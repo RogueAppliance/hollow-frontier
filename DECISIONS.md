@@ -342,3 +342,9 @@ Calls made in place of asking, and the reasons behind them. PLAN.md keeps the st
 - **One 1.0.0 changelog entry:** nothing had shipped, so the per-phase development log (with superseded content like zinc) became a single player-facing 1.0.0 entry. The development story is in this file.
 - **Removed:** AUDIT.md (a snapshot whose findings are all fixed) and `branding/old` (the replaced sheriff's-star logo set).
 - **CI:** `.github/workflows/build.yml` runs `gradlew build` on Java 25 for every push and pull request.
+
+### Store upload prep (2026-11-01, on request)
+- **Jar name** carries the loader and MC version (`hollowfrontier-neoforge-26.3-1.0.0.jar`), as both stores list every MC version's file side by side. The mod version itself stays `1.0.0`; Modrinth's version number is `1.0.0+26.3`.
+- **One page for both stores:** CURSEFORGE.md stays the source (both take Markdown); `prepareRelease` strips its notes-to-self into `build/release/description.md` and pulls the newest changelog section, and RELEASING.md holds each store's form fields. Uploading stays manual: both stores review a new project by hand, so publishing from CI can wait until the projects exist.
+- **In-game logo:** the mod list shows the wanted-poster logo (`logoFile`), copied from `branding` at build time rather than kept twice.
+- **Jar cleanup:** datagen's `.cache/` hash files had shipped in every jar (the MDK's exclude never matched); now excluded.

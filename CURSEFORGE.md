@@ -1,9 +1,6 @@
 <!-- PAGE SETTINGS
-Summary (the one line under the title): Wild West steampunk on a Hollow Earth frontier: black powder guns, living towns, airships, mammoths, Concavia and the Grays.
-Main category: Adventure and RPG. Also: World Gen, Structures, Mobs, Armor, Tools, and Weapons, Technology.
-Logo: branding/avatar_400x400.png. Banner: branding/curseforge_banner_1920x480.png.
-Gallery (screenshots tab): the trailer's stills, or the GIFs below.
-Video: trailer/out/hollow_frontier_trailer_shaders.mp4, once it's on YouTube.
+The store page for both Modrinth and CurseForge. Form fields, gallery and upload steps: RELEASING.md.
+`gradlew prepareRelease` writes the paste-ready copy (these comments removed, IMAGE markers kept) to build/release/description.md.
 -->
 
 # Hollow Frontier

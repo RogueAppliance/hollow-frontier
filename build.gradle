@@ -19,7 +19,8 @@ sourceSets.main.resources {
     srcDir('src/generated/resources')
 
     exclude("**/*.bbmodel")
-    exclude("src/generated/**/.cache")
+    // datagen's hash cache; patterns are relative to the resource root (the MDK's "src/generated/**/.cache" never matched)
+    exclude(".cache/**")
 }
 
 repositories {
@@ -48,7 +49,8 @@ repositories {
 }
 
 base {
-    archivesName = mod_id
+    // hollowfrontier-neoforge-26.3-1.0.0.jar: the stores list one file per MC version, so the name says which
+    archivesName = "${mod_id}-neoforge-${minecraft_version}"
 }
 
 // Dev-only rigs (PhotoBooth, Trailer): their own source set, part of the mod in every dev run but never in the jar.
@@ -194,6 +196,40 @@ neoForge.ideSyncTask generateModMetadata
 def licenseInJar = "LICENSE_${mod_id}" // resolved now: the configuration cache can't reach project properties at run time
 tasks.named('jar', Jar) {
     from('LICENSE') { rename { licenseInJar } }
+}
+
+// The in-game mod list logo (logoFile in neoforge.mods.toml), from the branding set
+tasks.named('processResources', ProcessResources) {
+    from('branding/ingame_logo_700x220.png') { rename { 'hollowfrontier_logo.png' } }
+}
+
+// Store upload kit in build/release: the jar, the store page without its notes-to-self comments, and the
+// newest CHANGELOG.md section (paste into the version's changelog box). Form fields and steps: RELEASING.md.
+def releaseJar = tasks.named('jar', Jar).flatMap { it.archiveFile }
+def releaseDir = layout.buildDirectory.dir('release')
+def storePage = file('CURSEFORGE.md')
+def changelogFile = file('CHANGELOG.md')
+tasks.register('prepareRelease') {
+    group = 'hollowfrontier'
+    description = 'Builds and gathers the jar, store description and changelog into build/release.'
+    dependsOn tasks.named('build')
+    inputs.files(releaseJar, storePage, changelogFile)
+    outputs.dir(releaseDir)
+    doLast {
+        File out = releaseDir.get().asFile
+        out.deleteDir()
+        out.mkdirs()
+        File jar = releaseJar.get().asFile
+        java.nio.file.Files.copy(jar.toPath(), new File(out, jar.name).toPath())
+        // IMAGE comments stay as markers for where each gallery GIF goes (both stores hide comments if one is left)
+        String page = storePage.getText('UTF-8').replace('\r\n', '\n').replaceAll(/(?s)<!--(?! IMAGE).*?-->\n?/, '').replaceAll(/\n{3,}/, '\n\n').trim()
+        new File(out, 'description.md').setText(page + '\n', 'UTF-8')
+        // The first "## " section of the changelog, without its heading
+        def section = (changelogFile.getText('UTF-8').replace('\r\n', '\n') =~ /(?s)\n## [^\n]*\n(.*?)(?=\n## |\z)/)
+        if (!section.find()) throw new GradleException('CHANGELOG.md has no "## " section')
+        new File(out, 'changelog.md').setText(section.group(1).trim() + '\n', 'UTF-8')
+        logger.lifecycle("prepareRelease: ${out}")
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {

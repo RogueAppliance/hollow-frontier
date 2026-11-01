@@ -290,6 +290,10 @@ The optional compat mods (JEI, Jade, Curios) are compiled against but never bund
   - the expedition: a Polar Gateway crater dark, waking, its beam from afar and open, the airship parked (side, three-quarter, bow, above) and under way, at the helm in first and third person, the Polar Compass and Resonator in hand, the Steam tab, and a crossing into the Hollow Earth with its return gateway and the view (`hf_44`-`hf_58`). `gradlew runPhoto -PphotoScene=expedition` shoots just this scene.
   - the Hollow Earth (`hf_60`-`hf_77`; `-PphotoScene=hollow` alone): the crossing as a player makes it (down Symmes' shaft; out of the crust looking down, up at the inner sun, and out over the land mid-fall; landed), the sun and the crust from the ground and the horizon, then each biome from high above and from its ground.
 
+## Mod list logo
+
+`hollowfrontier_logo.png` (jar root, `logoFile` in neoforge.mods.toml): `branding/ingame_logo_700x220.png`, the wanted-poster logo, copied in by `processResources`. Ours (`branding/source`).
+
 ## GUIs
 
 The Boiler and Steam Crusher screens are drawn with flat color fills (`client/SteamMachineScreens`), so no GUI textures are needed yet. When adding real GUI art, use `textures/gui/boiler.png` and `textures/gui/crusher.png` (176×166) and blit them in `extractBackground`.
