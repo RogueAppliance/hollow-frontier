@@ -176,7 +176,7 @@ Calls made in place of asking, and the reasons behind them. PLAN.md keeps the st
 - **Jade:** server data providers for what isn't synced (burn time, progress, coal). Jade refuses a data provider that is also a tooltip provider and the refusal stops mod loading, so each has a separate `*Data` provider. Client runs are the check for compat: the game test server didn't catch it.
 - **Curios:** the Sunstone Lens (charm) and the Kindled Sigil (necklace). The capability is registered in `RegisterCapabilitiesEvent` (common setup is too late). With Curios loaded, test players need `NetworkRegistry.configureMockConnection`.
 - **Balance:** bosses climb 80 → 300 → 600 health; starsteel sits between diamond and netherite.
-- **Release:** 1.0.0, built but not uploaded; publishing is the user's call. MIT licence (the user's choice, so it can go in modpacks), with reworked-vanilla textures and third-party recordings excluded.
+- **Release:** 1.0.0, built but not uploaded; publishing is the user's call. MIT licence (the user's choice, so it can go in modpacks), with only the reworked-vanilla textures excluded: every bundled sound is our own (2026-11-01: the credits were corrected, as they still named third-party recordings long after the last one was replaced). The mod metadata links the GitHub repo and its issues, and credits the piano's Joplin scores.
 - **Post-release audit** (AUDIT.md): the project became a git repo, with the author identity in the repo's own config. Gateway effects clear on server stop (a descent carried into the next singleplayer world kept the player fall-safe). AI scans read only loaded chunks' block entities and never load chunks.
 
 ### Phase 15: aftermath

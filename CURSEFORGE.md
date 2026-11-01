@@ -156,11 +156,21 @@ Hollow Frontier works on its own. If these mods are installed, it uses them:
 
 ## Modpacks
 
-Yes, go ahead. Hollow Frontier is MIT licensed. The exceptions are the textures reworked from vanilla, and the bundled public-domain and CC0 recordings. The LICENSE file in the jar has the details.
+Yes, go ahead. Hollow Frontier is MIT licensed. The one exception is the textures reworked from vanilla Minecraft's, which belong to Mojang. The LICENSE file in the jar has the details.
 
 - Materials use the `c:` tags, and the recipes take any mod's ingots, dusts and ores.
 - Spawns and structures go by biome tags, which a datapack can change. Polar Gateways spawn in any `c:is_snowy` biome.
 - The bosses are tagged `c:bosses`, and other mods' mob catchers and teleporters leave them alone, along with the townsfolk.
 - Other mods' pipes can feed the Boiler and Crusher.
+
+## Credits
+
+Made by RogueAppliance. The art is the mod's own, apart from a few textures reworked from vanilla's, and every sound is synthesized for it. The saloon piano plays Scott Joplin's ragtime (public domain), rendered from the Mutopia Project's public-domain scores. Built on NeoForge and GeckoLib.
+
+The trailer uses "Still Pickin'" by Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0, and was filmed with the Complementary Reimagined shader pack by EminGT.
+
+## Bugs and Ideas
+
+Report bugs on [GitHub Issues](https://github.com/RogueAppliance/hollow-frontier/issues), with your versions and a log link from mclo.gs. Questions and ideas go in [Discussions](https://github.com/RogueAppliance/hollow-frontier/discussions).
 
 <!-- LINKS: source and issues: https://github.com/RogueAppliance/hollow-frontier (the repo must be public first) / changelog: CHANGELOG.md -->

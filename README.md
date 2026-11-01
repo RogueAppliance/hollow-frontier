@@ -61,4 +61,18 @@ The jar lands in `build/libs/`. Assets come from datagen: after changing datagen
 
 ## Credits and license
 
-[MIT](LICENSE): use it, put it in your modpack, fork it, as long as the license notice comes along. The exceptions are the textures reworked from vanilla (Mojang's) and the bundled third-party recordings (public domain or CC0), which [LICENSE](LICENSE) spells out. Art and sound sources are listed in [ASSETS.md](ASSETS.md). The changes in each version are in [CHANGELOG.md](CHANGELOG.md).
+Made by RogueAppliance.
+
+**License:** [MIT](LICENSE). Use it, put it in your modpack, fork it, as long as the license notice comes along. Two things aren't covered:
+- The textures reworked from vanilla Minecraft's (marked in [ASSETS.md](ASSETS.md)) belong to Mojang.
+- The build files from the NeoForge MDK keep their own MIT notice ([TEMPLATE_LICENSE.txt](TEMPLATE_LICENSE.txt)).
+
+**Art and sound:** everything else is the mod's own work. The art is drawn by code in `tools/textures` and `tools/models`. Every bundled sound (the piano, the Hollow Earth's reveal, the ray guns and the saucers) is synthesized in `tools/music` with no samples. The other sound effects are Minecraft's own sounds, re-pitched in `sounds.json`, not copied. [ASSETS.md](ASSETS.md) lists every file and where it came from.
+
+**Music:** the saloon piano plays Scott Joplin's ragtime ("The Entertainer", "Elite Syncopations", "Pineapple Rag", "The Strenuous Life"), public domain, rendered by our own piano synthesizer from the [Mutopia Project](https://www.mutopiaproject.org)'s public-domain scores.
+
+**Built on** [NeoForge](https://neoforged.net) and [GeckoLib](https://github.com/bernie-g/geckolib), with optional support for JEI, Jade, Curios and Iris.
+
+**The trailer** uses "Still Pickin'" by Kevin MacLeod ([incompetech.com](https://incompetech.com)), licensed under [Creative Commons: By Attribution 4.0](http://creativecommons.org/licenses/by/4.0/), and was filmed with the Complementary Reimagined shader pack by EminGT. Neither is part of the mod.
+
+The changes in each version are in [CHANGELOG.md](CHANGELOG.md).

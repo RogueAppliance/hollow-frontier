@@ -27,7 +27,9 @@ Exceptions: what this license does not cover
 - Textures marked "reworked vanilla" in ASSETS.md. They are recoloured and
   reworked from Minecraft's own textures, which belong to Mojang AB and are used
   under Mojang's terms, not this license.
-- Third-party recordings listed in ASSETS.md under "Recordings". Each keeps the
-  license shown there (public domain or CC0).
 - The build files that came from the NeoForge MDK, covered by their own MIT
   notice in TEMPLATE_LICENSE.txt.
+
+Every bundled sound is the mod's own work and falls under this license. The
+saloon piano plays Scott Joplin's compositions, which are in the public domain,
+rendered by the mod's own synthesizer from public-domain Mutopia Project scores.
