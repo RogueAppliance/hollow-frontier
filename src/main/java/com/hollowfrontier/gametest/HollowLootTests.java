@@ -98,7 +98,7 @@ final class HollowLootTests {
         h.succeed();
     }
 
-    /** A town's prospector buys each relic, one at a time, for its price in gold coins. */
+    /** A town's prospector buys each relic (and each of the Grays' gadgets, 32c), one at a time, for its price in gold coins. */
     static void prospectorBuysRelics(GameTestHelper h) {
         Townsfolk prospector = ModEntities.TOWNSFOLK.get().spawn(h.getLevel(), h.absolutePos(new BlockPos(2, 1, 2)), EntitySpawnReason.SPAWN_ITEM_USE);
         prospector.setFolk(Folk.PROSPECTOR);
@@ -107,6 +107,10 @@ final class HollowLootTests {
         for (var relic : ModItems.RELICS) {
             h.assertTrue(offers.stream().anyMatch(o -> o.getCostA().is(relic.get()) && o.getResult().is(ModItems.GOLD_COIN.get())
                     && o.getResult().getCount() == relic.get().price()), "the prospector won't buy " + relic.getId());
+        }
+        for (var gadget : ModItems.GADGETS) {
+            h.assertTrue(offers.stream().anyMatch(o -> o.getCostA().is(gadget.get()) && o.getResult().is(ModItems.GOLD_COIN.get())
+                    && o.getResult().getCount() == gadget.get().price()), "the prospector won't buy " + gadget.getId());
         }
         prospector.discard();
         h.succeed();

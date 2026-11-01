@@ -138,7 +138,7 @@ public final class ModAdvancements {
         text("steam/airship", "Lighter Than Air", "Build an airship");
         text("steam/above_the_clouds", "Above the Clouds", "Take an airship up past height 200");
         text("steam/true_north", "True North", "Take a bearing with a Polar Compass");
-        text("steam/open_sesame", "Open Sesame", "Wake a Polar Gateway with a Polar Resonator");
+        text("steam/open_sesame", "Open Sesame", "Wake a Polar Gateway with a Polar Resonator and 2,000 mB of steam");
         text("steam/hollow_earth", "Journey to the Centre", "Step through a Polar Gateway into the Hollow Earth");
 
         text("hollow/root", "Under Another Sun", "Come down through the crust into the Hollow Earth");

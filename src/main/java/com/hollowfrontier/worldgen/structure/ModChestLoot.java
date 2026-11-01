@@ -39,6 +39,8 @@ public final class ModChestLoot {
     public static final ResourceKey<LootTable> GRAY_STATION = key("gray_station");
     // 15a: a Gray Landing's cache, opened once its guards are down
     public static final ResourceKey<LootTable> GRAY_LANDING = key("gray_landing");
+    // 32c: the cargo pod in a crash site's cockpit
+    public static final ResourceKey<LootTable> CRASH_SITE = key("crash_site");
     public static final ResourceKey<LootTable> SYMMES_CAMP = key("symmes_camp");
     /** The Kindled's stores at the back of the crystal ruins' sanctum (12a). */
     public static final ResourceKey<LootTable> CRYSTAL_RUINS = key("crystal_ruins");

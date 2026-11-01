@@ -6275,6 +6275,58 @@ public class TextureArt {
             return img;
         }
 
+        /**
+         * A face of the Gray Cargo Pod (32c), in the hull's pale alloy with dark seams. The sides have a band that's lit
+         * green while it's sealed and dead once open, and an open side shows its hatch swung away on a dark hold; the top
+         * has a round seal, lit while sealed, a dark port once open. The bottom is plain alloy.
+         */
+        static BufferedImage pod(boolean open, Boolean top) {
+            BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+            Random rnd = new Random(open ? 3202 : 3201);
+            for (int y = 0; y < 16; y++) {
+                for (int x = 0; x < 16; x++) {
+                    int shade = rnd.nextInt(7) - 3;
+                    int rgb = (0xB4 + shade) << 16 | (0xB8 + shade) << 8 | (0xC0 + shade);
+                    if (x == 0 || y == 0 || x == 15 || y == 15) {
+                        rgb = 0x7A7E86;
+                    } else if (x == 1 || y == 1) {
+                        rgb = 0xD0D4DA;
+                    }
+                    img.setRGB(x, y, 0xFF000000 | rgb);
+                }
+            }
+            if (top == null) {
+                return img; // the bottom: plain alloy
+            }
+            if (top) {
+                for (int y = 4; y <= 11; y++) {
+                    for (int x = 4; x <= 11; x++) {
+                        double d = Math.hypot(x - 7.5, y - 7.5);
+                        if (d <= 3.9) {
+                            int rgb = d > 2.9 ? 0x6E727A : open ? 0x1A1414 : d < 1.5 ? 0x9EE070 : 0x7ACB5A;
+                            img.setRGB(x, y, 0xFF000000 | rgb);
+                        }
+                    }
+                }
+                return img;
+            }
+            for (int x = 1; x < 15; x++) {
+                img.setRGB(x, 4, 0xFF6E727A);
+                img.setRGB(x, 11, 0xFF6E727A);
+                img.setRGB(x, 7, 0xFF000000 | (open ? 0x3A3434 : 0x7ACB5A));
+                img.setRGB(x, 8, 0xFF000000 | (open ? 0x2A2626 : x % 3 == 0 ? 0x9EE070 : 0x7ACB5A));
+            }
+            if (open) {
+                for (int y = 2; y <= 13; y++) {
+                    for (int x = 3; x <= 12; x++) {
+                        boolean edge = x == 3 || x == 12 || y == 2 || y == 13;
+                        img.setRGB(x, y, 0xFF000000 | (edge ? 0x5A5E66 : y > 10 ? 0x2A2626 : 0x1A1414));
+                    }
+                }
+            }
+            return img;
+        }
+
         static int writeAll(File root) throws Exception {
             int n = 0;
             // The relics
@@ -6311,6 +6363,34 @@ public class TextureArt {
                     ".iInnnnnoOnnnIi.", ".iInngnnOOnnnIi.", ".iInnnnnnnnwnIi.", ".iInwnnnnnnnnIi.", ".iInnnnngnnnnIi.", ".iInnnnnnnnnnIi.",
                     ".iIiiiiiiiiiiIi.", "..iiiiiiiiiiii..", "................", "................"));
             n += 8;
+            // 32c: the Grays' gadgets from a crash site's cargo pod, and the pod
+            write(new File(root, "item/humming_doohickey.png"), grid(
+                    "................", ".......k........", ".......c........", "......kQk.......", ".......Q........", ".....qqqqq......",
+                    "....qwqqqqQ.....", "...qqqcCcqqQ....", "...qqcyyycqQ....", "...qqqcCcqqQ....", "....qqqqqqQ.....", "....QQQQQQQ.....",
+                    "...ddddddddd....", "...dsssssssd....", "....ddddddd.....", "................"));
+            write(new File(root, "item/self_warming_rock.png"), grid(
+                    "................", "................", "................", "......ddddd.....", "....ddsssssd....", "...dssssoossd...",
+                    "..dsssoOOosssd..", "..dssoOooOossd..", "..dsssoOOossssd.", "..dsssssoosssd..", "...dssssssssd...", "....dddddddd....",
+                    "................", "................", "................", "................"));
+            write(new File(root, "item/backward_watch.png"), grid(
+                    "......GG........", ".....G..G.......", "......GG........", "....gggggg......", "...gwwwwwwg.....", "..gwwwkwwwwg....",
+                    "..gwwwkwwwwg....", "..gwwwkkkwwg....", "..gwwwwwwwwg....", "..gwwwwwwwwg....", "...gwwwwwwg.....", "....gggggg......",
+                    "................", "................", "................", "................"));
+            write(new File(root, "item/restless_marble.png"), grid(
+                    "................", "................", "................", "................", ".....cccc.......", "....cwcCCc......",
+                    "...cwcCvCCc.....", "...cCCvvCCc.....", "...cCvCCvCc.....", "...cCCCvCCc.....", "....cCCCCc......", ".....cccc.......",
+                    "................", "................", "......dddd......", "................"));
+            write(new File(root, "item/unopenable_box.png"), grid(
+                    "................", "................", "..QQQQQQQQQQQQ..", "..QqwqqqqqqqqQ..", "..QqqqqqqqqqqQ..", "..QqqqqqqqqqqQ..",
+                    "..QqqqqqqqqqqQ..", "..QqqqqcCqqqqQ..", "..QqqqqqqqqqqQ..", "..QqqqqqqqqqqQ..", "..QqqqqqqqqqqQ..", "..QqqqqqqqqqqQ..",
+                    "..QQQQQQQQQQQQ..", "...dddddddddddd.", "................", "................"));
+            for (boolean open : new boolean[] {false, true}) {
+                String suffix = open ? "_open" : "";
+                write(new File(root, "block/gray_cargo_pod_side" + suffix + ".png"), pod(open, false));
+                write(new File(root, "block/gray_cargo_pod_top" + suffix + ".png"), pod(open, true));
+            }
+            write(new File(root, "block/gray_cargo_pod_bottom.png"), pod(true, null));
+            n += 10;
             // The sherds (shards of terracotta with the motif on) and the pot patterns themselves
             String[] sherd = {
                     "................", "................", "....tttt........", "...tttttttt.....", "..tttttttttt....", "..tttttttttttt..",

@@ -92,7 +92,7 @@ Something has been troubling the frontier: lights in the night sky, cattle found
 - **Saucer flyovers and abductions** at night. Sneak if you don't want to be taken.
 - **Gray field stations** in the Hollow Earth, where tagged and augmented megafauna come from.
 - **Gray pens,** where men taken from the frontier wait in cells. Stop the procedure, free the captives, and carry their letters home.
-- **Crash sites** with salvage to pry loose: alien alloy, a gravity drive, a beam emitter, a lens array and a navigation core.
+- **Crash sites** with salvage to pry loose (alien alloy, a gravity drive, a beam emitter, a lens array and a navigation core) and a sealed cargo pod in the cockpit, holding the odd Gray gadget the prospector will buy: a doohickey that hums at ore, a rock that keeps you warm, a watch that runs backward, a marble that would rather be up, and a box that doesn't open.
 - **Phlogiston weapons:** the Ray Pistol and Phlogiston Rifle, with rechargeable phlogiston cells.
 - **The Prototype Saucer:** build your own from the salvage. It has full 3D flight, a heat laser and a tractor beam that carries mobs, items and players.
 - **The Mothership:** summon it with a Phlogiston Beacon and bring it down in a three-phase fight, on foot or in a dogfight from your own saucer.

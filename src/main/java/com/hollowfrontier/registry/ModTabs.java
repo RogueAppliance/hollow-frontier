@@ -172,7 +172,7 @@ public final class ModTabs {
     // ---------------------------------------------------------------- The Grays: their wrecks and what's in them (13a)
 
     private static void grays(Consumer<ItemStack> out) {
-        add(out, ModItems.SAUCER_HULL, ModItems.SAUCER_WRECKAGE, ModItems.GRAY_CACHE);
+        add(out, ModItems.SAUCER_HULL, ModItems.SAUCER_WRECKAGE, ModItems.GRAY_CACHE, ModItems.GRAY_CARGO_POD);
         add(out, ModItems.ALIEN_ALLOY_PLATING, ModItems.DAMAGED_GRAVITY_DRIVE, ModItems.BEAM_EMITTER, ModItems.LENS_ARRAY, ModItems.NAVIGATION_CORE);
         // Phlogiston tech (13b)
         add(out, ModItems.EMPTY_PHLOGISTON_CELL, ModItems.PHLOGISTON_CELL, ModItems.RAY_PISTOL, ModItems.PHLOGISTON_RIFLE, ModItems.GRAVITY_DRIVE);
@@ -181,6 +181,7 @@ public final class ModTabs {
         add(out, ModItems.IMPLANT_RIG, ModItems.LETTER_HOME); // 20
         add(out, ModItems.KINDLED_SEAL, ModItems.SEAL_SOCKET); // 26
         ModItems.RELICS.forEach(relic -> add(out, relic)); // 28
+        ModItems.GADGETS.forEach(gadget -> add(out, gadget)); // 32c
         ModItems.SHERDS.forEach(sherd -> add(out, sherd));
         add(out, ModItems.CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE);
     }

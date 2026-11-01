@@ -345,6 +345,21 @@ public class ModChestLootProvider implements LootTableSubProvider {
                         .add(item(Items.GLOW_INK_SAC, 1, 3, 6)))
                 .withPool(fieldNotes(3)));
         // A Gray Landing's cache (15a): plating and charged cells every time, Gray odds and ends, and now and then a whole part
+        // 32c: a crash site's cargo pod: salvage, always one of the Grays' gadgets, now and then a second
+        LootPool.Builder gadgets = pool(1, 1);
+        ModItems.GADGETS.forEach(gadget -> gadgets.add(item(gadget.get(), 1, 1, 1)));
+        LootPool.Builder another = pool(1, 1).add(EmptyLootItem.emptyItem().setWeight(15));
+        ModItems.GADGETS.forEach(gadget -> another.add(item(gadget.get(), 1, 1, 1)));
+        accept(ModChestLoot.CRASH_SITE, LootTable.lootTable()
+                .withPool(pool(1, 1).add(item(ModItems.ALIEN_ALLOY_PLATING.get(), 1, 2, 1)))
+                .withPool(pool(2, 3)
+                        .add(item(ModItems.GRAY_TECH_FRAGMENT.get(), 1, 2, 10))
+                        .add(item(ModItems.PHLOGISTON_SHARD.get(), 1, 2, 8))
+                        .add(item(Items.REDSTONE, 2, 6, 8))
+                        .add(item(ModItems.STARSTEEL_NUGGET.get(), 1, 3, 6))
+                        .add(item(ModItems.EMPTY_PHLOGISTON_CELL.get(), 1, 1, 6)))
+                .withPool(gadgets)
+                .withPool(another));
         accept(ModChestLoot.GRAY_LANDING, LootTable.lootTable()
                 .withPool(pool(1, 1).add(item(ModItems.ALIEN_ALLOY_PLATING.get(), 2, 4, 1)))
                 .withPool(pool(1, 1).add(item(ModItems.PHLOGISTON_CELL.get(), 1, 2, 1)))

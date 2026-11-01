@@ -174,6 +174,10 @@ public final class ModGameTests {
         test("broken_airship_keeps_its_fuel", 20, ExpeditionTests::brokenAirshipKeepsItsFuel);
         test("high_altitude_earns_advancement", 60, ExpeditionTests::highAltitudeEarnsAdvancement);
         test("resonator_opens_gateway", 80, ExpeditionTests::resonatorOpensGateway);
+        test("resonator_charges_and_draws_from_airship", 20, ExpeditionTests::resonatorChargesAndDrawsFromAirship);
+        test("crash_site_has_a_cargo_pod", 20, CrashCacheTests::crashSiteHasACargoPod);
+        test("cargo_pod_spills_its_load", 20, CrashCacheTests::cargoPodSpillsItsLoad);
+        test("gadgets_do_their_tricks", 20, CrashCacheTests::gadgetsDoTheirTricks);
         test("gateway_leads_to_hollow_earth_and_back", 40, ExpeditionTests::gatewayLeadsToHollowEarthAndBack);
         test("gateway_template_has_ring_and_chest", 20, ExpeditionTests::gatewayTemplateHasRingAndChest);
         // Phase 9a: the Hollow Earth's own world

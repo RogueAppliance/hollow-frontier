@@ -338,6 +338,40 @@ final class ExpeditionTests {
         return center;
     }
 
+    /**
+     * 32c: the resonator charges from a steam tank like a canister and opens a ring on its own charge; with none left and no
+     * canisters it draws from the player's airship close by, and takes nothing at all when even that falls short.
+     */
+    static void resonatorChargesAndDrawsFromAirship(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        BlockPos first = ring(h, new BlockPos(3, 1, 3), true), second = ring(h, new BlockPos(8, 1, 8), true);
+        BlockPos tankPos = new BlockPos(10, 1, 2);
+        h.setBlock(tankPos, ModBlocks.STEAM_TANK.get());
+        h.getBlockEntity(tankPos, SteamStorageBlockEntity.class).tank().add(ModFluids.steam(), 16_000);
+        ServerPlayer player = TestPlayers.survival(h, new BlockPos(6, 1, 3), "hf-resonator-charger");
+        ItemStack resonator = new ItemStack(ModItems.POLAR_RESONATOR.get());
+        player.setItemInHand(InteractionHand.MAIN_HAND, resonator);
+        BlockPos tank = h.absolutePos(tankPos);
+        resonator.useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, new BlockHitResult(Vec3.atCenterOf(tank), Direction.UP, tank, false)));
+        h.assertValueEqual(PolarResonatorItem.charge(resonator), PolarResonatorItem.CAPACITY, "charge after a tank");
+
+        h.useBlock(first.offset(PolarGateways.RING.get(0)), player);
+        h.assertTrue(GatewayEffects.isWaking(level, h.absolutePos(first)), "it didn't open on its own charge");
+        h.assertValueEqual(PolarResonatorItem.charge(resonator), 0, "charge after opening");
+
+        Airship ship = airship(h, new Vec3(2, 1, 9), 500, 0);
+        ship.setOwner(player);
+        h.useBlock(second.offset(PolarGateways.RING.get(0)), player);
+        h.assertFalse(GatewayEffects.isWaking(level, h.absolutePos(second)), "it opened on too little steam");
+        h.assertValueEqual(ship.steam(), 500, "steam taken from the airship though it fell short");
+        ship.setSteam(3_000);
+        h.useBlock(second.offset(PolarGateways.RING.get(0)), player);
+        h.assertTrue(GatewayEffects.isWaking(level, h.absolutePos(second)), "it didn't draw on the airship nearby");
+        h.assertValueEqual(ship.steam(), 3_000 - PolarResonatorItem.OPEN_STEAM, "steam left in the airship");
+        ship.discard();
+        h.succeed();
+    }
+
     /** The resonator opens a whole ring for 2000 mB of steam, and won't open a broken one or one without steam. */
     static void resonatorOpensGateway(GameTestHelper h) {
         BlockPos center = ring(h, new BlockPos(5, 1, 5), true);

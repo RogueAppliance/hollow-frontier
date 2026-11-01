@@ -134,6 +134,13 @@ public final class PhotoBooth {
         if (mc.gui.screen() instanceof net.minecraft.client.gui.screens.PauseScreen) {
             mc.gui.setScreen(null);
         }
+        // The crash site's cargo pod and the Grays' gadgets (32c), only on their own with -PphotoScene=cache
+        if (CACHE_ONLY) {
+            if (ticks >= 40) {
+                cache(mc, server, ticks - 40);
+            }
+            return;
+        }
         // The airship's bail-out and the Polar Compass (32b), only on their own with -PphotoScene=bailout
         if (BAILOUT_ONLY) {
             if (ticks >= 40) {
@@ -648,6 +655,33 @@ public final class PhotoBooth {
                 shot(mc, "hf_32b_compass_target_from_above.png");
                 HollowFrontier.LOGGER.info("[PhotoBooth] 32b: done");
             }
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- 32c: the crash site's cargo pod and the Grays' gadgets
+
+    private static final boolean CACHE_ONLY = "cache".equals(System.getProperty("hollowfrontier.photo.scene"));
+
+    /** A sealed and an open cargo pod side by side, and the five gadgets and a charged resonator in the hotbar. */
+    private static void cache(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                run(server, "time set noon");
+                run(server, "weather clear");
+                run(server, "gamemode creative @p");
+                run(server, String.format("setblock %d %d %d hollowfrontier:gray_cargo_pod[open=false]", baseX + 2, Y, baseZ + 4));
+                run(server, String.format("setblock %d %d %d hollowfrontier:gray_cargo_pod[open=true]", baseX + 4, Y, baseZ + 4));
+                String[] gadgets = {"humming_doohickey", "self_warming_rock", "backward_watch", "restless_marble", "unopenable_box"};
+                for (int i = 0; i < gadgets.length; i++) {
+                    run(server, "item replace entity @p hotbar." + i + " with hollowfrontier:" + gadgets[i]);
+                }
+                run(server, "item replace entity @p hotbar.5 with hollowfrontier:polar_resonator[hollowfrontier:steam=1200]");
+                run(server, "item replace entity @p hotbar.6 with hollowfrontier:gray_cargo_pod");
+                mc.player.getInventory().setSelectedSlot(8);
+            }
+            case 5 -> tpLooking(server, new Vec3(baseX + 3.5, Y + 1.6, baseZ + 1.0), new Vec3(baseX + 3.5, Y + 0.5, baseZ + 4.5));
+            case 40 -> shot(mc, "hf_32c_cargo_pods.png");
             default -> {}
         }
     }

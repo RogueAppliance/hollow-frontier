@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "hollowfrontier:block/gray_cargo_pod"
+    },
+    "open=true": {
+      "model": "hollowfrontier:block/gray_cargo_pod_open"
+    }
+  }
+}

@@ -19,7 +19,8 @@ import net.minecraft.world.level.block.state.BlockState;
  *     either side and still smouldering, hull plates strewn along it; and at its end the saucer, fifteen across, nose down
  *     and half buried, a rim of phlogiston lights (some dead), its glass dome stove in, a breach torn in its flank. Salvage is in
  *     its wreckage ({@link ModBlocks#SAUCER_WRECKAGE}): two blocks in the cockpit under the dome, one at the breach, two
- *     thrown clear along the furrow. Two Gray Wardens keep it.</li>
+ *     thrown clear along the furrow. A sealed cargo pod ({@link ModBlocks#GRAY_CARGO_POD}, 32c) stands in the cockpit. Two Gray
+ *     Wardens keep it.</li>
  * </ul>
  */
 public final class UfoBlueprints {
@@ -72,6 +73,8 @@ public final class UfoBlueprints {
         b.set(c + 6, s + 3, SAUCER_Z + 1, wreckage);
         b.set(c - 2, s + 1, 20, wreckage);
         b.set(c + 2, s + 1, 27, wreckage);
+        // The cargo pod (32c), sealed, beside the pilot's seat
+        b.set(c + 1, s + 3, SAUCER_Z - 1, ModBlocks.GRAY_CARGO_POD.get().defaultBlockState());
         // Its keepers
         b.entity(ModEntities.GRAY_WARDEN.get(), c - 4, s + 1, 25);
         b.entity(ModEntities.GRAY_WARDEN.get(), c + 5, s + 1, 22);

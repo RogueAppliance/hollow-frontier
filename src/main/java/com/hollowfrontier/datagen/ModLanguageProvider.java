@@ -401,6 +401,33 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.STAR_CHART, "Star Chart");
         add("item.hollowfrontier.star_chart.desc", "Stars where there is no sky to put them in.");
         add("tooltip.hollowfrontier.relic", "A town prospector pays %s gold coins");
+        // 32c: the Grays' odds and ends from a crash site's cargo pod, and the pod
+        addItem(ModItems.HUMMING_DOOHICKEY, "Humming Doohickey");
+        add("item.hollowfrontier.humming_doohickey.desc", "The prospector says he'd pay more if it hummed at gold in particular.");
+        add("item.hollowfrontier.humming_doohickey.use", "Use it: it hums, louder the nearer ore lies");
+        add("message.hollowfrontier.humming_doohickey.quiet", "It says nothing.");
+        add("message.hollowfrontier.humming_doohickey.faint", "It hums, faintly.");
+        add("message.hollowfrontier.humming_doohickey.sure", "It hums with some conviction.");
+        add("message.hollowfrontier.humming_doohickey.loud", "It hums fit to burst.");
+        addItem(ModItems.SELF_WARMING_ROCK, "Self-Warming Rock");
+        add("item.hollowfrontier.self_warming_rock.desc", "Warm as a fresh biscuit, and has been since it was found.");
+        add("item.hollowfrontier.self_warming_rock.use", "Carried, it keeps the frost off: powder snow can't freeze you");
+        addItem(ModItems.BACKWARD_WATCH, "Backward Watch");
+        add("item.hollowfrontier.backward_watch.desc", "Runs backward. Keeps good time doing it.");
+        add("item.hollowfrontier.backward_watch.use", "Use it: how long until dusk, or dawn");
+        add("message.hollowfrontier.backward_watch.dusk", "It runs backward, but by it dusk is some %s minutes off.");
+        add("message.hollowfrontier.backward_watch.dawn", "It runs backward, but by it dawn is some %s minutes off.");
+        addItem(ModItems.RESTLESS_MARBLE, "Restless Marble");
+        add("item.hollowfrontier.restless_marble.desc", "It would rather be up. Children are not to play with it.");
+        add("item.hollowfrontier.restless_marble.use", "Use it: up you go, and down again gently");
+        addItem(ModItems.UNOPENABLE_BOX, "Unopenable Box");
+        add("item.hollowfrontier.unopenable_box.desc", "Three men and a pry bar have tried. It doesn't open.");
+        add("item.hollowfrontier.unopenable_box.use", "Use it: it doesn't open");
+        add("message.hollowfrontier.unopenable_box.shut", "It doesn't open.");
+        add("message.hollowfrontier.unopenable_box.open", "It opens. Nobody will believe you.");
+        addBlock(ModBlocks.GRAY_CARGO_POD, "Gray Cargo Pod");
+        add("message.hollowfrontier.cargo_pod.opened", "The seal gives with a hiss.");
+        add("message.hollowfrontier.cargo_pod.empty", "Empty. You were thorough.");
         addItem(ModItems.SUN_POTTERY_SHERD, "Sun Pottery Sherd");
         addItem(ModItems.CRYSTAL_POTTERY_SHERD, "Crystal Pottery Sherd");
         addItem(ModItems.WATCHER_POTTERY_SHERD, "Watcher Pottery Sherd");
@@ -535,11 +562,12 @@ public class ModLanguageProvider extends LanguageProvider {
             add("message.hollowfrontier.direction." + point, point);
         }
         addItem(ModItems.POLAR_RESONATOR, "Polar Resonator");
-        add("tooltip.hollowfrontier.polar_resonator", "Use on a Polar Gateway's ring to open it (%s mB of steam from canisters). Sneak-use to shut it");
+        add("tooltip.hollowfrontier.polar_resonator", "Use on a Polar Gateway's ring to open it, for %s mB of steam. Sneak-use to shut it");
+        add("tooltip.hollowfrontier.polar_resonator.steam", "Steam comes from its own charge (use it on a boiler, tank or pipe), then canisters you carry, then your airship within %s blocks");
         add("message.hollowfrontier.polar_resonator.broken_ring", "The ring is broken. It won't ring true");
         add("message.hollowfrontier.polar_resonator.already_open", "The gateway is already open");
         add("message.hollowfrontier.polar_resonator.blocked", "Something's lying in the well. Clear it first");
-        add("message.hollowfrontier.polar_resonator.no_steam", "Not enough steam: the resonator needs %s mB from your canisters");
+        add("message.hollowfrontier.polar_resonator.no_steam", "Not enough steam: it needs %s mB, from its own charge, canisters you carry or your airship within %s blocks");
         add("message.hollowfrontier.polar_resonator.opened", "The ring begins to sing...");
         add("message.hollowfrontier.polar_resonator.closed", "The ring falls silent");
         addBlock(ModBlocks.GATEWAY_FRAME, "Gateway Frame");

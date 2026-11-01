@@ -297,6 +297,10 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
                 for (var relic : ModItems.RELICS) {
                     offers.add(buy(relic.get(), 1, gold, relic.get().price()));
                 }
+                // 32c: and the Grays' odds and ends, which he can't explain either
+                for (var gadget : ModItems.GADGETS) {
+                    offers.add(buy(gadget.get(), 1, gold, gadget.get().price()));
+                }
             }
             // The railroad: track, steam to try a handcar with, the valve that's hard to make, and he buys crusher dust
             // (for the smelter down the line) and coal for the locomotives.

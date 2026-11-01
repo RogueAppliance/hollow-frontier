@@ -321,6 +321,16 @@ public class ModModelProvider extends ModelProvider {
         Item compass = ModItems.POLAR_COMPASS.get();
         itemModels.itemModelOutput.accept(compass, ItemModelUtils.rangeSelect(
                 new CompassAngle(true, CompassAngleState.CompassTarget.LODESTONE), 32.0F, itemModels.createCompassModels(compass)));
+        // 32c: the crash site's cargo pod, sealed (its band lit) and open
+        Block pod = ModBlocks.GRAY_CARGO_POD.get();
+        TextureMapping podTextures = TextureMapping.cubeBottomTop(pod);
+        Identifier podSealed = ModelTemplates.CUBE_BOTTOM_TOP.create(pod, podTextures, blockModels.modelOutput);
+        Identifier podOpen = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(pod, "_open", podTextures
+                .copyAndUpdate(TextureSlot.TOP, TextureMapping.getBlockTexture(pod, "_top_open"))
+                .copyAndUpdate(TextureSlot.SIDE, TextureMapping.getBlockTexture(pod, "_side_open")), blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(pod).with(BlockModelGenerators.createBooleanModelDispatch(
+                com.hollowfrontier.content.ufo.CargoPodBlock.OPEN, BlockModelGenerators.plainVariant(podOpen), BlockModelGenerators.plainVariant(podSealed))));
+        blockModels.registerSimpleItemModel(pod, podSealed);
         Block frame = ModBlocks.GATEWAY_FRAME.get();
         TextureMapping frameTextures = TextureMapping.cubeBottomTop(frame);
         Identifier frameDark = ModelTemplates.CUBE_BOTTOM_TOP.create(frame, frameTextures, blockModels.modelOutput);
@@ -391,6 +401,7 @@ public class ModModelProvider extends ModelProvider {
         }
         // 28: the relics, the sherds and the trim template
         ModItems.RELICS.forEach(relic -> itemModels.generateFlatItem(relic.get(), ModelTemplates.FLAT_ITEM));
+        ModItems.GADGETS.forEach(gadget -> itemModels.generateFlatItem(gadget.get(), ModelTemplates.FLAT_ITEM)); // 32c
         ModItems.SHERDS.forEach(sherd -> itemModels.generateFlatItem(sherd.get(), ModelTemplates.FLAT_ITEM));
         itemModels.generateFlatItem(ModItems.CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);
         // The megafauna (10a): eggs, drops and gear

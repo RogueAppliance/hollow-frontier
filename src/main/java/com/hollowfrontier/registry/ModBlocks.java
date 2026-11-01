@@ -186,6 +186,11 @@ public final class ModBlocks {
     public static final DeferredBlock<GrayCacheBlock> GRAY_CACHE = BLOCKS.registerBlock("gray_cache", GrayCacheBlock::new,
             () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(-1.0F, 3600000.0F)
                     .noLootTable().pushReaction(PushReaction.IMMOVEABLE).lightLevel(state -> 7));
+    // 32c: a crash site's cargo pod (sealed until used, then open, empty scrap)
+    public static final DeferredBlock<com.hollowfrontier.content.ufo.CargoPodBlock> GRAY_CARGO_POD = BLOCKS.registerBlock("gray_cargo_pod",
+            com.hollowfrontier.content.ufo.CargoPodBlock::new, () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_LIGHT_GRAY)
+                    .strength(5.0F, 3600000.0F).noLootTable().pushReaction(PushReaction.IMMOVEABLE)
+                    .lightLevel(state -> state.getValue(com.hollowfrontier.content.ufo.CargoPodBlock.OPEN) ? 0 : 5));
     // 15c: a Concavian waystone (unbreakable, like the gateways' stones; the item is creative-only)
     public static final DeferredBlock<WaystoneBlock> WAYSTONE = BLOCKS.registerBlock("waystone", WaystoneBlock::new,
             () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.END_PORTAL_FRAME).mapColor(MapColor.QUARTZ).lightLevel(state -> 10)
