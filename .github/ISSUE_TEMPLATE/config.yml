@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/RogueAppliance/hollow-frontier/discussions
+    about: Ask how something works, share builds, or talk over an idea before it's a suggestion.

@@ -1,0 +1,13 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hollowfrontier:has_mammoths",
+  "spawners": {
+    "type": "hollowfrontier:woolly_mammoth",
+    "count": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 4,
+      "min_inclusive": 2
+    },
+    "weight": 4
+  }
+}

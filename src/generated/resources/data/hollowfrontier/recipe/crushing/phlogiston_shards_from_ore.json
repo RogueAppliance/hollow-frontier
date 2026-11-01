@@ -1,0 +1,8 @@
+{
+  "type": "hollowfrontier:crushing",
+  "ingredient": "#c:ores/phlogiston",
+  "result": {
+    "count": 3,
+    "id": "hollowfrontier:phlogiston_shard"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_damaged_gravity_drive": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:damaged_gravity_drive"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "hollowfrontier:gravity_drive"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_damaged_gravity_drive"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollowfrontier:gravity_drive"
+    ]
+  }
+}

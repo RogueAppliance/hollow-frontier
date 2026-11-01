@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "seen": {
+      "trigger": "hollowfrontier:saucer_seen"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "hollowfrontier:block/saucer_hull",
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.root.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:beam_emitter"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "seen"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

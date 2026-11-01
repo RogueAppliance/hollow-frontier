@@ -1,0 +1,44 @@
+{
+  "parent": "hollowfrontier:ufo/lightning_in_a_bottle",
+  "criteria": {
+    "pistol": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:ray_pistol"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "rifle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:phlogiston_rifle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.death_ray.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:ray_pistol"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.death_ray.title"
+    }
+  },
+  "requirements": [
+    [
+      "pistol",
+      "rifle"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

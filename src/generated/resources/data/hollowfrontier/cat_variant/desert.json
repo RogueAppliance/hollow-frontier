@@ -1,0 +1,13 @@
+{
+  "asset_id": "hollowfrontier:entity/cat/desert",
+  "baby_asset_id": "hollowfrontier:entity/cat/desert_baby",
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#hollowfrontier:has_rattlesnakes"
+      },
+      "priority": 0
+    }
+  ]
+}

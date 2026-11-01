@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:steam/handcar",
+  "criteria": {
+    "driven": {
+      "conditions": {
+        "min": 1000
+      },
+      "trigger": "hollowfrontier:handcar_driven"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.long_haul.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:powered_rail"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.long_haul.title"
+    }
+  },
+  "requirements": [
+    [
+      "driven"
+    ]
+  ],
+  "rewards": {
+    "experience": 100,
+    "loot": "hollowfrontier:rewards/long_haul"
+  },
+  "sends_telemetry_event": true
+}

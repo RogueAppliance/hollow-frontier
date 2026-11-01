@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "O": "#c:ingots/starsteel",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "O",
+    "O",
+    "S"
+  ],
+  "result": {
+    "id": "hollowfrontier:starsteel_sword"
+  }
+}

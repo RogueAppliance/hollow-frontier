@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:hollow/jailbreak",
+  "criteria": {
+    "delivered": {
+      "trigger": "hollowfrontier:letter_delivered"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.special_delivery.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:letter_home"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.special_delivery.title"
+    }
+  },
+  "requirements": [
+    [
+      "delivered"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

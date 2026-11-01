@@ -1,0 +1,22 @@
+name: Suggestion
+description: An idea for something new, or a change to something that already works.
+labels: ["suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For open-ended ideas and questions, [Discussions](https://github.com/RogueAppliance/hollow-frontier/discussions) is a better fit. Use this form for a specific, concrete suggestion.
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What should be added or changed?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: What would it add to playing the mod? What problem does it solve?
+    validations:
+      required: true

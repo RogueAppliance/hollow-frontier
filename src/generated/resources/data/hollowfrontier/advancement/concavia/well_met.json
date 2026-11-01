@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:concavia/root",
+  "criteria": {
+    "met": {
+      "trigger": "hollowfrontier:met_kindled"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.well_met.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:kindled_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.well_met.title"
+    }
+  },
+  "requirements": [
+    [
+      "met"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

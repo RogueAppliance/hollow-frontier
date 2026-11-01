@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "hollowfrontier:item/phlogiston_rifle",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

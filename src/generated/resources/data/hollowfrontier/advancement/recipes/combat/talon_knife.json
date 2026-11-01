@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_terror_bird_talon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:terror_bird_talon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "hollowfrontier:talon_knife"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_terror_bird_talon"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollowfrontier:talon_knife"
+    ]
+  }
+}

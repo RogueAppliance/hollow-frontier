@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/the_mothership_falls",
+  "criteria": {
+    "rematch": {
+      "trigger": "hollowfrontier:mothership_rematch"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.encore.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:cloaking_device"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.encore.title"
+    }
+  },
+  "requirements": [
+    [
+      "rematch"
+    ]
+  ],
+  "rewards": {
+    "experience": 250
+  },
+  "sends_telemetry_event": true
+}

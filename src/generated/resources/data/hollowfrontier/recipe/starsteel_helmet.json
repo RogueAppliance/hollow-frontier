@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "O": "#c:ingots/starsteel"
+  },
+  "pattern": [
+    "OOO",
+    "O O"
+  ],
+  "result": {
+    "id": "hollowfrontier:starsteel_helmet"
+  }
+}

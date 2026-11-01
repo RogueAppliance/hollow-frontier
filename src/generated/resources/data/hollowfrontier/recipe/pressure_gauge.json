@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "G": "#c:glass_panes",
+    "P": "#c:plates/brass",
+    "V": "hollowfrontier:pressure_valve"
+  },
+  "pattern": [
+    "PGP",
+    " V "
+  ],
+  "result": {
+    "id": "hollowfrontier:pressure_gauge"
+  }
+}

@@ -1,0 +1,91 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"misc.idle": {
+			"loop": true,
+			"animation_length": 2.0,
+			"bones": {
+				"right_arm": {"rotation": {"0.0": [0, 0, 2], "1.0": [0, 0, 4], "2.0": [0, 0, 2]}},
+				"left_arm": {"rotation": {"0.0": [0, 0, -2], "1.0": [0, 0, -4], "2.0": [0, 0, -2]}},
+				"right_leg": {"rotation": [0, 0, 0]},
+				"left_leg": {"rotation": [0, 0, 0]}
+			}
+		},
+		"misc.ride": {
+			"loop": true,
+			"animation_length": 1.0,
+			"bones": {
+				"right_arm": {"rotation": [-30, 5, 0]},
+				"left_arm": {"rotation": [-30, -5, 0]},
+				"right_leg": {"rotation": [-80, 18, 0]},
+				"left_leg": {"rotation": [-80, -18, 0]},
+				"coat_tails": {"rotation": [35, 0, 0]}
+			}
+		},
+		"attack.throw": {
+			"loop": true,
+			"animation_length": 1.0,
+			"bones": {
+				"right_arm": {"rotation": [-165, 0, -10]},
+				"left_arm": {"rotation": [-40, 0, 10]}
+			}
+		},
+		"move.walk": {
+			"loop": true,
+			"animation_length": 1.0,
+			"bones": {
+				"right_arm": {"rotation": {"0.0": [30, 0, 0], "0.5": [-30, 0, 0], "1.0": [30, 0, 0]}},
+				"left_arm": {"rotation": {"0.0": [-30, 0, 0], "0.5": [30, 0, 0], "1.0": [-30, 0, 0]}},
+				"right_leg": {"rotation": {"0.0": [-30, 0, 0], "0.5": [30, 0, 0], "1.0": [-30, 0, 0]}},
+				"left_leg": {"rotation": {"0.0": [30, 0, 0], "0.5": [-30, 0, 0], "1.0": [30, 0, 0]}},
+				"coat_tails": {"rotation": {"0.0": [24, 0, 0], "0.25": [6, 0, 0], "0.5": [24, 0, 0], "0.75": [6, 0, 0], "1.0": [24, 0, 0]}}
+			}
+		},
+		"attack.aim_pistol": {
+			"loop": true,
+			"animation_length": 1.0,
+			"bones": {
+				"right_arm": {"rotation": [-90, 0, 0]}
+			}
+		},
+		"attack.aim_long": {
+			"loop": true,
+			"animation_length": 1.0,
+			"bones": {
+				"right_arm": {"rotation": [-90, -15, 0]},
+				"left_arm": {"rotation": [-90, 35, 0]}
+			}
+		},
+		"attack.shoot_pistol": {
+			"loop": false,
+			"animation_length": 0.4,
+			"bones": {
+				"right_arm": {"rotation": {"0.0": [-90, 0, 0], "0.08": [-112, 0, 0], "0.4": [-90, 0, 0]}}
+			}
+		},
+		"attack.shoot_long": {
+			"loop": false,
+			"animation_length": 0.4,
+			"bones": {
+				"right_arm": {"rotation": {"0.0": [-90, -15, 0], "0.08": [-102, -15, 0], "0.4": [-90, -15, 0]}},
+				"left_arm": {"rotation": {"0.0": [-90, 35, 0], "0.08": [-102, 35, 0], "0.4": [-90, 35, 0]}}
+			}
+		},
+		"attack.reload_pistol": {
+			"loop": true,
+			"animation_length": 0.75,
+			"bones": {
+				"right_arm": {"rotation": [-40, 10, 0]},
+				"left_arm": {"rotation": {"0.0": [-45, 30, 0], "0.35": [-55, 25, 0], "0.75": [-45, 30, 0]}}
+			}
+		},
+		"attack.reload_long": {
+			"loop": true,
+			"animation_length": 2.5,
+			"bones": {
+				"right_arm": {"rotation": [-25, -5, 0]},
+				"left_arm": {"rotation": {"0.0": [-60, 30, 0], "0.6": [-110, 20, 0], "1.4": [-80, 25, 0], "2.0": [-110, 20, 0], "2.5": [-60, 30, 0]}}
+			}
+		}
+	}
+}

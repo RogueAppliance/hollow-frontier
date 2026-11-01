@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/dead_or_alive",
+  "criteria": {
+    "defended": {
+      "trigger": "hollowfrontier:raid_defended"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.hold_the_line.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:plains_rifle"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.hold_the_line.title"
+    }
+  },
+  "requirements": [
+    [
+      "defended"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

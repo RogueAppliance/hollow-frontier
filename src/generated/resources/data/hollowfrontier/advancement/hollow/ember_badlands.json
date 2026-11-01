@@ -1,0 +1,37 @@
+{
+  "parent": "hollowfrontier:hollow/root",
+  "criteria": {
+    "visited": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "hollowfrontier:ember_badlands"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.ember_badlands.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:ash_vent"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.ember_badlands.title"
+    }
+  },
+  "requirements": [
+    [
+      "visited"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

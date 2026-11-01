@@ -1,0 +1,27 @@
+{
+  "parent": "hollowfrontier:frontier/most_wanted",
+  "criteria": {
+    "cut": {
+      "trigger": "hollowfrontier:raid_cut"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.honor_among_thieves.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:dynamite"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.honor_among_thieves.title"
+    }
+  },
+  "requirements": [
+    [
+      "cut"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

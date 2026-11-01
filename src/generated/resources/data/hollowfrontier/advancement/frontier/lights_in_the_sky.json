@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/extra_extra",
+  "criteria": {
+    "seen": {
+      "trigger": "hollowfrontier:sighting_seen"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.lights_in_the_sky.description"
+    },
+    "icon": {
+      "id": "minecraft:glowstone_dust"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.lights_in_the_sky.title"
+    }
+  },
+  "requirements": [
+    [
+      "seen"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

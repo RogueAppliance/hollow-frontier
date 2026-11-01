@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:concavia/concavia_rising",
+  "criteria": {
+    "travelled": {
+      "trigger": "hollowfrontier:waystone_travelled"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.old_roads.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:waystone"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.old_roads.title"
+    }
+  },
+  "requirements": [
+    [
+      "travelled"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": "minecraft:green_carpet",
+    "P": "minecraft:paper",
+    "W": "#minecraft:planks"
+  },
+  "pattern": [
+    "GPG",
+    " W ",
+    "WWW"
+  ],
+  "result": {
+    "id": "hollowfrontier:card_table"
+  }
+}

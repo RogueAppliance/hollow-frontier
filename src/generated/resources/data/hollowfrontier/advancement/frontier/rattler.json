@@ -1,0 +1,35 @@
+{
+  "parent": "hollowfrontier:frontier/load_gun",
+  "criteria": {
+    "rattlesnake": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:rattlesnake"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.rattler.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:snakeskin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.rattler.title"
+    }
+  },
+  "requirements": [
+    [
+      "rattlesnake"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

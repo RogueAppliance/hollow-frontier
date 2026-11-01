@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "hollowfrontier:concavian_crystal",
+  "result": {
+    "id": "hollowfrontier:crystal_bricks"
+  }
+}

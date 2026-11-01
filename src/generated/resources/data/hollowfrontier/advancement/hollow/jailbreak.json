@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:hollow/escaped_specimen",
+  "criteria": {
+    "freed": {
+      "trigger": "hollowfrontier:captive_freed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.jailbreak.description"
+    },
+    "icon": {
+      "id": "minecraft:iron_bars"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.jailbreak.title"
+    }
+  },
+  "requirements": [
+    [
+      "freed"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

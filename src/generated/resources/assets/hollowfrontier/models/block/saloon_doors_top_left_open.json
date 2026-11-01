@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left_open",
+  "textures": {
+    "bottom": "hollowfrontier:block/saloon_doors_bottom",
+    "top": "hollowfrontier:block/saloon_doors_top"
+  }
+}

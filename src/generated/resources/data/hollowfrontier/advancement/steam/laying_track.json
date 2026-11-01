@@ -1,0 +1,31 @@
+{
+  "parent": "hollowfrontier:steam/handcar",
+  "criteria": {
+    "rails": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:rail"
+        }
+      },
+      "trigger": "minecraft:villager_trade"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.laying_track.description"
+    },
+    "icon": {
+      "id": "minecraft:rail"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.laying_track.title"
+    }
+  },
+  "requirements": [
+    [
+      "rails"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

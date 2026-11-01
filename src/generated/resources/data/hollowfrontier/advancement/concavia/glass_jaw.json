@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:concavia/root",
+  "criteria": {
+    "guardian": {
+      "trigger": "hollowfrontier:guardian_killed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.glass_jaw.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:chiseled_crystal_bricks"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.glass_jaw.title"
+    }
+  },
+  "requirements": [
+    [
+      "guardian"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

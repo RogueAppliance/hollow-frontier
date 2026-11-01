@@ -1,0 +1,16 @@
+{
+  "remove": [
+    "#c:is_beach",
+    "#minecraft:is_ocean",
+    "#minecraft:is_river",
+    "#c:is_mountain/peak"
+  ],
+  "values": [
+    "minecraft:snowy_plains",
+    "minecraft:ice_spikes",
+    "minecraft:snowy_taiga",
+    "minecraft:grove",
+    "minecraft:snowy_slopes",
+    "#c:is_snowy"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": "#hollowfrontier:thick_hides",
+    "N": "#c:nuggets/brass"
+  },
+  "pattern": [
+    "H H",
+    "HHH",
+    "N N"
+  ],
+  "result": {
+    "id": "hollowfrontier:hide_barding"
+  }
+}

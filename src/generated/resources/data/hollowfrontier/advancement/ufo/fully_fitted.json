@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/encore",
+  "criteria": {
+    "fitted": {
+      "trigger": "hollowfrontier:saucer_fully_fitted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.fully_fitted.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:cargo_hold"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.fully_fitted.title"
+    }
+  },
+  "requirements": [
+    [
+      "fitted"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  },
+  "sends_telemetry_event": true
+}

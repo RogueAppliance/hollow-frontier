@@ -1,0 +1,54 @@
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="RogueAppliance"
+description='''
+Wild West steampunk on a Hollow Earth frontier. Ride out with revolver and lasso, build boilers and airships,
+fall through Symmes' Hole to the inner sun, and learn who has been flying Concavia's stolen craft.
+'''
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="geckolib"
+    type="required"
+    versionRange="[${geckolib_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+# Optional compat (phase 14): used when present, never required
+[[dependencies.${mod_id}]]
+    modId="jei"
+    type="optional"
+    versionRange="[31.17,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="jade"
+    type="optional"
+    versionRange="[26.3,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="curios"
+    type="optional"
+    versionRange="[17.0.0-beta.3,)"
+    ordering="NONE"
+    side="BOTH"

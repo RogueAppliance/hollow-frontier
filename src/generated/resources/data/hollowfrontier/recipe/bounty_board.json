@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": "minecraft:paper",
+    "S": "#c:rods/wooden",
+    "W": "#minecraft:planks"
+  },
+  "pattern": [
+    "WWW",
+    "WPW",
+    "S S"
+  ],
+  "result": {
+    "id": "hollowfrontier:bounty_board"
+  }
+}

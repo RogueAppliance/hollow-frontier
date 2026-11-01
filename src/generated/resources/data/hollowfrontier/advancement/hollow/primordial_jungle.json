@@ -1,0 +1,37 @@
+{
+  "parent": "hollowfrontier:hollow/root",
+  "criteria": {
+    "visited": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "hollowfrontier:primordial_jungle"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.primordial_jungle.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:fern_frond"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.primordial_jungle.title"
+    }
+  },
+  "requirements": [
+    [
+      "visited"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

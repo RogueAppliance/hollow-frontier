@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hollowfrontier:item/pale_raven_spawn_egg"
+  }
+}

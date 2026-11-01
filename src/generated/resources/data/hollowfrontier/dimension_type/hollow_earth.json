@@ -1,0 +1,48 @@
+{
+  "ambient_light": 0.1,
+  "attributes": {
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2.0,
+        "sound": "minecraft:ambient.cave",
+        "tick_delay": 6000
+      }
+    },
+    "minecraft:gameplay/bed_rule": {
+      "can_set_spawn": "always",
+      "can_sleep": "never",
+      "error_message": {
+        "translate": "block.hollowfrontier.bed.no_sleep_hollow"
+      }
+    },
+    "minecraft:gameplay/can_start_raid": false,
+    "minecraft:gameplay/fast_lava": true,
+    "minecraft:visual/ambient_light_color": "#141810",
+    "minecraft:visual/cloud_color": "#00e8e0b0",
+    "minecraft:visual/fog_color": "#c9cf96",
+    "minecraft:visual/fog_end_distance": 480.0,
+    "minecraft:visual/fog_start_distance": 48.0,
+    "minecraft:visual/moon_angle": 180.0,
+    "minecraft:visual/sky_color": "#a8c890",
+    "minecraft:visual/sky_fog_end_distance": 200.0,
+    "minecraft:visual/star_brightness": 0.0,
+    "minecraft:visual/sun_angle": 0.0,
+    "minecraft:visual/sunrise_sunset_color": "#00000000"
+  },
+  "coordinate_scale": 1.0,
+  "has_ceiling": true,
+  "has_ender_dragon_fight": false,
+  "has_fixed_time": true,
+  "has_skylight": true,
+  "height": 384,
+  "infiniburn": "#minecraft:infiniburn_overworld",
+  "logical_height": 384,
+  "min_y": -64,
+  "monster_spawn_block_light_limit": 0,
+  "monster_spawn_light_level": {
+    "type": "minecraft:uniform",
+    "max_inclusive": 7,
+    "min_inclusive": 0
+  }
+}

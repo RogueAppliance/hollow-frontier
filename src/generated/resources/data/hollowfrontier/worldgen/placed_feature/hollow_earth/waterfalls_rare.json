@@ -1,0 +1,26 @@
+{
+  "feature": "hollowfrontier:hollow_earth/ceiling_spring_water",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 48
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "absolute": 184
+      }
+    },
+    {
+      "type": "hollowfrontier:open_air_scan",
+      "direction": "up",
+      "max_steps": 135
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

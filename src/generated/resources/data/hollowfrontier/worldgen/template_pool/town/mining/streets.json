@@ -1,0 +1,35 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "hollowfrontier:town/mining/street_long",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "hollowfrontier:town_name"
+            }
+          ]
+        },
+        "projection": "rigid"
+      },
+      "weight": 36
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "hollowfrontier:town/mining/street_short",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "hollowfrontier:town_name"
+            }
+          ]
+        },
+        "projection": "rigid"
+      },
+      "weight": 24
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

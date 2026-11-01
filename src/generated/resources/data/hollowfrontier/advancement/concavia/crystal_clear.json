@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:concavia/root",
+  "criteria": {
+    "crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:concavian_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.crystal_clear.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:concavian_crystal"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.crystal_clear.title"
+    }
+  },
+  "requirements": [
+    [
+      "crystal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

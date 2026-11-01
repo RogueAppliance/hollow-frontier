@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/reputation",
+  "criteria": {
+    "paid": {
+      "trigger": "hollowfrontier:wanted_cleared"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.clean_slate.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:copper_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.clean_slate.title"
+    }
+  },
+  "requirements": [
+    [
+      "paid"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

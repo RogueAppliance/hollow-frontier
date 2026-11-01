@@ -1,0 +1,38 @@
+{
+  "parent": "hollowfrontier:ufo/calling_them_down",
+  "criteria": {
+    "mothership": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:mothership"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.the_mothership_falls.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:alien_alloy_plating"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.the_mothership_falls.title"
+    }
+  },
+  "requirements": [
+    [
+      "mothership"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  },
+  "sends_telemetry_event": true
+}

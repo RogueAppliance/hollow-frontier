@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "hollowfrontier:copper_pipe",
+    "F": "minecraft:furnace",
+    "G": "#c:gears/brass",
+    "P": "#c:plates/brass",
+    "V": "hollowfrontier:pressure_valve"
+  },
+  "pattern": [
+    "GPG",
+    "CFC",
+    "GVG"
+  ],
+  "result": {
+    "id": "hollowfrontier:airship_engine"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "hollowfrontier:block/crystal_bricks"
+  }
+}

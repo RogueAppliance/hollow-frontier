@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:transparent}
+svg{display:block}
+</style></head><body>
+<!-- E. Cinematic: the wordmark struck in hot metal, a rim of light along its top, an anamorphic flare through it
+     (gold on the left fading to the Hollow's cyan on the right), a thin line beneath -->
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fffaf0"/><stop offset=".22" stop-color="#ffe2a4"/><stop offset=".5" stop-color="#d59a4a"/>
+    <stop offset=".51" stop-color="#7d4a1a"/><stop offset=".75" stop-color="#b8803c"/><stop offset="1" stop-color="#4a2808"/>
+  </linearGradient>
+  <linearGradient id="flare" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#ffb04a" stop-opacity="0"/><stop offset=".3" stop-color="#ffc870" stop-opacity=".9"/>
+    <stop offset=".5" stop-color="#ffffff"/><stop offset=".7" stop-color="#8ff0ff" stop-opacity=".9"/>
+    <stop offset="1" stop-color="#5fd6e8" stop-opacity="0"/>
+  </linearGradient>
+  <radialGradient id="core" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#fff1c8" stop-opacity=".8"/><stop offset="1" stop-color="#ffd08a" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#ffd27a" stop-opacity="0"/><stop offset=".5" stop-color="#ffe6b0"/><stop offset="1" stop-color="#8ff0ff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="blur8"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="blur30" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="30"/></filter>
+  <filter id="shadow" x="-10%" y="-40%" width="120%" height="180%"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".85"/></filter>
+</defs>
+<!-- the flare, behind -->
+<rect x="160" y="628" width="1600" height="14" fill="url(#flare)" filter="url(#blur8)"/>
+<rect x="260" y="633" width="1400" height="3" fill="url(#flare)"/>
+<ellipse cx="1124" cy="634" rx="260" ry="40" fill="url(#core)" filter="url(#blur30)" opacity=".7"/>
+<g font-family="Algerian" text-anchor="middle" letter-spacing="14">
+  <g filter="url(#shadow)">
+    <text x="960" y="580" font-size="168" fill="url(#metal)" stroke="#1a0c03" stroke-width="5" paint-order="stroke" stroke-linejoin="round">HOLLOW FRONTIER</text>
+  </g>
+  <!-- the rim light along the letters' tops -->
+  <text x="960" y="577" font-size="168" fill="none" stroke="#fff6dc" stroke-width="2" stroke-opacity=".8">HOLLOW FRONTIER</text>
+</g>
+
+<g font-family="Bahnschrift, 'Segoe UI'" text-anchor="middle" fill="#f6ecd8">
+  <text x="960" y="700" font-size="30" letter-spacing="18" font-weight="300">WILD WEST · STEAM AGE · HOLLOW EARTH</text>
+  <text x="960" y="742" font-size="20" letter-spacing="9" fill-opacity=".7">A NEOFORGE MOD FOR MINECRAFT 26.3</text>
+</g>
+</svg>
+</body></html>

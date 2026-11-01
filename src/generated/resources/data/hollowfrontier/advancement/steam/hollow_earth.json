@@ -1,0 +1,32 @@
+{
+  "parent": "hollowfrontier:steam/open_sesame",
+  "criteria": {
+    "entered": {
+      "conditions": {
+        "to": "hollowfrontier:hollow_earth"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.hollow_earth.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:gateway_frame"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.hollow_earth.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

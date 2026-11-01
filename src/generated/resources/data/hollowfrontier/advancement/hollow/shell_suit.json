@@ -1,0 +1,42 @@
+{
+  "parent": "hollowfrontier:hollow/shell_game",
+  "criteria": {
+    "suit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:glyptodon_helmet"
+          },
+          {
+            "items": "hollowfrontier:glyptodon_chestplate"
+          },
+          {
+            "items": "hollowfrontier:glyptodon_leggings"
+          },
+          {
+            "items": "hollowfrontier:glyptodon_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.shell_suit.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:glyptodon_chestplate"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.shell_suit.title"
+    }
+  },
+  "requirements": [
+    [
+      "suit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

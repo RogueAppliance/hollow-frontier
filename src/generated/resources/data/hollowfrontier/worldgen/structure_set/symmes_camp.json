@@ -1,0 +1,18 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+      "chunk_count": 6,
+      "other_set": "hollowfrontier:gray_lab"
+    },
+    "salt": 1818041029,
+    "separation": 14,
+    "spacing": 40
+  },
+  "structures": [
+    {
+      "structure": "hollowfrontier:symmes_camp",
+      "weight": 1
+    }
+  ]
+}

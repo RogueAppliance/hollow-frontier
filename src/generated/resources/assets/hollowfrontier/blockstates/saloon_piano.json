@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hollowfrontier:block/saloon_piano",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hollowfrontier:block/saloon_piano"
+    },
+    "facing=south": {
+      "model": "hollowfrontier:block/saloon_piano",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hollowfrontier:block/saloon_piano",
+      "y": 270
+    }
+  }
+}

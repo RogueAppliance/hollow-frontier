@@ -1,0 +1,35 @@
+{
+  "parent": "hollowfrontier:ufo/root",
+  "criteria": {
+    "warden": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:gray_warden"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.take_me_to_your_leader.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:gray_tech_fragment"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.take_me_to_your_leader.title"
+    }
+  },
+  "requirements": [
+    [
+      "warden"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

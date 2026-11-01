@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:ufo/we_have_liftoff",
+  "criteria": {
+    "beamed": {
+      "trigger": "hollowfrontier:saucer_beamed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.beam_me_up.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:beam_emitter"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.beam_me_up.title"
+    }
+  },
+  "requirements": [
+    [
+      "beamed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

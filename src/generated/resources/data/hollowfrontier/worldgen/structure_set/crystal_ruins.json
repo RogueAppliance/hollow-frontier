@@ -1,0 +1,18 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+      "chunk_count": 6,
+      "other_set": "hollowfrontier:kindled_site"
+    },
+    "salt": 1912120401,
+    "separation": 9,
+    "spacing": 26
+  },
+  "structures": [
+    {
+      "structure": "hollowfrontier:crystal_ruins",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.hollowfrontier.airship_sighting",
+				"texture_width": 128,
+				"texture_height": 64,
+				"visible_bounds_width": 16,
+				"visible_bounds_height": 6,
+				"visible_bounds_offset": [0, 1, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 4, 0]
+				},
+				{
+					"name": "hull",
+					"parent": "root",
+					"pivot": [0, 4, 0],
+					"cubes": [
+						{"origin": [-4, 0, -16], "size": [8, 8, 32], "uv": [0, 0]},
+						{"origin": [-3, 1, -22], "size": [6, 6, 6], "uv": [0, 40]},
+						{"origin": [-3, 1, 16], "size": [6, 6, 6], "uv": [24, 40]},
+						{"origin": [-2, 2, -25], "size": [4, 4, 3], "uv": [48, 40]},
+						{"origin": [-2, 2, 22], "size": [4, 4, 2], "uv": [62, 40]}
+					]
+				},
+				{
+					"name": "fins",
+					"parent": "hull",
+					"pivot": [0, 4, 16],
+					"cubes": [
+						{"origin": [-0.5, 7, 14], "size": [1, 4, 7], "uv": [80, 0]},
+						{"origin": [3, 3.5, 15], "size": [4, 1, 5], "uv": [80, 11]},
+						{"origin": [-7, 3.5, 15], "size": [4, 1, 5], "uv": [80, 11], "mirror": true}
+					]
+				},
+				{
+					"name": "gondola",
+					"parent": "hull",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-2, -3, -7], "size": [4, 3, 14], "uv": [80, 17]},
+						{"origin": [-0.5, -1, -2], "size": [1, 1, 4], "uv": [80, 34]}
+					]
+				},
+				{
+					"name": "lights",
+					"parent": "hull",
+					"pivot": [0, 4, 0],
+					"cubes": [
+						{"origin": [4, 3.5, -13], "size": [1, 1, 1], "uv": [112, 0]},
+						{"origin": [4, 3.5, -6], "size": [1, 1, 1], "uv": [112, 0]},
+						{"origin": [4, 3.5, 1], "size": [1, 1, 1], "uv": [112, 0]},
+						{"origin": [4, 3.5, 8], "size": [1, 1, 1], "uv": [112, 0]},
+						{"origin": [-5, 3.5, -13], "size": [1, 1, 1], "uv": [112, 0]},
+						{"origin": [-5, 3.5, -6], "size": [1, 1, 1], "uv": [112, 0]},
+						{"origin": [-5, 3.5, 1], "size": [1, 1, 1], "uv": [112, 0]},
+						{"origin": [-5, 3.5, 8], "size": [1, 1, 1], "uv": [112, 0]},
+						{"origin": [-0.5, 8, -10], "size": [1, 1, 1], "uv": [112, 0]},
+						{"origin": [-0.5, 8, 4], "size": [1, 1, 1], "uv": [112, 0]}
+					]
+				}
+			]
+		}
+	]
+}

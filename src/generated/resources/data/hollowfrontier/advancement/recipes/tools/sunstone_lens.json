@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sunstone_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:sunstone_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "hollowfrontier:sunstone_lens"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sunstone_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollowfrontier:sunstone_lens"
+    ]
+  }
+}

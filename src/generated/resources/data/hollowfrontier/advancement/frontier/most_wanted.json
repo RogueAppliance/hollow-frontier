@@ -1,0 +1,30 @@
+{
+  "parent": "hollowfrontier:frontier/reputation",
+  "criteria": {
+    "three_stars": {
+      "conditions": {
+        "min": 3
+      },
+      "trigger": "hollowfrontier:wanted_level"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.most_wanted.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:revolver"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.most_wanted.title"
+    }
+  },
+  "requirements": [
+    [
+      "three_stars"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

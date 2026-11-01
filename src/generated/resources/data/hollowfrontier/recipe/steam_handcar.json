@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "hollowfrontier:copper_pipe",
+    "G": "#c:gears/brass",
+    "M": "minecraft:minecart",
+    "P": "#c:plates/brass",
+    "V": "hollowfrontier:pressure_valve"
+  },
+  "pattern": [
+    " V ",
+    "GMG",
+    "PCP"
+  ],
+  "result": {
+    "id": "hollowfrontier:steam_handcar"
+  }
+}

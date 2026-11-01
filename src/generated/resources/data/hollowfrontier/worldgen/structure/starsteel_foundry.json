@@ -1,0 +1,14 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "hollowfrontier:ember_badlands",
+  "max_slope": 5,
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "start_pool": "hollowfrontier:starsteel_foundry",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

@@ -1,0 +1,45 @@
+{
+  "criteria": {
+    "brass_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/brass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "copper_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:copper_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "hollowfrontier:block/brass_block",
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.root.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:brass_gear"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "copper_ingot",
+      "brass_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,314 @@
+{
+  "type": "minecraft:add",
+  "left": {
+    "type": "minecraft:squeeze",
+    "input": {
+      "type": "minecraft:interpolated",
+      "cell_size_xz": 4,
+      "cell_size_y": 8,
+      "input": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:max",
+          "left": {
+            "type": "minecraft:range_choice",
+            "input": "minecraft:y",
+            "max_exclusive": 200.0,
+            "min_inclusive": -64.0,
+            "when_in_range": {
+              "type": "minecraft:add",
+              "left": {
+                "type": "minecraft:div",
+                "left": {
+                  "type": "minecraft:sub",
+                  "left": "hollowfrontier:hollow_earth/height",
+                  "right": "minecraft:y"
+                },
+                "right": 24.0
+              },
+              "right": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:old_blended_noise",
+                  "smear_scale_multiplier": 8.0,
+                  "xz_factor": 80.0,
+                  "xz_scale": 0.25,
+                  "y_factor": 120.0,
+                  "y_scale": 0.125
+                },
+                "right": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:clamp",
+                        "input": "hollowfrontier:hollow_earth/erosion",
+                        "max": 0.6,
+                        "min": -0.6
+                      },
+                      "right": -0.20833333
+                    },
+                    "right": 0.225
+                  },
+                  "right": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:max",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": "hollowfrontier:hollow_earth/continents",
+                            "max": 0.73,
+                            "min": 0.28
+                          },
+                          "right": 2.222222
+                        },
+                        "right": -0.6222222
+                      },
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/temperature",
+                              "max": -0.35,
+                              "min": -0.75
+                            },
+                            "right": -2.5
+                          },
+                          "right": -0.875
+                        },
+                        "right": 0.6
+                      }
+                    },
+                    "right": 0.2
+                  }
+                }
+              }
+            },
+            "when_out_of_range": -1.0
+          },
+          "right": {
+            "type": "minecraft:max",
+            "left": {
+              "type": "minecraft:range_choice",
+              "input": "minecraft:y",
+              "max_exclusive": 320.0,
+              "min_inclusive": 100.0,
+              "when_in_range": {
+                "type": "minecraft:add",
+                "left": {
+                  "type": "minecraft:div",
+                  "left": {
+                    "type": "minecraft:sub",
+                    "left": "minecraft:y",
+                    "right": "hollowfrontier:hollow_earth/ceiling_bottom"
+                  },
+                  "right": 10.0
+                },
+                "right": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:old_blended_noise",
+                    "smear_scale_multiplier": 8.0,
+                    "xz_factor": 80.0,
+                    "xz_scale": 0.25,
+                    "y_factor": 120.0,
+                    "y_scale": 0.125
+                  },
+                  "right": 0.12
+                }
+              },
+              "when_out_of_range": -1.0
+            },
+            "right": {
+              "type": "minecraft:range_choice",
+              "input": "minecraft:y",
+              "max_exclusive": 216.0,
+              "min_inclusive": 150.0,
+              "when_in_range": {
+                "type": "minecraft:min",
+                "left": {
+                  "type": "minecraft:min",
+                  "left": {
+                    "type": "minecraft:div",
+                    "left": {
+                      "type": "minecraft:sub",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": 200.0,
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:noise",
+                            "noise": "hollowfrontier:hollow_earth/islands",
+                            "shift_x": "minecraft:shift_x",
+                            "shift_z": "minecraft:shift_z",
+                            "xz_scale": 0.25,
+                            "y_scale": 0.0
+                          },
+                          "right": 8.0
+                        }
+                      },
+                      "right": "minecraft:y"
+                    },
+                    "right": 3.0
+                  },
+                  "right": {
+                    "type": "minecraft:div",
+                    "left": {
+                      "type": "minecraft:sub",
+                      "left": "minecraft:y",
+                      "right": {
+                        "type": "minecraft:sub",
+                        "left": {
+                          "type": "minecraft:sub",
+                          "left": {
+                            "type": "minecraft:add",
+                            "left": 200.0,
+                            "right": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:noise",
+                                "noise": "hollowfrontier:hollow_earth/islands",
+                                "shift_x": "minecraft:shift_x",
+                                "shift_z": "minecraft:shift_z",
+                                "xz_scale": 0.25,
+                                "y_scale": 0.0
+                              },
+                              "right": 8.0
+                            }
+                          },
+                          "right": 2.0
+                        },
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:sqrt",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:clamp",
+                                    "input": {
+                                      "type": "minecraft:noise",
+                                      "noise": "hollowfrontier:hollow_earth/islands",
+                                      "shift_x": "minecraft:shift_x",
+                                      "shift_z": "minecraft:shift_z",
+                                      "xz_scale": 0.25,
+                                      "y_scale": 0.0
+                                    },
+                                    "max": 0.8,
+                                    "min": 0.4
+                                  },
+                                  "right": 2.5
+                                },
+                                "right": -1.0
+                              },
+                              "right": {
+                                "type": "minecraft:add",
+                                "left": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:clamp",
+                                    "input": {
+                                      "type": "minecraft:noise",
+                                      "noise": "hollowfrontier:hollow_earth/island_fields",
+                                      "shift_x": "minecraft:shift_x",
+                                      "shift_z": "minecraft:shift_z",
+                                      "xz_scale": 0.25,
+                                      "y_scale": 0.0
+                                    },
+                                    "max": 0.4,
+                                    "min": 0.1
+                                  },
+                                  "right": 3.3333333
+                                },
+                                "right": -0.33333334
+                              }
+                            }
+                          },
+                          "right": 34.0
+                        }
+                      }
+                    },
+                    "right": 4.0
+                  }
+                },
+                "right": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:sub",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:noise",
+                              "noise": "hollowfrontier:hollow_earth/islands",
+                              "shift_x": "minecraft:shift_x",
+                              "shift_z": "minecraft:shift_z",
+                              "xz_scale": 0.25,
+                              "y_scale": 0.0
+                            },
+                            "max": 0.8,
+                            "min": 0.4
+                          },
+                          "right": 2.5
+                        },
+                        "right": -1.0
+                      },
+                      "right": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:noise",
+                              "noise": "hollowfrontier:hollow_earth/island_fields",
+                              "shift_x": "minecraft:shift_x",
+                              "shift_z": "minecraft:shift_z",
+                              "xz_scale": 0.25,
+                              "y_scale": 0.0
+                            },
+                            "max": 0.4,
+                            "min": 0.1
+                          },
+                          "right": 3.3333333
+                        },
+                        "right": -0.33333334
+                      }
+                    },
+                    "right": 0.04
+                  },
+                  "right": 40.0
+                }
+              },
+              "when_out_of_range": -1.0
+            }
+          }
+        },
+        "right": 0.64
+      }
+    }
+  },
+  "right": {
+    "type": "minecraft:beardifier"
+  }
+}

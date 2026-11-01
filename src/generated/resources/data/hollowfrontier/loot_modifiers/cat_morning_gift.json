@@ -1,0 +1,9 @@
+{
+  "type": "hollowfrontier:cat_gift",
+  "chance": 0.35,
+  "condition": {
+    "type": "neoforge:loot_table_id",
+    "loot_table_id": "minecraft:gameplay/cat_morning_gift"
+  },
+  "table": "hollowfrontier:gameplay/cat_morning_gift"
+}

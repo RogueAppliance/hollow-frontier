@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_phlogiston_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:gems/phlogiston"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "hollowfrontier:concavian_codex"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_phlogiston_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollowfrontier:concavian_codex"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/twenty_one",
+  "criteria": {
+    "charlie": {
+      "trigger": "hollowfrontier:five_card_charlie"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.five_card_charlie.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:gold_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.five_card_charlie.title"
+    }
+  },
+  "requirements": [
+    [
+      "charlie"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

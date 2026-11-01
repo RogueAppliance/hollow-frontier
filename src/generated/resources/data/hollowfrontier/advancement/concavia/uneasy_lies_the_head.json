@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:concavia/eclipse",
+  "criteria": {
+    "crowned": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:starsteel_crown"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.uneasy_lies_the_head.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:starsteel_crown"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.uneasy_lies_the_head.title"
+    }
+  },
+  "requirements": [
+    [
+      "crowned"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

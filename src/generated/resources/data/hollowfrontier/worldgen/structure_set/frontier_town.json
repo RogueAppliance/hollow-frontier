@@ -1,0 +1,22 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 739201557,
+    "separation": 18,
+    "spacing": 44
+  },
+  "structures": [
+    {
+      "structure": "hollowfrontier:frontier_town",
+      "weight": 1
+    },
+    {
+      "structure": "hollowfrontier:desert_town",
+      "weight": 1
+    },
+    {
+      "structure": "hollowfrontier:mining_town",
+      "weight": 1
+    }
+  ]
+}

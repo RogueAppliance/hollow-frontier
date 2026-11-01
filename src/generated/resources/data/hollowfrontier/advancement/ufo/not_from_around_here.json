@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/cut_loose",
+  "criteria": {
+    "exposed": {
+      "trigger": "hollowfrontier:gray_exposed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.not_from_around_here.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:sunstone_lens"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.not_from_around_here.title"
+    }
+  },
+  "requirements": [
+    [
+      "exposed"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

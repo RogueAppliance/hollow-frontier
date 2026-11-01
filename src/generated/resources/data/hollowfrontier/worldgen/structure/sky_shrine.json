@@ -1,0 +1,9 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "#hollowfrontier:is_hollow_earth",
+  "island": true,
+  "spawn_overrides": {},
+  "start_pool": "hollowfrontier:sky_shrine",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

@@ -1,0 +1,38 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "hollowfrontier:town/rail_boxcar",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 24
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "hollowfrontier:town/rail_spur",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 24
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "hollowfrontier:town/rail_tank",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 12
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

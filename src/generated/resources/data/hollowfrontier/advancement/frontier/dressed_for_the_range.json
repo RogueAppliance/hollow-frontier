@@ -1,0 +1,42 @@
+{
+  "parent": "hollowfrontier:frontier/well_heeled",
+  "criteria": {
+    "outfit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:cowboy_hat"
+          },
+          {
+            "items": "hollowfrontier:duster"
+          },
+          {
+            "items": "hollowfrontier:chaps"
+          },
+          {
+            "items": "hollowfrontier:cowboy_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.dressed_for_the_range.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:duster"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.dressed_for_the_range.title"
+    }
+  },
+  "requirements": [
+    [
+      "outfit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

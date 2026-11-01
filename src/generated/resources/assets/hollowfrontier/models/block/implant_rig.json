@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hollowfrontier:block/implant_rig_top",
+    "side": "hollowfrontier:block/implant_rig_side"
+  }
+}

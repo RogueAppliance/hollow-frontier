@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": "#c:leathers",
+    "S": "minecraft:stick",
+    "T": "hollowfrontier:terror_bird_talon"
+  },
+  "pattern": [
+    "T",
+    "L",
+    "S"
+  ],
+  "result": {
+    "id": "hollowfrontier:talon_knife"
+  }
+}

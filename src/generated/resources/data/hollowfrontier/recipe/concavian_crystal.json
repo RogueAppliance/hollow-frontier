@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "G": "#c:glass_blocks/colorless",
+    "Q": "#c:gems/quartz",
+    "V": "#c:gems/phlogiston"
+  },
+  "pattern": [
+    "GQG",
+    "QVQ",
+    "GQG"
+  ],
+  "result": {
+    "count": 8,
+    "id": "hollowfrontier:concavian_crystal"
+  }
+}

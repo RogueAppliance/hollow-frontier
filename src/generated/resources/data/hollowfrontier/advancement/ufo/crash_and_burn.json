@@ -1,0 +1,55 @@
+{
+  "parent": "hollowfrontier:ufo/root",
+  "criteria": {
+    "hollow": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "hollowfrontier:hollow_crash_site"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    },
+    "surface": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "hollowfrontier:crash_site"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.crash_and_burn.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:saucer_hull"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.crash_and_burn.title"
+    }
+  },
+  "requirements": [
+    [
+      "surface",
+      "hollow"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

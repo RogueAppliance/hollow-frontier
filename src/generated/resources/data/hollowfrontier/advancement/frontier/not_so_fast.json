@@ -1,0 +1,30 @@
+{
+  "parent": "hollowfrontier:frontier/hold_the_line",
+  "criteria": {
+    "recovered": {
+      "trigger": "hollowfrontier:loot_recovered"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.not_so_fast.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:gold_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.not_so_fast.title"
+    }
+  },
+  "requirements": [
+    [
+      "recovered"
+    ]
+  ],
+  "rewards": {
+    "experience": 100,
+    "loot": "hollowfrontier:rewards/loot_recovered"
+  },
+  "sends_telemetry_event": true
+}

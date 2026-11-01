@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:ufo/root",
+  "criteria": {
+    "escaped": {
+      "trigger": "hollowfrontier:beam_escaped"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.not_today.description"
+    },
+    "icon": {
+      "id": "minecraft:leather_boots"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.not_today.title"
+    }
+  },
+  "requirements": [
+    [
+      "escaped"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

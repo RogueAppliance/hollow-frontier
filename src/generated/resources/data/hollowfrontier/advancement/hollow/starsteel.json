@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:hollow/root",
+  "criteria": {
+    "ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:starsteel_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.starsteel.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:starsteel_ingot"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.starsteel.title"
+    }
+  },
+  "requirements": [
+    [
+      "ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

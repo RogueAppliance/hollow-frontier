@@ -1,0 +1,14 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "hollowfrontier:primordial_jungle",
+  "max_slope": 6,
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "start_pool": "hollowfrontier:overgrown_ziggurat",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

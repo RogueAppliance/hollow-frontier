@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "hollowfrontier:crystal_bricks",
+  "result": {
+    "id": "hollowfrontier:crystal_brick_stairs"
+  }
+}

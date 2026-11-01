@@ -1,0 +1,91 @@
+{
+  "parent": "hollowfrontier:hollow/concavian_highlands",
+  "criteria": {
+    "concavian_highlands": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "hollowfrontier:concavian_highlands"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    },
+    "crystal_steppes": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "hollowfrontier:crystal_steppes"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    },
+    "ember_badlands": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "hollowfrontier:ember_badlands"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    },
+    "primordial_jungle": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "hollowfrontier:primordial_jungle"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.world_within.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:crust_rock"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.world_within.title"
+    }
+  },
+  "requirements": [
+    [
+      "primordial_jungle"
+    ],
+    [
+      "crystal_steppes"
+    ],
+    [
+      "ember_badlands"
+    ],
+    [
+      "concavian_highlands"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,9 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "#hollowfrontier:is_hollow_earth",
+  "max_slope": 6,
+  "spawn_overrides": {},
+  "start_pool": "hollowfrontier:crash_site",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

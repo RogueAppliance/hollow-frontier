@@ -1,0 +1,45 @@
+cue,offset,sound,gain,pitch,pan,from,len,note
+saloon,0.55,mc:block/wooden_door/open1,0.9,0.75,0.0,,,the saloon doors swing open
+saloon,1.15,mc:block/wooden_door/close2,0.45,0.8,0.1,,,and back
+saloon,1.4,mc:block/amethyst/shimmer,0.25,1.8,0.4,,,glasses
+saloon,2.1,mc:item/bottle/fill2,0.5,0.9,0.2,,,the barmaid pouring
+saloon,3.3,mc:item/book/open_flip2,0.6,1.4,0.1,,,cards dealt
+saloon,3.55,mc:item/book/open_flip3,0.5,1.5,-0.1,,,
+saloon,3.9,mc:block/chain/step2,0.5,1.6,0.2,,,chips
+saloon,5.75,mc:item/book/close_put1,0.6,1.2,0.0,,,a poster taken down
+ride,-0.55,mc:mob/horse/angry1,0.9,1.0,-0.2,,,the whinny
+ride,0.0,mc:mob/horse/gallop1,0.6,1.0,-0.3,,,
+ride,0.4,mc:mob/horse/gallop2,0.55,0.95,0.2,,,
+ride,0.85,mc:mob/horse/gallop3,0.6,1.05,-0.1,,,
+ride,1.3,mc:mob/horse/gallop4,0.55,1.0,0.3,,,
+ride,1.75,mc:mob/horse/gallop1,0.6,0.9,-0.2,,,
+ride,2.2,mc:mob/horse/gallop2,0.55,1.0,0.1,,,
+ride,2.65,mc:mob/horse/gallop3,0.5,1.05,-0.3,,,
+ride,3.1,mc:mob/horse/gallop4,0.5,0.95,0.2,,,
+ride,3.55,mc:mob/horse/gallop1,0.45,1.0,0.0,,,
+dynamite,0.1,mc:random/fuse,0.6,1.3,0.2,,,the fuse
+bang,0.0,mc:random/explode2,1.0,0.9,0.0,,,the blast
+steam,0.35,mc:random/fizz,0.4,0.8,0.3,,,steam off the boiler
+raid,0.1,mc:mob/horse/angry1,0.7,0.85,0.3,,,
+raid,0.0,mc:mob/horse/gallop1,0.5,0.8,-0.3,,,the gang riding in
+raid,0.45,mc:mob/horse/gallop3,0.5,0.75,0.3,,,
+raid,0.9,mc:mob/horse/gallop2,0.5,0.8,-0.2,,,
+raid,1.35,mc:mob/horse/gallop4,0.45,0.7,0.2,,,
+raid,1.8,mc:mob/horse/gallop1,0.45,0.8,0.0,,,
+beam,0.0,mc:block/beacon/activate,0.8,0.5,0.0,,,the beam (the saucer's own sound)
+beam,0.45,mc:mob/cow/say2,0.9,1.0,0.1,,,the cow
+beam,1.7,mc:mob/cow/say3,0.8,1.15,0.0,,,higher as it rises
+take,0.0,mc:mob/endermen/portal,0.8,0.5,0.0,,,taken (the game's own)
+take,0.1,mc:block/beacon/deactivate,0.6,0.5,0.0,,,
+drop,0.3,mod:entity/mothership/death_ray_fire,0.9,1.0,0.0,,,the death ray
+drop,0.0,mod:entity/mothership/hum,0.6,1.0,0.0,,,
+drop,2.0,mod:item/phlogiston_gun/rifle_1,0.7,1.0,0.3,,,the warden
+gate,-0.4,mc:block/beacon/power2,0.6,0.8,0.0,,,the gateway charging
+gate,0.2,mc:block/end_portal/endportal,0.8,1.4,0.0,,,the gateway opening (as in the game)
+gate,0.2,mc:block/amethyst/shimmer,0.5,0.7,0.0,,,
+fall,0.0,mc:item/trident/riptide3,0.9,0.7,0.0,,,crossing (as in the game)
+fall,0.05,mc:block/end_portal/endportal,0.35,1.8,0.0,,,
+vista,0.0,mod:ambient/hollow_earth/reveal,0.7,1.0,0.0,,,the Hollow's reveal
+sites,0.4,mc:block/amethyst/shimmer,0.5,1.2,-0.4,,,crystal
+sites,1.3,mc:block/amethyst/shimmer,0.45,0.9,0.4,,,
+title,0.0,mc:ambient/weather/thunder3,0.45,0.7,0.0,,,

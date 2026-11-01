@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "#minecraft:boats",
+    "E": "hollowfrontier:airship_envelope",
+    "L": "minecraft:lead",
+    "N": "hollowfrontier:airship_engine"
+  },
+  "pattern": [
+    "LEL",
+    " N ",
+    " B "
+  ],
+  "result": {
+    "id": "hollowfrontier:airship"
+  }
+}

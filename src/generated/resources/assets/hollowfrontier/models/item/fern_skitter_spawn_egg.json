@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hollowfrontier:item/fern_skitter_spawn_egg"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "parent": "hollowfrontier:frontier/twenty_one",
+  "criteria": {
+    "cleaned_out": {
+      "trigger": "hollowfrontier:cleaned_out"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.cleaned_out.description"
+    },
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:copper_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.cleaned_out.title"
+    }
+  },
+  "requirements": [
+    [
+      "cleaned_out"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:ufo/the_mothership_falls",
+  "criteria": {
+    "broken": {
+      "trigger": "hollowfrontier:leash_broken"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.cut_loose.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:kindled_sigil"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.cut_loose.title"
+    }
+  },
+  "requirements": [
+    [
+      "broken"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

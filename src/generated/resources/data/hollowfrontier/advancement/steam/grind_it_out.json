@@ -1,0 +1,55 @@
+{
+  "parent": "hollowfrontier:steam/head_of_steam",
+  "criteria": {
+    "copper_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:copper_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "gold_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:gold_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "iron_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:iron_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.grind_it_out.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:iron_dust"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.grind_it_out.title"
+    }
+  },
+  "requirements": [
+    [
+      "iron_dust",
+      "gold_dust",
+      "copper_dust"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

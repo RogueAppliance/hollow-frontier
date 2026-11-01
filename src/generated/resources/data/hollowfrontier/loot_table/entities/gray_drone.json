@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:killed_by_player"
+          },
+          {
+            "type": "minecraft:random_chance",
+            "chance": 0.35
+          }
+        ]
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:gray_tech_fragment"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "hollowfrontier:entities/gray_drone"
+}

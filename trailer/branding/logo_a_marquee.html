@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:transparent}
+svg{display:block}
+</style></head><body>
+<!-- A. Brass Marquee: the wordmark in polished brass, bevelled, between ornamental rules -->
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff6d0"/><stop offset=".30" stop-color="#f5cd63"/>
+    <stop offset=".52" stop-color="#b8772a"/><stop offset=".58" stop-color="#f0c060"/>
+    <stop offset=".80" stop-color="#c88a35"/><stop offset="1" stop-color="#6e3d10"/>
+  </linearGradient>
+  <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#f2c55a" stop-opacity="0"/><stop offset=".5" stop-color="#f7d98a"/>
+    <stop offset="1" stop-color="#f2c55a" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="shadow" x="-10%" y="-30%" width="120%" height="160%">
+    <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity=".75"/>
+  </filter>
+  <filter id="glow" x="-20%" y="-60%" width="140%" height="220%">
+    <feGaussianBlur stdDeviation="18" result="b"/>
+    <feColorMatrix in="b" type="matrix" values="1 0 0 0 0.25  0 .8 0 0 0.12  0 0 .3 0 0  0 0 0 .55 0"/>
+  </filter>
+</defs>
+<g font-family="Algerian" text-anchor="middle">
+  <!-- warm bloom behind -->
+  <text x="960" y="585" font-size="182" fill="#ffb84a" filter="url(#glow)" letter-spacing="6">HOLLOW FRONTIER</text>
+  <!-- body: dark rim, brass face, a highlight edge -->
+  <g filter="url(#shadow)">
+    <text x="960" y="585" font-size="182" letter-spacing="6" fill="url(#gold)" stroke="#2a1405" stroke-width="10" paint-order="stroke" stroke-linejoin="round">HOLLOW FRONTIER</text>
+  </g>
+  <text x="960" y="582" font-size="182" letter-spacing="6" fill="none" stroke="#fff4c8" stroke-opacity=".55" stroke-width="1.6">HOLLOW FRONTIER</text>
+</g>
+<!-- rules and stars -->
+<g>
+  <rect x="460" y="372" width="1000" height="3" fill="url(#rule)"/>
+  <rect x="560" y="382" width="800" height="1.5" fill="url(#rule)"/>
+  <rect x="460" y="650" width="1000" height="3" fill="url(#rule)"/>
+  <rect x="560" y="642" width="800" height="1.5" fill="url(#rule)"/>
+  <g fill="#f7d98a" stroke="#2a1405" stroke-width="2">
+    <polygon points="960,346 967,365 987,365 971,377 977,396 960,384 943,396 949,377 933,365 953,365"/>
+  </g>
+</g>
+<g font-family="Bahnschrift, 'Segoe UI'" text-anchor="middle" fill="#f3e3c0">
+  <text x="960" y="712" font-size="34" letter-spacing="14" font-weight="600">WILD WEST · STEAM AGE · HOLLOW EARTH</text>
+  <text x="960" y="760" font-size="22" letter-spacing="8" fill-opacity=".75">A NEOFORGE MOD FOR MINECRAFT 26.3</text>
+</g>
+</svg>
+</body></html>

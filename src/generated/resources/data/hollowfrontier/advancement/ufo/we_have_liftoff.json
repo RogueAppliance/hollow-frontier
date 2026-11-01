@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/defying_gravity",
+  "criteria": {
+    "launched": {
+      "trigger": "hollowfrontier:saucer_launched"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.we_have_liftoff.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:prototype_saucer"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.we_have_liftoff.title"
+    }
+  },
+  "requirements": [
+    [
+      "launched"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

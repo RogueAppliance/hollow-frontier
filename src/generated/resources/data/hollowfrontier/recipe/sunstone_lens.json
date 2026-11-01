@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "#c:glass_panes/colorless",
+    "H": "#c:ingots/starsteel",
+    "S": "hollowfrontier:sunstone_shard"
+  },
+  "pattern": [
+    " HS",
+    "HGH",
+    "SH "
+  ],
+  "result": {
+    "id": "hollowfrontier:sunstone_lens"
+  }
+}

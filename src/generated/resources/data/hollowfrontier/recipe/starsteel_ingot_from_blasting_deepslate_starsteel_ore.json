@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "starsteel_ingot",
+  "ingredient": "hollowfrontier:deepslate_starsteel_ore",
+  "result": {
+    "id": "hollowfrontier:starsteel_ingot"
+  }
+}

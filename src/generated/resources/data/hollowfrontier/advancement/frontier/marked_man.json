@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/word_to_the_wise",
+  "criteria": {
+    "marked": {
+      "trigger": "hollowfrontier:marked"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.marked_man.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "minecraft:skeleton_skull"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.marked_man.title"
+    }
+  },
+  "requirements": [
+    [
+      "marked"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

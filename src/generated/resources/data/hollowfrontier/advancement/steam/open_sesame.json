@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:steam/true_north",
+  "criteria": {
+    "opened": {
+      "trigger": "hollowfrontier:gateway_opened"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.open_sesame.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:polar_resonator"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.open_sesame.title"
+    }
+  },
+  "requirements": [
+    [
+      "opened"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

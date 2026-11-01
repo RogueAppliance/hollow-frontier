@@ -1,0 +1,27 @@
+{
+  "parent": "hollowfrontier:ufo/root",
+  "criteria": {
+    "taken": {
+      "trigger": "hollowfrontier:abducted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.missing_time.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "id": "minecraft:ender_eye"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.missing_time.title"
+    }
+  },
+  "requirements": [
+    [
+      "taken"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

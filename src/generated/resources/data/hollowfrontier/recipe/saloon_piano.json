@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "minecraft:bone",
+    "N": "minecraft:note_block",
+    "W": "#minecraft:planks"
+  },
+  "pattern": [
+    "WWW",
+    "BNB",
+    "W W"
+  ],
+  "result": {
+    "id": "hollowfrontier:saloon_piano"
+  }
+}

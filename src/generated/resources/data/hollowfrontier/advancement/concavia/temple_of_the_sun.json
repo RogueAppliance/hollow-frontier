@@ -1,0 +1,37 @@
+{
+  "parent": "hollowfrontier:concavia/an_ally_below",
+  "criteria": {
+    "found": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "hollowfrontier:sun_temple"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.temple_of_the_sun.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:sun_pylon"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.temple_of_the_sun.title"
+    }
+  },
+  "requirements": [
+    [
+      "found"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

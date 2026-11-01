@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "R": "#c:rods/wooden",
+    "S": "#minecraft:wooden_slabs"
+  },
+  "pattern": [
+    "SSS",
+    " R ",
+    " R "
+  ],
+  "result": {
+    "count": 2,
+    "id": "hollowfrontier:bar_stool"
+  }
+}

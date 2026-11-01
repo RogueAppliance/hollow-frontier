@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:concavia/root",
+  "criteria": {
+    "read": {
+      "trigger": "hollowfrontier:codex_read"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.required_reading.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:concavian_codex"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.required_reading.title"
+    }
+  },
+  "requirements": [
+    [
+      "read"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

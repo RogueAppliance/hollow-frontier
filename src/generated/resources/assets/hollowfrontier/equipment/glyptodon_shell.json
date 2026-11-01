@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "hollowfrontier:glyptodon_shell"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "hollowfrontier:glyptodon_shell"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "hollowfrontier:glyptodon_shell"
+      }
+    ]
+  }
+}

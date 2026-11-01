@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": "minecraft:diamond",
+    "C": "hollowfrontier:crystal_bricks",
+    "S": "hollowfrontier:concavian_armor_trim_smithing_template"
+  },
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "id": "hollowfrontier:concavian_armor_trim_smithing_template"
+  }
+}

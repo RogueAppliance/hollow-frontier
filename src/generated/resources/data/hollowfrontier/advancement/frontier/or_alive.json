@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/dead_or_alive",
+  "criteria": {
+    "alive": {
+      "trigger": "hollowfrontier:brought_in_alive"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.or_alive.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "minecraft:lead"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.or_alive.title"
+    }
+  },
+  "requirements": [
+    [
+      "alive"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

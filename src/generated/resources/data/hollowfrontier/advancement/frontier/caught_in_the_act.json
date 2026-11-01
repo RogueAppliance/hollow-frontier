@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/lights_in_the_sky",
+  "criteria": {
+    "caught": {
+      "trigger": "hollowfrontier:caught_in_the_act"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.caught_in_the_act.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:gray_tech_fragment"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.caught_in_the_act.title"
+    }
+  },
+  "requirements": [
+    [
+      "caught"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

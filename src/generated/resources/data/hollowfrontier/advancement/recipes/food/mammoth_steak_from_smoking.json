@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_mammoth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:raw_mammoth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "hollowfrontier:mammoth_steak_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_mammoth"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollowfrontier:mammoth_steak_from_smoking"
+    ]
+  }
+}

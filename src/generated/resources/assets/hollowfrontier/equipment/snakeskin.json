@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "hollowfrontier:snakeskin"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "hollowfrontier:snakeskin"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "hollowfrontier:snakeskin"
+      }
+    ]
+  }
+}

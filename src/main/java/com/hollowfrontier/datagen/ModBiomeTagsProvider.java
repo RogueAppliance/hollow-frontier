@@ -1,0 +1,76 @@
+package com.hollowfrontier.datagen;
+
+import java.util.concurrent.CompletableFuture;
+
+import com.hollowfrontier.HollowFrontier;
+import com.hollowfrontier.content.frontier.weather.DustDevils;
+import com.hollowfrontier.worldgen.HollowBiomes;
+import com.hollowfrontier.worldgen.ModSpawns;
+import com.hollowfrontier.worldgen.structure.ModStructures;
+import com.hollowfrontier.worldgen.structure.TownStyle;
+
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+import net.neoforged.neoforge.common.Tags;
+
+public class ModBiomeTagsProvider extends TagsProvider<Biome> {
+    public ModBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, Registries.BIOME, lookupProvider, HollowFrontier.MODID);
+    }
+
+    @Override
+    protected void addTags(HolderLookup.Provider registries) {
+        tag(ModStructures.IS_FRONTIER)
+                .addTag(Tags.Biomes.IS_DESERT)
+                .addTag(Tags.Biomes.IS_PLAINS)
+                .addTag(BiomeTags.IS_SAVANNA)
+                .addTag(BiomeTags.IS_BADLANDS);
+        tag(ModSpawns.HAS_OUTLAWS).addTag(ModStructures.IS_FRONTIER);
+        // Town styles (TownStyle): clapboard on the grass, missions in the sand, mining camps up in the pines
+        tag(TownStyle.FRONTIER.biomes())
+                .addTag(Tags.Biomes.IS_PLAINS)
+                .addTag(BiomeTags.IS_SAVANNA);
+        tag(TownStyle.DESERT.biomes())
+                .addTag(Tags.Biomes.IS_DESERT)
+                .addTag(BiomeTags.IS_BADLANDS);
+        tag(TownStyle.MINING.biomes())
+                .addTag(BiomeTags.IS_TAIGA)
+                .addTag(BiomeTags.IS_HILL)
+                .addTag(Tags.Biomes.IS_HILL)
+                .add(Biomes.MEADOW);
+        // Polar Gateways: frozen country only (the Overworld has no poles, so the snows stand in for them). Any mod's snowy
+        // biomes count (c:is_snowy), since the way into the Hollow Earth mustn't vanish in a modded world; beaches, oceans,
+        // rivers and bare peaks are taken out again (NeoForge's tag removal).
+        tag(ModStructures.HAS_POLAR_GATEWAY)
+                .add(Biomes.SNOWY_PLAINS, Biomes.ICE_SPIKES, Biomes.SNOWY_TAIGA, Biomes.GROVE, Biomes.SNOWY_SLOPES)
+                .addTag(Tags.Biomes.IS_SNOWY)
+                .remove(Tags.Biomes.IS_BEACH, BiomeTags.IS_OCEAN, BiomeTags.IS_RIVER, Tags.Biomes.IS_MOUNTAIN_PEAK);
+        // The Hollow Earth, and where its megafauna (10a) and the Grays' labs (10b) will turn up
+        tag(HollowBiomes.IS_HOLLOW_EARTH).add(HollowBiomes.PRIMORDIAL_JUNGLE, HollowBiomes.CRYSTAL_STEPPES, HollowBiomes.EMBER_BADLANDS,
+                HollowBiomes.CONCAVIAN_HIGHLANDS);
+        tag(HollowBiomes.HAS_MAMMOTHS).add(HollowBiomes.CONCAVIAN_HIGHLANDS, HollowBiomes.CRYSTAL_STEPPES);
+        tag(HollowBiomes.HAS_TERROR_BIRDS).add(HollowBiomes.CRYSTAL_STEPPES, HollowBiomes.EMBER_BADLANDS);
+        tag(HollowBiomes.HAS_MEGATHERIUM).add(HollowBiomes.PRIMORDIAL_JUNGLE);
+        tag(HollowBiomes.HAS_GLYPTODONS).add(HollowBiomes.PRIMORDIAL_JUNGLE, HollowBiomes.CRYSTAL_STEPPES);
+        tag(HollowBiomes.HAS_GRAY_LABS).add(HollowBiomes.PRIMORDIAL_JUNGLE, HollowBiomes.CRYSTAL_STEPPES, HollowBiomes.EMBER_BADLANDS);
+        tag(ModStructures.HAS_KINDLED_SITES).add(HollowBiomes.CONCAVIAN_HIGHLANDS);
+        tag(ModStructures.HAS_CRYSTAL_RUINS).add(HollowBiomes.CONCAVIAN_HIGHLANDS);
+        tag(ModStructures.HAS_SUN_TEMPLE).add(HollowBiomes.EMBER_BADLANDS);
+        tag(ModStructures.HAS_CRASH_SITE).addTag(ModStructures.IS_FRONTIER).addTag(BiomeTags.IS_FOREST).addTag(BiomeTags.IS_TAIGA);
+        // 29: dust devils over the dry country, Ash Devils in the Ember Badlands
+        tag(DustDevils.HAS_DUST_DEVILS)
+                .addTag(Tags.Biomes.IS_DESERT)
+                .addTag(BiomeTags.IS_SAVANNA)
+                .addTag(BiomeTags.IS_BADLANDS);
+        tag(DustDevils.HAS_ASH_DEVILS).add(HollowBiomes.EMBER_BADLANDS);
+        tag(ModSpawns.HAS_RATTLESNAKES)
+                .addTag(Tags.Biomes.IS_DESERT)
+                .addTag(BiomeTags.IS_SAVANNA)
+                .addTag(BiomeTags.IS_BADLANDS);
+    }
+}

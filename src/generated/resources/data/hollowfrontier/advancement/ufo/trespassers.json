@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/cut_loose",
+  "criteria": {
+    "cleared": {
+      "trigger": "hollowfrontier:landing_cleared"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.trespassers.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:gray_cache"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.trespassers.title"
+    }
+  },
+  "requirements": [
+    [
+      "cleared"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

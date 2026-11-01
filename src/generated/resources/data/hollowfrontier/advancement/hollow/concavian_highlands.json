@@ -1,0 +1,37 @@
+{
+  "parent": "hollowfrontier:hollow/root",
+  "criteria": {
+    "visited": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "biomes": "hollowfrontier:concavian_highlands"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.concavian_highlands.description"
+    },
+    "icon": {
+      "id": "minecraft:calcite"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.concavian_highlands.title"
+    }
+  },
+  "requirements": [
+    [
+      "visited"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

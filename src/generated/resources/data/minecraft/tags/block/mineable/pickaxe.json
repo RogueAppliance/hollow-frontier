@@ -1,0 +1,31 @@
+{
+  "values": [
+    "hollowfrontier:brass_block",
+    "hollowfrontier:town_lamp",
+    "hollowfrontier:boiler",
+    "hollowfrontier:copper_pipe",
+    "hollowfrontier:steam_tank",
+    "hollowfrontier:pressure_gauge",
+    "hollowfrontier:crusher",
+    "hollowfrontier:crust_rock",
+    "hollowfrontier:ash_vent",
+    "hollowfrontier:starsteel_ore",
+    "hollowfrontier:deepslate_starsteel_ore",
+    "hollowfrontier:raw_starsteel_block",
+    "hollowfrontier:starsteel_block",
+    "hollowfrontier:phlogiston_ore",
+    "hollowfrontier:deepslate_phlogiston_ore",
+    "hollowfrontier:phlogiston_lamp",
+    "hollowfrontier:concavian_crystal",
+    "hollowfrontier:crystal_bricks",
+    "hollowfrontier:crystal_brick_stairs",
+    "hollowfrontier:crystal_brick_slab",
+    "hollowfrontier:crystal_brick_wall",
+    "hollowfrontier:chiseled_crystal_bricks",
+    "hollowfrontier:sun_pylon",
+    "hollowfrontier:saucer_hull",
+    "hollowfrontier:saucer_wreckage",
+    "hollowfrontier:phlogiston_beacon",
+    "hollowfrontier:implant_rig"
+  ]
+}

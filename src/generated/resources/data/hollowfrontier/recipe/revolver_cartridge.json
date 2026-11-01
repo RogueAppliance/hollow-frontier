@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:paper",
+    "minecraft:gunpowder",
+    "#c:nuggets/iron"
+  ],
+  "result": {
+    "count": 6,
+    "id": "hollowfrontier:revolver_cartridge"
+  }
+}

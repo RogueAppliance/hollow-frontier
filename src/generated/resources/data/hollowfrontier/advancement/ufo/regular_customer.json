@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/cut_loose",
+  "criteria": {
+    "regular": {
+      "trigger": "hollowfrontier:regular_customer"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.regular_customer.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:sarsaparilla"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.regular_customer.title"
+    }
+  },
+  "requirements": [
+    [
+      "regular"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

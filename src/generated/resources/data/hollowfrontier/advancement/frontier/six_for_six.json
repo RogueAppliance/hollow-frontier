@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/load_gun",
+  "criteria": {
+    "six": {
+      "conditions": {
+        "min": 6
+      },
+      "trigger": "hollowfrontier:gun_loaded"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.six_for_six.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:revolver"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.six_for_six.title"
+    }
+  },
+  "requirements": [
+    [
+      "six"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

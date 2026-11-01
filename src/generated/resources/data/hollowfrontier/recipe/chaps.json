@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "#c:nuggets/brass",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    "LBL",
+    "L L",
+    "L L"
+  ],
+  "result": {
+    "id": "hollowfrontier:chaps"
+  }
+}

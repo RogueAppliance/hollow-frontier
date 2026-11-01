@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hollowfrontier:block/crystal_brick_slab"
+    },
+    "type=double": {
+      "model": "hollowfrontier:block/crystal_bricks"
+    },
+    "type=top": {
+      "model": "hollowfrontier:block/crystal_brick_slab_top"
+    }
+  }
+}

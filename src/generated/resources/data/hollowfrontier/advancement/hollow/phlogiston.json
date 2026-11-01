@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:hollow/root",
+  "criteria": {
+    "shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:phlogiston_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.phlogiston.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:phlogiston_shard"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.phlogiston.title"
+    }
+  },
+  "requirements": [
+    [
+      "shard"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hollowfrontier:block/waystone_top",
+    "side": "hollowfrontier:block/waystone_side"
+  }
+}

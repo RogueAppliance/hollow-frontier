@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/root",
+  "criteria": {
+    "wanted": {
+      "conditions": {
+        "min": 1
+      },
+      "trigger": "hollowfrontier:wanted_level"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.reputation.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:wanted_poster"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.reputation.title"
+    }
+  },
+  "requirements": [
+    [
+      "wanted"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

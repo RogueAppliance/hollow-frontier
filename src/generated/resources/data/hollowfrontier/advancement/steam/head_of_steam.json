@@ -1,0 +1,32 @@
+{
+  "parent": "hollowfrontier:steam/root",
+  "criteria": {
+    "boiler": {
+      "conditions": {
+        "location": {
+          "type": "minecraft:match_block",
+          "blocks": "hollowfrontier:boiler"
+        }
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.head_of_steam.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:boiler"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.head_of_steam.title"
+    }
+  },
+  "requirements": [
+    [
+      "boiler"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

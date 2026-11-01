@@ -1,0 +1,37 @@
+{
+  "parent": "hollowfrontier:frontier/root",
+  "criteria": {
+    "seated": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:vehicle": {
+              "minecraft:entity_type": "hollowfrontier:seat"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:started_riding"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.pull_up_a_stool.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:bar_stool"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.pull_up_a_stool.title"
+    }
+  },
+  "requirements": [
+    [
+      "seated"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

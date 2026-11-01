@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "entered": {
+      "conditions": {
+        "to": "hollowfrontier:hollow_earth"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "hollowfrontier:block/crust_rock",
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.root.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:phlogiston_shard"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

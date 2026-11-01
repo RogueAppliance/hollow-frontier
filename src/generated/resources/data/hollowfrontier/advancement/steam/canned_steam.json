@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:steam/head_of_steam",
+  "criteria": {
+    "filled": {
+      "trigger": "hollowfrontier:canister_filled"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.canned_steam.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:steam_canister"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.canned_steam.title"
+    }
+  },
+  "requirements": [
+    [
+      "filled"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

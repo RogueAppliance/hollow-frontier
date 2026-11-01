@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:steam/handcar",
+  "criteria": {
+    "bearing": {
+      "trigger": "hollowfrontier:polar_bearing"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.true_north.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:polar_compass"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.true_north.title"
+    }
+  },
+  "requirements": [
+    [
+      "bearing"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

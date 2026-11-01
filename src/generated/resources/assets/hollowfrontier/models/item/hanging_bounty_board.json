@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hollowfrontier:item/hanging_bounty_board"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "parent": "hollowfrontier:frontier/wet_your_whistle",
+  "criteria": {
+    "woke": {
+      "trigger": "hollowfrontier:missing_time_drunk"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.missing_time_question.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:cowboy_hat"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.missing_time_question.title"
+    }
+  },
+  "requirements": [
+    [
+      "woke"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  },
+  "sends_telemetry_event": true
+}

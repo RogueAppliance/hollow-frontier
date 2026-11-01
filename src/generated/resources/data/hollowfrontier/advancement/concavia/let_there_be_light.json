@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:concavia/eclipse",
+  "criteria": {
+    "beam": {
+      "trigger": "hollowfrontier:sunbeam_hit"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.let_there_be_light.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:sunstone_lens"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.let_there_be_light.title"
+    }
+  },
+  "requirements": [
+    [
+      "beam"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

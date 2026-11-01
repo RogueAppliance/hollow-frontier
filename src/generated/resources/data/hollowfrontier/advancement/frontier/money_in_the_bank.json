@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/mint_coin",
+  "criteria": {
+    "opened": {
+      "trigger": "hollowfrontier:bank_opened"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.money_in_the_bank.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:gold_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.money_in_the_bank.title"
+    }
+  },
+  "requirements": [
+    [
+      "opened"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

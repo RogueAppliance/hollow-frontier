@@ -1,0 +1,62 @@
+name: Bug report
+description: Something broke, crashed or doesn't work the way it should.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please check the [known issues](https://github.com/RogueAppliance/hollow-frontier/issues?q=is%3Aissue+label%3Aknown) and search for an existing report first.
+  - type: input
+    id: mod-version
+    attributes:
+      label: Hollow Frontier version
+      description: From the jar's name or the Mods screen.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: neoforge-version
+    attributes:
+      label: Minecraft and NeoForge versions
+      placeholder: "Minecraft 26.3, NeoForge 26.3.0.99"
+    validations:
+      required: true
+  - type: dropdown
+    id: side
+    attributes:
+      label: Where does it happen?
+      options:
+        - Singleplayer
+        - Multiplayer (dedicated server)
+        - Multiplayer (LAN or hosted from a client)
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you expected, and what happened instead. Screenshots help.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can someone else make it happen? A seed and coordinates help with world generation bugs.
+      placeholder: |
+        1. Open a Polar Gateway with the resonator
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: log
+    attributes:
+      label: Log or crash report
+      description: Upload `logs/latest.log` (or the file in `crash-reports/`) to https://mclo.gs and paste the link here. Please don't paste whole logs into the issue.
+      placeholder: "https://mclo.gs/..."
+  - type: textarea
+    id: mods
+    attributes:
+      label: Other mods and shaders
+      description: Your modpack's name, or a list of other mods. Mention any shader pack too. Does it still happen with only Hollow Frontier and GeckoLib installed?

@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:hollow/phlogiston",
+  "criteria": {
+    "lamp": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:phlogiston_lamp"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.phlogiston_lamp.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:phlogiston_lamp"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.phlogiston_lamp.title"
+    }
+  },
+  "requirements": [
+    [
+      "lamp"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

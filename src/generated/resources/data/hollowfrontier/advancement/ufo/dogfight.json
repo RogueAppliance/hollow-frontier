@@ -1,0 +1,35 @@
+{
+  "parent": "hollowfrontier:ufo/calling_them_down",
+  "criteria": {
+    "drone": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:gray_drone"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.dogfight.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:lens_array"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.dogfight.title"
+    }
+  },
+  "requirements": [
+    [
+      "drone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

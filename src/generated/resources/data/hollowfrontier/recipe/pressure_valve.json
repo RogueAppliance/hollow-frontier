@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "#c:ingots/copper",
+    "G": "#c:gears/brass",
+    "P": "#c:plates/brass",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    " G ",
+    "PCP",
+    " R "
+  ],
+  "result": {
+    "id": "hollowfrontier:pressure_valve"
+  }
+}

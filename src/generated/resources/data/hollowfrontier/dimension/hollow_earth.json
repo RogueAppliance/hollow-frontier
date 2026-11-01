@@ -1,0 +1,147 @@
+{
+  "type": "hollowfrontier:hollow_earth",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "hollowfrontier:concavian_highlands",
+          "parameters": {
+            "continentalness": [
+              0.38,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "hollowfrontier:concavian_highlands",
+          "parameters": {
+            "continentalness": [
+              -1.0,
+              0.38
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "hollowfrontier:primordial_jungle",
+          "parameters": {
+            "continentalness": [
+              -1.0,
+              0.38
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              0.02,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "hollowfrontier:ember_badlands",
+          "parameters": {
+            "continentalness": [
+              -1.0,
+              0.38
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              0.02
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.12,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "hollowfrontier:crystal_steppes",
+          "parameters": {
+            "continentalness": [
+              -1.0,
+              0.38
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              0.02
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.12
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        }
+      ]
+    },
+    "settings": "hollowfrontier:hollow_earth"
+  }
+}

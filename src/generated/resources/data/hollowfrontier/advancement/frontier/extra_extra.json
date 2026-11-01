@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:frontier/mint_coin",
+  "criteria": {
+    "gazette": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:frontier_gazette"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.extra_extra.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:frontier_gazette"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.extra_extra.title"
+    }
+  },
+  "requirements": [
+    [
+      "gazette"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

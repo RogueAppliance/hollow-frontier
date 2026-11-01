@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "hollowfrontier:ash"
+  ],
+  "result": {
+    "id": "minecraft:gray_dye"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/root",
+  "criteria": {
+    "shod": {
+      "trigger": "hollowfrontier:horse_shod"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.well_heeled.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:iron_horseshoes"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.well_heeled.title"
+    }
+  },
+  "requirements": [
+    [
+      "shod"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

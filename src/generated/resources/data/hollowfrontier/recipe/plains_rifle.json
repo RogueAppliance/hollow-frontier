@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "#c:gears/brass",
+    "I": "#c:ingots/iron",
+    "P": "#c:plates/brass",
+    "W": "#minecraft:planks"
+  },
+  "pattern": [
+    "III",
+    "PGW",
+    "  W"
+  ],
+  "result": {
+    "id": "hollowfrontier:plains_rifle"
+  }
+}

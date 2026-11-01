@@ -1,0 +1,15 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "hollowfrontier:crystal_steppes",
+  "max_slope": 5,
+  "size": 2,
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "start_pool": "hollowfrontier:phlogiston_mine",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

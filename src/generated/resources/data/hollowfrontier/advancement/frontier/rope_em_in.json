@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/well_heeled",
+  "criteria": {
+    "lassoed": {
+      "trigger": "hollowfrontier:lassoed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.rope_em_in.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:lasso"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.rope_em_in.title"
+    }
+  },
+  "requirements": [
+    [
+      "lassoed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

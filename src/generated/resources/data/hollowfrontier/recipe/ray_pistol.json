@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "#c:ingots/brass",
+    "F": "hollowfrontier:gray_tech_fragment",
+    "H": "#c:ingots/starsteel",
+    "V": "#c:gems/phlogiston"
+  },
+  "pattern": [
+    " FV",
+    "HHB",
+    " B "
+  ],
+  "result": {
+    "id": "hollowfrontier:ray_pistol"
+  }
+}

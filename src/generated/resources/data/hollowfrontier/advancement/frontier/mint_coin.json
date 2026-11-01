@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/root",
+  "criteria": {
+    "minted": {
+      "conditions": {
+        "recipes": "hollowfrontier:copper_coin"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.mint_coin.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:copper_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.mint_coin.title"
+    }
+  },
+  "requirements": [
+    [
+      "minted"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

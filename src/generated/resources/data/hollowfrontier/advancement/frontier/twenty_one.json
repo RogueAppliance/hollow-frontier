@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/pull_up_a_stool",
+  "criteria": {
+    "natural": {
+      "trigger": "hollowfrontier:blackjack_natural"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.twenty_one.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:card_table"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.twenty_one.title"
+    }
+  },
+  "requirements": [
+    [
+      "natural"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

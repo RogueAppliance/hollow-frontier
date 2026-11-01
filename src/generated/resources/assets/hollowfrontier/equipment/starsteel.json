@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "hollowfrontier:starsteel"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "hollowfrontier:starsteel"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "hollowfrontier:starsteel"
+      }
+    ]
+  }
+}

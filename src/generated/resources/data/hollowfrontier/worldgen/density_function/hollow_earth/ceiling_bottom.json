@@ -1,0 +1,105 @@
+{
+  "type": "minecraft:cache",
+  "input": {
+    "type": "minecraft:sub",
+    "left": {
+      "type": "minecraft:sub",
+      "left": {
+        "type": "minecraft:add",
+        "left": 236.0,
+        "right": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:noise",
+            "noise": "hollowfrontier:hollow_earth/ceiling",
+            "shift_x": "minecraft:shift_x",
+            "shift_z": "minecraft:shift_z",
+            "xz_scale": 0.25,
+            "y_scale": 0.0
+          },
+          "right": 12.0
+        }
+      },
+      "right": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:square",
+            "input": {
+              "type": "minecraft:add",
+              "left": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:clamp",
+                  "input": {
+                    "type": "minecraft:noise",
+                    "noise": "hollowfrontier:hollow_earth/spires",
+                    "shift_x": "minecraft:shift_x",
+                    "shift_z": "minecraft:shift_z",
+                    "xz_scale": 0.25,
+                    "y_scale": 0.0
+                  },
+                  "max": 0.9,
+                  "min": 0.3
+                },
+                "right": 1.6666667
+              },
+              "right": -0.50000006
+            }
+          },
+          "right": {
+            "type": "minecraft:add",
+            "left": {
+              "type": "minecraft:mul",
+              "left": {
+                "type": "minecraft:clamp",
+                "input": {
+                  "type": "minecraft:noise",
+                  "noise": "hollowfrontier:hollow_earth/spire_fields",
+                  "shift_x": "minecraft:shift_x",
+                  "shift_z": "minecraft:shift_z",
+                  "xz_scale": 0.25,
+                  "y_scale": 0.0
+                },
+                "max": 0.3,
+                "min": -0.3
+              },
+              "right": 1.0833333
+            },
+            "right": 0.67499995
+          }
+        },
+        "right": 110.0
+      }
+    },
+    "right": {
+      "type": "minecraft:mul",
+      "left": {
+        "type": "minecraft:square",
+        "input": {
+          "type": "minecraft:add",
+          "left": {
+            "type": "minecraft:mul",
+            "left": {
+              "type": "minecraft:clamp",
+              "input": {
+                "type": "minecraft:noise",
+                "noise": "hollowfrontier:hollow_earth/teeth",
+                "shift_x": "minecraft:shift_x",
+                "shift_z": "minecraft:shift_z",
+                "xz_scale": 0.25,
+                "y_scale": 0.0
+              },
+              "max": 1.0,
+              "min": 0.35
+            },
+            "right": 1.5384616
+          },
+          "right": -0.53846157
+        }
+      },
+      "right": 10.0
+    }
+  }
+}

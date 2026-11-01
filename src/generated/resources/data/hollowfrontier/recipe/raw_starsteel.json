@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "hollowfrontier:raw_starsteel_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "hollowfrontier:raw_starsteel"
+  }
+}

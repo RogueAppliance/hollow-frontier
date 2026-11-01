@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/money_in_the_bank",
+  "criteria": {
+    "saved": {
+      "trigger": "hollowfrontier:bank_saved"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.saved_the_savings.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "minecraft:bundle"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.saved_the_savings.title"
+    }
+  },
+  "requirements": [
+    [
+      "saved"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

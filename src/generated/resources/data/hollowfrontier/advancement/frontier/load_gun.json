@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/root",
+  "criteria": {
+    "loaded": {
+      "trigger": "hollowfrontier:gun_loaded"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.load_gun.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:revolver_cartridge"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.load_gun.title"
+    }
+  },
+  "requirements": [
+    [
+      "loaded"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

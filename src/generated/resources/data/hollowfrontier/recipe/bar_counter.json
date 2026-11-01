@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": "minecraft:dark_oak_slab",
+    "W": "#minecraft:planks"
+  },
+  "pattern": [
+    "SSS",
+    "WWW",
+    "WWW"
+  ],
+  "result": {
+    "count": 3,
+    "id": "hollowfrontier:bar_counter"
+  }
+}

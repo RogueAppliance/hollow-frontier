@@ -1,0 +1,48 @@
+{
+  "parent": "hollowfrontier:ufo/salvage_rights",
+  "criteria": {
+    "all": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:alien_alloy_plating"
+          },
+          {
+            "items": "hollowfrontier:damaged_gravity_drive"
+          },
+          {
+            "items": "hollowfrontier:beam_emitter"
+          },
+          {
+            "items": "hollowfrontier:lens_array"
+          },
+          {
+            "items": "hollowfrontier:navigation_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.some_assembly_required.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:navigation_core"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.some_assembly_required.title"
+    }
+  },
+  "requirements": [
+    [
+      "all"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  },
+  "sends_telemetry_event": true
+}

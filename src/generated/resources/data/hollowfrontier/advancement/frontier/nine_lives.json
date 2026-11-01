@@ -1,0 +1,30 @@
+{
+  "parent": "hollowfrontier:frontier/dressed_to_the_nines",
+  "criteria": {
+    "ghost": {
+      "trigger": "hollowfrontier:ghost_cat_tamed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.nine_lives.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:cooked_salmon"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.nine_lives.title"
+    }
+  },
+  "requirements": [
+    [
+      "ghost"
+    ]
+  ],
+  "rewards": {
+    "experience": 100,
+    "loot": "hollowfrontier:rewards/ghost_cat"
+  },
+  "sends_telemetry_event": true
+}

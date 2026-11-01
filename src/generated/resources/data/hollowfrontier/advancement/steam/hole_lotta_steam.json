@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:steam/canned_steam",
+  "criteria": {
+    "drill": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:steam_drill"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.hole_lotta_steam.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:steam_drill"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.hole_lotta_steam.title"
+    }
+  },
+  "requirements": [
+    [
+      "drill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

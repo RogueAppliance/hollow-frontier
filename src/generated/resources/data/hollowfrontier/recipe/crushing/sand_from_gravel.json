@@ -1,0 +1,7 @@
+{
+  "type": "hollowfrontier:crushing",
+  "ingredient": "#c:gravels",
+  "result": {
+    "id": "minecraft:sand"
+  }
+}

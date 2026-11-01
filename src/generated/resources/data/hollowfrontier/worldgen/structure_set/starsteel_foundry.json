@@ -1,0 +1,18 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+      "chunk_count": 6,
+      "other_set": "hollowfrontier:gray_lab"
+    },
+    "salt": 1427270505,
+    "separation": 10,
+    "spacing": 30
+  },
+  "structures": [
+    {
+      "structure": "hollowfrontier:starsteel_foundry",
+      "weight": 1
+    }
+  ]
+}

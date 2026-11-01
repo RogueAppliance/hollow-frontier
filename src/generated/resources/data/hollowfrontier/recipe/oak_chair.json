@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": "minecraft:oak_planks",
+    "R": "#c:rods/wooden"
+  },
+  "pattern": [
+    "P  ",
+    "PPP",
+    "R R"
+  ],
+  "result": {
+    "count": 2,
+    "id": "hollowfrontier:oak_chair"
+  }
+}

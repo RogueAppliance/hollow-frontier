@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_empty_phlogiston_cell": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:empty_phlogiston_cell"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "hollowfrontier:phlogiston_cell"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_empty_phlogiston_cell"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollowfrontier:phlogiston_cell"
+    ]
+  }
+}

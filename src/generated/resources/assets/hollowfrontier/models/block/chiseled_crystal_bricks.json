@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "hollowfrontier:block/chiseled_crystal_bricks"
+  }
+}

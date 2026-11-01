@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:lantern",
+    "minecraft:lantern",
+    "minecraft:daylight_detector"
+  ],
+  "result": {
+    "count": 2,
+    "id": "hollowfrontier:town_lamp"
+  }
+}

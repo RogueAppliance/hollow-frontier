@@ -1,0 +1,9 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "hollowfrontier:primordial_jungle",
+  "max_slope": 5,
+  "spawn_overrides": {},
+  "start_pool": "hollowfrontier:tar_pit",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

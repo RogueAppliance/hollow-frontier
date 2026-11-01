@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:advancement_reward",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 3
+          },
+          "name": "minecraft:cooked_salmon"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "hollowfrontier:rewards/ghost_cat"
+}

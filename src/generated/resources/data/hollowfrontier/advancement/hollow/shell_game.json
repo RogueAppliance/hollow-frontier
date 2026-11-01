@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:hollow/root",
+  "criteria": {
+    "scute": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:glyptodon_scute"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.shell_game.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:glyptodon_scute"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.shell_game.title"
+    }
+  },
+  "requirements": [
+    [
+      "scute"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,31 @@
+{
+  "parent": "hollowfrontier:frontier/wet_your_whistle",
+  "criteria": {
+    "blacked_out": {
+      "trigger": "hollowfrontier:blacked_out"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.lights_out.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:moonshine"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.lights_out.title"
+    }
+  },
+  "requirements": [
+    [
+      "blacked_out"
+    ]
+  ],
+  "rewards": {
+    "experience": 25,
+    "loot": "hollowfrontier:rewards/blackout"
+  },
+  "sends_telemetry_event": true
+}

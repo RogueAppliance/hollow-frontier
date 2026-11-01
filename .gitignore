@@ -1,0 +1,59 @@
+### Gradle ###
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/**/build/
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/**/out/
+
+.run/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.eclipse/
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/**/bin/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Minecraft Modding ###
+run/
+!**/src/**/run/
+**/src/generated/**/.cache/
+repo/
+!**/src/**/repo/
+
+### Trailer (clips, renders and the music are local only) ###
+trailer/clips/
+trailer/clips_shaders/
+trailer/clips_shaders_*/
+trailer/out/
+trailer/music/
+trailer/fonts/
+trailer/branding/bg/
+trailer/branding/preview/
+trailer/branding/*_options.*
+
+# Branding intermediates (rebuilt by branding/source/gen.py and render.ps1)
+branding/source/html/
+branding/source/png/
+
+# YouTube channel art and thumbnails (kept local)
+branding/channel/
+trailer/thumbnails/

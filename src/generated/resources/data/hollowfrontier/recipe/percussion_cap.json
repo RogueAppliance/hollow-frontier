@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "#c:ingots/copper",
+    "minecraft:gunpowder"
+  ],
+  "result": {
+    "count": 16,
+    "id": "hollowfrontier:percussion_cap"
+  }
+}

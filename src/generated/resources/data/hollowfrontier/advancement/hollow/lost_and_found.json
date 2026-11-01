@@ -1,0 +1,41 @@
+{
+  "parent": "hollowfrontier:hollow/root",
+  "criteria": {
+    "found": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "hollowfrontier:symmes_camp"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.lost_and_found.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "id": "minecraft:writable_book"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.lost_and_found.title"
+    }
+  },
+  "requirements": [
+    [
+      "found"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

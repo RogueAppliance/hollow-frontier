@@ -1,0 +1,35 @@
+{
+  "parent": "hollowfrontier:hollow/root",
+  "criteria": {
+    "terror_bird": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:terror_bird"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.dont_run.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:terror_bird_talon"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.dont_run.title"
+    }
+  },
+  "requirements": [
+    [
+      "terror_bird"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

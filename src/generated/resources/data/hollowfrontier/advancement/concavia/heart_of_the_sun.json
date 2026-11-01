@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:concavia/eclipse",
+  "criteria": {
+    "core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:phlogiston_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.heart_of_the_sun.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:phlogiston_core"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.heart_of_the_sun.title"
+    }
+  },
+  "requirements": [
+    [
+      "core"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

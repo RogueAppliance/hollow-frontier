@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:ufo/salvage_rights",
+  "criteria": {
+    "drive": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:gravity_drive"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.defying_gravity.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:gravity_drive"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.defying_gravity.title"
+    }
+  },
+  "requirements": [
+    [
+      "drive"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

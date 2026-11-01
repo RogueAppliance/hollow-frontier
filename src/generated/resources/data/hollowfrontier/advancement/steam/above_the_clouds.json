@@ -1,0 +1,32 @@
+{
+  "parent": "hollowfrontier:steam/airship",
+  "criteria": {
+    "altitude": {
+      "conditions": {
+        "min": 200
+      },
+      "trigger": "hollowfrontier:airship_altitude"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.above_the_clouds.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:airship_envelope"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.above_the_clouds.title"
+    }
+  },
+  "requirements": [
+    [
+      "altitude"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

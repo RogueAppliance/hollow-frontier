@@ -1,0 +1,589 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3,
+              "min": 1
+            }
+          },
+          "name": "hollowfrontier:phlogiston_cell"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1,
+        "min": 1
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 2
+            }
+          },
+          "name": "hollowfrontier:alien_alloy_plating"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1,
+        "min": 1
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 2
+            }
+          },
+          "name": "hollowfrontier:gray_tech_fragment",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 2
+            }
+          },
+          "name": "hollowfrontier:phlogiston_shard",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2,
+              "min": 1
+            }
+          },
+          "name": "hollowfrontier:empty_phlogiston_cell",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2,
+              "min": 1
+            }
+          },
+          "name": "minecraft:redstone_block",
+          "weight": 6
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 4,
+        "min": 2
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
+            }
+          },
+          "name": "hollowfrontier:damaged_gravity_drive"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
+            }
+          },
+          "name": "hollowfrontier:beam_emitter"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
+            }
+          },
+          "name": "hollowfrontier:lens_array"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
+            }
+          },
+          "name": "hollowfrontier:navigation_core"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1,
+        "min": 1
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:set_book_cover",
+              "author": "Observer 7",
+              "generation": 0,
+              "title": {
+                "raw": "Field Notes"
+              }
+            },
+            {
+              "type": "minecraft:set_written_book_pages",
+              "mode": "replace_all",
+              "pages": [
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.title"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.1"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.12"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.6"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.9"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:set_book_cover",
+              "author": "Observer 7",
+              "generation": 0,
+              "title": {
+                "raw": "Field Notes"
+              }
+            },
+            {
+              "type": "minecraft:set_written_book_pages",
+              "mode": "replace_all",
+              "pages": [
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.title"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.2"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.13"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.7"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.10"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:set_book_cover",
+              "author": "Observer 7",
+              "generation": 0,
+              "title": {
+                "raw": "Field Notes"
+              }
+            },
+            {
+              "type": "minecraft:set_written_book_pages",
+              "mode": "replace_all",
+              "pages": [
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.title"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.3"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.14"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.8"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.11"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:set_book_cover",
+              "author": "Observer 7",
+              "generation": 0,
+              "title": {
+                "raw": "Field Notes"
+              }
+            },
+            {
+              "type": "minecraft:set_written_book_pages",
+              "mode": "replace_all",
+              "pages": [
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.title"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.4"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.15"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.1"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.12"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:set_book_cover",
+              "author": "Observer 7",
+              "generation": 0,
+              "title": {
+                "raw": "Field Notes"
+              }
+            },
+            {
+              "type": "minecraft:set_written_book_pages",
+              "mode": "replace_all",
+              "pages": [
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.title"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.5"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.16"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.2"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.13"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:set_book_cover",
+              "author": "Observer 7",
+              "generation": 0,
+              "title": {
+                "raw": "Field Notes"
+              }
+            },
+            {
+              "type": "minecraft:set_written_book_pages",
+              "mode": "replace_all",
+              "pages": [
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.title"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.6"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.9"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.3"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.14"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:set_book_cover",
+              "author": "Observer 7",
+              "generation": 0,
+              "title": {
+                "raw": "Field Notes"
+              }
+            },
+            {
+              "type": "minecraft:set_written_book_pages",
+              "mode": "replace_all",
+              "pages": [
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.title"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.7"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.10"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.4"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.15"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "minecraft:written_book"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:set_book_cover",
+              "author": "Observer 7",
+              "generation": 0,
+              "title": {
+                "raw": "Field Notes"
+              }
+            },
+            {
+              "type": "minecraft:set_written_book_pages",
+              "mode": "replace_all",
+              "pages": [
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.title"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.8"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.11"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.5"
+                  }
+                },
+                {
+                  "raw": {
+                    "translate": "book.hollowfrontier.field_notes.16"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "minecraft:written_book"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1,
+        "min": 1
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:gray_specimen_jar"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1,
+        "min": 1
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:empty"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:exploration_map",
+              "decoration": "minecraft:red_x",
+              "destination": "hollowfrontier:gray_pens",
+              "search_radius": 60,
+              "skip_existing_chunks": false,
+              "zoom": 1
+            },
+            {
+              "type": "minecraft:set_name",
+              "name": {
+                "translate": "item.hollowfrontier.map.gray_pens"
+              },
+              "target": "item_name"
+            }
+          ],
+          "name": "minecraft:map"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1,
+        "min": 1
+      }
+    }
+  ],
+  "random_sequence": "hollowfrontier:chests/gray_complex_core"
+}

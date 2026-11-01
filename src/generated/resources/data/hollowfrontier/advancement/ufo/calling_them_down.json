@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:ufo/we_have_liftoff",
+  "criteria": {
+    "summoned": {
+      "trigger": "hollowfrontier:mothership_summoned"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.calling_them_down.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:phlogiston_beacon"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.calling_them_down.title"
+    }
+  },
+  "requirements": [
+    [
+      "summoned"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

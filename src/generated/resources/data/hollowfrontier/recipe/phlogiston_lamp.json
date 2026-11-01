@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "#c:ingots/brass",
+    "G": "#c:glass_blocks",
+    "V": "#c:gems/phlogiston"
+  },
+  "pattern": [
+    " B ",
+    "GVG",
+    " B "
+  ],
+  "result": {
+    "id": "hollowfrontier:phlogiston_lamp"
+  }
+}

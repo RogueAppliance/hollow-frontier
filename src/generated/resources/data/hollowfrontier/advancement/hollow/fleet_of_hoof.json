@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:hollow/starsteel",
+  "criteria": {
+    "shod": {
+      "conditions": {
+        "min": 3
+      },
+      "trigger": "hollowfrontier:horse_shod"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.fleet_of_hoof.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:starsteel_horseshoes"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.fleet_of_hoof.title"
+    }
+  },
+  "requirements": [
+    [
+      "shod"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,18 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "hollowfrontier:brass_alloying"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:ingots/copper",
+    "#c:ingots/copper",
+    "#c:ingots/copper",
+    "#c:nuggets/gold"
+  ],
+  "result": {
+    "count": 4,
+    "id": "hollowfrontier:brass_ingot"
+  }
+}

@@ -1,0 +1,30 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"animation_length": 2.0,
+			"bones": {
+				"coil": {"scale": ["1 + math.sin(query.anim_time * 180) * 0.04", "1 + math.sin(query.anim_time * 180) * 0.04", 1]}
+			}
+		},
+		"fire": {
+			"loop": false,
+			"animation_length": 0.3,
+			"bones": {
+				"gun": {
+					"rotation": {"0.0": [0, 0, 0], "0.04": [-14, 0, 0], "0.3": [0, 0, 0]},
+					"position": {"0.0": [0, 0, 0], "0.04": [0, 0.2, 0.8], "0.3": [0, 0, 0]}
+				},
+				"coil": {"scale": {"0.0": [1.35, 1.35, 1], "0.3": [1, 1, 1]}}
+			}
+		},
+		"reload": {
+			"loop": true,
+			"animation_length": 1.0,
+			"bones": {
+				"gun": {"rotation": {"0.0": [0, 0, 0]}}
+			}
+		}
+	}
+}

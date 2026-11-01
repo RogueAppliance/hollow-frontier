@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "hollowfrontier:empty_phlogiston_cell",
+    "#c:gems/phlogiston"
+  ],
+  "result": {
+    "id": "hollowfrontier:phlogiston_cell"
+  }
+}

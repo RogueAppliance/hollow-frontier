@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "F": "minecraft:flint",
+    "G": "#c:gears/brass",
+    "I": "#c:ingots/iron",
+    "V": "hollowfrontier:pressure_valve"
+  },
+  "pattern": [
+    "IGI",
+    "FVF",
+    "III"
+  ],
+  "result": {
+    "id": "hollowfrontier:crusher"
+  }
+}

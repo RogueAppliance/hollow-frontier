@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": "hollowfrontier:damaged_gravity_drive",
+    "H": "#c:ingots/starsteel",
+    "V": "#c:gems/phlogiston"
+  },
+  "pattern": [
+    "HVH",
+    "VDV",
+    "HVH"
+  ],
+  "result": {
+    "id": "hollowfrontier:gravity_drive"
+  }
+}

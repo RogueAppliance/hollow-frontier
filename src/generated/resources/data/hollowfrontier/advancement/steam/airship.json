@@ -1,0 +1,36 @@
+{
+  "parent": "hollowfrontier:steam/handcar",
+  "criteria": {
+    "airship": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:airship"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.airship.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:airship"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.airship.title"
+    }
+  },
+  "requirements": [
+    [
+      "airship"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

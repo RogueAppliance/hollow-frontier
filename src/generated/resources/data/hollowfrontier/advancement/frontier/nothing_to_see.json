@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/lights_in_the_sky",
+  "criteria": {
+    "sold": {
+      "trigger": "hollowfrontier:sold_to_them"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.nothing_to_see.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:gold_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.nothing_to_see.title"
+    }
+  },
+  "requirements": [
+    [
+      "sold"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

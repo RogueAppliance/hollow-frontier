@@ -1,0 +1,38 @@
+{
+  "criteria": {
+    "found": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "hollowfrontier:crystal_ruins"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "hollowfrontier:block/crystal_bricks",
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.root.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:concavian_crystal"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "found"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

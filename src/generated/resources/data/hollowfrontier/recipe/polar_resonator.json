@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "minecraft:amethyst_shard",
+    "C": "hollowfrontier:copper_pipe",
+    "G": "#c:gears/brass",
+    "P": "#c:plates/brass",
+    "V": "hollowfrontier:pressure_valve"
+  },
+  "pattern": [
+    " A ",
+    "GVG",
+    "PCP"
+  ],
+  "result": {
+    "id": "hollowfrontier:polar_resonator"
+  }
+}

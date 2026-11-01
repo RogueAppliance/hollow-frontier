@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "hollowfrontier:starsteel_ingot"
+  ],
+  "result": {
+    "count": 9,
+    "id": "hollowfrontier:starsteel_nugget"
+  }
+}

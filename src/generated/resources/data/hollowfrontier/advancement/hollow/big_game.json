@@ -1,0 +1,83 @@
+{
+  "parent": "hollowfrontier:hollow/dont_run",
+  "criteria": {
+    "glyptodon": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:glyptodon"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "megatherium": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:megatherium"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "terror_bird": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:terror_bird"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "woolly_mammoth": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:woolly_mammoth"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.big_game.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:thick_hide"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.big_game.title"
+    }
+  },
+  "requirements": [
+    [
+      "woolly_mammoth"
+    ],
+    [
+      "terror_bird"
+    ],
+    [
+      "megatherium"
+    ],
+    [
+      "glyptodon"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  },
+  "sends_telemetry_event": true
+}

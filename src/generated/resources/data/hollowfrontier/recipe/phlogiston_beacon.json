@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "hollowfrontier:phlogiston_core",
+    "F": "hollowfrontier:gray_tech_fragment",
+    "H": "#c:ingots/starsteel",
+    "L": "hollowfrontier:phlogiston_lamp"
+  },
+  "pattern": [
+    "HFH",
+    "FCF",
+    "HLH"
+  ],
+  "result": {
+    "id": "hollowfrontier:phlogiston_beacon"
+  }
+}

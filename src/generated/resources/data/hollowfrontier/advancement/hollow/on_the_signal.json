@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:hollow/escaped_specimen",
+  "criteria": {
+    "signal": {
+      "trigger": "hollowfrontier:signal_found"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.on_the_signal.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:signal_locator"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.on_the_signal.title"
+    }
+  },
+  "requirements": [
+    [
+      "signal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

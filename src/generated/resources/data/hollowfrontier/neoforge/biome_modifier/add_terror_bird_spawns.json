@@ -1,0 +1,13 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hollowfrontier:has_terror_birds",
+  "spawners": {
+    "type": "hollowfrontier:terror_bird",
+    "count": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 1
+    },
+    "weight": 25
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "parent": "hollowfrontier:ufo/the_mothership_falls",
+  "criteria": {
+    "mothership": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:mothership"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "outlaw_boss": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:outlaw_boss"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "sun_archon": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:sun_archon"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.legend_of_the_frontier.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:cowboy_hat"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.legend_of_the_frontier.title"
+    }
+  },
+  "requirements": [
+    [
+      "outlaw_boss"
+    ],
+    [
+      "sun_archon"
+    ],
+    [
+      "mothership"
+    ]
+  ],
+  "rewards": {
+    "experience": 1000
+  },
+  "sends_telemetry_event": true
+}

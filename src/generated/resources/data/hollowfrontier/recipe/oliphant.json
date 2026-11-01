@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "hollowfrontier:mammoth_tusk",
+    "#c:leathers",
+    "#c:nuggets/brass"
+  ],
+  "result": {
+    "id": "hollowfrontier:oliphant"
+  }
+}

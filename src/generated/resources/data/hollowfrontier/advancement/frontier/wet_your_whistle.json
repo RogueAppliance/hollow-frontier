@@ -1,0 +1,85 @@
+{
+  "parent": "hollowfrontier:frontier/pull_up_a_stool",
+  "criteria": {
+    "cowboy_coffee": {
+      "conditions": {
+        "item": {
+          "items": "hollowfrontier:cowboy_coffee"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "frontier_beer": {
+      "conditions": {
+        "item": {
+          "items": "hollowfrontier:frontier_beer"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "mezcal": {
+      "conditions": {
+        "item": {
+          "items": "hollowfrontier:mezcal"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "moonshine": {
+      "conditions": {
+        "item": {
+          "items": "hollowfrontier:moonshine"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "rye_whiskey": {
+      "conditions": {
+        "item": {
+          "items": "hollowfrontier:rye_whiskey"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "sarsaparilla": {
+      "conditions": {
+        "item": {
+          "items": "hollowfrontier:sarsaparilla"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "snake_oil": {
+      "conditions": {
+        "item": {
+          "items": "hollowfrontier:snake_oil"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.wet_your_whistle.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:rye_whiskey"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.wet_your_whistle.title"
+    }
+  },
+  "requirements": [
+    [
+      "frontier_beer",
+      "sarsaparilla",
+      "cowboy_coffee",
+      "rye_whiskey",
+      "mezcal",
+      "moonshine",
+      "snake_oil"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

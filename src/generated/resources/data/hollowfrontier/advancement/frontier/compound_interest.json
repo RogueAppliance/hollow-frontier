@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/money_in_the_bank",
+  "criteria": {
+    "interest": {
+      "trigger": "hollowfrontier:bank_interest"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.compound_interest.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:copper_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.compound_interest.title"
+    }
+  },
+  "requirements": [
+    [
+      "interest"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

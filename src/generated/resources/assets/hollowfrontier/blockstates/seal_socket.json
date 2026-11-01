@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "marked=false": {
+      "model": "hollowfrontier:block/seal_socket"
+    },
+    "marked=true": {
+      "model": "hollowfrontier:block/seal_socket_marked"
+    }
+  }
+}

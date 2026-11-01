@@ -1,0 +1,34 @@
+{
+  "parent": "hollowfrontier:frontier/lights_in_the_sky",
+  "criteria": {
+    "skull": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:strange_skull"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.not_of_this_world.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:strange_skull"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.not_of_this_world.title"
+    }
+  },
+  "requirements": [
+    [
+      "skull"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

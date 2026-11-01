@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "hollowfrontier:block/boiler"
+    },
+    "lit=true": {
+      "model": "hollowfrontier:block/boiler_on"
+    }
+  }
+}

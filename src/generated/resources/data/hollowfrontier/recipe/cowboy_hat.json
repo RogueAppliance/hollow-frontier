@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    " L ",
+    "LLL"
+  ],
+  "result": {
+    "id": "hollowfrontier:cowboy_hat"
+  }
+}

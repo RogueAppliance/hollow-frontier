@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:hollow/jailbreak",
+  "criteria": {
+    "stopped": {
+      "trigger": "hollowfrontier:procedure_stopped"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.not_on_my_watch.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:implant_rig"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.not_on_my_watch.title"
+    }
+  },
+  "requirements": [
+    [
+      "stopped"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

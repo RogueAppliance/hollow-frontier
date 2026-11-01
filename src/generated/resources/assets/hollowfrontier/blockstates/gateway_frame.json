@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "hollowfrontier:block/gateway_frame"
+    },
+    "active=true": {
+      "model": "hollowfrontier:block/gateway_frame_active"
+    }
+  }
+}

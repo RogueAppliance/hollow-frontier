@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "hollowfrontier:block/phlogiston_beacon"
+    },
+    "lit=true": {
+      "model": "hollowfrontier:block/phlogiston_beacon_lit"
+    }
+  }
+}

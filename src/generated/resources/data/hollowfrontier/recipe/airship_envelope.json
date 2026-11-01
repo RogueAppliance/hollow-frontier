@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "L": "minecraft:leather",
+    "M": "minecraft:phantom_membrane",
+    "S": "minecraft:string"
+  },
+  "pattern": [
+    "LML",
+    "LSL",
+    "LML"
+  ],
+  "result": {
+    "id": "hollowfrontier:airship_envelope"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "minecraft:bricks",
+    "C": "#c:ingots/copper",
+    "F": "minecraft:furnace",
+    "V": "hollowfrontier:pressure_valve"
+  },
+  "pattern": [
+    "CVC",
+    "CFC",
+    "BBB"
+  ],
+  "result": {
+    "id": "hollowfrontier:boiler"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "#c:gears/brass",
+    "I": "#c:ingots/iron",
+    "P": "#c:plates/brass",
+    "W": "#minecraft:planks"
+  },
+  "pattern": [
+    "IIP",
+    " GW"
+  ],
+  "result": {
+    "id": "hollowfrontier:revolver"
+  }
+}

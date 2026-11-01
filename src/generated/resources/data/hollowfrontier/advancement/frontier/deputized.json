@@ -1,0 +1,36 @@
+{
+  "parent": "hollowfrontier:frontier/dressed_to_the_nines",
+  "criteria": {
+    "star": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:brass_star"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.deputized.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:brass_star"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.deputized.title"
+    }
+  },
+  "requirements": [
+    [
+      "star"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

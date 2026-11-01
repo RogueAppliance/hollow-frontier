@@ -1,0 +1,14 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "hollowfrontier:crystal_steppes",
+  "max_slope": 5,
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "start_pool": "hollowfrontier:kindled_observatory",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

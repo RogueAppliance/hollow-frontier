@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:compass",
+    "F": "hollowfrontier:gray_tech_fragment",
+    "V": "#c:gems/phlogiston"
+  },
+  "pattern": [
+    " F ",
+    "FCF",
+    " V "
+  ],
+  "result": {
+    "id": "hollowfrontier:signal_locator"
+  }
+}

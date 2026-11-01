@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/load_gun",
+  "criteria": {
+    "claimed": {
+      "trigger": "hollowfrontier:bounty_claimed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.dead_or_alive.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:outlaw_badge"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.dead_or_alive.title"
+    }
+  },
+  "requirements": [
+    [
+      "claimed"
+    ]
+  ],
+  "rewards": {
+    "experience": 30
+  },
+  "sends_telemetry_event": true
+}

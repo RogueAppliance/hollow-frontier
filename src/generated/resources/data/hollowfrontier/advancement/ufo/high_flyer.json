@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/we_have_liftoff",
+  "criteria": {
+    "high": {
+      "conditions": {
+        "min": 192
+      },
+      "trigger": "hollowfrontier:saucer_flown"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.high_flyer.description"
+    },
+    "icon": {
+      "id": "minecraft:phantom_membrane"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.high_flyer.title"
+    }
+  },
+  "requirements": [
+    [
+      "high"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

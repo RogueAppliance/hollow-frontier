@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:frontier/rattler",
+  "criteria": {
+    "boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:snakeskin_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.snakeskin_boots.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:snakeskin_boots"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.snakeskin_boots.title"
+    }
+  },
+  "requirements": [
+    [
+      "boots"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

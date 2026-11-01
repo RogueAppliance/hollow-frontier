@@ -1,0 +1,38 @@
+{
+  "parent": "hollowfrontier:concavia/temple_of_the_sun",
+  "criteria": {
+    "archon": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:sun_archon"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.eclipse.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:sunstone_shard"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.eclipse.title"
+    }
+  },
+  "requirements": [
+    [
+      "archon"
+    ]
+  ],
+  "rewards": {
+    "experience": 250
+  },
+  "sends_telemetry_event": true
+}

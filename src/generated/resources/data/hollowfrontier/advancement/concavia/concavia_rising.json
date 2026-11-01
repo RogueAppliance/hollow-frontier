@@ -1,0 +1,32 @@
+{
+  "parent": "hollowfrontier:concavia/an_ally_below",
+  "criteria": {
+    "restored": {
+      "conditions": {
+        "min": 3
+      },
+      "trigger": "hollowfrontier:ruin_restored"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.concavia.concavia_rising.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:phlogiston_lamp"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.concavia.concavia_rising.title"
+    }
+  },
+  "requirements": [
+    [
+      "restored"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  },
+  "sends_telemetry_event": true
+}

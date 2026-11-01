@@ -1,0 +1,10 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "#hollowfrontier:has_kindled_sites",
+  "max_slope": 8,
+  "size": 6,
+  "spawn_overrides": {},
+  "start_pool": "hollowfrontier:kindled_site",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

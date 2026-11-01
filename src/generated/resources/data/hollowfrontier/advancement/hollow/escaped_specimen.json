@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:hollow/dont_run",
+  "criteria": {
+    "specimen": {
+      "trigger": "hollowfrontier:specimen_killed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.escaped_specimen.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:gray_tech_fragment"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.escaped_specimen.title"
+    }
+  },
+  "requirements": [
+    [
+      "specimen"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

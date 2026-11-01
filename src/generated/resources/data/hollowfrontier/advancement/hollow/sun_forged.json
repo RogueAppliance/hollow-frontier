@@ -1,0 +1,45 @@
+{
+  "parent": "hollowfrontier:hollow/starsteel",
+  "criteria": {
+    "suit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:starsteel_helmet"
+          },
+          {
+            "items": "hollowfrontier:starsteel_chestplate"
+          },
+          {
+            "items": "hollowfrontier:starsteel_leggings"
+          },
+          {
+            "items": "hollowfrontier:starsteel_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.sun_forged.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:starsteel_chestplate"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.sun_forged.title"
+    }
+  },
+  "requirements": [
+    [
+      "suit"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

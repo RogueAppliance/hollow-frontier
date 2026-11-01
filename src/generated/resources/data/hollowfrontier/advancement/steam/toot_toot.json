@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:steam/handcar",
+  "criteria": {
+    "whistle": {
+      "trigger": "hollowfrontier:handcar_whistle"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.toot_toot.description"
+    },
+    "icon": {
+      "id": "minecraft:goat_horn"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.toot_toot.title"
+    }
+  },
+  "requirements": [
+    [
+      "whistle"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

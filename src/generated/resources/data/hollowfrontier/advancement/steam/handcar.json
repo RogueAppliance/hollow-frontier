@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:steam/canned_steam",
+  "criteria": {
+    "handcar": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:steam_handcar"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.handcar.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:steam_handcar"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.handcar.title"
+    }
+  },
+  "requirements": [
+    [
+      "handcar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bandana": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:bandana"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "hollowfrontier:bandana_dyed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bandana"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollowfrontier:bandana_dyed"
+    ]
+  }
+}

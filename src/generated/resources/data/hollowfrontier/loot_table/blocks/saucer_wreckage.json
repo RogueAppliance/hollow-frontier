@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2,
+              "min": 1
+            }
+          },
+          "name": "hollowfrontier:alien_alloy_plating"
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:damaged_gravity_drive",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:beam_emitter",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:lens_array",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:navigation_core",
+          "weight": 2
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "hollowfrontier:blocks/saucer_wreckage"
+}

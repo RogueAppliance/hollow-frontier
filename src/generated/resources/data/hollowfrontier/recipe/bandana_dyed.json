@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_dye",
+  "dye": "#minecraft:dyes",
+  "group": "bandana",
+  "result": {
+    "id": "hollowfrontier:bandana"
+  },
+  "target": "hollowfrontier:bandana"
+}

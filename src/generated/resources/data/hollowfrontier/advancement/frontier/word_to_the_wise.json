@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/lights_in_the_sky",
+  "criteria": {
+    "warned": {
+      "trigger": "hollowfrontier:warned_off"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.word_to_the_wise.description"
+    },
+    "icon": {
+      "id": "minecraft:black_dye"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.word_to_the_wise.title"
+    }
+  },
+  "requirements": [
+    [
+      "warned"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

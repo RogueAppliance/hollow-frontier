@@ -1,0 +1,35 @@
+{
+  "feature": "hollowfrontier:hollow_earth/standing_stone",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 5
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "absolute": 212
+      }
+    },
+    {
+      "type": "hollowfrontier:open_air_scan",
+      "direction": "down",
+      "max_steps": 276
+    },
+    {
+      "type": "minecraft:offset",
+      "x": 0,
+      "y": 1,
+      "z": 0
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "hollowfrontier:clear_of_sites"
+    }
+  ]
+}

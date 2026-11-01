@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:hollow/root",
+  "criteria": {
+    "tusk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:mammoth_tusk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.woolly_thinking.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:mammoth_tusk"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.woolly_thinking.title"
+    }
+  },
+  "requirements": [
+    [
+      "tusk"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

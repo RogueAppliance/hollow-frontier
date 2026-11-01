@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "hollowfrontier:cowboy"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "hollowfrontier:cowboy"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "hollowfrontier:cowboy"
+      }
+    ]
+  }
+}

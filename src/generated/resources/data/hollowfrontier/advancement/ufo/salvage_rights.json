@@ -1,0 +1,77 @@
+{
+  "parent": "hollowfrontier:ufo/crash_and_burn",
+  "criteria": {
+    "alien_alloy_plating": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:alien_alloy_plating"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "beam_emitter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:beam_emitter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "damaged_gravity_drive": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:damaged_gravity_drive"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "lens_array": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:lens_array"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "navigation_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:navigation_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.salvage_rights.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:alien_alloy_plating"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.salvage_rights.title"
+    }
+  },
+  "requirements": [
+    [
+      "alien_alloy_plating",
+      "damaged_gravity_drive",
+      "beam_emitter",
+      "lens_array",
+      "navigation_core"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

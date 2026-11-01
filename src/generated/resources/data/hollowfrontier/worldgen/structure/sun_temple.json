@@ -1,0 +1,15 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "#hollowfrontier:has_sun_temple",
+  "max_slope": 8,
+  "size": 5,
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "start_pool": "hollowfrontier:sun_temple",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

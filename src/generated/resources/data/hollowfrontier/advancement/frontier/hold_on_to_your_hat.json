@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/well_heeled",
+  "criteria": {
+    "blown": {
+      "trigger": "hollowfrontier:hat_blown"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.hold_on_to_your_hat.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:cowboy_hat"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.hold_on_to_your_hat.title"
+    }
+  },
+  "requirements": [
+    [
+      "blown"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

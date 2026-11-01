@@ -1,0 +1,14 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "#hollowfrontier:has_crystal_ruins",
+  "max_slope": 8,
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "start_pool": "hollowfrontier:crystal_ruins",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/root",
+  "criteria": {
+    "dressed": {
+      "trigger": "hollowfrontier:cat_dressed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.dressed_to_the_nines.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:bandana"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.dressed_to_the_nines.title"
+    }
+  },
+  "requirements": [
+    [
+      "dressed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "hollowfrontier:block/handcar_engine"
+    },
+    "lit=true": {
+      "model": "hollowfrontier:block/handcar_engine_on"
+    }
+  }
+}

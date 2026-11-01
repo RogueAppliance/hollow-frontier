@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:transparent}
+svg{display:block}
+</style></head><body>
+<!-- B. Two Worlds: HOLLOW in the inner world's cold phlogiston light, FRONTIER in the desert's brass, a horizon between
+     with a saucer's beam falling across it -->
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#bff5ff"/>
+    <stop offset=".55" stop-color="#5fd6e8"/><stop offset="1" stop-color="#1d6f86"/>
+  </linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff3c4"/><stop offset=".35" stop-color="#f4c35a"/>
+    <stop offset=".55" stop-color="#b06f24"/><stop offset=".62" stop-color="#eab456"/>
+    <stop offset="1" stop-color="#6a3a10"/>
+  </linearGradient>
+  <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#c8ffe6" stop-opacity=".75"/><stop offset="1" stop-color="#c8ffe6" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="horizon" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff2c8"/>
+    <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="coldglow" x="-20%" y="-60%" width="140%" height="220%">
+    <feGaussianBlur stdDeviation="14"/><feColorMatrix type="matrix" values="0 0 0 0 .45  0 0 0 0 .95  0 0 0 0 1  0 0 0 .9 0"/>
+  </filter>
+  <filter id="warmglow" x="-20%" y="-60%" width="140%" height="220%">
+    <feGaussianBlur stdDeviation="16"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 .62  0 0 0 0 .2  0 0 0 .7 0"/>
+  </filter>
+  <filter id="shadow"><feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#000" flood-opacity=".7"/></filter>
+</defs>
+<!-- the beam, from a saucer above the horizon down across FRONTIER -->
+<polygon points="1238,470 1262,470 1330,690 1170,690" fill="url(#beam)"/>
+<g font-family="Algerian" text-anchor="middle" letter-spacing="10">
+  <text x="960" y="452" font-size="150" filter="url(#coldglow)">HOLLOW</text>
+  <g filter="url(#shadow)">
+    <text x="960" y="452" font-size="150" fill="url(#ice)" stroke="#06242e" stroke-width="8" paint-order="stroke" stroke-linejoin="round">HOLLOW</text>
+  </g>
+  <text x="960" y="652" font-size="170" filter="url(#warmglow)">FRONTIER</text>
+  <g filter="url(#shadow)">
+    <text x="960" y="652" font-size="170" fill="url(#gold)" stroke="#2a1405" stroke-width="9" paint-order="stroke" stroke-linejoin="round">FRONTIER</text>
+  </g>
+</g>
+<!-- horizon line and the saucer sitting over it -->
+<rect x="420" y="494" width="1080" height="2.5" fill="url(#horizon)"/>
+<g transform="translate(1250,468)">
+  <ellipse cx="0" cy="0" rx="44" ry="11" fill="#cfd6dc" stroke="#1d262c" stroke-width="3"/>
+  <path d="M -18 -4 A 18 15 0 0 1 18 -4 Z" fill="#9ff7d6" stroke="#1d262c" stroke-width="3"/>
+  <g fill="#7ff2c8"><circle cx="-26" cy="2" r="3"/><circle cx="-9" cy="4" r="3"/><circle cx="9" cy="4" r="3"/><circle cx="26" cy="2" r="3"/></g>
+</g>
+<g font-family="Bahnschrift, 'Segoe UI'" text-anchor="middle" fill="#eaf6ff">
+  <text x="960" y="722" font-size="30" letter-spacing="14" font-weight="600">WILD WEST · STEAM AGE · HOLLOW EARTH</text>
+  <text x="960" y="766" font-size="21" letter-spacing="8" fill-opacity=".75">A NEOFORGE MOD FOR MINECRAFT 26.3</text>
+</g>
+</svg>
+</body></html>

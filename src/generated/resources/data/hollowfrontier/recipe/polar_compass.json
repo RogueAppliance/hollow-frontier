@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:compass",
+    "I": "minecraft:packed_ice",
+    "P": "#c:plates/brass"
+  },
+  "pattern": [
+    " P ",
+    "PCP",
+    " I "
+  ],
+  "result": {
+    "id": "hollowfrontier:polar_compass"
+  }
+}
