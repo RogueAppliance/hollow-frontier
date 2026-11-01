@@ -55,6 +55,11 @@ final class PosterPainter {
                         tr("fine", wanted.fine()), tr("dead_or_alive"), wanted.name().hashCode(), null, null));
                 continue;
             }
+            if (slot.kind() == BoardFace.Kind.SURVEY) { // 32d: news of the Polar Survey, a bearded explorer for its likeness
+                posters.add(new Poster(slot.kind(), slot.u0(), slot.v0(), slot.u1(), slot.v1(), tr("wanted"), wrap(tr("survey"), false),
+                        tr("reward", com.hollowfrontier.content.frontier.survey.SurveyBounty.REWARD), tr("survey_ask"), 1908 << 5, null, null));
+                continue;
+            }
             BoardPosting posting = face.shown().get(slot.index());
             BountyData bounty = posting.bounty();
             String stamp = switch (posting.status()) {

@@ -411,6 +411,10 @@ public final class ModGameTests {
         raid("robbed_bank_tells_owners", 300, RaidTests::robbedBankTellsOwners);
         raid("town_talks_of_raid_and_robbery", 20, RaidTests::townTalksOfRaidAndRobbery);
         // Voices (19)
+        test("postmaster_hands_over_the_letter", 20, SurveyTests::postmasterHandsOverTheLetter);
+        test("letter_ticks_off_the_road", 20, SurveyTests::letterTicksOffTheRoad);
+        test("survey_notice_pays_once", 20, SurveyTests::surveyNoticePaysOnce);
+        test("frontier_nudges_north", 20, SurveyTests::frontierNudgesNorth);
         test("chatter_table_complete", 20, ChatterTests::tableComplete);
         test("chatter_conditions_let_lines_in", 20, ChatterTests::conditionsLetLinesIn);
         test("chatter_picks_avoid_repeats", 20, ChatterTests::picksAvoidRepeats);

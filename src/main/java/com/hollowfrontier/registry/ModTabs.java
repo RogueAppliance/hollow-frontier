@@ -89,7 +89,7 @@ public final class ModTabs {
         // Horse gear
         add(out, ModItems.IRON_HORSESHOES, ModItems.BRASS_HORSESHOES, ModItems.SADDLEBAGS);
         // Money, the law and the news
-        add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE);
+        add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE, ModItems.SURVEY_LETTER);
         // The frontier's mysteries (11a)
         add(out, ModItems.FLATTENED_WHEAT, ModItems.STRANGE_SKULL);
         // Drinks, soft to hard, then the doctor's

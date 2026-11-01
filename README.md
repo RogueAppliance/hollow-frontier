@@ -27,7 +27,7 @@ Shaders are up to you; Complementary Reimagined and Bliss are good fits. The sky
 
 ## Where to start
 
-Craft a Concavian Codex (a book and a phlogiston shard) once you reach the Hollow Earth. It keeps track of how far you've come and says what's next. Before that, the advancement tabs (Hollow Frontier, Steam Age) lay out the frontier and the road north.
+Talk to a town's postmaster first: the Polar Survey's last letter is waiting, and it keeps track of the road north to a Polar Gateway (what to build, and roughly where the crater is). Once you reach the Hollow Earth, craft a Concavian Codex (a book and a phlogiston shard): it keeps track of how far you've come and says what's next. The advancement tabs (Hollow Frontier, Steam Age) lay out the rest.
 
 ## Settings
 

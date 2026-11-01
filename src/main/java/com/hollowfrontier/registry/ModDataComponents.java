@@ -74,4 +74,10 @@ public final class ModDataComponents {
             DATA_COMPONENTS.registerComponentType("bearing_from", builder -> builder
                     .persistent(net.minecraft.core.GlobalPos.CODEC)
                     .networkSynchronized(net.minecraft.core.GlobalPos.STREAM_CODEC));
+
+    // 32d: where the Survey Letter's gateway is (the nearest to the post office it was collected from)
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<net.minecraft.core.GlobalPos>> SURVEY_GATEWAY =
+            DATA_COMPONENTS.registerComponentType("survey_gateway", builder -> builder
+                    .persistent(net.minecraft.core.GlobalPos.CODEC)
+                    .networkSynchronized(net.minecraft.core.GlobalPos.STREAM_CODEC));
 }

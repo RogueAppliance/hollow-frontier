@@ -21,6 +21,7 @@ The store page for both Modrinth and CurseForge. Form fields, gallery and upload
 
 **Towns that feel lived in.** Every town has a name ("Coyote Springs", "POP. 212") on a welcome arch at the end of each street. Main streets of false-fronted buildings stand shoulder to shoulder, each furnished for its trade and with a sign over the door: the saloon, the sheriff's office and jail, the bank, the hotel, the general store, the gunsmith, the doctor ("teeth pulled"), the post and telegraph office, the bathhouse and barber, the Gazette office with its printing press, the schoolhouse, the chapel and the railroad depot. Out past the lanes are homesteads, a ranch with cattle, wheat fields, and a Boot Hill with headstones worth reading.
 
+- **The Polar Survey's last letter**, waiting at every post office, points newcomers north: what to build, roughly where the crater is, and a bounty-board reward for news of the Survey.
 - **Townsfolk** trade for copper and gold coins, each selling their own trade's goods. There are shopkeepers, bankers, blacksmiths, wranglers, prospectors, the gunsmith, the doctor, the schoolteacher, the preacher, the postmaster, the Gazette's editor and the railroad engineer.
 - **They keep a day:** work by day, the saloon in the evening, home to bed at night. Street lamps light one by one at dusk.
 - **Lawmen** (sheriffs, deputies, marshals and rangers) keep the peace, and they come for you if you break it.
@@ -119,7 +120,7 @@ Bringing it down breaks the Grays' hold on the outlaws, but the story doesn't st
 
 ## Where to Start
 
-The **Hollow Frontier** and **Steam Age** advancement tabs lay out the frontier and the road north. Once you reach the Hollow Earth, craft a **Concavian Codex** (a book and a phlogiston shard) and it will guide you from there.
+Talk to a town's **postmaster** first: the **Polar Survey's last letter** is waiting, and it keeps track of the road north (what to build, and roughly where the crater is). The **Hollow Frontier** and **Steam Age** advancement tabs lay out the rest of the frontier. Once you reach the Hollow Earth, craft a **Concavian Codex** (a book and a phlogiston shard) and it will guide you from there.
 
 ---
 

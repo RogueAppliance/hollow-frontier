@@ -93,6 +93,7 @@ The optional compat mods (JEI, Jade, Curios) are compiled against but never bund
 | textures/entity/cat/cat_sheriff_star.png | accessory 32x32 (CatAccessoryModel UV) | Brass star badge on a dark leather collar (stitched, brass ring) | pixel art v1 | `tools/textures/TextureArt.java` (Cats) |
 | model layer hollowfrontier:cat#accessories | code model (not a file) | Cat hat, bandana and star geometry on the vanilla cat bones | v1 | `client/CatAccessoryModel.java` |
 | textures/item/frontier_gazette.png | item texture | The Frontier Gazette | pixel art v1 | `tools/textures/TextureArt.java` |
+| textures/item/survey_letter.png | item texture | Letter from the Polar Survey (32d): an old envelope, its flap folded down, sealed in red wax | pixel art v1 | `tools/textures/TextureArt.java` (`Relics`) |
 | textures/entity/rattlesnake.png | entity texture 64x32 (rattlesnake box UV) | Rattlesnake: tan with dark diamonds, cream belly, black-and-white coontail, rattle | pixel art v1 | `tools/textures/TextureArt.java` (Snake) |
 | geckolib/models/entity/rattlesnake.geo.json | GeckoLib model | Rattlesnake: head, neck, three body segments, tail, rattle (chained from the middle so the front and back can lift) | v1 | hand-written |
 | geckolib/animations/entity/rattlesnake.animation.json | GeckoLib animations | misc.idle, move.walk (molang slither wave), misc.rattle (coiled, tail up and shaking), attack.strike | v1 | hand-written |

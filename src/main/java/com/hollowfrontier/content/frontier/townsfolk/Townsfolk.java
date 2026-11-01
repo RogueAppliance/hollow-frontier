@@ -192,6 +192,13 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
             }
             return InteractionResult.SUCCESS;
         }
+        // 32d: a postmaster hands a newcomer the Polar Survey's uncollected letter first, before any business.
+        if (isAlive() && getType() == ModEntities.TOWNSFOLK.get() && getFolk() == Folk.POSTMASTER
+                && level() instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer
+                && com.hollowfrontier.content.frontier.survey.SurveyLetterItem.handOver(serverLevel, serverPlayer, blockPosition())) {
+            serverPlayer.sendSystemMessage(Component.translatable("message.hollowfrontier.survey.postmaster"));
+            return InteractionResult.SUCCESS_SERVER;
+        }
         // Sneaking up to a banker: your safe deposit box in this town's bank, not his trades.
         if (isAlive() && player.isSecondaryUseActive() && getType() == ModEntities.TOWNSFOLK.get() && getFolk() == Folk.BANKER) {
             if (level() instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
@@ -293,6 +300,8 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
                 offers.add(buy(Items.GOLD_NUGGET, 6, copper, 1));
                 offers.add(buy(Items.COPPER_INGOT, 6, copper, 1));
                 offers.add(buy(Items.RAW_IRON, 4, copper, 1));
+                // 32d: a Polar Compass, for anyone set on the pole and short of luck in the chests
+                offers.add(buy(gold, 3, ModItems.POLAR_COMPASS.get(), 1));
                 // 28: and the Hollow Earth's relics, each for what it's worth to a collector back East
                 for (var relic : ModItems.RELICS) {
                     offers.add(buy(relic.get(), 1, gold, relic.get().price()));

@@ -134,6 +134,13 @@ public final class PhotoBooth {
         if (mc.gui.screen() instanceof net.minecraft.client.gui.screens.PauseScreen) {
             mc.gui.setScreen(null);
         }
+        // The road north (32d), only on its own with -PphotoScene=survey
+        if (SURVEY_ONLY) {
+            if (ticks >= 40) {
+                survey(mc, server, ticks - 40);
+            }
+            return;
+        }
         // The crash site's cargo pod and the Grays' gadgets (32c), only on their own with -PphotoScene=cache
         if (CACHE_ONLY) {
             if (ticks >= 40) {
@@ -683,6 +690,42 @@ public final class PhotoBooth {
             case 5 -> tpLooking(server, new Vec3(baseX + 3.5, Y + 1.6, baseZ + 1.0), new Vec3(baseX + 3.5, Y + 0.5, baseZ + 4.5));
             case 40 -> shot(mc, "hf_32c_cargo_pods.png");
             default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- 32d: the road north
+
+    private static final boolean SURVEY_ONLY = "survey".equals(System.getProperty("hollowfrontier.photo.scene"));
+
+    /** A Small Bounty Board with the Polar Survey's notice in its last cell, then the Survey's letter open, page by page. */
+    private static void survey(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                run(server, "time set noon");
+                run(server, "weather clear");
+                run(server, "gamemode creative @p");
+                run(server, String.format("setblock %d %d %d hollowfrontier:bounty_board", baseX + 3, Y, baseZ + 4));
+                mc.player.getInventory().setSelectedSlot(8);
+            }
+            case 5 -> tpLooking(server, new Vec3(baseX + 3.5, Y - 1.1, baseZ + 2.6), new Vec3(baseX + 3.5, Y - 1.1, baseZ + 4.0)); // eyes level with the face
+            case 40 -> shot(mc, "hf_32d_survey_notice.png");
+            case 42 -> server.execute(() -> {
+                ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+                ItemStack letter = new ItemStack(com.hollowfrontier.registry.ModItems.SURVEY_LETTER.get());
+                player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, letter);
+                letter.use(server.overworld(), player, net.minecraft.world.InteractionHand.MAIN_HAND);
+            });
+            default -> {
+                // Each page a second apart: the plea, its signature, where the crater is, what's needed, and the reward
+                if (t >= 60 && t <= 60 + 20 * 6 && (t - 60) % 20 == 0
+                        && mc.gui.screen() instanceof net.minecraft.client.gui.screens.inventory.BookViewScreen book) {
+                    int page = (t - 60) / 20;
+                    book.setPage(page);
+                }
+                if (t >= 70 && t <= 70 + 20 * 6 && (t - 70) % 20 == 0) {
+                    shot(mc, "hf_32d_letter_page_" + (t - 70) / 20 + ".png");
+                }
+            }
         }
     }
 

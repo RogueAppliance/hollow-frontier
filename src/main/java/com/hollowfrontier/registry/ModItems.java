@@ -293,6 +293,9 @@ public final class ModItems {
             p -> p.durability(SunstoneLensItem.DURABILITY).rarity(Rarity.EPIC).fireResistant());
     public static final DeferredItem<ConcavianCodexItem> CONCAVIAN_CODEX = ITEMS.registerItem("concavian_codex", ConcavianCodexItem::new,
             p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    // 32d: the Polar Survey's last letter, from a town's postmaster
+    public static final DeferredItem<com.hollowfrontier.content.frontier.survey.SurveyLetterItem> SURVEY_LETTER = ITEMS.registerItem("survey_letter",
+            com.hollowfrontier.content.frontier.survey.SurveyLetterItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<SpawnEggItem> SUN_ARCHON_SPAWN_EGG = ITEMS.registerItem("sun_archon_spawn_egg",
             SpawnEggItem::new, p -> p.spawnEgg(ModEntities.SUN_ARCHON.get()));
 

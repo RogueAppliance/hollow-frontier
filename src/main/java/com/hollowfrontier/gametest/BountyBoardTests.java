@@ -3,6 +3,7 @@ package com.hollowfrontier.gametest;
 import java.util.HashSet;
 import java.util.List;
 
+import com.hollowfrontier.content.frontier.bounty.BoardFace;
 import com.hollowfrontier.content.frontier.bounty.BoardPosting;
 import com.hollowfrontier.content.frontier.bounty.BountyBoardBlockEntity;
 import com.hollowfrontier.content.frontier.bounty.BountyBoardEntity;
@@ -62,7 +63,9 @@ final class BountyBoardTests {
             double d = Math.hypot(posting.bounty().x() - at.getX(), posting.bounty().z() - at.getZ());
             h.assertTrue(posting.status() == BoardPosting.Status.OPEN && d >= 195 && d <= 505, "bad posting " + posting + " at " + d);
         }
-        h.assertTrue(board.face().slots(2, 2).size() == 3, "not every poster has a place on the face");
+        List<BoardFace.Slot> slots = board.face().slots(2, 2);
+        h.assertTrue(slots.stream().filter(s -> s.kind() == BoardFace.Kind.OUTLAW).count() == 3, "not every poster has a place on the face");
+        h.assertTrue(slots.size() == 4 && slots.get(3).kind() == BoardFace.Kind.SURVEY, "the Polar Survey's notice (32d) should fill the last cell: " + slots);
         h.succeed();
     }
 

@@ -24,8 +24,8 @@ import net.minecraft.world.phys.Vec3;
  * clients to draw.
  * <p>
  * The face is a grid of cells, {@code columns} by {@code rows}, one poster to a cell ({@link #slots}): a raid leader across
- * the first two cells of the top row, then the outlaws, then wanted players in what room is left (last, so they never move
- * the posters people click on).
+ * the first two cells of the top row, then the outlaws, then wanted players in what room is left (after the outlaws, so
+ * they never move the posters people click on), and last the Polar Survey's notice (32d) if there's a cell to spare.
  */
 public record BoardFace(List<BoardPosting> shown, List<WantedFace> wanted) {
     public static final double WANTED_RANGE = 128.0;
@@ -39,7 +39,8 @@ public record BoardFace(List<BoardPosting> shown, List<WantedFace> wanted) {
                 Codec.INT.fieldOf("fine").forGetter(WantedFace::fine)).apply(i, WantedFace::new));
     }
 
-    public enum Kind { RAIDER, WANTED, OUTLAW }
+    /** SURVEY: the standing notice for news of the Polar Survey (32d), the same on every board; its index means nothing. */
+    public enum Kind { RAIDER, WANTED, OUTLAW, SURVEY }
 
     /** One poster on the face: what it is ({@code index} into the postings or the wanted), and where (0..1, top left). */
     public record Slot(Kind kind, int index, float u0, float v0, float u1, float v1) {
@@ -85,6 +86,9 @@ public record BoardFace(List<BoardPosting> shown, List<WantedFace> wanted) {
         }
         for (int i = 0; i < wanted.size() && cell < cells; i++, cell++) {
             slots.add(cell(Kind.WANTED, i, cell, columns, rows));
+        }
+        if (cell < cells) {
+            slots.add(cell(Kind.SURVEY, -1, cell, columns, rows)); // 32d: in the last room there is, so it never crowds out a poster
         }
         return slots;
     }

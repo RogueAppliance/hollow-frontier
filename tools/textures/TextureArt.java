@@ -6384,6 +6384,12 @@ public class TextureArt {
                     "................", "................", "..QQQQQQQQQQQQ..", "..QqwqqqqqqqqQ..", "..QqqqqqqqqqqQ..", "..QqqqqqqqqqqQ..",
                     "..QqqqqqqqqqqQ..", "..QqqqqcCqqqqQ..", "..QqqqqqqqqqqQ..", "..QqqqqqqqqqqQ..", "..QqqqqqqqqqqQ..", "..QqqqqqqqqqqQ..",
                     "..QQQQQQQQQQQQ..", "...dddddddddddd.", "................", "................"));
+            // 32d: the Polar Survey's last letter, an old envelope with its flap and a red wax seal
+            write(new File(root, "item/survey_letter.png"), grid(
+                    "................", "................", "................", ".IIIIIIIIIIIIII.", ".IIiiiiiiiiiiII.", ".IiIiiiiiiiiIiI.",
+                    ".IiiIiiiiiiIiiI.", ".IiiiIiiiiIiiiI.", ".IiiiiIhhIiiiiI.", ".IiiiiihHhiiiiI.", ".IiiiiiihiiiiiI.", ".IiiiiiiiiiiiiI.",
+                    ".IIIIIIIIIIIIII.", "..dddddddddddd..", "................", "................"));
+            n++;
             for (boolean open : new boolean[] {false, true}) {
                 String suffix = open ? "_open" : "";
                 write(new File(root, "block/gray_cargo_pod_side" + suffix + ".png"), pod(open, false));

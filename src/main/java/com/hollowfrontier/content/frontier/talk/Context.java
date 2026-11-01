@@ -109,6 +109,11 @@ public record Context(Set<Fact> facts, Act act, String poster) {
             if (Moonshine.seeingThings(player)) {
                 facts.add(Fact.SEEING_THINGS);
             }
+            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer
+                    && com.hollowfrontier.content.concavia.ConcavianCodexItem.reached(serverPlayer, "steam/airship")
+                    && !com.hollowfrontier.content.concavia.ConcavianCodexItem.reached(serverPlayer, "steam/open_sesame")) {
+                facts.add(Fact.AIRSHIP);
+            }
             long lost = player.getData(ModAttachments.HAT_LOST.get());
             if (lost >= 0 && now - lost <= HAT_WINDOW && !player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.COWBOY_HAT.get())) {
                 facts.add(Fact.LOST_HAT);

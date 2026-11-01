@@ -422,6 +422,7 @@ public class ModModelProvider extends ModelProvider {
                 ModelTemplates.FLAT_ITEM.create(bandana, TextureMapping.layer0(bandana), itemModels.modelOutput), new Dye(TownCat.Accessory.DEFAULT_BANDANA)));
         itemModels.generateFlatItem(ModItems.BRASS_STAR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.FRONTIER_GAZETTE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.SURVEY_LETTER.get(), ModelTemplates.FLAT_ITEM); // 32d
         for (var drink : java.util.List.of(ModItems.FRONTIER_BEER, ModItems.SARSAPARILLA, ModItems.COWBOY_COFFEE, ModItems.RYE_WHISKEY,
                 ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL)) {
             itemModels.generateFlatItem(drink.get(), ModelTemplates.FLAT_ITEM);

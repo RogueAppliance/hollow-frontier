@@ -181,7 +181,7 @@ public class PolarCompassItem extends Item {
     }
 
     /** One of eight compass points from one spot to another (north is -z). */
-    static String direction(BlockPos from, BlockPos to) {
+    public static String direction(BlockPos from, BlockPos to) {
         double angle = Mth.atan2(to.getX() - from.getX(), -(to.getZ() - from.getZ())) * Mth.RAD_TO_DEG;
         String[] points = {"north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"};
         return points[Math.floorMod((int) Math.round(angle / 45.0), 8)];

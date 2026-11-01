@@ -53,11 +53,18 @@ public final class BoardUse {
             }
             return;
         }
+        board.sync(level);
+        // 32d: the Polar Survey's notice, when that's the poster in front of them (on the face as it is now: a new board's
+        // is empty until it syncs, and the notice would seem to be in the first cell)
+        BoardFace.Slot looked = spot == null ? null : board.face().slotAt(board.columns(), board.rows(), spot[0], spot[1]);
+        if (looked != null && looked.kind() == BoardFace.Kind.SURVEY) {
+            com.hollowfrontier.content.frontier.survey.SurveyBounty.use(level, player, at);
+            return;
+        }
         if (player.getInventory().contains(stack -> stack.is(ModItems.WANTED_POSTER.get()))) {
             player.sendOverlayMessage(Component.translatable("message.hollowfrontier.bounty.already_have"));
             return;
         }
-        board.sync(level);
         BoardPosting posting = pick(board, spot, player);
         if (posting == null) {
             player.sendOverlayMessage(Component.translatable("message.hollowfrontier.bounty.none_up"));
@@ -88,13 +95,13 @@ public final class BoardUse {
     private static @Nullable BoardPosting pick(PostingBoard board, float @Nullable [] spot, Player player) {
         BoardFace face = board.face();
         BoardFace.Slot slot = spot == null ? null : face.slotAt(board.columns(), board.rows(), spot[0], spot[1]);
-        if (slot != null && slot.kind() != BoardFace.Kind.WANTED) {
+        if (slot != null && slot.kind() != BoardFace.Kind.WANTED && slot.kind() != BoardFace.Kind.SURVEY) {
             return face.shown().get(slot.index());
         }
         String name = player.getGameProfile().name();
         BoardPosting fallback = null;
         for (BoardFace.Slot s : face.slots(board.columns(), board.rows())) {
-            if (s.kind() == BoardFace.Kind.WANTED) {
+            if (s.kind() == BoardFace.Kind.WANTED || s.kind() == BoardFace.Kind.SURVEY) {
                 continue;
             }
             BoardPosting posting = face.shown().get(s.index());
