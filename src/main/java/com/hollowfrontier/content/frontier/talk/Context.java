@@ -114,6 +114,9 @@ public record Context(Set<Fact> facts, Act act, String poster) {
                     && !com.hollowfrontier.content.concavia.ConcavianCodexItem.reached(serverPlayer, "steam/open_sesame")) {
                 facts.add(Fact.AIRSHIP);
             }
+            if (player.getData(ModAttachments.SURVEY_LETTER.get())) {
+                facts.add(Fact.SURVEY_LETTER);
+            }
             long lost = player.getData(ModAttachments.HAT_LOST.get());
             if (lost >= 0 && now - lost <= HAT_WINDOW && !player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.COWBOY_HAT.get())) {
                 facts.add(Fact.LOST_HAT);

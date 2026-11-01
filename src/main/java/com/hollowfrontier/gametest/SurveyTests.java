@@ -53,6 +53,12 @@ final class SurveyTests {
         h.assertTrue(newcomer.getData(ModAttachments.SURVEY_LETTER.get()), "the hand-over wasn't remembered");
         postmaster.mobInteract(newcomer, InteractionHand.MAIN_HAND);
         h.assertValueEqual(count(newcomer, ModItems.SURVEY_LETTER.get()), 1, "letters after a second visit");
+        // and once they have it, nobody tells them the letter's still waiting
+        Context had = Context.of(h.getLevel(), h.absolutePos(new BlockPos(4, 1, 2)), newcomer);
+        h.assertTrue(had.has(Fact.SURVEY_LETTER), "no SURVEY_LETTER once the letter's handed over");
+        h.assertTrue(com.hollowfrontier.content.frontier.talk.Chatter.candidates(List.of("postmaster", "townsfolk"),
+                        com.hollowfrontier.content.frontier.talk.Moment.TALK, had).stream()
+                .noneMatch(line -> line.text().contains("Polar Survey")), "still told about the waiting letter");
 
         ServerPlayer veteran = TestPlayers.survival(h, new BlockPos(6, 1, 2), "hf-survey-veteran");
         award(veteran, "steam/open_sesame");
