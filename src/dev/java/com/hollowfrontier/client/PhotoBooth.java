@@ -563,11 +563,11 @@ public final class PhotoBooth {
             case 3600 -> shot(mc, "hf_40_advancements_steam.png");
             case 3602 -> mc.gui.setScreen(null);
             // Each mod tab open in the creative inventory
-            case 3605 -> creativeTab(mc, ModTabs.FRONTIER.get());
+            case 3605 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 3625 -> shot(mc, "hf_41_tab_frontier.png");
-            case 3627 -> creativeTab(mc, ModTabs.FRONTIER_BUILDING.get());
+            case 3627 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 3645 -> shot(mc, "hf_42_tab_frontier_building.png");
-            case 3647 -> creativeTab(mc, ModTabs.STEAM.get());
+            case 3647 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 3665 -> shot(mc, "hf_43_tab_steam.png");
             case 3667 -> mc.gui.setScreen(null);
             default -> {}
@@ -681,7 +681,7 @@ public final class PhotoBooth {
             case 320 -> shot(mc, "hf_55_resonator_in_hand.png");
             case 322 -> {
                 mc.player.getInventory().setSelectedSlot(8);
-                creativeTab(mc, ModTabs.STEAM.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 342 -> shot(mc, "hf_56_tab_steam_expedition.png");
             case 344 -> mc.gui.setScreen(null);
@@ -1152,7 +1152,7 @@ public final class PhotoBooth {
             case 190 -> shot(mc, "hf_b3_megatherium.png");
             case 192 -> tpLooking(server, new Vec3(baseX + 22, Y + 2.4, baseZ - 0.5), new Vec3(baseX + 22, Y + 0.9, baseZ + 6));
             case 220 -> shot(mc, "hf_b4_glyptodon_and_gear.png");
-            case 222 -> creativeTab(mc, ModTabs.HOLLOW_EARTH.get());
+            case 222 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 242 -> shot(mc, "hf_b5_tab_hollow_earth.png");
             case 245 -> {
                 HollowFrontier.LOGGER.info("[PhotoBooth] megafauna done, quitting");
@@ -1227,7 +1227,7 @@ public final class PhotoBooth {
             case 380 -> {
                 run(server, "gamemode creative @p");
                 run(server, "effect clear @p");
-                creativeTab(mc, ModTabs.GRAYS.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 400 -> shot(mc, "hf_l6_tab_grays.png");
             case 403 -> {
@@ -1322,7 +1322,7 @@ public final class PhotoBooth {
             case 194 -> shot(mc, "hf_k4_saucer_cockpit.png");
             case 196 -> {
                 run(server, "ride @p dismount");
-                creativeTab(mc, ModTabs.GRAYS.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 216 -> shot(mc, "hf_k5_tab_grays.png");
             case 219 -> {
@@ -1392,7 +1392,7 @@ public final class PhotoBooth {
             case 175 -> {
                 mc.options.setCameraType(CameraType.FIRST_PERSON);
                 run(server, "kill @e[type=minecraft:zombie,distance=..20]");
-                creativeTab(mc, ModTabs.GRAYS.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 195 -> shot(mc, "hf_j5_tab_grays.png");
             case 198 -> {
@@ -1444,7 +1444,7 @@ public final class PhotoBooth {
                 tpLooking(server, new Vec3(x + 24.5, Y + 4, z - 4), new Vec3(x + 36.5, Y + 10, z + 6.5));
             }
             case 330 -> shot(mc, "hf_i3_abduction.png");
-            case 332 -> creativeTab(mc, ModTabs.GRAYS.get());
+            case 332 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 352 -> shot(mc, "hf_i4_tab_grays.png");
             case 355 -> {
                 HollowFrontier.LOGGER.info("[PhotoBooth] grays done, quitting");
@@ -1978,7 +1978,7 @@ public final class PhotoBooth {
             case 322 -> {
                 run(server, "gamemode creative @p");
                 run(server, "kill @e[type=hollowfrontier:sun_archon]");
-                creativeTab(mc, ModTabs.CONCAVIA.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 342 -> shot(mc, "hf_h5_tab_concavia.png");
             case 345 -> {
@@ -2033,7 +2033,7 @@ public final class PhotoBooth {
             case 224 -> {
                 run(server, "gamemode creative @p");
                 run(server, "clear @p hollowfrontier:gray_tech_fragment");
-                creativeTab(mc, ModTabs.CONCAVIA.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 244 -> shot(mc, "hf_g4_tab_concavia.png");
             case 247 -> {
@@ -3068,7 +3068,7 @@ public final class PhotoBooth {
             }
             case 80 -> shot(mc, "hf_a0_starsteel_and_phlogiston.png");
             case 82 -> {
-                creativeTab(mc, ModTabs.HOLLOW_EARTH.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 102 -> shot(mc, "hf_a1_tab_hollow_earth.png");
             case 104 -> {

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 — Playtest fixes (unreleased)
+
+- **Airship:** you can eat, fire a gun and use a compass aboard; clicks no longer land on the airship around you. Your own swings from aboard no longer damage it either. You can still stoke it with coal or top it up from a canister while flying.
+- **Townsfolk:** rugs and aisles in town buildings stop a tile short of the door, where townsfolk got caught on them (in newly generated towns). In any town, a townsperson who can't reach where their routine sends them now waits a while before trying again, instead of working a door open and shut.
+- **Creative menu:** everything is in one Hollow Frontier tab (it was six), in the same order, with all the spawn eggs together at the end.
+
 ## 1.0.0 — First release (2026-11-01)
 
 The first public release, for Minecraft 26.3 on NeoForge (needs GeckoLib).

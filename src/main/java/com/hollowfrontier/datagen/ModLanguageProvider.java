@@ -45,12 +45,7 @@ public class ModLanguageProvider extends LanguageProvider {
                 add("sign.hollowfrontier.epitaph." + (n + 1) + "." + (line + 1), TownLandmarks.EPITAPHS.get(n).get(line));
             }
         }
-        add(ModTabs.titleKey("frontier"), "Frontier");
-        add(ModTabs.titleKey("frontier_building"), "Frontier Building");
-        add(ModTabs.titleKey("steam"), "Steam Age");
-        add(ModTabs.titleKey("hollow_earth"), "Hollow Earth");
-        add(ModTabs.titleKey("concavia"), "Concavia");
-        add(ModTabs.titleKey("grays"), "The Grays");
+        add(ModTabs.titleKey("hollow_frontier"), "Hollow Frontier");
 
         addBlock(ModBlocks.BRASS_BLOCK, "Block of Brass");
 

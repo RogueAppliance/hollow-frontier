@@ -54,24 +54,36 @@ final class TabTests {
         h.succeed();
     }
 
-    /** Loaded guns, a full canister and every bandana colour are entries of their own; tabs sit in their menu order. */
+    /**
+     * Loaded guns, a full canister and every bandana colour are entries of their own; the one tab (32a) runs frontier,
+     * town building, steam, Hollow Earth, Concavia, the Grays, then every spawn egg.
+     */
     static void tabVariantsAndOrder(GameTestHelper h) {
         build(h);
-        List<ItemStack> frontier = contents(ModTabs.FRONTIER.key());
-        h.assertTrue(frontier.get(0).is(ModItems.REVOLVER.get()) && GunItem.getAmmo(frontier.get(0)) == 0
-                && frontier.get(1).is(ModItems.REVOLVER.get()) && GunItem.getAmmo(frontier.get(1)) == 6, "the tab should open with an empty and a loaded revolver");
-        long bandanaColours = frontier.stream().filter(s -> s.is(ModItems.BANDANA.get()))
+        List<ItemStack> tab = contents(ModTabs.HOLLOW_FRONTIER.key());
+        h.assertTrue(tab.get(0).is(ModItems.REVOLVER.get()) && GunItem.getAmmo(tab.get(0)) == 0
+                && tab.get(1).is(ModItems.REVOLVER.get()) && GunItem.getAmmo(tab.get(1)) == 6, "the tab should open with an empty and a loaded revolver");
+        long bandanaColours = tab.stream().filter(s -> s.is(ModItems.BANDANA.get()))
                 .map(s -> s.has(DataComponents.DYED_COLOR) ? s.get(DataComponents.DYED_COLOR).rgb() : -1).distinct().count();
         h.assertTrue(bandanaColours == 16, "expected 16 bandana colours, got " + bandanaColours);
         int lastEgg = -1, firstGun = Integer.MAX_VALUE;
-        for (int i = 0; i < frontier.size(); i++) {
-            if (frontier.get(i).getItem() instanceof SpawnEggItem) lastEgg = i;
-            if (frontier.get(i).getItem() instanceof GunItem) firstGun = Math.min(firstGun, i);
+        for (int i = 0; i < tab.size(); i++) {
+            if (tab.get(i).getItem() instanceof SpawnEggItem) lastEgg = i;
+            if (tab.get(i).getItem() instanceof GunItem) firstGun = Math.min(firstGun, i);
         }
-        h.assertTrue(lastEgg == frontier.size() - 1 && firstGun == 0, "spawn eggs should close the tab and guns open it");
-        List<ItemStack> steam = contents(ModTabs.STEAM.key());
-        h.assertTrue(steam.stream().anyMatch(s -> s.is(ModItems.STEAM_CANISTER.get()) && SteamCanisterItem.steam(s) == SteamCanisterItem.CAPACITY)
-                && steam.stream().anyMatch(s -> s.is(ModItems.STEAM_CANISTER.get()) && SteamCanisterItem.steam(s) == 0), "need an empty and a full canister");
+        h.assertTrue(lastEgg == tab.size() - 1 && firstGun == 0, "spawn eggs should close the tab and guns open it");
+        int firstEgg = 0;
+        while (!(tab.get(firstEgg).getItem() instanceof SpawnEggItem)) {
+            firstEgg++;
+        }
+        h.assertTrue(tab.stream().skip(firstEgg).allMatch(s -> s.getItem() instanceof SpawnEggItem), "the spawn eggs should be together at the end");
+        List<Item> sections = List.of(ModItems.REVOLVER.get(), ModItems.SALOON_DOORS.get(), ModItems.BOILER.get(), ModItems.CRUST_ROCK.get(),
+                ModItems.CONCAVIAN_CRYSTAL.get(), ModItems.SAUCER_HULL.get(), ModItems.OUTLAW_SPAWN_EGG.get());
+        for (int i = 1; i < sections.size(); i++) {
+            h.assertTrue(indexOf(tab, sections.get(i - 1)) < indexOf(tab, sections.get(i)), "sections out of order at " + sections.get(i));
+        }
+        h.assertTrue(tab.stream().anyMatch(s -> s.is(ModItems.STEAM_CANISTER.get()) && SteamCanisterItem.steam(s) == SteamCanisterItem.CAPACITY)
+                && tab.stream().anyMatch(s -> s.is(ModItems.STEAM_CANISTER.get()) && SteamCanisterItem.steam(s) == 0), "need an empty and a full canister");
         h.succeed();
     }
 

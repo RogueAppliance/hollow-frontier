@@ -88,6 +88,11 @@ public final class ModGameTests {
         test("townsfolk_have_looks", 20, TownTests::townsfolkHaveLooks);
         test("sheriff_office_staffed", 40, TownTests::sheriffOfficeStaffed);
         test("town_doors_are_clear", 20, TownTests::townDoorsAreClear);
+        test("town_doors_have_bare_thresholds", 20, TownTests::townDoorsHaveBareThresholds);
+        test("sheriff_rug_clears_the_door", 20, TownTests::sheriffRugClearsTheDoor, TestBlueprints.YARD);
+        test("folk_give_up_on_unreachable_place", 400, TownTests::folkGiveUpOnUnreachablePlace);
+        test("folk_pass_bare_door", 200, TownTests::folkPassBareDoor);
+        test("folk_pass_door_beside_carpet", 200, TownTests::folkPassDoorBesideCarpet);
         test("town_buildings_furnished", 40, TownTests::townBuildingsFurnished);
         test("town_names_and_arches", 20, TownTests::townNamesAndArches);
         test("every_town_has_gunsmith", 20, TownTests::everyTownHasGunsmith);
@@ -161,6 +166,7 @@ public final class ModGameTests {
         test("moored_airship_fills_from_tank", 60, ExpeditionTests::mooredAirshipFillsFromTank);
         // Phase 31a: the airship's owner, and the coal and steam it keeps when broken
         test("airship_owner_lock_holds", 20, ExpeditionTests::airshipOwnerLockHolds);
+        test("rider_uses_items_aboard", 20, ExpeditionTests::riderUsesItemsAboard);
         test("broken_airship_keeps_its_fuel", 20, ExpeditionTests::brokenAirshipKeepsItsFuel);
         test("high_altitude_earns_advancement", 60, ExpeditionTests::highAltitudeEarnsAdvancement);
         test("resonator_opens_gateway", 80, ExpeditionTests::resonatorOpensGateway);

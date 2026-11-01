@@ -83,7 +83,7 @@ public final class TownBlueprints {
                 for (int i = 0; i < palettes.size(); i++) {
                     java.util.Map<Block, Block> palette = palettes.get(i);
                     java.util.function.UnaryOperator<BlockState> restyle = style.restyle();
-                    out.add(building.restyled(style.template(TownPalettes.variant(base, i)), state -> restyle.apply(TownStyle.swap(palette, state))).hardenGround().hangLanterns());
+                    out.add(building.restyled(style.template(TownPalettes.variant(base, i)), state -> restyle.apply(TownStyle.swap(palette, state))).hardenGround().hangLanterns().bareThresholds());
                 }
             }
         }

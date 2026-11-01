@@ -28,6 +28,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Input;
@@ -171,6 +172,31 @@ final class ExpeditionTests {
         Airship other = airship(h, new Vec3(6.5, 1, 2.5), 0, 0);
         other.setOwner(owner);
         h.assertTrue(other.hurtServer(level, level.damageSources().lava(), 100.0F) && !other.isAlive(), "lava spared an owned airship");
+        h.succeed();
+    }
+
+    /**
+     * 32a: aboard, a click on the hull passes through to what the rider holds (so they can eat, shoot and read a compass),
+     * coal still stokes it, and the owner's own swing from the helm doesn't break it.
+     */
+    static void riderUsesItemsAboard(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        ServerPlayer owner = TestPlayers.survival(h, new BlockPos(2, 1, 6), "hf-airship-rider");
+        Airship ship = airship(h, new Vec3(6.5, 1, 6.5), 0, 0);
+        ship.setOwner(owner);
+        ship.interact(owner, InteractionHand.MAIN_HAND, ship.position());
+        h.assertTrue(owner.getVehicle() == ship, "the owner couldn't board");
+        owner.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BREAD));
+        h.assertTrue(ship.interact(owner, InteractionHand.MAIN_HAND, ship.position()) == InteractionResult.PASS,
+                "a rider's click on the hull was swallowed");
+        owner.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.COAL));
+        ship.interact(owner, InteractionHand.MAIN_HAND, ship.position());
+        h.assertValueEqual(ship.fuel(), Airship.COAL_TICKS, "coal stoked from aboard");
+        h.assertFalse(ship.hurtServer(level, level.damageSources().playerAttack(owner), 100.0F), "the rider's own swing landed");
+        h.assertTrue(ship.isAlive() && ship.getDamage() == 0.0F, "the rider broke their own ship");
+        owner.stopRiding();
+        h.assertTrue(ship.hurtServer(level, level.damageSources().playerAttack(owner), 100.0F) && !ship.isAlive(),
+                "the owner couldn't break it from the ground");
         h.succeed();
     }
 

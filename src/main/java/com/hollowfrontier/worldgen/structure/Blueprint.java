@@ -385,6 +385,27 @@ public final class Blueprint {
         return this;
     }
 
+    /**
+     * Takes up any carpet on the tile either side of a door, so a rug or runner stops short of the threshold: mobs walking
+     * through the door stick on a carpet there (a playtest saw townsfolk stuck, working the door open and shut).
+     */
+    public Blueprint bareThresholds() {
+        for (BlockPos pos : new ArrayList<>(blocks.keySet())) {
+            BlockState state = blocks.get(pos);
+            if (!(state.getBlock() instanceof DoorBlock) || state.getValue(DoorBlock.HALF) != DoubleBlockHalf.LOWER) {
+                continue;
+            }
+            Direction facing = state.getValue(DoorBlock.FACING);
+            for (BlockPos threshold : List.of(pos.relative(facing), pos.relative(facing.getOpposite()))) {
+                // By class, not the carpet tag: blueprints are drawn in datagen, where tags aren't bound yet
+                if (blocks.getOrDefault(threshold, Blocks.AIR.defaultBlockState()).getBlock() instanceof net.minecraft.world.level.block.CarpetBlock) {
+                    blocks.put(threshold, Blocks.AIR.defaultBlockState());
+                }
+            }
+        }
+        return this;
+    }
+
     /** How far up {@link #hangLanterns} looks for something to hang a lantern from. */
     public static final int CHAIN_REACH = 8;
 

@@ -335,6 +335,11 @@ public class Airship extends VehicleEntity implements GeoEntity {
             }
             return InteractionResult.SUCCESS;
         }
+        // A rider's eyes are inside the hull's box, so every click aboard lands here: let it through to what they hold
+        // (a compass, a gun, a sandwich) rather than eat it.
+        if (hasPassenger(player)) {
+            return InteractionResult.PASS;
+        }
         if (player.isSecondaryUseActive()) {
             if (!level().isClientSide()) {
                 player.sendOverlayMessage(gauge());
@@ -381,9 +386,13 @@ public class Airship extends VehicleEntity implements GeoEntity {
         return team != null && team == level().getScoreboard().getPlayersTeam(ownerName);
     }
 
-    // Another player's blows, shots and blasts glance off; the weather, fire, lava and mobs still count.
+    // Another player's blows, shots and blasts glance off; the weather, fire, lava and mobs still count. So do the crew's
+    // own: a rider's swing lands on the hull around them, and nobody means to break up their ship in mid-air.
     @Override
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
+        if (source.getEntity() != null && hasPassenger(source.getEntity())) {
+            return false;
+        }
         if (source.getEntity() instanceof Player player && !mayHandle(player)) {
             if (source.getDirectEntity() == player) {
                 player.sendOverlayMessage(Component.translatable("message.hollowfrontier.airship.not_yours", ownerName).withStyle(ChatFormatting.RED));
