@@ -221,8 +221,7 @@ tasks.register('prepareRelease') {
         out.mkdirs()
         File jar = releaseJar.get().asFile
         java.nio.file.Files.copy(jar.toPath(), new File(out, jar.name).toPath())
-        // IMAGE comments stay as markers for where each gallery GIF goes (both stores hide comments if one is left)
-        String page = storePage.getText('UTF-8').replace('\r\n', '\n').replaceAll(/(?s)<!--(?! IMAGE).*?-->\n?/, '').replaceAll(/\n{3,}/, '\n\n').trim()
+        String page = storePage.getText('UTF-8').replace('\r\n', '\n').replaceAll(/(?s)<!--.*?-->\n?/, '').replaceAll(/\n{3,}/, '\n\n').trim()
         new File(out, 'description.md').setText(page + '\n', 'UTF-8')
         // The first "## " section of the changelog, without its heading
         def section = (changelogFile.getText('UTF-8').replace('\r\n', '\n') =~ /(?s)\n## [^\n]*\n(.*?)(?=\n## |\z)/)

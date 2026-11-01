@@ -1,13 +1,15 @@
 <!-- PAGE SETTINGS
 The store page for both Modrinth and CurseForge. Form fields, gallery and upload steps: RELEASING.md.
-`gradlew prepareRelease` writes the paste-ready copy (these comments removed, IMAGE markers kept) to build/release/description.md.
+`gradlew prepareRelease` writes the paste-ready copy (these comments removed) to build/release/description.md.
 -->
 
 # Hollow Frontier
 
 **Wild West steampunk on a Hollow Earth frontier.** Ride out with a cap-and-ball revolver, collect bounties and drink in the saloon. Build boilers and an airship, sail north to a Polar Gateway and fall through Symmes' Hole into a world lit by an inner sun. Down there you'll find mammoths and terror birds, the ruins of Concavia and the Kindled who survived it, and the Grays: the ones flying Concavia's stolen saucers, and the ones behind the outlaws. In the end you build a saucer of your own and take the fight to their Mothership. And when it falls, the frontier has to work out what comes next.
 
-<!-- IMAGE: banner: branding/curseforge_banner_1920x480.png (cowboys at sundown | the Prototype Saucer over the Hollow's herd, the wanted poster between) -->
+**[▶ Watch the trailer](https://www.youtube.com/watch?v=WpgwvE-Jupo)**
+
+![Hollow Frontier](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/curseforge_banner_1920x480.png)
 
 ---
 
@@ -38,10 +40,10 @@ The store page for both Modrinth and CurseForge. Form fields, gallery and upload
 
 **Also:** a lasso, dynamite, the cowboy outfit (a set bonus while riding), snakeskin boots, horseshoes and saddlebags for your horse, chairs you can sit in, and rattlesnakes in the desert.
 
-<!-- IMAGE: a town from the air: branding/gifs/town_aerial.gif -->
-<!-- IMAGE: saloon interior with barmaid, piano and card table: branding/gifs/saloon.gif -->
-<!-- IMAGE: bounty board with posters: branding/gifs/bounty_board.gif -->
-<!-- IMAGE: a gang riding in at night: branding/gifs/night_raid.gif -->
+![a town from the air](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/town_aerial.gif)
+![saloon interior with barmaid, piano and card table](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/saloon.gif)
+![bounty board with posters](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/bounty_board.gif)
+![a gang riding in at night](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/night_raid.gif)
 
 ---
 
@@ -53,7 +55,7 @@ The store page for both Modrinth and CurseForge. Form fields, gallery and upload
 - **The Steam Handcar** rides the rails, and refuels at depot standpipes.
 - **The Airship:** a coal-fired steam dirigible for two. Fly it north to find the Polar Gateways.
 
-<!-- IMAGE: airship over the frontier: branding/gifs/airship.gif -->
+![airship over the frontier](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/airship.gif)
 
 ---
 
@@ -68,8 +70,8 @@ Wake a Polar Gateway's ring of stones with a Polar Resonator, then fall through 
 - **Dungeons below them:** the Kindled Catacombs, sealed by a vault puzzle; buried Gray complexes with cells, cold storage and a reactor; and the treasuries under the Sun Temple.
 - **Loot worth the trip:** eight relics the town prospector buys for gold, explorers' maps to the big sites, a Concavian armor trim, and pottery sherds to brush out of the ruins.
 
-<!-- IMAGE: Hollow Earth vista with crust ceiling and inner sun: branding/gifs/hollow_vista.gif -->
-<!-- IMAGE: mammoth herd on the Steppes: branding/gifs/saucer_over_mammoths.gif (the Prototype Saucer over the herd) -->
+![Hollow Earth vista with crust ceiling and inner sun](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/hollow_vista.gif)
+![mammoth herd on the Steppes](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/saucer_over_mammoths.gif)
 
 ---
 
@@ -79,7 +81,7 @@ In the Highlands stand the Crystal Ruins, where the last **Kindled** live. They 
 
 The **Concavian Codex** keeps track of how far you've come and tells you what's next.
 
-<!-- IMAGE: Crystal Ruins / Sun Archon fight: branding/gifs/sun_archon.gif (the Archon waking on his throne) -->
+![Crystal Ruins / Sun Archon fight](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/sun_archon.gif)
 
 ---
 
@@ -95,9 +97,9 @@ Something has been troubling the frontier: lights in the night sky, cattle found
 - **The Prototype Saucer:** build your own from the salvage. It has full 3D flight, a heat laser and a tractor beam that carries mobs, items and players.
 - **The Mothership:** summon it with a Phlogiston Beacon and bring it down in a three-phase fight, on foot or in a dogfight from your own saucer.
 
-<!-- IMAGE: a Gray saucer beaming up a cow: branding/gifs/abduction.gif -->
-<!-- IMAGE: freeing a captive from a Gray pen: branding/gifs/captives.gif -->
-<!-- IMAGE: Mothership fight: branding/gifs/mothership.gif -->
+![a Gray saucer beaming up a cow](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/abduction.gif)
+![freeing a captive from a Gray pen](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/captives.gif)
+![Mothership fight](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/mothership.gif)
 
 ---
 
@@ -111,7 +113,7 @@ Bringing it down breaks the Grays' hold on the outlaws, but the story doesn't st
 - **Restore the Crystal Ruins** with phlogiston and starsteel, and wake their **waystones** for fast travel between the ruins and the Polar Gateways.
 - **Mr. Gray:** a stranded Gray in a duster and a hat far too big for it starts turning up at the saloon. Expose it, or let it become a regular.
 
-<!-- IMAGE: Mr. Gray at the bar: branding/gifs/mr_gray.gif -->
+![Mr. Gray at the bar](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/mr_gray.gif)
 
 ---
 
