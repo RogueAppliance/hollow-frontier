@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — First release
+## 1.0.0 — First release (2026-11-01)
 
 The first public release, for Minecraft 26.3 on NeoForge (needs GeckoLib).
 

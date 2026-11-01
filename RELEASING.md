@@ -11,6 +11,11 @@ How a version goes up on Modrinth and CurseForge. The store page text is [CURSEF
    - `changelog.md`, the newest changelog section, for the version's changelog box.
 3. Upload the jar to both stores (fields below), then add the date to the changelog heading, commit, tag `vx.y.z`, and make a GitHub release with the same jar.
 
+## The projects
+
+- CurseForge: project 1778329, https://www.curseforge.com/minecraft/mc-mods/hollow-frontier (Files → Add File; default relations fill in the dependencies)
+- Modrinth: project Mvsn4kHn, https://modrinth.com/mod/hollow-frontier (Versions → Create version; add the dependencies by project ID: GeckoLib `8BmcQJ2H`, JEI `u6dRKJwZ`, Jade `nvQzSEkH`, Curios `vvuO3ImH`)
+
 ## Before the first upload
 
 - **Make the GitHub repo public.** The jar's metadata (issue tracker, mod page) and both store pages link to it.
