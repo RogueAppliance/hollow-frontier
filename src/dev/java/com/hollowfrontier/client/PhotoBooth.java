@@ -134,6 +134,13 @@ public final class PhotoBooth {
         if (mc.gui.screen() instanceof net.minecraft.client.gui.screens.PauseScreen) {
             mc.gui.setScreen(null);
         }
+        // The airship's bail-out and the Polar Compass (32b), only on their own with -PphotoScene=bailout
+        if (BAILOUT_ONLY) {
+            if (ticks >= 40) {
+                bailout(mc, server, ticks - 40);
+            }
+            return;
+        }
         // The Hollow Earth's ores and gear (9c), only on their own with -PphotoScene=gear
         if (GEAR_ONLY) {
             if (ticks >= 40) {
@@ -570,6 +577,77 @@ public final class PhotoBooth {
             case 3647 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 3665 -> shot(mc, "hf_43_tab_steam.png");
             case 3667 -> mc.gui.setScreen(null);
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- 32b: bailing out, and the Polar Compass
+
+    private static final boolean BAILOUT_ONLY = "bailout".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static Airship bailShip;
+    private static @org.jspecify.annotations.Nullable BlockPos compassTarget;
+
+    /**
+     * A survival player at the helm high over the staging spot with a Polar Compass in hand (the gauge line carries its
+     * reading), one sneak (a warning, still aboard), a second (off, drifting down under slow falling), then a look straight
+     * down on the gateway the compass found, to see the needle aims at the ring itself. The log says what happened.
+     */
+    private static void bailout(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                run(server, "time set noon");
+                run(server, "weather clear");
+                run(server, "gamemode survival @p");
+                run(server, "kill @e[type=hollowfrontier:airship]");
+                run(server, "item replace entity @p weapon.mainhand with hollowfrontier:polar_compass");
+            }
+            case 5 -> server.execute(() -> {
+                ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+                bailShip = airshipAt(server.overworld(), new Vec3(baseX + 0.5, Y + 40, baseZ + 0.5), 0, Airship.CAPACITY, Airship.COAL_TICKS * 4);
+                player.teleportTo(bailShip.getX(), bailShip.getY() + 1, bailShip.getZ());
+                player.startRiding(bailShip, true, false);
+            });
+            case 10 -> mc.options.setCameraType(CameraType.FIRST_PERSON);
+            case 60 -> {
+                shot(mc, "hf_32b_gauge_with_compass.png");
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: aboard {}, {} blocks up", mc.player.getVehicle() != null,
+                        bailShip.heightAboveGround(server.overworld()));
+            }
+            case 62 -> mc.options.keyShift.setDown(true);
+            case 66 -> mc.options.keyShift.setDown(false);
+            case 70 -> {
+                shot(mc, "hf_32b_bail_warning.png");
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: after one sneak, still aboard: {}", mc.player.getVehicle() != null);
+            }
+            case 74 -> mc.options.keyShift.setDown(true);
+            case 78 -> mc.options.keyShift.setDown(false);
+            case 90 -> {
+                shot(mc, "hf_32b_bailed_out.png");
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: after two sneaks, aboard: {}, slow falling: {}", mc.player.getVehicle() != null,
+                        mc.player.hasEffect(net.minecraft.world.effect.MobEffects.SLOW_FALLING));
+            }
+            case 100 -> server.execute(() -> {
+                ServerLevel level = server.overworld();
+                ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+                var gateway = level.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE)
+                        .getOrThrow(com.hollowfrontier.worldgen.structure.ModStructures.POLAR_GATEWAY);
+                var found = level.getChunkSource().getGenerator().findNearestMapStructure(level, net.minecraft.core.HolderSet.direct(gateway),
+                        player.blockPosition(), com.hollowfrontier.content.hollow.gateway.PolarCompassItem.SEARCH_CHUNKS, false);
+                compassTarget = com.hollowfrontier.content.hollow.gateway.PolarCompassItem.bearing(level, player.blockPosition()).orElse(null);
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: structure search found {}, the compass aims at {}",
+                        found == null ? null : found.getFirst(), compassTarget);
+            });
+            case 105 -> {
+                if (compassTarget != null) {
+                    run(server, "effect clear @p");
+                    run(server, "gamemode spectator @p");
+                    run(server, String.format("tp @p %d %d %d 0 90", compassTarget.getX(), compassTarget.getY() + 25, compassTarget.getZ()));
+                }
+            }
+            case 260 -> {
+                shot(mc, "hf_32b_compass_target_from_above.png");
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: done");
+            }
             default -> {}
         }
     }

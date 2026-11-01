@@ -4,6 +4,8 @@
 
 - **Airship:** you can eat, fire a gun and use a compass aboard; clicks no longer land on the airship around you. Your own swings from aboard no longer damage it either. You can still stoke it with coal or top it up from a canister while flying.
 - **Townsfolk:** rugs and aisles in town buildings stop a tile short of the door, where townsfolk got caught on them (in newly generated towns). In any town, a townsperson who can't reach where their routine sends them now waits a while before trying again, instead of working a door open and shut.
+- **Getting off an airship:** more than 4 blocks up, the first sneak only tells you how far down it is; sneak again to step off. Leaving a ship aloft, by choice or not, gives you slow falling all the way down. A ship left with nobody aboard for 30 seconds sinks gently to the ground and waits there.
+- **Polar Compass:** it takes its own bearings as you carry it (and again every 256 blocks, so a nearer gateway takes over), and now points at the middle of the gateway's ring rather than a spot nearby. Hold it to read how far and which way; at the helm the reading joins the airship's gauge line.
 - **Creative menu:** everything is in one Hollow Frontier tab (it was six), in the same order, with all the spawn eggs together at the end.
 
 ## 1.0.0 — First release (2026-11-01)

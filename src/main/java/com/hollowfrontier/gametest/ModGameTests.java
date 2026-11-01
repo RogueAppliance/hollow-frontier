@@ -167,6 +167,10 @@ public final class ModGameTests {
         // Phase 31a: the airship's owner, and the coal and steam it keeps when broken
         test("airship_owner_lock_holds", 20, ExpeditionTests::airshipOwnerLockHolds);
         test("rider_uses_items_aboard", 20, ExpeditionTests::riderUsesItemsAboard);
+        test("rider_bails_out_on_second_sneak", 20, ExpeditionTests::riderBailsOutOnSecondSneak, TestBlueprints.YARD);
+        test("rider_steps_off_near_the_ground", 20, ExpeditionTests::riderStepsOffNearTheGround);
+        test("unattended_airship_comes_down", 50, ExpeditionTests::unattendedAirshipComesDown, TestBlueprints.YARD);
+        test("polar_compass_finds_its_own_way", 20, ExpeditionTests::polarCompassFindsItsOwnWay);
         test("broken_airship_keeps_its_fuel", 20, ExpeditionTests::brokenAirshipKeepsItsFuel);
         test("high_altitude_earns_advancement", 60, ExpeditionTests::highAltitudeEarnsAdvancement);
         test("resonator_opens_gateway", 80, ExpeditionTests::resonatorOpensGateway);

@@ -86,6 +86,10 @@ public class Airship extends VehicleEntity implements GeoEntity {
     static final double SINK_SPEED = 0.06;
     static final float TURN_RATE = 3.0F;
     static final int MOOR_RATE = 100;
+    /** Above this many blocks over the ground, getting off takes a second sneak within {@link #BAIL_WINDOW} ticks of the first. */
+    public static final int BAIL_HEIGHT = 4, BAIL_WINDOW = 30;
+    /** With nobody aboard this long (ticks), the ship lets its envelope cool and sinks to the ground. */
+    public static final int UNATTENDED_TICKS = 600;
 
     private static final EntityDataAccessor<Integer> DATA_STEAM = SynchedEntityData.defineId(Airship.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_FUEL = SynchedEntityData.defineId(Airship.class, EntityDataSerializers.INT);
@@ -102,6 +106,9 @@ public class Airship extends VehicleEntity implements GeoEntity {
     // Helm for a pilotless airship (tests); a pilot's keys replace it.
     private int standingThrottle;
     private int standingLift;
+    // Server: ticks with nobody aboard, and when each rider was last warned that the next sneak bails out.
+    private int unattended;
+    private final java.util.Map<UUID, Long> bailWarnings = new java.util.HashMap<>();
     // Client: how far the ship turned this tick, to turn the local rider with it (as boats do).
     private float turned;
     private @Nullable UUID owner;
@@ -165,6 +172,7 @@ public class Airship extends VehicleEntity implements GeoEntity {
         float yawBefore = getYRot();
         super.tick();
         if (level() instanceof ServerLevel level) {
+            watchForBailing(level);
             readHelm();
             boil();
             fly(level);
@@ -189,6 +197,7 @@ public class Airship extends VehicleEntity implements GeoEntity {
         throttle = standingThrottle;
         lift = standingLift;
         rudder = 0;
+        unattended = isVehicle() ? 0 : unattended + 1;
         if (getFirstPassenger() instanceof ServerPlayer pilot) {
             Input input = pilot.getLastClientInput();
             throttle = input.forward() ? 1 : input.backward() ? -1 : 0;
@@ -231,8 +240,8 @@ public class Airship extends VehicleEntity implements GeoEntity {
         Vec3 heading = Vec3.directionFromRotation(0, getYRot());
         Vec3 horizontal = v.horizontal().lerp(heading.scale(targetSpeed), driving ? 0.05 : (onGround() ? 0.5 : 0.02));
         double targetY;
-        if (!buoyant) {
-            targetY = -SINK_SPEED; // a cold envelope sinks, slowly
+        if (!buoyant || isAdrift()) {
+            targetY = -SINK_SPEED; // a cold envelope sinks, slowly (and one left to itself comes down to wait)
         } else if (climbing) {
             targetY = CLIMB_SPEED;
         } else if (lift < 0) {
@@ -251,6 +260,61 @@ public class Airship extends VehicleEntity implements GeoEntity {
         }
         if (climbing && tickCount % 15 == 0) {
             level.playSound(null, getX(), getY() + 3, getZ(), ModSounds.AIRSHIP_VENT.get(), SoundSource.NEUTRAL, 0.5F, 1.0F);
+        }
+    }
+
+    /** Left with nobody aboard for {@link #UNATTENDED_TICKS}: it sinks to the ground rather than hang where its crew left it. */
+    public boolean isAdrift() {
+        return unattended > UNATTENDED_TICKS;
+    }
+
+    // ---------------------------------------------------------------- bailing out
+
+    /**
+     * Near the ground a rider's sneak gets them off as usual. Aloft, the first sneak only warns them how far down it is;
+     * a second within {@link #BAIL_WINDOW} ticks lets them go. The ship ticks before its riders, so clearing the sneak here
+     * keeps the rider's own tick from getting them off; the client sends its keys only when they change, so the next
+     * sneak is a fresh press.
+     */
+    private void watchForBailing(ServerLevel level) {
+        long now = level.getGameTime();
+        bailWarnings.values().removeIf(warned -> now - warned > BAIL_WINDOW);
+        for (Entity passenger : getPassengers()) {
+            if (!(passenger instanceof ServerPlayer rider) || !rider.isShiftKeyDown()) {
+                continue;
+            }
+            int height = heightAboveGround(level);
+            if (height <= BAIL_HEIGHT || bailWarnings.remove(rider.getUUID()) != null) {
+                continue; // near the ground, or the second sneak: off they go
+            }
+            bailWarnings.put(rider.getUUID(), now);
+            rider.setShiftKeyDown(false);
+            rider.sendOverlayMessage(Component.translatable("message.hollowfrontier.airship.bail", height).withStyle(ChatFormatting.YELLOW));
+        }
+    }
+
+    /** How many blocks of clear air are under the keel (counted down to the bottom of the world). */
+    public int heightAboveGround(Level level) {
+        BlockPos.MutableBlockPos pos = BlockPos.containing(getX(), getY() - 0.01, getZ()).mutable();
+        int height = 0;
+        while (pos.getY() > level.getMinY() && level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()
+                && level.getFluidState(pos).isEmpty()) {
+            pos.move(Direction.DOWN);
+            height++;
+        }
+        return height;
+    }
+
+    // Whoever leaves the ship aloft, by choice or not (it broke up under them), gets slow falling to see them down.
+    @Override
+    protected void removePassenger(Entity passenger) {
+        super.removePassenger(passenger);
+        if (level() instanceof ServerLevel level && passenger instanceof net.minecraft.world.entity.LivingEntity living && living.isAlive()) {
+            int height = heightAboveGround(level);
+            if (height > BAIL_HEIGHT) {
+                living.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.SLOW_FALLING,
+                        20 * (3 + height / 8)));
+            }
         }
     }
 
@@ -285,8 +349,12 @@ public class Airship extends VehicleEntity implements GeoEntity {
 
     private void report(ServerLevel level) {
         if (getFirstPassenger() instanceof ServerPlayer pilot) {
-            if (tickCount % 10 == 0) {
-                pilot.sendOverlayMessage(gauge());
+            if (tickCount % 10 == 0 && !bailWarnings.containsKey(pilot.getUUID())) { // the bail warning stays up while it counts
+                // A Polar Compass in hand reads out on the gauge line, which would otherwise write over it
+                Component gauge = gauge();
+                pilot.sendOverlayMessage(com.hollowfrontier.content.hollow.gateway.PolarCompassItem.heldReading(pilot)
+                        .<Component>map(reading -> Component.translatable("message.hollowfrontier.airship.gauge_bearing", gauge, reading))
+                        .orElse(gauge));
             }
             if (tickCount % 20 == 0 && !onGround()) {
                 ModCriteria.AIRSHIP_ALTITUDE.get().trigger(pilot, Mth.floor(getY()));
@@ -483,6 +551,11 @@ public class Airship extends VehicleEntity implements GeoEntity {
         setFuel(input.getIntOr("fuel", 0));
         owner = input.read("Owner", UUIDUtil.CODEC).orElse(null);
         ownerName = input.getStringOr("OwnerName", "");
+    }
+
+    /** For tests: as if nobody had been aboard for {@code ticks}. */
+    public void leaveUnattended(int ticks) {
+        unattended = ticks;
     }
 
     /** For tests: a standing helm (throttle and lift, each -1, 0 or +1) used while nobody is aboard. */

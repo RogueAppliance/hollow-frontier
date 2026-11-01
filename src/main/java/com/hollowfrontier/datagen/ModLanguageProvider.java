@@ -514,18 +514,23 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.AIRSHIP, "Airship");
         addEntityType(ModEntities.AIRSHIP, "Airship");
         add("tooltip.hollowfrontier.airship.fuel", "Burns coal or charcoal; takes steam from canisters or a steam tank under its keel");
-        add("tooltip.hollowfrontier.airship.controls", "Jump to climb, sprint to descend, sneak to step off");
+        add("tooltip.hollowfrontier.airship.controls", "Jump to climb, sprint to descend, sneak to step off (twice, when aloft)");
         add("message.hollowfrontier.airship.gauge", "Steam %s %s%%  ·  Coal %s  ·  Altitude %s");
         add("message.hollowfrontier.airship.not_yours", "This airship belongs to %s.");
+        add("message.hollowfrontier.airship.bail", "It's %s blocks to the ground. Sneak again to step off.");
+        add("message.hollowfrontier.airship.gauge_bearing", "%s  ·  %s");
         add("tooltip.hollowfrontier.airship.stored", "Coal %s  ·  Steam %s%%");
         add("subtitles.hollowfrontier.airship.engine", "Airship engine thrums");
         add("subtitles.hollowfrontier.airship.vent", "Airship vents steam");
         add("subtitles.hollowfrontier.airship.stoke", "Airship firebox stoked");
         addItem(ModItems.POLAR_COMPASS, "Polar Compass");
-        add("tooltip.hollowfrontier.polar_compass.unset", "Use to take a bearing on the nearest Polar Gateway");
-        add("tooltip.hollowfrontier.polar_compass.set", "Bearing taken. Use again to take a fresh one");
+        add("tooltip.hollowfrontier.polar_compass.unset", "Carry it and the needle finds the nearest Polar Gateway. Right-click to take a bearing now");
+        add("tooltip.hollowfrontier.polar_compass.set", "Hold it to read how far. Right-click for a fresh bearing");
         add("message.hollowfrontier.polar_compass.bearing", "The needle settles: a gateway lies some %s blocks %s");
         add("message.hollowfrontier.polar_compass.lost", "The needle wanders. No gateway within reach");
+        add("message.hollowfrontier.polar_compass.first", "The needle settles: a gateway lies some %s blocks %s. Hold the compass to keep reading it");
+        add("message.hollowfrontier.polar_compass.reading", "Gateway: some %s blocks %s");
+        add("message.hollowfrontier.polar_compass.here", "Gateway: right here");
         for (String point : new String[] {"north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"}) {
             add("message.hollowfrontier.direction." + point, point);
         }

@@ -108,15 +108,7 @@ All phases so far are done. Their original specs are in PHASE_SPECS.md. Add new 
 31. ✅ 2026-10-31 — Polish: 31a airship owner lock and fuel kept when broken; 31b no deprecation warnings, dev rigs out of the jar; 31c humanoid model with brim curls, bandanas, and dress and robe skirts (duster tails on hold).
 32. Playtest fixes for 1.1.0 (from the 2026-11-01 playtest; the user's picks are in DECISIONS.md). Log each part under a new CHANGELOG heading.
     - ✅ 2026-11-01 — 32a Fixes: items usable aboard the airship and no self-damage from its riders; carpet kept off town door thresholds and a routine back-off after failed paths; one Hollow Frontier creative tab.
-    - **32b — Airship safety and the Polar Compass**
-      - **Bailing out:** sneaking aloft (more than about 4 blocks above the ground) shows "Sneak again to bail out, N blocks up" on the overlay; a second sneak within about 1.5 s gets off. Near the ground one sneak still works. Check first where 26.x lets a dismount be cancelled (`EntityMountEvent`, the server's input handling, any client-side prediction).
-      - **Soft landing:** leaving the ship aloft gives a few seconds of slow falling, as a backstop.
-      - **Unattended descent:** after about 30 s with no pilot, the ship sinks gently (the existing out-of-fuel sink) and moors on the ground.
-      - **Polar Compass, live needle:** it re-takes its bearing by itself while carried (a new structure search only after about 64 blocks of travel, so it stays cheap); right-clicking still forces a fresh bearing.
-      - **Polar Compass, distance while held:** held in either hand, it shows "~N blocks NE" on the overlay about once a second. Aboard an airship the reading joins the gauge line, which otherwise replaces any other overlay message every 10 ticks.
-      - **Polar Compass, final approach:** check where the structure search lands (likely the gateway's chunk, not the ring). Within about 64 blocks it points at the ring's actual centre, and says so when you're standing at the gateway.
-      - **Polar Compass, teaching:** a tooltip line "Right-click to take a bearing" (until it has one) and an overlay hint the first time a player picks one up.
-      - *Done when:* one sneak aloft doesn't drop the player, two do, and they land unhurt from build height; an empty ship comes down on its own; the compass needle follows a moving player without clicks, the distance shows while held (and aboard, in the gauge line), and it points at the ring centre up close; game tests cover the descent, the slow fall, the live bearing and the final approach, and runClient checks the double tap and the overlays.
+    - ✅ 2026-11-01 — 32b Airship safety and the Polar Compass: a second sneak to get off aloft, slow falling after, unattended ships come down; the compass takes its own bearings on the ring's middle and reads out while held (in the gauge line aboard).
     - **32c — Crash cache and resonator**
       - **Gray Cargo Pod:** a new lootable container block in the crash site's cockpit (both crash sites), on a new `chests/crash_site` table: salvage, Gray parts and the new relics.
       - **Thingamabob relics:** 4–5 Gray gadgets the prospector buys (names like Humming Doohickey or Self-Warming Rock). Each also has a small deadpan gimmick, so it isn't sell-only. Tooltips are the prospector's baffled appraisals.

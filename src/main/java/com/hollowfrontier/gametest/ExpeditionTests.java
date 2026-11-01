@@ -4,6 +4,7 @@ import com.hollowfrontier.HollowFrontier;
 import com.hollowfrontier.content.hollow.gateway.GatewayEffects;
 import com.hollowfrontier.content.hollow.gateway.GatewayFrameBlock;
 import com.hollowfrontier.content.hollow.gateway.GatewayLinks;
+import com.hollowfrontier.content.hollow.gateway.PolarCompassItem;
 import com.hollowfrontier.content.hollow.gateway.PolarGateways;
 import com.hollowfrontier.content.hollow.gateway.PolarResonatorItem;
 import com.hollowfrontier.content.steam.SteamCanisterItem;
@@ -198,6 +199,102 @@ final class ExpeditionTests {
         h.assertTrue(ship.hurtServer(level, level.damageSources().playerAttack(owner), 100.0F) && !ship.isAlive(),
                 "the owner couldn't break it from the ground");
         h.succeed();
+    }
+
+    /**
+     * 32b: aloft, a rider's first sneak only warns them; a second soon after gets them off, with slow falling to see them
+     * down. (The ship hovers on its steam with nobody at the keys.)
+     */
+    static void riderBailsOutOnSecondSneak(GameTestHelper h) {
+        Airship ship = airship(h, new Vec3(10.5, 12, 10.5), 8_000, 0);
+        ServerPlayer rider = TestPlayers.survival(h, new BlockPos(10, 1, 8), "hf-airship-bailer");
+        ship.interact(rider, InteractionHand.MAIN_HAND, ship.position());
+        h.assertTrue(rider.getVehicle() == ship, "couldn't board");
+        h.assertTrue(ship.heightAboveGround(h.getLevel()) > Airship.BAIL_HEIGHT, "the ship isn't aloft: " + ship.heightAboveGround(h.getLevel()));
+        rider.setShiftKeyDown(true);
+        h.runAfterDelay(2, () -> {
+            h.assertTrue(rider.getVehicle() == ship, "one sneak aloft dropped the rider");
+            h.assertFalse(rider.isShiftKeyDown(), "the first sneak wasn't caught");
+            rider.setShiftKeyDown(true);
+            h.runAfterDelay(2, () -> {
+                h.assertTrue(rider.getVehicle() == null, "a second sneak didn't get them off");
+                h.assertTrue(rider.hasEffect(MobEffects.SLOW_FALLING), "no slow falling for a rider leaving aloft");
+                ship.discard();
+                h.succeed();
+            });
+        });
+    }
+
+    /** 32b: near the ground one sneak gets you off, as on any vehicle, and there's no slow falling to wait out. */
+    static void riderStepsOffNearTheGround(GameTestHelper h) {
+        Airship ship = airship(h, new Vec3(6.5, 1, 6.5), 0, 0);
+        ServerPlayer rider = TestPlayers.survival(h, new BlockPos(6, 1, 4), "hf-airship-stepper");
+        ship.interact(rider, InteractionHand.MAIN_HAND, ship.position());
+        h.assertTrue(rider.getVehicle() == ship, "couldn't board");
+        rider.setShiftKeyDown(true);
+        h.runAfterDelay(2, () -> {
+            h.assertTrue(rider.getVehicle() == null, "one sneak on the ground didn't get them off");
+            h.assertFalse(rider.hasEffect(MobEffects.SLOW_FALLING), "slow falling for stepping off on the ground");
+            ship.discard();
+            h.succeed();
+        });
+    }
+
+    /** 32b: under steam with nobody aboard a ship holds its height for a while, then comes down to wait. */
+    static void unattendedAirshipComesDown(GameTestHelper h) {
+        Airship left = airship(h, new Vec3(4.5, 12, 6.5), 8_000, 0);
+        Airship fresh = airship(h, new Vec3(14.5, 12, 6.5), 8_000, 0);
+        left.leaveUnattended(Airship.UNATTENDED_TICKS);
+        double leftY = left.getY(), freshY = fresh.getY();
+        h.runAfterDelay(30, () -> {
+            h.assertTrue(left.isAdrift() && leftY - left.getY() > 0.5, "the unattended ship didn't come down: " + (leftY - left.getY()));
+            h.assertTrue(-left.getDeltaMovement().y <= 0.0601 + 1.0E-3, "coming down too fast: " + left.getDeltaMovement().y);
+            h.assertTrue(!fresh.isAdrift() && Math.abs(fresh.getY() - freshY) < 0.1, "a just-left ship should hold its height: " + (fresh.getY() - freshY));
+            left.discard();
+            fresh.discard();
+            h.succeed();
+        });
+    }
+
+    /**
+     * 32b: a carried Polar Compass takes its own bearing, a held one reads out how far and which way (and says when you're
+     * there), and it searches again only after a long way. The test world stands in for the Hollow Earth, where the
+     * compass points to return gateways, so no gateway has to generate.
+     */
+    static void polarCompassFindsItsOwnWay(GameTestHelper h) {
+        PolarGateways.standInForHollowEarth(Level.OVERWORLD);
+        try {
+            ServerLevel level = h.getLevel();
+            BlockPos near = h.absolutePos(new BlockPos(6, 1, 6)), far = near.east(PolarCompassItem.RESEARCH_DISTANCE + 100);
+            GatewayLinks.get(level).add(new GatewayLinks.Link(near, near));
+            GatewayLinks.get(level).add(new GatewayLinks.Link(far, far));
+            ServerPlayer player = TestPlayers.survival(h, new BlockPos(1, 1, 1), "hf-compass-reader");
+            ItemStack compass = new ItemStack(ModItems.POLAR_COMPASS.get());
+            player.setItemInHand(InteractionHand.MAIN_HAND, compass);
+            PolarCompassItem.update(level, player, compass);
+            h.assertValueEqual(target(compass), near, "the first bearing");
+            h.assertValueEqual(key(PolarCompassItem.reading(player, compass)), "message.hollowfrontier.polar_compass.reading", "the held reading");
+            player.snapTo(Vec3.atBottomCenterOf(near));
+            h.assertValueEqual(key(PolarCompassItem.reading(player, compass)), "message.hollowfrontier.polar_compass.here", "the reading at the gateway");
+            player.snapTo(Vec3.atBottomCenterOf(far.west(20)));
+            PolarCompassItem.update(level, player, compass);
+            h.assertValueEqual(target(compass), far, "the bearing after a long way");
+            player.snapTo(Vec3.atBottomCenterOf(near.east(170))); // 166 blocks back: nearer the first gateway now, but not far enough to search again
+            PolarCompassItem.update(level, player, compass);
+            h.assertValueEqual(target(compass), far, "the bearing a short way on (it shouldn't search again)");
+            h.succeed();
+        } finally {
+            PolarGateways.standInForHollowEarth(null);
+        }
+    }
+
+    private static @org.jspecify.annotations.Nullable BlockPos target(ItemStack compass) {
+        var tracker = compass.get(DataComponents.LODESTONE_TRACKER);
+        return tracker == null ? null : tracker.target().map(net.minecraft.core.GlobalPos::pos).orElse(null);
+    }
+
+    private static String key(java.util.Optional<net.minecraft.network.chat.Component> reading) {
+        return reading.map(c -> c.getContents() instanceof net.minecraft.network.chat.contents.TranslatableContents t ? t.getKey() : c.getString()).orElse("none");
     }
 
     /** 31a: a broken airship drops with its coal and steam, and laying it out again puts them back (and makes it yours). */
