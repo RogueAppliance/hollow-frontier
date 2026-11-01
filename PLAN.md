@@ -109,7 +109,7 @@ All phases so far are done. Their original specs are in PHASE_SPECS.md. Add new 
 
 ## Open items
 
-- **Publishing:** the version is still 1.0.0, with phases 15-31 under "Unreleased" in CHANGELOG.md; bump it before uploading to Modrinth and CurseForge. The store page's source link needs the GitHub repo made public first.
+- **Publishing:** the first public release is 1.0.0; add its date to CHANGELOG.md when it's uploaded to Modrinth and CurseForge, and log later changes under a new heading above it. The store page's source link needs the GitHub repo made public first.
 - **Trailer leftovers:** the plain (no-shader) trailer, the vertical short and the page GIFs predate the current trailer world and the ember phlogiston. Re-film or re-cut them before use. A true 4K trailer would need re-filming at 4K (AMD VSR on the 1440p monitor); the current 4K file is an upscale.
 - **The Kindled's look:** kept for now (the user's call); mock-ups of alternatives exist (see DECISIONS.md, art passes).
 - **Known gaps:** Quick Load speeds loading but not the reload animation; loaded and empty guns look the same in the creative grid; duster tails are on hold; the fern frond still reads as scattered pixels.
