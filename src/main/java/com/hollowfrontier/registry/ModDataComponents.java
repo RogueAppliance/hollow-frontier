@@ -68,4 +68,22 @@ public final class ModDataComponents {
             DATA_COMPONENTS.registerComponentType("letter_home", builder -> builder
                     .persistent(com.hollowfrontier.content.hollow.gray.LetterHome.CODEC)
                     .networkSynchronized(com.hollowfrontier.content.hollow.gray.LetterHome.STREAM_CODEC));
+
+    // 32b: where a Polar Compass last searched for a gateway, so it searches again only after a long way
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<net.minecraft.core.GlobalPos>> BEARING_FROM =
+            DATA_COMPONENTS.registerComponentType("bearing_from", builder -> builder
+                    .persistent(net.minecraft.core.GlobalPos.CODEC)
+                    .networkSynchronized(net.minecraft.core.GlobalPos.STREAM_CODEC));
+
+    // 32: game time a Polar Resonator last woke a ring. Drives its ring animation (the fork shivers, the needle swings).
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> RESONATED =
+            DATA_COMPONENTS.registerComponentType("resonated", builder -> builder
+                    .persistent(Codec.LONG)
+                    .networkSynchronized(ByteBufCodecs.VAR_LONG));
+
+    // 32d: where the Survey Letter's gateway is (the nearest to the post office it was collected from)
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<net.minecraft.core.GlobalPos>> SURVEY_GATEWAY =
+            DATA_COMPONENTS.registerComponentType("survey_gateway", builder -> builder
+                    .persistent(net.minecraft.core.GlobalPos.CODEC)
+                    .networkSynchronized(net.minecraft.core.GlobalPos.STREAM_CODEC));
 }

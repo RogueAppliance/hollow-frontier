@@ -128,8 +128,11 @@ public class GazetteItem extends Item {
 
         // Page four: odd news from out past the edge of the map; a Polar Gateway's crater when there's one within reach.
         BlockPos gateway = nearest(level, ModStructures.POLAR_GATEWAY, here);
+        // (32d) told shorter for a reader who hasn't been there, ending on the Survey's last letter waiting at the post office
+        boolean northBound = !com.hollowfrontier.content.concavia.ConcavianCodexItem.reached(reader, "steam/open_sesame")
+                && !reader.getData(com.hollowfrontier.registry.ModAttachments.SURVEY_LETTER.get()); // nor collected the letter
         pages.add(Filterable.passThrough(gateway != null
-                ? story("gateway", gateway.getX(), gateway.getZ())
+                ? story(northBound ? "gateway_letter" : "gateway", gateway.getX(), gateway.getZ())
                 : story("odd." + (1 + random.nextInt(ODD_NEWS)))));
 
         // 21a: the back page, classifieds, letters or corrections that fit how far the reader has got

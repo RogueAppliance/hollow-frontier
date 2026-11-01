@@ -3,6 +3,17 @@ package com.hollowfrontier.content.steam;
 import java.util.List;
 import java.util.function.Consumer;
 
+import org.jspecify.annotations.Nullable;
+
+import com.geckolib.animatable.GeoItem;
+import com.geckolib.animatable.client.GeoRenderProvider;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.constant.DataTickets;
+import com.geckolib.constant.dataticket.DataTicket;
+import com.geckolib.util.GeckoLibUtil;
 import com.hollowfrontier.HollowFrontier;
 
 import net.minecraft.ChatFormatting;
@@ -11,7 +22,10 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -29,12 +43,19 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 /**
  * Pickaxe + shovel at iron tier. With steam (from canisters in the inventory) it mines at DRILL_SPEED and uses
- * STEAM_PER_BLOCK mB per block; without steam it still mines (and drops) but at bare-hand speed.
+ * STEAM_PER_BLOCK mB per block; without steam it still mines (and drops) but at bare-hand speed. Held, it's a GeckoLib model
+ * whose bit spins while it drills (DrillRenderer); its icon is flat.
  */
 @EventBusSubscriber(modid = HollowFrontier.MODID)
-public class SteamDrillItem extends Item {
+public class SteamDrillItem extends Item implements GeoItem {
     public static final int STEAM_PER_BLOCK = 25;
     private static final float DRILL_SPEED = 9.0F;
+    // Render-state data the client renderer fills in: whether whoever holds it is drilling (with steam to do it).
+    public static final DataTicket<Boolean> DRILLING = DataTickets.create("hollowfrontier_drilling", Boolean.class);
+
+    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
+    private static final RawAnimation SPIN = RawAnimation.begin().thenLoop("spin");
+    private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
     public SteamDrillItem(Properties properties) {
         super(properties);
@@ -72,5 +93,44 @@ public class SteamDrillItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag flag) {
         builder.accept(Component.translatable("tooltip.hollowfrontier.steam_drill", STEAM_PER_BLOCK).withStyle(ChatFormatting.GRAY));
+    }
+
+    // ---------------------------------------------------------------- GeckoLib (held, it's a 3D model; its icon is flat)
+
+    @Override
+    public void inventoryTick(ItemStack stack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
+        GeoItem.getOrAssignId(stack, level);
+    }
+
+    // Wear from each block changes the stack; that shouldn't drop it out of the hand and back, as a new item would
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return slotChanged || !ItemStack.isSameItem(oldStack, newStack);
+    }
+
+    @Override
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
+            private com.hollowfrontier.client.DrillRenderer renderer;
+
+            @Override
+            public com.geckolib.renderer.GeoItemRenderer<?> getGeoItemRenderer() {
+                if (renderer == null) {
+                    renderer = new com.hollowfrontier.client.DrillRenderer(SteamDrillItem.this);
+                }
+                return renderer;
+            }
+        });
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<SteamDrillItem>("drill", 2,
+                test -> test.setAndContinue(test.getDataOrDefault(DRILLING, false) ? SPIN : IDLE)));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return geoCache;
     }
 }

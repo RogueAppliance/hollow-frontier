@@ -75,9 +75,13 @@ public final class Routine {
 
     /** The goal: walks to the place for the time of day (looked up again when the phase turns), and sleeps there at night. */
     public static final class RoutineGoal extends Goal {
+        /** After giving up short of the place, how long they wait (this to twice this, in ticks) before setting off again. */
+        public static final int GIVE_UP_TICKS = 600;
+
         private final Townsfolk folk;
         private @Nullable Phase phase;
         private @Nullable Place place;
+        private long restUntil;
 
         public RoutineGoal(Townsfolk folk) {
             this.folk = folk;
@@ -92,6 +96,7 @@ public final class Routine {
             Phase now = phase(folk.level().getOverworldClockTime());
             if (now != phase || place == null) {
                 phase = now;
+                restUntil = 0; // a new part of the day is worth a fresh try
                 place = place(folk.level(), folk.getWorkplace(), now);
                 folk.setHomeTo(place.bed() ? folk.getWorkplace() : place.pos(), place.bed() ? BED_REACH : place.range());
                 if (now != Phase.NIGHT && folk.isSleeping()) {
@@ -107,7 +112,7 @@ public final class Routine {
                 }
                 return false;
             }
-            return !folk.blockPosition().closerThan(place.pos(), place.range() + 1);
+            return folk.level().getGameTime() >= restUntil && !folk.blockPosition().closerThan(place.pos(), place.range() + 1);
         }
 
         @Override
@@ -117,7 +122,25 @@ public final class Routine {
 
         @Override
         public boolean canContinueToUse() {
-            return !folk.getNavigation().isDone() && place != null && !folk.blockPosition().closerThan(place.pos(), place.bed() ? 1.5 : place.range());
+            return !folk.getNavigation().isDone() && place != null && !arrived();
+        }
+
+        // Gave up short of the place (no way through, or stuck): wait a while rather than set off again every second,
+        // which had folk stuck by a door working it open and shut for as long as they stood there (a playtest, 32a).
+        @Override
+        public void stop() {
+            if (place != null && folk.getNavigation().isDone() && !arrived()) {
+                restUntil = folk.level().getGameTime() + GIVE_UP_TICKS + folk.getRandom().nextInt(GIVE_UP_TICKS);
+            }
+        }
+
+        private boolean arrived() {
+            return folk.blockPosition().closerThan(place.pos(), place.bed() ? 1.5 : place.range());
+        }
+
+        /** Whether they've given up on getting there for now. */
+        public boolean resting() {
+            return folk.level().getGameTime() < restUntil;
         }
     }
 }

@@ -293,6 +293,9 @@ public final class ModItems {
             p -> p.durability(SunstoneLensItem.DURABILITY).rarity(Rarity.EPIC).fireResistant());
     public static final DeferredItem<ConcavianCodexItem> CONCAVIAN_CODEX = ITEMS.registerItem("concavian_codex", ConcavianCodexItem::new,
             p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    // 32d: the Polar Survey's last letter, from a town's postmaster
+    public static final DeferredItem<com.hollowfrontier.content.frontier.survey.SurveyLetterItem> SURVEY_LETTER = ITEMS.registerItem("survey_letter",
+            com.hollowfrontier.content.frontier.survey.SurveyLetterItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<SpawnEggItem> SUN_ARCHON_SPAWN_EGG = ITEMS.registerItem("sun_archon_spawn_egg",
             SpawnEggItem::new, p -> p.spawnEgg(ModEntities.SUN_ARCHON.get()));
 
@@ -300,6 +303,7 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> SAUCER_HULL = ITEMS.registerSimpleBlockItem(ModBlocks.SAUCER_HULL);
     public static final DeferredItem<BlockItem> SAUCER_WRECKAGE = ITEMS.registerSimpleBlockItem(ModBlocks.SAUCER_WRECKAGE);
     public static final DeferredItem<BlockItem> GRAY_CACHE = ITEMS.registerSimpleBlockItem(ModBlocks.GRAY_CACHE); // 15a
+    public static final DeferredItem<BlockItem> GRAY_CARGO_POD = ITEMS.registerSimpleBlockItem(ModBlocks.GRAY_CARGO_POD, p -> p.rarity(Rarity.UNCOMMON)); // 32c
     public static final DeferredItem<SalvageItem> ALIEN_ALLOY_PLATING = ITEMS.registerItem("alien_alloy_plating", SalvageItem::new,
             p -> p.rarity(Rarity.UNCOMMON));
     public static final DeferredItem<SalvageItem> DAMAGED_GRAVITY_DRIVE = ITEMS.registerItem("damaged_gravity_drive", SalvageItem::new,
@@ -348,6 +352,14 @@ public final class ModItems {
     public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> STAR_CHART = relic("star_chart", 4, Rarity.UNCOMMON);
     public static final java.util.List<DeferredItem<com.hollowfrontier.content.hollow.RelicItem>> RELICS = java.util.List.of(KINDLED_IDOL, CRYSTAL_TABLET,
             SUNSTONE_CIRCLET, STARSTEEL_MASK, GRAY_SPECIMEN_JAR, EXPEDITION_SEXTANT, IVORY_CARVING, STAR_CHART);
+    // 32c: the Grays' odds and ends from a crash site's cargo pod (the prospector buys them too, for the gold coins after each name)
+    public static final DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> HUMMING_DOOHICKEY = gadget("humming_doohickey", 3, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind.DOOHICKEY);
+    public static final DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> SELF_WARMING_ROCK = gadget("self_warming_rock", 3, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind.WARMING_ROCK);
+    public static final DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> BACKWARD_WATCH = gadget("backward_watch", 2, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind.BACKWARD_WATCH);
+    public static final DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> RESTLESS_MARBLE = gadget("restless_marble", 2, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind.RESTLESS_MARBLE);
+    public static final DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> UNOPENABLE_BOX = gadget("unopenable_box", 4, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind.UNOPENABLE_BOX);
+    public static final java.util.List<DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem>> GADGETS = java.util.List.of(HUMMING_DOOHICKEY,
+            SELF_WARMING_ROCK, BACKWARD_WATCH, RESTLESS_MARBLE, UNOPENABLE_BOX);
     public static final DeferredItem<Item> SUN_POTTERY_SHERD = ITEMS.registerItem("sun_pottery_sherd", Item::new,
             p -> p.rarity(Rarity.UNCOMMON).potPattern(com.hollowfrontier.content.hollow.HollowPatterns.SUN));
     public static final DeferredItem<Item> CRYSTAL_POTTERY_SHERD = ITEMS.registerItem("crystal_pottery_sherd", Item::new,
@@ -360,6 +372,10 @@ public final class ModItems {
 
     private static DeferredItem<com.hollowfrontier.content.hollow.RelicItem> relic(String name, int price, Rarity rarity) {
         return ITEMS.registerItem(name, p -> new com.hollowfrontier.content.hollow.RelicItem(p, price), p -> p.stacksTo(16).rarity(rarity));
+    }
+
+    private static DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> gadget(String name, int price, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind kind) {
+        return ITEMS.registerItem(name, p -> new com.hollowfrontier.content.ufo.GrayGadgetItem(p, price, kind), p -> p.stacksTo(16).rarity(Rarity.UNCOMMON));
     }
     public static final DeferredItem<com.hollowfrontier.content.hollow.gray.LetterHomeItem> LETTER_HOME = ITEMS.registerItem("letter_home",
             com.hollowfrontier.content.hollow.gray.LetterHomeItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));

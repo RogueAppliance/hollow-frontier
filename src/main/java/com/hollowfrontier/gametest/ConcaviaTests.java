@@ -374,6 +374,9 @@ final class ConcaviaTests {
         h.assertTrue(com.hollowfrontier.content.concavia.SunstoneLensItem.shine(h.getLevel(), player) == zombie, "the beam missed the zombie");
         h.assertTrue(zombie.getMaxHealth() - zombie.getHealth() > com.hollowfrontier.content.concavia.SunstoneLensItem.DAMAGE && zombie.isOnFire(),
                 "the zombie wasn't burned hard: " + zombie.getHealth());
+        // Used, it marks the beam on the stack, which flares the glass of its held model
+        player.getMainHandItem().use(h.getLevel(), player, InteractionHand.MAIN_HAND);
+        h.assertTrue(player.getMainHandItem().has(com.hollowfrontier.registry.ModDataComponents.LAST_FIRED.get()), "using it didn't mark the beam");
         TestPlayers.leave(player);
         h.succeed();
     }

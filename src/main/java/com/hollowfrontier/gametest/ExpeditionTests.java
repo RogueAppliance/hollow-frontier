@@ -4,6 +4,7 @@ import com.hollowfrontier.HollowFrontier;
 import com.hollowfrontier.content.hollow.gateway.GatewayEffects;
 import com.hollowfrontier.content.hollow.gateway.GatewayFrameBlock;
 import com.hollowfrontier.content.hollow.gateway.GatewayLinks;
+import com.hollowfrontier.content.hollow.gateway.PolarCompassItem;
 import com.hollowfrontier.content.hollow.gateway.PolarGateways;
 import com.hollowfrontier.content.hollow.gateway.PolarResonatorItem;
 import com.hollowfrontier.content.steam.SteamCanisterItem;
@@ -12,6 +13,7 @@ import com.hollowfrontier.content.steam.airship.Airship;
 import com.hollowfrontier.content.steam.airship.AirshipItem;
 import com.hollowfrontier.registry.ModAttachments;
 import com.hollowfrontier.registry.ModBlocks;
+import com.hollowfrontier.registry.ModDataComponents;
 import com.hollowfrontier.registry.ModEntities;
 import com.hollowfrontier.registry.ModFluids;
 import com.hollowfrontier.registry.ModItems;
@@ -28,6 +30,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Input;
@@ -174,6 +177,127 @@ final class ExpeditionTests {
         h.succeed();
     }
 
+    /**
+     * 32a: aboard, a click on the hull passes through to what the rider holds (so they can eat, shoot and read a compass),
+     * coal still stokes it, and the owner's own swing from the helm doesn't break it.
+     */
+    static void riderUsesItemsAboard(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        ServerPlayer owner = TestPlayers.survival(h, new BlockPos(2, 1, 6), "hf-airship-rider");
+        Airship ship = airship(h, new Vec3(6.5, 1, 6.5), 0, 0);
+        ship.setOwner(owner);
+        ship.interact(owner, InteractionHand.MAIN_HAND, ship.position());
+        h.assertTrue(owner.getVehicle() == ship, "the owner couldn't board");
+        owner.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BREAD));
+        h.assertTrue(ship.interact(owner, InteractionHand.MAIN_HAND, ship.position()) == InteractionResult.PASS,
+                "a rider's click on the hull was swallowed");
+        owner.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.COAL));
+        ship.interact(owner, InteractionHand.MAIN_HAND, ship.position());
+        h.assertValueEqual(ship.fuel(), Airship.COAL_TICKS, "coal stoked from aboard");
+        h.assertFalse(ship.hurtServer(level, level.damageSources().playerAttack(owner), 100.0F), "the rider's own swing landed");
+        h.assertTrue(ship.isAlive() && ship.getDamage() == 0.0F, "the rider broke their own ship");
+        owner.stopRiding();
+        h.assertTrue(ship.hurtServer(level, level.damageSources().playerAttack(owner), 100.0F) && !ship.isAlive(),
+                "the owner couldn't break it from the ground");
+        h.succeed();
+    }
+
+    /**
+     * 32b: aloft, a rider's first sneak only warns them; a second soon after gets them off, with slow falling to see them
+     * down. (The ship hovers on its steam with nobody at the keys.)
+     */
+    static void riderBailsOutOnSecondSneak(GameTestHelper h) {
+        Airship ship = airship(h, new Vec3(10.5, 12, 10.5), 8_000, 0);
+        ServerPlayer rider = TestPlayers.survival(h, new BlockPos(10, 1, 8), "hf-airship-bailer");
+        ship.interact(rider, InteractionHand.MAIN_HAND, ship.position());
+        h.assertTrue(rider.getVehicle() == ship, "couldn't board");
+        h.assertTrue(ship.heightAboveGround(h.getLevel()) > Airship.BAIL_HEIGHT, "the ship isn't aloft: " + ship.heightAboveGround(h.getLevel()));
+        rider.setShiftKeyDown(true);
+        h.runAfterDelay(2, () -> {
+            h.assertTrue(rider.getVehicle() == ship, "one sneak aloft dropped the rider");
+            h.assertFalse(rider.isShiftKeyDown(), "the first sneak wasn't caught");
+            rider.setShiftKeyDown(true);
+            h.runAfterDelay(2, () -> {
+                h.assertTrue(rider.getVehicle() == null, "a second sneak didn't get them off");
+                h.assertTrue(rider.hasEffect(MobEffects.SLOW_FALLING), "no slow falling for a rider leaving aloft");
+                ship.discard();
+                h.succeed();
+            });
+        });
+    }
+
+    /** 32b: near the ground one sneak gets you off, as on any vehicle, and there's no slow falling to wait out. */
+    static void riderStepsOffNearTheGround(GameTestHelper h) {
+        Airship ship = airship(h, new Vec3(6.5, 1, 6.5), 0, 0);
+        ServerPlayer rider = TestPlayers.survival(h, new BlockPos(6, 1, 4), "hf-airship-stepper");
+        ship.interact(rider, InteractionHand.MAIN_HAND, ship.position());
+        h.assertTrue(rider.getVehicle() == ship, "couldn't board");
+        rider.setShiftKeyDown(true);
+        h.runAfterDelay(2, () -> {
+            h.assertTrue(rider.getVehicle() == null, "one sneak on the ground didn't get them off");
+            h.assertFalse(rider.hasEffect(MobEffects.SLOW_FALLING), "slow falling for stepping off on the ground");
+            ship.discard();
+            h.succeed();
+        });
+    }
+
+    /** 32b: under steam with nobody aboard a ship holds its height for a while, then comes down to wait. */
+    static void unattendedAirshipComesDown(GameTestHelper h) {
+        Airship left = airship(h, new Vec3(4.5, 12, 6.5), 8_000, 0);
+        Airship fresh = airship(h, new Vec3(14.5, 12, 6.5), 8_000, 0);
+        left.leaveUnattended(Airship.UNATTENDED_TICKS);
+        double leftY = left.getY(), freshY = fresh.getY();
+        h.runAfterDelay(30, () -> {
+            h.assertTrue(left.isAdrift() && leftY - left.getY() > 0.5, "the unattended ship didn't come down: " + (leftY - left.getY()));
+            h.assertTrue(-left.getDeltaMovement().y <= 0.0601 + 1.0E-3, "coming down too fast: " + left.getDeltaMovement().y);
+            h.assertTrue(!fresh.isAdrift() && Math.abs(fresh.getY() - freshY) < 0.1, "a just-left ship should hold its height: " + (fresh.getY() - freshY));
+            left.discard();
+            fresh.discard();
+            h.succeed();
+        });
+    }
+
+    /**
+     * 32b: a carried Polar Compass takes its own bearing, a held one reads out how far and which way (and says when you're
+     * there), and it searches again only after a long way. The test world stands in for the Hollow Earth, where the
+     * compass points to return gateways, so no gateway has to generate.
+     */
+    static void polarCompassFindsItsOwnWay(GameTestHelper h) {
+        PolarGateways.standInForHollowEarth(Level.OVERWORLD);
+        try {
+            ServerLevel level = h.getLevel();
+            BlockPos near = h.absolutePos(new BlockPos(6, 1, 6)), far = near.east(PolarCompassItem.RESEARCH_DISTANCE + 100);
+            GatewayLinks.get(level).add(new GatewayLinks.Link(near, near));
+            GatewayLinks.get(level).add(new GatewayLinks.Link(far, far));
+            ServerPlayer player = TestPlayers.survival(h, new BlockPos(1, 1, 1), "hf-compass-reader");
+            ItemStack compass = new ItemStack(ModItems.POLAR_COMPASS.get());
+            player.setItemInHand(InteractionHand.MAIN_HAND, compass);
+            PolarCompassItem.update(level, player, compass);
+            h.assertValueEqual(target(compass), near, "the first bearing");
+            h.assertValueEqual(key(PolarCompassItem.reading(player, compass)), "message.hollowfrontier.polar_compass.reading", "the held reading");
+            player.snapTo(Vec3.atBottomCenterOf(near));
+            h.assertValueEqual(key(PolarCompassItem.reading(player, compass)), "message.hollowfrontier.polar_compass.here", "the reading at the gateway");
+            player.snapTo(Vec3.atBottomCenterOf(far.west(20)));
+            PolarCompassItem.update(level, player, compass);
+            h.assertValueEqual(target(compass), far, "the bearing after a long way");
+            player.snapTo(Vec3.atBottomCenterOf(near.east(170))); // 166 blocks back: nearer the first gateway now, but not far enough to search again
+            PolarCompassItem.update(level, player, compass);
+            h.assertValueEqual(target(compass), far, "the bearing a short way on (it shouldn't search again)");
+            h.succeed();
+        } finally {
+            PolarGateways.standInForHollowEarth(null);
+        }
+    }
+
+    private static @org.jspecify.annotations.Nullable BlockPos target(ItemStack compass) {
+        var tracker = compass.get(DataComponents.LODESTONE_TRACKER);
+        return tracker == null ? null : tracker.target().map(net.minecraft.core.GlobalPos::pos).orElse(null);
+    }
+
+    private static String key(java.util.Optional<net.minecraft.network.chat.Component> reading) {
+        return reading.map(c -> c.getContents() instanceof net.minecraft.network.chat.contents.TranslatableContents t ? t.getKey() : c.getString()).orElse("none");
+    }
+
     /** 31a: a broken airship drops with its coal and steam, and laying it out again puts them back (and makes it yours). */
     static void brokenAirshipKeepsItsFuel(GameTestHelper h) {
         ServerLevel level = h.getLevel();
@@ -213,6 +337,41 @@ final class ExpeditionTests {
             h.setBlock(center.offset(PolarGateways.RING.get(0)), Blocks.STONE);
         }
         return center;
+    }
+
+    /**
+     * 32c: the resonator charges from a steam tank like a canister and opens a ring on its own charge; with none left and no
+     * canisters it draws from the player's airship close by, and takes nothing at all when even that falls short.
+     */
+    static void resonatorChargesAndDrawsFromAirship(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        BlockPos first = ring(h, new BlockPos(3, 1, 3), true), second = ring(h, new BlockPos(8, 1, 8), true);
+        BlockPos tankPos = new BlockPos(10, 1, 2);
+        h.setBlock(tankPos, ModBlocks.STEAM_TANK.get());
+        h.getBlockEntity(tankPos, SteamStorageBlockEntity.class).tank().add(ModFluids.steam(), 16_000);
+        ServerPlayer player = TestPlayers.survival(h, new BlockPos(6, 1, 3), "hf-resonator-charger");
+        ItemStack resonator = new ItemStack(ModItems.POLAR_RESONATOR.get());
+        player.setItemInHand(InteractionHand.MAIN_HAND, resonator);
+        BlockPos tank = h.absolutePos(tankPos);
+        resonator.useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, new BlockHitResult(Vec3.atCenterOf(tank), Direction.UP, tank, false)));
+        h.assertValueEqual(PolarResonatorItem.charge(resonator), PolarResonatorItem.CAPACITY, "charge after a tank");
+
+        h.useBlock(first.offset(PolarGateways.RING.get(0)), player);
+        h.assertTrue(GatewayEffects.isWaking(level, h.absolutePos(first)), "it didn't open on its own charge");
+        h.assertValueEqual(PolarResonatorItem.charge(resonator), 0, "charge after opening");
+        h.assertTrue(resonator.has(ModDataComponents.RESONATED.get()), "opening a ring didn't set it ringing");
+
+        Airship ship = airship(h, new Vec3(2, 1, 9), 500, 0);
+        ship.setOwner(player);
+        h.useBlock(second.offset(PolarGateways.RING.get(0)), player);
+        h.assertFalse(GatewayEffects.isWaking(level, h.absolutePos(second)), "it opened on too little steam");
+        h.assertValueEqual(ship.steam(), 500, "steam taken from the airship though it fell short");
+        ship.setSteam(3_000);
+        h.useBlock(second.offset(PolarGateways.RING.get(0)), player);
+        h.assertTrue(GatewayEffects.isWaking(level, h.absolutePos(second)), "it didn't draw on the airship nearby");
+        h.assertValueEqual(ship.steam(), 3_000 - PolarResonatorItem.OPEN_STEAM, "steam left in the airship");
+        ship.discard();
+        h.succeed();
     }
 
     /** The resonator opens a whole ring for 2000 mB of steam, and won't open a broken one or one without steam. */

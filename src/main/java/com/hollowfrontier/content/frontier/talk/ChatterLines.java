@@ -149,6 +149,10 @@ public final class ChatterLines {
         say(TALK, when(LANDINGS), "One of them saucers set down outside town. Sat there all night, bold as brass, with its little grey men walking round it.");
         say(TALK, when(LANDINGS), "There's a ring of burnt ground past the creek. Saucer sat in it all night. Gone by sunup.");
         say(TALK, when(LANDINGS), "They don't take folks no more. Now they just land where they please, like they own the place.");
+        // 32d: the road north, for anyone who hasn't taken it
+        say(TALK, only(Act.FRONTIER).unless(SURVEY_LETTER), "The Polar Survey went north two summers back. The postmaster's still holding their last letter.");
+        say(TALK, when(AIRSHIP), "That airship of yours could make the pole. The Survey went on foot, and look where it got them.");
+        say(TALK, when(AIRSHIP), "If you're flying north, take steam. The Survey wrote home for steam, and coal, and a compass. In that order.");
     }
 
     private static void folk() {
@@ -206,6 +210,7 @@ public final class ChatterLines {
         say(TALK, act(Act.GATEWAY), "Fella back from the pole swears there's folk down there who glow like a lamp. Lantern Men, he calls 'em.");
         say(TALK, act(Act.AFTER), "Funny thing. Ever since the sky went quiet, I sleep like a babe.");
         say(TALK, when(LANDINGS), "Saw the saucer's lights through the trees. I went for a look, and one of the grey fellas looked back.");
+        say(TALK, when(AIRSHIP), "Flying north? I've a compass that points at the pole. Not the one on the map. The other one.");
 
         voice("engineer");
         say(GREET, "Mind the rails. The four-fifteen don't stop for nobody.");
@@ -238,6 +243,8 @@ public final class ChatterLines {
         say(GREET, "Mail goes out with the stage, Mondays and Thursdays. Rain, shine or outlaws.");
         say(TALK, "A letter back east takes three weeks. A telegram takes three minutes and costs a week's wages.");
         say(TALK, "I don't read the postcards. Don't need to. Folks tell me what's in 'em anyway.");
+        say(TALK, only(Act.FRONTIER).unless(SURVEY_LETTER), "There's a letter here from the Polar Survey. Addressed to anybody. Nobody's been anybody yet.");
+        say(TALK, when(SURVEY_LETTER).until(Act.FRONTIER), "Read that letter yet? Don't tell me what's in it. I'll hear soon enough.");
 
         voice("gunsmith");
         say(GREET, "Mind the muzzle, friend. Every gun's loaded till it ain't.");
@@ -541,5 +548,6 @@ public final class ChatterLines {
         gossip(act(Act.AFTER), "Sky's been quiet.", "Too quiet?", "No. Just quiet. It's nice.");
         gossip(when(STRANGER), "That stranger asked me where the humans drink.", "What'd you tell him?", "The saloon. Where else would humans drink?");
         gossip(when(STRANGER), "Ever notice the new fella's hat's three sizes too big?", "Maybe his head's small.", "His head ain't small.");
+        gossip(only(Act.FRONTIER).unless(SURVEY_LETTER), "Any word from the Polar Survey?", "Not since the letter.", "What letter?"); // 32d
     }
 }

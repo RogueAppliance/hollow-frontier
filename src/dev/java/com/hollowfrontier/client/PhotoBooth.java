@@ -134,6 +134,41 @@ public final class PhotoBooth {
         if (mc.gui.screen() instanceof net.minecraft.client.gui.screens.PauseScreen) {
             mc.gui.setScreen(null);
         }
+        // The Polar Resonator held, only on its own with -PphotoScene=resonator
+        if (RESONATOR_ONLY) {
+            if (ticks >= 40) {
+                resonator(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The Steam Drill and the Sunstone Lens held, only on their own with -PphotoScene=held
+        if (HELD_ONLY) {
+            if (ticks >= 40) {
+                held(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The road north (32d), only on its own with -PphotoScene=survey
+        if (SURVEY_ONLY) {
+            if (ticks >= 40) {
+                survey(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The crash site's cargo pod and the Grays' gadgets (32c), only on their own with -PphotoScene=cache
+        if (CACHE_ONLY) {
+            if (ticks >= 40) {
+                cache(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The airship's bail-out and the Polar Compass (32b), only on their own with -PphotoScene=bailout
+        if (BAILOUT_ONLY) {
+            if (ticks >= 40) {
+                bailout(mc, server, ticks - 40);
+            }
+            return;
+        }
         // The Hollow Earth's ores and gear (9c), only on their own with -PphotoScene=gear
         if (GEAR_ONLY) {
             if (ticks >= 40) {
@@ -563,14 +598,236 @@ public final class PhotoBooth {
             case 3600 -> shot(mc, "hf_40_advancements_steam.png");
             case 3602 -> mc.gui.setScreen(null);
             // Each mod tab open in the creative inventory
-            case 3605 -> creativeTab(mc, ModTabs.FRONTIER.get());
+            case 3605 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 3625 -> shot(mc, "hf_41_tab_frontier.png");
-            case 3627 -> creativeTab(mc, ModTabs.FRONTIER_BUILDING.get());
+            case 3627 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 3645 -> shot(mc, "hf_42_tab_frontier_building.png");
-            case 3647 -> creativeTab(mc, ModTabs.STEAM.get());
+            case 3647 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 3665 -> shot(mc, "hf_43_tab_steam.png");
             case 3667 -> mc.gui.setScreen(null);
             default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- 32b: bailing out, and the Polar Compass
+
+    private static final boolean BAILOUT_ONLY = "bailout".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static Airship bailShip;
+    private static @org.jspecify.annotations.Nullable BlockPos compassTarget;
+
+    /**
+     * A survival player at the helm high over the staging spot with a Polar Compass in hand (the gauge line carries its
+     * reading), one sneak (a warning, still aboard), a second (off, drifting down under slow falling), then a look straight
+     * down on the gateway the compass found, to see the needle aims at the ring itself. The log says what happened.
+     */
+    private static void bailout(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                run(server, "time set noon");
+                run(server, "weather clear");
+                run(server, "gamemode survival @p");
+                run(server, "kill @e[type=hollowfrontier:airship]");
+                run(server, "item replace entity @p weapon.mainhand with hollowfrontier:polar_compass");
+            }
+            case 5 -> server.execute(() -> {
+                ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+                bailShip = airshipAt(server.overworld(), new Vec3(baseX + 0.5, Y + 40, baseZ + 0.5), 0, Airship.CAPACITY, Airship.COAL_TICKS * 4);
+                player.teleportTo(bailShip.getX(), bailShip.getY() + 1, bailShip.getZ());
+                player.startRiding(bailShip, true, false);
+            });
+            case 10 -> mc.options.setCameraType(CameraType.FIRST_PERSON);
+            case 60 -> {
+                shot(mc, "hf_32b_gauge_with_compass.png");
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: aboard {}, {} blocks up", mc.player.getVehicle() != null,
+                        bailShip.heightAboveGround(server.overworld()));
+            }
+            case 62 -> mc.options.keyShift.setDown(true);
+            case 66 -> mc.options.keyShift.setDown(false);
+            case 70 -> {
+                shot(mc, "hf_32b_bail_warning.png");
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: after one sneak, still aboard: {}", mc.player.getVehicle() != null);
+            }
+            case 74 -> mc.options.keyShift.setDown(true);
+            case 78 -> mc.options.keyShift.setDown(false);
+            case 90 -> {
+                shot(mc, "hf_32b_bailed_out.png");
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: after two sneaks, aboard: {}, slow falling: {}", mc.player.getVehicle() != null,
+                        mc.player.hasEffect(net.minecraft.world.effect.MobEffects.SLOW_FALLING));
+            }
+            case 100 -> server.execute(() -> {
+                ServerLevel level = server.overworld();
+                ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+                var gateway = level.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE)
+                        .getOrThrow(com.hollowfrontier.worldgen.structure.ModStructures.POLAR_GATEWAY);
+                var found = level.getChunkSource().getGenerator().findNearestMapStructure(level, net.minecraft.core.HolderSet.direct(gateway),
+                        player.blockPosition(), com.hollowfrontier.content.hollow.gateway.PolarCompassItem.SEARCH_CHUNKS, false);
+                compassTarget = com.hollowfrontier.content.hollow.gateway.PolarCompassItem.bearing(level, player.blockPosition()).orElse(null);
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: structure search found {}, the compass aims at {}",
+                        found == null ? null : found.getFirst(), compassTarget);
+            });
+            case 105 -> {
+                if (compassTarget != null) {
+                    run(server, "effect clear @p");
+                    run(server, "gamemode spectator @p");
+                    run(server, String.format("tp @p %d %d %d 0 90", compassTarget.getX(), compassTarget.getY() + 25, compassTarget.getZ()));
+                }
+            }
+            case 260 -> {
+                shot(mc, "hf_32b_compass_target_from_above.png");
+                HollowFrontier.LOGGER.info("[PhotoBooth] 32b: done");
+            }
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- 32c: the crash site's cargo pod and the Grays' gadgets
+
+    private static final boolean CACHE_ONLY = "cache".equals(System.getProperty("hollowfrontier.photo.scene"));
+
+    /** A sealed and an open cargo pod side by side, and the five gadgets and a charged resonator in the hotbar. */
+    private static void cache(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                run(server, "time set noon");
+                run(server, "weather clear");
+                run(server, "gamemode creative @p");
+                run(server, String.format("setblock %d %d %d hollowfrontier:gray_cargo_pod[open=false]", baseX + 2, Y, baseZ + 4));
+                run(server, String.format("setblock %d %d %d hollowfrontier:gray_cargo_pod[open=true]", baseX + 4, Y, baseZ + 4));
+                String[] gadgets = {"humming_doohickey", "self_warming_rock", "backward_watch", "restless_marble", "unopenable_box"};
+                for (int i = 0; i < gadgets.length; i++) {
+                    run(server, "item replace entity @p hotbar." + i + " with hollowfrontier:" + gadgets[i]);
+                }
+                run(server, "item replace entity @p hotbar.5 with hollowfrontier:polar_resonator[hollowfrontier:steam=1200]");
+                run(server, "item replace entity @p hotbar.6 with hollowfrontier:gray_cargo_pod");
+                mc.player.getInventory().setSelectedSlot(8);
+            }
+            case 5 -> tpLooking(server, new Vec3(baseX + 3.5, Y + 1.6, baseZ + 1.0), new Vec3(baseX + 3.5, Y + 0.5, baseZ + 4.5));
+            case 40 -> shot(mc, "hf_32c_cargo_pods.png");
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- the Polar Resonator, held
+
+    private static final boolean RESONATOR_ONLY = "resonator".equals(System.getProperty("hollowfrontier.photo.scene"));
+
+    /** The resonator in hand, first person still and ringing, then from the front in third person (and its icon in the hotbar). */
+    private static void resonator(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                if (!mc.player.isAlive()) { // the world may have been closed on a death screen
+                    mc.player.respawn();
+                    mc.gui.setScreen(null);
+                }
+                run(server, "time set noon");
+                run(server, "weather clear");
+                tpLooking(server, new Vec3(baseX + 0.5, Y, baseZ + 0.5), new Vec3(baseX + 0.5, Y + 1.0, baseZ + 10.5)); // on firm ground first
+                run(server, "gamemode creative @p");
+                run(server, "item replace entity @p hotbar.0 with hollowfrontier:polar_resonator");
+                run(server, "item replace entity @p hotbar.1 with hollowfrontier:polar_resonator");
+                mc.player.getInventory().setSelectedSlot(0);
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+            }
+            case 5 -> tpLooking(server, new Vec3(baseX + 0.5, Y, baseZ + 0.5), new Vec3(baseX + 0.5, Y + 1.0, baseZ + 10.5));
+            case 40 -> shot(mc, "hf_res_first_person.png");
+            case 42 -> server.execute(() -> server.getPlayerList().getPlayers().get(0).getMainHandItem()
+                    .set(com.hollowfrontier.registry.ModDataComponents.RESONATED.get(), server.overworld().getGameTime()));
+            case 47 -> shot(mc, "hf_res_first_person_ringing.png");
+            case 50 -> mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+            case 70 -> shot(mc, "hf_res_third_person.png");
+            case 72 -> mc.options.setCameraType(CameraType.FIRST_PERSON);
+            default -> {}
+        }
+    }
+
+    private static final boolean HELD_ONLY = "held".equals(System.getProperty("hollowfrontier.photo.scene"));
+
+    /**
+     * The Steam Drill and the Sunstone Lens in hand: the drill still, then spinning as it bites into a stone wall (in survival
+     * for the moment, with a full canister, since a creative player breaks blocks outright); the lens glowing, then flaring as
+     * if it had thrown a beam; then both from the front in third person.
+     */
+    private static void held(Minecraft mc, MinecraftServer server, int t) {
+        Vec3 eye = new Vec3(baseX + 0.5, Y, baseZ + 0.5), wall = new Vec3(baseX + 0.5, Y + 1.62, baseZ + 2.5); // looking level at it
+        switch (t) {
+            case 0 -> {
+                if (!mc.player.isAlive()) {
+                    mc.player.respawn();
+                    mc.gui.setScreen(null);
+                }
+                run(server, "time set noon");
+                run(server, "weather clear");
+                tpLooking(server, eye, wall);
+                run(server, "gamemode creative @p");
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:stone", baseX - 1, Y, baseZ + 2, baseX + 1, Y + 2, baseZ + 8));
+                run(server, "item replace entity @p hotbar.0 with hollowfrontier:polar_resonator");
+                run(server, "item replace entity @p hotbar.1 with hollowfrontier:steam_drill");
+                run(server, "item replace entity @p hotbar.2 with hollowfrontier:sunstone_lens");
+                run(server, "item replace entity @p hotbar.3 with hollowfrontier:steam_canister[hollowfrontier:steam=4000]");
+                mc.player.getInventory().setSelectedSlot(1);
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+            }
+            case 5 -> {
+                tpLooking(server, eye, wall);
+                run(server, "gamemode survival @p"); // early, so the hand has settled after the switch before the shots
+                run(server, "effect give @p minecraft:resistance 30 4 true"); // the staging spot has archers about
+                run(server, "kill @e[type=minecraft:arrow,distance=..64]");
+            }
+            case 30 -> shot(mc, "hf_held_drill.png");
+            case 32 -> mc.options.keyAttack.setDown(true);
+            case 50 -> shot(mc, "hf_held_drill_spinning.png");
+            case 53 -> shot(mc, "hf_held_drill_spinning_2.png");
+            case 56 -> {
+                mc.options.keyAttack.setDown(false);
+                run(server, "gamemode creative @p");
+                mc.player.getInventory().setSelectedSlot(2);
+            }
+            case 70 -> shot(mc, "hf_held_lens.png");
+            case 72 -> server.execute(() -> server.getPlayerList().getPlayers().get(0).getMainHandItem()
+                    .set(com.hollowfrontier.registry.ModDataComponents.LAST_FIRED.get(), server.overworld().getGameTime()));
+            case 74 -> shot(mc, "hf_held_lens_flare.png");
+            case 76 -> mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+            case 96 -> shot(mc, "hf_held_lens_third_person.png");
+            case 98 -> mc.player.getInventory().setSelectedSlot(1);
+            case 118 -> shot(mc, "hf_held_drill_third_person.png");
+            case 120 -> mc.options.setCameraType(CameraType.FIRST_PERSON);
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- 32d: the road north
+
+    private static final boolean SURVEY_ONLY = "survey".equals(System.getProperty("hollowfrontier.photo.scene"));
+
+    /** A Small Bounty Board with the Polar Survey's notice in its last cell, then the Survey's letter open, page by page. */
+    private static void survey(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                run(server, "time set noon");
+                run(server, "weather clear");
+                run(server, "gamemode creative @p");
+                run(server, String.format("setblock %d %d %d hollowfrontier:bounty_board", baseX + 3, Y, baseZ + 4));
+                mc.player.getInventory().setSelectedSlot(8);
+            }
+            case 5 -> tpLooking(server, new Vec3(baseX + 3.5, Y - 1.1, baseZ + 2.6), new Vec3(baseX + 3.5, Y - 1.1, baseZ + 4.0)); // eyes level with the face
+            case 40 -> shot(mc, "hf_32d_survey_notice.png");
+            case 42 -> server.execute(() -> {
+                ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+                ItemStack letter = new ItemStack(com.hollowfrontier.registry.ModItems.SURVEY_LETTER.get());
+                player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, letter);
+                letter.use(server.overworld(), player, net.minecraft.world.InteractionHand.MAIN_HAND);
+            });
+            default -> {
+                // Each page a second apart: the plea, its signature, where the crater is, what's needed, and the reward
+                if (t >= 60 && t <= 60 + 20 * 6 && (t - 60) % 20 == 0
+                        && mc.gui.screen() instanceof net.minecraft.client.gui.screens.inventory.BookViewScreen book) {
+                    int page = (t - 60) / 20;
+                    book.setPage(page);
+                }
+                if (t >= 70 && t <= 70 + 20 * 6 && (t - 70) % 20 == 0) {
+                    shot(mc, "hf_32d_letter_page_" + (t - 70) / 20 + ".png");
+                }
+            }
         }
     }
 
@@ -681,7 +938,7 @@ public final class PhotoBooth {
             case 320 -> shot(mc, "hf_55_resonator_in_hand.png");
             case 322 -> {
                 mc.player.getInventory().setSelectedSlot(8);
-                creativeTab(mc, ModTabs.STEAM.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 342 -> shot(mc, "hf_56_tab_steam_expedition.png");
             case 344 -> mc.gui.setScreen(null);
@@ -1152,7 +1409,7 @@ public final class PhotoBooth {
             case 190 -> shot(mc, "hf_b3_megatherium.png");
             case 192 -> tpLooking(server, new Vec3(baseX + 22, Y + 2.4, baseZ - 0.5), new Vec3(baseX + 22, Y + 0.9, baseZ + 6));
             case 220 -> shot(mc, "hf_b4_glyptodon_and_gear.png");
-            case 222 -> creativeTab(mc, ModTabs.HOLLOW_EARTH.get());
+            case 222 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 242 -> shot(mc, "hf_b5_tab_hollow_earth.png");
             case 245 -> {
                 HollowFrontier.LOGGER.info("[PhotoBooth] megafauna done, quitting");
@@ -1227,7 +1484,7 @@ public final class PhotoBooth {
             case 380 -> {
                 run(server, "gamemode creative @p");
                 run(server, "effect clear @p");
-                creativeTab(mc, ModTabs.GRAYS.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 400 -> shot(mc, "hf_l6_tab_grays.png");
             case 403 -> {
@@ -1322,7 +1579,7 @@ public final class PhotoBooth {
             case 194 -> shot(mc, "hf_k4_saucer_cockpit.png");
             case 196 -> {
                 run(server, "ride @p dismount");
-                creativeTab(mc, ModTabs.GRAYS.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 216 -> shot(mc, "hf_k5_tab_grays.png");
             case 219 -> {
@@ -1392,7 +1649,7 @@ public final class PhotoBooth {
             case 175 -> {
                 mc.options.setCameraType(CameraType.FIRST_PERSON);
                 run(server, "kill @e[type=minecraft:zombie,distance=..20]");
-                creativeTab(mc, ModTabs.GRAYS.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 195 -> shot(mc, "hf_j5_tab_grays.png");
             case 198 -> {
@@ -1444,7 +1701,7 @@ public final class PhotoBooth {
                 tpLooking(server, new Vec3(x + 24.5, Y + 4, z - 4), new Vec3(x + 36.5, Y + 10, z + 6.5));
             }
             case 330 -> shot(mc, "hf_i3_abduction.png");
-            case 332 -> creativeTab(mc, ModTabs.GRAYS.get());
+            case 332 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             case 352 -> shot(mc, "hf_i4_tab_grays.png");
             case 355 -> {
                 HollowFrontier.LOGGER.info("[PhotoBooth] grays done, quitting");
@@ -1978,7 +2235,7 @@ public final class PhotoBooth {
             case 322 -> {
                 run(server, "gamemode creative @p");
                 run(server, "kill @e[type=hollowfrontier:sun_archon]");
-                creativeTab(mc, ModTabs.CONCAVIA.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 342 -> shot(mc, "hf_h5_tab_concavia.png");
             case 345 -> {
@@ -2033,7 +2290,7 @@ public final class PhotoBooth {
             case 224 -> {
                 run(server, "gamemode creative @p");
                 run(server, "clear @p hollowfrontier:gray_tech_fragment");
-                creativeTab(mc, ModTabs.CONCAVIA.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 244 -> shot(mc, "hf_g4_tab_concavia.png");
             case 247 -> {
@@ -3068,7 +3325,7 @@ public final class PhotoBooth {
             }
             case 80 -> shot(mc, "hf_a0_starsteel_and_phlogiston.png");
             case 82 -> {
-                creativeTab(mc, ModTabs.HOLLOW_EARTH.get());
+                creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
             }
             case 102 -> shot(mc, "hf_a1_tab_hollow_earth.png");
             case 104 -> {

@@ -66,6 +66,12 @@ public final class ModAttachments {
     public static final Supplier<AttachmentType<Boolean>> VISITED_HOLLOW_EARTH = ATTACHMENTS.register("visited_hollow_earth",
             () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("visited"), visited -> visited).copyOnDeath().build());
 
+    // 32d: the Polar Survey's letter: whether this player has been handed it, and whether the board has paid them for news of the Survey
+    public static final Supplier<AttachmentType<Boolean>> SURVEY_LETTER = ATTACHMENTS.register("survey_letter",
+            () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("handed"), handed -> handed).copyOnDeath().build());
+    public static final Supplier<AttachmentType<Boolean>> SURVEY_PAID = ATTACHMENTS.register("survey_paid",
+            () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("paid"), paid -> paid).copyOnDeath().build());
+
     // Present only while the horse wears saddlebags (check hasData before getData, which would create it).
     public static final Supplier<AttachmentType<ItemContainerContents>> SADDLEBAGS = ATTACHMENTS.register("saddlebags",
             () -> AttachmentType.builder(() -> ItemContainerContents.EMPTY).serialize(ItemContainerContents.CODEC.fieldOf("items")).build());

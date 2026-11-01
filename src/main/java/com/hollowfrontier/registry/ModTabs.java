@@ -28,13 +28,14 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 /**
  * The creative menu. This file is the one place that decides where every mod item shows up:
  * <ul>
- * <li><b>Mod tabs</b>, after the vanilla ones: Frontier, Frontier Building, Steam, Hollow Earth. Each tab lists its items section by
- *     section, in the order players look for things: materials, tools and weapons, ammo, armor, gear, consumables,
- *     blocks, spawn eggs. Useful variants (loaded guns, a full canister, every bandana colour) are entries of their own.</li>
+ * <li><b>The Hollow Frontier tab</b>, after the vanilla ones (one tab since 32a; it was six). It lists the mod section by
+ *     section, the way a game goes: the frontier, building a town, steam, the Hollow Earth, Concavia, the Grays, and every
+ *     spawn egg at the end. Within a section, things come in the order players look for them: materials, tools and
+ *     weapons, ammo, armor, gear, consumables, blocks. Useful variants (loaded guns, a full canister, every bandana
+ *     colour) are entries of their own.</li>
  * <li><b>Vanilla tabs</b> ({@link #addToVanillaTabs}): the same items again next to their vanilla relatives.</li>
  * </ul>
- * A new item has to be added to a section here; the {@code every_item_in_a_tab} game test fails until it is. Later phases
- * add their own tab after {@link #HOLLOW_EARTH} (Concavia, UFO), each with {@code withTabsBefore} on the last one.
+ * A new item has to be added to a section here; the {@code every_item_in_a_tab} game test fails until it is.
  */
 @EventBusSubscriber(modid = HollowFrontier.MODID)
 public final class ModTabs {
@@ -43,22 +44,34 @@ public final class ModTabs {
     public static final DeferredRegister<CreativeModeTab> TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, HollowFrontier.MODID);
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FRONTIER =
-            tab("frontier", CreativeModeTabs.SPAWN_EGGS, ModItems.REVOLVER, ModTabs::frontier);
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FRONTIER_BUILDING =
-            tab("frontier_building", key("frontier"), ModItems.SALOON_DOORS, ModTabs::frontierBuilding);
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> STEAM =
-            tab("steam", key("frontier_building"), ModItems.BOILER, ModTabs::steam);
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> HOLLOW_EARTH =
-            tab("hollow_earth", key("steam"), ModItems.PHLOGISTON_SHARD, ModTabs::hollowEarth);
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CONCAVIA =
-            tab("concavia", key("hollow_earth"), ModItems.CONCAVIAN_CRYSTAL, ModTabs::concavia);
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> GRAYS =
-            tab("grays", key("concavia"), ModItems.BEAM_EMITTER, ModTabs::grays);
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> HOLLOW_FRONTIER =
+            tab("hollow_frontier", CreativeModeTabs.SPAWN_EGGS, ModItems.WANTED_POSTER, ModTabs::hollowFrontier);
 
     /** The mod's own tabs, in menu order (the coverage test walks these). */
     public static List<DeferredHolder<CreativeModeTab, CreativeModeTab>> modTabs() {
-        return List.of(FRONTIER, FRONTIER_BUILDING, STEAM, HOLLOW_EARTH, CONCAVIA, GRAYS);
+        return List.of(HOLLOW_FRONTIER);
+    }
+
+    /** Every spawn egg, in the order the tab and the vanilla Spawn Eggs tab list them: the frontier's folk and wildlife, the Hollow's creatures, Concavia, the Grays. */
+    private static List<Supplier<? extends ItemLike>> spawnEggs() {
+        return List.of(ModItems.OUTLAW_SPAWN_EGG, ModItems.OUTLAW_GUNSLINGER_SPAWN_EGG, ModItems.OUTLAW_BOSS_SPAWN_EGG,
+                ModItems.LAWMAN_SPAWN_EGG, ModItems.TOWNSFOLK_SPAWN_EGG, ModItems.BARMAID_SPAWN_EGG, ModItems.RATTLESNAKE_SPAWN_EGG,
+                ModItems.MAN_IN_BLACK_SPAWN_EGG,
+                ModItems.FERN_SKITTER_SPAWN_EGG, ModItems.GLASSBACK_HARE_SPAWN_EGG, ModItems.ASH_SALAMANDER_SPAWN_EGG, ModItems.PALE_RAVEN_SPAWN_EGG,
+                ModItems.GRAY_PROBE_SPAWN_EGG, ModItems.WOOLLY_MAMMOTH_SPAWN_EGG, ModItems.TERROR_BIRD_SPAWN_EGG,
+                ModItems.MEGATHERIUM_SPAWN_EGG, ModItems.GLYPTODON_SPAWN_EGG, ModItems.GRAY_SENTINEL_SPAWN_EGG,
+                ModItems.KINDLED_SPAWN_EGG, ModItems.CRYSTAL_GUARDIAN_SPAWN_EGG, ModItems.SUN_ARCHON_SPAWN_EGG,
+                ModItems.GRAY_WARDEN_SPAWN_EGG, ModItems.DISGUISED_GRAY_SPAWN_EGG);
+    }
+
+    private static void hollowFrontier(Consumer<ItemStack> out) {
+        frontier(out);
+        frontierBuilding(out);
+        steam(out);
+        hollowEarth(out);
+        concavia(out);
+        grays(out);
+        spawnEggs().forEach(egg -> out.accept(new ItemStack(egg.get())));
     }
 
     // ---------------------------------------------------------------- Frontier: the cowboy's kit
@@ -76,7 +89,7 @@ public final class ModTabs {
         // Horse gear
         add(out, ModItems.IRON_HORSESHOES, ModItems.BRASS_HORSESHOES, ModItems.SADDLEBAGS);
         // Money, the law and the news
-        add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE);
+        add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE, ModItems.SURVEY_LETTER);
         // The frontier's mysteries (11a)
         add(out, ModItems.FLATTENED_WHEAT, ModItems.STRANGE_SKULL);
         // Drinks, soft to hard, then the doctor's
@@ -87,9 +100,6 @@ public final class ModTabs {
         add(out, ModItems.BRASS_STAR);
         // Critter drops
         add(out, ModItems.SNAKESKIN);
-        // Spawn eggs: outlaws, town folk, wildlife
-        add(out, ModItems.OUTLAW_SPAWN_EGG, ModItems.OUTLAW_GUNSLINGER_SPAWN_EGG, ModItems.OUTLAW_BOSS_SPAWN_EGG, ModItems.LAWMAN_SPAWN_EGG,
-                ModItems.TOWNSFOLK_SPAWN_EGG, ModItems.BARMAID_SPAWN_EGG, ModItems.RATTLESNAKE_SPAWN_EGG, ModItems.MAN_IN_BLACK_SPAWN_EGG);
     }
 
     // ---------------------------------------------------------------- Frontier Building: furnishing a town
@@ -146,10 +156,6 @@ public final class ModTabs {
                 ModItems.GLYPTODON_HELMET, ModItems.GLYPTODON_CHESTPLATE, ModItems.GLYPTODON_LEGGINGS, ModItems.GLYPTODON_BOOTS);
         // The Gray experiments (10b)
         add(out, ModItems.GRAY_TECH_FRAGMENT, ModItems.SIGNAL_LOCATOR);
-        // Spawn eggs: the small creatures, Jungle to Highlands (9b2), the Gray probe (9b3), the megafauna (10a)
-        add(out, ModItems.FERN_SKITTER_SPAWN_EGG, ModItems.GLASSBACK_HARE_SPAWN_EGG, ModItems.ASH_SALAMANDER_SPAWN_EGG, ModItems.PALE_RAVEN_SPAWN_EGG,
-                ModItems.GRAY_PROBE_SPAWN_EGG, ModItems.WOOLLY_MAMMOTH_SPAWN_EGG, ModItems.TERROR_BIRD_SPAWN_EGG, ModItems.MEGATHERIUM_SPAWN_EGG,
-                ModItems.GLYPTODON_SPAWN_EGG, ModItems.GRAY_SENTINEL_SPAWN_EGG);
     }
 
     // ---------------------------------------------------------------- Concavia: the crystal city and its last people (12a)
@@ -157,26 +163,25 @@ public final class ModTabs {
     private static void concavia(Consumer<ItemStack> out) {
         add(out, ModItems.CONCAVIAN_CRYSTAL, ModItems.CRYSTAL_BRICKS, ModItems.CRYSTAL_BRICK_STAIRS, ModItems.CRYSTAL_BRICK_SLAB,
                 ModItems.CRYSTAL_BRICK_WALL, ModItems.CHISELED_CRYSTAL_BRICKS);
-        add(out, ModItems.KINDLED_SIGIL, ModItems.CONCAVIAN_CODEX, ModItems.KINDLED_SPAWN_EGG, ModItems.CRYSTAL_GUARDIAN_SPAWN_EGG);
+        add(out, ModItems.KINDLED_SIGIL, ModItems.CONCAVIAN_CODEX);
         add(out, ModItems.WAYSTONE); // 15c, for builders in creative
         // The Sun Archon (12b): the temple's pylons, and what the Archon leaves
-        add(out, ModItems.SUN_PYLON, ModItems.SUNSTONE_SHARD, ModItems.PHLOGISTON_CORE, ModItems.STARSTEEL_CROWN, ModItems.SUNSTONE_LENS,
-                ModItems.SUN_ARCHON_SPAWN_EGG);
+        add(out, ModItems.SUN_PYLON, ModItems.SUNSTONE_SHARD, ModItems.PHLOGISTON_CORE, ModItems.STARSTEEL_CROWN, ModItems.SUNSTONE_LENS);
     }
 
     // ---------------------------------------------------------------- The Grays: their wrecks and what's in them (13a)
 
     private static void grays(Consumer<ItemStack> out) {
-        add(out, ModItems.SAUCER_HULL, ModItems.SAUCER_WRECKAGE, ModItems.GRAY_CACHE);
+        add(out, ModItems.SAUCER_HULL, ModItems.SAUCER_WRECKAGE, ModItems.GRAY_CACHE, ModItems.GRAY_CARGO_POD);
         add(out, ModItems.ALIEN_ALLOY_PLATING, ModItems.DAMAGED_GRAVITY_DRIVE, ModItems.BEAM_EMITTER, ModItems.LENS_ARRAY, ModItems.NAVIGATION_CORE);
         // Phlogiston tech (13b)
         add(out, ModItems.EMPTY_PHLOGISTON_CELL, ModItems.PHLOGISTON_CELL, ModItems.RAY_PISTOL, ModItems.PHLOGISTON_RIFLE, ModItems.GRAVITY_DRIVE);
         add(out, ModItems.PROTOTYPE_SAUCER, ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD); // 13c, 15b
         add(out, ModItems.PHLOGISTON_BEACON); // 13d
-        add(out, ModItems.GRAY_WARDEN_SPAWN_EGG, ModItems.DISGUISED_GRAY_SPAWN_EGG);
         add(out, ModItems.IMPLANT_RIG, ModItems.LETTER_HOME); // 20
         add(out, ModItems.KINDLED_SEAL, ModItems.SEAL_SOCKET); // 26
         ModItems.RELICS.forEach(relic -> add(out, relic)); // 28
+        ModItems.GADGETS.forEach(gadget -> add(out, gadget)); // 32c
         ModItems.SHERDS.forEach(sherd -> add(out, sherd));
         add(out, ModItems.CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE);
     }
@@ -239,14 +244,8 @@ public final class ModTabs {
             after(event, Items.PHANTOM_MEMBRANE, ModItems.AIRSHIP_ENVELOPE, ModItems.AIRSHIP_ENGINE);
             after(event, Items.ARMADILLO_SCUTE, ModItems.GLYPTODON_SCUTE, ModItems.THICK_HIDE, ModItems.MAMMOTH_TUSK, ModItems.TERROR_BIRD_TALON, ModItems.GRAY_TECH_FRAGMENT);
         } else if (tab == CreativeModeTabs.SPAWN_EGGS) {
-            for (var egg : List.of(ModItems.OUTLAW_SPAWN_EGG, ModItems.OUTLAW_GUNSLINGER_SPAWN_EGG, ModItems.OUTLAW_BOSS_SPAWN_EGG,
-                    ModItems.LAWMAN_SPAWN_EGG, ModItems.TOWNSFOLK_SPAWN_EGG, ModItems.BARMAID_SPAWN_EGG, ModItems.RATTLESNAKE_SPAWN_EGG,
-                    ModItems.FERN_SKITTER_SPAWN_EGG, ModItems.GLASSBACK_HARE_SPAWN_EGG, ModItems.ASH_SALAMANDER_SPAWN_EGG, ModItems.PALE_RAVEN_SPAWN_EGG,
-                    ModItems.GRAY_PROBE_SPAWN_EGG, ModItems.WOOLLY_MAMMOTH_SPAWN_EGG, ModItems.TERROR_BIRD_SPAWN_EGG,
-                    ModItems.MEGATHERIUM_SPAWN_EGG, ModItems.GLYPTODON_SPAWN_EGG, ModItems.GRAY_SENTINEL_SPAWN_EGG, ModItems.MAN_IN_BLACK_SPAWN_EGG,
-                    ModItems.KINDLED_SPAWN_EGG, ModItems.CRYSTAL_GUARDIAN_SPAWN_EGG, ModItems.SUN_ARCHON_SPAWN_EGG,
-                    ModItems.GRAY_WARDEN_SPAWN_EGG, ModItems.DISGUISED_GRAY_SPAWN_EGG)) {
-                event.accept(egg.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
+            for (var egg : spawnEggs()) {
+                event.accept(new ItemStack(egg.get()), CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
             }
         }
     }
@@ -296,10 +295,6 @@ public final class ModTabs {
         ItemStack canister = new ItemStack(ModItems.STEAM_CANISTER.get());
         SteamCanisterItem.setSteam(canister, SteamCanisterItem.CAPACITY);
         return canister;
-    }
-
-    private static ResourceKey<CreativeModeTab> key(String name) {
-        return ResourceKey.create(Registries.CREATIVE_MODE_TAB, HollowFrontier.id(name));
     }
 
     public static String titleKey(String name) {

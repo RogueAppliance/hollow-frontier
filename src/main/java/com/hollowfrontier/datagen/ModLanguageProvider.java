@@ -45,12 +45,7 @@ public class ModLanguageProvider extends LanguageProvider {
                 add("sign.hollowfrontier.epitaph." + (n + 1) + "." + (line + 1), TownLandmarks.EPITAPHS.get(n).get(line));
             }
         }
-        add(ModTabs.titleKey("frontier"), "Frontier");
-        add(ModTabs.titleKey("frontier_building"), "Frontier Building");
-        add(ModTabs.titleKey("steam"), "Steam Age");
-        add(ModTabs.titleKey("hollow_earth"), "Hollow Earth");
-        add(ModTabs.titleKey("concavia"), "Concavia");
-        add(ModTabs.titleKey("grays"), "The Grays");
+        add(ModTabs.titleKey("hollow_frontier"), "Hollow Frontier");
 
         addBlock(ModBlocks.BRASS_BLOCK, "Block of Brass");
 
@@ -366,6 +361,37 @@ public class ModLanguageProvider extends LanguageProvider {
         add("gazette.hollowfrontier.raid.gave_up.body", "The %2$s Gang shot up %5$s near X %3$s, Z %4$s until they tired of it. %1$s is still at large; see the town's Bounty Board.");
         add("gazette.hollowfrontier.gateway.title", "EXPEDITION LOST IN THE SNOWS");
         add("gazette.hollowfrontier.gateway.body", "No word from the Polar Survey since it reached a crater of blue ice near X %s, Z %s. Their last letter spoke of a ring of carved stones that hummed when struck, and asked for more coal.");
+        add("gazette.hollowfrontier.gateway_letter.title", "EXPEDITION LOST IN THE SNOWS");
+        add("gazette.hollowfrontier.gateway_letter.body", "No word from the Polar Survey since it reached a crater of blue ice near X %s, Z %s. Its last letter is at the post office, uncollected.");
+        // 32d: the Polar Survey's last letter, its notice on the bounty boards, and what's said handing them over
+        addItem(ModItems.SURVEY_LETTER, "Letter from the Polar Survey");
+        add("book.hollowfrontier.survey_letter.title", "The Polar Survey");
+        add("book.hollowfrontier.survey_letter.plea", "To whoever collects this,\n\nWe reached the crater of blue ice in the far north. A ring of carved stones lies in its floor and hums when struck. We cannot wake it.");
+        add("book.hollowfrontier.survey_letter.plea_2", "It wants steam, more than we can carry, and a way to carry it. A compass that points north properly would help. An airship would help more.\n\nWe are short of coal.");
+        add("book.hollowfrontier.survey_letter.signed", "E. Crane, for the Polar Survey");
+        add("book.hollowfrontier.survey_letter.where", "By the postmaster's reckoning, the crater lies some %s blocks %s of where you stand. Look for snow, and blue ice under it.");
+        add("book.hollowfrontier.survey_letter.where_unknown", "Nobody here can say how far the crater is. Past the snow line, past the pack ice. A Polar Compass would know.");
+        add("book.hollowfrontier.survey_letter.needs", "What the Survey needs");
+        add("book.hollowfrontier.survey_letter.step.boiler", "A boiler");
+        add("book.hollowfrontier.survey_letter.step.boiler.how", "Set one down: water in, fire under.");
+        add("book.hollowfrontier.survey_letter.step.canister", "Steam to carry");
+        add("book.hollowfrontier.survey_letter.step.canister.how", "Fill a steam canister at a boiler, tank or pipe.");
+        add("book.hollowfrontier.survey_letter.step.airship", "An airship");
+        add("book.hollowfrontier.survey_letter.step.airship.how", "An envelope and an engine. Coal keeps it up.");
+        add("book.hollowfrontier.survey_letter.step.compass", "A compass that points north properly");
+        add("book.hollowfrontier.survey_letter.step.compass.how", "Found in old camps, or sold by a prospector. Carried, it finds the crater.");
+        add("book.hollowfrontier.survey_letter.step.resonator", "A Polar Resonator");
+        add("book.hollowfrontier.survey_letter.step.resonator.how", "The tuning fork that wakes the ring. Charge it with steam before you go.");
+        add("book.hollowfrontier.survey_letter.step.gateway", "The ring awake");
+        add("book.hollowfrontier.survey_letter.step.gateway.how", "Use the resonator on any stone of the ring.");
+        add("book.hollowfrontier.survey_letter.reward", "If you find us, or what's left of us, the saloon board pays %s gold for the news.\n\nIf not, keep this letter. Somebody should.");
+        add("message.hollowfrontier.survey.postmaster", "The postmaster: \"This has been here two years. Addressed to anybody. You'll do.\"");
+        add("message.hollowfrontier.survey.letter_pinned", "A letter is pinned under the notice. You take it.");
+        add("message.hollowfrontier.survey.notice", "Wanted: news of the Polar Survey. Open their gateway, then come back.");
+        add("message.hollowfrontier.survey.paid", "The board pays %s gold for news of the Polar Survey. Somebody will be glad to hear it.");
+        add("message.hollowfrontier.survey.paid_already", "You've been paid for that news.");
+        add("gui.hollowfrontier.bounty_board.survey", "News of the Polar Survey");
+        add("gui.hollowfrontier.bounty_board.survey_ask", "post office");
         add("gazette.hollowfrontier.odd.1.title", "LIGHTS OVER THE BADLANDS");
         add("gazette.hollowfrontier.odd.1.body", "Three ranch hands swear they saw a silver plate fly over the mesa at midnight, humming like a beehive. The ranch has since run dry of whiskey.");
         add("gazette.hollowfrontier.odd.2.title", "THE EARTH IS HOLLOW, SAYS OLD PROSPECTOR");
@@ -406,6 +432,33 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.STAR_CHART, "Star Chart");
         add("item.hollowfrontier.star_chart.desc", "Stars where there is no sky to put them in.");
         add("tooltip.hollowfrontier.relic", "A town prospector pays %s gold coins");
+        // 32c: the Grays' odds and ends from a crash site's cargo pod, and the pod
+        addItem(ModItems.HUMMING_DOOHICKEY, "Humming Doohickey");
+        add("item.hollowfrontier.humming_doohickey.desc", "The prospector says he'd pay more if it hummed at gold in particular.");
+        add("item.hollowfrontier.humming_doohickey.use", "Use it: it hums, louder the nearer ore lies");
+        add("message.hollowfrontier.humming_doohickey.quiet", "It says nothing.");
+        add("message.hollowfrontier.humming_doohickey.faint", "It hums, faintly.");
+        add("message.hollowfrontier.humming_doohickey.sure", "It hums with some conviction.");
+        add("message.hollowfrontier.humming_doohickey.loud", "It hums fit to burst.");
+        addItem(ModItems.SELF_WARMING_ROCK, "Self-Warming Rock");
+        add("item.hollowfrontier.self_warming_rock.desc", "Warm as a fresh biscuit, and has been since it was found.");
+        add("item.hollowfrontier.self_warming_rock.use", "Carried, it keeps the frost off: powder snow can't freeze you");
+        addItem(ModItems.BACKWARD_WATCH, "Backward Watch");
+        add("item.hollowfrontier.backward_watch.desc", "Runs backward. Keeps good time doing it.");
+        add("item.hollowfrontier.backward_watch.use", "Use it: how long until dusk, or dawn");
+        add("message.hollowfrontier.backward_watch.dusk", "It runs backward, but by it dusk is some %s minutes off.");
+        add("message.hollowfrontier.backward_watch.dawn", "It runs backward, but by it dawn is some %s minutes off.");
+        addItem(ModItems.RESTLESS_MARBLE, "Restless Marble");
+        add("item.hollowfrontier.restless_marble.desc", "It would rather be up. Children are not to play with it.");
+        add("item.hollowfrontier.restless_marble.use", "Use it: up you go, and down again gently");
+        addItem(ModItems.UNOPENABLE_BOX, "Unopenable Box");
+        add("item.hollowfrontier.unopenable_box.desc", "Three men and a pry bar have tried. It doesn't open.");
+        add("item.hollowfrontier.unopenable_box.use", "Use it: it doesn't open");
+        add("message.hollowfrontier.unopenable_box.shut", "It doesn't open.");
+        add("message.hollowfrontier.unopenable_box.open", "It opens. Nobody will believe you.");
+        addBlock(ModBlocks.GRAY_CARGO_POD, "Gray Cargo Pod");
+        add("message.hollowfrontier.cargo_pod.opened", "The seal gives with a hiss.");
+        add("message.hollowfrontier.cargo_pod.empty", "Empty. You were thorough.");
         addItem(ModItems.SUN_POTTERY_SHERD, "Sun Pottery Sherd");
         addItem(ModItems.CRYSTAL_POTTERY_SHERD, "Crystal Pottery Sherd");
         addItem(ModItems.WATCHER_POTTERY_SHERD, "Watcher Pottery Sherd");
@@ -519,27 +572,33 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.AIRSHIP, "Airship");
         addEntityType(ModEntities.AIRSHIP, "Airship");
         add("tooltip.hollowfrontier.airship.fuel", "Burns coal or charcoal; takes steam from canisters or a steam tank under its keel");
-        add("tooltip.hollowfrontier.airship.controls", "Jump to climb, sprint to descend, sneak to step off");
+        add("tooltip.hollowfrontier.airship.controls", "Jump to climb, sprint to descend, sneak to step off (twice, when aloft)");
         add("message.hollowfrontier.airship.gauge", "Steam %s %s%%  ·  Coal %s  ·  Altitude %s");
         add("message.hollowfrontier.airship.not_yours", "This airship belongs to %s.");
+        add("message.hollowfrontier.airship.bail", "It's %s blocks to the ground. Sneak again to step off.");
+        add("message.hollowfrontier.airship.gauge_bearing", "%s  ·  %s");
         add("tooltip.hollowfrontier.airship.stored", "Coal %s  ·  Steam %s%%");
         add("subtitles.hollowfrontier.airship.engine", "Airship engine thrums");
         add("subtitles.hollowfrontier.airship.vent", "Airship vents steam");
         add("subtitles.hollowfrontier.airship.stoke", "Airship firebox stoked");
         addItem(ModItems.POLAR_COMPASS, "Polar Compass");
-        add("tooltip.hollowfrontier.polar_compass.unset", "Use to take a bearing on the nearest Polar Gateway");
-        add("tooltip.hollowfrontier.polar_compass.set", "Bearing taken. Use again to take a fresh one");
+        add("tooltip.hollowfrontier.polar_compass.unset", "Carry it and the needle finds the nearest Polar Gateway. Right-click to take a bearing now");
+        add("tooltip.hollowfrontier.polar_compass.set", "Hold it to read how far. Right-click for a fresh bearing");
         add("message.hollowfrontier.polar_compass.bearing", "The needle settles: a gateway lies some %s blocks %s");
         add("message.hollowfrontier.polar_compass.lost", "The needle wanders. No gateway within reach");
+        add("message.hollowfrontier.polar_compass.first", "The needle settles: a gateway lies some %s blocks %s. Hold the compass to keep reading it");
+        add("message.hollowfrontier.polar_compass.reading", "Gateway: some %s blocks %s");
+        add("message.hollowfrontier.polar_compass.here", "Gateway: right here");
         for (String point : new String[] {"north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"}) {
             add("message.hollowfrontier.direction." + point, point);
         }
         addItem(ModItems.POLAR_RESONATOR, "Polar Resonator");
-        add("tooltip.hollowfrontier.polar_resonator", "Use on a Polar Gateway's ring to open it (%s mB of steam from canisters). Sneak-use to shut it");
+        add("tooltip.hollowfrontier.polar_resonator", "Use on a Polar Gateway's ring to open it, for %s mB of steam. Sneak-use to shut it");
+        add("tooltip.hollowfrontier.polar_resonator.steam", "Steam comes from its own charge (use it on a boiler, tank or pipe), then canisters you carry, then your airship within %s blocks");
         add("message.hollowfrontier.polar_resonator.broken_ring", "The ring is broken. It won't ring true");
         add("message.hollowfrontier.polar_resonator.already_open", "The gateway is already open");
         add("message.hollowfrontier.polar_resonator.blocked", "Something's lying in the well. Clear it first");
-        add("message.hollowfrontier.polar_resonator.no_steam", "Not enough steam: the resonator needs %s mB from your canisters");
+        add("message.hollowfrontier.polar_resonator.no_steam", "Not enough steam: it needs %s mB, from its own charge, canisters you carry or your airship within %s blocks");
         add("message.hollowfrontier.polar_resonator.opened", "The ring begins to sing...");
         add("message.hollowfrontier.polar_resonator.closed", "The ring falls silent");
         addBlock(ModBlocks.GATEWAY_FRAME, "Gateway Frame");

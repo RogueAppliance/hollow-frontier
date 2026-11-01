@@ -88,6 +88,11 @@ public final class ModGameTests {
         test("townsfolk_have_looks", 20, TownTests::townsfolkHaveLooks);
         test("sheriff_office_staffed", 40, TownTests::sheriffOfficeStaffed);
         test("town_doors_are_clear", 20, TownTests::townDoorsAreClear);
+        test("town_doors_have_bare_thresholds", 20, TownTests::townDoorsHaveBareThresholds);
+        test("sheriff_rug_clears_the_door", 20, TownTests::sheriffRugClearsTheDoor, TestBlueprints.YARD);
+        test("folk_give_up_on_unreachable_place", 400, TownTests::folkGiveUpOnUnreachablePlace);
+        test("folk_pass_bare_door", 400, TownTests::folkPassBareDoor);
+        test("folk_pass_door_beside_carpet", 400, TownTests::folkPassDoorBesideCarpet);
         test("town_buildings_furnished", 40, TownTests::townBuildingsFurnished);
         test("town_names_and_arches", 20, TownTests::townNamesAndArches);
         test("every_town_has_gunsmith", 20, TownTests::everyTownHasGunsmith);
@@ -161,9 +166,18 @@ public final class ModGameTests {
         test("moored_airship_fills_from_tank", 60, ExpeditionTests::mooredAirshipFillsFromTank);
         // Phase 31a: the airship's owner, and the coal and steam it keeps when broken
         test("airship_owner_lock_holds", 20, ExpeditionTests::airshipOwnerLockHolds);
+        test("rider_uses_items_aboard", 20, ExpeditionTests::riderUsesItemsAboard);
+        test("rider_bails_out_on_second_sneak", 20, ExpeditionTests::riderBailsOutOnSecondSneak, TestBlueprints.YARD);
+        test("rider_steps_off_near_the_ground", 20, ExpeditionTests::riderStepsOffNearTheGround);
+        test("unattended_airship_comes_down", 50, ExpeditionTests::unattendedAirshipComesDown, TestBlueprints.YARD);
+        test("polar_compass_finds_its_own_way", 20, ExpeditionTests::polarCompassFindsItsOwnWay);
         test("broken_airship_keeps_its_fuel", 20, ExpeditionTests::brokenAirshipKeepsItsFuel);
         test("high_altitude_earns_advancement", 60, ExpeditionTests::highAltitudeEarnsAdvancement);
         test("resonator_opens_gateway", 80, ExpeditionTests::resonatorOpensGateway);
+        test("resonator_charges_and_draws_from_airship", 20, ExpeditionTests::resonatorChargesAndDrawsFromAirship);
+        test("crash_site_has_a_cargo_pod", 20, CrashCacheTests::crashSiteHasACargoPod);
+        test("cargo_pod_spills_its_load", 20, CrashCacheTests::cargoPodSpillsItsLoad);
+        test("gadgets_do_their_tricks", 20, CrashCacheTests::gadgetsDoTheirTricks);
         test("gateway_leads_to_hollow_earth_and_back", 40, ExpeditionTests::gatewayLeadsToHollowEarthAndBack);
         test("gateway_template_has_ring_and_chest", 20, ExpeditionTests::gatewayTemplateHasRingAndChest);
         // Phase 9a: the Hollow Earth's own world
@@ -397,6 +411,10 @@ public final class ModGameTests {
         raid("robbed_bank_tells_owners", 300, RaidTests::robbedBankTellsOwners);
         raid("town_talks_of_raid_and_robbery", 20, RaidTests::townTalksOfRaidAndRobbery);
         // Voices (19)
+        test("postmaster_hands_over_the_letter", 20, SurveyTests::postmasterHandsOverTheLetter);
+        test("letter_ticks_off_the_road", 20, SurveyTests::letterTicksOffTheRoad);
+        test("survey_notice_pays_once", 20, SurveyTests::surveyNoticePaysOnce);
+        test("frontier_nudges_north", 20, SurveyTests::frontierNudgesNorth);
         test("chatter_table_complete", 20, ChatterTests::tableComplete);
         test("chatter_conditions_let_lines_in", 20, ChatterTests::conditionsLetLinesIn);
         test("chatter_picks_avoid_repeats", 20, ChatterTests::picksAvoidRepeats);

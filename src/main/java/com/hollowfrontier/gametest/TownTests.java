@@ -10,6 +10,7 @@ import com.hollowfrontier.content.frontier.outlaw.AbstractOutlaw;
 import com.hollowfrontier.content.frontier.outlaw.Outlaw;
 import com.hollowfrontier.content.frontier.townsfolk.Folk;
 import com.hollowfrontier.content.frontier.townsfolk.Lawman;
+import com.hollowfrontier.content.frontier.townsfolk.Routine;
 import com.hollowfrontier.content.frontier.townsfolk.Townsfolk;
 import com.hollowfrontier.registry.ModBlocks;
 import com.hollowfrontier.registry.ModEntities;
@@ -300,21 +301,22 @@ final class TownTests {
     }
 
     /**
-     * Every town has a gunsmith, the only one who sells guns: each style's every square has one lot on the gunsmith pool,
-     * and that pool, registered, draws only the gunsmith.
+     * Every town has a gunsmith, the only one who sells guns, and a post office, whose postmaster holds the Polar Survey's
+     * letter (32d): each style's every square has one lot on each one's pool, and that pool, registered, draws only it.
      */
     static void everyTownHasGunsmith(GameTestHelper h) {
         var pools = h.getLevel().registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.TEMPLATE_POOL);
         for (com.hollowfrontier.worldgen.structure.TownStyle style : com.hollowfrontier.worldgen.structure.TownStyle.values()) {
-            String gunsmith = style.pool(com.hollowfrontier.worldgen.structure.TownLayout.GUNSMITH);
-            h.assertTrue(pools.containsKey(net.minecraft.resources.Identifier.parse(gunsmith)), gunsmith + " isn't registered");
-            h.assertValueEqual(TownBlueprints.pools(style).get(com.hollowfrontier.worldgen.structure.TownLayout.GUNSMITH).keySet(),
-                    Set.of("gunsmith"), gunsmith + "'s buildings");
-            for (String square : TownBlueprints.pools(style).get(com.hollowfrontier.worldgen.structure.TownLayout.SQUARES).keySet()) {
-                StructureTemplate t = h.getLevel().getStructureTemplateManager().get(HollowFrontier.id(style.template(square))).orElseThrow();
-                long lots = t.filterBlocks(BlockPos.ZERO, new StructurePlaceSettings(), Blocks.JIGSAW).stream()
-                        .filter(info -> info.nbt().getStringOr("pool", "").equals(gunsmith)).count();
-                h.assertValueEqual(lots, 1L, style.template(square) + "'s gunsmith lots");
+            for (String building : List.of(com.hollowfrontier.worldgen.structure.TownLayout.GUNSMITH, com.hollowfrontier.worldgen.structure.TownLayout.POST_OFFICE)) {
+                String pool = style.pool(building);
+                h.assertTrue(pools.containsKey(net.minecraft.resources.Identifier.parse(pool)), pool + " isn't registered");
+                h.assertValueEqual(TownBlueprints.pools(style).get(building).keySet(), Set.of(building), pool + "'s buildings");
+                for (String square : TownBlueprints.pools(style).get(com.hollowfrontier.worldgen.structure.TownLayout.SQUARES).keySet()) {
+                    StructureTemplate t = h.getLevel().getStructureTemplateManager().get(HollowFrontier.id(style.template(square))).orElseThrow();
+                    long lots = t.filterBlocks(BlockPos.ZERO, new StructurePlaceSettings(), Blocks.JIGSAW).stream()
+                            .filter(info -> info.nbt().getStringOr("pool", "").equals(pool)).count();
+                    h.assertValueEqual(lots, 1L, style.template(square) + "'s " + building + " lots");
+                }
             }
         }
         h.succeed();
@@ -346,6 +348,105 @@ final class TownTests {
         }
         h.assertTrue(blocked.isEmpty(), "blocked doors: " + blocked);
         h.succeed();
+    }
+
+    /**
+     * 32a: no carpet on the tile either side of a door in any town building. Townsfolk got stuck on carpet laid up to a
+     * door in a playtest; the threshold stays bare floor.
+     */
+    static void townDoorsHaveBareThresholds(GameTestHelper h) {
+        List<String> carpeted = new java.util.ArrayList<>();
+        for (Blueprint blueprint : TownBlueprints.all()) {
+            for (BlockPos pos : blueprint.positions()) {
+                BlockState door = blueprint.get(pos);
+                if (!(door.getBlock() instanceof DoorBlock) || door.getValue(DoorBlock.HALF) != DoubleBlockHalf.LOWER) {
+                    continue;
+                }
+                Direction facing = door.getValue(DoorBlock.FACING);
+                for (Direction side : List.of(facing, facing.getOpposite())) {
+                    BlockState threshold = blueprint.get(pos.relative(side));
+                    if (threshold != null && threshold.getBlock() instanceof net.minecraft.world.level.block.CarpetBlock) {
+                        carpeted.add(blueprint.name() + " " + pos.toShortString() + " " + side);
+                    }
+                }
+            }
+        }
+        h.assertTrue(carpeted.isEmpty(), "carpet at a door: " + carpeted);
+        h.succeed();
+    }
+
+    /** 32a: the same in a shipped template (the blueprints are drawn again in datagen): the sheriff's rug stops short of his door. */
+    static void sheriffRugClearsTheDoor(GameTestHelper h) {
+        BlockPos at = new BlockPos(5, 0, 5);
+        place(h, "town/sheriff_office", at);
+        h.assertTrue(h.getBlockState(at.offset(4, 1, 2)).getBlock() instanceof DoorBlock, "no door at the sheriff's office's 4, 1, 2");
+        h.assertFalse(h.getBlockState(at.offset(4, 1, 3)).getBlock() instanceof net.minecraft.world.level.block.CarpetBlock, "carpet inside the sheriff's door");
+        h.assertTrue(h.getBlockState(at.offset(4, 1, 4)).getBlock() instanceof net.minecraft.world.level.block.CarpetBlock, "the rest of the rug is gone");
+        h.succeed();
+    }
+
+    /**
+     * 32a: a townsperson walks through a closed door into a room, as their routine sends them, with {@code carpets} (x, z
+     * pairs on the floor) laid about it. A wall runs along z 5 with an oak door at x 5; they start at z 2 and head for
+     * z 10. A playtest saw folk stuck on carpet by a door, opening and shutting it over and over.
+     */
+    private static void folkWalkThroughDoor(GameTestHelper h, int... carpets) {
+        for (int x = -3; x <= 14; x++) { // past the platform's edges, so the only way in is the door
+            for (int y = 1; y <= 3; y++) {
+                h.setBlock(new BlockPos(x, y, 5), Blocks.OAK_PLANKS);
+            }
+        }
+        BlockState door = Blocks.OAK_DOOR.defaultBlockState().setValue(DoorBlock.FACING, Direction.NORTH);
+        h.setBlock(new BlockPos(5, 1, 5), door);
+        h.setBlock(new BlockPos(5, 2, 5), door.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
+        for (int i = 0; i < carpets.length; i += 2) {
+            h.setBlock(new BlockPos(carpets[i], 1, carpets[i + 1]), Blocks.CARPET.red());
+        }
+        Townsfolk folk = h.spawn(ModEntities.TOWNSFOLK.get(), new BlockPos(5, 1, 2));
+        folk.goalSelector.removeAllGoals(goal -> goal instanceof Routine.RoutineGoal); // or by night they'd head back to where they were put
+        BlockPos goal = h.absolutePos(new BlockPos(5, 1, 10));
+        h.succeedWhen(() -> {
+            if (folk.getNavigation().isDone()) {
+                folk.getNavigation().moveTo(goal.getX() + 0.5, goal.getY(), goal.getZ() + 0.5, 0.5);
+            }
+            h.assertTrue(folk.getZ() >= goal.getZ() - 1, "stuck at " + h.relativeVec(folk.position()));
+            folk.discard();
+        });
+    }
+
+    /**
+     * 32a: a townsperson who can't reach their place for the time of day (here they're shut in a cell well away from their
+     * workplace) gives up for a while instead of setting off again every second.
+     */
+    static void folkGiveUpOnUnreachablePlace(GameTestHelper h) {
+        BlockPos work = new BlockPos(10, 1, 10), cell = new BlockPos(1, 1, 1);
+        Townsfolk folk = h.spawn(ModEntities.TOWNSFOLK.get(), work);
+        h.runAfterDelay(2, () -> {
+            h.assertTrue(h.absolutePos(work).equals(folk.getWorkplace()), "the workplace should be where they were put, not " + folk.getWorkplace());
+            for (BlockPos pos : BlockPos.betweenClosed(cell.offset(-1, 0, -1), cell.offset(1, 2, 1))) {
+                if (pos.getX() != cell.getX() || pos.getZ() != cell.getZ() || pos.getY() == cell.getY() + 2) {
+                    h.setBlock(pos, Blocks.STONE);
+                }
+            }
+            Vec3 inside = h.absoluteVec(Vec3.atBottomCenterOf(cell));
+            folk.snapTo(inside.x, inside.y, inside.z, 0, 0);
+            Routine.RoutineGoal routine = folk.goalSelector.getAvailableGoals().stream().map(g -> g.getGoal())
+                    .filter(Routine.RoutineGoal.class::isInstance).map(Routine.RoutineGoal.class::cast).findFirst().orElseThrow();
+            h.succeedWhen(() -> {
+                h.assertTrue(routine.resting(), "still trying for the workplace from the cell, at " + h.relativeVec(folk.position()));
+                folk.discard();
+            });
+        });
+    }
+
+    static void folkPassBareDoor(GameTestHelper h) {
+        folkWalkThroughDoor(h);
+    }
+
+    // Carpet on the threshold itself (z 4 or 6 at x 5) is what sticks them, which Blueprint.bareThresholds keeps out of
+    // the towns; carpet diagonal to the doorway, as a rug that stops short of it leaves, is fine.
+    static void folkPassDoorBesideCarpet(GameTestHelper h) {
+        folkWalkThroughDoor(h, 4, 6, 6, 6, 4, 4, 6, 4);
     }
 
     private static double height(BlockState state) {

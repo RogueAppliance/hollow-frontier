@@ -60,7 +60,7 @@ The ones every session needs. The full log (engine notes, each phase's calls and
 - **Rendering stays shader-safe:** the custom sky and beams use vanilla render types, so Iris shader packs don't break them. Phase 9a notes any limits found.
 - **Placeholder art:** a Gradle task (`genPlaceholders`, java.awt, no extra tools) writes flat-color 16x16 PNGs with a 1px border for every missing texture. GeckoLib entities get a minimal box `.geo.json`. Everything is listed in `ASSETS.md`.
 - **License:** MIT (chosen by the user 2026-10-29 so the mod can go in modpacks freely), copyright and `authors` under the handle RogueAppliance. `LICENSE` excludes only the reworked-vanilla textures (Mojang's); every bundled sound is ours (the piano's Joplin compositions are public domain); the MDK's own MIT notice stays in `TEMPLATE_LICENSE.txt` for the build files that came from it. The jar carries the license as `LICENSE_hollowfrontier`.
-- **Creative tabs** are themed and ordered by hand in `registry/ModTabs` only; a test fails until a new item has a place.
+- **Creative tabs:** one Hollow Frontier tab (since 32a), its sections ordered by hand in `registry/ModTabs` only, spawn eggs last; a test fails until a new item has a place.
 - **Every item and mob needs a use:** a recipe input, a mechanic, a trade it unlocks, or a drop with one of those. Selling to townsfolk alone doesn't count.
 - **Sound:** sci-fi sounds (lasers, beams, saucers) are synthesized in `tools/music`; frontier effects are re-pitched vanilla sound events; music is in-house or public domain/CC0. Credit anything CC BY wherever it's used.
 - **Humour** is deadpan and comes from how the frontier reacts; the story itself stays serious. No memes, fourth-wall jokes, references to other works, or real people's names.
@@ -106,6 +106,11 @@ All phases so far are done. Their original specs are in PHASE_SPECS.md. Add new 
 29. ✅ 2026-10-31 — Dust devils: whirls over the dry country that lift, fling and take hats, spook unshod horses and leave odds and ends; Ash Devils in the Ember Badlands; talk, Gazette and men in black cover stories.
 30. ✅ 2026-10-31 — Modpack friendliness: item capabilities on the Boiler and Crusher, `c:steam`, `c:is_snowy` Polar Gateways, `c:bosses` and capture/teleport tags, tag-based dust smelting, mystery and men-in-black switches.
 31. ✅ 2026-10-31 — Polish: 31a airship owner lock and fuel kept when broken; 31b no deprecation warnings, dev rigs out of the jar; 31c humanoid model with brim curls, bandanas, and dress and robe skirts (duster tails on hold).
+32. ✅ 2026-11-01 — Playtest fixes for 1.1.0 (from the 2026-11-01 playtest; the user's picks are in DECISIONS.md). Log each part under a new CHANGELOG heading.
+    - ✅ 2026-11-01 — 32a Fixes: items usable aboard the airship and no self-damage from its riders; carpet kept off town door thresholds and a routine back-off after failed paths; one Hollow Frontier creative tab.
+    - ✅ 2026-11-01 — 32b Airship safety and the Polar Compass: a second sneak to get off aloft, slow falling after, unattended ships come down; the compass takes its own bearings on the ring's middle and reads out while held (in the gauge line aboard).
+    - ✅ 2026-11-01 — 32c Crash cache and resonator: a sealed Gray Cargo Pod in the crash sites' cockpit with salvage and five Gray gadgets (each with a trick, all bought by the prospector); the Polar Resonator holds its own charge and draws on your airship nearby.
+    - ✅ 2026-11-01 — 32d The road north: the Polar Survey's letter from the postmaster (a checklist like the Codex, with a heading to the crater), its notice on the bounty boards paying once a gateway's open, and Chatter, Gazette and prospector nudges.
 
 ## Open items
 

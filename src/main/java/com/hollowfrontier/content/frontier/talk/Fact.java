@@ -41,6 +41,10 @@ public enum Fact {
     STRANGER,
     /** A dust devil came through near here today (29). */
     DUST_DEVIL,
+    /** The listener has an airship (steam/airship) but hasn't opened a Polar Gateway yet: the road north is theirs to take (32d). */
+    AIRSHIP,
+    /** The listener has been handed the Polar Survey's letter (32d), so nobody tells them it's still waiting. */
+    SURVEY_LETTER,
     /** A dust devil took the listener's hat a little while ago, and they haven't a hat on. */
     LOST_HAT;
 
