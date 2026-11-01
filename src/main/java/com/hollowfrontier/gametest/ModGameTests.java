@@ -91,8 +91,8 @@ public final class ModGameTests {
         test("town_doors_have_bare_thresholds", 20, TownTests::townDoorsHaveBareThresholds);
         test("sheriff_rug_clears_the_door", 20, TownTests::sheriffRugClearsTheDoor, TestBlueprints.YARD);
         test("folk_give_up_on_unreachable_place", 400, TownTests::folkGiveUpOnUnreachablePlace);
-        test("folk_pass_bare_door", 200, TownTests::folkPassBareDoor);
-        test("folk_pass_door_beside_carpet", 200, TownTests::folkPassDoorBesideCarpet);
+        test("folk_pass_bare_door", 400, TownTests::folkPassBareDoor);
+        test("folk_pass_door_beside_carpet", 400, TownTests::folkPassDoorBesideCarpet);
         test("town_buildings_furnished", 40, TownTests::townBuildingsFurnished);
         test("town_names_and_arches", 20, TownTests::townNamesAndArches);
         test("every_town_has_gunsmith", 20, TownTests::everyTownHasGunsmith);

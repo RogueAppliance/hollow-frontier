@@ -107,6 +107,7 @@ public final class TownBlueprints {
                 java.util.Map.entry(TownLayout.SHOPS, java.util.Map.of("general_store", 3, "blacksmith", mining ? 3 : 2, "livery", 2,
                         "undertaker", 1, "bank", 1, "gunsmith", 1, "doctor", 2, "post_office", 2, "bathhouse", 1, "gazette_office", 1)),
                 java.util.Map.entry(TownLayout.GUNSMITH, java.util.Map.of("gunsmith", 1)),
+                java.util.Map.entry(TownLayout.POST_OFFICE, java.util.Map.of("post_office", 1)),
                 java.util.Map.entry(TownLayout.HOMES, java.util.Map.of("house", desert ? 1 : 3, "adobe", desert ? 4 : mining ? 1 : 2,
                         "homestead", desert ? 1 : 2)),
                 java.util.Map.entry(TownLayout.LANDMARKS, java.util.Map.of("courthouse", 3, "church", 2)),

@@ -114,7 +114,100 @@ public class GunModels {
         write(new File(dir, "shotgun.geo.json"), "shotgun", shotgun());
         write(new File(dir, "ray_pistol.geo.json"), "ray_pistol", rayPistol());
         write(new File(dir, "phlogiston_rifle.geo.json"), "phlogiston_rifle", phlogistonRifle());
-        System.out.println("GunModels: wrote 5 gun models to " + dir);
+        write(new File(dir, "polar_resonator.geo.json"), "polar_resonator", resonator());
+        write(new File(dir, "steam_drill.geo.json"), "steam_drill", steamDrill());
+        write(new File(dir, "sunstone_lens.geo.json"), "sunstone_lens", sunstoneLens());
+        System.out.println("GunModels: wrote 5 gun models, the Polar Resonator, the Steam Drill and the Sunstone Lens to " + dir);
+    }
+
+    // ---------------------------------------------------------------- the Steam Drill and the Sunstone Lens
+
+    /**
+     * The Steam Drill, held like a pistol (TextureArt.Gun.paintDrill): a walnut grip at the origin, an iron guard, a fat
+     * brass housing running forward (-Z) with a gauge on its back toward the holder, a red valve wheel on the right (-x) and a
+     * copper exhaust on the left, an iron collar, and the fluted steel bit. The bit is its own bone on the drill's axis so the
+     * "spin" animation turns it; dark flutes wound round it at staggered angles make the turning show.
+     */
+    static List<Bone> steamDrill() {
+        double ay = 5.8; // the bit's axis
+        Bone drill = new Bone("drill", null, 0, 0, 0)
+                .rotated(Mat.WOOD, -0.8, -1.5, -0.9, 0.8, 4.2, 0.9, 12, 0, 0, 0, 4.2, 0)  // the grip, raked back
+                .box(Mat.STEEL, -0.9, 3.6, -2.4, 0.9, 4.1, 0.9)              // its guard
+                .box(Mat.BLACK, -0.15, 2.6, -1.9, 0.15, 3.6, -1.5)            // the trigger
+                .box(Mat.BRASS, -1.8, 4.0, -6.2, 1.8, 7.6, 1.4)               // the housing
+                .box(Mat.STEEL, -1.9, 3.9, 1.4, 1.9, 7.7, 1.8)                // its back plate
+                .box(Mat.BRASS, -0.9, 7.6, -0.6, 0.9, 9.2, 0.9)               // the gauge on top, its dial toward the holder
+                .box(Mat.CHAMBERS, -0.75, 7.75, 0.9, 0.75, 9.05, 0.95)
+                .box(Mat.CASE, -2.15, 5.0, -3.0, -1.8, 6.8, -1.2)             // the valve wheel, on the right
+                .box(Mat.COPPER, 1.8, 6.3, -5.5, 2.4, 6.9, 0.5)               // the exhaust, on the left
+                .box(Mat.COPPER, 1.8, 6.9, -5.5, 2.4, 7.9, -4.9)              //   and its stack
+                .box(Mat.STEEL, -1.3, 4.5, -7.3, 1.3, 7.1, -6.2);             // the collar
+        Bone bit = new Bone("bit", "drill", 0, ay, -7.3)
+                .octagon(Mat.STEEL, Mat.STEEL, 0, ay, 0.85, -12.6, -7.3)
+                .octagon(Mat.STEEL, Mat.STEEL, 0, ay, 0.45, -14.0, -12.6);
+        for (int k = 0; k < 5; k++) { // the flutes, a turn of the spiral per segment
+            double z0 = -12.4 + k, z1 = z0 + 0.45;
+            bit.rotated(Mat.BLACK, -0.95, ay - 0.15, z0, 0.95, ay + 0.15, z1, 0, 0, k * 40, 0, ay, (z0 + z1) / 2);
+        }
+        return List.of(drill, bit);
+    }
+
+    /**
+     * The Sunstone Lens, held up like a reading glass (TextureArt.Gun.paintLens): a gold handle with a leather wrap at the
+     * origin, up (+Y) to a crimson starsteel ring round a disc of sunstone facing the holder (+Z), lit full-bright from the
+     * glowmask. The disc is its own bone so the "flare" animation can swell it when a beam is thrown.
+     */
+    static List<Bone> sunstoneLens() {
+        double cy = 9.0, r = 3.4; // the ring's centre and radius
+        Bone lens = new Bone("lens", null, 0, 0, 0)
+                .box(Mat.BRASS, -0.7, -3.6, -0.7, 0.7, -3.0, 0.7)             // the handle's foot
+                .box(Mat.WOOD, -0.6, -3.0, -0.6, 0.6, 3.0, 0.6)               // its leather wrap
+                .box(Mat.BRASS, -0.75, 3.0, -0.75, 0.75, 5.0, 0.75)           // the gold neck
+                .box(Mat.BRASS, -1.0, 5.0, -0.8, 1.0, 5.6, 0.8);              //   flaring to the ring
+        for (int k = 0; k < 8; k++) { // the ring: eight bars round the disc
+            double side = r * 0.8284 + 0.2;
+            lens.rotated(Mat.STEEL, -side / 2, cy - r - 0.45, -0.55, side / 2, cy - r + 0.45, 0.55, 0, 0, k * 45 + 22.5, 0, cy, 0);
+        }
+        Bone glass = new Bone("glass", "lens", 0, cy, 0)
+                .octagon(Mat.BRIGHT, Mat.BRIGHT, 0, cy, r - 0.3, -0.25, 0.25);
+        return List.of(lens, glass);
+    }
+
+    // ---------------------------------------------------------------- the Polar Resonator
+
+    /**
+     * The Polar Resonator, held (it's not a gun, but it's the same kind of model on the same atlas, painted by
+     * TextureArt.Gun.paintResonator): a brass tuning fork on a steam gauge, held by a short walnut grip. Grip at the
+     * origin with the fork up (+Y) and the gauge's dial toward the holder (+Z). Bones: the body; the two tines, each pivoting
+     * at its root so the "ring" animation can shiver them; and the gauge's needle, pivoting at the dial's centre. The tines'
+     * tips are the BRIGHT swatch, lit full-bright from the glowmask (the gateway's cyan). The CHAMBERS swatch holds the dial,
+     * CASE the red of the valve wheel and the needle.
+     */
+    static List<Bone> resonator() {
+        Bone body = new Bone("resonator", null, 0, 0, 0)
+                .box(Mat.WOOD, -0.8, -4.0, -0.8, 0.8, 1.0, 0.8)          // the grip
+                .box(Mat.BRASS, -1.1, -4.4, -1.1, 1.1, -3.9, 1.1)         // its end cap
+                .box(Mat.BRASS, -1.2, 1.0, -1.2, 1.2, 1.6, 1.2)           // the collar
+                .box(Mat.BRASS, -2.2, 1.6, -1.3, 2.2, 5.8, 1.3)           // the gauge's case
+                .box(Mat.STEEL, -1.9, 1.9, 1.3, 1.9, 2.2, 1.42)           // its bezel, bottom and top
+                .box(Mat.STEEL, -1.9, 5.2, 1.3, 1.9, 5.5, 1.42)
+                .box(Mat.STEEL, -1.9, 2.2, 1.3, -1.6, 5.2, 1.42)          // and sides
+                .box(Mat.STEEL, 1.6, 2.2, 1.3, 1.9, 5.2, 1.42)
+                .box(Mat.CHAMBERS, -1.6, 2.2, 1.3, 1.6, 5.2, 1.34)        // the dial
+                .box(Mat.COPPER, -3.0, 3.0, -0.35, -2.2, 3.7, 0.35)       // a steam pipe out of the right side (-x)
+                .box(Mat.COPPER, -3.0, 0.2, -0.35, -2.3, 3.0, 0.35)       //   and down
+                .box(Mat.CASE, 2.2, 2.6, -0.9, 2.5, 4.4, 0.9)             // the valve wheel, on the left
+                .box(Mat.BRASS, -0.6, 5.8, -0.6, 0.6, 8.0, 0.6)           // the fork's stem
+                .box(Mat.BRASS, -2.6, 8.0, -0.6, 2.6, 9.0, 0.6);          // and its yoke
+        Bone left = new Bone("tine_left", "resonator", 2.05, 9.0, 0)
+                .box(Mat.BRASS, 1.5, 9.0, -0.5, 2.6, 16.0, 0.5)
+                .box(Mat.BRIGHT, 1.5, 16.0, -0.5, 2.6, 17.0, 0.5);       // its lit tip
+        Bone right = new Bone("tine_right", "resonator", -2.05, 9.0, 0)
+                .box(Mat.BRASS, -2.6, 9.0, -0.5, -1.5, 16.0, 0.5)
+                .box(Mat.BRIGHT, -2.6, 16.0, -0.5, -1.5, 17.0, 0.5);
+        Bone needle = new Bone("needle", "resonator", 0, 3.7, 1.4)
+                .box(Mat.CASE, -0.12, 3.6, 1.35, 0.12, 5.0, 1.45);
+        return List.of(body, left, right, needle);
     }
 
     // ---------------------------------------------------------------- guns

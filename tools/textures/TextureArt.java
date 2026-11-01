@@ -834,7 +834,100 @@ public class TextureArt {
                 write(new File(root, "item/" + g[0] + ".png"), sheet[0]);
                 write(new File(root, "item/" + g[0] + "_glowmask.png"), sheet[1]);
             }
-            return 7;
+            // The Polar Resonator held (its model is in tools/models/GunModels.java, on this same layout)
+            BufferedImage[] resonator = paintResonator(63);
+            write(new File(root, "item/polar_resonator.png"), resonator[0]);
+            write(new File(root, "item/polar_resonator_glowmask.png"), resonator[1]);
+            // The Steam Drill and the Sunstone Lens held (their models too are in GunModels)
+            write(new File(root, "item/steam_drill.png"), paintDrill(64));
+            BufferedImage[] lens = paintLens(65);
+            write(new File(root, "item/sunstone_lens.png"), lens[0]);
+            write(new File(root, "item/sunstone_lens_glowmask.png"), lens[1]);
+            return 12;
+        }
+
+        /** The Steam Drill's sheet: a walnut grip, polished steel for the bit, collar and guard, brass, a red valve, copper, its gauge. */
+        static BufferedImage paintDrill(int seed) {
+            BufferedImage img = new BufferedImage(128, 64, BufferedImage.TYPE_INT_ARGB);
+            Random rnd = new Random(seed);
+            grain(img, WOOD_H, 0x6E4024, false, rnd, 0.22);
+            grain(img, WOOD_V, 0x6E4024, true, rnd, 0.22);
+            polish(img, STEEL_H, 0x9AA0A8, false, rnd);
+            polish(img, STEEL_V, 0x9AA0A8, true, rnd);
+            metal(img, CASE, 0xA82A20, 8, rnd);
+            metal(img, BRASS, 0xC89C40, 9, rnd);
+            metal(img, BLACK, 0x2A2C30, 5, rnd);
+            metal(img, COPPER, 0xB8693A, 10, rnd);
+            dial(img);
+            return img;
+        }
+
+        /**
+         * The Sunstone Lens's sheet: a dark leather wrap (WOOD), crimson starsteel for the ring (STEEL), gold for the handle
+         * (BRASS), and the sunstone itself (BRIGHT), warm gold-orange with pale glints, drawn again in the glowmask.
+         */
+        static BufferedImage[] paintLens(int seed) {
+            BufferedImage img = new BufferedImage(128, 64, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage mask = new BufferedImage(128, 64, BufferedImage.TYPE_INT_ARGB);
+            Random rnd = new Random(seed);
+            grain(img, WOOD_H, 0x4A2A18, false, rnd, 0.12);
+            grain(img, WOOD_V, 0x4A2A18, true, rnd, 0.12);
+            polish(img, STEEL_H, 0x9A1A2B, false, rnd);
+            polish(img, STEEL_V, 0x9A1A2B, true, rnd);
+            metal(img, BRASS, 0xE6A93A, 9, rnd);
+            metal(img, BLACK, 0x2A2C30, 5, rnd);
+            for (int i = 0; i < BRIGHT.w(); i++) {
+                for (int j = 0; j < BRIGHT.h(); j++) {
+                    int c = (i + j) % 6 == 0 ? 0xFFF0A0 : (i * 3 + j) % 7 == 0 ? 0xFF9A30 : 0xFFC040;
+                    img.setRGB(BRIGHT.x() + i, BRIGHT.y() + j, 0xFF000000 | c);
+                    mask.setRGB(BRIGHT.x() + i, BRIGHT.y() + j, 0xFF000000 | c);
+                }
+            }
+            return new BufferedImage[] {img, mask};
+        }
+
+        // A gauge's dial in the CHAMBERS square: a cream face with a light scale round its upper half, red at the top
+        static void dial(BufferedImage img) {
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    double x = i + 0.5 - 4, y = j + 0.5 - 4, d = Math.hypot(x, y), angle = Math.toDegrees(Math.atan2(x, -y));
+                    int c = 0xE8E0D0;
+                    if (d > 3.2 && d <= 4.0 && Math.abs(angle) <= 90) {
+                        c = angle > 50 ? 0xC0302A : (int) Math.floor(angle / 20) % 2 == 0 ? 0xA89C88 : 0xCFC6B4;
+                    }
+                    img.setRGB(CHAMBERS.x() + i, CHAMBERS.y() + j, 0xFF000000 | c);
+                }
+            }
+        }
+
+        /**
+         * The Polar Resonator's sheet on the guns' layout: a walnut grip (WOOD), brass for the fork and the gauge's case,
+         * dark iron for the bezel (STEEL), red paint for the valve wheel and the needle (CASE), copper for the pipe, the
+         * gateway's cyan for the fork's tips (BRIGHT, drawn again in the glowmask), and the gauge's dial in the CHAMBERS
+         * square: a cream face with ticks round its upper half and a red band at the top of the scale.
+         */
+        static BufferedImage[] paintResonator(int seed) {
+            BufferedImage img = new BufferedImage(128, 64, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage mask = new BufferedImage(128, 64, BufferedImage.TYPE_INT_ARGB);
+            Random rnd = new Random(seed);
+            grain(img, WOOD_H, 0x5A3420, false, rnd, 0.22);
+            grain(img, WOOD_V, 0x5A3420, true, rnd, 0.22);
+            polish(img, STEEL_H, 0x3A3C40, false, rnd);
+            polish(img, STEEL_V, 0x3A3C40, true, rnd);
+            metal(img, CASE, 0xA82A20, 8, rnd);
+            metal(img, BRASS, 0xC89C40, 9, rnd);
+            metal(img, BLACK, 0x2A2C30, 5, rnd);
+            metal(img, COPPER, 0xB8693A, 10, rnd);
+            int glow = 0x7FF0FF;
+            for (int i = 0; i < BRIGHT.w(); i++) {
+                for (int j = 0; j < BRIGHT.h(); j++) {
+                    int c = (i + j) % 5 == 0 ? 0xE8FEFF : (i * 3 + j) % 7 == 0 ? shade(glow, 0.8) : glow;
+                    img.setRGB(BRIGHT.x() + i, BRIGHT.y() + j, 0xFF000000 | c);
+                    mask.setRGB(BRIGHT.x() + i, BRIGHT.y() + j, 0xFF000000 | c);
+                }
+            }
+            dial(img);
+            return new BufferedImage[] {img, mask};
         }
 
         static BufferedImage paint(Palette pal) {
@@ -2913,7 +3006,7 @@ public class TextureArt {
                     "   k54443322k",
                     "   kk443322kk",
                     "     kkkkkk"));
-            n += put(root, "steam_drill", drill());
+            n += put(root, "steam_drill_icon", drill());
             n += put(root, "steam_handcar", sprite(0x6A6E74, pal('k', 0x1E1E22, 'y', BRASS, 'Y', shade(BRASS, 0.7), 'f', 0xF0A030),
                     "          kk    ",
                     "         kkkk   ",
@@ -3925,7 +4018,7 @@ public class TextureArt {
             n += 3;
             n += Items.put(root, "starsteel_crown", crownIcon());
             n += Tiles.put(root, "sun_pylon", pylon());
-            n += Items.put(root, "sunstone_lens", lens());
+            n += Items.put(root, "sunstone_lens_icon", lens());
             n += Items.put(root, "sun_archon_spawn_egg", Items.egg(0x8A1E1E, pal('y', 0xFFC040, 'Y', 0xFFE070, 'W', 0xFFFBE0),
                     "", "", "",
                     "       yy",
@@ -5920,7 +6013,7 @@ public class TextureArt {
             n += Items.put(root, "airship_envelope", envelopeItem());
             n += Items.put(root, "airship_engine", engineItem());
             n += Items.put(root, "airship", airshipItem());
-            n += Items.put(root, "polar_resonator", resonatorItem());
+            n += Items.put(root, "polar_resonator_icon", resonatorItem());
             for (int i = 0; i < 32; i++) {
                 n += Items.put(root, String.format(java.util.Locale.ROOT, "polar_compass_%02d", i), compass(i));
             }
@@ -6123,24 +6216,25 @@ public class TextureArt {
                     "");
         }
 
+        // Its icon (inventory, frames, the ground): a tall brass fork with tips lit the gateway's cyan, on a steam gauge with a copper
+        // pipe and a puff of steam. Held, it's the 3D model (GunModels.resonator, on the sheet Gun.paintResonator paints).
         static BufferedImage resonatorItem() {
-            BufferedImage img = sprite(BRASS, pal('a', AMETHYST, 'A', shade(AMETHYST, 1.35), 'm', shade(AMETHYST, 0.65), 'k', 0x2A2A2E, 'c', Items.COPPER, 'g', 0xE8E0D0),
-                    "    A     A",
-                    "    a     a",
-                    "    aA   Aa",
-                    "    ma   am",
-                    "     ma am",
-                    "      mam",
-                    "       a",
-                    "      kkk",
-                    "    6665555",
-                    "   655g55554",
-                    "  c55gkg5554c",
-                    "  c555g55554c",
-                    "   44444444",
-                    "   33333332",
-                    "    222222");
-            return img;
+            return sprite(BRASS, pal('g', GLOW, 'G', 0xC8FAFF, 'k', 0x2A2A2E, 'c', Items.COPPER, 'd', 0xE8E0D0, 'R', 0xB02A20, 'w', 0xF4F4F4, 'W', 0xC8C8CC),
+                    "   gG      Gg",
+                    "   56      65",
+                    "   56      65",
+                    "   45      54",
+                    "   45      54",
+                    "   45      54",
+                    "   345    543",
+                    "    34555543",
+                    "      3443",
+                    "    ckkkkkkc",
+                    "   c4dddddd4cw",
+                    "   c4ddRkdd4cWw",
+                    "   c4dddddd4c",
+                    "   c33333333c",
+                    "    22222222");
         }
 
         static BufferedImage compass(int frame) {

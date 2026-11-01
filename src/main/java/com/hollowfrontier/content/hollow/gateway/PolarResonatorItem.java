@@ -10,6 +10,18 @@ import com.hollowfrontier.registry.ModCriteria;
 import com.hollowfrontier.registry.ModDataComponents;
 import com.hollowfrontier.registry.ModFluids;
 
+import org.jspecify.annotations.Nullable;
+
+import com.geckolib.animatable.GeoItem;
+import com.geckolib.animatable.client.GeoRenderProvider;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.constant.DataTickets;
+import com.geckolib.constant.dataticket.DataTicket;
+import com.geckolib.util.GeckoLibUtil;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -17,6 +29,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,11 +54,19 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * and the steam for an opening comes from its own charge first, then canisters you carry, then your airship if it's
  * within {@link #AIRSHIP_REACH} blocks (a playtester reached a gateway with an airship full of steam and no canister).
  */
-public class PolarResonatorItem extends Item {
+public class PolarResonatorItem extends Item implements GeoItem {
     public static final int OPEN_STEAM = 2_000;
     /** It holds one opening's worth. */
     public static final int CAPACITY = OPEN_STEAM;
     public static final int AIRSHIP_REACH = 16;
+    /** How long it rings after waking a ring (ticks): as long as the ring takes to wake. */
+    public static final int RING_TICKS = GatewayEffects.WAKE_TICKS;
+    // Render-state data the client renderer fills in from the stack: ticks since it last woke a ring, or -1.
+    public static final DataTicket<Double> SINCE_RESONATED = DataTickets.create("hollowfrontier_since_resonated", Double.class);
+
+    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
+    private static final RawAnimation RING = RawAnimation.begin().thenPlay("strike").thenLoop("ring");
+    private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
     public PolarResonatorItem(Properties properties) {
         super(properties);
@@ -95,6 +117,7 @@ public class PolarResonatorItem extends Item {
             return InteractionResult.FAIL;
         }
         GatewayEffects.awaken(server, center);
+        context.getItemInHand().set(ModDataComponents.RESONATED.get(), level.getGameTime()); // it rings while the ring wakes
         player.sendOverlayMessage(Component.translatable("message.hollowfrontier.polar_resonator.opened"));
         ModCriteria.fire(player, ModCriteria.GATEWAY_OPENED);
         return InteractionResult.SUCCESS;
@@ -183,5 +206,48 @@ public class PolarResonatorItem extends Item {
         builder.accept(Component.translatable("tooltip.hollowfrontier.steam", charge(stack), CAPACITY).withStyle(ChatFormatting.GRAY));
         builder.accept(Component.translatable("tooltip.hollowfrontier.polar_resonator", OPEN_STEAM).withStyle(ChatFormatting.GRAY));
         builder.accept(Component.translatable("tooltip.hollowfrontier.polar_resonator.steam", AIRSHIP_REACH).withStyle(ChatFormatting.GRAY));
+    }
+
+    // ---------------------------------------------------------------- GeckoLib (held, it's a 3D model; its icon is flat)
+
+    @Override
+    public void inventoryTick(ItemStack stack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
+        GeoItem.getOrAssignId(stack, level);
+    }
+
+    // Ringing, charging or spending steam changes the stack; none of that should drop it out of the hand and back, as a
+    // new item would
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return slotChanged || !ItemStack.isSameItem(oldStack, newStack);
+    }
+
+    @Override
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
+            private com.hollowfrontier.client.ResonatorRenderer renderer;
+
+            @Override
+            public com.geckolib.renderer.GeoItemRenderer<?> getGeoItemRenderer() {
+                if (renderer == null) {
+                    renderer = new com.hollowfrontier.client.ResonatorRenderer(PolarResonatorItem.this);
+                }
+                return renderer;
+            }
+        });
+    }
+
+    // It strikes and rings for as long as the ring takes to wake, then idles
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<PolarResonatorItem>("resonator", 2, test -> {
+            double since = test.getDataOrDefault(SINCE_RESONATED, -1.0);
+            return test.setAndContinue(since >= 0 && since < RING_TICKS ? RING : IDLE);
+        }));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return geoCache;
     }
 }

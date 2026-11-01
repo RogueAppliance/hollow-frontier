@@ -4,12 +4,23 @@ import java.util.function.Consumer;
 
 import org.jspecify.annotations.Nullable;
 
+import com.geckolib.animatable.GeoItem;
+import com.geckolib.animatable.client.GeoRenderProvider;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.constant.DataTickets;
+import com.geckolib.constant.dataticket.DataTicket;
+import com.geckolib.util.GeckoLibUtil;
 import com.hollowfrontier.content.frontier.mystery.ManInBlack;
 import com.hollowfrontier.content.hollow.creature.GrayProbe;
 import com.hollowfrontier.content.hollow.gray.Specimens;
 import com.hollowfrontier.content.ufo.GrayWarden;
 import com.hollowfrontier.registry.ModCriteria;
 import com.hollowfrontier.registry.ModDamageTypes;
+import com.hollowfrontier.registry.ModDataComponents;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -43,13 +54,21 @@ import net.minecraft.world.phys.Vec3;
  * {@link #DAMAGE} (twice that if it's undead or of the Grays') and catches fire. A point of wear a beam, and
  * {@link #COOLDOWN} ticks between them.
  */
-public class SunstoneLensItem extends Item {
+public class SunstoneLensItem extends Item implements GeoItem {
     public static final int DURABILITY = 250;
     public static final double RANGE = 32.0;
     public static final float DAMAGE = 6.0F;
     public static final int COOLDOWN = 30;
     private static final int NIGHT_VISION = 400;
     private static final DustParticleOptions SUNLIGHT = new DustParticleOptions(0xFFE070, 0.7F);
+    // Render-state data the client renderer fills in from the stack (its LAST_FIRED component): the game time of its last
+    // beam, and ticks since.
+    public static final DataTicket<Long> LAST_BEAM_TICK = DataTickets.create("hollowfrontier_last_beam", Long.class);
+    public static final DataTicket<Double> SINCE_BEAM = DataTickets.create("hollowfrontier_since_beam", Double.class);
+
+    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
+    private static final RawAnimation FLARE = RawAnimation.begin().thenPlay("flare").thenLoop("idle");
+    private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
     public SunstoneLensItem(Properties properties) {
         super(properties);
@@ -57,6 +76,7 @@ public class SunstoneLensItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
+        GeoItem.getOrAssignId(stack, level);
         if ((slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND) && entity instanceof LivingEntity living && entity.tickCount % 20 == 0) {
             lendSight(living);
         }
@@ -76,6 +96,7 @@ public class SunstoneLensItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (level instanceof ServerLevel serverLevel) {
             shine(serverLevel, player);
+            stack.set(ModDataComponents.LAST_FIRED.get(), level.getGameTime()); // the glass flares (its held model)
             stack.hurtAndBreak(1, player, hand);
             player.getCooldowns().addCooldown(stack, COOLDOWN);
         }
@@ -113,5 +134,53 @@ public class SunstoneLensItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag flag) {
         builder.accept(Component.translatable("tooltip.hollowfrontier.sunstone_lens").withStyle(ChatFormatting.GRAY));
+    }
+
+    // ---------------------------------------------------------------- GeckoLib (held, it's a 3D model; its icon is flat)
+
+    // A beam marks and wears the stack; that shouldn't drop it out of the hand and back, as a new item would
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return slotChanged || !ItemStack.isSameItem(oldStack, newStack);
+    }
+
+    @Override
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
+            private com.hollowfrontier.client.LensRenderer renderer;
+
+            @Override
+            public com.geckolib.renderer.GeoItemRenderer<?> getGeoItemRenderer() {
+                if (renderer == null) {
+                    renderer = new com.hollowfrontier.client.LensRenderer(SunstoneLensItem.this);
+                }
+                return renderer;
+            }
+        });
+    }
+
+    // A fresh beam flares the glass (as a fresh shot recoils a gun); a stack seen for the first time just glows
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        long[] seenBeam = {Long.MIN_VALUE};
+        controllers.add(new AnimationController<SunstoneLensItem>("lens", 2, test -> {
+            long beam = test.getDataOrDefault(LAST_BEAM_TICK, Long.MIN_VALUE);
+            if (beam != seenBeam[0]) {
+                seenBeam[0] = beam;
+                if (test.getDataOrDefault(SINCE_BEAM, 1000.0) < 5) {
+                    test.controller().reset();
+                    return test.setAndContinue(FLARE);
+                }
+            }
+            if (test.isCurrentAnimation(FLARE)) {
+                return PlayState.CONTINUE;
+            }
+            return test.setAndContinue(IDLE);
+        }));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return geoCache;
     }
 }

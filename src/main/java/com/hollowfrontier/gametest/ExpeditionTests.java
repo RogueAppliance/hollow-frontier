@@ -13,6 +13,7 @@ import com.hollowfrontier.content.steam.airship.Airship;
 import com.hollowfrontier.content.steam.airship.AirshipItem;
 import com.hollowfrontier.registry.ModAttachments;
 import com.hollowfrontier.registry.ModBlocks;
+import com.hollowfrontier.registry.ModDataComponents;
 import com.hollowfrontier.registry.ModEntities;
 import com.hollowfrontier.registry.ModFluids;
 import com.hollowfrontier.registry.ModItems;
@@ -358,6 +359,7 @@ final class ExpeditionTests {
         h.useBlock(first.offset(PolarGateways.RING.get(0)), player);
         h.assertTrue(GatewayEffects.isWaking(level, h.absolutePos(first)), "it didn't open on its own charge");
         h.assertValueEqual(PolarResonatorItem.charge(resonator), 0, "charge after opening");
+        h.assertTrue(resonator.has(ModDataComponents.RESONATED.get()), "opening a ring didn't set it ringing");
 
         Airship ship = airship(h, new Vec3(2, 1, 9), 500, 0);
         ship.setOwner(player);

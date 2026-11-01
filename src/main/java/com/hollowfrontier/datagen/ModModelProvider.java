@@ -299,7 +299,6 @@ public class ModModelProvider extends ModelProvider {
         blockModels.registerSimpleItemModel(pipe, PIPE_ITEM.create(pipe, pipeTextures, blockModels.modelOutput));
 
         itemModels.generateFlatItem(ModItems.STEAM_CANISTER.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.STEAM_DRILL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.STEAM_HANDCAR.get(), ModelTemplates.FLAT_ITEM);
         Block engine = ModBlocks.HANDCAR_ENGINE.get();
         TextureMapping engineTextures = new TextureMapping()
@@ -316,7 +315,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.AIRSHIP_ENVELOPE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.AIRSHIP_ENGINE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.AIRSHIP.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.POLAR_RESONATOR.get(), ModelTemplates.FLAT_ITEM);
+        heldModels(itemModels); // the resonator, the drill and the lens: flat icons, and held GeckoLib models
         // The polar compass points like a lodestone compass at its bearing (polar_compass_00..31), and spins without one.
         Item compass = ModItems.POLAR_COMPASS.get();
         itemModels.itemModelOutput.accept(compass, ItemModelUtils.rangeSelect(
@@ -390,7 +389,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.KINDLED_SIGIL.get(), ModelTemplates.FLAT_ITEM); // 12a
         itemModels.generateFlatItem(ModItems.KINDLED_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.CRYSTAL_GUARDIAN_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
-        for (var item : java.util.List.of(ModItems.SUNSTONE_SHARD, ModItems.PHLOGISTON_CORE, ModItems.STARSTEEL_CROWN, ModItems.SUNSTONE_LENS,
+        for (var item : java.util.List.of(ModItems.SUNSTONE_SHARD, ModItems.PHLOGISTON_CORE, ModItems.STARSTEEL_CROWN,
                 ModItems.CONCAVIAN_CODEX, ModItems.SUN_ARCHON_SPAWN_EGG, // 12b
                 ModItems.ALIEN_ALLOY_PLATING, ModItems.DAMAGED_GRAVITY_DRIVE, ModItems.BEAM_EMITTER, ModItems.LENS_ARRAY, ModItems.NAVIGATION_CORE,
                 ModItems.GRAY_WARDEN_SPAWN_EGG, ModItems.DISGUISED_GRAY_SPAWN_EGG, // 13a, 21c
@@ -427,6 +426,43 @@ public class ModModelProvider extends ModelProvider {
                 ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL)) {
             itemModels.generateFlatItem(drink.get(), ModelTemplates.FLAT_ITEM);
         }
+    }
+
+    /**
+     * The tools held as GeckoLib models (the Polar Resonator, the Steam Drill, the Sunstone Lens): their flat icons
+     * ({@code item/<name>_icon}) in the inventory, in frames, on shelves and on the ground, as vanilla does the spyglass;
+     * held, the GeckoLib model under a base model carrying only the hand transforms. Placed in hand by eye in runPhoto.
+     * <ul>
+     * <li>Upright ones (the resonator and the lens: grip at the origin, up +Y, their face toward the holder +Z) stand in
+     *     first person toed in a little; in third person, where an item's +Y points ahead of a hanging arm, a quarter turn
+     *     about X stands them up, and {@code tpLift} raises the grip into the fist.</li>
+     * <li>The drill is held like a pistol (grip at the origin, bit along -Z), as the guns are in first person; in third
+     *     person the same quarter turn points the bit ahead.</li>
+     * </ul>
+     */
+    private static void heldModels(ItemModelGenerators itemModels) {
+        held(itemModels, ModItems.POLAR_RESONATOR.get(), t -> t.rotation(0, -12, 0).translation(-2.0F, 2.5F, -2.5F).scale(0.6F), 3.2F);
+        held(itemModels, ModItems.SUNSTONE_LENS.get(), t -> t.rotation(0, -12, 0).translation(-2.0F, 2.0F, -2.5F).scale(0.6F), 2.4F);
+        held(itemModels, ModItems.STEAM_DRILL.get(), t -> t.rotation(0, 6, 0).translation(-1.6F, 2.2F, -3.5F).scale(0.45F), 1.9F);
+    }
+
+    private static void held(ItemModelGenerators itemModels, Item item,
+                             java.util.function.Consumer<net.neoforged.neoforge.client.model.generators.template.TransformVecBuilder> firstPerson,
+                             float tpLift) {
+        net.minecraft.client.resources.model.sprite.Material iconTexture = TextureMapping.getItemTexture(item, "_icon");
+        Identifier icon = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item, "_icon"), TextureMapping.layer0(iconTexture),
+                itemModels.modelOutput);
+        ModelTemplate held = ExtendedModelTemplateBuilder.builder()
+                .requiredTextureSlot(TextureSlot.PARTICLE)
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, firstPerson)
+                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, firstPerson)
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, t -> t.rotation(90, 0, 0).translation(0, 1.5F, tpLift).scale(0.45F))
+                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, t -> t.rotation(90, 0, 0).translation(0, 1.5F, tpLift).scale(0.45F))
+                .transform(ItemDisplayContext.HEAD, t -> t.translation(0, 8, 0).scale(0.6F))
+                .build();
+        Identifier base = held.create(item, new TextureMapping().put(TextureSlot.PARTICLE, iconTexture), itemModels.modelOutput);
+        itemModels.itemModelOutput.accept(item, ItemModelGenerators.createFlatModelDispatch(ItemModelUtils.plainModel(icon),
+                ItemModelUtils.specialModel(base, new GeckolibItemSpecialRenderer.Unbaked<>())));
     }
 
     /**

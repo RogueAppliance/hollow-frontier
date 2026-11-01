@@ -134,6 +134,20 @@ public final class PhotoBooth {
         if (mc.gui.screen() instanceof net.minecraft.client.gui.screens.PauseScreen) {
             mc.gui.setScreen(null);
         }
+        // The Polar Resonator held, only on its own with -PphotoScene=resonator
+        if (RESONATOR_ONLY) {
+            if (ticks >= 40) {
+                resonator(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The Steam Drill and the Sunstone Lens held, only on their own with -PphotoScene=held
+        if (HELD_ONLY) {
+            if (ticks >= 40) {
+                held(mc, server, ticks - 40);
+            }
+            return;
+        }
         // The road north (32d), only on its own with -PphotoScene=survey
         if (SURVEY_ONLY) {
             if (ticks >= 40) {
@@ -689,6 +703,94 @@ public final class PhotoBooth {
             }
             case 5 -> tpLooking(server, new Vec3(baseX + 3.5, Y + 1.6, baseZ + 1.0), new Vec3(baseX + 3.5, Y + 0.5, baseZ + 4.5));
             case 40 -> shot(mc, "hf_32c_cargo_pods.png");
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- the Polar Resonator, held
+
+    private static final boolean RESONATOR_ONLY = "resonator".equals(System.getProperty("hollowfrontier.photo.scene"));
+
+    /** The resonator in hand, first person still and ringing, then from the front in third person (and its icon in the hotbar). */
+    private static void resonator(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                if (!mc.player.isAlive()) { // the world may have been closed on a death screen
+                    mc.player.respawn();
+                    mc.gui.setScreen(null);
+                }
+                run(server, "time set noon");
+                run(server, "weather clear");
+                tpLooking(server, new Vec3(baseX + 0.5, Y, baseZ + 0.5), new Vec3(baseX + 0.5, Y + 1.0, baseZ + 10.5)); // on firm ground first
+                run(server, "gamemode creative @p");
+                run(server, "item replace entity @p hotbar.0 with hollowfrontier:polar_resonator");
+                run(server, "item replace entity @p hotbar.1 with hollowfrontier:polar_resonator");
+                mc.player.getInventory().setSelectedSlot(0);
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+            }
+            case 5 -> tpLooking(server, new Vec3(baseX + 0.5, Y, baseZ + 0.5), new Vec3(baseX + 0.5, Y + 1.0, baseZ + 10.5));
+            case 40 -> shot(mc, "hf_res_first_person.png");
+            case 42 -> server.execute(() -> server.getPlayerList().getPlayers().get(0).getMainHandItem()
+                    .set(com.hollowfrontier.registry.ModDataComponents.RESONATED.get(), server.overworld().getGameTime()));
+            case 47 -> shot(mc, "hf_res_first_person_ringing.png");
+            case 50 -> mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+            case 70 -> shot(mc, "hf_res_third_person.png");
+            case 72 -> mc.options.setCameraType(CameraType.FIRST_PERSON);
+            default -> {}
+        }
+    }
+
+    private static final boolean HELD_ONLY = "held".equals(System.getProperty("hollowfrontier.photo.scene"));
+
+    /**
+     * The Steam Drill and the Sunstone Lens in hand: the drill still, then spinning as it bites into a stone wall (in survival
+     * for the moment, with a full canister, since a creative player breaks blocks outright); the lens glowing, then flaring as
+     * if it had thrown a beam; then both from the front in third person.
+     */
+    private static void held(Minecraft mc, MinecraftServer server, int t) {
+        Vec3 eye = new Vec3(baseX + 0.5, Y, baseZ + 0.5), wall = new Vec3(baseX + 0.5, Y + 1.62, baseZ + 2.5); // looking level at it
+        switch (t) {
+            case 0 -> {
+                if (!mc.player.isAlive()) {
+                    mc.player.respawn();
+                    mc.gui.setScreen(null);
+                }
+                run(server, "time set noon");
+                run(server, "weather clear");
+                tpLooking(server, eye, wall);
+                run(server, "gamemode creative @p");
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:stone", baseX - 1, Y, baseZ + 2, baseX + 1, Y + 2, baseZ + 8));
+                run(server, "item replace entity @p hotbar.0 with hollowfrontier:polar_resonator");
+                run(server, "item replace entity @p hotbar.1 with hollowfrontier:steam_drill");
+                run(server, "item replace entity @p hotbar.2 with hollowfrontier:sunstone_lens");
+                run(server, "item replace entity @p hotbar.3 with hollowfrontier:steam_canister[hollowfrontier:steam=4000]");
+                mc.player.getInventory().setSelectedSlot(1);
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+            }
+            case 5 -> {
+                tpLooking(server, eye, wall);
+                run(server, "gamemode survival @p"); // early, so the hand has settled after the switch before the shots
+                run(server, "effect give @p minecraft:resistance 30 4 true"); // the staging spot has archers about
+                run(server, "kill @e[type=minecraft:arrow,distance=..64]");
+            }
+            case 30 -> shot(mc, "hf_held_drill.png");
+            case 32 -> mc.options.keyAttack.setDown(true);
+            case 50 -> shot(mc, "hf_held_drill_spinning.png");
+            case 53 -> shot(mc, "hf_held_drill_spinning_2.png");
+            case 56 -> {
+                mc.options.keyAttack.setDown(false);
+                run(server, "gamemode creative @p");
+                mc.player.getInventory().setSelectedSlot(2);
+            }
+            case 70 -> shot(mc, "hf_held_lens.png");
+            case 72 -> server.execute(() -> server.getPlayerList().getPlayers().get(0).getMainHandItem()
+                    .set(com.hollowfrontier.registry.ModDataComponents.LAST_FIRED.get(), server.overworld().getGameTime()));
+            case 74 -> shot(mc, "hf_held_lens_flare.png");
+            case 76 -> mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+            case 96 -> shot(mc, "hf_held_lens_third_person.png");
+            case 98 -> mc.player.getInventory().setSelectedSlot(1);
+            case 118 -> shot(mc, "hf_held_drill_third_person.png");
+            case 120 -> mc.options.setCameraType(CameraType.FIRST_PERSON);
             default -> {}
         }
     }

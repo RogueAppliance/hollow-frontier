@@ -301,21 +301,22 @@ final class TownTests {
     }
 
     /**
-     * Every town has a gunsmith, the only one who sells guns: each style's every square has one lot on the gunsmith pool,
-     * and that pool, registered, draws only the gunsmith.
+     * Every town has a gunsmith, the only one who sells guns, and a post office, whose postmaster holds the Polar Survey's
+     * letter (32d): each style's every square has one lot on each one's pool, and that pool, registered, draws only it.
      */
     static void everyTownHasGunsmith(GameTestHelper h) {
         var pools = h.getLevel().registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.TEMPLATE_POOL);
         for (com.hollowfrontier.worldgen.structure.TownStyle style : com.hollowfrontier.worldgen.structure.TownStyle.values()) {
-            String gunsmith = style.pool(com.hollowfrontier.worldgen.structure.TownLayout.GUNSMITH);
-            h.assertTrue(pools.containsKey(net.minecraft.resources.Identifier.parse(gunsmith)), gunsmith + " isn't registered");
-            h.assertValueEqual(TownBlueprints.pools(style).get(com.hollowfrontier.worldgen.structure.TownLayout.GUNSMITH).keySet(),
-                    Set.of("gunsmith"), gunsmith + "'s buildings");
-            for (String square : TownBlueprints.pools(style).get(com.hollowfrontier.worldgen.structure.TownLayout.SQUARES).keySet()) {
-                StructureTemplate t = h.getLevel().getStructureTemplateManager().get(HollowFrontier.id(style.template(square))).orElseThrow();
-                long lots = t.filterBlocks(BlockPos.ZERO, new StructurePlaceSettings(), Blocks.JIGSAW).stream()
-                        .filter(info -> info.nbt().getStringOr("pool", "").equals(gunsmith)).count();
-                h.assertValueEqual(lots, 1L, style.template(square) + "'s gunsmith lots");
+            for (String building : List.of(com.hollowfrontier.worldgen.structure.TownLayout.GUNSMITH, com.hollowfrontier.worldgen.structure.TownLayout.POST_OFFICE)) {
+                String pool = style.pool(building);
+                h.assertTrue(pools.containsKey(net.minecraft.resources.Identifier.parse(pool)), pool + " isn't registered");
+                h.assertValueEqual(TownBlueprints.pools(style).get(building).keySet(), Set.of(building), pool + "'s buildings");
+                for (String square : TownBlueprints.pools(style).get(com.hollowfrontier.worldgen.structure.TownLayout.SQUARES).keySet()) {
+                    StructureTemplate t = h.getLevel().getStructureTemplateManager().get(HollowFrontier.id(style.template(square))).orElseThrow();
+                    long lots = t.filterBlocks(BlockPos.ZERO, new StructurePlaceSettings(), Blocks.JIGSAW).stream()
+                            .filter(info -> info.nbt().getStringOr("pool", "").equals(pool)).count();
+                    h.assertValueEqual(lots, 1L, style.template(square) + "'s " + building + " lots");
+                }
             }
         }
         h.succeed();

@@ -61,6 +61,8 @@ public final class TownLayout {
     public static final String SHOPS = "shops";
     /** The square's gunsmith lot: he alone sells guns, so every town has one (more may turn up among the shops). */
     public static final String GUNSMITH = "gunsmith";
+    /** The square's post office lot: its postmaster holds the Polar Survey's letter (32d), so every town has one too. */
+    public static final String POST_OFFICE = "post_office";
     public static final String HOMES = "homes";
     public static final String LANDMARKS = "square_landmarks";
     public static final String STREET_ENDS = "street_ends";
@@ -104,15 +106,15 @@ public final class TownLayout {
             // Crossroads: four streets out
             out.add(square(style, "square_cross" + suffix, piece,
                     Side.exit(Direction.NORTH, CIVIC, COMMERCE), Side.exit(Direction.EAST, SALOON, GUNSMITH),
-                    Side.exit(Direction.SOUTH, SHOPS, SHOPS), Side.exit(Direction.WEST, SHOPS, HOMES)));
+                    Side.exit(Direction.SOUTH, SHOPS, POST_OFFICE), Side.exit(Direction.WEST, SHOPS, HOMES)));
             // Three streets, and a landmark looking down the square
             out.add(square(style, "square_tee" + suffix, piece,
                     Side.exit(Direction.NORTH, CIVIC, COMMERCE), Side.exit(Direction.EAST, SALOON, GUNSMITH),
-                    Side.exit(Direction.SOUTH, SHOPS, SHOPS), Side.grand(Direction.WEST)));
+                    Side.exit(Direction.SOUTH, SHOPS, POST_OFFICE), Side.grand(Direction.WEST)));
             // One street through, a landmark on one side and the law and the hotel across from it
             out.add(square(style, "square_pair" + suffix, piece,
                     Side.exit(Direction.NORTH, SALOON, GUNSMITH), Side.grand(Direction.EAST),
-                    Side.exit(Direction.SOUTH, SHOPS, HOMES), Side.lots(Direction.WEST, CIVIC, COMMERCE)));
+                    Side.exit(Direction.SOUTH, POST_OFFICE, HOMES), Side.lots(Direction.WEST, CIVIC, COMMERCE)));
         }
         out.add(street(style, "street_long", 56, new String[] {SHOPS, HOMES, SHOPS}, new String[] {HOMES, SHOPS, FARMS}));
         out.add(street(style, "street_short", 44, new String[] {SHOPS, HOMES}, new String[] {HOMES, FARMS}));
