@@ -1,7 +1,8 @@
 # Changelog
 
-## 1.1.0 — Playtest fixes (unreleased)
+## 1.1.0 — Playtest fixes and phlogiston guns (unreleased)
 
+- **Crash fixes:** a world could crash when a Megatherium finished browsing or gave up on reaching leaves, or when a Fern Skitter snatched food. Both are fixed.
 - **Airship:** you can eat, fire a gun and use a compass aboard; clicks no longer land on the airship around you. Your own swings from aboard no longer damage it either. You can still stoke it with coal or top it up from a canister while flying.
 - **Townsfolk:** rugs and aisles in town buildings stop a tile short of the door, where townsfolk got caught on them (in newly generated towns). In any town, a townsperson who can't reach where their routine sends them now waits a while before trying again, instead of working a door open and shut.
 - **Getting off an airship:** more than 4 blocks up, the first sneak only tells you how far down it is; sneak again to step off. Leaving a ship aloft, by choice or not, gives you slow falling all the way down. A ship left with nobody aboard for 30 seconds sinks gently to the ground and waits there.
@@ -15,8 +16,6 @@
 - **Phlogiston guns:** now a real step up from black powder. The Ray Pistol hits for 10 (was 7) and the Phlogiston Rifle for 30 (was 20), and a beam sets what it hits alight. A new enchantment, Focus, does for them what Rifling does for black powder guns; before, a fully enchanted Plains Rifle could out-damage the Phlogiston Rifle. Find it at the enchanting table, from librarians and in general loot.
 - **Gun tooltips:** every gun now shows what it hits for, enchantments counted.
 - **Beams from the saddle:** a phlogiston gun fired while riding no longer hits your own mount.
-- **Crash fixes:** a world could crash when a Megatherium finished browsing or gave up on reaching leaves, or when a Fern Skitter snatched food. Both are fixed.
-
 ## 1.0.0 — First release (2026-11-01)
 
 The first public release, for Minecraft 26.3 on NeoForge (needs GeckoLib).
