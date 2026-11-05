@@ -112,6 +112,7 @@ All phases so far are done. Their original specs are in PHASE_SPECS.md. Add new 
     - ✅ 2026-11-01 — 32c Crash cache and resonator: a sealed Gray Cargo Pod in the crash sites' cockpit with salvage and five Gray gadgets (each with a trick, all bought by the prospector); the Polar Resonator holds its own charge and draws on your airship nearby.
     - ✅ 2026-11-01 — 32d The road north: the Polar Survey's letter from the postmaster (a checklist like the Codex, with a heading to the crater), its notice on the bounty boards paying once a gateway's open, and Chatter, Gazette and prospector nudges.
 33. ✅ 2026-11-05 — Late-game guns: Ray Pistol 10 and Phlogiston Rifle 30, beams that set alight, the Focus enchantment, damage in every gun's tooltip, and a test holding the phlogiston guns ahead of black powder.
+34. ✅ 2026-11-05 — Crash fixes: the Megatherium's browse and the Fern Skitter's snatch no longer crash the world on the tick after they end.
 
 ## Open items
 

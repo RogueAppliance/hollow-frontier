@@ -205,6 +205,7 @@ public final class ModGameTests {
         // 9b2: small creatures
         test("hollow_creatures_spawn_in_biomes", 20, CreatureTests::creaturesSpawnInTheirBiomes);
         garden("skitter_snatches_food", 200, CreatureTests::skitterSnatchesFood);
+        garden("snatch_survives_the_tick_after", 20, CreatureTests::snatchSurvivesTheTickAfter);
         garden("skitter_eats_or_drops", 40, CreatureTests::skitterEatsOrDrops);
         garden("skitter_shies_from_player", 200, CreatureTests::skitterShiesFromPlayer);
         garden("skitter_tames_with_meat", 200, CreatureTests::skitterTamesWithMeat);
@@ -244,6 +245,7 @@ public final class ModGameTests {
         field("terror_bird_shuns_mammoths", 300, MegafaunaTests::terrorBirdShunsMammoths);
         field("terror_birds_stay_few", 20, MegafaunaTests::terrorBirdsStayFew);
         field("megatherium_browses", 1200, MegafaunaTests::megatheriumBrowses);
+        field("browse_survives_the_tick_after", 20, MegafaunaTests::browseSurvivesTheTickAfter);
         field("glyptodon_hunkers", 60, MegafaunaTests::glyptodonHunkers);
         field("glyptodon_brushed_for_scute", 40, MegafaunaTests::glyptodonBrushedForScute);
         field("talon_knife_skins", 20, MegafaunaTests::talonKnifeSkins);
