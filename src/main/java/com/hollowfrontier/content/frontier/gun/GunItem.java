@@ -11,7 +11,6 @@ import com.geckolib.animatable.manager.AnimatableManager;
 import com.geckolib.animation.AnimationController;
 import com.geckolib.animation.RawAnimation;
 import com.geckolib.animation.object.PlayState;
-import com.geckolib.constant.DataTickets;
 import com.geckolib.constant.dataticket.DataTicket;
 import com.geckolib.util.GeckoLibUtil;
 import com.hollowfrontier.content.frontier.outlaw.AbstractOutlaw;
@@ -57,9 +56,9 @@ public class GunItem extends Item implements GeoItem {
     public static final float RAIN_MISFIRE_CHANCE = 0.2F;
 
     // Render-state data the client renderer fills in from the stack; read by the animation controller.
-    public static final DataTicket<Double> RELOAD_TICKS = DataTickets.create("hollowfrontier_reload_ticks", Double.class);
-    public static final DataTicket<Long> LAST_FIRED_TICK = DataTickets.create("hollowfrontier_last_fired", Long.class);
-    public static final DataTicket<Double> SINCE_FIRED = DataTickets.create("hollowfrontier_since_fired", Double.class);
+    public static final DataTicket<Double> RELOAD_TICKS = DataTicket.create("hollowfrontier_reload_ticks", Double.class);
+    public static final DataTicket<Long> LAST_FIRED_TICK = DataTicket.create("hollowfrontier_last_fired", Long.class);
+    public static final DataTicket<Double> SINCE_FIRED = DataTicket.create("hollowfrontier_since_fired", Double.class);
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
     private static final RawAnimation FIRE = RawAnimation.begin().thenPlay("fire").thenLoop("idle");

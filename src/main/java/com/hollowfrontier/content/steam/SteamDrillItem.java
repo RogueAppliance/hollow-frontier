@@ -11,7 +11,6 @@ import com.geckolib.animatable.instance.AnimatableInstanceCache;
 import com.geckolib.animatable.manager.AnimatableManager;
 import com.geckolib.animation.AnimationController;
 import com.geckolib.animation.RawAnimation;
-import com.geckolib.constant.DataTickets;
 import com.geckolib.constant.dataticket.DataTicket;
 import com.geckolib.util.GeckoLibUtil;
 import com.hollowfrontier.HollowFrontier;
@@ -51,7 +50,7 @@ public class SteamDrillItem extends Item implements GeoItem {
     public static final int STEAM_PER_BLOCK = 25;
     private static final float DRILL_SPEED = 9.0F;
     // Render-state data the client renderer fills in: whether whoever holds it is drilling (with steam to do it).
-    public static final DataTicket<Boolean> DRILLING = DataTickets.create("hollowfrontier_drilling", Boolean.class);
+    public static final DataTicket<Boolean> DRILLING = DataTicket.create("hollowfrontier_drilling", Boolean.class);
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
     private static final RawAnimation SPIN = RawAnimation.begin().thenLoop("spin");

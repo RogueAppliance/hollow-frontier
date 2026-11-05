@@ -113,6 +113,7 @@ All phases so far are done. Their original specs are in PHASE_SPECS.md. Add new 
     - ✅ 2026-11-01 — 32d The road north: the Polar Survey's letter from the postmaster (a checklist like the Codex, with a heading to the crater), its notice on the bounty boards paying once a gateway's open, and Chatter, Gazette and prospector nudges.
 33. ✅ 2026-11-05 — Late-game guns: Ray Pistol 10 and Phlogiston Rifle 30, beams that set alight, the Focus enchantment, damage in every gun's tooltip, and a test holding the phlogiston guns ahead of black powder.
 34. ✅ 2026-11-05 — Crash fixes: the Megatherium's browse and the Fern Skitter's snatch no longer crash the world on the tick after they end.
+36. ✅ 2026-11-05 — Dedicated servers: the mod starts and plays on a real server (1.1.1). Found while testing the Saddles N' Saucers modpack; every earlier release stopped at startup.
 
 ## Open items
 
@@ -124,4 +125,4 @@ All phases so far are done. Their original specs are in PHASE_SPECS.md. Add new 
 ## Risks
 
 - 26.x APIs (datagen events, transfer API, rendering/sky effects, data components) differ from 1.21-era tutorials. Check the NeoForge docs and the 26.3 MDK before guessing.
-- `gradlew build` and the game tests catch most things, but the game test server loads no datapack dimensions and isn't a client: compat crashes (Jade) and anything visual only show in `runClient` or `runPhoto`. Keep logic deterministic and data in datagen so build-time errors catch what they can.
+- `gradlew build` and the game tests catch most things, but they have client classes on the classpath, so they can't catch a dedicated-server crash: run `tests/server-smoke.sh` in the modpack repo against the built jar for anything touching client or GeckoLib code in common classes. The game test server also loads no datapack dimensions and isn't a client: compat crashes (Jade) and anything visual only show in `runClient` or `runPhoto`. Keep logic deterministic and data in datagen so build-time errors catch what they can.

@@ -11,7 +11,6 @@ import com.geckolib.animatable.manager.AnimatableManager;
 import com.geckolib.animation.AnimationController;
 import com.geckolib.animation.RawAnimation;
 import com.geckolib.animation.object.PlayState;
-import com.geckolib.constant.DataTickets;
 import com.geckolib.constant.dataticket.DataTicket;
 import com.geckolib.util.GeckoLibUtil;
 import com.hollowfrontier.content.frontier.mystery.ManInBlack;
@@ -63,8 +62,8 @@ public class SunstoneLensItem extends Item implements GeoItem {
     private static final DustParticleOptions SUNLIGHT = new DustParticleOptions(0xFFE070, 0.7F);
     // Render-state data the client renderer fills in from the stack (its LAST_FIRED component): the game time of its last
     // beam, and ticks since.
-    public static final DataTicket<Long> LAST_BEAM_TICK = DataTickets.create("hollowfrontier_last_beam", Long.class);
-    public static final DataTicket<Double> SINCE_BEAM = DataTickets.create("hollowfrontier_since_beam", Double.class);
+    public static final DataTicket<Long> LAST_BEAM_TICK = DataTicket.create("hollowfrontier_last_beam", Long.class);
+    public static final DataTicket<Double> SINCE_BEAM = DataTicket.create("hollowfrontier_since_beam", Double.class);
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
     private static final RawAnimation FLARE = RawAnimation.begin().thenPlay("flare").thenLoop("idle");
