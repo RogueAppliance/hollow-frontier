@@ -275,10 +275,26 @@ public class GunItem extends Item implements GeoItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag flag) {
+        builder.accept(damageLine(stack, context));
         builder.accept(Component.translatable("tooltip.hollowfrontier.ammo", getAmmo(stack), stats.magazine()).withStyle(ChatFormatting.GRAY));
         builder.accept(Component.translatable("tooltip.hollowfrontier.uses_ammo", Component.translatable(stats.ammo().get().getDescriptionId()),
                 Component.translatable(ModItems.PERCUSSION_CAP.get().getDescriptionId())).withStyle(ChatFormatting.DARK_GRAY));
         builder.accept(Component.translatable("tooltip.hollowfrontier.reload_hint").withStyle(ChatFormatting.DARK_GRAY));
+    }
+
+    /** What this gun hits for, its enchantments counted: the plain number to set one gun against another. */
+    protected Component damageLine(ItemStack stack, TooltipContext context) {
+        Level level = context.level();
+        GunStats shown = level == null ? stats : GunEnchantments.apply(stats, stack, level);
+        Component line = shown.pellets() > 1
+                ? Component.translatable("tooltip.hollowfrontier.gun_damage.pellets", number(shown.damage()), shown.pellets())
+                : Component.translatable("tooltip.hollowfrontier.gun_damage", number(shown.damage()));
+        return line.copy().withStyle(ChatFormatting.GRAY);
+    }
+
+    // 30, not 30.0; 11.2 as it stands
+    private static String number(float value) {
+        return value == Math.round(value) ? Integer.toString(Math.round(value)) : String.format(java.util.Locale.ROOT, "%.1f", value);
     }
 
     // ---------------------------------------------------------------- GeckoLib

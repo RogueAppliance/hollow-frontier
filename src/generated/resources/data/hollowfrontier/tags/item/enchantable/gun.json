@@ -1,7 +1,6 @@
 {
   "values": [
     "#hollowfrontier:enchantable/muzzleloader",
-    "hollowfrontier:ray_pistol",
-    "hollowfrontier:phlogiston_rifle"
+    "#hollowfrontier:enchantable/phlogiston_gun"
   ]
 }

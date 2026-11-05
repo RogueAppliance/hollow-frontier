@@ -28,6 +28,7 @@ public final class ModEnchantments {
     public static final ResourceKey<Enchantment> CHOKE = key("choke");
     public static final ResourceKey<Enchantment> DRY_POWDER = key("dry_powder");
     public static final ResourceKey<Enchantment> FRUGAL = key("frugal");
+    public static final ResourceKey<Enchantment> FOCUS = key("focus");
 
     public static void bootstrap(BootstrapContext<Enchantment> context) {
         HolderGetter<Item> items = context.lookup(Registries.ITEM);
@@ -42,6 +43,9 @@ public final class ModEnchantments {
                 Enchantment.dynamicCost(1, 10), Enchantment.constantCost(50), 2);
         register(context, DRY_POWDER, items, ModTags.Items.ENCHANTABLE_MUZZLELOADER, 2, 1,
                 Enchantment.constantCost(1), Enchantment.constantCost(41), 4);
+        // Focus is Rifling for a beam (33): the same costs, so a phlogiston gun has a damage enchantment of its own
+        register(context, FOCUS, items, ModTags.Items.ENCHANTABLE_PHLOGISTON_GUN, 10, 4,
+                Enchantment.dynamicCost(1, 10), Enchantment.dynamicCost(16, 10), 1);
         // Frugal and Infinity don't go together: Infinity already spends nothing
         context.register(FRUGAL, builder(items, ModTags.Items.ENCHANTABLE_MUZZLELOADER, 2, 3,
                 Enchantment.dynamicCost(15, 9), Enchantment.dynamicCost(65, 9), 4)

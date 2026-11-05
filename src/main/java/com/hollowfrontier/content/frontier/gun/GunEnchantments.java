@@ -20,18 +20,20 @@ public final class GunEnchantments {
     public static final float DEADEYE_PER_LEVEL = 0.25F;
     public static final float CHOKE_PER_LEVEL = 0.25F;
     public static final float FRUGAL_PER_LEVEL = 0.15F;
+    public static final float FOCUS_PER_LEVEL = 0.15F;
 
-    /** {@code base} as this gun shoots it: Rifling's damage, Choke's spread, Quick Load's loading and Deadeye's headshots. */
+    /** {@code base} as this gun shoots it: Rifling's and Focus's damage, Choke's spread, Quick Load's loading and Deadeye's headshots. */
     public static GunStats apply(GunStats base, ItemStack gun, Level level) {
         int rifling = ModEnchantments.level(level, ModEnchantments.RIFLING, gun);
         int quickLoad = ModEnchantments.level(level, ModEnchantments.QUICK_LOAD, gun);
         int deadeye = ModEnchantments.level(level, ModEnchantments.DEADEYE, gun);
         int choke = ModEnchantments.level(level, ModEnchantments.CHOKE, gun);
-        if (rifling + quickLoad + deadeye + choke == 0) {
+        int focus = ModEnchantments.level(level, ModEnchantments.FOCUS, gun);
+        if (rifling + quickLoad + deadeye + choke + focus == 0) {
             return base;
         }
         return new GunStats(base.magazine(), base.ammo(),
-                base.damage() * (1.0F + RIFLING_PER_LEVEL * rifling),
+                base.damage() * (1.0F + RIFLING_PER_LEVEL * rifling + FOCUS_PER_LEVEL * focus),
                 base.pellets(),
                 base.spreadDegrees() * Math.max(0.0F, 1.0F - CHOKE_PER_LEVEL * choke),
                 base.range(), base.fireCooldown(),

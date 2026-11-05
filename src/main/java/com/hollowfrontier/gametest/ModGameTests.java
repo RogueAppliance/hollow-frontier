@@ -61,6 +61,9 @@ public final class ModGameTests {
         test("gun_enchantments_fit_the_right_guns", 20, GunEnchantmentTests::enchantmentsFitTheRightGuns);
         test("gun_enchantments_change_the_tuning", 20, GunEnchantmentTests::enchantmentsChangeTheTuning);
         test("rifling_hits_harder", 20, GunEnchantmentTests::riflingHitsHarder);
+        test("focus_hits_harder", 20, GunEnchantmentTests::focusHitsHarder);
+        test("phlogiston_guns_stay_ahead", 20, GunEnchantmentTests::phlogistonGunsStayAhead);
+        test("gun_tooltips_show_damage", 20, GunEnchantmentTests::gunTooltipsShowDamage);
         test("quick_load_loads_sooner", 20, GunEnchantmentTests::quickLoadLoadsSooner);
         test("frugal_saves_rounds", 20, GunEnchantmentTests::frugalSavesRounds);
         test("infinity_loads_for_free", 20, GunEnchantmentTests::infinityLoadsForFree);
@@ -323,6 +326,8 @@ public final class ModGameTests {
         // 13b: phlogiston tech
         field("ray_pistol_fires", 20, UfoTests::rayPistolFires);
         field("phlogiston_rifle_pierces", 20, UfoTests::phlogistonRiflePierces);
+        field("beams_set_alight", 20, UfoTests::beamsSetAlight);
+        field("beams_spare_the_shooters_mount", 20, UfoTests::beamsSpareTheShootersMount);
         field("cells_drain_and_empty", 20, UfoTests::cellsDrainAndEmpty);
         // 13c: the Prototype Saucer
         field("saucer_places_fits_and_folds", 20, UfoTests::saucerPlacesFitsAndFolds);

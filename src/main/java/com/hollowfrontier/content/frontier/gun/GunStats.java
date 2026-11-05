@@ -25,4 +25,16 @@ public record GunStats(
         Holder<SoundEvent> fireSound,
         float firePitch,
         float headshot) {
+    /** A shot's damage with every pellet on target. */
+    public float shotDamage() {
+        return damage * pellets;
+    }
+
+    /**
+     * Damage a second kept up over a whole magazine, fired and loaded again, with every pellet on target: each round costs
+     * its cooldown and its load, whatever the magazine holds. For a phlogiston gun, with nothing to load, it's only the cooldown.
+     */
+    public float damagePerSecond() {
+        return shotDamage() * 20.0F / (fireCooldown + loadTicks);
+    }
 }
