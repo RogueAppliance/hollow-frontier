@@ -36,7 +36,7 @@ How a version goes up on Modrinth and CurseForge. The store page text is [CURSEF
 | Links | Issues: `https://github.com/RogueAppliance/hollow-frontier/issues`. Source: `https://github.com/RogueAppliance/hollow-frontier`. Wiki and Discord: leave empty. |
 | Gallery | The 14 stills in `branding/stills` (1080p JPGs, from the shader trailer), with the banner `branding/curseforge_banner_1920x480.png` as the featured image. The full GIFs are already on the page itself. |
 
-**Version:** number `1.0.0+26.3`, name `Hollow Frontier 1.0.0`, channel Release, loader NeoForge, game version 26.3, changelog from `build/release/changelog.md`. Dependencies: GeckoLib (required); JEI, Jade, Curios (optional).
+**Version:** number `x.y.z+26.3`, name `Hollow Frontier x.y.z`, channel Release, loader NeoForge, game version 26.3, changelog from `build/release/changelog.md`. Dependencies: GeckoLib (required); JEI, Jade, Curios (optional).
 
 ## CurseForge (authors.curseforge.com → Create project → Minecraft → Mods)
 
@@ -52,4 +52,4 @@ How a version goes up on Modrinth and CurseForge. The store page text is [CURSEF
 | Source / Issues | as Modrinth's |
 | Images | the same stills and banner (CurseForge caps uploads at 2 MB, which rules the GIFs out); the trailer under Videos once it's on YouTube |
 
-**File:** display name `Hollow Frontier 1.0.0`, release type Release, game version 26.3, loader NeoForge, Java 25, environment Client + Server, changelog from `build/release/changelog.md` (Markdown). Related projects: GeckoLib (required dependency); JEI, Jade, Curios (optional dependency).
+**File:** display name `Hollow Frontier x.y.z`, release type Release, game version 26.3, loader NeoForge, Java 25, environment Client + Server, changelog from `build/release/changelog.md` (Markdown). Related projects: GeckoLib (required dependency); JEI, Jade, Curios (optional dependency).
