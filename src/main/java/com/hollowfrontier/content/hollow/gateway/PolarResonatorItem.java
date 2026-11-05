@@ -18,7 +18,6 @@ import com.geckolib.animatable.instance.AnimatableInstanceCache;
 import com.geckolib.animatable.manager.AnimatableManager;
 import com.geckolib.animation.AnimationController;
 import com.geckolib.animation.RawAnimation;
-import com.geckolib.constant.DataTickets;
 import com.geckolib.constant.dataticket.DataTicket;
 import com.geckolib.util.GeckoLibUtil;
 
@@ -62,7 +61,7 @@ public class PolarResonatorItem extends Item implements GeoItem {
     /** How long it rings after waking a ring (ticks): as long as the ring takes to wake. */
     public static final int RING_TICKS = GatewayEffects.WAKE_TICKS;
     // Render-state data the client renderer fills in from the stack: ticks since it last woke a ring, or -1.
-    public static final DataTicket<Double> SINCE_RESONATED = DataTickets.create("hollowfrontier_since_resonated", Double.class);
+    public static final DataTicket<Double> SINCE_RESONATED = DataTicket.create("hollowfrontier_since_resonated", Double.class);
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
     private static final RawAnimation RING = RawAnimation.begin().thenPlay("strike").thenLoop("ring");

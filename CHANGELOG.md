@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1 — Dedicated servers
+
+- **Dedicated servers:** Hollow Frontier now starts on a dedicated server. Before, every release stopped at startup with a missing client class (`net.minecraft.client.model.Model`), because the guns, Steam Drill, Sunstone Lens and Polar Resonator touched client-only GeckoLib code as they loaded. Single-player was never affected.
+
 ## 1.1.0 — Playtest fixes and phlogiston guns (2026-11-05)
 
 - **Crash fixes:** a world could crash when a Megatherium finished browsing or gave up on reaching leaves, or when a Fern Skitter snatched food. Both are fixed.
