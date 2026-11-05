@@ -33,10 +33,10 @@ public final class GunTypes {
             LARGE_BLAST, 1.0F, 1.5F);
 
     // Phlogiston guns (13b, PhlogistonGunItem): a straight beam, no magazine to load (they draw on Phlogiston Cells), never a misfire.
-    public static final GunStats RAY_PISTOL = new GunStats(0, ModItems.PHLOGISTON_CELL, 7.0F, 1, 0.0F, 40.0, 10, 0,
+    // Phase 33: 20 a second each, ahead of any black powder gun in the same role even at its top enchantments (a test holds them to it).
+    public static final GunStats RAY_PISTOL = new GunStats(0, ModItems.PHLOGISTON_CELL, 10.0F, 1, 0.0F, 40.0, 10, 0,
             ModSounds.PHLOGISTON_GUN_FIRE, 1.0F, 1.5F);
-    // 20 a shot (was 16, under the plains rifle's 18; raised in the phase 14 balance pass)
-    public static final GunStats PHLOGISTON_RIFLE = new GunStats(0, ModItems.PHLOGISTON_CELL, 20.0F, 1, 0.0F, 80.0, 30, 0,
+    public static final GunStats PHLOGISTON_RIFLE = new GunStats(0, ModItems.PHLOGISTON_CELL, 30.0F, 1, 0.0F, 80.0, 30, 0,
             ModSounds.PHLOGISTON_RIFLE_FIRE, 1.0F, 2.0F);
 
     // Mob-held versions: weaker and less accurate than the player's (bullet damage also scales with difficulty).

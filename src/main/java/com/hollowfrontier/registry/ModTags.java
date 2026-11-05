@@ -60,10 +60,11 @@ public final class ModTags {
         public static final TagKey<Item> GLYPTODON_SHELL_ARMOR = TagKey.create(Registries.ITEM, com.hollowfrontier.HollowFrontier.id("glyptodon_shell_armor"));
         /** The Grays' things, which the men in black buy back and mind you carrying (11b). */
         public static final TagKey<Item> STRANGE_GOODS = TagKey.create(Registries.ITEM, com.hollowfrontier.HollowFrontier.id("strange_goods"));
-        // What takes the gun enchantments (22): every gun (Deadeye), the black powder guns (the rest), the shotgun (Choke)
+        // What takes the gun enchantments (22): every gun (Deadeye), the black powder guns (the rest), the shotgun (Choke), the phlogiston guns (Focus, 33)
         public static final TagKey<Item> ENCHANTABLE_GUN = TagKey.create(Registries.ITEM, com.hollowfrontier.HollowFrontier.id("enchantable/gun"));
         public static final TagKey<Item> ENCHANTABLE_MUZZLELOADER = TagKey.create(Registries.ITEM, com.hollowfrontier.HollowFrontier.id("enchantable/muzzleloader"));
         public static final TagKey<Item> ENCHANTABLE_SHOTGUN = TagKey.create(Registries.ITEM, com.hollowfrontier.HollowFrontier.id("enchantable/shotgun"));
+        public static final TagKey<Item> ENCHANTABLE_PHLOGISTON_GUN = TagKey.create(Registries.ITEM, com.hollowfrontier.HollowFrontier.id("enchantable/phlogiston_gun"));
         // Curios slots (optional compat, phase 14): plain tags, harmless without Curios
         public static final TagKey<Item> CURIOS_CHARM = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("curios", "charm"));
         public static final TagKey<Item> CURIOS_NECKLACE = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("curios", "necklace"));

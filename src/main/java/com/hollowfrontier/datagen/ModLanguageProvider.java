@@ -62,6 +62,8 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.REVOLVER, "Cap & Ball Revolver");
         addItem(ModItems.PLAINS_RIFLE, "Plains Rifle");
         addItem(ModItems.SHOTGUN, "Double-Barrel Muzzleloader");
+        add("tooltip.hollowfrontier.gun_damage", "%s damage a shot");
+        add("tooltip.hollowfrontier.gun_damage.pellets", "%s damage a pellet, %s pellets");
         add("tooltip.hollowfrontier.ammo", "Loaded: %s/%s");
         add("tooltip.hollowfrontier.uses_ammo", "Loads with: %s + %s");
         add("tooltip.hollowfrontier.reload_hint", "Reload key or sneak + use loads one chamber at a time");
@@ -74,6 +76,7 @@ public class ModLanguageProvider extends LanguageProvider {
         enchantment("choke", "Choke", "A narrower muzzle keeps the buckshot together.");
         enchantment("dry_powder", "Dry Powder", "Rain can't make the gun misfire.");
         enchantment("frugal", "Frugal", "Loading sometimes costs no cartridge or cap.");
+        enchantment("focus", "Focus", "A truer lens: each beam hits harder.");
 
         addItem(ModItems.COWBOY_HAT, "Cowboy Hat");
         addItem(ModItems.DUSTER, "Duster Coat");
@@ -890,6 +893,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("tooltip.hollowfrontier.phlogiston_cell", "Charge: %s / %s");
         add("tooltip.hollowfrontier.phlogiston_gun", "Draws %s charge a shot from the Phlogiston Cells you carry");
         add("tooltip.hollowfrontier.phlogiston_gun.pierce", "The beam goes through up to %s creatures");
+        add("tooltip.hollowfrontier.phlogiston_gun.burn", "Sets what it hits alight");
         add("tooltip.hollowfrontier.gravity_drive", "What holds a saucer up, mended. It wants to rise.");
         add("message.hollowfrontier.no_charge", "No charge left in your Phlogiston Cells");
         add("subtitles.hollowfrontier.phlogiston_gun.fire", "Phlogiston gun fires");

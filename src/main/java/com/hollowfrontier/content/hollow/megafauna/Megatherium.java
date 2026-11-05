@@ -249,6 +249,10 @@ public class Megatherium extends PathfinderMob implements GeoEntity, Specimen {
 
         @Override
         public void tick() {
+            // Done with them already: vanilla only asks canContinueToUse every other tick, and between times just ticks an every-tick goal
+            if (leaves == null) {
+                return;
+            }
             ticks++;
             sloth.getLookControl().setLookAt(leaves.getX() + 0.5, leaves.getY() + 0.5, leaves.getZ() + 0.5);
             double across = Math.hypot(leaves.getX() + 0.5 - sloth.getX(), leaves.getZ() + 0.5 - sloth.getZ());

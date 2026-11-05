@@ -65,6 +65,24 @@ final class CreatureTests {
         h.succeedWhen(() -> h.assertTrue(skitter.isCarryingFood(), "the skitter hasn't snatched the bread (at " + h.relativePos(skitter.blockPosition()) + ")"));
     }
 
+    /** The tick after a snatch: the goal has let go of the food but gets one more tick before vanilla asks whether it's done (it crashed there). */
+    static void snatchSurvivesTheTickAfter(GameTestHelper h) {
+        FernSkitter skitter = h.spawnWithNoFreeWill(ModEntities.FERN_SKITTER.get(), new BlockPos(4, 1, 8));
+        h.spawnItem(Items.BREAD, new Vec3(5.0, 1.2, 8.5));
+        FernSkitter.SnatchFoodGoal goal = new FernSkitter.SnatchFoodGoal(skitter);
+        boolean found = false;
+        for (int i = 0; i < 200 && !found; i++) {
+            found = goal.canUse();
+        }
+        h.assertTrue(found, "the skitter never saw the bread");
+        goal.start();
+        goal.tick();
+        h.assertTrue(skitter.isCarryingFood(), "the skitter didn't snatch the bread beside it");
+        h.assertFalse(goal.canContinueToUse(), "the goal should be over");
+        goal.tick();
+        h.succeed();
+    }
+
     /** It eats what it carries (in time; here at once), and drops it if killed first. */
     static void skitterEatsOrDrops(GameTestHelper h) {
         FernSkitter eater = h.spawnWithNoFreeWill(ModEntities.FERN_SKITTER.get(), new BlockPos(4, 1, 4));

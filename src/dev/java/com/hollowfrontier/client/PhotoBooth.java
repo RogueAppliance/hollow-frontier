@@ -1653,6 +1653,26 @@ public final class PhotoBooth {
             }
             case 195 -> shot(mc, "hf_j5_tab_grays.png");
             case 198 -> {
+                mc.gui.setScreen(null);
+                mc.player.getInventory().setSelectedSlot(0);
+                run(server, "item replace entity @p hotbar.6 with hollowfrontier:ray_pistol[enchantments={\"hollowfrontier:focus\":4}]");
+                run(server, String.format("summon minecraft:zombie %d.5 %d %d.5 {NoAI:1b,Rotation:[180f,0f]}", x, Y, z + 8));
+            }
+            case 205 -> server.execute(() -> {
+                ServerPlayer player = server.getPlayerList().getPlayers().getFirst();
+                ModItems.RAY_PISTOL.get().shoot(server.overworld(), player, player.getMainHandItem(), net.minecraft.world.InteractionHand.MAIN_HAND);
+            });
+            case 218 -> shot(mc, "hf_j6_ray_pistol_burning.png"); // past the beam, so the fire is what's left (phase 33)
+            case 220 -> {
+                // The tooltips as the client builds them, with the real language and its own registries (phase 33)
+                var context = net.minecraft.world.item.Item.TooltipContext.of(mc.level, mc.player);
+                for (int slot : new int[] {0, 1, 6}) {
+                    HollowFrontier.LOGGER.info("[PhotoBooth] 33 tooltip: {}", mc.player.getInventory().getItem(slot)
+                            .getTooltipLines(context, mc.player, net.minecraft.world.item.TooltipFlag.NORMAL).stream()
+                            .map(net.minecraft.network.chat.Component::getString).toList());
+                }
+            }
+            case 222 -> {
                 HollowFrontier.LOGGER.info("[PhotoBooth] phlogiston done, quitting");
                 quit(mc, server);
             }

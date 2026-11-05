@@ -217,6 +217,36 @@ final class UfoTests {
         h.succeed();
     }
 
+    /** A beam sets what it harms alight (33), the rifle's for longer. */
+    static void beamsSetAlight(GameTestHelper h) {
+        ServerPlayer player = TestPlayers.survival(h, new BlockPos(20, 1, 6));
+        var zombie = dummy(h, new BlockPos(20, 1, 12));
+        var golem = h.spawnWithNoFreeWill(EntityTypes.IRON_GOLEM, new BlockPos(28, 1, 6));
+        player.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES, zombie.getBoundingBox().getCenter());
+        ModItems.RAY_PISTOL.get().beam(h.getLevel(), player);
+        player.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES, golem.getBoundingBox().getCenter());
+        ModItems.PHLOGISTON_RIFLE.get().beam(h.getLevel(), player);
+        h.assertTrue(zombie.getRemainingFireTicks() > 0, "the ray pistol didn't set it alight");
+        h.assertTrue(golem.getRemainingFireTicks() > zombie.getRemainingFireTicks(), "the rifle's fire isn't the longer: "
+                + golem.getRemainingFireTicks() + " against " + zombie.getRemainingFireTicks());
+        h.succeed();
+    }
+
+    /** A beam fired from the saddle goes through your own horse, which would otherwise take the shot and the fire (33). */
+    static void beamsSpareTheShootersMount(GameTestHelper h) {
+        ServerPlayer player = TestPlayers.survival(h, new BlockPos(20, 1, 14));
+        var horse = h.spawnWithNoFreeWill(EntityTypes.HORSE, new BlockPos(20, 1, 14));
+        player.startRiding(horse, true, false);
+        horse.positionRider(player);
+        player.setXRot(90.0F);
+        Vec3 eye = player.getEyePosition();
+        h.assertTrue(horse.getBoundingBox().inflate(0.3).clip(eye, eye.add(0, -3.0, 0)).isPresent(), "the beam wouldn't have crossed the horse");
+        List<LivingEntity> struck = ModItems.RAY_PISTOL.get().beam(h.getLevel(), player);
+        h.assertTrue(struck.isEmpty(), "the beam struck " + struck);
+        h.assertTrue(horse.getHealth() == horse.getMaxHealth() && horse.getRemainingFireTicks() <= 0, "the horse was hurt");
+        h.succeed();
+    }
+
     /** A cell drawn dry turns into an empty one; a draw larger than what's left takes nothing. */
     static void cellsDrainAndEmpty(GameTestHelper h) {
         ServerPlayer player = TestPlayers.survival(h, new BlockPos(20, 1, 20));

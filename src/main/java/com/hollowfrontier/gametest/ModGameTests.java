@@ -61,6 +61,9 @@ public final class ModGameTests {
         test("gun_enchantments_fit_the_right_guns", 20, GunEnchantmentTests::enchantmentsFitTheRightGuns);
         test("gun_enchantments_change_the_tuning", 20, GunEnchantmentTests::enchantmentsChangeTheTuning);
         test("rifling_hits_harder", 20, GunEnchantmentTests::riflingHitsHarder);
+        test("focus_hits_harder", 20, GunEnchantmentTests::focusHitsHarder);
+        test("phlogiston_guns_stay_ahead", 20, GunEnchantmentTests::phlogistonGunsStayAhead);
+        test("gun_tooltips_show_damage", 20, GunEnchantmentTests::gunTooltipsShowDamage);
         test("quick_load_loads_sooner", 20, GunEnchantmentTests::quickLoadLoadsSooner);
         test("frugal_saves_rounds", 20, GunEnchantmentTests::frugalSavesRounds);
         test("infinity_loads_for_free", 20, GunEnchantmentTests::infinityLoadsForFree);
@@ -202,6 +205,7 @@ public final class ModGameTests {
         // 9b2: small creatures
         test("hollow_creatures_spawn_in_biomes", 20, CreatureTests::creaturesSpawnInTheirBiomes);
         garden("skitter_snatches_food", 200, CreatureTests::skitterSnatchesFood);
+        garden("snatch_survives_the_tick_after", 20, CreatureTests::snatchSurvivesTheTickAfter);
         garden("skitter_eats_or_drops", 40, CreatureTests::skitterEatsOrDrops);
         garden("skitter_shies_from_player", 200, CreatureTests::skitterShiesFromPlayer);
         garden("skitter_tames_with_meat", 200, CreatureTests::skitterTamesWithMeat);
@@ -241,6 +245,7 @@ public final class ModGameTests {
         field("terror_bird_shuns_mammoths", 300, MegafaunaTests::terrorBirdShunsMammoths);
         field("terror_birds_stay_few", 20, MegafaunaTests::terrorBirdsStayFew);
         field("megatherium_browses", 1200, MegafaunaTests::megatheriumBrowses);
+        field("browse_survives_the_tick_after", 20, MegafaunaTests::browseSurvivesTheTickAfter);
         field("glyptodon_hunkers", 60, MegafaunaTests::glyptodonHunkers);
         field("glyptodon_brushed_for_scute", 40, MegafaunaTests::glyptodonBrushedForScute);
         field("talon_knife_skins", 20, MegafaunaTests::talonKnifeSkins);
@@ -323,6 +328,8 @@ public final class ModGameTests {
         // 13b: phlogiston tech
         field("ray_pistol_fires", 20, UfoTests::rayPistolFires);
         field("phlogiston_rifle_pierces", 20, UfoTests::phlogistonRiflePierces);
+        field("beams_set_alight", 20, UfoTests::beamsSetAlight);
+        field("beams_spare_the_shooters_mount", 20, UfoTests::beamsSpareTheShootersMount);
         field("cells_drain_and_empty", 20, UfoTests::cellsDrainAndEmpty);
         // 13c: the Prototype Saucer
         field("saucer_places_fits_and_folds", 20, UfoTests::saucerPlacesFitsAndFolds);

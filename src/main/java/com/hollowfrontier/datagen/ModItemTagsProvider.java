@@ -62,7 +62,8 @@ public class ModItemTagsProvider extends BlockTagCopyingItemTagProvider {
         // The guns (22): their own enchantments, and vanilla's Unbreaking, Mending and Curse of Vanishing
         tag(ModTags.Items.ENCHANTABLE_SHOTGUN).add(ModItems.SHOTGUN.key());
         tag(ModTags.Items.ENCHANTABLE_MUZZLELOADER).add(ModItems.REVOLVER.key(), ModItems.PLAINS_RIFLE.key()).addTag(ModTags.Items.ENCHANTABLE_SHOTGUN);
-        tag(ModTags.Items.ENCHANTABLE_GUN).addTag(ModTags.Items.ENCHANTABLE_MUZZLELOADER).add(ModItems.RAY_PISTOL.key(), ModItems.PHLOGISTON_RIFLE.key());
+        tag(ModTags.Items.ENCHANTABLE_PHLOGISTON_GUN).add(ModItems.RAY_PISTOL.key(), ModItems.PHLOGISTON_RIFLE.key());
+        tag(ModTags.Items.ENCHANTABLE_GUN).addTag(ModTags.Items.ENCHANTABLE_MUZZLELOADER).addTag(ModTags.Items.ENCHANTABLE_PHLOGISTON_GUN);
         tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(ModTags.Items.ENCHANTABLE_GUN);
         tag(ItemTags.VANISHING_ENCHANTABLE).addTag(ModTags.Items.ENCHANTABLE_GUN);
 

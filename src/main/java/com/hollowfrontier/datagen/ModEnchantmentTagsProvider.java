@@ -23,8 +23,9 @@ public class ModEnchantmentTagsProvider extends TagsProvider<Enchantment> {
     protected void addTags(HolderLookup.Provider registries) {
         // Ordinary enchantments: vanilla's non_treasure puts them on the table, in librarians' trades and in random loot.
         tag(EnchantmentTags.NON_TREASURE).add(ModEnchantments.RIFLING, ModEnchantments.QUICK_LOAD, ModEnchantments.DEADEYE,
-                ModEnchantments.CHOKE, ModEnchantments.DRY_POWDER, ModEnchantments.FRUGAL);
-        // Vanilla Infinity is a gun enchantment too (GunItem lets the black powder guns take it), so camp loot and the blacksmith can turn it up
+                ModEnchantments.CHOKE, ModEnchantments.DRY_POWDER, ModEnchantments.FRUGAL, ModEnchantments.FOCUS);
+        // Vanilla Infinity is a gun enchantment too (GunItem lets the black powder guns take it), so camp loot and the blacksmith can turn it up.
+        // Focus stays out: this tag is what the frontier knows, and no frontier smith has seen a phlogiston gun.
         tag(ModTags.Enchantments.GUN).add(ModEnchantments.RIFLING, ModEnchantments.QUICK_LOAD, ModEnchantments.DEADEYE,
                 ModEnchantments.CHOKE, ModEnchantments.DRY_POWDER, ModEnchantments.FRUGAL, Enchantments.INFINITY);
         tag(ModTags.Enchantments.EXCLUSIVE_SET_AMMO).add(Enchantments.INFINITY);

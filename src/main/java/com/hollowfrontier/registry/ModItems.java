@@ -324,9 +324,9 @@ public final class ModItems {
     public static final DeferredItem<PhlogistonCellItem> PHLOGISTON_CELL = ITEMS.registerItem("phlogiston_cell", PhlogistonCellItem::new,
             p -> p.durability(PhlogistonCellItem.CHARGES).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<PhlogistonGunItem> RAY_PISTOL = ITEMS.registerItem("ray_pistol",
-            p -> new PhlogistonGunItem(GunTypes.RAY_PISTOL, 1, 1, 0x70FFA0, new Vec3(1.0, 0.33, 0.12), p), p -> p.durability(500).repairable(ModTags.Items.INGOTS_STARSTEEL).rarity(Rarity.RARE).enchantable(PHLOGISTON_GUN_ENCHANTABILITY));
+            p -> new PhlogistonGunItem(GunTypes.RAY_PISTOL, 1, 1, 2.0F, 0x70FFA0, new Vec3(1.0, 0.33, 0.12), p), p -> p.durability(500).repairable(ModTags.Items.INGOTS_STARSTEEL).rarity(Rarity.RARE).enchantable(PHLOGISTON_GUN_ENCHANTABILITY));
     public static final DeferredItem<PhlogistonGunItem> PHLOGISTON_RIFLE = ITEMS.registerItem("phlogiston_rifle",
-            p -> new PhlogistonGunItem(GunTypes.PHLOGISTON_RIFLE, 3, 3, 0xFF8A2A, new Vec3(1.5, 0.34, 0.3), p), p -> p.durability(500).repairable(ModTags.Items.INGOTS_STARSTEEL).rarity(Rarity.RARE).enchantable(PHLOGISTON_GUN_ENCHANTABILITY));
+            p -> new PhlogistonGunItem(GunTypes.PHLOGISTON_RIFLE, 3, 3, 4.0F, 0xFF8A2A, new Vec3(1.5, 0.34, 0.3), p), p -> p.durability(500).repairable(ModTags.Items.INGOTS_STARSTEEL).rarity(Rarity.RARE).enchantable(PHLOGISTON_GUN_ENCHANTABILITY));
     public static final DeferredItem<SalvageItem> GRAVITY_DRIVE = ITEMS.registerItem("gravity_drive", SalvageItem::new,
             p -> p.stacksTo(1).rarity(Rarity.EPIC).fireResistant());
     // 13d: the Phlogiston Beacon

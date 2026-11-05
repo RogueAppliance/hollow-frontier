@@ -17,7 +17,7 @@ The store page for both Modrinth and CurseForge. Form fields, gallery and upload
 
 **Black powder guns.** The Cap & Ball Revolver, Plains Rifle and Double-Barrel Muzzleloader are 1800s percussion guns with 3D models and animations. Each chamber is loaded by hand with a paper cartridge and a percussion cap. Every shot leaves a puff of white smoke, rain can make a gun misfire, and a shot to the head hits harder.
 
-- **Six gun enchantments:** Rifling, Quick Load, Deadeye, Choke, Dry Powder and Frugal, plus vanilla's Infinity, Unbreaking and Mending. Find them at the enchanting table, from librarians and the town blacksmith, and in outlaw camps.
+- **Seven gun enchantments:** Rifling, Quick Load, Deadeye, Choke, Dry Powder and Frugal, plus Focus for the phlogiston guns and vanilla's Infinity, Unbreaking and Mending. Find them at the enchanting table, from librarians and the town blacksmith, and in outlaw camps (Focus only at the table, from librarians and in general loot).
 
 **Towns that feel lived in.** Every town has a name ("Coyote Springs", "POP. 212") on a welcome arch at the end of each street. Main streets of false-fronted buildings stand shoulder to shoulder, each furnished for its trade and with a sign over the door: the saloon, the sheriff's office and jail, the bank, the hotel, the general store, the gunsmith, the doctor ("teeth pulled"), the post and telegraph office, the bathhouse and barber, the Gazette office with its printing press, the schoolhouse, the chapel and the railroad depot. Out past the lanes are homesteads, a ranch with cattle, wheat fields, and a Boot Hill with headstones worth reading.
 
@@ -94,7 +94,7 @@ Something has been troubling the frontier: lights in the night sky, cattle found
 - **Gray field stations** in the Hollow Earth, where tagged and augmented megafauna come from.
 - **Gray pens,** where men taken from the frontier wait in cells. Stop the procedure, free the captives, and carry their letters home.
 - **Crash sites** with salvage to pry loose (alien alloy, a gravity drive, a beam emitter, a lens array and a navigation core) and a sealed cargo pod in the cockpit, holding the odd Gray gadget the prospector will buy: a doohickey that hums at ore, a rock that keeps you warm, a watch that runs backward, a marble that would rather be up, and a box that doesn't open.
-- **Phlogiston weapons:** the Ray Pistol and Phlogiston Rifle, with rechargeable phlogiston cells.
+- **Phlogiston weapons:** the Ray Pistol and Phlogiston Rifle fire beams that set what they hit alight, with no loading and rechargeable phlogiston cells. The rifle's beam goes through three creatures.
 - **The Prototype Saucer:** build your own from the salvage. It has full 3D flight, a heat laser and a tractor beam that carries mobs, items and players.
 - **The Mothership:** summon it with a Phlogiston Beacon and bring it down in a three-phase fight, on foot or in a dogfight from your own saucer.
 

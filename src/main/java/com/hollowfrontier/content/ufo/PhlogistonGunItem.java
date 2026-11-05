@@ -42,11 +42,13 @@ import net.minecraft.world.phys.Vec3;
  * They're {@link GunItem}s for their looks (the same GeckoLib renderer, raised-arms pose and recoil) but fire a straight
  * beam of phlogiston (a {@link PhlogistonBeam} of light to see, a phlogiston beam's harm), instead of a ball: no loading, no misfires in the wet, just {@link #cost} charges a
  * shot drawn from the Phlogiston Cells the shooter carries ({@link PhlogistonCellItem#draw}). The rifle's beam goes through up to
- * {@link #pierce} creatures in a line; the pistol's stops at the first.
+ * {@link #pierce} creatures in a line; the pistol's stops at the first. Phlogiston being what it is, a beam sets what it harms
+ * alight for {@link #burnSeconds}. Focus is their damage enchantment, as Rifling is the black powder guns'.
  */
 public class PhlogistonGunItem extends GunItem {
     private final int cost;
     private final int pierce;
+    private final float burnSeconds;
     private final int colour;
     private final Vec3 muzzle;
     private final DustParticleOptions spark;
@@ -55,10 +57,11 @@ public class PhlogistonGunItem extends GunItem {
      * {@code muzzle} is where the beam leaves the gun, from the shooter's eye: so far along their look, so far to the right,
      * so far down (matching where the gun's emitter sits in first person).
      */
-    public PhlogistonGunItem(GunStats stats, int cost, int pierce, int colour, Vec3 muzzle, Properties properties) {
+    public PhlogistonGunItem(GunStats stats, int cost, int pierce, float burnSeconds, int colour, Vec3 muzzle, Properties properties) {
         super(stats, properties);
         this.cost = cost;
         this.pierce = pierce;
+        this.burnSeconds = burnSeconds;
         this.colour = colour;
         this.muzzle = muzzle;
         this.spark = new DustParticleOptions(colour, 0.8F);
@@ -112,7 +115,7 @@ public class PhlogistonGunItem extends GunItem {
         List<LivingEntity> struck = new ArrayList<>();
         AABB along = shooter.getBoundingBox().expandTowards(end.subtract(eye)).inflate(1.0);
         for (LivingEntity target : level.getEntitiesOfClass(LivingEntity.class, along, e -> e != shooter && e.isAlive() && e.isPickable() && !e.isSpectator()
-                && e.getBoundingBox().inflate(0.3).clip(eye, end).isPresent())) {
+                && !shooter.isPassengerOfSameVehicle(e) && e.getBoundingBox().inflate(0.3).clip(eye, end).isPresent())) {
             struck.add(target);
         }
         struck.sort(Comparator.comparingDouble(e -> e.distanceToSqr(eye)));
@@ -131,7 +134,9 @@ public class PhlogistonGunItem extends GunItem {
             // Where the beam went in, for a headshot
             Vec3 hit = target.getBoundingBox().inflate(0.3).clip(eye, end).orElse(target.getBoundingBox().getCenter());
             float headshot = GunMechanics.headshot(shooter, target, hit, stats);
-            target.hurtServer(level, ModDamageTypes.phlogistonBeam(shooter), stats.damage() * headshot);
+            if (target.hurtServer(level, ModDamageTypes.phlogistonBeam(shooter), stats.damage() * headshot)) {
+                target.igniteForSeconds(burnSeconds);
+            }
             if (headshot > 1.0F) {
                 GunMechanics.headshotFeedback(level, shooter, hit);
             }
@@ -159,10 +164,12 @@ public class PhlogistonGunItem extends GunItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag flag) {
+        builder.accept(damageLine(stack, context));
         builder.accept(Component.translatable("tooltip.hollowfrontier.phlogiston_gun", cost).withStyle(ChatFormatting.GRAY));
         if (pierce > 1) {
             builder.accept(Component.translatable("tooltip.hollowfrontier.phlogiston_gun.pierce", pierce).withStyle(ChatFormatting.DARK_GRAY));
         }
+        builder.accept(Component.translatable("tooltip.hollowfrontier.phlogiston_gun.burn").withStyle(ChatFormatting.DARK_GRAY));
     }
 
     @Override

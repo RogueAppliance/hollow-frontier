@@ -253,11 +253,11 @@ public class FernSkitter extends TamableAnimal implements GeoEntity {
     }
 
     /** Darts to dropped food it can see within reach and snatches it. */
-    static final class SnatchFoodGoal extends Goal {
+    public static final class SnatchFoodGoal extends Goal {
         private final FernSkitter skitter;
         private ItemEntity target;
 
-        SnatchFoodGoal(FernSkitter skitter) {
+        public SnatchFoodGoal(FernSkitter skitter) {
             this.skitter = skitter;
             setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
         }
@@ -285,6 +285,10 @@ public class FernSkitter extends TamableAnimal implements GeoEntity {
 
         @Override
         public void tick() {
+            // Snatched it already: vanilla only asks canContinueToUse every other tick, and between times just ticks an every-tick goal
+            if (target == null) {
+                return;
+            }
             skitter.getLookControl().setLookAt(target);
             if (skitter.distanceToSqr(target) < 1.5 * 1.5) {
                 skitter.snatch(target);

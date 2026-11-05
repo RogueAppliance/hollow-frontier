@@ -12,6 +12,10 @@
 - **Polar Resonator, redrawn:** a brass tuning fork with cyan-lit tips on a steam gauge. Held, it's a 3D model; when it wakes a gateway's ring the fork shivers and the gauge needle swings into the red until the well opens.
 - **Steam Drill and Sunstone Lens, held:** both are 3D models in hand now (their icons stay as they were). The drill holds steady while it works and its bit spins as you drill with steam; the lens's sunstone glows and flares when it throws a beam.
 - **Creative menu:** everything is in one Hollow Frontier tab (it was six), in the same order, with all the spawn eggs together at the end.
+- **Phlogiston guns:** now a real step up from black powder. The Ray Pistol hits for 10 (was 7) and the Phlogiston Rifle for 30 (was 20), and a beam sets what it hits alight. A new enchantment, Focus, does for them what Rifling does for black powder guns; before, a fully enchanted Plains Rifle could out-damage the Phlogiston Rifle. Find it at the enchanting table, from librarians and in general loot.
+- **Gun tooltips:** every gun now shows what it hits for, enchantments counted.
+- **Beams from the saddle:** a phlogiston gun fired while riding no longer hits your own mount.
+- **Crash fixes:** a world could crash when a Megatherium finished browsing or gave up on reaching leaves, or when a Fern Skitter snatched food. Both are fixed.
 
 ## 1.0.0 — First release (2026-11-01)
 

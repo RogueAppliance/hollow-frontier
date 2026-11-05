@@ -174,6 +174,48 @@ final class MegafaunaTests {
                 "it didn't browse the leaves (reared " + reared[0] + ", leaves " + h.getBlockState(leaves) + ")"));
     }
 
+    /**
+     * The tick after a browse ends. Vanilla only asks {@code canContinueToUse} on every other tick, so a goal that wants every tick
+     * gets one more {@code tick} after letting go of its leaves; that one crashed the server, from either way of letting go.
+     */
+    static void browseSurvivesTheTickAfter(GameTestHelper h) {
+        BlockPos leaves = new BlockPos(20, 4, 20);
+        for (int y = 1; y < 4; y++) {
+            h.setBlock(new BlockPos(20, y, 20), Blocks.JUNGLE_LOG);
+        }
+        h.setBlock(leaves, Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+
+        // Couldn't get there: its path ends with the leaves still out of reach
+        Megatherium stuck = h.spawnWithNoFreeWill(ModEntities.MEGATHERIUM.get(), new BlockPos(26, 1, 20));
+        Megatherium.BrowseGoal giveUp = browsing(h, stuck);
+        stuck.getNavigation().stop();
+        giveUp.tick();
+        h.assertFalse(giveUp.canContinueToUse(), "it should give up on leaves it can't reach");
+        giveUp.tick();
+
+        // Ate them: rears beside the tree, browses, strips the leaves
+        Megatherium fed = h.spawnWithNoFreeWill(ModEntities.MEGATHERIUM.get(), new BlockPos(20, 1, 22));
+        Megatherium.BrowseGoal eat = browsing(h, fed);
+        for (int i = 0; i < 1000 && eat.canContinueToUse(); i++) {
+            eat.tick();
+        }
+        h.assertTrue(h.getBlockState(leaves).isAir(), "it didn't strip the leaves");
+        eat.tick();
+        h.succeed();
+    }
+
+    // canUse is a chance per tick, so asks until it comes up; the goal is then under way on the leaves it found
+    private static Megatherium.BrowseGoal browsing(GameTestHelper h, Megatherium sloth) {
+        Megatherium.BrowseGoal goal = new Megatherium.BrowseGoal(sloth);
+        for (int i = 0; i < 10000; i++) {
+            if (goal.canUse()) {
+                goal.start();
+                return goal;
+            }
+        }
+        throw h.assertionException("the megatherium never found the leaves");
+    }
+
     /** Hurt, a glyptodon hunkers down, and then lets only a quarter of the damage through. */
     static void glyptodonHunkers(GameTestHelper h) {
         Glyptodon glyptodon = h.spawn(ModEntities.GLYPTODON.get(), new BlockPos(20, 1, 20));

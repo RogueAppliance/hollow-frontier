@@ -17,6 +17,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.EnchantmentTags;
@@ -26,6 +28,7 @@ import net.minecraft.world.entity.animal.golem.IronGolem;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -48,7 +51,7 @@ final class GunEnchantmentTests {
         return Math.abs(a - b) < 0.001F;
     }
 
-    /** Each enchantment goes on the guns it's meant for and nothing else; all six are on the table; vanilla's durability ones fit every gun. */
+    /** Each enchantment goes on the guns it's meant for and nothing else; all seven are on the table; vanilla's durability ones fit every gun. */
     static void enchantmentsFitTheRightGuns(GameTestHelper h) {
         Level level = h.getLevel();
         ItemStack revolver = new ItemStack(ModItems.REVOLVER.get());
@@ -70,6 +73,12 @@ final class GunEnchantmentTests {
         }
         Enchantment choke = holder(level, ModEnchantments.CHOKE).value();
         h.assertTrue(choke.canEnchant(shotgun) && !choke.canEnchant(revolver), "Choke isn't the shotgun's alone");
+        // Focus is the phlogiston guns' alone, and it's on the table but not in the frontier's book trade (the blacksmith, camp loot)
+        Holder<Enchantment> focus = holder(level, ModEnchantments.FOCUS);
+        h.assertTrue(focus.value().canEnchant(phlogistonRifle) && focus.value().canEnchant(new ItemStack(ModItems.RAY_PISTOL.get())), "Focus won't go on a phlogiston gun");
+        h.assertFalse(focus.value().canEnchant(revolver) || focus.value().canEnchant(shotgun) || focus.value().canEnchant(sword), "Focus goes on something else");
+        h.assertTrue(focus.is(EnchantmentTags.IN_ENCHANTING_TABLE), "Focus isn't on the table");
+        h.assertFalse(focus.is(ModTags.Enchantments.GUN), "Focus is in the frontier's books");
         for (ResourceKey<Enchantment> key : new ResourceKey[] {ModEnchantments.RIFLING, ModEnchantments.QUICK_LOAD, ModEnchantments.DEADEYE,
                 ModEnchantments.CHOKE, ModEnchantments.DRY_POWDER, ModEnchantments.FRUGAL}) {
             Holder<Enchantment> enchantment = holder(level, key);
@@ -116,6 +125,69 @@ final class GunEnchantmentTests {
         float lost = golem.getMaxHealth() - golem.getHealth();
         h.assertTrue(near(lost, 7.0F * 1.6F), "a Rifling IV revolver did " + lost);
         h.succeed();
+    }
+
+    /** Focus reaches the beam: a Focus IV ray pistol does 60% more, by the same road as Rifling. */
+    static void focusHitsHarder(GameTestHelper h) {
+        ServerPlayer player = TestPlayers.survival(h, new BlockPos(2, 1, 2));
+        IronGolem golem = h.spawnWithNoFreeWill(EntityTypes.IRON_GOLEM, new BlockPos(2, 1, 8));
+        player.lookAt(EntityAnchorArgument.Anchor.EYES, golem.getBoundingBox().getCenter());
+        ItemStack gun = enchanted(h, new ItemStack(ModItems.RAY_PISTOL.get()), ModEnchantments.FOCUS, 4);
+        ModItems.RAY_PISTOL.get().beam(h.getLevel(), player, gun);
+        float lost = golem.getMaxHealth() - golem.getHealth();
+        h.assertTrue(near(lost, GunTypes.RAY_PISTOL.damage() * 1.6F), "a Focus IV ray pistol did " + lost);
+        h.succeed();
+    }
+
+    /**
+     * The damage curve (33): each phlogiston gun out-hits and outlasts the black powder gun in its role, plain against plain and
+     * enchanted against enchanted, and even a plain one keeps up more damage than that gun at its best.
+     */
+    static void phlogistonGunsStayAhead(GameTestHelper h) {
+        Level level = h.getLevel();
+        GunStats bestRevolver = powderAtBest(h, new ItemStack(ModItems.REVOLVER.get()), GunTypes.REVOLVER);
+        GunStats bestRifle = powderAtBest(h, new ItemStack(ModItems.PLAINS_RIFLE.get()), GunTypes.RIFLE);
+        GunStats bestPistol = GunEnchantments.apply(GunTypes.RAY_PISTOL, enchanted(h, new ItemStack(ModItems.RAY_PISTOL.get()), ModEnchantments.FOCUS, 4), level);
+        GunStats bestPhlogiston = GunEnchantments.apply(GunTypes.PHLOGISTON_RIFLE,
+                enchanted(h, new ItemStack(ModItems.PHLOGISTON_RIFLE.get()), ModEnchantments.FOCUS, 4), level);
+        ahead(h, GunTypes.RAY_PISTOL, GunTypes.REVOLVER, "plain ray pistol");
+        ahead(h, GunTypes.PHLOGISTON_RIFLE, GunTypes.RIFLE, "plain phlogiston rifle");
+        ahead(h, bestPistol, bestRevolver, "best ray pistol");
+        ahead(h, bestPhlogiston, bestRifle, "best phlogiston rifle");
+        h.assertTrue(GunTypes.RAY_PISTOL.damagePerSecond() > bestRevolver.damagePerSecond(), "a plain ray pistol trails the best revolver");
+        h.assertTrue(GunTypes.PHLOGISTON_RIFLE.damagePerSecond() > bestRifle.damagePerSecond(), "a plain phlogiston rifle trails the best plains rifle");
+        h.succeed();
+    }
+
+    private static GunStats powderAtBest(GameTestHelper h, ItemStack gun, GunStats base) {
+        enchanted(h, gun, ModEnchantments.RIFLING, 4);
+        enchanted(h, gun, ModEnchantments.QUICK_LOAD, 3);
+        return GunEnchantments.apply(base, gun, h.getLevel());
+    }
+
+    private static void ahead(GameTestHelper h, GunStats phlogiston, GunStats powder, String gun) {
+        h.assertTrue(phlogiston.shotDamage() > powder.shotDamage(), gun + " hits for " + phlogiston.shotDamage() + " against " + powder.shotDamage());
+        h.assertTrue(phlogiston.damagePerSecond() > powder.damagePerSecond(),
+                gun + " keeps up " + phlogiston.damagePerSecond() + " a second against " + powder.damagePerSecond());
+    }
+
+    /** Every gun's tooltip says what it hits for, enchantments counted, a shotgun by the pellet. */
+    static void gunTooltipsShowDamage(GameTestHelper h) {
+        Level level = h.getLevel();
+        h.assertValueEqual(shownDamage(level, new ItemStack(ModItems.PHLOGISTON_RIFLE.get())), "30", "phlogiston rifle's tooltip");
+        h.assertValueEqual(shownDamage(level, new ItemStack(ModItems.SHOTGUN.get())), "3.5", "shotgun's tooltip");
+        h.assertValueEqual(shownDamage(level, enchanted(h, new ItemStack(ModItems.REVOLVER.get()), ModEnchantments.RIFLING, 4)), "11.2", "Rifling IV revolver's tooltip");
+        h.assertValueEqual(shownDamage(level, enchanted(h, new ItemStack(ModItems.RAY_PISTOL.get()), ModEnchantments.FOCUS, 4)), "16", "Focus IV ray pistol's tooltip");
+        h.succeed();
+    }
+
+    private static String shownDamage(Level level, ItemStack gun) {
+        for (Component line : gun.getTooltipLines(net.minecraft.world.item.Item.TooltipContext.of(level), null, TooltipFlag.NORMAL)) {
+            if (line.getContents() instanceof TranslatableContents text && text.getKey().startsWith("tooltip.hollowfrontier.gun_damage")) {
+                return String.valueOf(text.getArgs()[0]);
+            }
+        }
+        return "no damage line";
     }
 
     /** Quick Load III loads a revolver chamber in 6 ticks, not 15. */
