@@ -3,6 +3,18 @@
     "#c:is_desert",
     "#c:is_plains",
     "#minecraft:is_savanna",
-    "#minecraft:is_badlands"
+    "#minecraft:is_badlands",
+    {
+      "id": "terralith:hot_shrubland",
+      "required": false
+    },
+    {
+      "id": "terralith:shrubland",
+      "required": false
+    },
+    {
+      "id": "terralith:yosemite_lowlands",
+      "required": false
+    }
   ]
 }

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2 — Faster town searches
+
+- **Town searches:** `/locate` for a town is many times faster, and no longer risks stopping a dedicated server when no matching biome is near. Before, a town's ground survey ran at every candidate spot, even in the wrong biome. A few more towns may appear along biome edges in new chunks.
+- **Terralith:** its Hot Shrubland, Shrubland and Yosemite Lowlands biomes can now hold towns and outlaws, which brings desert towns a good deal closer. Without Terralith nothing changes.
+
 ## 1.1.1 — Dedicated servers
 
 - **Dedicated servers:** Hollow Frontier now starts on a dedicated server. Before, every release stopped at startup with a missing client class (`net.minecraft.client.model.Model`), because the guns, Steam Drill, Sunstone Lens and Polar Resonator touched client-only GeckoLib code as they loaded. Single-player was never affected.

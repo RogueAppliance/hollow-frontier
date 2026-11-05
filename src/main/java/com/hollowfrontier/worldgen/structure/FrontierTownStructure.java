@@ -60,6 +60,9 @@ public final class FrontierTownStructure extends Structure {
     public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
         for (int[] offset : TRIES) {
             int x = context.chunkPos().getMinBlockX() + offset[0], z = context.chunkPos().getMinBlockZ() + offset[1];
+            if (!inValidBiome(context, x, z)) {
+                continue;
+            }
             OptionalInt ground = levelGround(context, x, z, maxSlope);
             if (ground.isEmpty()) {
                 continue;
@@ -73,6 +76,16 @@ public final class FrontierTownStructure extends Structure {
             }
         }
         return Optional.empty();
+    }
+
+    /**
+     * Whether (x, z) lies in a biome this town can stand in. Minecraft only checks the biome after findGenerationPoint returns,
+     * so without this every candidate in a search would have its ground surveyed, whatever the country: one height here against
+     * up to 58 in {@link #levelGround}. A /locate with no matching biome near spawn then outran the server watchdog.
+     */
+    private static boolean inValidBiome(GenerationContext context, int x, int z) {
+        int y = context.chunkGenerator().getFirstFreeHeight(x, z, Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
+        return context.isValidBiome(new GenerationStub(new BlockPos(x, y, z), pieces -> {}));
     }
 
     /**

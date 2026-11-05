@@ -430,3 +430,9 @@ Calls made in place of asking, and the reasons behind them. PLAN.md keeps the st
 - **The fix:** `DataTicket.create` makes the same ticket without loading `DataTickets`. Only the render state reads them, so nothing else changes.
 - **Why nothing caught it:** dev runs and game tests have client classes on the classpath. Nobody had booted the jar on a real server. The check now lives in the modpack repo (`tests/server-smoke.sh`).
 - **Tested on a real server with a joined client:** gun reload and fire, chatter, trading, boarding the airship, Jade server data, the Hollow Earth, and summoning the main mobs and vehicles in both dimensions, with no errors. Other multiplayer play, such as two players at once, is still untested.
+
+### Town searches (2026-11-05)
+- **The cause:** Minecraft checks a structure's biome only after `findGenerationPoint` returns, and `FrontierTownStructure` surveyed the ground inside it (up to 58 heights a try, five tries). A search over country with no matching biome surveyed every candidate, on the main thread. `/locate` for a town took 2-39s and could pass the 60s watchdog, which stopped 7 of 15 test servers.
+- **The fix:** one height and a biome check first. Median vanilla desert town search went from 22.7s to 0.8s; the slowest of 165 searches was 12.8s.
+- **In-game searches are safe:** the Polar Compass, Gazette, saucer and Signal Locator look for structures that don't use this class, and took 0.0-0.1s. The freed captive's letter does search towns, but only with no known town; it's covered by the same fix.
+- **Terralith biomes are optional entries by name,** since its own tags leave out its level dry country. Its proper deserts are mostly too rugged for a town. Median desert town on Terralith went from 10,873 to 6,633 blocks.

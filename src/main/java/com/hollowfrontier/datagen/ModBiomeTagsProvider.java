@@ -13,6 +13,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -23,21 +25,33 @@ public class ModBiomeTagsProvider extends TagsProvider<Biome> {
         super(output, Registries.BIOME, lookupProvider, HollowFrontier.MODID);
     }
 
+    /** A biome of Terralith's, for optional entries: ignored when Terralith isn't installed. */
+    private static ResourceKey<Biome> terralith(String name) {
+        return ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("terralith", name));
+    }
+
     @Override
     protected void addTags(HolderLookup.Provider registries) {
         tag(ModStructures.IS_FRONTIER)
                 .addTag(Tags.Biomes.IS_DESERT)
                 .addTag(Tags.Biomes.IS_PLAINS)
                 .addTag(BiomeTags.IS_SAVANNA)
-                .addTag(BiomeTags.IS_BADLANDS);
+                .addTag(BiomeTags.IS_BADLANDS)
+                .addOptional(terralith("hot_shrubland"))
+                .addOptional(terralith("shrubland"))
+                .addOptional(terralith("yosemite_lowlands"));
         tag(ModSpawns.HAS_OUTLAWS).addTag(ModStructures.IS_FRONTIER);
         // Town styles (TownStyle): clapboard on the grass, missions in the sand, mining camps up in the pines
+        // Terralith's level dry country: its tags leave these out, and its deserts proper are mostly too rugged for a town
         tag(TownStyle.FRONTIER.biomes())
                 .addTag(Tags.Biomes.IS_PLAINS)
-                .addTag(BiomeTags.IS_SAVANNA);
+                .addTag(BiomeTags.IS_SAVANNA)
+                .addOptional(terralith("shrubland"))
+                .addOptional(terralith("yosemite_lowlands"));
         tag(TownStyle.DESERT.biomes())
                 .addTag(Tags.Biomes.IS_DESERT)
-                .addTag(BiomeTags.IS_BADLANDS);
+                .addTag(BiomeTags.IS_BADLANDS)
+                .addOptional(terralith("hot_shrubland"));
         tag(TownStyle.MINING.biomes())
                 .addTag(BiomeTags.IS_TAIGA)
                 .addTag(BiomeTags.IS_HILL)

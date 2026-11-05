@@ -1,6 +1,14 @@
 {
   "values": [
     "#c:is_plains",
-    "#minecraft:is_savanna"
+    "#minecraft:is_savanna",
+    {
+      "id": "terralith:shrubland",
+      "required": false
+    },
+    {
+      "id": "terralith:yosemite_lowlands",
+      "required": false
+    }
   ]
 }
