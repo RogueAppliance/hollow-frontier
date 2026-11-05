@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0 — Playtest fixes and phlogiston guns (unreleased)
+## 1.1.0 — Playtest fixes and phlogiston guns (2026-11-05)
 
 - **Crash fixes:** a world could crash when a Megatherium finished browsing or gave up on reaching leaves, or when a Fern Skitter snatched food. Both are fixed.
 - **Airship:** you can eat, fire a gun and use a compass aboard; clicks no longer land on the airship around you. Your own swings from aboard no longer damage it either. You can still stoke it with coal or top it up from a canister while flying.
