@@ -39,6 +39,7 @@ public final class ModGameTests {
         test("recipes_load", 20, DataTests::recipesLoad);
         test("brass_steps_aside", 20, DataTests::brassStepsAside);
         test("loot_tables_load", 20, DataTests::lootTablesLoad);
+        test("towns_stay_out_of_lootr", 20, DataTests::townsStayOutOfLootr);
         test("tags_apply", 20, DataTests::tagsApply);
         test("worldgen_registered", 20, DataTests::worldgenRegistered);
         test("structure_templates_load", 20, DataTests::structureTemplatesLoad);
@@ -403,6 +404,8 @@ public final class ModGameTests {
         raid("one_raid_per_town", 20, RaidTests::oneRaidPerTown);
         raid("townsfolk_shelter_indoors", 400, RaidTests::townsfolkShelterIndoors);
         raid("lawmen_engage_raiders", 400, RaidTests::lawmenEngageRaiders);
+        raid("mounted_gang_opens_doors", 40, RaidTests::mountedGangOpensDoors);
+        raid("strongbox_ignores_cell_doors", 20, RaidTests::strongboxIgnoresCellDoors);
         raid("vault_timer_robs_chest", 200, RaidTests::vaultTimerRobsChest);
         raid("killing_safecracker_interrupts", 100, RaidTests::killingSafecrackerInterrupts);
         raid("defended_raid_pays_and_pardons", 40, RaidTests::defendedRaidPaysAndPardons);

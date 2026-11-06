@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3 — Raids reach the vault
+
+- **Raids:** a gang that rides in can now get through doors on foot. Before, outlaws learned doors while mounted, so the skill went to the horse, and a mounted raid could never reach a vault indoors.
+- **Sheriff's strongbox:** the safecracker now works it from in front of the lid. Before, a jail cell's iron door beside it was taken for a vault door, and he was sent behind it, where he could never start.
+- **Lootr:** towns now stay out of Lootr's conversion, so raids can still find their vaults. Town chests are shared rather than per-player when Lootr is installed.
+
 ## 1.1.2 — Faster town searches (2026-11-05)
 
 - **Town searches:** `/locate` for a town is many times faster, and no longer risks stopping a dedicated server when no matching biome is near. Before, a town's ground survey ran at every candidate spot, even in the wrong biome. A few more towns may appear along biome edges in new chunks.
