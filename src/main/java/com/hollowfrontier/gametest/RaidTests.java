@@ -1,6 +1,7 @@
 package com.hollowfrontier.gametest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.hollowfrontier.content.frontier.bank.BankBox;
@@ -32,6 +33,7 @@ import com.hollowfrontier.registry.ModEntities;
 import com.hollowfrontier.registry.ModItems;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
@@ -44,6 +46,7 @@ import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
@@ -195,6 +198,35 @@ final class RaidTests {
             h.assertTrue(((AbstractOutlaw) cracker).getMainHandItem().is(net.minecraft.world.item.Items.BUNDLE), "the safecracker isn't carrying the loot");
             callOff(h, raid);
         });
+    }
+
+    /** A mounted gang gets its goals on horseback, where getNavigation() is the horse's: on foot, the men must still open doors. */
+    static void mountedGangOpensDoors(GameTestHelper h) {
+        TownRaid raid = TownRaids.get(h.getLevel()).start(h.getLevel(), site(h), QUICK, 4, true).orElseThrow();
+        rideIn(h, raid);
+        AbstractOutlaw cracker = (AbstractOutlaw) h.getLevel().getEntity(raid.safecrackerId());
+        boolean mounted = cracker.isPassenger();
+        cracker.stopRiding();
+        boolean doors = cracker.getNavigation().getNodeEvaluator().canOpenDoors();
+        callOff(h, raid);
+        h.assertTrue(mounted, "setup: the safecracker rode in on foot");
+        h.assertTrue(doors, "on foot, the safecracker can't open doors");
+        h.succeed();
+    }
+
+    /** A strongbox is worked from in front of the lid, even with a jail cell's iron door beside it. Only a bank has a vault door. */
+    static void strongboxIgnoresCellDoors(GameTestHelper h) {
+        BlockPos box = new BlockPos(3, 1, 3);
+        h.setBlock(box, Blocks.CHEST.defaultBlockState()
+                .setValue(ChestBlock.FACING, Direction.WEST));
+        h.getBlockEntity(box, ChestBlockEntity.class).setData(ModAttachments.TOWN_VAULT.get(), 1);
+        h.setBlock(new BlockPos(2, 1, 5), Blocks.IRON_DOOR);
+        BoundingBox bounds = BoundingBox.fromCorners(h.absolutePos(BlockPos.ZERO), h.absolutePos(new BlockPos(9, 7, 9)));
+        TownSite site = TownSite.scan(h.getLevel(), h.absolutePos(BlockPos.ZERO).asLong(), bounds, h.absolutePos(new BlockPos(4, 1, 8)),
+                h.absolutePos(new BlockPos(0, 1, 8)), h.absolutePos(new BlockPos(0, 1, 8)), 1);
+        h.assertTrue(site.crackAt().equals(Optional.of(h.absolutePos(box))), "not cracking the box: " + site.crackAt());
+        h.assertTrue(site.workAt().equals(Optional.of(h.absolutePos(new BlockPos(2, 1, 3)))), "not working at the lid: " + site.workAt());
+        h.succeed();
     }
 
     /** Killing the safecracker mid-job starts the job over; the vault keeps its contents. */

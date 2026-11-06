@@ -290,6 +290,11 @@ public abstract class AbstractOutlaw extends Monster implements GeoEntity, GunWi
 
     protected abstract ItemStack createGun();
 
+    /** Lets him through doors on foot. A rider's getNavigation() is his horse's, so this goes on his own navigator. */
+    public void learnDoors() {
+        navigation.setCanOpenDoors(true);
+    }
+
     @Override
     protected void registerGoals() {
         goalSelector.addGoal(0, new FloatGoal(this));

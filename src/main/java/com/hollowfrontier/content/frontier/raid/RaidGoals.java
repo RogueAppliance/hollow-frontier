@@ -53,7 +53,7 @@ public final class RaidGoals {
         if (outlaw.goalSelector.getAvailableGoals().stream().anyMatch(g -> g.getGoal() instanceof Advance)) {
             return;
         }
-        outlaw.getNavigation().setCanOpenDoors(true); // into the bank by its front door
+        outlaw.learnDoors(); // into the bank by its front door
         outlaw.goalSelector.addGoal(0, new Retreat(outlaw));
         outlaw.goalSelector.addGoal(1, new OpenDoorGoal(outlaw, false));
         outlaw.goalSelector.addGoal(1, new Safecrack(outlaw));

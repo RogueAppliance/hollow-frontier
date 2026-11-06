@@ -115,6 +115,7 @@ All phases so far are done. Their original specs are in PHASE_SPECS.md. Add new 
 34. ✅ 2026-11-05 — Crash fixes: the Megatherium's browse and the Fern Skitter's snatch no longer crash the world on the tick after they end.
 36. ✅ 2026-11-05 — Dedicated servers: the mod starts and plays on a real server (1.1.1). Found while testing the Saddles N' Saucers modpack; every earlier release stopped at startup.
 37. ✅ 2026-11-05 — Town searches: a biome check before the ground survey (1.1.2), and Terralith's level dry biomes in the town tags.
+38. ✅ 2026-11-05 — Raids reach the vault (1.1.3): mounted gangs keep their door skill on foot, and a strongbox no longer takes a cell door for a vault door.
 
 ## Open items
 

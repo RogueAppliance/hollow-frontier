@@ -169,7 +169,8 @@ public record TownSite(long key, BoundingBox bounds, BlockPos rally, BlockPos ed
         // Two banks in one town: the gang goes for the one nearest the middle of the street.
         BlockPos first = chests.stream().min(Comparator.comparingDouble(p -> p.distSqr(rally))).orElseThrow();
         List<BlockPos> vault = chests.stream().filter(p -> p.closerThan(first, 8)).toList();
-        Optional<BlockPos> door = vaultDoor(level, vault);
+        // Only a bank has a vault door. A sheriff's strongbox stands by the jail, whose cell doors are iron too.
+        Optional<BlockPos> door = bestKind == 2 ? vaultDoor(level, vault) : Optional.empty();
         BlockPos crackAt;
         BlockPos workAt;
         if (door.isPresent()) {
