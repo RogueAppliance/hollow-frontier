@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.3 — Raids reach the vault
+## 1.1.3 — Raids reach the vault (2026-11-06)
 
 - **Raids:** a gang that rides in can now get through doors on foot. Before, outlaws learned doors while mounted, so the skill went to the horse, and a mounted raid could never reach a vault indoors.
 - **Sheriff's strongbox:** the safecracker now works it from in front of the lid. Before, a jail cell's iron door beside it was taken for a vault door, and he was sent behind it, where he could never start.
