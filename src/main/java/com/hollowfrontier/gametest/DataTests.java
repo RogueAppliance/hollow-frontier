@@ -38,6 +38,7 @@ import net.minecraft.world.level.block.CrossCollisionBlock;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -77,6 +78,15 @@ final class DataTests {
                 ModChestLoot.BLACKSMITH, ModChestLoot.LIVERY,
                 lootKey("entities/outlaw"), lootKey("entities/outlaw_boss"), lootKey("blocks/brass_block"), lootKey("blocks/boiler"))) {
             h.assertTrue(registries.getLootTable(key) != LootTable.EMPTY, "missing loot table " + key.identifier());
+        }
+        h.succeed();
+    }
+
+    /** Lootr's chests lose the vault marker, so every town style has to be on its structure blacklist. */
+    static void townsStayOutOfLootr(GameTestHelper h) {
+        var structures = h.getLevel().registryAccess().lookupOrThrow(Registries.STRUCTURE);
+        for (ResourceKey<Structure> town : ModStructures.TOWNS) {
+            h.assertTrue(structures.getOrThrow(town).is(ModStructures.LOOTR_BLACKLIST), town.identifier() + " not on Lootr's blacklist");
         }
         h.succeed();
     }

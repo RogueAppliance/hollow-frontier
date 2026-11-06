@@ -39,6 +39,7 @@ public final class ModGameTests {
         test("recipes_load", 20, DataTests::recipesLoad);
         test("brass_steps_aside", 20, DataTests::brassStepsAside);
         test("loot_tables_load", 20, DataTests::lootTablesLoad);
+        test("towns_stay_out_of_lootr", 20, DataTests::townsStayOutOfLootr);
         test("tags_apply", 20, DataTests::tagsApply);
         test("worldgen_registered", 20, DataTests::worldgenRegistered);
         test("structure_templates_load", 20, DataTests::structureTemplatesLoad);

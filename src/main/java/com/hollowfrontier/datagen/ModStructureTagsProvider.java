@@ -22,5 +22,7 @@ public class ModStructureTagsProvider extends TagsProvider<Structure> {
         tag(ModStructures.KINDLED_SITES).add(ModStructures.KINDLED_SITE, ModStructures.CRYSTAL_RUINS);
         tag(ModStructures.SUN_TEMPLES).add(ModStructures.SUN_TEMPLE);
         tag(ModStructures.CRASH_SITES).add(ModStructures.CRASH_SITE, ModStructures.HOLLOW_CRASH_SITE);
+        var lootr = tag(ModStructures.LOOTR_BLACKLIST);
+        ModStructures.TOWNS.forEach(lootr::add);
     }
 }
