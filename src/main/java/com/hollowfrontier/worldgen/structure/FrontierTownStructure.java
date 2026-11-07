@@ -95,17 +95,25 @@ public final class FrontierTownStructure extends Structure {
     public static OptionalInt levelGround(GenerationContext context, int x, int z, int maxSlope) {
         int[] heights = new int[1 + RINGS.length * POINTS];
         int n = 0;
-        heights[n++] = dryHeight(context, x, z);
+        int lowest = heights[n++] = dryHeight(context, x, z);
+        int highest = lowest;
+        if (lowest == Integer.MIN_VALUE) {
+            return OptionalInt.empty();
+        }
+        // Stops at the first reading that rules the spot out: amplified country is all failures, and a search reads thousands
         for (int ring : RINGS) {
             for (int i = 0; i < POINTS; i++) {
                 double a = Math.PI * 2 * i / POINTS;
-                heights[n++] = dryHeight(context, x + (int) Math.round(Math.cos(a) * ring), z + (int) Math.round(Math.sin(a) * ring));
+                int height = dryHeight(context, x + (int) Math.round(Math.cos(a) * ring), z + (int) Math.round(Math.sin(a) * ring));
+                heights[n++] = height;
+                lowest = Math.min(lowest, height);
+                highest = Math.max(highest, height);
+                if (height == Integer.MIN_VALUE || highest - lowest > maxSlope) {
+                    return OptionalInt.empty();
+                }
             }
         }
         Arrays.sort(heights);
-        if (heights[0] == Integer.MIN_VALUE || heights[heights.length - 1] - heights[0] > maxSlope) {
-            return OptionalInt.empty();
-        }
         // The outskirts (lanes, fields, the depot) reach further: no lake there either, whatever its lie
         for (int i = 0; i < SHORE_POINTS; i++) {
             double a = Math.PI * 2 * (i + 0.5) / SHORE_POINTS;

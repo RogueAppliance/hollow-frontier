@@ -20,17 +20,20 @@ import com.hollowfrontier.content.frontier.raid.TownRaid;
 import com.hollowfrontier.content.frontier.raid.TownRaids;
 import com.hollowfrontier.content.frontier.raid.TownRecord;
 import com.hollowfrontier.content.frontier.raid.TownSite;
+import com.hollowfrontier.content.frontier.raid.VaultChests;
 import com.hollowfrontier.content.frontier.talk.Chatter;
 import com.hollowfrontier.content.frontier.talk.ChatterLines;
 import com.hollowfrontier.content.frontier.talk.Context;
 import com.hollowfrontier.content.frontier.talk.Fact;
 import com.hollowfrontier.content.frontier.talk.Moment;
+import com.hollowfrontier.content.frontier.town.TownVacancies;
 import com.hollowfrontier.content.frontier.townsfolk.Lawman;
 import com.hollowfrontier.content.frontier.townsfolk.Townsfolk;
 import com.hollowfrontier.registry.ModAttachments;
 import com.hollowfrontier.registry.ModDataComponents;
 import com.hollowfrontier.registry.ModEntities;
 import com.hollowfrontier.registry.ModItems;
+import com.hollowfrontier.worldgen.structure.ModChestLoot;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -227,6 +230,31 @@ final class RaidTests {
         h.assertTrue(site.crackAt().equals(Optional.of(h.absolutePos(box))), "not cracking the box: " + site.crackAt());
         h.assertTrue(site.workAt().equals(Optional.of(h.absolutePos(new BlockPos(2, 1, 3)))), "not working at the lid: " + site.workAt());
         h.succeed();
+    }
+
+    /**
+     * A gang can leave the safecracker behind the bank, and the way round to the front door is a long one. Walls here
+     * make it about 50 blocks, past the 40 a mob looks ahead, so he must look further to get to work at all.
+     */
+    static void safecrackerWalksRoundTheBlock(GameTestHelper h) {
+        for (int y = 1; y <= 3; y++) {
+            for (int x = 9; x <= 13; x++) {
+                h.setBlock(new BlockPos(x, y, 16), Blocks.BRICKS); // the gap between the hut and the bank
+            }
+            for (int x = 22; x <= 23; x++) {
+                h.setBlock(new BlockPos(x, y, 16), Blocks.BRICKS); // the alley past the bank's far side
+            }
+        }
+        TownRaid raid = start(h, 3, new RaidTimings(10, 400, 2000, 20));
+        rideIn(h, raid);
+        AbstractOutlaw cracker = (AbstractOutlaw) h.getLevel().getEntity(raid.safecrackerId());
+        BlockPos back = h.absolutePos(new BlockPos(17, 1, 22));
+        cracker.snapTo(back.getX() + 0.5, back.getY(), back.getZ() + 0.5, 0, 0);
+        cracker.setNoAi(false);
+        h.succeedWhen(() -> {
+            h.assertTrue(raid.vaultProgress() > 0, "safecracker stuck at " + cracker.blockPosition().subtract(h.absolutePos(BlockPos.ZERO)));
+            callOff(h, raid);
+        });
     }
 
     /** Killing the safecracker mid-job starts the job over; the vault keeps its contents. */
@@ -494,6 +522,42 @@ final class RaidTests {
         other.hurtServer(level, level.damageSources().playerAttack(player), 1000.0F);
         h.assertValueEqual(Wanted.of(player).heat(), Wanted.KILL_LAWMAN, "heat for killing a lawman in a raid");
         callOff(h, raid);
+        h.succeed();
+    }
+
+    /** A vault chest rolls its own loot and keeps no table for Lootr to convert it by; an ordinary chest keeps its table for Lootr. */
+    static void vaultChestsStockThemselves(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        ChestBlockEntity vault = h.getBlockEntity(VAULT_CHEST, ChestBlockEntity.class);
+        vault.clearContent(); // whether or not its chunk loading got there first
+        vault.setLootTable(ModChestLoot.BANK, 1L);
+        BlockPos ordinaryPos = VAULT_CHEST.west();
+        h.setBlock(ordinaryPos, Blocks.CHEST);
+        ChestBlockEntity ordinary = h.getBlockEntity(ordinaryPos, ChestBlockEntity.class);
+        ordinary.setLootTable(ModChestLoot.BANK, 1L);
+        VaultChests.stock(level, level.getChunkAt(h.absolutePos(VAULT_CHEST)));
+        h.assertTrue(vault.getLootTable() == null, "vault chest kept its loot table");
+        h.assertFalse(vault.isEmpty(), "vault chest rolled nothing");
+        h.assertTrue(site(h).vault().contains(h.absolutePos(VAULT_CHEST)), "a stocked chest is still the vault");
+        h.assertTrue(ordinary.getLootTable() != null, "an ordinary chest was stocked too");
+        h.succeed();
+    }
+
+    /** No newcomers while the town's under attack: the place stays open until the gang is gone. */
+    static void arrivalsWaitOutTheRaid(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        TownRaid raid = start(h, 3, QUICK);
+        long key = raid.site().key();
+        TownVacancies data = TownVacancies.get(level);
+        data.forget(key); // a failed run's leftovers
+        data.settle(key, raid.site().bounds());
+        ModEntities.TOWNSFOLK.get().spawn(level, h.absolutePos(new BlockPos(5, 1, 16)), EntitySpawnReason.STRUCTURE).kill(level);
+        data.check(level, 0);
+        h.assertTrue(data.open(key).size() == 1, "someone arrived in the middle of a raid");
+        callOff(h, raid);
+        data.check(level, 0);
+        h.assertTrue(data.open(key).isEmpty(), "nobody arrived once the raid was over");
+        data.forget(key);
         h.succeed();
     }
 

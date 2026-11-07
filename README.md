@@ -27,7 +27,7 @@ Shaders are up to you; Complementary Reimagined and Bliss are good fits. The sky
 
 ## Where to start
 
-Talk to a town's postmaster first: the Polar Survey's last letter is waiting, and it keeps track of the road north to a Polar Gateway (what to build, and roughly where the crater is). Once you reach the Hollow Earth, craft a Concavian Codex (a book and a phlogiston shard): it keeps track of how far you've come and says what's next. The advancement tabs (Hollow Frontier, Steam Age) lay out the rest.
+A new world starts you in the nearest town's square, and on a dedicated server with operators you'll want `spawn-protection=0`, or other players can't use the doors and chests around it. Talk to a town's postmaster first: the Polar Survey's last letter is waiting, and it keeps track of the road north to a Polar Gateway (what to build, and roughly where the crater is). Once you reach the Hollow Earth, craft a Concavian Codex (a book and a phlogiston shard): it keeps track of how far you've come and says what's next. The advancement tabs (Hollow Frontier, Steam Age) lay out the rest.
 
 ## Settings
 
@@ -35,6 +35,8 @@ Talk to a town's postmaster first: the Polar Survey's last letter is waiting, an
 - `hollowfrontier-ufo-server.toml` (per world): saucer flyovers, and whether their beams take players.
 - `hollowfrontier-saloon-server.toml` and `hollowfrontier-dust-devils-server.toml` (per world): saloon brawls and missing time; dust devils.
 - `hollowfrontier-mysteries-server.toml` (per world): airship sightings, cattle mutilations, crop circles, and the men in black's visits and hunts, each switchable.
+- `hollowfrontier-towns-server.toml` (per world): whether towns replace the townsfolk and lawmen they lose, and how long each new arrival takes.
+  It also holds `spawnAtTown`, on by default, which starts new worlds in the nearest town. A world chooses its spawn once, so set this in the `config` folder before creating the world.
 - `hollowfrontier-startup.toml`: whether brass can be alloyed at a crafting table (turn it off if another mod makes brass).
 
 ## In a modpack

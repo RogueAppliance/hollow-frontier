@@ -116,6 +116,10 @@ All phases so far are done. Their original specs are in PHASE_SPECS.md. Add new 
 36. ✅ 2026-11-05 — Dedicated servers: the mod starts and plays on a real server (1.1.1). Found while testing the Saddles N' Saucers modpack; every earlier release stopped at startup.
 37. ✅ 2026-11-05 — Town searches: a biome check before the ground survey (1.1.2), and Terralith's level dry biomes in the town tags.
 38. ✅ 2026-11-05 — Raids reach the vault (1.1.3): mounted gangs keep their door skill on foot, and a strongbox no longer takes a cell door for a vault door.
+39. ✅ 2026-11-06 — Safecrackers find the way in (1.1.4): he looks 128 blocks ahead for a route, so a bank whose front door faces away from him no longer stops a raid.
+40. ✅ 2026-11-06 — Towns replace their dead (1.1.4): residents who die leave a place on their town's list, and replacements arrive one a day, in the same job at the same post, out of players' sight.
+41. ✅ 2026-11-06 — Town chests under Lootr (1.1.4): towns come off its blacklist so ordinary chests go per-player, and vault chests roll their loot on load so they stay plain and can be robbed.
+42. ✅ 2026-11-06 — New worlds start in town (1.1.4): the world spawn goes on open ground in the nearest town's square, with `spawnAtTown` to turn it off and the game's own spawn when no town is in reach. Replaces the starting map idea.
 
 ## Open items
 

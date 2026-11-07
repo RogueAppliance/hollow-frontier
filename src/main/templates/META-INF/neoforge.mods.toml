@@ -7,7 +7,7 @@ version="${mod_version}"
 displayName="${mod_name}"
 authors="RogueAppliance"
 displayURL="https://github.com/RogueAppliance/hollow-frontier"
-logoFile="hollowfrontier_logo.png"
+bannerFile="hollowfrontier_logo.png"
 credits="Saloon piano: Scott Joplin's ragtime (public domain), rendered from Mutopia Project scores. Built on NeoForge and GeckoLib."
 description='''
 Wild West steampunk on a Hollow Earth frontier. Ride out with revolver and lasso, build boilers and airships,

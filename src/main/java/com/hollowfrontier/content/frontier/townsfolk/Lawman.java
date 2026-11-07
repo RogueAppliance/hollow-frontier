@@ -123,6 +123,8 @@ public class Lawman extends PathfinderMob implements GeoEntity, GunWielder {
     private boolean rankChosen;
     // Riding with a posse after a wanted player: no post to return to, and gone once the chase goes cold.
     private boolean posse;
+    // Not one of the town's own (a spawn egg's, a sworn-in freed man): the town doesn't replace them (TownVacancies).
+    private boolean stranger;
     private int idleTicks;
 
     public Lawman(EntityType<? extends Lawman> type, Level level) {
@@ -162,6 +164,11 @@ public class Lawman extends PathfinderMob implements GeoEntity, GunWielder {
         return posse;
     }
 
+    /** Whether his town would replace him. */
+    public boolean isResident() {
+        return !stranger && !posse;
+    }
+
     /** A freed man sworn in (15c, FreedMen): a Deputy with his shotgun, keeping the peace round {@code post}. */
     public void swearIn(BlockPos post) {
         setRank(Rank.DEPUTY);
@@ -169,6 +176,7 @@ public class Lawman extends PathfinderMob implements GeoEntity, GunWielder {
         setDropChance(EquipmentSlot.MAINHAND, 0.0F);
         setHomeTo(post, PATROL_RADIUS);
         setPersistenceRequired();
+        stranger = true;
     }
 
     public Rank getRank() {
@@ -195,6 +203,9 @@ public class Lawman extends PathfinderMob implements GeoEntity, GunWielder {
         if (posse) {
             output.putBoolean("posse", true);
         }
+        if (stranger) {
+            output.putBoolean("stranger", true);
+        }
     }
 
     @Override
@@ -202,6 +213,7 @@ public class Lawman extends PathfinderMob implements GeoEntity, GunWielder {
         super.readAdditionalSaveData(input);
         input.getString("rank").ifPresent(id -> setRank(Rank.byId(id)));
         posse = input.getBooleanOr("posse", false);
+        stranger = input.getBooleanOr("stranger", false);
     }
 
     @Override
@@ -213,6 +225,8 @@ public class Lawman extends PathfinderMob implements GeoEntity, GunWielder {
         setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(getRank().gunItem.get()));
         setDropChance(EquipmentSlot.MAINHAND, 0.0F);
         setHomeTo(blockPosition(), PATROL_RADIUS);
+        // A town's own come with its buildings or arrive to replace someone (TownVacancies); posse riders are marked apart.
+        stranger = reason != EntitySpawnReason.STRUCTURE && reason != EntitySpawnReason.EVENT;
         return super.finalizeSpawn(level, difficulty, reason, groupData);
     }
 

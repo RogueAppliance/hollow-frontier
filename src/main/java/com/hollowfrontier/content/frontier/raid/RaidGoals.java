@@ -120,6 +120,8 @@ public final class RaidGoals {
 
     /** The safecracker goes to the vault and works it. TownRaid counts the progress while he's on the spot. */
     static class Safecrack extends Goal {
+        // How far he looks for a way in. Mobs plan 40 blocks by default, and the way from behind a bank to its front door can be longer.
+        private static final float ROUTE_LENGTH = 128.0F;
         private final AbstractOutlaw mob;
         private int repath;
 
@@ -150,6 +152,7 @@ public final class RaidGoals {
         public void start() {
             repath = 0;
             mob.setTarget(null);
+            mob.getNavigation().setRequiredPathLength(ROUTE_LENGTH);
         }
 
         @Override
@@ -163,7 +166,7 @@ public final class RaidGoals {
             if (raid.atWork(mob)) {
                 mob.getNavigation().stop();
                 mob.getLookControl().setLookAt(crack.getX() + 0.5, crack.getY() + 0.8, crack.getZ() + 0.5);
-            } else if (--repath <= 0 || mob.getNavigation().isDone()) {
+            } else if (--repath <= 0) {
                 repath = 20;
                 mob.getNavigation().moveTo(work.getX() + 0.5, work.getY(), work.getZ() + 0.5, 1.15);
             }
@@ -172,6 +175,7 @@ public final class RaidGoals {
         @Override
         public void stop() {
             mob.getNavigation().stop();
+            mob.getNavigation().setRequiredPathLength(0.0F);
         }
     }
 

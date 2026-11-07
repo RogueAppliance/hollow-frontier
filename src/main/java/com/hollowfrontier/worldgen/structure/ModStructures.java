@@ -58,8 +58,8 @@ public final class ModStructures {
     public static final ResourceKey<Structure> FRONTIER_TOWN = TownStyle.FRONTIER.structure();
     /** Every town structure, one per style. */
     public static final List<ResourceKey<Structure>> TOWNS = java.util.Arrays.stream(TownStyle.values()).map(TownStyle::structure).toList();
-    /** Lootr's own tag: its chests lose the marker raids find a vault by, so towns stay out of it. Harmless without Lootr. */
-    public static final TagKey<Structure> LOOTR_BLACKLIST = TagKey.create(Registries.STRUCTURE, Identifier.fromNamespaceAndPath("lootr", "blacklist"));
+    /** The same towns as a tag, for a search over all of them at once (TownSpawn). */
+    public static final TagKey<Structure> TOWN_TAG = TagKey.create(Registries.STRUCTURE, HollowFrontier.id("towns"));
     private static final int TOWN_DEPTH = 3;
     private static final int TOWN_REACH = 116; // the most a jigsaw structure with a beard may span from its centre (128 - 12)
     public static final ResourceKey<Structure> OUTLAW_CAMP = structure("outlaw_camp");

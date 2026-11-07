@@ -82,11 +82,12 @@ final class DataTests {
         h.succeed();
     }
 
-    /** Lootr's chests lose the vault marker, so every town style has to be on its structure blacklist. */
-    static void townsStayOutOfLootr(GameTestHelper h) {
+    /** On Lootr's structure blacklist a town's chests won't open at all: its hook cancels the unpack, then the tag refuses the conversion. */
+    static void townsStayOffLootrBlacklist(GameTestHelper h) {
         var structures = h.getLevel().registryAccess().lookupOrThrow(Registries.STRUCTURE);
+        var blacklist = net.minecraft.tags.TagKey.create(Registries.STRUCTURE, net.minecraft.resources.Identifier.fromNamespaceAndPath("lootr", "blacklist"));
         for (ResourceKey<Structure> town : ModStructures.TOWNS) {
-            h.assertTrue(structures.getOrThrow(town).is(ModStructures.LOOTR_BLACKLIST), town.identifier() + " not on Lootr's blacklist");
+            h.assertFalse(structures.getOrThrow(town).is(blacklist), town.identifier() + " on Lootr's blacklist");
         }
         h.succeed();
     }
