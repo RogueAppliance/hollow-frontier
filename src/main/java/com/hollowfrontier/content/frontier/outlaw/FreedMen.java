@@ -87,7 +87,10 @@ public final class FreedMen {
         BlockPos home = man.blockPosition();
         say(player, man, "home");
         Townsfolk prospector = man.convertTo(ModEntities.TOWNSFOLK.get(), ConversionParams.single(man, false, false),
-                folk -> folk.setFolk(Folk.PROSPECTOR));
+                folk -> {
+                    folk.setFolk(Folk.PROSPECTOR);
+                    folk.markStranger();
+                });
         if (prospector == null) {
             return null;
         }

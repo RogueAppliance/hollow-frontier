@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.4 — New worlds start in town, new faces, and safecrackers find the way in
+
+- **New worlds start in town:** a new world now puts you on open ground in the nearest town's square, and you come back there if you die with no bed. With no town within about 10,000 blocks you start where the game would have put you. Existing worlds keep their spawn. Set `spawnAtTown` in `hollowfrontier-towns-server.toml`, in the config folder, before creating the world. On a dedicated server with operators, set `spawn-protection=0`, or other players can't use the doors and chests round the square.
+- **Towns replace their dead:** when a townsperson or lawman a town started with dies, someone new slowly takes their place: one at a time, about one a Minecraft day, in the same job at the same post, and out of players' sight. A town never grows past what it started with, and nobody arrives during a raid. It works in existing towns, for deaths from this version on. Set `arrivals` and `arrivalTime` in `hollowfrontier-towns-server.toml`.
+- **Lootr:** town chests are per-player Lootr chests again, and they open. 1.1.3 kept towns out of Lootr to protect raids, but with Lootr installed that stopped town chests opening at all, and a raid could find an empty vault. Bank vaults and the sheriff's strongbox stay ordinary shared chests, so raids can still rob them. They fill when their chunk loads, in existing towns too.
+- **Raids:** the safecracker now finds his way round to a bank's front door. Before, he gave up after looking 40 blocks ahead, so he could end up standing at the bank's back wall and never reach the vault.
+- **Town searches:** a search that finds no town is faster in rough country such as amplified worlds. Towns still stand in the same places.
+- **Startup warning:** the warning about a deprecated `logoFile` property is gone.
+
 ## 1.1.3 — Raids reach the vault (2026-11-06)
 
 - **Raids:** a gang that rides in can now get through doors on foot. Before, outlaws learned doors while mounted, so the skill went to the horse, and a mounted raid could never reach a vault indoors.

@@ -120,7 +120,7 @@ Bringing it down breaks the Grays' hold on the outlaws, but the story doesn't st
 
 ## Where to Start
 
-Talk to a town's **postmaster** first: the **Polar Survey's last letter** is waiting, and it keeps track of the road north (what to build, and roughly where the crater is). The **Hollow Frontier** and **Steam Age** advancement tabs lay out the rest of the frontier. Once you reach the Hollow Earth, craft a **Concavian Codex** (a book and a phlogiston shard) and it will guide you from there.
+A new world starts you in the nearest town's square. On a dedicated server with operators, set `spawn-protection=0`, or other players can't use the doors and chests around it. Talk to a town's **postmaster** first: the **Polar Survey's last letter** is waiting, and it keeps track of the road north (what to build, and roughly where the crater is). The **Hollow Frontier** and **Steam Age** advancement tabs lay out the rest of the frontier. Once you reach the Hollow Earth, craft a **Concavian Codex** (a book and a phlogiston shard) and it will guide you from there.
 
 ---
 
@@ -149,6 +149,8 @@ Hollow Frontier works on its own. If these mods are installed, it uses them:
 - `hollowfrontier-server.toml` (per world): outlaw raids, how often they come, how big they are, and what the bank stands to lose.
 - `hollowfrontier-ufo-server.toml` (per world): saucer flyovers and landings, and whether their beams take players.
 - `hollowfrontier-mysteries-server.toml` (per world): airship sightings, cattle mutilations, crop circles, and the men in black, each switchable.
+- `hollowfrontier-towns-server.toml` (per world): whether towns replace the townsfolk and lawmen they lose, and how long each new arrival takes.
+  It also holds `spawnAtTown`, on by default, which starts new worlds in the nearest town. A world chooses its spawn once, so set this in the `config` folder before creating the world.
 - `hollowfrontier-saloon-server.toml` and `hollowfrontier-dust-devils-server.toml` (per world): saloon brawls and missing time; dust devils.
 - `hollowfrontier-startup.toml`: crafting-table brass. Turn it off if another mod makes brass.
 - Gamerule `hollowfrontier:saucer_beams_players`: whether a player's saucer can beam up other players.

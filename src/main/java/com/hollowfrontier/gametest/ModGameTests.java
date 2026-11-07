@@ -39,7 +39,7 @@ public final class ModGameTests {
         test("recipes_load", 20, DataTests::recipesLoad);
         test("brass_steps_aside", 20, DataTests::brassStepsAside);
         test("loot_tables_load", 20, DataTests::lootTablesLoad);
-        test("towns_stay_out_of_lootr", 20, DataTests::townsStayOutOfLootr);
+        test("towns_stay_off_lootr_blacklist", 20, DataTests::townsStayOffLootrBlacklist);
         test("tags_apply", 20, DataTests::tagsApply);
         test("worldgen_registered", 20, DataTests::worldgenRegistered);
         test("structure_templates_load", 20, DataTests::structureTemplatesLoad);
@@ -406,6 +406,8 @@ public final class ModGameTests {
         raid("lawmen_engage_raiders", 400, RaidTests::lawmenEngageRaiders);
         raid("mounted_gang_opens_doors", 40, RaidTests::mountedGangOpensDoors);
         raid("strongbox_ignores_cell_doors", 20, RaidTests::strongboxIgnoresCellDoors);
+        raid("vault_chests_stock_themselves", 20, RaidTests::vaultChestsStockThemselves);
+        raid("safecracker_walks_round_the_block", 300, RaidTests::safecrackerWalksRoundTheBlock);
         raid("vault_timer_robs_chest", 200, RaidTests::vaultTimerRobsChest);
         raid("killing_safecracker_interrupts", 100, RaidTests::killingSafecrackerInterrupts);
         raid("defended_raid_pays_and_pardons", 40, RaidTests::defendedRaidPaysAndPardons);
@@ -420,6 +422,19 @@ public final class ModGameTests {
         raid("bagman_returns_box_coins", 300, RaidTests::bagmanReturnsBoxCoins);
         raid("robbed_bank_tells_owners", 300, RaidTests::robbedBankTellsOwners);
         raid("town_talks_of_raid_and_robbery", 20, RaidTests::townTalksOfRaidAndRobbery);
+        raid("arrivals_wait_out_the_raid", 40, RaidTests::arrivalsWaitOutTheRaid);
+        // Towns replacing their dead
+        raid("town_replaces_its_dead_one_at_a_time", 40, ArrivalTests::replacedOneAtATime);
+        raid("barmaid_replaced_as_barmaid", 20, ArrivalTests::barmaidReplacedAsBarmaid);
+        raid("strangers_not_replaced", 20, ArrivalTests::strangersNotReplaced);
+        raid("arrivals_keep_out_of_sight", 20, ArrivalTests::arrivalsKeepOutOfSight);
+        raid("arrivals_find_ground_over_lost_post", 20, ArrivalTests::arrivalsFindGroundOverLostPost);
+        raid("vacancies_survive_save", 20, ArrivalTests::vacanciesSurviveSave);
+        // New worlds starting in town
+        field("every_square_has_a_landing", 40, TownSpawnTests::everySquareHasALanding);
+        field("landing_keeps_out_from_under_roofs", 20, TownSpawnTests::landingKeepsOutFromUnderRoofs);
+        test("no_town_leaves_the_spawn_alone", 20, TownSpawnTests::noTownLeavesTheSpawnAlone);
+        test("towns_tag_holds_every_town", 20, TownSpawnTests::townsTagHoldsEveryTown);
         // Voices (19)
         test("postmaster_hands_over_the_letter", 20, SurveyTests::postmasterHandsOverTheLetter);
         test("letter_ticks_off_the_road", 20, SurveyTests::letterTicksOffTheRoad);

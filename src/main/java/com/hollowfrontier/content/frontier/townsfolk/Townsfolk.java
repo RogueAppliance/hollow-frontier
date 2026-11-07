@@ -83,6 +83,8 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
     // Set when the folk came from NBT (a town building chose it), so spawning doesn't reroll it.
     private boolean folkChosen;
     private @Nullable BlockPos workplace;
+    // Not one of the town's own (a spawn egg's, a freed man): the town doesn't replace them (TownVacancies).
+    private boolean stranger;
 
     public Townsfolk(EntityType<? extends Townsfolk> type, Level level) {
         super(type, level);
@@ -122,12 +124,29 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
         return workplace;
     }
 
+    /** Sets where they work, for someone taking over a post. */
+    public void setWorkplace(BlockPos pos) {
+        workplace = pos;
+    }
+
+    /** Whether their town would replace them. */
+    public boolean isResident() {
+        return !stranger;
+    }
+
+    public void markStranger() {
+        stranger = true;
+    }
+
     @Override
     protected void addAdditionalSaveData(ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.putString("folk", getFolk().id());
         if (workplace != null) {
             output.store("workplace", BlockPos.CODEC, workplace);
+        }
+        if (stranger) {
+            output.putBoolean("stranger", true);
         }
     }
 
@@ -136,6 +155,7 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
         super.readAdditionalSaveData(input);
         input.getString("folk").ifPresent(id -> setFolk(Folk.byId(id)));
         workplace = input.read("workplace", BlockPos.CODEC).orElse(null);
+        stranger = input.getBooleanOr("stranger", false);
     }
 
     // Asleep in bed: no walking off with the blankets.
@@ -149,6 +169,8 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
         if (!folkChosen) {
             setFolk(Folk.RANDOM[level.getRandom().nextInt(Folk.RANDOM.length)]);
         }
+        // A town's own come with its buildings or arrive to replace someone (TownVacancies).
+        stranger = reason != EntitySpawnReason.STRUCTURE && reason != EntitySpawnReason.EVENT;
         return super.finalizeSpawn(level, difficulty, reason, groupData);
     }
 
