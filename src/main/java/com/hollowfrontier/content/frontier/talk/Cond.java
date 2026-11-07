@@ -49,7 +49,8 @@ public record Cond(Set<Fact> all, Set<Fact> none, Act from, Act to) {
 
     public boolean test(Context context) {
         return context.facts().containsAll(all) && none.stream().noneMatch(context::has)
-                && context.act().atLeast(from) && to.atLeast(context.act());
+                && context.act().atLeast(from) && to.atLeast(context.act())
+                && (from != Act.GATEWAY || context.beenDown());
     }
 
     /** Whether this asks for an urgent fact ({@link Fact#urgent}). */

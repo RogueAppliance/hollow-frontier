@@ -48,6 +48,14 @@ public enum Act {
         return FRONTIER;
     }
 
+    /**
+     * Whether this listener has been down to the Hollow Earth. The acts aren't always reached in order: a saucer can turn up
+     * first, and that puts a listener past {@link #GATEWAY} without their ever having gone through one.
+     */
+    public static boolean beenDown(ServerLevel level, @Nullable Player player) {
+        return player instanceof ServerPlayer serverPlayer ? GATEWAY.reached(level, serverPlayer) : of(level, null).atLeast(GATEWAY);
+    }
+
     private boolean reached(ServerLevel level, ServerPlayer player) {
         AdvancementHolder holder = level.getServer().getAdvancements().get(HollowFrontier.id(advancement));
         return holder != null && player.getAdvancements().getOrStartProgress(holder).isDone();

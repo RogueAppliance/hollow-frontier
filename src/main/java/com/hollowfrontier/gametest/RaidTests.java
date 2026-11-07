@@ -38,6 +38,7 @@ import com.hollowfrontier.worldgen.structure.ModChestLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.RegistryOps;
@@ -51,6 +52,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 /**
@@ -540,6 +542,26 @@ final class RaidTests {
         h.assertFalse(vault.isEmpty(), "vault chest rolled nothing");
         h.assertTrue(site(h).vault().contains(h.absolutePos(VAULT_CHEST)), "a stocked chest is still the vault");
         h.assertTrue(ordinary.getLootTable() != null, "an ordinary chest was stocked too");
+        h.succeed();
+    }
+
+    /** A chest still waiting in its chunk's pending block entities, as in a freshly generated chunk, gets stocked too. */
+    static void vaultChestsStockWhilePending(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        BlockPos pos = h.absolutePos(VAULT_CHEST);
+        ChestBlockEntity vault = h.getBlockEntity(VAULT_CHEST, ChestBlockEntity.class);
+        vault.clearContent();
+        vault.setLootTable(ModChestLoot.BANK, 1L);
+        CompoundTag saved = vault.saveWithFullMetadata(level.registryAccess());
+        LevelChunk chunk = level.getChunkAt(pos);
+        chunk.removeBlockEntity(pos);
+        chunk.setBlockEntityNbt(saved);
+        h.assertTrue(!chunk.getBlockEntities().containsKey(pos), "the chest should be pending");
+        VaultChests.stock(level, chunk);
+        ChestBlockEntity stocked = h.getBlockEntity(VAULT_CHEST, ChestBlockEntity.class);
+        h.assertTrue(stocked.getLootTable() == null, "a pending vault chest kept its loot table");
+        h.assertFalse(stocked.isEmpty(), "a pending vault chest rolled nothing");
+        h.assertTrue(site(h).vault().contains(pos), "a pending chest lost its mark");
         h.succeed();
     }
 

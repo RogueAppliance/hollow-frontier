@@ -28,10 +28,11 @@ import net.minecraft.world.phys.AABB;
 
 /**
  * The facts of one moment of talk, and the listener's act. {@code poster} is the name on a Wanted Poster the listener
- * carries (empty if none), passed to every line as its first argument so the poster lines can name him.
+ * carries (empty if none), passed to every line as its first argument so the poster lines can name him. {@code beenDown} is
+ * whether the listener has been to the Hollow Earth, which their act alone can't say ({@link Act#beenDown}).
  */
-public record Context(Set<Fact> facts, Act act, String poster) {
-    public static final Context QUIET = new Context(EnumSet.noneOf(Fact.class), Act.FRONTIER, "");
+public record Context(Set<Fact> facts, Act act, String poster, boolean beenDown) {
+    public static final Context QUIET = new Context(EnumSet.noneOf(Fact.class), Act.FRONTIER, "", false);
     /** How near a Gray in disguise has to be for the townsfolk to remark on it (21c). */
     public static final double STRANGER_RANGE = 24.0;
     /** How long after a dust devil took their hat a bareheaded listener gets remarked on (29). */
@@ -41,7 +42,7 @@ public record Context(Set<Fact> facts, Act act, String poster) {
     public static Context of(Act act, Fact... facts) {
         EnumSet<Fact> set = EnumSet.noneOf(Fact.class);
         set.addAll(Set.of(facts));
-        return new Context(set, act, set.contains(Fact.POSTER) ? "Black Jack Ketchum" : "");
+        return new Context(set, act, set.contains(Fact.POSTER) ? "Black Jack Ketchum" : "", act.atLeast(Act.GATEWAY));
     }
 
     public boolean has(Fact fact) {
@@ -122,7 +123,7 @@ public record Context(Set<Fact> facts, Act act, String poster) {
                 facts.add(Fact.LOST_HAT);
             }
         }
-        return new Context(facts, Act.of(level, player), poster);
+        return new Context(facts, Act.of(level, player), poster, Act.beenDown(level, player));
     }
 
     private static void recent(MysteryLog log, MysteryLog.Kind kind, Fact fact, BlockPos where, long now, Set<Fact> facts) {

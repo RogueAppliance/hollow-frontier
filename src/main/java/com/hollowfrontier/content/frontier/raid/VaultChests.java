@@ -7,9 +7,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import com.hollowfrontier.HollowFrontier;
 import com.hollowfrontier.registry.ModAttachments;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
@@ -35,12 +35,13 @@ import net.neoforged.neoforge.event.tick.ServerTickEvent;
 public final class VaultChests {
     private VaultChests() {}
 
-    private static final Queue<ChunkPos> LOADED = new ConcurrentLinkedQueue<>();
+    private static final Queue<LevelChunk> LOADED = new ConcurrentLinkedQueue<>();
 
     @SubscribeEvent
     static void onChunkLoad(ChunkEvent.Load event) {
-        if (event.getLevel() instanceof ServerLevel level && level.dimension() == Level.OVERWORLD) {
-            LOADED.add(event.getChunk().getPos());
+        // The chunk itself, not its position: a chunk still on its way in isn't findable by position next tick
+        if (event.getLevel() instanceof ServerLevel level && level.dimension() == Level.OVERWORLD && event.getChunk() instanceof LevelChunk chunk) {
+            LOADED.add(chunk);
         }
     }
 
@@ -48,17 +49,16 @@ public final class VaultChests {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     static void onServerTick(ServerTickEvent.Pre event) {
         ServerLevel level = event.getServer().overworld();
-        for (ChunkPos pos = LOADED.poll(); pos != null; pos = LOADED.poll()) {
-            LevelChunk chunk = level.getChunkSource().getChunkNow(pos.x(), pos.z());
-            if (chunk != null) {
-                stock(level, chunk);
-            }
+        for (LevelChunk chunk = LOADED.poll(); chunk != null; chunk = LOADED.poll()) {
+            stock(level, chunk);
         }
     }
 
     /** Fills the chunk's vault chests that haven't rolled their loot yet. */
     public static void stock(ServerLevel level, LevelChunk chunk) {
-        for (BlockEntity entity : List.copyOf(chunk.getBlockEntities().values())) {
+        // By position, and made now: a newly generated chunk's block entities may still be pending, and getBlockEntities leaves those out
+        for (BlockPos pos : List.copyOf(chunk.getBlockEntitiesPos())) {
+            BlockEntity entity = chunk.getBlockEntity(pos, LevelChunk.EntityCreationType.IMMEDIATE);
             if (entity instanceof ChestBlockEntity chest && chest.hasData(ModAttachments.TOWN_VAULT.get()) && chest.getLootTable() != null) {
                 fill(level, chest);
             }
