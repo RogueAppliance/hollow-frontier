@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.4 — New worlds start in town, new faces, and safecrackers find the way in
+## 1.1.4 — New worlds start in town, new faces, and safecrackers find the way in (2026-11-07)
 
 - **New worlds start in town:** a new world now puts you on open ground in the nearest town's square, and you come back there if you die with no bed. With no town within about 10,000 blocks you start where the game would have put you. Existing worlds keep their spawn. Set `spawnAtTown` in `hollowfrontier-towns-server.toml`, in the config folder, before creating the world. On a dedicated server with operators, set `spawn-protection=0`, or other players can't use the doors and chests round the square.
 - **Towns replace their dead:** when a townsperson or lawman a town started with dies, someone new slowly takes their place: one at a time, about one a Minecraft day, in the same job at the same post, and out of players' sight. A town never grows past what it started with, and nobody arrives during a raid. It works in existing towns, for deaths from this version on. Set `arrivals` and `arrivalTime` in `hollowfrontier-towns-server.toml`.
