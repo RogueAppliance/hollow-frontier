@@ -196,8 +196,18 @@ final class ChatterTests {
         player.setItemSlot(EquipmentSlot.HEAD, new ItemStack(ModItems.COWBOY_HAT.get()));
         h.assertTrue(Context.of(h.getLevel(), here, player).has(Fact.OUTFIT), "the whole cowboy outfit");
 
+        // A saucer can come before the Hollow Earth: that listener mustn't hear they've been down there
+        ServerPlayer watcher = TestPlayers.survival(h, new BlockPos(6, 1, 5));
+        award(watcher, "ufo/root");
+        Context sawOne = Context.of(h.getLevel(), watcher.blockPosition(), watcher);
+        h.assertValueEqual(sawOne.act(), Act.GRAYS, "a saucer seen first");
+        h.assertFalse(Cond.act(Act.GATEWAY).test(sawOne), "Hollow Earth lines for someone who hasn't been");
+        h.assertTrue(Cond.only(Act.GRAYS).test(sawOne), "saucer lines still reach them");
+        TestPlayers.leave(watcher);
+
         award(player, "hollow/root");
         h.assertValueEqual(Context.of(h.getLevel(), here, player).act(), Act.GATEWAY, "through a gateway");
+        h.assertTrue(Cond.act(Act.GATEWAY).test(Context.of(h.getLevel(), here, player)), "Hollow Earth lines for someone who has");
         award(player, "ufo/root");
         h.assertValueEqual(Context.of(h.getLevel(), here, player).act(), Act.GRAYS, "a saucer seen");
         boolean wasBroken = Leash.isBroken(h.getLevel());
@@ -292,6 +302,6 @@ final class ChatterTests {
     }
 
     private static Context forced(Set<Fact> facts, Act act) {
-        return new Context(facts.isEmpty() ? EnumSet.noneOf(Fact.class) : EnumSet.copyOf(facts), act, "Black Jack Ketchum");
+        return new Context(facts.isEmpty() ? EnumSet.noneOf(Fact.class) : EnumSet.copyOf(facts), act, "Black Jack Ketchum", act.atLeast(Act.GATEWAY));
     }
 }

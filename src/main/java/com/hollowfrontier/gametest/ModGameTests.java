@@ -407,6 +407,7 @@ public final class ModGameTests {
         raid("mounted_gang_opens_doors", 40, RaidTests::mountedGangOpensDoors);
         raid("strongbox_ignores_cell_doors", 20, RaidTests::strongboxIgnoresCellDoors);
         raid("vault_chests_stock_themselves", 20, RaidTests::vaultChestsStockThemselves);
+        raid("vault_chests_stock_while_pending", 20, RaidTests::vaultChestsStockWhilePending);
         raid("safecracker_walks_round_the_block", 300, RaidTests::safecrackerWalksRoundTheBlock);
         raid("vault_timer_robs_chest", 200, RaidTests::vaultTimerRobsChest);
         raid("killing_safecracker_interrupts", 100, RaidTests::killingSafecrackerInterrupts);

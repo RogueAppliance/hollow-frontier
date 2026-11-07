@@ -180,7 +180,7 @@ final class HumourTests {
 
     private static Context forced(Piece piece) {
         Set<Fact> facts = piece.cond().all().isEmpty() ? EnumSet.noneOf(Fact.class) : EnumSet.copyOf(piece.cond().all());
-        return new Context(facts, piece.cond().from(), "");
+        return new Context(facts, piece.cond().from(), "", piece.cond().from().atLeast(Act.GATEWAY));
     }
 
     // The lang keys in a page, in order.

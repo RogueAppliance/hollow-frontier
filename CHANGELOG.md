@@ -6,6 +6,7 @@
 - **Towns replace their dead:** when a townsperson or lawman a town started with dies, someone new slowly takes their place: one at a time, about one a Minecraft day, in the same job at the same post, and out of players' sight. A town never grows past what it started with, and nobody arrives during a raid. It works in existing towns, for deaths from this version on. Set `arrivals` and `arrivalTime` in `hollowfrontier-towns-server.toml`.
 - **Lootr:** town chests are per-player Lootr chests again, and they open. 1.1.3 kept towns out of Lootr to protect raids, but with Lootr installed that stopped town chests opening at all, and a raid could find an empty vault. Bank vaults and the sheriff's strongbox stay ordinary shared chests, so raids can still rob them. They fill when their chunk loads, in existing towns too.
 - **Raids:** the safecracker now finds his way round to a bank's front door. Before, he gave up after looking 40 blocks ahead, so he could end up standing at the bank's back wall and never reach the vault.
+- **Town talk:** seeing a saucer no longer makes folk talk as if you've been to the Hollow Earth. Lines about going down the hole now wait until you have.
 - **Town searches:** a search that finds no town is faster in rough country such as amplified worlds. Towns still stand in the same places.
 - **Startup warning:** the warning about a deprecated `logoFile` property is gone.
 
