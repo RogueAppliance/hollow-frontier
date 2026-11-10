@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:hollow/still_sea",
+  "criteria": {
+    "fetched": {
+      "trigger": "hollowfrontier:plesiosaur_fetched"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.plesiosaur_fetch.description"
+    },
+    "icon": {
+      "id": "minecraft:cod"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.plesiosaur_fetch.title"
+    }
+  },
+  "requirements": [
+    [
+      "fetched"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

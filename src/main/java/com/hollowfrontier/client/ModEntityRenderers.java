@@ -57,6 +57,7 @@ public final class ModEntityRenderers {
         // A plain minecart body; the engine is its display block (HandcarEngineBlock).
         event.registerEntityRenderer(ModEntities.STEAM_HANDCAR.get(), ctx -> new MinecartRenderer(ctx, ModelLayers.MINECART));
         event.registerEntityRenderer(ModEntities.AIRSHIP.get(), AirshipRenderer::new);
+        event.registerEntityRenderer(ModEntities.STEAM_SUBMERSIBLE.get(), SubmersibleRenderer::new); // 43c
         event.registerBlockEntityRenderer(ModBlockEntities.POLAR_PORTAL.get(), PolarPortalRenderer::new);
         event.registerEntityRenderer(ModEntities.RATTLESNAKE.get(), ctx -> new GlowingGeoRenderer<>(ctx, new DefaultedEntityGeoModel<Rattlesnake>(HollowFrontier.id("rattlesnake"))));
         // The Hollow Earth's creatures (9b2). The hare's crystals and the salamander's spots glow (their *_glowmask textures);
@@ -74,6 +75,12 @@ public final class ModEntityRenderers {
         event.registerEntityRenderer(ModEntities.TERROR_BIRD.get(), ctx -> new MegafaunaRenderer<>(ctx, "terror_bird", 0.7F));
         event.registerEntityRenderer(ModEntities.MEGATHERIUM.get(), ctx -> new MegafaunaRenderer<>(ctx, "megatherium", 1.3F));
         event.registerEntityRenderer(ModEntities.GLYPTODON.get(), ctx -> new MegafaunaRenderer<>(ctx, "glyptodon", 1.2F));
+        // 43b: the Still Sea's creatures, and the thrown Harpoon (its own model, turned to its flight)
+        event.registerEntityRenderer(ModEntities.GREAT_SEA_COW.get(), ctx -> new SeaCreatureRenderer<>(ctx, "great_sea_cow", 1.4F, true));
+        event.registerEntityRenderer(ModEntities.BASILOSAURUS.get(), ctx -> new SeaCreatureRenderer<>(ctx, "basilosaurus", 1.8F, false));
+        event.registerEntityRenderer(ModEntities.PLESIOSAUR.get(), ctx -> new SeaCreatureRenderer<>(ctx, "plesiosaur", 1.2F, false));
+        event.registerEntityRenderer(ModEntities.LAMPJELLY.get(), ctx -> new SeaCreatureRenderer<>(ctx, "lampjelly", 0.3F, false).glowing());
+        event.registerEntityRenderer(ModEntities.HARPOON.get(), HarpoonEntityRenderer::new);
         // The frontier's mysteries (11a): the sighting (its model a quarter size, drawn four times over; its lights glow), and the
         // carcass (its cuts glow faintly)
         event.registerEntityRenderer(ModEntities.AIRSHIP_SIGHTING.get(), ctx -> new GlowingGeoRenderer<>(ctx,

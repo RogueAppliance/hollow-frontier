@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:hollow/still_sea",
+  "criteria": {
+    "harpoon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:harpoon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.harpoon.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:harpoon"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.harpoon.title"
+    }
+  },
+  "requirements": [
+    [
+      "harpoon"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

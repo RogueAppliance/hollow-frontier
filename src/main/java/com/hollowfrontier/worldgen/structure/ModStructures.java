@@ -192,7 +192,7 @@ public final class ModStructures {
                 pools.getOrThrow(GRAY_STATION_POOL), 5));
         context.register(GRAY_PENS, new HollowSiteStructure(hollowSite(biomes.getOrThrow(HollowBiomes.HAS_GRAY_LABS), Map.of(MobCategory.MONSTER, noMonsters)),
                 pools.getOrThrow(GRAY_PENS_POOL), 4));
-        context.register(SYMMES_CAMP, new HollowSiteStructure(hollowSite(biomes.getOrThrow(HollowBiomes.IS_HOLLOW_EARTH), Map.of(MobCategory.MONSTER, noMonsters)),
+        context.register(SYMMES_CAMP, new HollowSiteStructure(hollowSite(biomes.getOrThrow(HollowBiomes.IS_HOLLOW_LAND), Map.of(MobCategory.MONSTER, noMonsters)),
                 pools.getOrThrow(SYMMES_CAMP_POOL), 6));
         context.register(CRYSTAL_RUINS, new HollowSiteStructure(hollowSite(biomes.getOrThrow(HAS_CRYSTAL_RUINS), Map.of(MobCategory.MONSTER, noMonsters)),
                 pools.getOrThrow(CRYSTAL_RUINS_POOL), 8));
@@ -202,7 +202,7 @@ public final class ModStructures {
         context.register(CRASH_SITE, new JigsawStructure(new Structure.StructureSettings(biomes.getOrThrow(HAS_CRASH_SITE), Map.of(),
                 GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN), pools.getOrThrow(CRASH_SITE_POOL), 1,
                 ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
-        context.register(HOLLOW_CRASH_SITE, new HollowSiteStructure(hollowSite(biomes.getOrThrow(HollowBiomes.IS_HOLLOW_EARTH), Map.of()),
+        context.register(HOLLOW_CRASH_SITE, new HollowSiteStructure(hollowSite(biomes.getOrThrow(HollowBiomes.IS_HOLLOW_LAND), Map.of()),
                 pools.getOrThrow(CRASH_SITE_POOL), 6));
         // 27: the wild sites
         HolderSet<Biome> jungle = HolderSet.direct(biomes.getOrThrow(HollowBiomes.PRIMORDIAL_JUNGLE));
@@ -213,7 +213,7 @@ public final class ModStructures {
         context.register(PHLOGISTON_MINE, new HollowSiteStructure(hollowSite(steppes, Map.of(MobCategory.MONSTER, noMonsters)), pools.getOrThrow(pool(WildBlueprints.PHLOGISTON_MINE)), 5, 2));
         context.register(OBSERVATORY, new HollowSiteStructure(hollowSite(steppes, Map.of(MobCategory.MONSTER, noMonsters)), pools.getOrThrow(pool(WildBlueprints.OBSERVATORY)), 5));
         context.register(FOUNDRY, new HollowSiteStructure(hollowSite(badlands, Map.of(MobCategory.MONSTER, noMonsters)), pools.getOrThrow(pool(WildBlueprints.FOUNDRY)), 5));
-        context.register(SKY_SHRINE, new HollowSiteStructure(hollowSite(biomes.getOrThrow(HollowBiomes.IS_HOLLOW_EARTH), Map.of()),
+        context.register(SKY_SHRINE, new HollowSiteStructure(hollowSite(biomes.getOrThrow(HollowBiomes.IS_HOLLOW_LAND), Map.of()),
                 pools.getOrThrow(pool(WildBlueprints.SKY_SHRINE)), 3, 1, true));
     }
 

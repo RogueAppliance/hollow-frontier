@@ -56,6 +56,8 @@ public class TextureArt {
         int ufo = Ufo.writeAll(root);
         int relics = Relics.writeAll(root); // 26-28: the Hollow sites' finds, the seal and the trim
         System.out.println("TextureArt: " + relics + " Hollow relic, sherd, trim and seal textures");
+        int sea = Sea.writeAll(root); // 43b: the Still Sea's creatures, their drops, the Jelly Lamp and the Harpoons
+        System.out.println("TextureArt: " + sea + " Still Sea textures");
         int reworked = Reworked.writeAll(root); // last: it overwrites hand-drawn versions with ones reworked from vanilla
         System.out.println("TextureArt: wrote " + (3 + folk.length + ranks.length) + " skins, " + barmaids + " barmaid skins, " + creatures + " Hollow Earth creature textures, " + megafauna + " megafauna textures, " + mystery + " frontier mystery textures, " + cats + " cat textures, 1 effect icon, " + guns + " gun textures, " + items + " items, " + blocks + " block tiles, " + armor + " armor layers, " + expedition + " airship and polar gateway textures, " + hollow + " Hollow Earth textures, " + starsteel + " starsteel and phlogiston textures, " + concavia + " Concavia textures, " + ufo + " Gray textures, " + reworked + " reworked from vanilla to " + root);
     }
@@ -5711,6 +5713,496 @@ public class TextureArt {
     }
 
     // ---------------------------------------------------------------- helpers
+
+    // ---------------------------------------------------------------- phase 43b: the Still Sea's creatures
+
+    /**
+     * The Still Sea's creatures (43b): box-UV skins matching their hand-written GeckoLib models (the boxes below repeat each
+     * cube's uv and size), the Lampjelly's glow mask, their spawn eggs and drops, the Jelly Lamp and the Harpoons.
+     */
+    static final class Sea {
+        static final int COW = 0x6E6A64, COW_DARK = 0x4E4A46, COW_BELLY = 0x9A948A, COW_SCAR = 0x8A847A;
+        static final int WHALE = 0x3E4A52, WHALE_DARK = 0x262E34, WHALE_BELLY = 0xC8C4B4, TOOTH = 0xEDE6D0, GUM = 0x8A3A3A;
+        static final int PLESIO = 0x4A6A5E, PLESIO_DARK = 0x2E4A40, PLESIO_BELLY = 0xD8D2B0, PLESIO_SPOT = 0x7A9A84;
+        static final int JELLY = 0xBFE8DC, JELLY_RIM = 0x8FCFC0, JELLY_GLOW = 0xE8FFC8, JELLY_CORE = 0xFFF6A0, JELLY_TENTACLE = 0xA8DCD0;
+        static final int BLUBBER = 0xE8D8C0, BLUBBER_SKIN = 0x5E5A56, TALLOW = 0xF0E6C4, IRON = 0xB4B8BE, SHAFT = 0x7A5A36, LINE = 0xC8B890;
+        static final int EYE = 0x101014;
+
+        static int writeAll(File root) throws Exception {
+            write(new File(root, "entity/great_sea_cow.png"), cow());
+            write(new File(root, "entity/basilosaurus.png"), whale());
+            write(new File(root, "entity/plesiosaur.png"), plesiosaur());
+            BufferedImage[] jelly = jelly();
+            write(new File(root, "entity/lampjelly.png"), jelly[0]);
+            write(new File(root, "entity/lampjelly_glowmask.png"), jelly[1]);
+            int n = 5;
+            n += Items.put(root, "great_sea_cow_spawn_egg", Items.egg(COW, pal('d', COW_DARK, 'b', COW_BELLY, 'e', EYE),
+                    "", "", "", "",
+                    "     dddddd",
+                    "    d      d",
+                    "    d e  e d",
+                    "    d      d",
+                    "     bbbbbb",
+                    "     b d  b",
+                    "      bbbb"));
+            n += Items.put(root, "basilosaurus_spawn_egg", Items.egg(WHALE, pal('d', WHALE_DARK, 'b', WHALE_BELLY, 't', TOOTH, 'e', 0xC8B040),
+                    "", "", "",
+                    "     dddddd",
+                    "    d      d",
+                    "    de    ed",
+                    "    d      d",
+                    "    tttttttt",
+                    "    dddddddd",
+                    "    t t tt t",
+                    "     bbbbbb"));
+            n += Items.put(root, "plesiosaur_spawn_egg", Items.egg(PLESIO, pal('d', PLESIO_DARK, 'b', PLESIO_BELLY, 's', PLESIO_SPOT, 'e', EYE),
+                    "", "",
+                    "      dd",
+                    "     dedd",
+                    "      ddb",
+                    "       db",
+                    "       db",
+                    "      sdb",
+                    "     sddbb",
+                    "    sdddbbb",
+                    "    dddbbbb",
+                    "     dbbbb"));
+            n += Items.put(root, "lampjelly_spawn_egg", Items.egg(JELLY_RIM, pal('j', JELLY, 'g', JELLY_GLOW, 'c', JELLY_CORE, 't', JELLY_TENTACLE),
+                    "", "", "",
+                    "      jjjj",
+                    "     jggggj",
+                    "    jggccggj",
+                    "    jggccggj",
+                    "    jjjjjjjj",
+                    "     t t  t",
+                    "     t  t t",
+                    "      t t"));
+            n += Items.put(root, "blubber", sprite(BLUBBER, pal('k', 0x6A5A48, 's', BLUBBER_SKIN, 'S', shade(BLUBBER_SKIN, 0.75), 'p', 0xD8A8A0),
+                    "",
+                    "",
+                    "",
+                    "    kkkkkkkk",
+                    "   ksssssssSk",
+                    "  k6655555544k",
+                    "  k6555555444k",
+                    "  k5555p55444k",
+                    "  k555pp54443k",
+                    "  k5555544433k",
+                    "  k5544444333k",
+                    "   k44443333k",
+                    "    kkkkkkkk"));
+            n += Items.put(root, "tallow", sprite(TALLOW, pal('k', 0x7A6A48),
+                    "",
+                    "",
+                    "",
+                    "",
+                    "     kkkkkkk",
+                    "    k6666655k",
+                    "   k66555554k",
+                    "   k65555544k",
+                    "   k55555444k",
+                    "   k55544443k",
+                    "   k54444433k",
+                    "    kkkkkkkk"));
+            n += Items.put(root, "basilosaur_tooth", sprite(TOOTH, pal('k', 0x4A4030, 'r', 0x9A8458, 'R', 0x7A6644),
+                    "",
+                    "",
+                    "         kk",
+                    "        k65k",
+                    "        k55k",
+                    "       k654k",
+                    "       k554k",
+                    "      k6544k",
+                    "      k5543k",
+                    "     k55443k",
+                    "     kr443Rk",
+                    "    krrrRRRk",
+                    "    krrRRRk",
+                    "     kkkkk"));
+            n += Items.put(root, "lamp_gel", sprite(JELLY_RIM, pal('k', 0x3E7A70, 'g', JELLY_GLOW, 'c', JELLY_CORE),
+                    "",
+                    "",
+                    "",
+                    "",
+                    "      kkkk",
+                    "     k66g5k",
+                    "    k6ggcg5k",
+                    "    k6gccg4k",
+                    "    k5ggg54k",
+                    "    k555444k",
+                    "     k4443k",
+                    "      kkkk"));
+            java.util.Map<java.lang.Character, Integer> harpoon = pal('k', 0x2A2420, 's', SHAFT, 'S', shade(SHAFT, 0.72), 'i', IRON, 'I', shade(IRON, 0.7),
+                    'h', shade(IRON, 1.2), 'l', LINE, 'L', shade(LINE, 0.75), 't', TOOTH, 'T', shade(TOOTH, 0.78));
+            n += Items.put(root, "harpoon_icon", sprite(IRON, harpoon,
+                    "             kk",
+                    "            khik",
+                    "          kkhiIk",
+                    "         kiiiIk",
+                    "          kiIk",
+                    "         ksSkk",
+                    "        ksSk",
+                    "       ksSk",
+                    "      ksSk",
+                    "     ksSk",
+                    "    ksSk",
+                    "  lkksSk",
+                    " lLksSk",
+                    " lLLkk",
+                    "  ll"));
+            n += Items.put(root, "toothed_harpoon_icon", sprite(IRON, harpoon,
+                    "             kk",
+                    "           tkhik",
+                    "          kkhiIk",
+                    "         kiiiIkt",
+                    "         tkiIkT",
+                    "         ksSkk",
+                    "        ksSk",
+                    "       ksSk",
+                    "      ksSk",
+                    "     ksSk",
+                    "    ksSk",
+                    "  lkksSk",
+                    " lLksSk",
+                    " lLLkk",
+                    "  ll"));
+            // The harpoons' model sheets (held and in flight); the icons above are what the inventory shows
+            n += Items.put(root, "harpoon", harpoonSheet(4361));
+            n += Items.put(root, "toothed_harpoon", harpoonSheet(4362));
+            write(new File(root, "entity/harpoon.png"), harpoonSheet(4362));
+            n++;
+            // The harpoon's line: four faces of twisted strands, a quarter of the sheet each, running its length
+            write(new File(root, "entity/harpoon_line.png"), rope(4363));
+            n++;
+            n += Tiles.put(root, "jelly_lamp", lamp(4301));
+            // 43c: the Steam Submersible's skin and its item
+            BufferedImage[] sub = submersible();
+            write(new File(root, "entity/steam_submersible.png"), sub[0]);
+            write(new File(root, "entity/steam_submersible_glowmask.png"), sub[1]);
+            n += 2 + Items.put(root, "steam_submersible", sprite(SUB_BRASS, pal('k', 0x2E2416, 'c', SUB_COPPER, 'C', shade(SUB_COPPER, 0.7), 'g', SUB_GLASS,
+                            'G', shade(SUB_GLASS, 1.5), 'l', JELLY_CORE, 'i', IRON),
+                    "",
+                    "",
+                    "      kkkkkk",
+                    "     kgGggggk",
+                    "     kgggGggk",
+                    "   kkkkkkkkkkkk",
+                    "  k66555555544ki",
+                    " lk6c5555c5544kii",
+                    " lk5c5555c4443ki",
+                    "  k55444444333k",
+                    "   kCCkkkkCCkk",
+                    "    kk    kk"));
+            return n;
+        }
+
+        /**
+         * A harpoon's 64x32 sheet (box UV, matching geckolib/models/item/harpoon.geo.json and its toothed and entity
+         * twins): a wooden shaft with a darker grain, an iron head and two crossed iron barbs, an iron butt cap, a coil of
+         * line by the butt, and ivory for the teeth (drawn on every sheet; only the toothed models have the cubes).
+         */
+        static BufferedImage harpoonSheet(long seed) {
+            BufferedImage img = new BufferedImage(64, 32, BufferedImage.TYPE_INT_ARGB);
+            Painter p = new Painter(img, new Random(seed));
+            Box shaft = new Box(0, 0, 1, 1, 24), head = new Box(0, 25, 2, 2, 5), barbWide = new Box(16, 26, 5, 1, 2), barbTall = new Box(32, 25, 1, 5, 2);
+            Box butt = new Box(40, 25, 2, 2, 1), coil = new Box(48, 25, 3, 3, 2), tooth = new Box(52, 0, 1, 1, 2);
+            Creatures.all(p, shaft, SHAFT, 8);
+            for (Rect side : new Rect[] {shaft.top(), shaft.bottom()}) {
+                for (int y = 3; y < side.h(); y += 5) p.row(side, y, shade(SHAFT, 0.72));
+            }
+            Creatures.all(p, head, IRON, 8);
+            p.face(head.front(), shade(IRON, 1.25), 4);
+            Creatures.all(p, barbWide, shade(IRON, 0.85), 6);
+            Creatures.all(p, barbTall, shade(IRON, 0.85), 6);
+            Creatures.all(p, butt, shade(IRON, 0.75), 5);
+            Creatures.all(p, coil, LINE, 8);
+            for (Rect side : new Rect[] {coil.east(), coil.west(), coil.top(), coil.bottom()}) p.row(side, side.h() / 2, shade(LINE, 0.75));
+            Creatures.all(p, tooth, TOOTH, 5);
+            return img;
+        }
+
+        /** A length of rope, 16x16: hemp strands twisting along it (left to right), darker in the lay between them. */
+        static BufferedImage rope(long seed) {
+            BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+            Painter p = new Painter(img, new Random(seed));
+            p.face(new Rect(0, 0, 16, 16), LINE, 8);
+            for (int x = 0; x < 16; x++)
+                for (int y = 0; y < 16; y++) {
+                    int lay = Math.floorMod(x + y, 4);
+                    if (lay == 0) p.set(x, y, shade(LINE, 0.62));
+                    else if (lay == 2) p.set(x, y, shade(LINE, 1.12));
+                }
+            return img;
+        }
+
+        /** Great Sea Cow: slate grey and barnacle-rough, darker along the back, a paler belly, old pale scars, small dark eyes. */
+        static BufferedImage cow() {
+            BufferedImage img = new BufferedImage(256, 128, BufferedImage.TYPE_INT_ARGB);
+            Painter p = new Painter(img, new Random(4311));
+            Box body = new Box(0, 0, 22, 18, 40), head = new Box(128, 0, 14, 12, 14), snout = new Box(188, 0, 10, 8, 6);
+            Box tail = new Box(128, 30, 14, 10, 16), fluke = new Box(128, 60, 28, 3, 12), flipper = new Box(190, 30, 3, 10, 8);
+            for (Box b : new Box[] {body, head, snout, tail}) {
+                Creatures.all(p, b, COW, 9);
+                p.face(b.top(), COW_DARK, 8);
+                p.face(b.bottom(), COW_BELLY, 6);
+                for (Rect side : new Rect[] {b.east(), b.west()}) {
+                    for (int y = 0; y < Math.max(1, side.h() / 4); y++) p.row(side, y, shade(COW_DARK, 1.0 + y * 0.08));
+                    for (int y = side.h() - Math.max(1, side.h() / 4); y < side.h(); y++) p.row(side, y, COW_BELLY);
+                }
+            }
+            Creatures.all(p, fluke, COW_DARK, 8);
+            Creatures.all(p, flipper, COW_DARK, 8);
+            // Scars and barnacle flecks on the back and flanks
+            Random r = new Random(4312);
+            for (Rect face : new Rect[] {body.top(), body.east(), body.west(), tail.top()}) {
+                for (int i = 0; i < face.w() * face.h() / 40; i++) {
+                    int x = face.x() + r.nextInt(face.w() - 3), y = face.y() + r.nextInt(face.h());
+                    for (int k = 0; k < 2 + r.nextInt(3); k++) p.set(x + k, y, COW_SCAR);
+                }
+            }
+            // The face: nostrils on the snout's front, a mouth line, eyes on the head's flanks
+            p.face(snout.front(), shade(COW, 1.1), 5);
+            p.set(snout.front().x() + 2, snout.front().y() + 2, COW_DARK);
+            p.set(snout.front().x() + 7, snout.front().y() + 2, COW_DARK);
+            p.row(snout.front(), 6, COW_DARK);
+            Creatures.eyes(p, head, 3, 4, EYE);
+            return img;
+        }
+
+        /** Basilosaurus: storm-dark above, bone-pale below, the join ragged along its length; a mouth full of teeth. */
+        static BufferedImage whale() {
+            BufferedImage img = new BufferedImage(256, 128, BufferedImage.TYPE_INT_ARGB);
+            Painter p = new Painter(img, new Random(4321));
+            Box head = new Box(0, 0, 12, 10, 22), jaw = new Box(72, 0, 10, 3, 18), chest = new Box(0, 34, 16, 16, 32), body = new Box(100, 34, 14, 14, 32);
+            Box hips = new Box(0, 84, 10, 10, 32), tail = new Box(88, 84, 6, 6, 28), fluke = new Box(160, 84, 20, 2, 10), flipper = new Box(196, 34, 2, 6, 10);
+            Random r = new Random(4322);
+            for (Box b : new Box[] {head, chest, body, hips, tail}) {
+                Creatures.all(p, b, WHALE, 8);
+                p.face(b.top(), WHALE_DARK, 7);
+                p.face(b.bottom(), WHALE_BELLY, 6);
+                for (Rect side : new Rect[] {b.east(), b.west()}) {
+                    for (int x = 0; x < side.w(); x++) {
+                        int join = side.h() * 3 / 5 + r.nextInt(3) - 1;
+                        for (int y = join; y < side.h(); y++) p.set(side.x() + x, side.y() + y, WHALE_BELLY);
+                    }
+                    p.row(side, 0, WHALE_DARK);
+                }
+            }
+            Creatures.all(p, fluke, WHALE_DARK, 7);
+            Creatures.all(p, flipper, WHALE_DARK, 7);
+            // The jaw: pale, with a row of teeth standing along its upper edge; gums and teeth along the head's lower edge too
+            Creatures.all(p, jaw, WHALE_BELLY, 6);
+            p.face(jaw.top(), GUM, 6);
+            for (Rect side : new Rect[] {jaw.east(), jaw.west(), jaw.front()}) {
+                for (int x = 0; x < side.w(); x += 2) p.set(side.x() + x, side.y(), TOOTH);
+            }
+            for (Rect side : new Rect[] {head.east(), head.west(), head.front()}) {
+                p.row(side, side.h() - 1, GUM);
+                for (int x = 0; x < side.w(); x += 2) p.set(side.x() + x, side.y() + side.h() - 1, TOOTH);
+            }
+            p.face(head.bottom(), GUM, 8);
+            Creatures.eyes(p, head, 8, 3, 0xC8B040);
+            return img;
+        }
+
+        /** Plesiosaur: sea green with paler spots down the back, a cream belly and throat, dark flippers, a small bright eye. */
+        static BufferedImage plesiosaur() {
+            BufferedImage img = new BufferedImage(128, 64, BufferedImage.TYPE_INT_ARGB);
+            Painter p = new Painter(img, new Random(4331));
+            Box body = new Box(0, 0, 16, 10, 24), neck = new Box(84, 0, 4, 4, 12), head = new Box(84, 18, 5, 4, 8);
+            Box tail = new Box(0, 36, 6, 5, 14), flipper = new Box(44, 36, 10, 2, 6);
+            Random r = new Random(4332);
+            for (Box b : new Box[] {body, neck, head, tail}) {
+                Creatures.all(p, b, PLESIO, 8);
+                p.face(b.bottom(), PLESIO_BELLY, 5);
+                for (Rect side : new Rect[] {b.east(), b.west()}) {
+                    p.row(side, side.h() - 1, PLESIO_BELLY);
+                    if (side.h() > 4) p.row(side, side.h() - 2, shade(PLESIO_BELLY, 0.9));
+                }
+                Rect top = b.top();
+                for (int i = 0; i < top.w() * top.h() / 10; i++) {
+                    p.set(top.x() + r.nextInt(top.w()), top.y() + r.nextInt(top.h()), PLESIO_SPOT);
+                }
+            }
+            p.face(body.top(), PLESIO_DARK, 7);
+            for (int i = 0; i < 30; i++) p.set(body.top().x() + r.nextInt(16), body.top().y() + r.nextInt(24), PLESIO_SPOT);
+            Creatures.all(p, flipper, PLESIO_DARK, 7);
+            p.face(flipper.bottom(), shade(PLESIO_BELLY, 0.8), 5);
+            p.row(head.front(), 3, PLESIO_DARK); // the mouth
+            Creatures.eyes(p, head, 2, 1, 0xE8D060);
+            return img;
+        }
+
+        /** Lampjelly: a pale glassy bell with a lit heart showing through its top and sides, a darker rim, thin tentacles. */
+        static BufferedImage[] jelly() {
+            BufferedImage img = new BufferedImage(64, 32, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage glow = new BufferedImage(64, 32, BufferedImage.TYPE_INT_ARGB);
+            Painter p = new Painter(img, new Random(4341));
+            Painter g = new Painter(glow, new Random(4341));
+            Box bell = new Box(0, 0, 8, 6, 8), skirt = new Box(0, 20, 10, 1, 10), tentacle = new Box(48, 0, 1, 7, 1), middle = new Box(54, 0, 1, 9, 1);
+            Creatures.all(p, bell, JELLY, 6);
+            Creatures.all(p, skirt, JELLY_RIM, 5);
+            Creatures.all(p, tentacle, JELLY_TENTACLE, 5);
+            Creatures.all(p, middle, JELLY_TENTACLE, 5);
+            for (Painter q : new Painter[] {p, g}) {
+                // The heart: a 4x4 glow in the middle of the top, and a soft patch on each side
+                Rect top = bell.top();
+                for (int x = 2; x < 6; x++)
+                    for (int y = 2; y < 6; y++) q.set(top.x() + x, top.y() + y, (x == 3 || x == 4) && (y == 3 || y == 4) ? JELLY_CORE : JELLY_GLOW);
+                for (Rect side : new Rect[] {bell.east(), bell.front(), bell.west(), bell.back()}) {
+                    for (int x = 2; x < 6; x++)
+                        for (int y = 1; y < 4; y++) q.set(side.x() + x, side.y() + y, y == 2 && (x == 3 || x == 4) ? JELLY_CORE : JELLY_GLOW);
+                }
+                q.set(middle.front().x(), middle.front().y() + 8, JELLY_GLOW); // the long tentacle's lit tip
+            }
+            for (Rect side : new Rect[] {bell.east(), bell.front(), bell.west(), bell.back()}) p.row(side, 5, JELLY_RIM);
+            return new BufferedImage[] {img, glow};
+        }
+
+        static final int SUB_BRASS = 0xDDB650, SUB_COPPER = 0xC87840, SUB_GLASS = 0x2E4A52, SUB_RIVET = 0x8A6A26, SUB_LIGHT = 0xFFE9A0;
+
+        /**
+         * The Steam Submersible (43c, art pass): a bright brass hull with a planked deck, a keel, a bow and stern stepped
+         * in to a point, and a copper ballast tank down each side; lit ports above the tanks and a lit lamp on the bow; a
+         * glazed dome (clear but for a post at each corner and a rail round the top, so the crew can see out), capped in brass with a
+         * hatch wheel; a copper rudder and planes, a snorkel pipe, an iron screw. Returns the skin and its glow mask (the
+         * lamp and the ports).
+         */
+        static BufferedImage[] submersible() {
+            BufferedImage img = new BufferedImage(256, 160, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage glow = new BufferedImage(256, 160, BufferedImage.TYPE_INT_ARGB);
+            Painter p = new Painter(img, new Random(4351));
+            Painter g = new Painter(glow, new Random(4351));
+            Box hull = new Box(0, 0, 20, 12, 40), deck = new Box(0, 52, 14, 2, 36), keel = new Box(0, 90, 6, 2, 32);
+            Box bow1 = new Box(124, 0, 16, 10, 5), bow2 = new Box(124, 16, 10, 6, 4), lamp = new Box(154, 16, 4, 4, 2);
+            Box stern1 = new Box(168, 0, 16, 10, 5), stern2 = new Box(168, 16, 10, 6, 5), tank = new Box(124, 28, 5, 7, 30);
+            Box dome = new Box(124, 66, 16, 12, 20), cap = new Box(124, 99, 12, 3, 16), wheel = new Box(200, 92, 6, 1, 6);
+            Box rudder = new Box(200, 28, 1, 14, 6), sternPlane = new Box(200, 50, 8, 1, 5), bowPlane = new Box(200, 58, 6, 1, 4);
+            Box hub = new Box(200, 66, 2, 2, 5), bladeWide = new Box(200, 74, 10, 2, 1), bladeTall = new Box(200, 78, 2, 10, 1);
+            Box pipe = new Box(216, 28, 2, 16, 2), pipeTop = new Box(228, 28, 2, 2, 4);
+
+            // Brass: lit from above, a little darker underneath, a dark seam along every lower edge
+            for (Box b : new Box[] {hull, bow1, bow2, stern1, stern2, cap}) {
+                Creatures.all(p, b, SUB_BRASS, 7);
+                p.face(b.top(), shade(SUB_BRASS, 1.12), 6);
+                p.face(b.bottom(), shade(SUB_BRASS, 0.8), 6);
+                for (Rect side : new Rect[] {b.east(), b.front(), b.west(), b.back()}) {
+                    p.row(side, 0, shade(SUB_BRASS, 1.15));
+                    p.row(side, side.h() - 1, shade(SUB_BRASS, 0.65));
+                }
+            }
+            // The hull's plates: a riveted copper band every ten pixels of its length, over the sides, the top and the bottom
+            for (Rect side : new Rect[] {hull.east(), hull.west()}) {
+                for (int x = 4; x < side.w(); x += 10) {
+                    for (int y = 0; y < side.h(); y++) p.set(side.x() + x, side.y() + y, y % 3 == 1 ? shade(SUB_COPPER, 1.15) : SUB_COPPER);
+                    for (int y = 1; y < side.h(); y += 3) {
+                        p.set(side.x() + x - 1, side.y() + y, SUB_RIVET);
+                        p.set(side.x() + x + 1, side.y() + y, SUB_RIVET);
+                    }
+                }
+                // Ports above the ballast tanks: a copper ring round a lit pane, between each pair of bands
+                for (int x = 8; x + 3 < side.w(); x += 10) {
+                    p.face(new Rect(side.x() + x - 1, side.y() + 1, 4, 3), SUB_COPPER, 3);
+                    for (Painter q : new Painter[] {p, g}) {
+                        q.set(side.x() + x, side.y() + 2, SUB_LIGHT);
+                        q.set(side.x() + x + 1, side.y() + 2, shade(SUB_LIGHT, 0.9));
+                    }
+                }
+            }
+            for (int y = 4; y < hull.top().h(); y += 10) {
+                p.row(hull.top(), y, SUB_COPPER);
+                p.row(hull.bottom(), y, shade(SUB_COPPER, 0.75));
+            }
+            // The bow and stern steps each get a copper collar where they meet the next piece
+            for (Box b : new Box[] {bow1, bow2, stern1, stern2}) {
+                for (Rect side : new Rect[] {b.east(), b.west()}) {
+                    for (int y = 0; y < side.h(); y++) p.set(side.x() + (b == bow1 || b == bow2 ? side.w() - 1 : 0), side.y() + y, SUB_COPPER);
+                }
+            }
+            // The deck: darker planks laid lengthwise, with a brass coaming where the dome stands
+            Creatures.all(p, deck, 0x8A6A3E, 6);
+            for (int x = 2; x < deck.top().w(); x += 3) {
+                for (int y = 0; y < deck.top().h(); y++) p.set(deck.top().x() + x, deck.top().y() + y, 0x6A4E2A);
+            }
+            p.outline(deck.top(), shade(SUB_BRASS, 0.8));
+            Creatures.all(p, keel, shade(SUB_COPPER, 0.75), 6);
+            // Ballast tanks: copper, with brass straps and a paler line along the top where the light catches
+            Creatures.all(p, tank, SUB_COPPER, 7);
+            p.face(tank.top(), shade(SUB_COPPER, 1.2), 6);
+            p.face(tank.bottom(), shade(SUB_COPPER, 0.7), 6);
+            for (Rect side : new Rect[] {tank.east(), tank.west(), tank.top()}) {
+                boolean lengthwise = side != tank.top();
+                for (int i = 3; i < (lengthwise ? side.w() : side.h()); i += 8) {
+                    if (lengthwise) {
+                        for (int y = 0; y < side.h(); y++) p.set(side.x() + i, side.y() + y, SUB_BRASS);
+                    } else {
+                        p.row(side, i, SUB_BRASS);
+                    }
+                }
+            }
+            p.face(tank.front(), shade(SUB_COPPER, 0.85), 5);
+            p.face(tank.back(), shade(SUB_COPPER, 0.85), 5);
+            // The lamp: a copper housing with a lit lens
+            Creatures.all(p, lamp, SUB_COPPER, 4);
+            for (Painter q : new Painter[] {p, g}) {
+                q.face(new Rect(lamp.front().x() + 1, lamp.front().y() + 1, 2, 2), SUB_LIGHT, 0);
+            }
+            // The dome: glass. Clear, but for its corner posts and top rail
+            for (Rect pane : new Rect[] {dome.east(), dome.front(), dome.west(), dome.back(), dome.top(), dome.bottom()}) {
+                for (int x = 0; x < pane.w(); x++)
+                    for (int y = 0; y < pane.h(); y++) img.setRGB(pane.x() + x, pane.y() + y, CLEAR);
+                if (pane == dome.bottom()) continue; // nothing underfoot but the deck
+                if (pane == dome.top()) {
+                    p.outline(pane, SUB_BRASS); // hidden under the cap all but its rim
+                    continue;
+                }
+                // A side pane: a post up each corner and a rail along the top, nothing else. From the pilot's seat a
+                // mullion a hand's breadth from the eye fills the view (the 2026-11-09 playtest), and so does a glint.
+                for (int y = 0; y < pane.h(); y++) {
+                    p.set(pane.x(), pane.y() + y, SUB_BRASS);
+                    p.set(pane.x() + pane.w() - 1, pane.y() + y, SUB_BRASS);
+                }
+                p.row(pane, 0, SUB_BRASS);
+            }
+            // The glass itself is a second box just inside the frame (the "glass" bone), so the renderer can leave it out
+            // for the crew looking out through it: a faint cool tint over each pane and two soft streaks of reflection
+            // near its upper corner, all mostly see-through
+            Box glass = new Box(0, 126, 16, 12, 20);
+            for (Rect pane : new Rect[] {glass.east(), glass.front(), glass.west(), glass.back(), glass.top()}) {
+                for (int x = 0; x < pane.w(); x++)
+                    for (int y = 0; y < pane.h(); y++) img.setRGB(pane.x() + x, pane.y() + y, 0x22CFEFF2);
+                if (pane != glass.top()) {
+                    for (int i = 0; i < 4; i++) {
+                        img.setRGB(pane.x() + pane.w() - 3 - i, pane.y() + 2 + i, 0x58FFFFFF);
+                        if (i < 3) img.setRGB(pane.x() + pane.w() - 5 - i, pane.y() + 2 + i, 0x38FFFFFF);
+                    }
+                }
+            }
+            p.outline(cap.top(), SUB_COPPER);
+            Creatures.all(p, wheel, SUB_COPPER, 5);
+            p.set(wheel.top().x() + 2, wheel.top().y() + 2, SUB_BRASS);
+            p.set(wheel.top().x() + 3, wheel.top().y() + 3, SUB_BRASS);
+            for (Box b : new Box[] {rudder, sternPlane, bowPlane}) {
+                Creatures.all(p, b, SUB_COPPER, 6);
+            }
+            Creatures.all(p, pipe, shade(SUB_BRASS, 0.9), 5);
+            Creatures.all(p, pipeTop, SUB_COPPER, 5);
+            for (Box b : new Box[] {hub, bladeWide, bladeTall}) Creatures.all(p, b, IRON, 8);
+            return new BufferedImage[] {img, glow};
+        }
+
+        /** The Jelly Lamp: a glass frame round a block of gel, bright in the middle. */
+        static BufferedImage lamp(long seed) {
+            BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+            Painter p = new Painter(img, new Random(seed));
+            p.face(new Rect(0, 0, 16, 16), JELLY_RIM, 6);
+            p.face(new Rect(2, 2, 12, 12), JELLY, 6);
+            p.face(new Rect(4, 4, 8, 8), JELLY_GLOW, 5);
+            p.face(new Rect(6, 6, 4, 4), JELLY_CORE, 3);
+            p.outline(new Rect(0, 0, 16, 16), 0x4E8A80);
+            return img;
+        }
+    }
 
     record Rect(int x, int y, int w, int h) {}
 

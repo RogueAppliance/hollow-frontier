@@ -42,6 +42,19 @@ public class ModChestLootProvider implements LootTableSubProvider {
 
     @Override
     public void run() {
+        // 43b: what a Plesiosaur brings up from the bed of the Still Sea: mostly what any seabed has, now and then something
+        // the Kindled left (a sherd, or a relic the prospector will buy)
+        LootPool.Builder dive = pool(1, 2)
+                .add(item(Items.KELP, 1, 3, 30))
+                .add(item(Items.SEAGRASS, 1, 2, 12))
+                .add(item(Items.CLAY_BALL, 1, 4, 16))
+                .add(item(Items.BONE, 1, 2, 10))
+                .add(item(Items.NAUTILUS_SHELL, 1, 1, 8))
+                .add(item(Items.PRISMARINE_SHARD, 1, 2, 6))
+                .add(item(ModItems.LAMP_GEL.get(), 1, 2, 8));
+        ModItems.SHERDS.forEach(sherd -> dive.add(item(sherd.get(), 1, 1, 1)));
+        ModItems.RELICS.forEach(relic -> dive.add(item(relic.get(), 1, 1, 1)));
+        context.accept(com.hollowfrontier.content.hollow.sea.SeaLife.DIVE_LOOT, LootTable.lootTable().withPool(dive));
         // 29: what a dust devil drops where it dies down: brush and feathers it swept up, now and then something of somebody's
         context.accept(DustDevils.LOOT, LootTable.lootTable().withPool(pool(1, 2)
                 .add(EmptyLootItem.emptyItem().setWeight(30))

@@ -1,0 +1,35 @@
+{
+  "parent": "hollowfrontier:hollow/harpoon",
+  "criteria": {
+    "basilosaurus": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hollowfrontier:basilosaurus"
+          }
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.basilosaurus.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:basilosaur_tooth"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.basilosaurus.title"
+    }
+  },
+  "requirements": [
+    [
+      "basilosaurus"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

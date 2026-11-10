@@ -25,7 +25,8 @@ import net.minecraft.world.level.levelgen.material.rule.MaterialRule;
  * <li>Deepslate below y 0-8.</li>
  * <li>Each biome's ground: Jungle grass, podzol and moss with mud along the water; Steppe grass with coarse dirt; Badlands
  *     red sand over banded terracotta mesas, patched with basalt, blackstone and magma; Highland grass with pale moss, snow
- *     on the peaks, and calcite and diorite through the top thirty blocks of stone.</li>
+ *     on the peaks, and calcite and diorite through the top thirty blocks of stone; the Still Sea's pale sand shores over
+ *     sandstone, and gravel and clay on its deep bed.</li>
  * <li>Everything else above about y 140 is <b>crust rock</b>: the ceiling, its spires and the floating islands' cores (so
  *     none of them casts a shadow), under whatever soil a biome put on an island's top.</li>
  * </ol>
@@ -116,6 +117,22 @@ public final class HollowMaterialRules {
                 // Pale stone under the uplands; deeper down (and in the crust's spires) the usual rules carry on
                 MaterialRules.ifTrue(veryDeepUnderFloor, paleStone)));
 
+        // The Still Sea (43a): pale sand beaches and shallows, a darker bed of gravel and clay in deep water; rock where the
+        // shore is steep, and grass on anything that stands well clear of the water (islets, a headland)
+        MaterialCondition clearOfTheWater = MaterialRules.yBlockCheck(VerticalAnchor.absolute(HollowEarth.SEA_LEVEL + 6), 0);
+        MaterialRule sand = block(Blocks.SAND);
+        MaterialRule sea = MaterialRules.sequence(
+                MaterialRules.ifTrue(onFloor, MaterialRules.sequence(
+                        MaterialRules.ifTrue(notUnderwater, MaterialRules.sequence(
+                                MaterialRules.ifTrue(steep, stone),
+                                MaterialRules.ifTrue(clearOfTheWater, grass),
+                                sand)),
+                        MaterialRules.ifTrue(notUnderDeepWater, sand),
+                        MaterialRules.ifTrue(MaterialRules.noiseCondition2d(Noises.GRAVEL, 0.0), gravel),
+                        MaterialRules.ifTrue(MaterialRules.noiseCondition2d(Noises.PATCH, 0.5), block(Blocks.CLAY)),
+                        sand)),
+                MaterialRules.ifTrue(underFloor, MaterialRules.sequence(MaterialRules.ifTrue(clearOfTheWater, dirt), block(Blocks.SANDSTONE))));
+
         context.register(HOLLOW_EARTH, MaterialRules.sequence(
                 MaterialRules.getRule(rules, VanillaMaterialRules.BEDROCK_FLOOR),
                 MaterialRules.ifTrue(MaterialRules.not(MaterialRules.verticalGradient("hollowfrontier:shell_bedrock",
@@ -126,6 +143,7 @@ public final class HollowMaterialRules {
                 MaterialRules.ifTrue(MaterialRules.isBiome(biomes, HollowBiomes.CRYSTAL_STEPPES), steppes),
                 MaterialRules.ifTrue(MaterialRules.isBiome(biomes, HollowBiomes.EMBER_BADLANDS), badlands),
                 MaterialRules.ifTrue(MaterialRules.isBiome(biomes, HollowBiomes.CONCAVIAN_HIGHLANDS), highlands),
+                MaterialRules.ifTrue(MaterialRules.isBiome(biomes, HollowBiomes.STILL_SEA), sea),
                 MaterialRules.ifTrue(MaterialRules.not(MaterialRules.verticalGradient("hollowfrontier:crust_rock",
                         VerticalAnchor.absolute(HollowEarth.CRUST_ROCK_FROM - 6), VerticalAnchor.absolute(HollowEarth.CRUST_ROCK_FROM + 6))),
                         block(ModBlocks.CRUST_ROCK.get()))));

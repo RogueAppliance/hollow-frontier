@@ -24,6 +24,7 @@ import com.hollowfrontier.content.hollow.gateway.PolarResonatorItem;
 import com.hollowfrontier.content.hollow.gray.SignalLocatorItem;
 import com.hollowfrontier.content.hollow.megafauna.MegafaunaGear;
 import com.hollowfrontier.content.hollow.megafauna.OliphantItem;
+import com.hollowfrontier.content.hollow.sea.HarpoonItem;
 import com.hollowfrontier.content.concavia.Artifacts;
 import com.hollowfrontier.content.concavia.ConcavianCodexItem;
 import com.hollowfrontier.content.concavia.KindledSigilItem;
@@ -198,6 +199,9 @@ public final class ModItems {
     public static final DeferredItem<Item> AIRSHIP_ENVELOPE = ITEMS.registerSimpleItem("airship_envelope");
     public static final DeferredItem<Item> AIRSHIP_ENGINE = ITEMS.registerSimpleItem("airship_engine");
     public static final DeferredItem<AirshipItem> AIRSHIP = ITEMS.registerItem("airship", AirshipItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    // 43c: fireless, so it carries steam and nothing else
+    public static final DeferredItem<com.hollowfrontier.content.steam.submersible.SubmersibleItem> STEAM_SUBMERSIBLE = ITEMS.registerItem("steam_submersible",
+            com.hollowfrontier.content.steam.submersible.SubmersibleItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<PolarCompassItem> POLAR_COMPASS = ITEMS.registerItem("polar_compass", PolarCompassItem::new, p -> p.stacksTo(1));
     public static final DeferredItem<PolarResonatorItem> POLAR_RESONATOR = ITEMS.registerItem("polar_resonator",
             PolarResonatorItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
@@ -255,6 +259,25 @@ public final class ModItems {
     public static final DeferredItem<Item> GLYPTODON_CHESTPLATE = ITEMS.registerItem("glyptodon_chestplate", Item::new, p -> p.humanoidArmor(MegafaunaGear.SHELL, ArmorType.CHESTPLATE));
     public static final DeferredItem<Item> GLYPTODON_LEGGINGS = ITEMS.registerItem("glyptodon_leggings", Item::new, p -> p.humanoidArmor(MegafaunaGear.SHELL, ArmorType.LEGGINGS));
     public static final DeferredItem<Item> GLYPTODON_BOOTS = ITEMS.registerItem("glyptodon_boots", Item::new, p -> p.humanoidArmor(MegafaunaGear.SHELL, ArmorType.BOOTS));
+
+    // The Still Sea (43b): its creatures' eggs and drops, what they make, and the Harpoons
+    public static final DeferredItem<SpawnEggItem> GREAT_SEA_COW_SPAWN_EGG = ITEMS.registerItem("great_sea_cow_spawn_egg",
+            SpawnEggItem::new, p -> p.spawnEgg(ModEntities.GREAT_SEA_COW.get()));
+    public static final DeferredItem<SpawnEggItem> BASILOSAURUS_SPAWN_EGG = ITEMS.registerItem("basilosaurus_spawn_egg",
+            SpawnEggItem::new, p -> p.spawnEgg(ModEntities.BASILOSAURUS.get()));
+    public static final DeferredItem<SpawnEggItem> PLESIOSAUR_SPAWN_EGG = ITEMS.registerItem("plesiosaur_spawn_egg",
+            SpawnEggItem::new, p -> p.spawnEgg(ModEntities.PLESIOSAUR.get()));
+    public static final DeferredItem<SpawnEggItem> LAMPJELLY_SPAWN_EGG = ITEMS.registerItem("lampjelly_spawn_egg",
+            SpawnEggItem::new, p -> p.spawnEgg(ModEntities.LAMPJELLY.get()));
+    public static final DeferredItem<Item> BLUBBER = ITEMS.registerSimpleItem("blubber");
+    // Rendered blubber: burns as long as coal (in a furnace or a Boiler), makes candles, and seals the submersible (43c)
+    public static final DeferredItem<Item> TALLOW = ITEMS.registerSimpleItem("tallow", p -> p.cookingFuel(ContextIntProviders.COOKING_TIME_COAL));
+    public static final DeferredItem<Item> BASILOSAUR_TOOTH = ITEMS.registerSimpleItem("basilosaur_tooth", p -> p.stacksTo(16));
+    public static final DeferredItem<Item> LAMP_GEL = ITEMS.registerSimpleItem("lamp_gel");
+    public static final DeferredItem<BlockItem> JELLY_LAMP = ITEMS.registerSimpleBlockItem(ModBlocks.JELLY_LAMP);
+    public static final DeferredItem<HarpoonItem> HARPOON = ITEMS.registerItem("harpoon", HarpoonItem::new, p -> p.durability(120));
+    public static final DeferredItem<HarpoonItem> TOOTHED_HARPOON = ITEMS.registerItem("toothed_harpoon", HarpoonItem::new,
+            p -> p.durability(250).rarity(Rarity.UNCOMMON));
 
     // The Gray experiments (10b): what the tagged beasts and the stations give up, and the locator it makes
     public static final DeferredItem<Item> GRAY_TECH_FRAGMENT = ITEMS.registerSimpleItem("gray_tech_fragment", p -> p.rarity(Rarity.UNCOMMON));

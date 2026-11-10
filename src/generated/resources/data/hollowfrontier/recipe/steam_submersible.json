@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "#c:storage_blocks/copper",
+    "G": "minecraft:glass",
+    "L": "hollowfrontier:lamp_gel",
+    "P": "#c:plates/brass",
+    "R": "#c:gears/brass",
+    "T": "hollowfrontier:tallow"
+  },
+  "pattern": [
+    "PGP",
+    "TLT",
+    "CRC"
+  ],
+  "result": {
+    "id": "hollowfrontier:steam_submersible"
+  }
+}

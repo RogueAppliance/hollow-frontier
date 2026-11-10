@@ -1,0 +1,45 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"misc.idle": {
+			"loop": true,
+			"animation_length": 6.0,
+			"bones": {
+				"neck1": {"rotation": ["-26 + math.sin(query.anim_time * 60) * 3", 0, 0]},
+				"neck2": {"rotation": ["-20 + math.sin(query.anim_time * 60 - 30) * 3", "math.sin(query.anim_time * 30) * 6", 0]},
+				"neck3": {"rotation": ["-14 + math.sin(query.anim_time * 60 - 60) * 3", "math.sin(query.anim_time * 30) * 8", 0]},
+				"head": {"rotation": [58, 0, 0]},
+				"tail": {"rotation": [0, "math.sin(query.anim_time * 60) * 8", 0]},
+				"flipper_front_left": {"rotation": [0, 0, "-10 + math.sin(query.anim_time * 60) * 8"]},
+				"flipper_front_right": {"rotation": [0, 0, "10 - math.sin(query.anim_time * 60) * 8"]},
+				"flipper_back_left": {"rotation": [0, 0, "-10 + math.sin(query.anim_time * 60 - 90) * 8"]},
+				"flipper_back_right": {"rotation": [0, 0, "10 - math.sin(query.anim_time * 60 - 90) * 8"]}
+			}
+		},
+		"move.swim": {
+			"loop": true,
+			"animation_length": 2.0,
+			"bones": {
+				"neck1": {"rotation": ["-10 + math.sin(query.anim_time * 180) * 2", 0, 0]},
+				"neck2": {"rotation": ["-8 + math.sin(query.anim_time * 180 - 40) * 2", 0, 0]},
+				"neck3": {"rotation": ["-6 + math.sin(query.anim_time * 180 - 80) * 2", 0, 0]},
+				"head": {"rotation": [22, 0, 0]},
+				"tail": {"rotation": [0, "math.sin(query.anim_time * 180) * 10", 0]},
+				"flipper_front_left": {"rotation": [0, "math.sin(query.anim_time * 180 + 90) * 15", "math.sin(query.anim_time * 180) * 28"]},
+				"flipper_front_right": {"rotation": [0, "math.sin(query.anim_time * 180 + 90) * -15", "math.sin(query.anim_time * 180) * -28"]},
+				"flipper_back_left": {"rotation": [0, "math.sin(query.anim_time * 180 - 90) * 15", "math.sin(query.anim_time * 180 - 180) * 28"]},
+				"flipper_back_right": {"rotation": [0, "math.sin(query.anim_time * 180 - 90) * -15", "math.sin(query.anim_time * 180 - 180) * -28"]}
+			}
+		},
+		"misc.dive": {
+			"loop": true,
+			"animation_length": 2.0,
+			"bones": {
+				"neck1": {"rotation": ["14 + math.sin(query.anim_time * 180) * 3", 0, 0]},
+				"neck2": {"rotation": ["12 + math.sin(query.anim_time * 180 - 40) * 3", "math.sin(query.anim_time * 90) * 10", 0]},
+				"neck3": {"rotation": ["10 + math.sin(query.anim_time * 180 - 80) * 3", "math.sin(query.anim_time * 90) * 14", 0]},
+				"head": {"rotation": ["math.sin(query.anim_time * 360) * 8", 0, 0]}
+			}
+		}
+	}
+}

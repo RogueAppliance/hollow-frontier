@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hollowfrontier:item/toothed_harpoon_icon"
+  }
+}

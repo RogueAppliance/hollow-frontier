@@ -123,6 +123,29 @@
     ],
     "subtitle": "subtitles.hollowfrontier.saloon.glasses"
   },
+  "ambient.still_sea.additions": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.water.ambient",
+        "pitch": 0.6,
+        "volume": 0.5
+      },
+      {
+        "type": "event",
+        "name": "entity.dolphin.splash",
+        "pitch": 0.55,
+        "volume": 0.25
+      },
+      {
+        "type": "event",
+        "name": "ambient.underwater.loop.additions.rare",
+        "pitch": 0.7,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.still_sea.additions"
+  },
   "ambient.town.bell": {
     "sounds": [
       {
@@ -508,6 +531,60 @@
     ],
     "subtitle": "subtitles.hollowfrontier.drink.pour"
   },
+  "entity.basilosaurus.ambient": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.elder_guardian.ambient",
+        "pitch": 0.5,
+        "volume": 0.6
+      },
+      {
+        "type": "event",
+        "name": "entity.ravager.ambient",
+        "pitch": 0.5,
+        "volume": 0.4
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.basilosaurus.ambient"
+  },
+  "entity.basilosaurus.bite": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.ravager.attack",
+        "pitch": 0.6
+      },
+      {
+        "type": "event",
+        "name": "entity.generic.splash",
+        "pitch": 0.7,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.basilosaurus.bite"
+  },
+  "entity.basilosaurus.death": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.ravager.death",
+        "pitch": 0.5
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.basilosaurus.death"
+  },
+  "entity.basilosaurus.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.ravager.hurt",
+        "pitch": 0.55,
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.basilosaurus.hurt"
+  },
   "entity.dust_devil.wind": {
     "sounds": [
       {
@@ -813,6 +890,78 @@
     ],
     "subtitle": "subtitles.hollowfrontier.gray_sentinel.zap"
   },
+  "entity.great_sea_cow.ambient": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.cow.ambient",
+        "pitch": 0.5,
+        "volume": 0.7
+      },
+      {
+        "type": "event",
+        "name": "entity.dolphin.ambient_water",
+        "pitch": 0.5,
+        "volume": 0.4
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.great_sea_cow.ambient"
+  },
+  "entity.great_sea_cow.death": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.cow.death",
+        "pitch": 0.5,
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.great_sea_cow.death"
+  },
+  "entity.great_sea_cow.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.cow.hurt",
+        "pitch": 0.5,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.great_sea_cow.hurt"
+  },
+  "entity.lampjelly.death": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.slime.death_small",
+        "pitch": 1.3,
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.lampjelly.death"
+  },
+  "entity.lampjelly.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.slime.hurt_small",
+        "pitch": 1.4,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.lampjelly.hurt"
+  },
+  "entity.lampjelly.sting": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.bee.sting",
+        "pitch": 1.5,
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.lampjelly.sting"
+  },
   "entity.megatherium.ambient": {
     "sounds": [
       {
@@ -924,6 +1073,45 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.pale_raven.hurt"
+  },
+  "entity.plesiosaur.ambient": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.camel.ambient",
+        "pitch": 0.7,
+        "volume": 0.7
+      },
+      {
+        "type": "event",
+        "name": "entity.dolphin.ambient",
+        "pitch": 0.6,
+        "volume": 0.4
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.plesiosaur.ambient"
+  },
+  "entity.plesiosaur.death": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.camel.death",
+        "pitch": 0.7,
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.plesiosaur.death"
+  },
+  "entity.plesiosaur.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.camel.hurt",
+        "pitch": 0.7,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.plesiosaur.hurt"
   },
   "entity.prototype_saucer.hum": {
     "sounds": [

@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:hollow/still_sea",
+  "criteria": {
+    "blubber": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:blubber"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.sea_cow.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:blubber"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.sea_cow.title"
+    }
+  },
+  "requirements": [
+    [
+      "blubber"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

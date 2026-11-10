@@ -55,6 +55,7 @@ The store page for both Modrinth and CurseForge. Form fields, gallery and upload
 - **The Steam Drill and Steam Canisters** for mining on the go.
 - **The Steam Handcar** rides the rails, and refuels at depot standpipes.
 - **The Airship:** a coal-fired steam dirigible for two. Fly it north to find the Polar Gateways.
+- **The Steam Submersible:** a fireless brass boat for two, charged with steam at the waterline, for the Still Sea or any other.
 
 ![airship over the frontier](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/airship.gif)
 
@@ -65,6 +66,9 @@ The store page for both Modrinth and CurseForge. Form fields, gallery and upload
 Wake a Polar Gateway's ring of stones with a Polar Resonator, then fall through Symmes' Hole into a world of its own. A golden crust arches 150 blocks overhead with stone spires and waterfalls hanging from it, and an inner sun that never sets.
 
 - **Four biomes:** the Primordial Jungle, the Crystal Steppes, the Ember Badlands and the Concavian Highlands, each with its own plants, sounds and creatures.
+- **The Still Sea:** an inner sea with no wind and no weather, so it lies flat as glass. Pale beaches, kelp forests on the shelf, and falls pouring in from the crust.
+- **Sea life:** Great Sea Cows grazing the kelp, a Plesiosaur that dives for you if you feed it a fish, glowing Lampjellies that sting, and the Basilosaurus, which hunts whatever swims over deep water. Take a Harpoon: it reels in what's small, and what's big tows you.
+- **The Steam Submersible:** a brass boat for two that runs on steam charged at the shore, with no fire aboard. Dive, hold your depth, and see by its lamp. A Basilosaurus will ram it.
 - **Megafauna:** woolly mammoths that charge as a herd, terror birds that outrun you, giant ground sloths and glyptodons.
 - **New metals:** glowing phlogiston crystal, and starsteel for tools, a paxel and armor.
 - **Sites to explore:** a lost Symmes expedition's dig, Kindled temples and observatories, an overgrown ziggurat, a tar pit full of bones, an abandoned phlogiston mine, a ruined starsteel foundry, shrines on the floating islands, and Gray relays hanging from the crust.

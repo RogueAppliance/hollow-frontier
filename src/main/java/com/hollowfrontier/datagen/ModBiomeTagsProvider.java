@@ -65,6 +65,11 @@ public class ModBiomeTagsProvider extends TagsProvider<Biome> {
                 .addTag(Tags.Biomes.IS_SNOWY)
                 .remove(Tags.Biomes.IS_BEACH, BiomeTags.IS_OCEAN, BiomeTags.IS_RIVER, Tags.Biomes.IS_MOUNTAIN_PEAK);
         // The Hollow Earth, and where its megafauna (10a) and the Grays' labs (10b) will turn up
+        // 43a: the Still Sea is Hollow Earth but not land, so the sites that stand anywhere go by is_hollow_land. It stays out
+        // of minecraft:is_ocean and every vanilla has_structure tag: no monuments, shipwrecks or drowned under the crust.
+        tag(HollowBiomes.IS_HOLLOW_LAND).add(HollowBiomes.PRIMORDIAL_JUNGLE, HollowBiomes.CRYSTAL_STEPPES, HollowBiomes.EMBER_BADLANDS,
+                HollowBiomes.CONCAVIAN_HIGHLANDS);
+        tag(HollowBiomes.IS_HOLLOW_EARTH).add(HollowBiomes.STILL_SEA);
         tag(HollowBiomes.IS_HOLLOW_EARTH).add(HollowBiomes.PRIMORDIAL_JUNGLE, HollowBiomes.CRYSTAL_STEPPES, HollowBiomes.EMBER_BADLANDS,
                 HollowBiomes.CONCAVIAN_HIGHLANDS);
         tag(HollowBiomes.HAS_MAMMOTHS).add(HollowBiomes.CONCAVIAN_HIGHLANDS, HollowBiomes.CRYSTAL_STEPPES);
@@ -82,6 +87,7 @@ public class ModBiomeTagsProvider extends TagsProvider<Biome> {
                 .addTag(BiomeTags.IS_SAVANNA)
                 .addTag(BiomeTags.IS_BADLANDS);
         tag(DustDevils.HAS_ASH_DEVILS).add(HollowBiomes.EMBER_BADLANDS);
+        tag(com.hollowfrontier.content.hollow.sea.SeaLife.HAS_SEA_LIFE).add(HollowBiomes.STILL_SEA); // 43b
         tag(ModSpawns.HAS_RATTLESNAKES)
                 .addTag(Tags.Biomes.IS_DESERT)
                 .addTag(BiomeTags.IS_SAVANNA)

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": "hollowfrontier:lamp_gel",
+    "X": "minecraft:glass"
+  },
+  "pattern": [
+    " G ",
+    "GXG",
+    " G "
+  ],
+  "result": {
+    "id": "hollowfrontier:jelly_lamp"
+  }
+}

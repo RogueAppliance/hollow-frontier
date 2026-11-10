@@ -367,6 +367,34 @@ public final class PhotoBooth {
             }
             return;
         }
+        // The Still Sea's creatures (43b), only on their own with -PphotoScene=sealife
+        if (SEALIFE_ONLY) {
+            if (ticks >= 40) {
+                seaLife(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The Steam Submersible (43c), only on its own with -PphotoScene=submersible
+        if (SUBMERSIBLE_ONLY) {
+            if (ticks >= 40) {
+                submersible(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // Harpoons in flight (43b), only on their own with -PphotoScene=harpoon
+        if (HARPOON_ONLY) {
+            if (ticks >= 40) {
+                harpoon(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The Still Sea (43a), only on its own with -PphotoScene=sea
+        if (SEA_ONLY) {
+            if (ticks >= 40) {
+                sea(mc, server, ticks - 40);
+            }
+            return;
+        }
         // The Hollow Earth's life (9b): flora and creatures close up, only on its own with -PphotoScene=life
         if (LIFE_ONLY) {
             if (ticks >= 40) {
@@ -1180,6 +1208,421 @@ public final class PhotoBooth {
     private static void next(int wait) {
         hollowStep++;
         hollowWait = wait;
+    }
+
+    // ---------------------------------------------------------------- phase 43a: the Still Sea
+
+    private static final boolean SEA_ONLY = "sea".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int seaStep;
+    private static int seaWait;
+    private static BlockPos seaDeep;
+    private static BlockPos seaShore;
+    private static BlockPos seaStack;
+    private static BlockPos seaSeam;
+
+    /**
+     * The Still Sea (hf_43a_*), only with -PphotoScene=sea: the nearest sea to the staging spot from high above, from
+     * just over the water and from under it; its shore from the land side; a sea stack (the crust's lowest spire within a
+     * kilometre, if one reaches the water); and, since the photo world's Hollow Earth was explored before the sea existed,
+     * a chunk saved as land that now lies in the sea, from above, for the seam where old chunks meet new.
+     */
+    private static void sea(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            seaStep = 0;
+            seaWait = 0;
+        }
+        if (seaWait > 0) {
+            seaWait--;
+            return;
+        }
+        int surface = HollowEarth.SEA_LEVEL;
+        switch (seaStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                server.execute(() -> findSea(server));
+                seaNext(20);
+            }
+            case 1 -> {
+                if (seaDeep == null) {
+                    HollowFrontier.LOGGER.info("[PhotoBooth] no Still Sea within reach, quitting");
+                    quit(mc, server);
+                    seaStep = 99;
+                    return;
+                }
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 16", seaDeep.getX(), HollowEarth.CEILING_LOWEST - 60, seaDeep.getZ() + 90));
+                seaNext(GENERATE_TICKS);
+            }
+            case 2 -> {
+                shot(mc, "hf_43a_1_sea_above.png");
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 -4", seaDeep.getX(), surface + 3, seaDeep.getZ()));
+                seaNext(80);
+            }
+            case 3 -> {
+                shot(mc, "hf_43a_2_sea_surface.png");
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 20", seaDeep.getX(), surface - 7, seaDeep.getZ()));
+                seaNext(60);
+            }
+            case 4 -> {
+                shot(mc, "hf_43a_3_sea_underwater.png");
+                // The shore, from 40 blocks inland and a little up, looking out to the deep water
+                Vec3 out = Vec3.atCenterOf(seaDeep).subtract(Vec3.atCenterOf(seaShore)).multiply(1, 0, 1).normalize();
+                Vec3 eye = new Vec3(seaShore.getX() - out.x * 40, surface + 16, seaShore.getZ() - out.z * 40);
+                hollowLooking(server, eye, new Vec3(seaShore.getX() + out.x * 60, surface, seaShore.getZ() + out.z * 60));
+                seaNext(GENERATE_TICKS);
+            }
+            case 5 -> {
+                shot(mc, "hf_43a_4_shore.png");
+                if (seaStack == null) {
+                    seaStep = 7;
+                    return;
+                }
+                Vec3 eye = new Vec3(seaStack.getX() + 70, surface + 22, seaStack.getZ() + 40);
+                hollowLooking(server, eye, new Vec3(seaStack.getX(), surface + 45, seaStack.getZ()));
+                seaNext(GENERATE_TICKS);
+            }
+            case 6 -> {
+                shot(mc, "hf_43a_5_sea_stack.png");
+                seaNext(0);
+            }
+            case 7 -> {
+                if (seaSeam == null) {
+                    seaStep = 10;
+                    return;
+                }
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 50", seaSeam.getX(), surface + 80, seaSeam.getZ() + 40));
+                seaNext(GENERATE_TICKS);
+            }
+            case 8 -> {
+                shot(mc, "hf_43a_6_old_world_seam_north.png");
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 0 50", seaSeam.getX(), surface + 80, seaSeam.getZ() - 40));
+                seaNext(GENERATE_TICKS);
+            }
+            case 9 -> {
+                shot(mc, "hf_43a_7_old_world_seam_south.png");
+                seaNext(0);
+            }
+            case 10 -> {
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                seaNext(20);
+            }
+            case 11 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] done, quitting");
+                quit(mc, server);
+                seaNext(0);
+            }
+            default -> {}
+        }
+    }
+
+    private static void seaNext(int wait) {
+        seaStep++;
+        seaWait = wait;
+    }
+
+    /** On the server thread: the sea's shore nearest the staging spot, its deepest water nearby, a stack, and an old chunk. */
+    private static void findSea(MinecraftServer server) {
+        ServerLevel level = server.getLevel(HollowEarth.LEVEL);
+        var sea = com.hollowfrontier.worldgen.HollowBiomes.STILL_SEA;
+        var found = level.findClosestBiome3d(b -> b.is(sea), new BlockPos(baseX, 80, baseZ), 6400, 32, 64);
+        if (found == null) {
+            return;
+        }
+        seaShore = found.getFirst();
+        var functions = level.registryAccess().lookupOrThrow(Registries.DENSITY_FUNCTION);
+        var continents = functions.getOrThrow(com.hollowfrontier.worldgen.HollowTerrain.F_CONTINENTS).value();
+        var ceiling = functions.getOrThrow(com.hollowfrontier.worldgen.HollowTerrain.CEILING_BOTTOM).value();
+        var random = level.getChunkSource().randomState();
+        float lowest = Float.MAX_VALUE;
+        float lowestCeiling = Float.MAX_VALUE;
+        seaDeep = seaShore;
+        seaStack = null;
+        for (int dx = -1000; dx <= 1000; dx += 8) {
+            for (int dz = -1000; dz <= 1000; dz += 8) {
+                int x = seaShore.getX() + dx;
+                int z = seaShore.getZ() + dz;
+                float c = random.sampleBlockValueUncached(continents, x, 0, z);
+                if (c < lowest && dx % 32 == 0 && dz % 32 == 0 && dx * dx + dz * dz <= 800 * 800) {
+                    lowest = c;
+                    seaDeep = new BlockPos(x, 80, z);
+                }
+                if (c < com.hollowfrontier.worldgen.HollowBiomes.SEA_CONTINENTS - com.hollowfrontier.worldgen.HollowTerrain.SEA_SHORE) {
+                    float bottom = random.sampleBlockValueUncached(ceiling, x, 0, z);
+                    if (bottom < lowestCeiling) {
+                        lowestCeiling = bottom;
+                        seaStack = new BlockPos(x, 80, z);
+                    }
+                }
+            }
+        }
+        if (lowestCeiling > HollowEarth.SEA_LEVEL + 4) {
+            HollowFrontier.LOGGER.info("[PhotoBooth] no sea stack within a kilometre (the lowest spire over the sea ends at y {})", lowestCeiling);
+            seaStack = null;
+        }
+        HollowFrontier.LOGGER.info("[PhotoBooth] Still Sea: shore {}, deep water {} (continents {}), stack {}", seaShore, seaDeep, lowest, seaStack);
+        // An old chunk in the new sea: saved full, with a land biome, where the generator now says sea well past the shore
+        seaSeam = null;
+        float seamLowest = com.hollowfrontier.worldgen.HollowBiomes.SEA_CONTINENTS - com.hollowfrontier.worldgen.HollowTerrain.SEA_SHORE;
+        int checked = 0;
+        int old = 0;
+        java.io.File[] regions = server.getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT)
+                .resolve("dimensions/hollowfrontier/hollow_earth/region").toFile().listFiles((dir, name) -> name.endsWith(".mca"));
+        for (java.io.File region : regions == null ? new java.io.File[0] : regions) {
+            String[] parts = region.getName().split("[.]");
+            int rx = Integer.parseInt(parts[1]);
+            int rz = Integer.parseInt(parts[2]);
+            for (int i = 0; i < 32 && checked < 400; i += 4) {
+                for (int j = 0; j < 32 && checked < 400; j += 4) {
+                    int cx = rx * 32 + i;
+                    int cz = rz * 32 + j;
+                    float c = random.sampleBlockValueUncached(continents, cx * 16 + 8, 0, cz * 16 + 8);
+                    if (c >= seamLowest) {
+                        continue;
+                    }
+                    checked++;
+                    var chunk = level.getChunkSource().getChunk(cx, cz, net.minecraft.world.level.chunk.status.ChunkStatus.EMPTY, true);
+                    if (chunk != null && chunk.getPersistedStatus().isOrAfter(net.minecraft.world.level.chunk.status.ChunkStatus.FULL)
+                            && !chunk.getNoiseBiome(2, 80 >> 2, 2).is(sea)) {
+                        old++;
+                        seamLowest = c;
+                        seaSeam = new BlockPos(cx * 16 + 8, 80, cz * 16 + 8);
+                    }
+                }
+            }
+        }
+        HollowFrontier.LOGGER.info("[PhotoBooth] old chunks in the new sea: {} of {} checked; the deepest at {} (continents {})", old, checked, seaSeam, seamLowest);
+    }
+
+    // ---------------------------------------------------------------- phase 43b: the Still Sea's creatures
+
+    private static final boolean SEALIFE_ONLY = "sealife".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int seaLifeStep;
+    private static int seaLifeWait;
+
+    /**
+     * The Still Sea's creatures (hf_43b_*), only with -PphotoScene=sealife: a Great Sea Cow, a Plesiosaur, a Basilosaurus
+     * and a shoal of Lampjellies set still in the deep water nearest the staging spot, side on, shot together from under
+     * the surface and then one by one. They're taken away again afterwards.
+     */
+    private static void seaLife(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            seaLifeStep = 0;
+            seaLifeWait = 0;
+        }
+        if (seaLifeWait > 0) {
+            seaLifeWait--;
+            return;
+        }
+        int y = HollowEarth.SEA_LEVEL - 7;
+        switch (seaLifeStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                server.execute(() -> findSea(server));
+                seaLifeNext(20);
+            }
+            case 1 -> {
+                if (seaDeep == null) {
+                    HollowFrontier.LOGGER.info("[PhotoBooth] no Still Sea within reach, quitting");
+                    quit(mc, server);
+                    seaLifeStep = 99;
+                    return;
+                }
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 0", seaDeep.getX(), y, seaDeep.getZ() + 16));
+                seaLifeNext(GENERATE_TICKS);
+            }
+            case 2 -> {
+                String still = "{NoAI:1b,PersistenceRequired:1b,Tags:[\"hf_photo\"],Rotation:[90f,0f]}";
+                String in = "execute in " + HollowEarth.LEVEL.identifier() + " run summon hollowfrontier:";
+                int x = seaDeep.getX(), z = seaDeep.getZ();
+                run(server, String.format(java.util.Locale.ROOT, in + "great_sea_cow %d %d %d %s", x - 9, y - 1, z + 4, still));
+                run(server, String.format(java.util.Locale.ROOT, in + "plesiosaur %d %d %d %s", x + 2, y, z + 6, still));
+                run(server, String.format(java.util.Locale.ROOT, in + "basilosaurus %d %d %d %s", x, y - 3, z - 6, still));
+                for (int i = 0; i < 4; i++) {
+                    run(server, String.format(java.util.Locale.ROOT, in + "lampjelly %d %d %d %s", x + 6 + i * 2, y + 1 - i % 2, z + 9 + i % 3, still));
+                }
+                seaLifeNext(40);
+            }
+            case 3 -> {
+                shot(mc, "hf_43b_1_sea_life.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() - 8.5, y + 0.5, seaDeep.getZ() + 10.5), new Vec3(seaDeep.getX() - 8.5, y, seaDeep.getZ() + 4.5));
+                seaLifeNext(30);
+            }
+            case 4 -> {
+                shot(mc, "hf_43b_2_great_sea_cow.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() + 1.0, y + 1.5, seaDeep.getZ() + 12.5), new Vec3(seaDeep.getX() + 1.0, y + 0.8, seaDeep.getZ() + 6.5));
+                seaLifeNext(30);
+            }
+            case 5 -> {
+                shot(mc, "hf_43b_3_plesiosaur.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() - 1.0, y - 1.5, seaDeep.getZ() + 5.5), new Vec3(seaDeep.getX() - 1.0, y - 2.5, seaDeep.getZ() - 5.5));
+                seaLifeNext(30);
+            }
+            case 6 -> {
+                shot(mc, "hf_43b_4_basilosaurus.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() + 9.5, y + 1.0, seaDeep.getZ() + 13.5), new Vec3(seaDeep.getX() + 9.5, y + 0.8, seaDeep.getZ() + 10.0));
+                seaLifeNext(30);
+            }
+            case 7 -> {
+                shot(mc, "hf_43b_5_lampjellies.png");
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[tag=hf_photo]");
+                seaLifeNext(10);
+            }
+            case 8 -> {
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[type=item,distance=..40]");
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                seaLifeNext(20);
+            }
+            case 9 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] done, quitting");
+                quit(mc, server);
+                seaLifeNext(0);
+            }
+            default -> {}
+        }
+    }
+
+    private static void seaLifeNext(int wait) {
+        seaLifeStep++;
+        seaLifeWait = wait;
+    }
+
+    // ---------------------------------------------------------------- phase 43c: the Steam Submersible
+
+    private static final boolean SUBMERSIBLE_ONLY = "submersible".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int subStep;
+    private static int subWait;
+
+    /**
+     * The Steam Submersible (hf_43c_*), only with -PphotoScene=submersible: one awash on the Still Sea, from over the
+     * water, and one eight blocks down, from beside it. They're taken away again afterwards.
+     */
+    private static void submersible(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            subStep = 0;
+            subWait = 0;
+        }
+        if (subWait > 0) {
+            subWait--;
+            return;
+        }
+        double awash = HollowEarth.SEA_LEVEL - 1.25, under = HollowEarth.SEA_LEVEL - 10.0;
+        switch (subStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                server.execute(() -> findSea(server));
+                subWait = 20;
+                subStep++;
+            }
+            case 1 -> {
+                if (seaDeep == null) {
+                    quit(mc, server);
+                    subStep = 99;
+                    return;
+                }
+                hollowLooking(server, new Vec3(seaDeep.getX() + 4.5, awash + 3.0, seaDeep.getZ() + 5.5), new Vec3(seaDeep.getX() + 0.5, awash + 0.8, seaDeep.getZ() + 0.5));
+                subWait = GENERATE_TICKS;
+                subStep++;
+            }
+            case 2 -> {
+                String in = "execute in " + HollowEarth.LEVEL.identifier() + " run summon hollowfrontier:steam_submersible ";
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {Tags:[\"hf_photo\"],Rotation:[60f,0f],steam:8000}", seaDeep.getX(), awash, seaDeep.getZ()));
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {Tags:[\"hf_photo\"],Rotation:[90f,0f],steam:8000}", seaDeep.getX(), under, seaDeep.getZ() - 12));
+                subWait = 40;
+                subStep++;
+            }
+            case 3 -> {
+                shot(mc, "hf_43c_1_submersible_awash.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() + 3.5, under + 2.2, seaDeep.getZ() - 8.0), new Vec3(seaDeep.getX() + 0.5, under + 0.9, seaDeep.getZ() - 11.5));
+                subWait = 40;
+                subStep++;
+            }
+            case 4 -> {
+                shot(mc, "hf_43c_2_submersible_under.png");
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[tag=hf_photo]");
+                subWait = 10;
+                subStep++;
+            }
+            case 5 -> {
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[type=item,distance=..40]");
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                subWait = 20;
+                subStep++;
+            }
+            case 6 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] done, quitting");
+                quit(mc, server);
+                subStep++;
+            }
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- phase 43b: the Harpoon in flight
+
+    private static final boolean HARPOON_ONLY = "harpoon".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int harpoonStep;
+    private static int harpoonWait;
+
+    /**
+     * Harpoons in flight (hf_43b_6_harpoons.png), only with -PphotoScene=harpoon: three drifting slowly over the Still Sea,
+     * seen from the south looking north. Left to right: one flying east (its head should point right), one flying up and
+     * east (head up and right), and a toothed one flying west (head left). It's how the renderer's turn was set.
+     */
+    private static void harpoon(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            harpoonStep = 0;
+            harpoonWait = 0;
+        }
+        if (harpoonWait > 0) {
+            harpoonWait--;
+            return;
+        }
+        double y = HollowEarth.SEA_LEVEL + 4.0;
+        switch (harpoonStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                server.execute(() -> findSea(server));
+                harpoonWait = 20;
+                harpoonStep++;
+            }
+            case 1 -> {
+                if (seaDeep == null) {
+                    quit(mc, server);
+                    harpoonStep = 99;
+                    return;
+                }
+                hollowLooking(server, new Vec3(seaDeep.getX() + 0.5, y, seaDeep.getZ() + 4.5), new Vec3(seaDeep.getX() + 0.5, y, seaDeep.getZ() - 4.5));
+                harpoonWait = GENERATE_TICKS;
+                harpoonStep++;
+            }
+            case 2 -> {
+                int[] me = net.minecraft.core.UUIDUtil.uuidToIntArray(mc.player.getUUID()); // thrown by the camera, so each has a line back to it
+                String mine = String.format("Owner:[I;%d,%d,%d,%d],", me[0], me[1], me[2], me[3]);
+                String in = "execute in " + HollowEarth.LEVEL.identifier() + " run summon hollowfrontier:harpoon ";
+                int x = seaDeep.getX(), z = seaDeep.getZ();
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {" + mine + "Tags:[\"hf_photo\"],NoGravity:1b,Motion:[0.03d,0.0d,0.0d]}", x - 3, y, z));
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {" + mine + "Tags:[\"hf_photo\"],NoGravity:1b,Motion:[0.02d,0.02d,0.0d]}", x, y, z));
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {" + mine + "Tags:[\"hf_photo\"],NoGravity:1b,Motion:[-0.03d,0.0d,0.0d],"
+                        + "item:{id:\"hollowfrontier:toothed_harpoon\",count:1}}", x + 3, y, z));
+                harpoonWait = 12;
+                harpoonStep++;
+            }
+            case 3 -> {
+                shot(mc, "hf_43b_6_harpoons.png");
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[tag=hf_photo]");
+                harpoonWait = 10;
+                harpoonStep++;
+            }
+            case 4 -> {
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                harpoonWait = 20;
+                harpoonStep++;
+            }
+            case 5 -> {
+                quit(mc, server);
+                harpoonStep++;
+            }
+            default -> {}
+        }
     }
 
     // ---------------------------------------------------------------- phase 9b: the Hollow Earth's life, close up

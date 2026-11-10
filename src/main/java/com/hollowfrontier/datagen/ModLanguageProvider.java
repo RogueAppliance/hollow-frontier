@@ -581,6 +581,16 @@ public class ModLanguageProvider extends LanguageProvider {
         add("message.hollowfrontier.airship.bail", "It's %s blocks to the ground. Sneak again to step off.");
         add("message.hollowfrontier.airship.gauge_bearing", "%s  ·  %s");
         add("tooltip.hollowfrontier.airship.stored", "Coal %s  ·  Steam %s%%");
+        // 43c: the Steam Submersible
+        addItem(ModItems.STEAM_SUBMERSIBLE, "Steam Submersible");
+        addEntityType(ModEntities.STEAM_SUBMERSIBLE, "Steam Submersible");
+        add("tooltip.hollowfrontier.submersible.stored", "Steam %s%%");
+        add("tooltip.hollowfrontier.submersible.charge", "No fire aboard: charge it from canisters, or float it beside a steam tank, pipe or boiler");
+        add("tooltip.hollowfrontier.submersible.controls", "Use on water to launch. Jump to rise, sprint to dive, sneak to get out");
+        add("message.hollowfrontier.submersible.gauge", "Steam %s %s%%  ·  Depth %s  ·  Hull %s%%");
+        add("message.hollowfrontier.submersible.not_yours", "This submersible belongs to %s.");
+        add("message.hollowfrontier.submersible.needs_water", "It has to be launched on water.");
+        add("message.hollowfrontier.submersible.rammed", "Something hit the hull. Hull %s%%");
         add("subtitles.hollowfrontier.airship.engine", "Airship engine thrums");
         add("subtitles.hollowfrontier.airship.vent", "Airship vents steam");
         add("subtitles.hollowfrontier.airship.stoke", "Airship firebox stoked");
@@ -619,6 +629,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("biome.hollowfrontier.crystal_steppes", "Crystal Steppes");
         add("biome.hollowfrontier.ember_badlands", "Ember Badlands");
         add("biome.hollowfrontier.concavian_highlands", "Concavian Highlands");
+        add("biome.hollowfrontier.still_sea", "The Still Sea");
         addBlock(ModBlocks.CRUST_ROCK, "Crust Rock");
         addBlock(ModBlocks.SHELL_BEDROCK, "Shell Bedrock");
         addBlock(ModBlocks.FERN_FROND, "Fern Frond");
@@ -628,6 +639,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.hollowfrontier.crystal_steppes.additions", "Crystals chime");
         add("subtitles.hollowfrontier.ember_badlands.additions", "The ground rumbles");
         add("subtitles.hollowfrontier.concavian_highlands.additions", "Wind over the uplands");
+        add("subtitles.hollowfrontier.still_sea.additions", "Still water stirs");
         add("subtitles.hollowfrontier.ash_vent.hiss", "Ash vent hisses");
         addEntityType(ModEntities.FERN_SKITTER, "Fern Skitter");
         addEntityType(ModEntities.GLASSBACK_HARE, "Glassback Hare");
@@ -721,6 +733,39 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.hollowfrontier.glyptodon.death", "Glyptodon dies");
         add("subtitles.hollowfrontier.glyptodon.hunker", "Glyptodon shells up");
         add("subtitles.hollowfrontier.glyptodon.brush", "Glyptodon is brushed");
+        // 43b: the Still Sea's creatures, their drops and the Harpoons
+        addEntityType(ModEntities.GREAT_SEA_COW, "Great Sea Cow");
+        addEntityType(ModEntities.BASILOSAURUS, "Basilosaurus");
+        addEntityType(ModEntities.PLESIOSAUR, "Plesiosaur");
+        addEntityType(ModEntities.LAMPJELLY, "Lampjelly");
+        addEntityType(ModEntities.HARPOON, "Harpoon");
+        addItem(ModItems.GREAT_SEA_COW_SPAWN_EGG, "Great Sea Cow Spawn Egg");
+        addItem(ModItems.BASILOSAURUS_SPAWN_EGG, "Basilosaurus Spawn Egg");
+        addItem(ModItems.PLESIOSAUR_SPAWN_EGG, "Plesiosaur Spawn Egg");
+        addItem(ModItems.LAMPJELLY_SPAWN_EGG, "Lampjelly Spawn Egg");
+        addItem(ModItems.BLUBBER, "Blubber");
+        addItem(ModItems.TALLOW, "Tallow");
+        addItem(ModItems.BASILOSAUR_TOOTH, "Basilosaur Tooth");
+        addItem(ModItems.LAMP_GEL, "Lamp Gel");
+        addBlock(ModBlocks.JELLY_LAMP, "Jelly Lamp");
+        addItem(ModItems.HARPOON, "Harpoon");
+        addItem(ModItems.TOOTHED_HARPOON, "Toothed Harpoon");
+        add("item.hollowfrontier.harpoon.damage", "%s damage, and then it holds");
+        add("item.hollowfrontier.harpoon.hint", "Reels in what's small. What's big tows you");
+        add("item.hollowfrontier.harpoon.release", "Flies true underwater. Sneak to let go of the line");
+        add("subtitles.hollowfrontier.great_sea_cow.ambient", "Great Sea Cow lows");
+        add("subtitles.hollowfrontier.great_sea_cow.hurt", "Great Sea Cow groans");
+        add("subtitles.hollowfrontier.great_sea_cow.death", "Great Sea Cow dies");
+        add("subtitles.hollowfrontier.basilosaurus.ambient", "Something large moves below");
+        add("subtitles.hollowfrontier.basilosaurus.hurt", "Basilosaurus bellows");
+        add("subtitles.hollowfrontier.basilosaurus.death", "Basilosaurus dies");
+        add("subtitles.hollowfrontier.basilosaurus.bite", "Basilosaurus bites");
+        add("subtitles.hollowfrontier.plesiosaur.ambient", "Plesiosaur honks");
+        add("subtitles.hollowfrontier.plesiosaur.hurt", "Plesiosaur hisses");
+        add("subtitles.hollowfrontier.plesiosaur.death", "Plesiosaur dies");
+        add("subtitles.hollowfrontier.lampjelly.hurt", "Lampjelly squelches");
+        add("subtitles.hollowfrontier.lampjelly.death", "Lampjelly bursts");
+        add("subtitles.hollowfrontier.lampjelly.sting", "Lampjelly stings");
         add("subtitles.hollowfrontier.oliphant.blow", "Oliphant sounds");
         // The Gray experiments (10b)
         addEntityType(ModEntities.GRAY_SENTINEL, "Gray Sentinel");
@@ -1079,6 +1124,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("jade.hollowfrontier.crusher.progress", "Crushing: %s%%");
         add("jade.hollowfrontier.gauge", "Pressure: %s%%");
         add("jade.hollowfrontier.airship.coal", "Coal: %s");
+        add("jade.hollowfrontier.submersible.hull", "Hull: %s%%");
     }
 
     private void enchantment(String name, String title, String description) {

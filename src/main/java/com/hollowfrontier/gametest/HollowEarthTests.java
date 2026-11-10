@@ -94,7 +94,7 @@ final class HollowEarthTests {
         }
         var source = world(h).generator().getBiomeSource();
         h.assertTrue(source.possibleBiomes().size() == HollowBiomes.ALL.size()
-                && source.possibleBiomes().stream().allMatch(b -> HollowBiomes.ALL.stream().anyMatch(b::is)), "the biome source should offer exactly the four biomes");
+                && source.possibleBiomes().stream().allMatch(b -> HollowBiomes.ALL.stream().anyMatch(b::is)), "the biome source should offer exactly the five biomes");
         h.succeed();
     }
 

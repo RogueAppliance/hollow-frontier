@@ -159,6 +159,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.BRASS_BLOCK.get());
         // The Hollow Earth's crust and its unbreakable shell
         blockModels.createTrivialCube(ModBlocks.CRUST_ROCK.get());
+        blockModels.createTrivialCube(ModBlocks.JELLY_LAMP.get()); // 43b
         blockModels.createTrivialCube(ModBlocks.SHELL_BEDROCK.get());
         // Hollow Earth flora and ground (9b1): fronds as leaves, ash like sand, the vent a cracked top over basalt sides
         blockModels.createTrivialBlock(ModBlocks.FERN_FROND.get(), TexturedModel.LEAVES);
@@ -315,6 +316,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.AIRSHIP_ENVELOPE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.AIRSHIP_ENGINE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.AIRSHIP.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.STEAM_SUBMERSIBLE.get(), ModelTemplates.FLAT_ITEM); // 43c
         heldModels(itemModels); // the resonator, the drill and the lens: flat icons, and held GeckoLib models
         // The polar compass points like a lodestone compass at its bearing (polar_compass_00..31), and spins without one.
         Item compass = ModItems.POLAR_COMPASS.get();
@@ -403,6 +405,11 @@ public class ModModelProvider extends ModelProvider {
         ModItems.GADGETS.forEach(gadget -> itemModels.generateFlatItem(gadget.get(), ModelTemplates.FLAT_ITEM)); // 32c
         ModItems.SHERDS.forEach(sherd -> itemModels.generateFlatItem(sherd.get(), ModelTemplates.FLAT_ITEM));
         itemModels.generateFlatItem(ModItems.CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);
+        // The Still Sea (43b): eggs and drops flat, the harpoons held like tools
+        for (var item : java.util.List.of(ModItems.GREAT_SEA_COW_SPAWN_EGG, ModItems.BASILOSAURUS_SPAWN_EGG, ModItems.PLESIOSAUR_SPAWN_EGG,
+                ModItems.LAMPJELLY_SPAWN_EGG, ModItems.BLUBBER, ModItems.TALLOW, ModItems.BASILOSAUR_TOOTH, ModItems.LAMP_GEL)) {
+            itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
+        }
         // The megafauna (10a): eggs, drops and gear
         for (var item : java.util.List.of(ModItems.WOOLLY_MAMMOTH_SPAWN_EGG, ModItems.TERROR_BIRD_SPAWN_EGG, ModItems.MEGATHERIUM_SPAWN_EGG, ModItems.GLYPTODON_SPAWN_EGG,
                 ModItems.MAMMOTH_TUSK, ModItems.RAW_MAMMOTH, ModItems.MAMMOTH_STEAK, ModItems.OLIPHANT, ModItems.TERROR_BIRD_TALON, ModItems.THICK_HIDE,
@@ -444,6 +451,9 @@ public class ModModelProvider extends ModelProvider {
         held(itemModels, ModItems.POLAR_RESONATOR.get(), t -> t.rotation(0, -12, 0).translation(-2.0F, 2.5F, -2.5F).scale(0.6F), 3.2F);
         held(itemModels, ModItems.SUNSTONE_LENS.get(), t -> t.rotation(0, -12, 0).translation(-2.0F, 2.0F, -2.5F).scale(0.6F), 2.4F);
         held(itemModels, ModItems.STEAM_DRILL.get(), t -> t.rotation(0, 6, 0).translation(-1.6F, 2.2F, -3.5F).scale(0.45F), 1.9F);
+        // 43b: the harpoons, held like the drill (grip at the origin, head along -Z), a little bigger
+        held(itemModels, ModItems.HARPOON.get(), t -> t.rotation(0, 4, 0).translation(-1.2F, 2.6F, -2.0F).scale(0.6F), 1.9F);
+        held(itemModels, ModItems.TOOTHED_HARPOON.get(), t -> t.rotation(0, 4, 0).translation(-1.2F, 2.6F, -2.0F).scale(0.6F), 1.9F);
     }
 
     private static void held(ItemModelGenerators itemModels, Item item,

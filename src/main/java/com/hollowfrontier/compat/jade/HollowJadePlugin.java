@@ -10,6 +10,7 @@ import com.hollowfrontier.content.steam.PressureGaugeBlockEntity;
 import com.hollowfrontier.content.steam.SteamHandcar;
 import com.hollowfrontier.content.steam.SteamNetwork;
 import com.hollowfrontier.content.steam.airship.Airship;
+import com.hollowfrontier.content.steam.submersible.SteamSubmersible;
 import com.hollowfrontier.content.ufo.PrototypeSaucer;
 import com.hollowfrontier.content.ufo.SaucerFittings;
 
@@ -44,6 +45,7 @@ public class HollowJadePlugin implements IWailaPlugin {
         registration.registerBlockDataProvider(MachineData.INSTANCE, CrusherBlockEntity.class);
         registration.registerBlockDataProvider(MachineData.INSTANCE, PressureGaugeBlockEntity.class);
         registration.registerEntityDataProvider(VehicleData.INSTANCE, Airship.class);
+        registration.registerEntityDataProvider(VehicleData.INSTANCE, SteamSubmersible.class);
         registration.registerEntityDataProvider(VehicleData.INSTANCE, SteamHandcar.class);
         registration.registerEntityDataProvider(VehicleData.INSTANCE, PrototypeSaucer.class);
     }
@@ -54,6 +56,7 @@ public class HollowJadePlugin implements IWailaPlugin {
         registration.registerBlockComponent(Machines.INSTANCE, CrusherBlock.class);
         registration.registerBlockComponent(Machines.INSTANCE, PressureGaugeBlock.class);
         registration.registerEntityComponent(Vehicles.INSTANCE, Airship.class);
+        registration.registerEntityComponent(Vehicles.INSTANCE, SteamSubmersible.class);
         registration.registerEntityComponent(Vehicles.INSTANCE, SteamHandcar.class);
         registration.registerEntityComponent(Vehicles.INSTANCE, PrototypeSaucer.class);
     }
@@ -132,6 +135,11 @@ public class HollowJadePlugin implements IWailaPlugin {
                     data.putInt("capacity", Airship.CAPACITY);
                     data.putInt("fuel", ship.fuel());
                 }
+                case SteamSubmersible sub -> {
+                    data.putInt("steam", sub.steam());
+                    data.putInt("capacity", SteamSubmersible.CAPACITY);
+                    data.putInt("hull", Math.round(sub.hull() * 100 / SteamSubmersible.HULL));
+                }
                 case SteamHandcar car -> {
                     data.putInt("steam", car.steam());
                     data.putInt("capacity", SteamHandcar.CAPACITY);
@@ -158,6 +166,9 @@ public class HollowJadePlugin implements IWailaPlugin {
             CompoundTag data = accessor.getServerData();
             if (data.contains("steam")) {
                 tooltip.add(Component.translatable("tooltip.hollowfrontier.steam", data.getIntOr("steam", 0), data.getIntOr("capacity", 0)));
+            }
+            if (data.contains("hull")) {
+                tooltip.add(line("submersible.hull", data.getIntOr("hull", 0)));
             }
             if (data.contains("fuel")) {
                 tooltip.add(line("airship.coal", String.format(java.util.Locale.ROOT, "%.1f", data.getIntOr("fuel", 0) / (double) Airship.COAL_TICKS)));

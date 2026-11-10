@@ -29,6 +29,9 @@ public final class ModFeatures {
     public static final Supplier<MapCodec<CrystalOutcropFeature>> CRYSTAL_OUTCROP = FEATURE_TYPES.register("crystal_outcrop", () -> CrystalOutcropFeature.CODEC);
     public static final Supplier<MapCodec<AshVentFeature>> ASH_VENT = FEATURE_TYPES.register("ash_vent", () -> AshVentFeature.CODEC);
     public static final Supplier<MapCodec<StandingStoneFeature>> STANDING_STONE = FEATURE_TYPES.register("standing_stone", () -> StandingStoneFeature.CODEC);
+    /** Kelp and seagrass on the bed of the Still Sea (43a). */
+    public static final Supplier<MapCodec<com.hollowfrontier.worldgen.feature.SeaKelpFeature>> SEA_KELP = FEATURE_TYPES.register("sea_kelp", () -> com.hollowfrontier.worldgen.feature.SeaKelpFeature.CODEC);
+    public static final Supplier<MapCodec<com.hollowfrontier.worldgen.feature.SeaGrassFeature>> SEA_GRASS = FEATURE_TYPES.register("sea_grass", () -> com.hollowfrontier.worldgen.feature.SeaGrassFeature.CODEC);
     /** A Gray relay hung under the crust (27). */
     public static final Supplier<MapCodec<com.hollowfrontier.worldgen.feature.GrayRelayFeature>> GRAY_RELAY = FEATURE_TYPES.register("gray_relay", () -> com.hollowfrontier.worldgen.feature.GrayRelayFeature.CODEC);
 

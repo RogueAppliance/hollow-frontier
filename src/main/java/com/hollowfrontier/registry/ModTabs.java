@@ -59,7 +59,9 @@ public final class ModTabs {
                 ModItems.MAN_IN_BLACK_SPAWN_EGG,
                 ModItems.FERN_SKITTER_SPAWN_EGG, ModItems.GLASSBACK_HARE_SPAWN_EGG, ModItems.ASH_SALAMANDER_SPAWN_EGG, ModItems.PALE_RAVEN_SPAWN_EGG,
                 ModItems.GRAY_PROBE_SPAWN_EGG, ModItems.WOOLLY_MAMMOTH_SPAWN_EGG, ModItems.TERROR_BIRD_SPAWN_EGG,
-                ModItems.MEGATHERIUM_SPAWN_EGG, ModItems.GLYPTODON_SPAWN_EGG, ModItems.GRAY_SENTINEL_SPAWN_EGG,
+                ModItems.MEGATHERIUM_SPAWN_EGG, ModItems.GLYPTODON_SPAWN_EGG,
+                ModItems.GREAT_SEA_COW_SPAWN_EGG, ModItems.BASILOSAURUS_SPAWN_EGG, ModItems.PLESIOSAUR_SPAWN_EGG, ModItems.LAMPJELLY_SPAWN_EGG,
+                ModItems.GRAY_SENTINEL_SPAWN_EGG,
                 ModItems.KINDLED_SPAWN_EGG, ModItems.CRYSTAL_GUARDIAN_SPAWN_EGG, ModItems.SUN_ARCHON_SPAWN_EGG,
                 ModItems.GRAY_WARDEN_SPAWN_EGG, ModItems.DISGUISED_GRAY_SPAWN_EGG);
     }
@@ -128,7 +130,7 @@ public final class ModTabs {
         out.accept(fullCanister());
         add(out, ModItems.STEAM_DRILL, ModItems.STEAM_HANDCAR);
         // The airship: its two parts, then the ship
-        add(out, ModItems.AIRSHIP_ENVELOPE, ModItems.AIRSHIP_ENGINE, ModItems.AIRSHIP);
+        add(out, ModItems.AIRSHIP_ENVELOPE, ModItems.AIRSHIP_ENGINE, ModItems.AIRSHIP, ModItems.STEAM_SUBMERSIBLE);
         // The polar expedition: find a gateway, open it (the frame is for builders in creative)
         add(out, ModItems.POLAR_COMPASS, ModItems.POLAR_RESONATOR);
         // Machines, in the order a steam line is built
@@ -154,6 +156,9 @@ public final class ModTabs {
         add(out, ModItems.MAMMOTH_TUSK, ModItems.OLIPHANT, ModItems.RAW_MAMMOTH, ModItems.MAMMOTH_STEAK, ModItems.TERROR_BIRD_TALON, ModItems.TALON_KNIFE,
                 ModItems.THICK_HIDE, ModItems.HIDE_BARDING, ModItems.GLYPTODON_SCUTE,
                 ModItems.GLYPTODON_HELMET, ModItems.GLYPTODON_CHESTPLATE, ModItems.GLYPTODON_LEGGINGS, ModItems.GLYPTODON_BOOTS);
+        // The Still Sea (43b): what its creatures give, what that makes, and the Harpoons
+        add(out, ModItems.BLUBBER, ModItems.TALLOW, ModItems.LAMP_GEL, ModItems.JELLY_LAMP, ModItems.BASILOSAUR_TOOTH,
+                ModItems.HARPOON, ModItems.TOOTHED_HARPOON);
         // The Gray experiments (10b)
         add(out, ModItems.GRAY_TECH_FRAGMENT, ModItems.SIGNAL_LOCATOR);
     }
