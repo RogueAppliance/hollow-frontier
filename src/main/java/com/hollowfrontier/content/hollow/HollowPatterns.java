@@ -23,7 +23,9 @@ public final class HollowPatterns {
     public static final ResourceKey<DecoratedPotPattern> SUN = pot("sun");
     public static final ResourceKey<DecoratedPotPattern> CRYSTAL = pot("crystal");
     public static final ResourceKey<DecoratedPotPattern> WATCHER = pot("watcher");
-    public static final List<ResourceKey<DecoratedPotPattern>> POTS = List.of(SUN, CRYSTAL, WATCHER);
+    /** 43d: the Drowned Quarter's sherd, a line of water. */
+    public static final ResourceKey<DecoratedPotPattern> WAVE = pot("wave");
+    public static final List<ResourceKey<DecoratedPotPattern>> POTS = List.of(SUN, CRYSTAL, WATCHER, WAVE);
     public static final ResourceKey<TrimPattern> CONCAVIAN = ResourceKey.create(Registries.TRIM_PATTERN, HollowFrontier.id("concavian"));
 
     private static ResourceKey<DecoratedPotPattern> pot(String name) {

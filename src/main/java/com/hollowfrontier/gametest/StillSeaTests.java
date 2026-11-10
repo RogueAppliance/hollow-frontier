@@ -159,7 +159,7 @@ final class StillSeaTests {
 
     /**
      * The biome: its bed's features and the falls; Hollow Earth but not Hollow land; out of vanilla's ocean tags; and no
-     * structure of ours may start in it (43d's Drowned Quarter will be the first, and should change this test).
+     * the land's sites keep out of it (which structures may stand in it is SeaSiteTests' business, since 43d).
      */
     static void seaBiomeIsItsOwn(GameTestHelper h) {
         var access = h.getLevel().registryAccess();
@@ -180,8 +180,6 @@ final class StillSeaTests {
         }
         h.assertFalse(sea.is(BiomeTags.IS_OCEAN) || sea.is(BiomeTags.IS_DEEP_OCEAN) || sea.is(BiomeTags.IS_BEACH) || sea.is(BiomeTags.IS_RIVER),
                 "the sea is in a vanilla water tag, which would bring vanilla's ocean structures and spawns");
-        access.lookupOrThrow(Registries.STRUCTURE).listElements().forEach(structure ->
-                h.assertFalse(structure.value().biomes().contains(sea), structure.key().identifier() + " may generate in the Still Sea"));
         h.succeed();
     }
 

@@ -45,7 +45,10 @@ public class ConcavianCodexItem extends Item {
                     "ufo/we_have_liftoff", "ufo/calling_them_down", "ufo/the_mothership_falls", "ufo/cut_loose")),
             // 15: what comes after the leash
             new Chapter("after", List.of("ufo/trespassers", "ufo/second_chance", "concavia/concavia_rising", "concavia/old_roads",
-                    "ufo/encore", "ufo/fully_fitted")));
+                    "ufo/encore", "ufo/fully_fitted")),
+            // 43: a side road, and the only chapter the Kindled who wrote the rest never saw the end of
+            new Chapter("sea", List.of("hollow/still_sea", "hollow/sea_cow", "hollow/harpoon", "steam/submersible", "hollow/symmes_landing",
+                    "hollow/drowned_quarter", "hollow/sealed_hull")));
     /** Milestones to a page: a book page holds about fourteen short lines. */
     private static final int PER_PAGE = 3;
 

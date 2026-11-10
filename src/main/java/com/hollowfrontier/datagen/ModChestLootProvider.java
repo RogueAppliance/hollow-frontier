@@ -541,6 +541,45 @@ public class ModChestLootProvider implements LootTableSubProvider {
                 .add(item(Items.COCOA_BEANS, 2, 6, 10))
                 .add(item(Items.BAMBOO, 3, 9, 8))
                 .add(item(Items.GOLDEN_APPLE, 1, 1, 3))));
+        // 43d: the Drowned Quarter. Its counting-house vault always holds the Sealed Hull, over what a river port banked;
+        // the domes held homes and shops; the flooded houses have what the water left. And the Symmes Landing's crate:
+        // always a chart to the nearest Quarter and a harpoon, over a boat's stores.
+        accept(ModChestLoot.DROWNED_VAULT, LootTable.lootTable()
+                .withPool(pool(1, 1).add(LootItem.lootTableItem(ModItems.SEALED_HULL.get())))
+                .withPool(pool(4, 6)
+                        .add(item(ModItems.PHLOGISTON_SHARD.get(), 2, 5, 12))
+                        .add(item(ModItems.STARSTEEL_INGOT.get(), 1, 3, 8))
+                        .add(item(ModItems.GOLD_COIN.get(), 3, 8, 12))
+                        .add(item(Items.GOLD_INGOT, 2, 5, 10))
+                        .add(item(Items.AMETHYST_SHARD, 3, 8, 10))
+                        .add(item(Items.PRISMARINE_CRYSTALS, 2, 6, 8))
+                        .add(item(Items.EMERALD, 1, 4, 6))
+                        .add(item(Items.HEART_OF_THE_SEA, 1, 1, 1))));
+        accept(ModChestLoot.DROWNED_HOME, LootTable.lootTable().withPool(pool(3, 5)
+                .add(item(Items.GOLD_NUGGET, 3, 9, 12))
+                .add(item(ModItems.LAMP_GEL.get(), 1, 3, 10))
+                .add(item(Items.NAUTILUS_SHELL, 1, 1, 6))
+                .add(item(Items.AMETHYST_SHARD, 1, 4, 8))
+                .add(item(Items.CLAY_BALL, 2, 6, 10))
+                .add(item(ModItems.PHLOGISTON_SHARD.get(), 1, 2, 6))
+                .add(item(Items.EMERALD, 1, 2, 4))));
+        accept(ModChestLoot.DROWNED_STREET, LootTable.lootTable().withPool(pool(2, 4)
+                .add(item(Items.BONE, 1, 3, 10))
+                .add(item(Items.CLAY_BALL, 1, 4, 12))
+                .add(item(Items.PRISMARINE_SHARD, 1, 3, 10))
+                .add(item(Items.IRON_NUGGET, 2, 6, 8))
+                .add(item(Items.GOLD_NUGGET, 1, 4, 6))
+                .add(item(Items.KELP, 1, 3, 8))));
+        accept(ModChestLoot.SYMMES_LANDING, LootTable.lootTable()
+                .withPool(pool(1, 1).add(map(com.hollowfrontier.worldgen.structure.ModStructures.DROWNED_QUARTER, "drowned_quarter")))
+                .withPool(pool(1, 1).add(LootItem.lootTableItem(ModItems.HARPOON.get())))
+                .withPool(pool(3, 5)
+                        .add(item(Items.COAL, 2, 6, 10))
+                        .add(item(Items.LEAD, 1, 2, 8))
+                        .add(item(ModItems.RIFLE_CARTRIDGE.get(), 2, 6, 8))
+                        .add(item(Items.COOKED_COD, 1, 3, 8))
+                        .add(item(Items.COMPASS, 1, 1, 4))
+                        .add(item(ModItems.TALLOW.get(), 1, 3, 6))));
         accept(ModChestLoot.TAR_PIT, LootTable.lootTable().withPool(pool(3, 5)
                 .add(item(ModItems.MAMMOTH_TUSK.get(), 1, 2, 10))
                 .add(item(ModItems.TERROR_BIRD_TALON.get(), 1, 2, 8))
@@ -721,6 +760,13 @@ public class ModChestLootProvider implements LootTableSubProvider {
                 List.of(one(ModItems.SUNSTONE_CIRCLET.get()))));
         t.put(ModChestLoot.FOUNDRY, new Tiers(2, List.of(one(ModItems.STARSTEEL_MASK.get()), book()), 6,
                 List.of(one(ModItems.CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE.get()))));
+        // 43d: the Drowned Quarter and the Symmes Landing
+        t.put(ModChestLoot.DROWNED_VAULT, new Tiers(1, List.of(one(ModItems.PILOTS_BELL.get()), one(ModItems.WATER_CLOCK.get()), one(ModItems.KINDLED_IDOL.get())),
+                2, List.of(one(ModItems.CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE.get()), one(ModItems.WAVE_POTTERY_SHERD.get()))));
+        t.put(ModChestLoot.DROWNED_HOME, new Tiers(3, List.of(one(ModItems.WAVE_POTTERY_SHERD.get()), one(ModItems.PILOTS_BELL.get()),
+                one(ModItems.CRYSTAL_TABLET.get())), 0, List.of()));
+        t.put(ModChestLoot.DROWNED_STREET, new Tiers(4, List.of(one(ModItems.WAVE_POTTERY_SHERD.get()), one(ModItems.WATER_CLOCK.get())), 0, List.of()));
+        t.put(ModChestLoot.SYMMES_LANDING, new Tiers(2, List.of(one(ModItems.EXPEDITION_SEXTANT.get()), book()), 0, List.of()));
         t.put(ModChestLoot.SKY_SHRINE, new Tiers(2, List.of(one(ModItems.STAR_CHART.get()), one(ModItems.KINDLED_IDOL.get())), 6,
                 List.of(one(ModItems.CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE.get()))));
         return t;

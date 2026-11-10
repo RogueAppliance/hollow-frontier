@@ -21,30 +21,37 @@ import net.minecraft.world.item.ItemStack;
  * <p>
  * {@link #mask} packs it into an int for the renderer, which shows each part once fitted.
  */
-public record SaucerFittings(boolean emitter, boolean lens, boolean nav, boolean cloak, boolean hold) {
+public record SaucerFittings(boolean emitter, boolean lens, boolean nav, boolean cloak, boolean hold, boolean hull) {
     public static final SaucerFittings NONE = new SaucerFittings(false, false, false);
     public static final SaucerFittings STANDARD = new SaucerFittings(true, true, false);
+    /** The five the Grays' craft carry: what "fully fitted" has meant since 15b. The Sealed Hull (43d) is Kindled work, and extra. */
     public static final SaucerFittings ALL = new SaucerFittings(true, true, true, true, true);
-    public static final int EMITTER = 1, LENS = 2, NAV = 4, CLOAK = 8, HOLD = 16;
+    public static final int EMITTER = 1, LENS = 2, NAV = 4, CLOAK = 8, HOLD = 16, HULL = 32;
 
     public static final Codec<SaucerFittings> CODEC = RecordCodecBuilder.create(i -> i.group(
             Codec.BOOL.optionalFieldOf("emitter", false).forGetter(SaucerFittings::emitter),
             Codec.BOOL.optionalFieldOf("lens", false).forGetter(SaucerFittings::lens),
             Codec.BOOL.optionalFieldOf("nav", false).forGetter(SaucerFittings::nav),
             Codec.BOOL.optionalFieldOf("cloak", false).forGetter(SaucerFittings::cloak),
-            Codec.BOOL.optionalFieldOf("hold", false).forGetter(SaucerFittings::hold)).apply(i, SaucerFittings::new));
+            Codec.BOOL.optionalFieldOf("hold", false).forGetter(SaucerFittings::hold),
+            Codec.BOOL.optionalFieldOf("hull", false).forGetter(SaucerFittings::hull)).apply(i, SaucerFittings::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, SaucerFittings> STREAM_CODEC = ByteBufCodecs.VAR_INT.map(
             SaucerFittings::fromMask, SaucerFittings::mask).cast();
 
     /** The three 13c parts, without the rematch fittings. */
     public SaucerFittings(boolean emitter, boolean lens, boolean nav) {
-        this(emitter, lens, nav, false, false);
+        this(emitter, lens, nav, false, false, false);
+    }
+
+    /** The Grays' five, without the Kindled's Sealed Hull. */
+    public SaucerFittings(boolean emitter, boolean lens, boolean nav, boolean cloak, boolean hold) {
+        this(emitter, lens, nav, cloak, hold, false);
     }
 
     /** Whether {@code stack} is one of the parts at all. */
     public static boolean isPart(ItemStack stack) {
         return stack.is(ModItems.BEAM_EMITTER.get()) || stack.is(ModItems.LENS_ARRAY.get()) || stack.is(ModItems.NAVIGATION_CORE.get())
-                || stack.is(ModItems.CLOAKING_DEVICE.get()) || stack.is(ModItems.CARGO_HOLD.get());
+                || stack.is(ModItems.CLOAKING_DEVICE.get()) || stack.is(ModItems.CARGO_HOLD.get()) || stack.is(ModItems.SEALED_HULL.get());
     }
 
     /** Fits {@code part} if it's one not fitted yet: the fittings after, or this unchanged. */
@@ -64,20 +71,23 @@ public record SaucerFittings(boolean emitter, boolean lens, boolean nav, boolean
         if (part.is(ModItems.CARGO_HOLD.get()) && !hold) {
             return fromMask(mask() | HOLD);
         }
+        if (part.is(ModItems.SEALED_HULL.get()) && !hull) {
+            return fromMask(mask() | HULL);
+        }
         return this;
     }
 
     /** Whether every fitting there is has been fitted. */
     public boolean full() {
-        return mask() == ALL.mask();
+        return (mask() & ALL.mask()) == ALL.mask();
     }
 
     public static SaucerFittings fromMask(int mask) {
-        return new SaucerFittings((mask & EMITTER) != 0, (mask & LENS) != 0, (mask & NAV) != 0, (mask & CLOAK) != 0, (mask & HOLD) != 0);
+        return new SaucerFittings((mask & EMITTER) != 0, (mask & LENS) != 0, (mask & NAV) != 0, (mask & CLOAK) != 0, (mask & HOLD) != 0, (mask & HULL) != 0);
     }
 
     public int mask() {
-        return (emitter ? EMITTER : 0) | (lens ? LENS : 0) | (nav ? NAV : 0) | (cloak ? CLOAK : 0) | (hold ? HOLD : 0);
+        return (emitter ? EMITTER : 0) | (lens ? LENS : 0) | (nav ? NAV : 0) | (cloak ? CLOAK : 0) | (hold ? HOLD : 0) | (hull ? HULL : 0);
     }
 
     /** A line per part fitted, or one saying none are (tooltips). */
@@ -91,6 +101,7 @@ public record SaucerFittings(boolean emitter, boolean lens, boolean nav, boolean
         if (nav) out.accept(fitted(ModItems.NAVIGATION_CORE.get().getDefaultInstance()));
         if (cloak) out.accept(fitted(ModItems.CLOAKING_DEVICE.get().getDefaultInstance()));
         if (hold) out.accept(fitted(ModItems.CARGO_HOLD.get().getDefaultInstance()));
+        if (hull) out.accept(fitted(ModItems.SEALED_HULL.get().getDefaultInstance()));
     }
 
     private static Component fitted(ItemStack part) {

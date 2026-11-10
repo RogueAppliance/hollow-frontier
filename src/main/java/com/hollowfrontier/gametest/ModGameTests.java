@@ -215,6 +215,12 @@ public final class ModGameTests {
         field("submersible_keeps_its_crew", 60, SubmersibleTests::submersibleKeepsItsCrew);
         field("submersible_owner_lock_and_fold", 20, SubmersibleTests::submersibleOwnerLockAndFold);
         field("basilosaurus_rams_the_hull", 20, SubmersibleTests::basilosaurusRamsTheHull);
+        // 43d: the Drowned Quarter, the Symmes Landing and the Sealed Hull
+        test("sea_sites_go_where_they_should", 20, SeaSiteTests::seaSitesGoWhereTheyShould);
+        field("drowned_quarter_keeps_its_air", 100, SeaSiteTests::drownedQuarterKeepsItsAir);
+        field("symmes_landing_places", 20, SeaSiteTests::symmesLandingPlaces);
+        test("sea_tables_give_what_they_promise", 20, SeaSiteTests::seaTablesGiveWhatTheyPromise);
+        field("sealed_hull_lets_a_saucer_dive", 100, SeaSiteTests::sealedHullLetsASaucerDive);
         // 9b1: flora and ambience
         test("hollow_flora_in_biomes", 20, HollowFloraTests::floraInBiomes);
         garden("giant_fern_grows", 20, HollowFloraTests::giantFernGrows);

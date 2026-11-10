@@ -169,6 +169,9 @@ public final class ModAdvancements {
         text("hollow/harpoon", "On the Line", "Make a Harpoon. What it hits, it holds");
         text("hollow/plesiosaur_fetch", "Good Neck", "Give a Plesiosaur a fish and see what it brings up");
         text("hollow/basilosaurus", "Deep Water", "Bring down a Basilosaurus");
+        text("hollow/symmes_landing", "Not Launching Her Again", "Find where the Symmes expedition drew up its boat");
+        text("hollow/drowned_quarter", "Under Glass", "Find a Drowned Quarter on the bed of the Still Sea");
+        text("hollow/sealed_hull", "Made for the Day the River Rose", "Take the Sealed Hull from a Drowned Quarter's vault");
         text("hollow/still_running", "Still Running", "Find a Gray field station that hasn't been abandoned");
         text("hollow/escaped_specimen", "Escaped Specimen", "Bring down a beast the Grays have tagged");
         text("hollow/on_the_signal", "On the Signal", "Pick up a Gray station's signal on a Signal Locator");
@@ -544,6 +547,13 @@ public final class ModAdvancements {
             display(harpoon, "hollow/basilosaurus", ModItems.BASILOSAUR_TOOTH.get(), AdvancementType.GOAL, false)
                     .addCriterion("basilosaurus", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entities, ModEntities.BASILOSAURUS.get())))
                     .save(output, id("hollow/basilosaurus"));
+            // 43d: the sea's sites, and what the Quarter's vault holds
+            found(sea, "hollow/symmes_landing", Items.SPRUCE_BOAT, structures.getOrThrow(ModStructures.SYMMES_LANDING));
+            found(sea, "hollow/drowned_quarter", ModItems.JELLY_LAMP.get(), structures.getOrThrow(ModStructures.DROWNED_QUARTER));
+            display(sea, "hollow/sealed_hull", ModItems.SEALED_HULL.get(), AdvancementType.CHALLENGE, true)
+                    .addCriterion("hull", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SEALED_HULL.get()))
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("hollow/sealed_hull"));
             // The Gray experiments (10b)
             found(root, "hollow/still_running", Items.SEA_LANTERN, structures.getOrThrow(ModStructures.GRAY_STATION));
             AdvancementHolder specimen = task(bird, "hollow/escaped_specimen", ModItems.GRAY_TECH_FRAGMENT.get())

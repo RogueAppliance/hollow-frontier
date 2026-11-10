@@ -153,6 +153,15 @@ public final class ChatterLines {
         say(TALK, only(Act.FRONTIER).unless(SURVEY_LETTER), "The Polar Survey went north two summers back. The postmaster's still holding their last letter.");
         say(TALK, when(AIRSHIP), "That airship of yours could make the pole. The Survey went on foot, and look where it got them.");
         say(TALK, when(AIRSHIP), "If you're flying north, take steam. The Survey wrote home for steam, and coal, and a compass. In that order.");
+        // 43d: the Still Sea, which nobody up here believes in
+        say(TALK, when(SEA_SEEN), "A sea under the ground. And I suppose the fish carry lanterns.");
+        say(TALK, when(SEA_SEEN), "A sea with no waves on it? That's not a sea. That's a pond with ideas.");
+        say(TALK, when(SEA_SEEN), "No tide, you say. Then what does it do all day?");
+        say(TALK, when(SEA_SEEN), "You smell of kelp. We're nine hundred miles from kelp.");
+        say(TALK, when(SEA_SEEN), "A town under glass at the bottom of it. Sure. And who washes the windows?");
+        say(TALK, when(SEA_SEEN), "My brother sailed twenty years. Says a sea with no wind is just a place to drown slowly.");
+        say(TALK, when(SEA_SEEN), "They say something long went under a fella's boat down there. He doesn't row any more.");
+        say(TALK, when(SEA_SEEN), "If there's a whale down there I don't want to hear about it. I've enough to worry on with the cattle.");
     }
 
     private static void folk() {
@@ -211,6 +220,7 @@ public final class ChatterLines {
         say(TALK, act(Act.AFTER), "Funny thing. Ever since the sky went quiet, I sleep like a babe.");
         say(TALK, when(LANDINGS), "Saw the saucer's lights through the trees. I went for a look, and one of the grey fellas looked back.");
         say(TALK, when(AIRSHIP), "Flying north? I've a compass that points at the pole. Not the one on the map. The other one.");
+        say(TALK, when(SEA_SEEN), "Bring me anything off that sea floor. Bells, clocks, I don't care. Wet's fine. I'll dry it."); // 43d
 
         voice("engineer");
         say(GREET, "Mind the rails. The four-fifteen don't stop for nobody.");
@@ -549,5 +559,7 @@ public final class ChatterLines {
         gossip(when(STRANGER), "That stranger asked me where the humans drink.", "What'd you tell him?", "The saloon. Where else would humans drink?");
         gossip(when(STRANGER), "Ever notice the new fella's hat's three sizes too big?", "Maybe his head's small.", "His head ain't small.");
         gossip(only(Act.FRONTIER).unless(SURVEY_LETTER), "Any word from the Polar Survey?", "Not since the letter.", "What letter?"); // 32d
+        gossip(when(SEA_SEEN), "That one says there's a sea under the ground.", "Under whose ground?", "Everybody's, the way they tell it."); // 43d
+        gossip(when(SEA_SEEN), "They say you can ride a brass kettle to the bottom of it.", "And back up?", "They didn't say.");
     }
 }

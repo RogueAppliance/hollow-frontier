@@ -37,6 +37,10 @@ public class SaucerModels {
         ALLOY_HI(0, 0, 4, 4), ALLOY(4, 0, 4, 4), ALLOY_DK(8, 0, 4, 4), UNDER(12, 0, 4, 4), BRASS(16, 0, 4, 4), BRASS_DK(20, 0, 4, 4),
         DRIVE(24, 0, 4, 4), EMITTER(28, 0, 4, 4), LENS(32, 0, 4, 4), EYE(36, 0, 4, 4), NAV(40, 0, 4, 4), CONSOLE(44, 0, 4, 4),
         SCREEN(48, 0, 4, 4), UNDERGLOW(52, 0, 4, 4), // the last: the Mothership's dim underside glow (13d)
+        // The Sealed Hull's band (43d): Kindled sea-green plate, its lamp-gel seams, and the band's edge (brass over plate, a gel light)
+        SEAL(0, 4, 4, 4), GEL(4, 4, 4, 4), S_SEAL(16, 4, 8, 2),
+        // The cargo hold's locker (15b, shown since 43d): leather, and its lid's face with a brass latch
+        HOLD(8, 4, 4, 4), HOLD_LID(12, 4, 4, 4),
         // Side strips, one per disc layer (a face uses as much of its strip as it's wide: under 8 px for every layer)
         S_BELLY(0, 8, 8, 2), S_L2(8, 8, 8, 2), S_L3(16, 8, 8, 2), S_RIM(24, 8, 8, 4), S_U1(32, 8, 8, 2), S_U2(40, 8, 8, 2),
         S_DECK(48, 8, 8, 2),
@@ -101,6 +105,13 @@ public class SaucerModels {
             return this;
         }
 
+        /** A box turned {@code yaw} degrees about the craft's axis: one spoke of a ring of them. */
+        Bone spoke(Mat mat, double yaw, double x0, double y0, double z0, double x1, double y1, double z1) {
+            cubes.add(new Cube(new double[] {x0, y0, z0}, new double[] {x1 - x0, y1 - y0, z1 - z0}, new double[] {0, y0, 0},
+                    new double[] {0, yaw, 0}, all(mat)));
+            return this;
+        }
+
         /**
          * A flat piece on this bone's +Z side running from (z0, y0) up to (z1, y1) (z the distance out from the middle), w
          * wide and t thick, tilted inward about its foot.
@@ -161,6 +172,28 @@ public class SaucerModels {
         bones.add(new Bone("lens", "root", 0, -1, -10)
                 .box(Mat.LENS, -2, -2.5, -12, 2, 0, -8)
                 .box(barrel, -0.75, -2, -15, 0.75, -0.5, -12));
+
+        // The Sealed Hull (43d): two collars of Kindled plate clasping the hull either side of the turning rim, a hair
+        // wider and deeper than the alloy layers they cover (so they hide those layers' sides, and the ring of top and
+        // bottom that shows beyond the next layer in). Twelve seams of lamp gel run across each, over the plates' joints.
+        Bone band = new Bone("hull_band", "root", 0, 8, 0)
+                .disc(55.4, 10, 12.25, 24, Mat.S_SEAL, Mat.SEAL, Mat.SEAL)
+                .disc(55.4, 3.75, 6, 24, Mat.S_SEAL, Mat.SEAL, Mat.SEAL);
+        for (int k = 0; k < 12; k++) {
+            double yaw = 30.0 * k + 15;
+            band.spoke(Mat.GEL, yaw, -0.3, 12.25, 23.2, 0.3, 12.4, 27.3);
+            band.spoke(Mat.GEL, yaw, -0.3, 3.6, 22.2, 0.3, 3.75, 27.3);
+        }
+        bones.add(band);
+
+        // The cargo hold (15b): a leather locker slung under the stern, opposite the lens turret, in two brass straps,
+        // its lid to the rear with a latch
+        Map<Face, Mat> locker = all(Mat.HOLD);
+        locker.put(Face.SOUTH, Mat.HOLD_LID);
+        bones.add(new Bone("hold", "root", 0, 0, 17)
+                .box(locker, -5, -1, 14.2, 5, 2, 20.5)
+                .box(Mat.BRASS_DK, -3.6, -1.2, 14, -2.6, 2, 20.7)
+                .box(Mat.BRASS_DK, 2.6, -1.2, 14, 3.6, 2, 20.7));
 
         // The cockpit: a console before the pilot, its top aglow
         Map<Face, Mat> console = all(Mat.CONSOLE);

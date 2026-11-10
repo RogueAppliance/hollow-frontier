@@ -206,11 +206,19 @@ public final class SeaLife {
         return isWater(level, pos);
     }
 
+    /** How far (in chunks, by the structure search's own count) a Plesiosaur knows of a Drowned Quarter. */
+    public static final int QUARTER_SEARCH = 24;
+
     /**
-     * Where a Plesiosaur looks when it surfaces with something: the Drowned Quarter (43d), once there is one to find.
-     * Until then, nowhere in particular (it looks at whoever fed it).
+     * Where a Plesiosaur looks when it surfaces with something: the nearest Drowned Quarter (43d), if there's one within
+     * its knowing. Otherwise nowhere in particular (it looks at whoever fed it).
      */
     public static Optional<BlockPos> quarterBearing(ServerLevel level, BlockPos from) {
-        return Optional.empty();
+        var quarter = level.registryAccess().lookupOrThrow(Registries.STRUCTURE).get(com.hollowfrontier.worldgen.structure.ModStructures.DROWNED_QUARTER);
+        if (quarter.isEmpty()) {
+            return Optional.empty();
+        }
+        var found = level.getChunkSource().getGenerator().findNearestMapStructure(level, net.minecraft.core.HolderSet.direct(quarter.get()), from, QUARTER_SEARCH, false);
+        return found == null ? Optional.empty() : Optional.of(found.getFirst());
     }
 }

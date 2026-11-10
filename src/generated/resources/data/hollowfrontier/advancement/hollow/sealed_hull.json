@@ -1,0 +1,37 @@
+{
+  "parent": "hollowfrontier:hollow/still_sea",
+  "criteria": {
+    "hull": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:sealed_hull"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.sealed_hull.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:sealed_hull"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.sealed_hull.title"
+    }
+  },
+  "requirements": [
+    [
+      "hull"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

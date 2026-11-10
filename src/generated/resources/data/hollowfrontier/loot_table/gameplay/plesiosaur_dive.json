@@ -140,6 +140,18 @@
               "min": 1
             }
           },
+          "name": "hollowfrontier:wave_pottery_sherd"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
+            }
+          },
           "name": "hollowfrontier:kindled_idol"
         },
         {
@@ -225,6 +237,30 @@
             }
           },
           "name": "hollowfrontier:star_chart"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
+            }
+          },
+          "name": "hollowfrontier:pilots_bell"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
+            }
+          },
+          "name": "hollowfrontier:water_clock"
         }
       ],
       "rolls": {

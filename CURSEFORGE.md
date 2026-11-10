@@ -69,6 +69,7 @@ Wake a Polar Gateway's ring of stones with a Polar Resonator, then fall through 
 - **The Still Sea:** an inner sea with no wind and no weather, so it lies flat as glass. Pale beaches, kelp forests on the shelf, and falls pouring in from the crust.
 - **Sea life:** Great Sea Cows grazing the kelp, a Plesiosaur that dives for you if you feed it a fish, glowing Lampjellies that sting, and the Basilosaurus, which hunts whatever swims over deep water. Take a Harpoon: it reels in what's small, and what's big tows you.
 - **The Steam Submersible:** a brass boat for two that runs on steam charged at the shore, with no fire aboard. Dive, hold your depth, and see by its lamp. A Basilosaurus will ram it.
+- **The Drowned Quarter:** a sunken Kindled river port on the seabed, with glass domes that still hold air, guardians still on watch, and a vault. What's in the vault lets your saucer follow you down.
 - **Megafauna:** woolly mammoths that charge as a herd, terror birds that outrun you, giant ground sloths and glyptodons.
 - **New metals:** glowing phlogiston crystal, and starsteel for tools, a paxel and armor.
 - **Sites to explore:** a lost Symmes expedition's dig, Kindled temples and observatories, an overgrown ziggurat, a tar pit full of bones, an abandoned phlogiston mine, a ruined starsteel foundry, shrines on the floating islands, and Gray relays hanging from the crust.

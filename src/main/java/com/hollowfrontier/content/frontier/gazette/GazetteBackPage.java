@@ -94,6 +94,7 @@ public final class GazetteBackPage {
         add(k, act(Act.AFTER), "FOR SALE: lead-lined nightcap. The sky's quiet now, and the owner wants his hair back.");
         add(k, when(DUST_DEVIL), "LOST: one good hat, last seen heading east at a gallop. Reward.");
         add(k, when(LOST_HAT), "FOR SALE: hats, with chin straps. Ask the reader who has just lost one.");
+        add(k, when(SEA_SEEN), "FOR SALE: rowing boat, used once, on a sea that is on no map. Ask no questions."); // 43d
     }
 
     private static void letters() {
@@ -110,6 +111,7 @@ public final class GazetteBackPage {
         add(k, when(CROP_CIRCLES), "Sir,\nI did not make the rings in my wheat, and I resent my neighbours' suggestion that I have taken up dancing.\n\n— A Farmer");
         add(k, only(Act.GRAYS), "Sir,\nOn Saturday last I was taken up into a light and shown many wonders. I should like to know who will pay for my fence.\n\n— A Citizen");
         add(k, act(Act.AFTER), "Sir,\nThe lights have stopped. I have nothing left to write to you about.\n\nP.S. The bandstand is still a disgrace.\n— A Resident");
+        add(k, when(SEA_SEEN), "Sir,\nYour paper says there is a sea beneath us. I have dug wells for thirty years and never once struck a fish.\n\n— A Well-Digger"); // 43d
     }
 
     private static void corrections() {
@@ -126,6 +128,7 @@ public final class GazetteBackPage {
         add(k, Cond.ANY, "We reported a twister through the stockyard. It was a dust devil, and it took only the stockman's hat. He would like it back.");
         add(k, only(Act.GRAYS), "Gentlemen from out of town have asked us to say that last week's lights were a dust devil carrying a lantern. We have said it.");
         add(k, act(Act.AFTER), "We reported that the sky has been quiet for a month. A goose flew over on Thursday. We regret the alarm.");
+        add(k, when(SEA_SEEN), "We reported a sea under the earth with no tide. A reader asks what, then, it has. We have asked. Lamps, we are told."); // 43d
     }
 
     // ---------------------------------------------------------------- printing

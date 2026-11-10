@@ -45,6 +45,14 @@ public class ModArchaeologyLootProvider implements LootTableSubProvider {
                 .add(entry(ModItems.MAMMOTH_TUSK.get(), 3))
                 .add(entry(Items.BONE, 8))
                 .add(entry(ModItems.TERROR_BIRD_TALON.get(), 3)).wrap());
+        // 43d: silt in the Drowned Quarter's houses: the Wave sherd, and what a river port dropped
+        context.accept(ModChestLoot.DIG_DROWNED_QUARTER, one()
+                .add(entry(ModItems.WAVE_POTTERY_SHERD.get(), 4))
+                .add(entry(ModItems.CRYSTAL_POTTERY_SHERD.get(), 1))
+                .add(entry(ModItems.PILOTS_BELL.get(), 1))
+                .add(entry(Items.CLAY_BALL, 6))
+                .add(entry(Items.GOLD_NUGGET, 5))
+                .add(entry(ModItems.LAMP_GEL.get(), 3)).wrap());
         context.accept(ModChestLoot.DIG_ZIGGURAT, one()
                 .add(entry(ModItems.SUN_POTTERY_SHERD.get(), 3))
                 .add(entry(ModItems.CRYSTAL_POTTERY_SHERD.get(), 3))

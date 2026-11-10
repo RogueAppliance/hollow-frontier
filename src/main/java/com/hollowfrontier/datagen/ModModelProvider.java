@@ -397,7 +397,7 @@ public class ModModelProvider extends ModelProvider {
                 ModItems.GRAY_WARDEN_SPAWN_EGG, ModItems.DISGUISED_GRAY_SPAWN_EGG, // 13a, 21c
                 ModItems.EMPTY_PHLOGISTON_CELL, ModItems.PHLOGISTON_CELL, ModItems.GRAVITY_DRIVE, // 13b
                 ModItems.PROTOTYPE_SAUCER, // 13c
-                ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD, ModItems.LETTER_HOME)) { // 15b, 20
+                ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD, ModItems.LETTER_HOME, ModItems.SEALED_HULL)) { // 15b, 20, 43d
             itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
         }
         // 28: the relics, the sherds and the trim template

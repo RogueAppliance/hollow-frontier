@@ -29,7 +29,7 @@ public record SeaGrassFeature() implements Feature {
     @Override
     public boolean place(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos origin) {
         int depth = depth(level, origin, MAX_DEPTH + 1);
-        if (depth < 1 || depth > MAX_DEPTH || !Blocks.SEAGRASS.defaultBlockState().canSurvive(level, origin)) {
+        if (depth < 1 || depth > MAX_DEPTH || !Blocks.SEAGRASS.defaultBlockState().canSurvive(level, origin) || onGlass(level, origin)) {
             return false;
         }
         if (depth >= 3 && random.nextInt(4) == 0) {
@@ -40,6 +40,16 @@ public record SeaGrassFeature() implements Feature {
             level.setBlock(origin, Blocks.SEAGRASS.defaultBlockState(), 2);
         }
         return true;
+    }
+
+    /**
+     * Whether {@code origin} stands on a Drowned Quarter's dome (43d): its glass, its crystal ribs or a lamp. Weed grows
+     * over the Quarter's paving and walls, but a dome furred with it reads as a rock.
+     */
+    static boolean onGlass(WorldGenLevel level, BlockPos origin) {
+        BlockState below = level.getBlockState(origin.below());
+        return below.is(Blocks.GLASS) || below.is(com.hollowfrontier.registry.ModBlocks.CRYSTAL_BRICKS.get())
+                || below.is(com.hollowfrontier.registry.ModBlocks.JELLY_LAMP.get());
     }
 
     /** How many blocks of open water stand at and above {@code origin}, counted up to {@code limit}; 0 if it isn't open water. */

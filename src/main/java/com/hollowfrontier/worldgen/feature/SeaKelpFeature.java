@@ -31,7 +31,7 @@ public record SeaKelpFeature() implements Feature {
     @Override
     public boolean place(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos origin) {
         int depth = SeaGrassFeature.depth(level, origin, MAX_DEPTH + 1);
-        if (depth < MIN_DEPTH || depth > MAX_DEPTH || !Blocks.KELP.defaultBlockState().canSurvive(level, origin)) {
+        if (depth < MIN_DEPTH || depth > MAX_DEPTH || !Blocks.KELP.defaultBlockState().canSurvive(level, origin) || SeaGrassFeature.onGlass(level, origin)) {
             return false;
         }
         int height = Math.min(depth - 1, 2 + random.nextInt(10));

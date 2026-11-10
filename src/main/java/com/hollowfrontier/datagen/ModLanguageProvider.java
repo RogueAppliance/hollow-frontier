@@ -434,6 +434,11 @@ public class ModLanguageProvider extends LanguageProvider {
         add("item.hollowfrontier.ivory_carving.desc", "A mammoth in mammoth tusk, carved by someone who'd seen one.");
         addItem(ModItems.STAR_CHART, "Star Chart");
         add("item.hollowfrontier.star_chart.desc", "Stars where there is no sky to put them in.");
+        // 43d: the Drowned Quarter's relics
+        addItem(ModItems.PILOTS_BELL, "River Pilot's Bell");
+        add("item.hollowfrontier.pilots_bell.desc", "Rung to bring barges in. There was a river, once, and no sea.");
+        addItem(ModItems.WATER_CLOCK, "Kindled Water Clock");
+        add("item.hollowfrontier.water_clock.desc", "It told the hours by dripping. It stopped when there was nowhere left to drip.");
         add("tooltip.hollowfrontier.relic", "A town prospector pays %s gold coins");
         // 32c: the Grays' odds and ends from a crash site's cargo pod, and the pod
         addItem(ModItems.HUMMING_DOOHICKEY, "Humming Doohickey");
@@ -465,12 +470,14 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.SUN_POTTERY_SHERD, "Sun Pottery Sherd");
         addItem(ModItems.CRYSTAL_POTTERY_SHERD, "Crystal Pottery Sherd");
         addItem(ModItems.WATCHER_POTTERY_SHERD, "Watcher Pottery Sherd");
+        addItem(ModItems.WAVE_POTTERY_SHERD, "Wave Pottery Sherd");
         addItem(ModItems.CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE, "Smithing Template");
         add("trim_pattern.hollowfrontier.concavian", "Concavian Armor Trim");
         add("item.hollowfrontier.map.sun_temple", "Expedition Map: the Sun Temple");
         add("item.hollowfrontier.map.gray_pens", "Gray Chart: Holding Pens");
         add("item.hollowfrontier.map.crystal_ruins", "Kindled Chart: the Crystal City");
         add("item.hollowfrontier.map.foundry", "Mining Co. Map: the Old Foundry");
+        add("item.hollowfrontier.map.drowned_quarter", "Boat's Chart: Something Under the Water");
         // 27: the phlogiston mine's sign, and the prospector's notes at the tar pit
         add("sign.hollowfrontier.phlogiston_mine.1", "STEPPE CRYSTAL");
         add("sign.hollowfrontier.phlogiston_mine.2", "MINING CO.");
@@ -997,6 +1004,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("message.hollowfrontier.waystone.arrived", "You step out at %s.");
         add("message.hollowfrontier.waystone.alone", "The waystone hums, but there's nowhere yet for it to send you.");
         add("book.hollowfrontier.codex.after", "VI. After");
+        add("book.hollowfrontier.codex.sea", "VII. The Still Sea");
         add("gazette.hollowfrontier.aftermath.deputy.title", "NEW STAR IN TOWN");
         add("gazette.hollowfrontier.aftermath.deputy.body", "A man who rode with the gangs until the night the sky went quiet has pinned on a deputy's star near (%2$s, %3$s). %1$s paid his first coin. The sheriff says he's the hardest worker in the office, and the only one who knows where the other gangs hole up.");
         add("gazette.hollowfrontier.aftermath.homecoming.title", "PRODIGAL RETURNS");
@@ -1044,6 +1052,10 @@ public class ModLanguageProvider extends LanguageProvider {
         // The Mothership's return (15b): the rematch fittings, the hold, the owner lock
         addItem(ModItems.CLOAKING_DEVICE, "Cloaking Device");
         addItem(ModItems.CARGO_HOLD, "Cargo Hold");
+        addItem(ModItems.SEALED_HULL, "Sealed Hull");
+        add("tooltip.hollowfrontier.sealed_hull", "Kindled work, older than the sea it was drowned in. Fitted, a saucer goes under water as if it were air.");
+        add("jei.hollowfrontier.info.sealed_hull", "Found in the vault of a Drowned Quarter, under the great dome on the bed of the Still Sea. Fit it to a Prototype Saucer: without it the water pushes a saucer back to the surface; with it the saucer dives, and its crew keeps its air.");
+        add("message.hollowfrontier.saucer.no_hull", "The drive won't take it under.");
         add("tooltip.hollowfrontier.cloaking_device", "Bends the light round a saucer. It hums at night, and does nothing at all by day.");
         add("tooltip.hollowfrontier.cargo_hold", "A Gray hold, roomier inside than out. Fits under a saucer's deck.");
         add("jei.hollowfrontier.info.cloaking_device", "Given up by a Mothership called after the first (its rematches), every other time. Fit it to a Prototype Saucer: at night, with a pilot aboard, nobody else can see the craft or its crew, and mobs lose track of them. The Grays' own craft can still see it.");
@@ -1081,6 +1093,15 @@ public class ModLanguageProvider extends LanguageProvider {
         add("message.hollowfrontier.leash_broken.2", "The men in black dusters walk off into the dust and don't come back. No one is watching the sky for the Grays any more.");
         add("message.hollowfrontier.leash_broken.3", "The outlaws who still ride now ride by their own choice. What the frontier makes of itself is its own again.");
         // The lost Symmes expedition's journal, on a lectern at its camp (9b3: HollowBlueprints.journal)
+        // 43d: the boat's log at the Symmes Landing, and the Kindled record under the great dome
+        add("book.hollowfrontier.symmes_log.1", "Boat's log, kept by T. Avery, coxswain.\n\nThe Captain wanted the far shore sounded, so six of us took the whaleboat out. There is no wind on this water and never a ripple that we do not make ourselves. The men do not like it. I do not like it.");
+        add("book.hollowfrontier.symmes_log.2", "Second day. Lead line gives nine fathoms, and at nine fathoms there are lights. Not fish. Lamps, in rows, as you would light a street. Dawes says it is the glare off the water. There is no glare. The sun here stands straight overhead and does not move.");
+        add("book.hollowfrontier.symmes_log.3", "Third day. We lay over the lights at slack and looked down through a bucket with a glass bottom. Roofs. Round ones, like bells, and a road with pillars. Dawes went over the side on a line to see closer and something very long went under the boat. We hauled him in. He will not speak of it.");
+        add("book.hollowfrontier.symmes_log.4", "We have drawn the boat up and we are not launching her again. I have marked the place on the chart and left the chart in the crate with the iron. Whoever built a town down there did not build it under water. Somebody put the water on top of it afterwards.");
+        add("book.hollowfrontier.drowned_record.1", "Set down by a keeper of the river port, in the counting house, for whoever comes after.\n\nThis was the low quarter. The river ran past the quay and the barges came down it with ore from the hills. There was no sea. There had never been a sea.");
+        add("book.hollowfrontier.drowned_record.2", "The grey ones came to the crust above us on the day the city fell. We heard them at it for an hour: a sound like a tooth being drawn. Then the roof of the world opened over the port, and what was above it came down. It has not stopped coming down.");
+        add("book.hollowfrontier.drowned_record.3", "The domes held. They were built to keep the cold out, not the water, but they held. We sealed the lower doors and lit every lamp. The guardians took their posts and have not left them. I do not think they know that there is nothing left to guard but air.");
+        add("book.hollowfrontier.drowned_record.4", "The hull-seal is in the vault. It was made for the barges, for the day the river rose. Take it. Put it on something that can leave. If you can read this you came down through the water, and you are braver than I was, or you have a better boat.");
         add("book.hollowfrontier.symmes_journal.1", "Symmes Polar Expedition, 1889.\n\nWe left the last of the pack ice on the fourth of June and found the sea running warm. The Captain says the old Colonel was right after all.");
         add("book.hollowfrontier.symmes_journal.2", "The rim of the world curves away beneath us here. The compasses spin like tops. Nine days going down the great hole, the sun behind us shrinking to a star.");
         add("book.hollowfrontier.symmes_journal.3", "Then a second sun, low and green-gold, that never sets. Ferns as tall as a church steeple. Beasts we have no names for. We have made camp by good water.");

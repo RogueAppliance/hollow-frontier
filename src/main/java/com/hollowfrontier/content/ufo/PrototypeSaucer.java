@@ -461,6 +461,14 @@ public class PrototypeSaucer extends VehicleEntity implements GeoEntity {
         return onGround() || !level().noCollision(this, getBoundingBox().move(0, -0.06, 0));
     }
 
+    /** How fast the water pushes an unsealed saucer back up. */
+    public static final double SURFACING_SPEED = 0.12;
+
+    /** Whether its hull is in the water (its middle is). */
+    public boolean awash() {
+        return com.hollowfrontier.content.hollow.sea.SeaLife.isWater(level(), BlockPos.containing(getX(), getY() + getBbHeight() * 0.5, getZ()));
+    }
+
     private void fly(ServerLevel level) {
         boolean powered = charge() > 0;
         Vec3 v = getDeltaMovement();
@@ -480,6 +488,22 @@ public class PrototypeSaucer extends VehicleEntity implements GeoEntity {
             targetY = -CLIMB_SPEED;
         } else {
             targetY = landed() ? -0.05 : 0;
+        }
+        // Water: a saucer is no boat. Without the Kindled's Sealed Hull (43d) the drive won't take it under: it's pushed back
+        // up to the surface whatever the helm says. With it, it goes where it's steered, and its crew keeps its air.
+        if (awash() && !fittings.hull() && lift < 0 && tickCount % 40 == 0 && getFirstPassenger() instanceof ServerPlayer pilot) {
+            pilot.sendOverlayMessage(Component.translatable("message.hollowfrontier.saucer.no_hull").withStyle(ChatFormatting.YELLOW));
+        }
+        if (awash()) {
+            if (!fittings.hull()) {
+                targetY = Math.max(targetY, SURFACING_SPEED);
+            } else {
+                for (Entity passenger : getPassengers()) {
+                    if (passenger instanceof net.minecraft.world.entity.LivingEntity rider) {
+                        rider.setAirSupply(rider.getMaxAirSupply());
+                    }
+                }
+            }
         }
         // Climbs and dives come on gently, but it brakes harder, so it stops near where the keys were let go
         double vy = Mth.lerp(Math.abs(targetY) < Math.abs(v.y) ? 0.4 : 0.2, v.y, targetY);
@@ -768,6 +792,8 @@ public class PrototypeSaucer extends VehicleEntity implements GeoEntity {
                     setFittings(fitted);
                     held.consume(1, player);
                     level.playSound(null, getX(), getY(), getZ(), SoundEvents.SMITHING_TABLE_USE, SoundSource.NEUTRAL, 1.0F, 1.2F);
+                    // A ring of sparks round the rim as the part goes on (43d: the hold and the hull show now, like the rest)
+                    level.sendParticles(net.minecraft.core.particles.ParticleTypes.WAX_OFF, getX(), getY() + 0.5, getZ(), 24, 1.6, 0.25, 1.6, 0.0);
                     if (fitted.full()) {
                         ModCriteria.fire(player, ModCriteria.SAUCER_FULLY_FITTED);
                     }

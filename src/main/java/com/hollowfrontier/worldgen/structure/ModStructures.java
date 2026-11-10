@@ -93,6 +93,9 @@ public final class ModStructures {
     public static final ResourceKey<Structure> OBSERVATORY = structure(WildBlueprints.OBSERVATORY);
     public static final ResourceKey<Structure> FOUNDRY = structure(WildBlueprints.FOUNDRY);
     public static final ResourceKey<Structure> SKY_SHRINE = structure(WildBlueprints.SKY_SHRINE);
+    // 43d: the Still Sea's sites: the Drowned Quarter on its bed, the Symmes Landing on its beaches
+    public static final ResourceKey<Structure> DROWNED_QUARTER = structure(SeaBlueprints.DROWNED_QUARTER);
+    public static final ResourceKey<Structure> SYMMES_LANDING = structure(SeaBlueprints.SYMMES_LANDING);
     /** The wild sites (27), in the order {@link #WILD_SITE_SETS} spaces them. */
     public static final java.util.List<ResourceKey<Structure>> WILD_SITES = java.util.List.of(ZIGGURAT, TAR_PIT, PHLOGISTON_MINE, OBSERVATORY, FOUNDRY, SKY_SHRINE);    public static final TagKey<Biome> HAS_CRASH_SITE = TagKey.create(Registries.BIOME, HollowFrontier.id("has_crash_site"));
     public static final TagKey<Structure> CRASH_SITES = TagKey.create(Registries.STRUCTURE, HollowFrontier.id("crash_sites"));
@@ -138,6 +141,8 @@ public final class ModStructures {
         singleTemplatePool(context, empty, CRYSTAL_RUINS_POOL, ConcaviaBlueprints.CRYSTAL_RUINS);
         singleTemplatePool(context, empty, SUN_TEMPLE_POOL, ConcaviaBlueprints.SUN_TEMPLE);
         singleTemplatePool(context, empty, CRASH_SITE_POOL, UfoBlueprints.CRASH_SITE);
+        singleTemplatePool(context, empty, pool(SeaBlueprints.DROWNED_QUARTER), SeaBlueprints.DROWNED_QUARTER); // 43d
+        singleTemplatePool(context, empty, pool(SeaBlueprints.SYMMES_LANDING), SeaBlueprints.SYMMES_LANDING);
         // The dungeons under the sites (26): each kit's pools, the rooms falling back on its caps
         for (DungeonBlueprints.Kit kit : DungeonBlueprints.KITS) {
             for (DungeonBlueprints.PoolSpec spec : DungeonBlueprints.pools(kit)) {
@@ -213,6 +218,13 @@ public final class ModStructures {
         context.register(PHLOGISTON_MINE, new HollowSiteStructure(hollowSite(steppes, Map.of(MobCategory.MONSTER, noMonsters)), pools.getOrThrow(pool(WildBlueprints.PHLOGISTON_MINE)), 5, 2));
         context.register(OBSERVATORY, new HollowSiteStructure(hollowSite(steppes, Map.of(MobCategory.MONSTER, noMonsters)), pools.getOrThrow(pool(WildBlueprints.OBSERVATORY)), 5));
         context.register(FOUNDRY, new HollowSiteStructure(hollowSite(badlands, Map.of(MobCategory.MONSTER, noMonsters)), pools.getOrThrow(pool(WildBlueprints.FOUNDRY)), 5));
+        // 43d: the Still Sea's own. The Quarter stands on the bed under deep water (seabed mode), its guardians its only
+        // monsters; the Landing on whatever dry ground the sea's biome has (its beaches and islets).
+        HolderSet<Biome> sea = HolderSet.direct(biomes.getOrThrow(HollowBiomes.STILL_SEA));
+        context.register(DROWNED_QUARTER, new HollowSiteStructure(hollowSite(sea, Map.of(MobCategory.MONSTER, noMonsters)),
+                pools.getOrThrow(pool(SeaBlueprints.DROWNED_QUARTER)), 6, 1, false, true));
+        context.register(SYMMES_LANDING, new HollowSiteStructure(hollowSite(sea, Map.of(MobCategory.MONSTER, noMonsters)),
+                pools.getOrThrow(pool(SeaBlueprints.SYMMES_LANDING)), 3, 1, false, false, true));
         context.register(SKY_SHRINE, new HollowSiteStructure(hollowSite(biomes.getOrThrow(HollowBiomes.IS_HOLLOW_LAND), Map.of()),
                 pools.getOrThrow(pool(WildBlueprints.SKY_SHRINE)), 3, 1, true));
     }
@@ -248,6 +260,9 @@ public final class ModStructures {
         set(context, "crash_site", structures.getOrThrow(CRASH_SITE), 48, 16, 1_947_070_771, sets.getOrThrow(setKey("frontier_town")));
         set(context, "hollow_crash_site", structures.getOrThrow(HOLLOW_CRASH_SITE), 36, 12, 1_896_189_712, sets.getOrThrow(setKey("gray_lab")));
         // 27: the wild sites, each well clear of the Gray sites (the mine and the observatory share the steppes with them)
+        // 43d: a Quarter is a rare find and wants deep, level bed; a Landing wants a beach, so its spots are closer set
+        set(context, "drowned_quarter", structures.getOrThrow(DROWNED_QUARTER), 28, 10, 1_843_430_101);
+        set(context, "symmes_landing", structures.getOrThrow(SYMMES_LANDING), 12, 4, 1_843_430_202);
         int[][] wild = {{32, 11, 1_427_270_101}, {30, 10, 1_427_270_202}, {32, 11, 1_427_270_303}, {34, 12, 1_427_270_404}, {30, 10, 1_427_270_505},
                 {20, 7, 1_427_270_606}};
         for (int i = 0; i < ModStructures.WILD_SITES.size(); i++) {

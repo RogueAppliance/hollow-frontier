@@ -115,6 +115,10 @@ public record Context(Set<Fact> facts, Act act, String poster, boolean beenDown)
                     && !com.hollowfrontier.content.concavia.ConcavianCodexItem.reached(serverPlayer, "steam/open_sesame")) {
                 facts.add(Fact.AIRSHIP);
             }
+            if (player instanceof net.minecraft.server.level.ServerPlayer seaman
+                    && com.hollowfrontier.content.concavia.ConcavianCodexItem.reached(seaman, "hollow/still_sea")) {
+                facts.add(Fact.SEA_SEEN);
+            }
             if (player.getData(ModAttachments.SURVEY_LETTER.get())) {
                 facts.add(Fact.SURVEY_LETTER);
             }

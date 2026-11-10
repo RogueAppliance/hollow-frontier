@@ -388,6 +388,13 @@ public final class PhotoBooth {
             }
             return;
         }
+        // The Drowned Quarter and the Symmes Landing (43d), only on their own with -PphotoScene=quarter
+        if (QUARTER_ONLY) {
+            if (ticks >= 40) {
+                quarter(mc, server, ticks - 40);
+            }
+            return;
+        }
         // The Still Sea (43a), only on its own with -PphotoScene=sea
         if (SEA_ONLY) {
             if (ticks >= 40) {
@@ -1625,6 +1632,175 @@ public final class PhotoBooth {
         }
     }
 
+    // ---------------------------------------------------------------- phase 43d: the Drowned Quarter and the Symmes Landing
+
+    private static final boolean QUARTER_ONLY = "quarter".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int quarterStep;
+    private static int quarterWait;
+    private static ChunkPos quarterChunk;
+    private static ChunkPos landingChunk;
+    private static net.minecraft.world.level.levelgen.structure.BoundingBox quarterBox;
+    private static net.minecraft.world.level.levelgen.structure.BoundingBox landingBox;
+
+    /**
+     * The sea's sites as the world generates them (hf_43d_*), only with -PphotoScene=quarter: the nearest Drowned Quarter to
+     * the sea by the staging spot, from over its north-east corner under water, from the quay looking down the street, and
+     * from inside the great dome; then the nearest Symmes Landing from the land side.
+     */
+    private static void quarter(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            quarterStep = 0;
+            quarterWait = 0;
+        }
+        if (quarterWait > 0) {
+            quarterWait--;
+            return;
+        }
+        switch (quarterStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                run(server, "effect give @p minecraft:night_vision infinite 0 true");
+                server.execute(() -> {
+                    findSea(server);
+                    if (seaDeep == null) {
+                        return;
+                    }
+                    quarterChunk = locateSite(server, com.hollowfrontier.worldgen.structure.ModStructures.DROWNED_QUARTER, seaDeep);
+                    landingChunk = locateSite(server, com.hollowfrontier.worldgen.structure.ModStructures.SYMMES_LANDING, seaDeep);
+                    if (quarterChunk != null) {
+                        run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 0 60", quarterChunk.getMinBlockX(), HollowEarth.SEA_LEVEL - 4, quarterChunk.getMinBlockZ()));
+                    }
+                });
+                quarterWait = GENERATE_TICKS;
+                quarterStep++;
+            }
+            case 1 -> {
+                if (quarterChunk == null) {
+                    quarterStep = 5;
+                    return;
+                }
+                server.execute(() -> quarterBox = siteBox(server, com.hollowfrontier.worldgen.structure.ModStructures.DROWNED_QUARTER, quarterChunk));
+                quarterWait = 10;
+                quarterStep++;
+            }
+            case 2 -> {
+                if (quarterBox == null) {
+                    quarterStep = 5;
+                    return;
+                }
+                Vec3 middle = new Vec3(quarterBox.getCenter().getX(), quarterBox.minY() + 4, quarterBox.getCenter().getZ());
+                hollowLooking(server, new Vec3(quarterBox.maxX() + 6, quarterBox.minY() + 16, quarterBox.minZ() - 6), middle);
+                quarterWait = 120;
+                quarterStep++;
+            }
+            case 3 -> {
+                shot(mc, "hf_43d_1_drowned_quarter.png");
+                Vec3 middle = new Vec3(quarterBox.getCenter().getX(), quarterBox.minY() + 3, quarterBox.getCenter().getZ());
+                hollowLooking(server, new Vec3(quarterBox.minX() - 4, quarterBox.minY() + 7, quarterBox.maxZ() + 4), middle);
+                quarterWait = 60;
+                quarterStep++;
+            }
+            case 4 -> {
+                shot(mc, "hf_43d_2_drowned_quarter_other_side.png");
+                // Inside the largest pocket of air there is: the great dome, wherever the piece was turned to
+                server.execute(() -> {
+                    ServerLevel level = server.getLevel(HollowEarth.LEVEL);
+                    BlockPos best = null;
+                    int bestAir = 0;
+                    for (BlockPos pos : BlockPos.betweenClosed(quarterBox.minX() + 4, quarterBox.minY() + 5, quarterBox.minZ() + 4, quarterBox.maxX() - 4, quarterBox.minY() + 5, quarterBox.maxZ() - 4)) {
+                        int air = 0;
+                        for (BlockPos near : BlockPos.betweenClosed(pos.offset(-5, 0, -5), pos.offset(5, 0, 5))) {
+                            if (level.getBlockState(near).isAir()) {
+                                air++;
+                            }
+                        }
+                        if (air > bestAir) {
+                            bestAir = air;
+                            best = pos.immutable();
+                        }
+                    }
+                    HollowFrontier.LOGGER.info("[PhotoBooth] Drowned Quarter {}: the great dome's air at {} ({} of 121 blocks round it)", quarterBox, best, bestAir);
+                    if (best != null) {
+                        run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d.3 %d.5 30 -12", best.getX(), best.getY(), best.getZ()));
+                    }
+                });
+                quarterWait = 60;
+                quarterStep = 6;
+            }
+            case 5 -> {
+                HollowFrontier.LOGGER.warn("[PhotoBooth] no Drowned Quarter found or generated near {}", seaDeep);
+                quarterStep = 7;
+            }
+            case 6 -> {
+                shot(mc, "hf_43d_3_inside_the_great_dome.png");
+                quarterStep++;
+            }
+            case 7 -> {
+                if (landingChunk == null) {
+                    HollowFrontier.LOGGER.warn("[PhotoBooth] no Symmes Landing found near {}", seaDeep);
+                    quarterStep = 11;
+                    return;
+                }
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 0 60", landingChunk.getMinBlockX(), HollowEarth.SEA_LEVEL + 30, landingChunk.getMinBlockZ()));
+                quarterWait = GENERATE_TICKS;
+                quarterStep++;
+            }
+            case 8 -> {
+                server.execute(() -> landingBox = siteBox(server, com.hollowfrontier.worldgen.structure.ModStructures.SYMMES_LANDING, landingChunk));
+                quarterWait = 10;
+                quarterStep++;
+            }
+            case 9 -> {
+                if (landingBox == null) {
+                    quarterStep = 11;
+                    return;
+                }
+                Vec3 middle = new Vec3(landingBox.getCenter().getX(), landingBox.minY() + 1, landingBox.getCenter().getZ());
+                hollowLooking(server, middle.add(9, 7, 11), middle);
+                quarterWait = 80;
+                quarterStep++;
+            }
+            case 10 -> {
+                shot(mc, "hf_43d_4_symmes_landing.png");
+                quarterStep++;
+            }
+            case 11 -> {
+                run(server, "effect clear @p minecraft:night_vision");
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                quarterWait = 20;
+                quarterStep++;
+            }
+            case 12 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] done, quitting");
+                quit(mc, server);
+                quarterStep++;
+            }
+            default -> {}
+        }
+    }
+
+    /** On the server thread: the chunk of the nearest {@code key} to {@code from} in the Hollow Earth, or null. */
+    private static ChunkPos locateSite(MinecraftServer server, net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.structure.Structure> key, BlockPos from) {
+        ServerLevel level = server.getLevel(HollowEarth.LEVEL);
+        var holder = level.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(key);
+        var found = level.getChunkSource().getGenerator().findNearestMapStructure(level, net.minecraft.core.HolderSet.direct(holder), from, 100, false);
+        HollowFrontier.LOGGER.info("[PhotoBooth] nearest {} to {}: {}", key.identifier().getPath(), from, found == null ? "none" : found.getFirst());
+        return found == null ? null : ChunkPos.containing(found.getFirst());
+    }
+
+    /** On the server thread: the bounds of the {@code key} that starts in {@code chunk}, once it has generated. */
+    private static net.minecraft.world.level.levelgen.structure.BoundingBox siteBox(MinecraftServer server,
+            net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.structure.Structure> key, ChunkPos chunk) {
+        ServerLevel level = server.getLevel(HollowEarth.LEVEL);
+        var structure = level.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(key).value();
+        StructureStart start = level.getChunk(chunk.x(), chunk.z()).getStartForStructure(structure);
+        if (start == null || !start.isValid()) {
+            HollowFrontier.LOGGER.warn("[PhotoBooth] the {} at {} didn't generate", key.identifier().getPath(), chunk);
+            return null;
+        }
+        return start.getPieces().getFirst().getBoundingBox();
+    }
+
     // ---------------------------------------------------------------- phase 9b: the Hollow Earth's life, close up
 
     private static final boolean LIFE_ONLY = "life".equals(System.getProperty("hollowfrontier.photo.scene"));
@@ -1967,7 +2143,7 @@ public final class PhotoBooth {
             }
             case 10 -> {
                 server.execute(() -> {
-                    var item = com.hollowfrontier.content.ufo.PrototypeSaucerItem.of(new com.hollowfrontier.content.ufo.SaucerFittings(true, true, true), 200);
+                    var item = com.hollowfrontier.content.ufo.PrototypeSaucerItem.of(new com.hollowfrontier.content.ufo.SaucerFittings(true, true, true, false, true, true), 200);
                     var saucer = com.hollowfrontier.content.ufo.PrototypeSaucerItem.place(server.overworld(), at, 180.0F, item);
                     if (saucer != null) {
                         server.overworld().addFreshEntity(saucer);

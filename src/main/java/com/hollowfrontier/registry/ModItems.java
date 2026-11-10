@@ -352,6 +352,10 @@ public final class ModItems {
             p -> new PhlogistonGunItem(GunTypes.PHLOGISTON_RIFLE, 3, 3, 4.0F, 0xFF8A2A, new Vec3(1.5, 0.34, 0.3), p), p -> p.durability(500).repairable(ModTags.Items.INGOTS_STARSTEEL).rarity(Rarity.RARE).enchantable(PHLOGISTON_GUN_ENCHANTABILITY));
     public static final DeferredItem<SalvageItem> GRAVITY_DRIVE = ITEMS.registerItem("gravity_drive", SalvageItem::new,
             p -> p.stacksTo(1).rarity(Rarity.EPIC).fireResistant());
+    // 43d: the fitting from the Drowned Quarter's vault, Kindled work: it lets a saucer go under water
+    public static final DeferredItem<SalvageItem> SEALED_HULL = ITEMS.registerItem("sealed_hull", SalvageItem::new,
+            p -> p.stacksTo(1).rarity(Rarity.EPIC).fireResistant());
+
     // 13d: the Phlogiston Beacon
     public static final DeferredItem<BlockItem> PHLOGISTON_BEACON = ITEMS.registerSimpleBlockItem(ModBlocks.PHLOGISTON_BEACON, p -> p.rarity(Rarity.EPIC));
     // 13c: the Prototype Saucer, crafted whole from salvage and set down like the airship
@@ -373,8 +377,11 @@ public final class ModItems {
     public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> EXPEDITION_SEXTANT = relic("expedition_sextant", 3, Rarity.UNCOMMON);
     public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> IVORY_CARVING = relic("ivory_carving", 3, Rarity.UNCOMMON);
     public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> STAR_CHART = relic("star_chart", 4, Rarity.UNCOMMON);
+    // 43d: the Drowned Quarter's own
+    public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> PILOTS_BELL = relic("pilots_bell", 6, Rarity.RARE);
+    public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> WATER_CLOCK = relic("water_clock", 7, Rarity.RARE);
     public static final java.util.List<DeferredItem<com.hollowfrontier.content.hollow.RelicItem>> RELICS = java.util.List.of(KINDLED_IDOL, CRYSTAL_TABLET,
-            SUNSTONE_CIRCLET, STARSTEEL_MASK, GRAY_SPECIMEN_JAR, EXPEDITION_SEXTANT, IVORY_CARVING, STAR_CHART);
+            SUNSTONE_CIRCLET, STARSTEEL_MASK, GRAY_SPECIMEN_JAR, EXPEDITION_SEXTANT, IVORY_CARVING, STAR_CHART, PILOTS_BELL, WATER_CLOCK);
     // 32c: the Grays' odds and ends from a crash site's cargo pod (the prospector buys them too, for the gold coins after each name)
     public static final DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> HUMMING_DOOHICKEY = gadget("humming_doohickey", 3, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind.DOOHICKEY);
     public static final DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> SELF_WARMING_ROCK = gadget("self_warming_rock", 3, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind.WARMING_ROCK);
@@ -389,7 +396,10 @@ public final class ModItems {
             p -> p.rarity(Rarity.UNCOMMON).potPattern(com.hollowfrontier.content.hollow.HollowPatterns.CRYSTAL));
     public static final DeferredItem<Item> WATCHER_POTTERY_SHERD = ITEMS.registerItem("watcher_pottery_sherd", Item::new,
             p -> p.rarity(Rarity.UNCOMMON).potPattern(com.hollowfrontier.content.hollow.HollowPatterns.WATCHER));
-    public static final java.util.List<DeferredItem<Item>> SHERDS = java.util.List.of(SUN_POTTERY_SHERD, CRYSTAL_POTTERY_SHERD, WATCHER_POTTERY_SHERD);
+    public static final DeferredItem<Item> WAVE_POTTERY_SHERD = ITEMS.registerItem("wave_pottery_sherd", Item::new,
+            p -> p.rarity(Rarity.UNCOMMON).potPattern(com.hollowfrontier.content.hollow.HollowPatterns.WAVE));
+    public static final java.util.List<DeferredItem<Item>> SHERDS = java.util.List.of(SUN_POTTERY_SHERD, CRYSTAL_POTTERY_SHERD, WATCHER_POTTERY_SHERD,
+            WAVE_POTTERY_SHERD);
     public static final DeferredItem<net.minecraft.world.item.SmithingTemplateItem> CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE = ITEMS.registerItem(
             "concavian_armor_trim_smithing_template", net.minecraft.world.item.SmithingTemplateItem::createArmorTrimTemplate, p -> p.rarity(Rarity.RARE));
 

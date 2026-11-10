@@ -4721,6 +4721,23 @@ public class TextureArt {
                 if (lit) Concavia.fillGlow(img, glow, new Rect(48 + sx, sy, 1, 1), sx == 1 && sy == 1 ? GLOW_HI : GLOW);
                 else p.set(48 + sx, sy, 0x14201A);
             }
+            // The Sealed Hull's band (43d): sea-green Kindled plate, the lamp gel in its seams, and the band's edge: a brass
+            // frame along the top, plate below, a gel light at the middle of each face (7.2 px wide)
+            int seal = 0x6A9E94, gel = 0xB4FFDC;
+            p.face(new Rect(0, 4, 4, 4), seal, 0);
+            Concavia.fillGlow(img, glow, new Rect(4, 4, 4, 4), gel);
+            Rect edge = new Rect(16, 4, 8, 2);
+            p.face(edge, shade(seal, 0.86), 3);
+            p.row(edge, 0, brass);
+            Concavia.fillGlow(img, glow, new Rect(19, 5, 1, 1), gel);
+            // The cargo hold's locker (15b): dark leather; its lid's face the same, a brass latch at the middle
+            int leather = 0x5C3A22;
+            p.face(new Rect(8, 4, 4, 4), leather, 3);
+            p.face(new Rect(12, 4, 4, 4), shade(leather, 0.88), 3);
+            p.set(13, 5, brass);
+            p.set(14, 5, brass);
+            p.set(13, 6, brassDk);
+            p.set(14, 6, brassDk);
             // Side strips {u, layer diameter, colour}, row 8: a face of a 24-gon layer is d sin 7.5 degrees wide and uses that
             // much of its strip, so each gets a brass rivet at its own middle
             int[][] strips = {{0, 28, under}, {8, 44, HULL_DK}, {16, 54, HULL}, {32, 54, HULL_HI}, {40, 46, HULL}, {48, 38, brass}};
@@ -5874,6 +5891,51 @@ public class TextureArt {
             // The harpoon's line: four faces of twisted strands, a quarter of the sheet each, running its length
             write(new File(root, "entity/harpoon_line.png"), rope(4363));
             n++;
+            // 43d: the Drowned Quarter's relics and the Sealed Hull
+            n += Items.put(root, "pilots_bell", sprite(0xC8A24A, pal('k', 0x3A2C12, 'c', 0x8A5A2A, 'v', 0x6FA89A),
+                    "",
+                    "       kk",
+                    "      kcck",
+                    "      k66k",
+                    "     k6655k",
+                    "     k6554k",
+                    "    k665544k",
+                    "    k655v44k",
+                    "   k6655v443k",
+                    "   k655vv443k",
+                    "  k66555444433k",
+                    "  kkkkkkkkkkkkk",
+                    "       kck",
+                    "       kkk"));
+            n += Items.put(root, "water_clock", sprite(0x5E8E9A, pal('k', 0x1E2A30, 'b', 0xC8A24A, 'B', 0x8A6A26, 'w', 0xBFE8F0, 'W', 0x6FC0D8),
+                    "",
+                    "   kkkkkkkkkk",
+                    "   kbbbbbbbBk",
+                    "    k5wwww3k",
+                    "    k5wWWw3k",
+                    "     k5WW3k",
+                    "      k53k",
+                    "      kWWk",
+                    "     k5..3k",
+                    "    k5.W..3k",
+                    "    k5wWWw3k",
+                    "   kbbbbbbbBk",
+                    "   kkkkkkkkkk"));
+            n += Items.put(root, "sealed_hull", sprite(0x6A9E94, pal('k', 0x16302C, 'b', 0xC8A24A, 'B', 0x8A6A26, 'g', JELLY_GLOW),
+                    "",
+                    "",
+                    "     kkkkkk",
+                    "   kk665544kk",
+                    "  k66bbbbbb44k",
+                    "  k6b555544B3k",
+                    " k66b5gggg4B33k",
+                    " k65b5g66g4B33k",
+                    " k65b5g55g4B32k",
+                    " k55b5gggg4B32k",
+                    "  k5b444444B2k",
+                    "  k55BBBBBB22k",
+                    "   kk443322kk",
+                    "     kkkkkk"));
             n += Tiles.put(root, "jelly_lamp", lamp(4301));
             // 43c: the Steam Submersible's skin and its item
             BufferedImage[] sub = submersible();
@@ -6991,8 +7053,9 @@ public class TextureArt {
             String[][] motifs = {
                     {"......r.....", "....r.r.r...", ".....rrr....", "...rrrrrrr..", ".....rrr....", "....r.r.r...", "......r....."},
                     {"......r.....", ".....rrr....", "....r.r.r...", "....r.r.r...", "....r.r.r...", ".....rrr....", "......r....."},
-                    {"....rrrrr...", "...r.....r..", "..r.rr.rr.r.", "..r.......r.", "...r..r..r..", "....rr.rr...", "............"}};
-            String[] names = {"sun", "crystal", "watcher"};
+                    {"....rrrrr...", "...r.....r..", "..r.rr.rr.r.", "..r.......r.", "...r..r..r..", "....rr.rr...", "............"},
+                    {"............", "..rr....rr..", ".r..r..r..r.", "r....rr....r", "..rr....rr..", ".r..r..r..r.", "r....rr....r"}}; // 43d: the wave
+            String[] names = {"sun", "crystal", "watcher", "wave"};
             for (int k = 0; k < names.length; k++) {
                 BufferedImage item = grid(sherd);
                 for (int y = 0; y < motifs[k].length; y++) {
