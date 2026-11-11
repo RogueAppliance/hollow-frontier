@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.3.0 — The Still Sea (unreleased)
+## 1.3.0 — The Still Sea and a frontier December
+
+Two updates in one: an inner sea for the Hollow Earth, and a frontier Christmas that comes and goes by the date.
+
+### The Still Sea
 
 - **The Still Sea:** the Hollow Earth has a sea. Where the land lay lowest it now runs down pale sand beaches into deep water, with kelp forests and seagrass on the shelf, open water beyond, and falls pouring into it from the crust. Nothing blows and nothing rains down there, so it lies flat. About a fifth of the Hollow is sea.
 - **Sea life:** four creatures live in the Still Sea. **Great Sea Cows** graze the kelp shallows in herds; feed them kelp to lead and breed them. A **Plesiosaur** keeps its distance until you hold out a fish; feed it one and it dives to the bed and comes back with something off the bottom, now and then a sherd or a relic. **Lampjellies** drift in glowing shoals and sting if touched. The **Basilosaurus** hunts anyone swimming or boating over deep water: it circles, then comes in. It leaves the shallows alone.
@@ -19,7 +23,7 @@
 - **Existing worlds:** the sea appears in Hollow Earth chunks nobody has visited yet. Places already explored stay as they are. About two thirds of what becomes sea was shallow lake before, so the join is mostly under water; where old dry land meets new sea there may be a step. Nothing else moves: the four land biomes, their terrain and their sites are where they were.
 - **For pack makers:** the new biome is `hollowfrontier:still_sea`. It is in `hollowfrontier:is_hollow_earth` and in no vanilla ocean tag, so vanilla's ocean structures and mobs don't appear there. A new tag, `hollowfrontier:is_hollow_land`, holds the four land biomes.
 
-## 1.2.0 — A frontier December (unreleased)
+### A frontier December
 
 Everything here comes on by the date and leaves by itself. The date is the server's own, so every player on a server sees the same thing. Nothing needs cleaning up in January, and existing worlds get all of it.
 
@@ -34,14 +38,14 @@ Everything here comes on by the date and leaves by itself. The date is the serve
 - **No snow:** weather and biomes stay as they are. Desert towns get a dry Christmas, and folk remark on it.
 - **Settings:** `hollowfrontier-season-server.toml`, per world. `mode` is `AUTO` (by the server's date), `ALWAYS` (December's things all year) or `NEVER`. Christmas itself always goes by the date, so `ALWAYS` doesn't stop raids for good. `truce` turns the truce and the waived fine off.
 
-Also in this version:
+### Also in this version
 
 - **Guns show what's in them:** a black powder gun's slot now has a row of small pips along the top, one for each chamber or barrel, brass when loaded and dark when not. Before, a loaded gun and an empty one were the same picture.
 - **Quick Load:** the reload animation now keeps pace with the faster loading. Before, the gun loaded sooner but the hands moved at the old speed and were cut off mid-stroke.
 - **Dusters have tails:** the outlaws', the men in black's and the U.S. Marshal's long coats now hang to the knee, open in front, and swing as they walk and ride.
 - **Fern Fronds redrawn:** the crowns of the Jungle's tree ferns read as fronds now, each with a midrib and leaflets. Before, they looked like scattered pixels.
 
-## 1.1.4 — New worlds start in town, new faces, and safecrackers find the way in
+## 1.1.4 — New worlds start in town, new faces, and safecrackers find the way in (2026-11-07)
 
 - **New worlds start in town:** a new world now puts you on open ground in the nearest town's square, and you come back there if you die with no bed. With no town within about 10,000 blocks you start where the game would have put you. Existing worlds keep their spawn. Set `spawnAtTown` in `hollowfrontier-towns-server.toml`, in the config folder, before creating the world. On a dedicated server with operators, set `spawn-protection=0`, or other players can't use the doors and chests round the square.
 - **Towns replace their dead:** when a townsperson or lawman a town started with dies, someone new slowly takes their place: one at a time, about one a Minecraft day, in the same job at the same post, and out of players' sight. A town never grows past what it started with, and nobody arrives during a raid. It works in existing towns, for deaths from this version on. Set `arrivals` and `arrivalTime` in `hollowfrontier-towns-server.toml`.

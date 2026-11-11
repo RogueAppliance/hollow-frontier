@@ -576,6 +576,7 @@ Calls made in place of asking, and the reasons behind them. PLAN.md keeps the st
 - **Phase 43 is done** with this part. Left over from the whole phase: a sea stack was never found to photograph; the seam where old dry land meets new sea is still unseen; the dedicated-server smoke test has not been run on any of it.
 
 ### Phase 35 a frontier December (2026-11-10)
+- **Released as 1.3.0 with the Still Sea** (2026-11-10, the user's call): one jar and one changelog section with `###` parts, so the store changelog (the first `## ` section) carries both. No 1.2.0 jar exists.
 - **Built on the Still Sea's branch.** The plan had December (1.2.0) ship from main before the Still Sea (1.3.0). The user asked for December and the known gaps together, with the sea already finished on `still-sea`, so this is `frontier-december`, cut from that branch's tip. One jar holds both unless they're split; the changelog keeps a heading for each until the user says which version it is.
 - **`always` isn't Christmas all year.** `mode = ALWAYS` holds December's things on (lamps, tree, drinks, carols, talk, parcels) but Christmas itself, the 24th to the 26th, still goes by the date. Otherwise a pack that wanted lamps all year would also never be raided. `NEVER` turns both off.
 - **The date is asked on the server only.** `Season.isDecember(level)` answers no on a client level, so nothing can drift onto a client's clock by accident. The config is the synced kind like the others, but only the server reads it.
