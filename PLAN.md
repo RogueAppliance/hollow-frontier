@@ -144,12 +144,11 @@ All phases so far are done. Their original specs are in PHASE_SPECS.md. Add new 
 
 ## Open items
 
-- **Releasing 1.3.0:** the Still Sea (43) and December (35, with 44) ship together as 1.3.0, one changelog section. December has to be on both stores by late November.
-- **Publishing:** 1.0.0 was uploaded on 2026-11-01 (CurseForge project 1778329, Modrinth Mvsn4kHn) 1.1.0 and 1.1.2 to CurseForge on 2026-11-05 (1.1.1 went out inside 1.1.2), and 1.1.3 to CurseForge on 2026-11-06, and 1.1.4 to CurseForge on 2026-11-07. Modrinth was still reviewing the project, so its first update, the newest version, goes up there once it's approved. Log later changes under a new heading above it in CHANGELOG.md. How to release: RELEASING.md.
+- **Publishing:** 1.0.0 was uploaded on 2026-11-01 (CurseForge project 1778329, Modrinth Mvsn4kHn) 1.1.0 and 1.1.2 to CurseForge on 2026-11-05 (1.1.1 went out inside 1.1.2), and 1.1.3 to CurseForge on 2026-11-06, 1.1.4 to CurseForge on 2026-11-07, and 1.3.0 on 2026-11-10. Log later changes under a new heading above it in CHANGELOG.md. How to release: RELEASING.md.
 - **Trailer leftovers:** the plain (no-shader) trailer, the vertical short and the page GIFs predate the current trailer world and the ember phlogiston. Re-film or re-cut them before use. A true 4K trailer would need re-filming at 4K (AMD VSR on the 1440p monitor); the current 4K file is an upscale.
 - **The Kindled's look:** kept for now (the user's call); mock-ups of alternatives exist (see DECISIONS.md, art passes).
 - **Known gaps:** none listed. Phase 44 closed the four that were here; the frock coats (doctor, preacher, banker) stay without tails by choice.
-- **Not checked by ear:** the three carols (35c) were checked by bar count and spectrogram only. Listen to them in `runClient` before release.
+- **Not checked by ear:** the three carols (35c) were checked by bar count and spectrogram only, and shipped in 1.3.0 that way. Listen to them in `runClient`.
 
 ## Risks
 

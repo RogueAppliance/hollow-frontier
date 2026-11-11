@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.0 — The Still Sea and a frontier December
+## 1.3.0 — The Still Sea and a frontier December (2026-11-10)
 
 Two updates in one: an inner sea for the Hollow Earth, and a frontier Christmas that comes and goes by the date.
 
