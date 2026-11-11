@@ -58,6 +58,51 @@ public class ModSoundDefinitionsProvider extends SoundDefinitionsProvider {
         // Out of the crust into the open: our own recording (rendered by tools/music/Swell.java), streamed
         add(ModSounds.HOLLOW_REVEAL, definition().subtitle("subtitles." + HollowFrontier.MODID + ".hollow_earth.reveal")
                 .with(recording("ambient/hollow_earth/reveal")));
+        // The Hollow's score (45a): one piece a biome, streamed. Music has no subtitle; the "now playing" toast names it
+        // from the file's path (lang: hollowfrontier.music.hollow.<biome>). Everything phase 45 added plays at 0.8 of
+        // what it was first built at (the user's listening, 2026-11-10: "all the sounds 20% quieter").
+        for (var piece : ModSounds.HOLLOW_SCORE) {
+            add(piece, definition().with(recording(piece.getId().getPath().replace('.', '/')).volume(0.8F)));
+        }
+        // 46, how things feel. A ball off stone; one going past your ear; one going home.
+        remix(ModSounds.GUN_RICOCHET, "gun.ricochet", vanilla("item.trident.return", 0.4F, 1.9F), vanilla("block.anvil.land", 0.12F, 2.0F));
+        remix(ModSounds.GUN_WHIZ, "gun.whiz", vanilla("entity.arrow.shoot", 0.8F, 1.9F), vanilla("item.trident.throw", 0.5F, 2.0F));
+        remix(ModSounds.GUN_THUD, "gun.thud", vanilla("entity.player.attack.knockback", 0.7F, 0.6F));
+        // A shod hoof on stone; the lasso going round and out; a line with something on the end of it
+        remix(ModSounds.HORSESHOE_RING, "horse.horseshoe_ring", vanilla("block.anvil.step", 0.5F, 1.8F), vanilla("block.netherite_block.step", 0.7F, 1.6F));
+        remix(ModSounds.LASSO_WHIRL, "lasso.whirl", vanilla("entity.player.attack.sweep", 0.4F, 0.7F), vanilla("entity.player.attack.sweep", 0.4F, 0.85F));
+        remix(ModSounds.LINE_CREAK, "lasso.line_creak", vanilla("item.crossbow.loading_middle", 0.5F, 0.6F), vanilla("block.wooden_trapdoor.close", 0.3F, 0.5F));
+        // The airship: the wind over the deck (a loop; the client sets how loud by speed and height, and it never ends, so
+        // no subtitle), and the envelope's frame taking the strain
+        add(ModSounds.AIRSHIP_WIND, definition().with(vanilla("item.elytra.flying", 1.0F, 1.0F)));
+        remix(ModSounds.AIRSHIP_CREAK, "airship.creak", vanilla("block.wooden_door.open", 0.7F, 0.5F), vanilla("block.wooden_trapdoor.close", 0.6F, 0.5F),
+                vanilla("entity.boat.paddle_land", 0.5F, 0.5F));
+        // The handcar over a rail joint; something very large putting a foot down; dynamite's own weight under the bang
+        remix(ModSounds.HANDCAR_CLACK, "steam_handcar.clack", vanilla("block.iron_trapdoor.close", 0.3F, 1.6F), vanilla("block.metal.step", 0.6F, 0.8F));
+        remix(ModSounds.BEAST_FOOTFALL, "megafauna.footfall", vanilla("entity.ravager.step", 1.0F, 0.6F), vanilla("entity.iron_golem.step", 0.8F, 0.5F),
+                vanilla("entity.warden.step", 1.0F, 0.7F));
+        remix(ModSounds.DYNAMITE_BLAST, "dynamite.blast", vanilla("entity.lightning_bolt.thunder", 0.25F, 1.5F), vanilla("entity.generic.explode", 0.5F, 0.6F));
+        // The boss themes and the stings (45c): streamed recordings named as their events are, at the same 0.8. No
+        // subtitles: they're music.
+        for (var theme : ModSounds.BOSS_THEMES) {
+            add(theme, definition().with(recording(theme.getId().getPath().replace('.', '/')).volume(0.8F)));
+        }
+        for (var sting : ModSounds.STINGS) {
+            add(sting, definition().with(recording(sting.getId().getPath().replace('.', '/')).volume(0.8F)));
+        }
+        // The beds (45b): seamless loops of ours, streamed, with no subtitle (they never stop). The file is the event's
+        // name with slashes. Their loudness is set in the recordings, then turned down here: 0.7 after the user's first
+        // listening (2026-11-10, "about 30% quieter"), then 0.8 of that with everything else, so 0.56.
+        for (var bed : ModSounds.HOLLOW_BEDS) {
+            add(bed, definition().with(recording(bed.getId().getPath().replace('.', '/')).volume(0.56F)));
+        }
+        // The submersible's works are a two-second loop, loaded whole; its hull is old iron and copper complaining
+        add(ModSounds.SUBMERSIBLE_THRUM, definition().with(shot("entity/steam_submersible/thrum").volume(0.8F)));
+        remix(ModSounds.SUBMERSIBLE_CREAK, "steam_submersible.creak", vanilla("block.iron_door.open", 0.56F, 0.5F),
+                vanilla("block.copper_door.open", 0.56F, 0.5F), vanilla("block.iron_trapdoor.close", 0.48F, 0.5F));
+        // The crust overhead shifting: a long way up, so only the low end of it arrives
+        remix(ModSounds.CRUST_RUMBLE, "hollow_earth.crust_rumble", vanilla("entity.generic.explode", 0.28F, 0.5F),
+                vanilla("block.deepslate.break", 0.64F, 0.5F));
         // The Hollow Earth's biomes (9b1), heard now and then: big birds, frogs and something old in the Jungle; the crystals
         // chiming on the Steppes; cracks, pops and the lava's mutter in the Badlands; wind and a faint hum of old stone in the
         // Highlands. The vents hiss.

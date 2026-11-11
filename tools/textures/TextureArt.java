@@ -6093,6 +6093,11 @@ public class TextureArt {
             // The harpoon's line: four faces of twisted strands, a quarter of the sheet each, running its length
             write(new File(root, "entity/harpoon_line.png"), rope(4363));
             n++;
+            // 46b: horseshoes as worn, one sheet a tier, laid over the vanilla horse's leg on its own 64x64 sheet
+            write(new File(root, "entity/horseshoes_iron.png"), horseshoes(0xC4C8CE));
+            write(new File(root, "entity/horseshoes_brass.png"), horseshoes(0xD4A640));
+            write(new File(root, "entity/horseshoes_starsteel.png"), horseshoes(0xB23A44));
+            n += 3;
             // 43d: the Drowned Quarter's relics and the Sealed Hull
             n += Items.put(root, "pilots_bell", sprite(0xC8A24A, pal('k', 0x3A2C12, 'c', 0x8A5A2A, 'v', 0x6FA89A),
                     "",
@@ -6186,6 +6191,26 @@ public class TextureArt {
         }
 
         /** A length of rope, 16x16: hemp strands twisting along it (left to right), darker in the lay between them. */
+        /**
+         * Horseshoes on the hoof. Vanilla's horse, donkey and mule draw all four legs from one box, 4x11x4 at (48,21): its
+         * four sides are the strip from (48,25) to (63,35), and its underside the square at (56,21). So: a band of metal two
+         * pixels deep round the foot, lit along its top edge with a nail's dark head on each face, and under the foot a shoe,
+         * open at the back. Everything else is clear.
+         */
+        static BufferedImage horseshoes(int metal) {
+            BufferedImage img = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
+            for (int x = 48; x < 64; x++) {
+                img.setRGB(x, 34, 0xFF000000 | shade(metal, 1.15));
+                img.setRGB(x, 35, 0xFF000000 | shade(metal, x % 4 == 1 ? 0.45 : 0.82));
+            }
+            for (int x = 56; x < 60; x++)
+                for (int y = 21; y < 25; y++) {
+                    boolean hollow = (x == 57 || x == 58) && y >= 22;
+                    if (!hollow) img.setRGB(x, y, 0xFF000000 | shade(metal, y == 21 ? 0.7 : 0.9));
+                }
+            return img;
+        }
+
         static BufferedImage rope(long seed) {
             BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
             Painter p = new Painter(img, new Random(seed));

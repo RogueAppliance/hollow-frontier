@@ -257,7 +257,7 @@ public class ModRecipeProvider extends RecipeProvider {
         // the reservoir and a gear for the screw. Nothing in it burns.
         shaped(RecipeCategory.TRANSPORTATION, ModItems.STEAM_SUBMERSIBLE.get())
                 .define('P', ModTags.Items.PLATES_BRASS).define('G', Items.GLASS).define('T', ModItems.TALLOW.get())
-                .define('L', ModItems.LAMP_GEL.get()).define('C', Tags.Items.STORAGE_BLOCKS_COPPER).define('R', ModTags.Items.GEARS_BRASS)
+                .define('L', ModItems.LAMP_GEL.get()).define('C', Tags.BlockItems.STORAGE_BLOCKS_COPPER.item()).define('R', ModTags.Items.GEARS_BRASS)
                 .pattern("PGP").pattern("TLT").pattern("CRC")
                 .unlockedBy("has_tallow", has(ModItems.TALLOW.get())).save(output);
         shaped(RecipeCategory.TRANSPORTATION, ModItems.AIRSHIP.get())

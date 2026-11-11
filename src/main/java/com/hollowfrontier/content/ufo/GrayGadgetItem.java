@@ -101,7 +101,7 @@ public class GrayGadgetItem extends RelicItem {
     public static int nearestOre(Level level, BlockPos from) {
         double best = Double.MAX_VALUE;
         for (BlockPos pos : BlockPos.betweenClosed(from.offset(-HUM_RANGE, -HUM_RANGE, -HUM_RANGE), from.offset(HUM_RANGE, HUM_RANGE, HUM_RANGE))) {
-            if (level.getBlockState(pos).is(Tags.Blocks.ORES)) {
+            if (level.getBlockState(pos).is(Tags.BlockItems.ORES.block())) {
                 best = Math.min(best, pos.distSqr(from));
             }
         }

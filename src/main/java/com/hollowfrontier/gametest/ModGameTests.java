@@ -70,6 +70,7 @@ public final class ModGameTests {
         test("infinity_loads_for_free", 20, GunEnchantmentTests::infinityLoadsForFree);
         test("blacksmith_sells_a_gun_book", 20, GunEnchantmentTests::blacksmithSellsAGunBook);
         test("lasso_leashes_cow", 80, FrontierTests::lassoLeashesCow);
+        test("lasso_winds_up_then_throws", 20, FrontierTests::lassoWindsUpThenThrows);
         test("cowboy_set_bonus_speeds_horse", 20, FrontierTests::cowboySetBonusSpeedsHorse);
         test("horse_gear_fit_and_strip", 20, FrontierTests::horseGearFitAndStrip);
         test("outlaw_spawns_armed", 20, FrontierTests::outlawSpawnsArmed);
@@ -155,6 +156,22 @@ public final class ModGameTests {
         test("sound_events_registered", 20, MusicTests::soundEventsRegistered);
         test("piano_controls", 20, MusicTests::pianoControls);
         test("piano_repertoire_resolves", 20, MusicTests::pianoRepertoireResolves);
+        test("every_sound_event_is_defined", 20, MusicTests::everySoundEventIsDefined);
+        test("hollow_biomes_play_the_hollow_score", 20, MusicTests::hollowBiomesPlayTheHollowScore);
+        test("hollow_biomes_have_beds", 20, MusicTests::hollowBiomesHaveBeds);
+        test("far_calls_come_from_what_lives_there", 20, MusicTests::farCallsComeFromWhatLivesThere);
+        test("depth_darkens_the_sea_and_works_the_hull", 20, MusicTests::depthDarkensTheSeaAndWorksTheHull);
+        test("stings_ride_on_real_advancements", 20, MusicTests::stingsRideOnRealAdvancements);
+        test("boss_bars_ask_for_their_themes", 20, MusicTests::bossBarsAskForTheirThemes);
+        // 46: how things feel
+        test("kick_goes_by_the_load", 20, FeelTests::kickGoesByTheLoad);
+        test("feel_leaves_the_guns_alone", 20, FeelTests::feelLeavesTheGunsAlone);
+        test("a_ball_knows_what_it_hit", 20, FeelTests::aBallKnowsWhatItHit);
+        test("a_near_miss_is_near", 20, FeelTests::aNearMissIsNear);
+        test("a_gunfight_leaves_a_haze", 20, FeelTests::aGunfightLeavesAHaze);
+        test("dust_goes_by_the_ground", 20, FeelTests::dustGoesByTheGround);
+        test("wind_goes_by_speed_and_height", 20, FeelTests::windGoesBySpeedAndHeight);
+        test("a_shake_falls_with_distance", 20, FeelTests::aShakeFallsWithDistance);
         // The steam bridge: handcar, depot standpipe, railroad engineer
         test("handcar_burns_steam_and_moves", 40, RailTests::handcarBurnsSteamAndMoves);
         test("handcar_fills_at_standpipe", 200, RailTests::handcarFillsAtStandpipe);

@@ -58,6 +58,7 @@ public final class GunMechanics {
         RandomSource random = shooter.getRandom();
         Map<Entity, Float> damageByTarget = new HashMap<>();
         Map<Entity, Vec3> headshots = new HashMap<>();
+        java.util.List<Vec3> paths = new java.util.ArrayList<>(); // where each pellet stopped (46a: what flew past whom)
         // Liquor spoils your aim: each Tipsy level widens the cone, even for a rifle.
         float spreadDegrees = stats.spreadDegrees() + TipsyEffect.extraSpread(shooter);
 
@@ -84,14 +85,25 @@ public final class GunMechanics {
                 }
                 damageByTarget.merge(entityHit.getEntity(), stats.damage() * headshot, Float::sum);
             } else if (blockHit.getType() != HitResult.Type.MISS) {
-                level.sendParticles(ParticleTypes.SMOKE, end.x, end.y, end.z, 3, 0.05, 0.05, 0.05, 0.01);
+                GunFeel.strike(level, blockHit, i, random); // 46a: chips of what it hit, and that block's own sound
             }
+            GunFeel.splash(level, shooter, start, end, i);
+            paths.add(end);
             tracer(level, start.add(dir.scale(0.8)), end);
         }
 
         DamageSource source = new DamageSource(ModDamageTypes.holder(level, ModDamageTypes.BULLET), shooter, shooter);
         damageByTarget.forEach((target, damage) -> target.hurtServer(level, source, damage));
         headshots.forEach((target, at) -> headshotFeedback(level, shooter, at));
+        // 46a: a thud for a hit that wasn't a headshot, a crack for anyone a ball went past, and powder for the haze
+        if (shooter instanceof ServerPlayer player && !damageByTarget.isEmpty() && headshots.isEmpty()) {
+            GunFeel.thud(player);
+        }
+        java.util.Set<ServerPlayer> told = new java.util.HashSet<>();
+        for (Vec3 end : paths) {
+            GunFeel.whiz(level, shooter, start, end, damageByTarget.keySet(), told);
+        }
+        GunFeel.powder(level, start.add(look.scale(0.9)));
 
         // Black powder: a flash and a white cloud drifting out of the muzzle, sent to each player on their own. Everyone else
         // sees it just ahead of the shooter's face, where the muzzle is from outside. The shooter gets a thinner one where

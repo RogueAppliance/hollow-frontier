@@ -100,6 +100,9 @@ public class DynamiteEntity extends ThrowableItemProjectile {
             }
         } else if (--fuse <= 0) {
             discard();
+            // 46c: its own low thump under vanilla's bang, carried 64 blocks; the client shakes the view by it
+            level().playSound(null, getX(), getY(), getZ(), com.hollowfrontier.registry.ModSounds.DYNAMITE_BLAST.get(),
+                    net.minecraft.sounds.SoundSource.BLOCKS, 4.0F, 1.0F);
             if (raider) {
                 level().explode(this, null, RAIDER_BLAST, getX(), getY(0.0625), getZ(), RAIDER_POWER, false, Level.ExplosionInteraction.NONE);
             } else {
