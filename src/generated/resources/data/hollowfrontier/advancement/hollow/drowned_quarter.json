@@ -1,0 +1,41 @@
+{
+  "parent": "hollowfrontier:hollow/still_sea",
+  "criteria": {
+    "found": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "hollowfrontier:drowned_quarter"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.drowned_quarter.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:jelly_lamp"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.drowned_quarter.title"
+    }
+  },
+  "requirements": [
+    [
+      "found"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

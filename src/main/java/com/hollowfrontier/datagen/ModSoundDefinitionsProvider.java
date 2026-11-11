@@ -27,6 +27,11 @@ public class ModSoundDefinitionsProvider extends SoundDefinitionsProvider {
             add(tune, definition().subtitle("subtitles." + HollowFrontier.MODID + ".saloon_piano.play")
                     .with(recording("block/saloon_piano/" + name).attenuationDistance(24)));
         }
+        for (var tune : ModSounds.PIANO_CAROLS) { // 35c
+            String name = tune.getId().getPath().substring("block.saloon_piano.".length());
+            add(tune, definition().subtitle("subtitles." + HollowFrontier.MODID + ".saloon_piano.carol")
+                    .with(recording("block/saloon_piano/" + name).attenuationDistance(24)));
+        }
 
         remix(ModSounds.RATTLESNAKE_RATTLE, "rattlesnake.rattle", vanilla("entity.silverfish.ambient", 0.8F, 1.7F), vanilla("entity.silverfish.ambient", 0.8F, 1.85F));
         remix(ModSounds.RATTLESNAKE_HURT, "rattlesnake.hurt", vanilla("entity.silverfish.hurt", 1.0F, 1.3F));
@@ -64,6 +69,9 @@ public class ModSoundDefinitionsProvider extends SoundDefinitionsProvider {
                 vanilla("block.lava.pop", 0.5F, 0.7F), vanilla("block.lava.ambient", 0.4F, 0.6F));
         remix(ModSounds.HIGHLANDS_AMBIENT, "concavian_highlands.additions", vanilla("item.elytra.flying", 0.12F, 0.5F),
                 vanilla("item.elytra.flying", 0.1F, 0.6F), vanilla("block.bell.resonate", 0.1F, 0.5F));
+        // The Still Sea (43a): no surf and no wind, only the water moving against itself now and then, and something far off
+        remix(ModSounds.SEA_AMBIENT, "still_sea.additions", vanilla("block.water.ambient", 0.5F, 0.6F),
+                vanilla("entity.dolphin.splash", 0.25F, 0.55F), vanilla("ambient.underwater.loop.additions.rare", 0.3F, 0.7F));
         remix(ModSounds.ASH_VENT_HISS, "ash_vent.hiss", vanilla("block.fire.extinguish", 0.5F, 0.6F), vanilla("block.lava.ambient", 0.6F, 0.8F));
         // The small creatures (9b2): a chirping little dinosaur, a hare whose crystals chime, a croaking fire lizard, a raven
         remix(ModSounds.FERN_SKITTER_AMBIENT, "fern_skitter.ambient", vanilla("entity.chicken.ambient", 0.6F, 1.7F), vanilla("entity.parrot.ambient", 0.4F, 1.8F));
@@ -104,6 +112,21 @@ public class ModSoundDefinitionsProvider extends SoundDefinitionsProvider {
         remix(ModSounds.GLYPTODON_DEATH, "glyptodon.death", vanilla("entity.armadillo.death", 1.0F, 0.6F));
         remix(ModSounds.GLYPTODON_HUNKER, "glyptodon.hunker", vanilla("entity.armadillo.roll", 1.0F, 0.6F), vanilla("entity.turtle.shamble", 0.8F, 0.6F));
         remix(ModSounds.GLYPTODON_BRUSH, "glyptodon.brush", vanilla("entity.armadillo.brush", 1.0F, 0.8F));
+        // The Still Sea's creatures (43b): a sea cow's low lowing, a whale's groan pitched down into the floor, a
+        // plesiosaur's honk, and a jelly that hardly makes a sound
+        remix(ModSounds.SEA_COW_AMBIENT, "great_sea_cow.ambient", vanilla("entity.cow.ambient", 0.7F, 0.5F), vanilla("entity.dolphin.ambient_water", 0.4F, 0.5F));
+        remix(ModSounds.SEA_COW_HURT, "great_sea_cow.hurt", vanilla("entity.cow.hurt", 0.8F, 0.5F));
+        remix(ModSounds.SEA_COW_DEATH, "great_sea_cow.death", vanilla("entity.cow.death", 0.9F, 0.5F));
+        remix(ModSounds.BASILOSAURUS_AMBIENT, "basilosaurus.ambient", vanilla("entity.elder_guardian.ambient", 0.6F, 0.5F), vanilla("entity.ravager.ambient", 0.4F, 0.5F));
+        remix(ModSounds.BASILOSAURUS_HURT, "basilosaurus.hurt", vanilla("entity.ravager.hurt", 0.9F, 0.55F));
+        remix(ModSounds.BASILOSAURUS_DEATH, "basilosaurus.death", vanilla("entity.ravager.death", 1.0F, 0.5F));
+        remix(ModSounds.BASILOSAURUS_BITE, "basilosaurus.bite", vanilla("entity.ravager.attack", 1.0F, 0.6F), vanilla("entity.generic.splash", 0.8F, 0.7F));
+        remix(ModSounds.PLESIOSAUR_AMBIENT, "plesiosaur.ambient", vanilla("entity.camel.ambient", 0.7F, 0.7F), vanilla("entity.dolphin.ambient", 0.4F, 0.6F));
+        remix(ModSounds.PLESIOSAUR_HURT, "plesiosaur.hurt", vanilla("entity.camel.hurt", 0.8F, 0.7F));
+        remix(ModSounds.PLESIOSAUR_DEATH, "plesiosaur.death", vanilla("entity.camel.death", 0.9F, 0.7F));
+        remix(ModSounds.LAMPJELLY_HURT, "lampjelly.hurt", vanilla("entity.slime.hurt_small", 0.5F, 1.4F));
+        remix(ModSounds.LAMPJELLY_DEATH, "lampjelly.death", vanilla("entity.slime.death_small", 0.6F, 1.3F));
+        remix(ModSounds.LAMPJELLY_STING, "lampjelly.sting", vanilla("entity.bee.sting", 0.6F, 1.5F));
         remix(ModSounds.OLIPHANT_BLOW, "oliphant.blow", vanilla("item.goat_horn.sound.0", 1.0F, 0.6F), vanilla("item.goat_horn.sound.1", 1.0F, 0.6F));
         // The Gray station (10b): the sentinel's whine as it locks on, its crack of a shot, the station's alarm; the locator's ping
         remix(ModSounds.SENTINEL_CHARGE, "gray_sentinel.charge", vanilla("block.beacon.activate", 0.8F, 1.8F), vanilla("entity.guardian.attack", 0.5F, 1.6F));

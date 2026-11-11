@@ -213,12 +213,19 @@ public class TownRaids extends SavedData {
         }
     }
 
+    /** Whether a raid may start at all just now: raids on, not peaceful, after dark, none going, and no Christmas truce (35d). */
+    public boolean raidsMayStart(ServerLevel level) {
+        return RaidConfig.enabled() && level.getDifficulty() != Difficulty.PEACEFUL && level.isDarkOutside() && active.isEmpty()
+                && !com.hollowfrontier.content.frontier.season.Season.truce(level);
+    }
+
     /**
      * At night, each town with a survival player in it may be raided: past its cooldown, no other raid on in the
      * world, nobody in town with a posse after them, and a roll of the dice.
      */
     void rollForRaids(ServerLevel level) {
-        if (!RaidConfig.enabled() || level.getDifficulty() == Difficulty.PEACEFUL || !level.isDarkOutside() || !active.isEmpty()) {
+        // 35d: and never over Christmas, while the truce holds (a raid or a posse already riding isn't called off)
+        if (!raidsMayStart(level)) {
             return;
         }
         long now = level.getGameTime();

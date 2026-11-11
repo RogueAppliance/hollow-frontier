@@ -1,5 +1,50 @@
 # Changelog
 
+## 1.3.0 — The Still Sea and a frontier December
+
+Two updates in one: an inner sea for the Hollow Earth, and a frontier Christmas that comes and goes by the date.
+
+### The Still Sea
+
+- **The Still Sea:** the Hollow Earth has a sea. Where the land lay lowest it now runs down pale sand beaches into deep water, with kelp forests and seagrass on the shelf, open water beyond, and falls pouring into it from the crust. Nothing blows and nothing rains down there, so it lies flat. About a fifth of the Hollow is sea.
+- **Sea life:** four creatures live in the Still Sea. **Great Sea Cows** graze the kelp shallows in herds; feed them kelp to lead and breed them. A **Plesiosaur** keeps its distance until you hold out a fish; feed it one and it dives to the bed and comes back with something off the bottom, now and then a sherd or a relic. **Lampjellies** drift in glowing shoals and sting if touched. The **Basilosaurus** hunts anyone swimming or boating over deep water: it circles, then comes in. It leaves the shallows alone.
+- **What they give:** Blubber renders to **Tallow** in a furnace, which burns as long as coal (in a Boiler too) and makes candles with string. Lamp Gel and glass make the **Jelly Lamp**, as bright as a sea lantern.
+- **The Harpoon:** a line weapon, and the sea's own, since black powder misfires underwater. Use it to throw it; it flies as true through water as through air. What it hits takes a jab of 3 and is held on the line. Small things (fish, jellies, most mobs, other players, items afloat) are reeled in to you. Big things (a sea cow, a Plesiosaur, a Basilosaurus) tow you along behind them instead, boat and all. Sneak to let go; the line also gives out after ten seconds or if it's stretched past 32 blocks. Then the harpoon comes back to your pack. The line is a real rope from your hand to the harpoon. Iron, a stick and a lead make one; two Basilosaur teeth make it a **Toothed Harpoon**: a jab of 5, a 48-block line and twice the hold. Held and in flight it's a 3D model.
+- **The Steam Submersible:** a brass boat for two that goes under. It has no fire aboard: it runs on steam it was given, 16 buckets of it, from canisters or by floating beside a steam tank, pipe or boiler, so a boiler on the shore now has a job. Use it on water to launch it. Jump to rise, sprint to dive, and let go to hold your depth, which costs nothing. Its crew doesn't drown and sees by its lamp. Run dry and it comes up by itself. It works in any sea, the Overworld's included. Brass plates, glass, Tallow, Lamp Gel, copper blocks and a brass gear make one.
+- **A Basilosaurus rams it.** The crew is safe behind the hull, which takes five rams in a row before it breaks up; it mends slowly if left alone. Like the airship, only its owner can break it up, and it folds with its steam.
+- **The Drowned Quarter:** on the bed of the Still Sea, under eighteen blocks of water or more, lies what was Concavia's river port: a quay, a street of broken columns still lit by Jelly Lamps, flooded houses with silt to brush, and three glass domes that never let the water in. Swim under a dome's wall and you come up inside, in air. Crystal Guardians are still at their posts in there. The great dome holds the port's vault, and a record of the day the water came.
+- **The Sealed Hull:** always in the Quarter's vault. Fitted to a Prototype Saucer it lets the saucer go underwater, and its crew keeps its air. Without it, water now pushes a saucer back to the surface; before, a saucer could fly into the sea and drown its pilot.
+- **Fittings you can see:** a saucer with the Sealed Hull wears two bands of sea-green plate round its rim with glowing seams, and one with the Cargo Hold carries a strapped locker under its stern. Until now neither showed.
+- **The Symmes Landing:** on the sea's beaches, where the expedition drew up its boat and would not launch it again. Its log says why, and its crate holds a chart to the nearest Quarter and a harpoon.
+- **Finds:** two new relics the prospector buys (the River Pilot's Bell and the Kindled Water Clock) and a fourth pottery sherd, the Wave. A Plesiosaur that brings something up now surfaces looking toward the nearest Quarter.
+- **The Codex** gains a seventh chapter for the sea, townsfolk have things to say to anyone who claims to have seen it, and the Gazette prints a few of them.
+- **Jade** shows a submersible's steam and hull.
+- **Ten advancements** for the sea: nine in a branch of their own in the Hollow Earth tab, and the submersible in Steam Age.
+- **Existing worlds:** the sea appears in Hollow Earth chunks nobody has visited yet. Places already explored stay as they are. About two thirds of what becomes sea was shallow lake before, so the join is mostly under water; where old dry land meets new sea there may be a step. Nothing else moves: the four land biomes, their terrain and their sites are where they were.
+- **For pack makers:** the new biome is `hollowfrontier:still_sea`. It is in `hollowfrontier:is_hollow_earth` and in no vanilla ocean tag, so vanilla's ocean structures and mobs don't appear there. A new tag, `hollowfrontier:is_hollow_land`, holds the four land biomes.
+
+### A frontier December
+
+Everything here comes on by the date and leaves by itself. The date is the server's own, so every player on a server sees the same thing. Nothing needs cleaning up in January, and existing worlds get all of it.
+
+- **The lamps:** through December a town's lamps dress themselves one by one, a sprig and a red ribbon on each, and undress the same way in January. Town Lamps you've placed yourself do it too.
+- **The town tree:** a December town has a spruce in its square, about seven blocks tall, in a tub, hung with tin stars and candles that are lit after dark. It can't be hit, pushed or walked into, and it damages nothing: it's there when someone is in town, and gone once the month is over.
+- **The Christmas Parcel:** in December the first time you talk to a town's postmaster he hands you a parcel, one a year for each player. In a town with no post office the shopkeeper has it. Use it to open it: coins, and things a frontier relative would send (cartridges, caps, coffee), and a **Fruitcake**.
+- **The Fruitcake** takes five seconds to eat, fills you right up and slows you for half a minute. Nobody will buy one.
+- **Two December drinks** at the saloon: **Eggnog** (Absorption, and 1 Tipsy) and **Hot Cider** (Regeneration, thaws you if you're freezing, and doesn't make you Tipsy). The barmaids pour them in December only.
+- **Carols:** in December the saloon piano works a carol in every other tune: Jingle Bells, God Rest Ye Merry, Gentlemen, and O Come, All Ye Faithful. They stop for a brawl like every other tune.
+- **Talk:** about thirty new lines across the frontier's voices, a few overheard exchanges, and Gazette back-page pieces. If there have been lights in the sky, the children decide it was a sleigh, the Gazette corrects them, and the men in black adopt it. The Kindled, who live under a sun that never sets, have the shortest day explained to them.
+- **The truce:** from December 24th to 26th no outlaw raid starts. A raid or a posse already under way isn't called off. Over those three days a sheriff will let one fine go, once a year: talk to him with one star. At two stars the law still shoots.
+- **No snow:** weather and biomes stay as they are. Desert towns get a dry Christmas, and folk remark on it.
+- **Settings:** `hollowfrontier-season-server.toml`, per world. `mode` is `AUTO` (by the server's date), `ALWAYS` (December's things all year) or `NEVER`. Christmas itself always goes by the date, so `ALWAYS` doesn't stop raids for good. `truce` turns the truce and the waived fine off.
+
+### Also in this version
+
+- **Guns show what's in them:** a black powder gun's slot now has a row of small pips along the top, one for each chamber or barrel, brass when loaded and dark when not. Before, a loaded gun and an empty one were the same picture.
+- **Quick Load:** the reload animation now keeps pace with the faster loading. Before, the gun loaded sooner but the hands moved at the old speed and were cut off mid-stroke.
+- **Dusters have tails:** the outlaws', the men in black's and the U.S. Marshal's long coats now hang to the knee, open in front, and swing as they walk and ride.
+- **Fern Fronds redrawn:** the crowns of the Jungle's tree ferns read as fronds now, each with a midrib and leaflets. Before, they looked like scattered pixels.
+
 ## 1.1.4 — New worlds start in town, new faces, and safecrackers find the way in (2026-11-07)
 
 - **New worlds start in town:** a new world now puts you on open ground in the nearest town's square, and you come back there if you die with no bed. With no town within about 10,000 blocks you start where the game would have put you. Existing worlds keep their spawn. Set `spawnAtTown` in `hollowfrontier-towns-server.toml`, in the config folder, before creating the world. On a dedicated server with operators, set `spawn-protection=0`, or other players can't use the doors and chests round the square.

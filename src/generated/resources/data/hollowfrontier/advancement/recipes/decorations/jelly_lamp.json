@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lamp_gel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:lamp_gel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "hollowfrontier:jelly_lamp"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_lamp_gel"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollowfrontier:jelly_lamp"
+    ]
+  }
+}

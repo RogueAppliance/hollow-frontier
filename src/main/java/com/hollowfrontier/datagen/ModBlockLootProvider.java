@@ -46,6 +46,7 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
         // Unbreakable in survival; a creative player breaking one gets nothing, like an end portal frame.
         add(ModBlocks.GATEWAY_FRAME.get(), noDrop());
         dropSelf(ModBlocks.CRUST_ROCK.get());
+        dropSelf(ModBlocks.JELLY_LAMP.get()); // 43b
         // Fronds drop themselves to shears or silk touch, otherwise now and then a fern; a vent crumbles to ash unless silk-touched
         add(ModBlocks.FERN_FROND.get(), block -> createSilkTouchOrShearsDispatchTable(block,
                 applyExplosionCondition(block, LootItem.lootTableItem(Items.FERN)).when(LootItemRandomChanceCondition.randomChance(0.125F))));

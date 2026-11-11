@@ -1,0 +1,33 @@
+{
+  "parent": "hollowfrontier:hollow/still_sea",
+  "criteria": {
+    "gel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:lamp_gel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.lamp_gel.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:lamp_gel"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.lamp_gel.title"
+    }
+  },
+  "requirements": [
+    [
+      "gel"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -83,13 +83,23 @@ public final class ModChestLoot {
     public static final ResourceKey<LootTable> FOUNDRY = key("foundry");
     public static final ResourceKey<LootTable> SKY_SHRINE = key("sky_shrine");
     public static final ResourceKey<LootTable> GRAY_RELAY = key("gray_relay");
+    // 43d: the Drowned Quarter (its counting-house vault, its domes, its flooded houses) and the Symmes Landing's crate
+    public static final ResourceKey<LootTable> DROWNED_VAULT = key("drowned_vault");
+    public static final ResourceKey<LootTable> DROWNED_HOME = key("drowned_home");
+    public static final ResourceKey<LootTable> DROWNED_STREET = key("drowned_street");
+    public static final ResourceKey<LootTable> SYMMES_LANDING = key("symmes_landing");
     // 28: what a brush turns up in the Hollow ruins' suspicious sand and gravel (archaeology tables, one find a block)
     public static final ResourceKey<LootTable> DIG_CRYSTAL_RUINS = archaeology("crystal_ruins");
     public static final ResourceKey<LootTable> DIG_SYMMES = archaeology("symmes_dig");
     public static final ResourceKey<LootTable> DIG_TAR_PIT = archaeology("tar_pit");
     public static final ResourceKey<LootTable> DIG_ZIGGURAT = archaeology("ziggurat");
+    /** 43d: the silt in the Drowned Quarter's flooded houses. */
+    public static final ResourceKey<LootTable> DIG_DROWNED_QUARTER = archaeology("drowned_quarter");
     // Buried under the strange grave on the rare Boot Hill (9c)
     public static final ResourceKey<LootTable> STRANGE_GRAVE = key("strange_grave");
+
+    /** 35b: what a Christmas Parcel holds. */
+    public static final ResourceKey<LootTable> CHRISTMAS_PARCEL = key("christmas_parcel");
 
     private static ResourceKey<LootTable> key(String name) {
         return ResourceKey.create(Registries.LOOT_TABLE, HollowFrontier.id("chests/" + name));

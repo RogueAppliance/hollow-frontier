@@ -46,7 +46,13 @@ public enum Fact {
     /** The listener has been handed the Polar Survey's letter (32d), so nobody tells them it's still waiting. */
     SURVEY_LETTER,
     /** A dust devil took the listener's hat a little while ago, and they haven't a hat on. */
-    LOST_HAT;
+    LOST_HAT,
+    /** The listener has been to the Still Sea (hollow/still_sea, 43): the frontier has heard, and doesn't believe a word of it. */
+    SEA_SEEN,
+    /** It's December by the server's calendar (35, {@link com.hollowfrontier.content.frontier.season.Season}). */
+    DECEMBER,
+    /** It's December 24th to 26th: the truce is on, and the church social has been. */
+    CHRISTMAS;
 
     /**
      * An urgent fact crowds out everything else: when it holds and a speaker has a line for it, that's the only kind of

@@ -45,7 +45,13 @@ public final class HollowSiteStructure extends Structure {
             StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(s -> s.startPool),
             Codec.intRange(0, 32).optionalFieldOf("max_slope", 3).forGetter(s -> s.maxSlope),
             Codec.intRange(1, 20).optionalFieldOf("size", 1).forGetter(s -> s.size),
-            Codec.BOOL.optionalFieldOf("island", false).forGetter(s -> s.island)).apply(i, HollowSiteStructure::new));
+            Codec.BOOL.optionalFieldOf("island", false).forGetter(s -> s.island),
+            Codec.BOOL.optionalFieldOf("seabed", false).forGetter(s -> s.seabed),
+            Codec.BOOL.optionalFieldOf("shore", false).forGetter(s -> s.shore)).apply(i, HollowSiteStructure::new));
+    /** A shore site (43d) stands no higher than this over the sea, with open water within {@link #SHORE_REACH} blocks of it. */
+    public static final int SHORE_MAX_HEIGHT = 4, SHORE_REACH = 10;
+    /** A seabed site (43d) wants at least this much water over its floor, so it stands wholly under the Still Sea. */
+    public static final int SEABED_MIN_DEPTH = 18;
     /** Ground above this is a floating island's top (they're flat a few blocks either side of 200), not the land. */
     public static final int HIGHEST_GROUND = 188;
     /** What {@link #ground} returns for a column with no dry land to build on. */
@@ -59,21 +65,36 @@ public final class HollowSiteStructure extends Structure {
     private final int size;
     /** Whether it stands on a floating island's top (27: the Sky Shrine) rather than on the land. */
     private final boolean island;
+    /** Whether it stands on the bed of the Still Sea (43d: the Drowned Quarter), under {@link #SEABED_MIN_DEPTH} of water or more. */
+    private final boolean seabed;
+    /** Whether it stands at the water's edge (43d: the Symmes Landing): on dry land just over sea level, with the sea beside it. */
+    private final boolean shore;
 
     public HollowSiteStructure(StructureSettings settings, Holder<StructureTemplatePool> startPool, int maxSlope) {
-        this(settings, startPool, maxSlope, 1, false);
+        this(settings, startPool, maxSlope, 1, false, false);
     }
 
     public HollowSiteStructure(StructureSettings settings, Holder<StructureTemplatePool> startPool, int maxSlope, int size) {
-        this(settings, startPool, maxSlope, size, false);
+        this(settings, startPool, maxSlope, size, false, false);
     }
 
     public HollowSiteStructure(StructureSettings settings, Holder<StructureTemplatePool> startPool, int maxSlope, int size, boolean island) {
+        this(settings, startPool, maxSlope, size, island, false);
+    }
+
+    public HollowSiteStructure(StructureSettings settings, Holder<StructureTemplatePool> startPool, int maxSlope, int size, boolean island, boolean seabed) {
+        this(settings, startPool, maxSlope, size, island, seabed, false);
+    }
+
+    public HollowSiteStructure(StructureSettings settings, Holder<StructureTemplatePool> startPool, int maxSlope, int size, boolean island, boolean seabed,
+            boolean shore) {
         super(settings);
         this.startPool = startPool;
         this.maxSlope = maxSlope;
         this.size = size;
         this.island = island;
+        this.seabed = seabed;
+        this.shore = shore;
     }
 
     @Override
@@ -96,6 +117,9 @@ public final class HollowSiteStructure extends Structure {
             if (ground.isEmpty()) {
                 continue;
             }
+            if (shore && !onTheShore(context, box, ground.getAsInt())) {
+                continue;
+            }
             int dy = ground.getAsInt() - box.minY();
             if (pieces.getBoundingBox().minY() + dy < HollowEarth.MIN_Y + 8) {
                 continue; // the dungeon would run into the shell
@@ -110,6 +134,22 @@ public final class HollowSiteStructure extends Structure {
             }
         }
         return Optional.empty();
+    }
+
+    /** Whether ground at {@code y} under {@code box} is a shore: low over the sea, with water off one of the box's four sides. */
+    private static boolean onTheShore(GenerationContext context, BoundingBox box, int y) {
+        if (y < HollowEarth.SEA_LEVEL || y > HollowEarth.SEA_LEVEL + SHORE_MAX_HEIGHT) {
+            return false;
+        }
+        int cx = box.getCenter().getX(), cz = box.getCenter().getZ();
+        int[][] off = {{box.minX() - SHORE_REACH, cz}, {box.maxX() + SHORE_REACH, cz}, {cx, box.minZ() - SHORE_REACH}, {cx, box.maxZ() + SHORE_REACH}};
+        for (int[] p : off) {
+            NoiseColumn column = context.chunkGenerator().getBaseColumn(p[0], p[1], context.heightAccessor(), context.randomState());
+            if (column.getBlock(HollowEarth.SEA_LEVEL - 1).getFluidState().is(net.minecraft.tags.FluidTags.WATER) && column.getBlock(HollowEarth.SEA_LEVEL + 1).isAir()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** The same pieces, the site's own first and every room after it {@link BuriedPiece buried} (the land left alone round it). */
@@ -130,7 +170,7 @@ public final class HollowSiteStructure extends Structure {
         int lowest = Integer.MAX_VALUE, highest = Integer.MIN_VALUE, sum = 0;
         for (int[] p : points) {
             NoiseColumn column = context.chunkGenerator().getBaseColumn(p[0], p[1], context.heightAccessor(), context.randomState());
-            int y = island ? islandTop(column) : ground(column);
+            int y = seabed ? seabed(column) : island ? islandTop(column) : ground(column);
             if (y == NO_GROUND) {
                 return OptionalInt.empty();
             }
@@ -152,6 +192,24 @@ public final class HollowSiteStructure extends Structure {
                 continue;
             }
             return !state.getFluidState().isEmpty() || y > HIGHEST_GROUND ? NO_GROUND : y;
+        }
+        return NO_GROUND;
+    }
+
+    /**
+     * The bed of the Still Sea in a bare noise column: the first solid block under the water, if there's water at the
+     * surface here and at least {@link #SEABED_MIN_DEPTH} of it; {@link #NO_GROUND} otherwise (land, shallows, a sea stack).
+     */
+    public static int seabed(NoiseColumn column) {
+        if (!column.getBlock(HollowEarth.SEA_LEVEL - 1).getFluidState().is(net.minecraft.tags.FluidTags.WATER) || !column.getBlock(HollowEarth.SEA_LEVEL + 1).isAir()) {
+            return NO_GROUND;
+        }
+        for (int y = HollowEarth.SEA_LEVEL - 2; y > HollowEarth.MIN_Y; y--) {
+            BlockState state = column.getBlock(y);
+            if (state.getFluidState().is(net.minecraft.tags.FluidTags.WATER)) {
+                continue;
+            }
+            return state.isSolid() && HollowEarth.SEA_LEVEL - 1 - y >= SEABED_MIN_DEPTH ? y : NO_GROUND;
         }
         return NO_GROUND;
     }

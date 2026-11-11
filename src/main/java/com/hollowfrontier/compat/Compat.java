@@ -33,7 +33,7 @@ public final class Compat {
             ModItems.OUTLAW_BADGE, ModItems.BRASS_STAR, ModItems.STRANGE_SKULL, ModItems.GRAY_TECH_FRAGMENT, ModItems.KINDLED_SIGIL,
             ModItems.SUNSTONE_SHARD, ModItems.PHLOGISTON_CORE,
             ModItems.ALIEN_ALLOY_PLATING, ModItems.DAMAGED_GRAVITY_DRIVE, ModItems.BEAM_EMITTER, ModItems.LENS_ARRAY, ModItems.NAVIGATION_CORE,
-            ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD, ModItems.LETTER_HOME);
+            ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD, ModItems.LETTER_HOME, ModItems.SEALED_HULL);
 
     private Compat() {}
 

@@ -1,0 +1,41 @@
+{
+  "parent": "hollowfrontier:hollow/still_sea",
+  "criteria": {
+    "found": {
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "hollowfrontier:symmes_landing"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.hollow.symmes_landing.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "id": "minecraft:spruce_boat"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.hollow.symmes_landing.title"
+    }
+  },
+  "requirements": [
+    [
+      "found"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

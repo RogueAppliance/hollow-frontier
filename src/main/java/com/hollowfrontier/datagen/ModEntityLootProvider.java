@@ -75,6 +75,19 @@ public class ModEntityLootProvider extends EntityLootSubProvider {
                 .withPool(drop(Items.LEATHER, 0, 2)));
         add(ModEntities.GLYPTODON.get(), LootTable.lootTable()
                 .withPool(drop(ModItems.GLYPTODON_SCUTE.get(), 2, 4)));
+        // The Still Sea (43b): blubber from the sea cow and the whale, the whale's teeth to a hunter, bones and fish from the
+        // plesiosaur (what it's for is the diving), gel from the jelly
+        add(ModEntities.GREAT_SEA_COW.get(), LootTable.lootTable()
+                .withPool(drop(ModItems.BLUBBER.get(), 2, 3))
+                .withPool(drop(Items.LEATHER, 0, 2)));
+        add(ModEntities.BASILOSAURUS.get(), LootTable.lootTable()
+                .withPool(drop(ModItems.BLUBBER.get(), 3, 5))
+                .withPool(drop(ModItems.BASILOSAUR_TOOTH.get(), 1, 2).when(LootItemKilledByPlayerCondition.killedByPlayer())));
+        add(ModEntities.PLESIOSAUR.get(), LootTable.lootTable()
+                .withPool(drop(Items.BONE, 1, 3))
+                .withPool(meat(Items.COD, 0, 2)));
+        add(ModEntities.LAMPJELLY.get(), LootTable.lootTable()
+                .withPool(drop(ModItems.LAMP_GEL.get(), 0, 2)));
         // The frontier's mysteries (11a): a sighting drops nothing; a carcass breaks up in code (CattleCarcass)
         add(ModEntities.AIRSHIP_SIGHTING.get(), LootTable.lootTable());
         add(ModEntities.CATTLE_CARCASS.get(), LootTable.lootTable());

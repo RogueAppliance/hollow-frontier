@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:wave_pottery_sherd",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:crystal_pottery_sherd"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:pilots_bell"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:clay_ball",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gold_nugget",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:lamp_gel",
+          "weight": 3
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "hollowfrontier:archaeology/drowned_quarter"
+}

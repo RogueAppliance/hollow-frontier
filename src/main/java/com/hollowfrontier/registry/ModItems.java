@@ -24,6 +24,7 @@ import com.hollowfrontier.content.hollow.gateway.PolarResonatorItem;
 import com.hollowfrontier.content.hollow.gray.SignalLocatorItem;
 import com.hollowfrontier.content.hollow.megafauna.MegafaunaGear;
 import com.hollowfrontier.content.hollow.megafauna.OliphantItem;
+import com.hollowfrontier.content.hollow.sea.HarpoonItem;
 import com.hollowfrontier.content.concavia.Artifacts;
 import com.hollowfrontier.content.concavia.ConcavianCodexItem;
 import com.hollowfrontier.content.concavia.KindledSigilItem;
@@ -182,6 +183,20 @@ public final class ModItems {
     public static final DeferredItem<DrinkItem> MOONSHINE = drink("moonshine", Drink.MOONSHINE, p -> p.rarity(Rarity.UNCOMMON));
     public static final DeferredItem<DrinkItem> SNAKE_OIL = drink("snake_oil", Drink.SNAKE_OIL, p -> p.rarity(Rarity.UNCOMMON));
 
+    // 35: a frontier December. The parcel a postmaster hands over, the Fruitcake always in it (five seconds to eat, fills you
+    // right up and slows you for half a minute), and the two drinks the barmaids pour that month
+    public static final DeferredItem<com.hollowfrontier.content.frontier.season.ChristmasParcelItem> CHRISTMAS_PARCEL = ITEMS.registerItem("christmas_parcel",
+            com.hollowfrontier.content.frontier.season.ChristmasParcelItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<com.hollowfrontier.content.frontier.season.FruitcakeItem> FRUITCAKE = ITEMS.registerItem("fruitcake",
+            com.hollowfrontier.content.frontier.season.FruitcakeItem::new,
+            p -> p.stacksTo(16).food(new FoodProperties.Builder().nutrition(20).saturationModifier(0.6F).alwaysEdible().build(),
+                    Consumables.defaultFood().consumeSeconds(5.0F)
+                            .onConsume(new net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect(
+                                    new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.SLOWNESS, 600, 0)))
+                            .build()));
+    public static final DeferredItem<DrinkItem> EGGNOG = drink("eggnog", Drink.EGGNOG, p -> p);
+    public static final DeferredItem<DrinkItem> HOT_CIDER = drink("hot_cider", Drink.HOT_CIDER, p -> p);
+
     // Steam
     public static final DeferredItem<BlockItem> BOILER = ITEMS.registerSimpleBlockItem(ModBlocks.BOILER);
     public static final DeferredItem<BlockItem> COPPER_PIPE = ITEMS.registerSimpleBlockItem(ModBlocks.COPPER_PIPE);
@@ -198,6 +213,9 @@ public final class ModItems {
     public static final DeferredItem<Item> AIRSHIP_ENVELOPE = ITEMS.registerSimpleItem("airship_envelope");
     public static final DeferredItem<Item> AIRSHIP_ENGINE = ITEMS.registerSimpleItem("airship_engine");
     public static final DeferredItem<AirshipItem> AIRSHIP = ITEMS.registerItem("airship", AirshipItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    // 43c: fireless, so it carries steam and nothing else
+    public static final DeferredItem<com.hollowfrontier.content.steam.submersible.SubmersibleItem> STEAM_SUBMERSIBLE = ITEMS.registerItem("steam_submersible",
+            com.hollowfrontier.content.steam.submersible.SubmersibleItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<PolarCompassItem> POLAR_COMPASS = ITEMS.registerItem("polar_compass", PolarCompassItem::new, p -> p.stacksTo(1));
     public static final DeferredItem<PolarResonatorItem> POLAR_RESONATOR = ITEMS.registerItem("polar_resonator",
             PolarResonatorItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
@@ -255,6 +273,25 @@ public final class ModItems {
     public static final DeferredItem<Item> GLYPTODON_CHESTPLATE = ITEMS.registerItem("glyptodon_chestplate", Item::new, p -> p.humanoidArmor(MegafaunaGear.SHELL, ArmorType.CHESTPLATE));
     public static final DeferredItem<Item> GLYPTODON_LEGGINGS = ITEMS.registerItem("glyptodon_leggings", Item::new, p -> p.humanoidArmor(MegafaunaGear.SHELL, ArmorType.LEGGINGS));
     public static final DeferredItem<Item> GLYPTODON_BOOTS = ITEMS.registerItem("glyptodon_boots", Item::new, p -> p.humanoidArmor(MegafaunaGear.SHELL, ArmorType.BOOTS));
+
+    // The Still Sea (43b): its creatures' eggs and drops, what they make, and the Harpoons
+    public static final DeferredItem<SpawnEggItem> GREAT_SEA_COW_SPAWN_EGG = ITEMS.registerItem("great_sea_cow_spawn_egg",
+            SpawnEggItem::new, p -> p.spawnEgg(ModEntities.GREAT_SEA_COW.get()));
+    public static final DeferredItem<SpawnEggItem> BASILOSAURUS_SPAWN_EGG = ITEMS.registerItem("basilosaurus_spawn_egg",
+            SpawnEggItem::new, p -> p.spawnEgg(ModEntities.BASILOSAURUS.get()));
+    public static final DeferredItem<SpawnEggItem> PLESIOSAUR_SPAWN_EGG = ITEMS.registerItem("plesiosaur_spawn_egg",
+            SpawnEggItem::new, p -> p.spawnEgg(ModEntities.PLESIOSAUR.get()));
+    public static final DeferredItem<SpawnEggItem> LAMPJELLY_SPAWN_EGG = ITEMS.registerItem("lampjelly_spawn_egg",
+            SpawnEggItem::new, p -> p.spawnEgg(ModEntities.LAMPJELLY.get()));
+    public static final DeferredItem<Item> BLUBBER = ITEMS.registerSimpleItem("blubber");
+    // Rendered blubber: burns as long as coal (in a furnace or a Boiler), makes candles, and seals the submersible (43c)
+    public static final DeferredItem<Item> TALLOW = ITEMS.registerSimpleItem("tallow", p -> p.cookingFuel(ContextIntProviders.COOKING_TIME_COAL));
+    public static final DeferredItem<Item> BASILOSAUR_TOOTH = ITEMS.registerSimpleItem("basilosaur_tooth", p -> p.stacksTo(16));
+    public static final DeferredItem<Item> LAMP_GEL = ITEMS.registerSimpleItem("lamp_gel");
+    public static final DeferredItem<BlockItem> JELLY_LAMP = ITEMS.registerSimpleBlockItem(ModBlocks.JELLY_LAMP);
+    public static final DeferredItem<HarpoonItem> HARPOON = ITEMS.registerItem("harpoon", HarpoonItem::new, p -> p.durability(120));
+    public static final DeferredItem<HarpoonItem> TOOTHED_HARPOON = ITEMS.registerItem("toothed_harpoon", HarpoonItem::new,
+            p -> p.durability(250).rarity(Rarity.UNCOMMON));
 
     // The Gray experiments (10b): what the tagged beasts and the stations give up, and the locator it makes
     public static final DeferredItem<Item> GRAY_TECH_FRAGMENT = ITEMS.registerSimpleItem("gray_tech_fragment", p -> p.rarity(Rarity.UNCOMMON));
@@ -329,6 +366,10 @@ public final class ModItems {
             p -> new PhlogistonGunItem(GunTypes.PHLOGISTON_RIFLE, 3, 3, 4.0F, 0xFF8A2A, new Vec3(1.5, 0.34, 0.3), p), p -> p.durability(500).repairable(ModTags.Items.INGOTS_STARSTEEL).rarity(Rarity.RARE).enchantable(PHLOGISTON_GUN_ENCHANTABILITY));
     public static final DeferredItem<SalvageItem> GRAVITY_DRIVE = ITEMS.registerItem("gravity_drive", SalvageItem::new,
             p -> p.stacksTo(1).rarity(Rarity.EPIC).fireResistant());
+    // 43d: the fitting from the Drowned Quarter's vault, Kindled work: it lets a saucer go under water
+    public static final DeferredItem<SalvageItem> SEALED_HULL = ITEMS.registerItem("sealed_hull", SalvageItem::new,
+            p -> p.stacksTo(1).rarity(Rarity.EPIC).fireResistant());
+
     // 13d: the Phlogiston Beacon
     public static final DeferredItem<BlockItem> PHLOGISTON_BEACON = ITEMS.registerSimpleBlockItem(ModBlocks.PHLOGISTON_BEACON, p -> p.rarity(Rarity.EPIC));
     // 13c: the Prototype Saucer, crafted whole from salvage and set down like the airship
@@ -350,8 +391,11 @@ public final class ModItems {
     public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> EXPEDITION_SEXTANT = relic("expedition_sextant", 3, Rarity.UNCOMMON);
     public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> IVORY_CARVING = relic("ivory_carving", 3, Rarity.UNCOMMON);
     public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> STAR_CHART = relic("star_chart", 4, Rarity.UNCOMMON);
+    // 43d: the Drowned Quarter's own
+    public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> PILOTS_BELL = relic("pilots_bell", 6, Rarity.RARE);
+    public static final DeferredItem<com.hollowfrontier.content.hollow.RelicItem> WATER_CLOCK = relic("water_clock", 7, Rarity.RARE);
     public static final java.util.List<DeferredItem<com.hollowfrontier.content.hollow.RelicItem>> RELICS = java.util.List.of(KINDLED_IDOL, CRYSTAL_TABLET,
-            SUNSTONE_CIRCLET, STARSTEEL_MASK, GRAY_SPECIMEN_JAR, EXPEDITION_SEXTANT, IVORY_CARVING, STAR_CHART);
+            SUNSTONE_CIRCLET, STARSTEEL_MASK, GRAY_SPECIMEN_JAR, EXPEDITION_SEXTANT, IVORY_CARVING, STAR_CHART, PILOTS_BELL, WATER_CLOCK);
     // 32c: the Grays' odds and ends from a crash site's cargo pod (the prospector buys them too, for the gold coins after each name)
     public static final DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> HUMMING_DOOHICKEY = gadget("humming_doohickey", 3, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind.DOOHICKEY);
     public static final DeferredItem<com.hollowfrontier.content.ufo.GrayGadgetItem> SELF_WARMING_ROCK = gadget("self_warming_rock", 3, com.hollowfrontier.content.ufo.GrayGadgetItem.Kind.WARMING_ROCK);
@@ -366,7 +410,10 @@ public final class ModItems {
             p -> p.rarity(Rarity.UNCOMMON).potPattern(com.hollowfrontier.content.hollow.HollowPatterns.CRYSTAL));
     public static final DeferredItem<Item> WATCHER_POTTERY_SHERD = ITEMS.registerItem("watcher_pottery_sherd", Item::new,
             p -> p.rarity(Rarity.UNCOMMON).potPattern(com.hollowfrontier.content.hollow.HollowPatterns.WATCHER));
-    public static final java.util.List<DeferredItem<Item>> SHERDS = java.util.List.of(SUN_POTTERY_SHERD, CRYSTAL_POTTERY_SHERD, WATCHER_POTTERY_SHERD);
+    public static final DeferredItem<Item> WAVE_POTTERY_SHERD = ITEMS.registerItem("wave_pottery_sherd", Item::new,
+            p -> p.rarity(Rarity.UNCOMMON).potPattern(com.hollowfrontier.content.hollow.HollowPatterns.WAVE));
+    public static final java.util.List<DeferredItem<Item>> SHERDS = java.util.List.of(SUN_POTTERY_SHERD, CRYSTAL_POTTERY_SHERD, WATCHER_POTTERY_SHERD,
+            WAVE_POTTERY_SHERD);
     public static final DeferredItem<net.minecraft.world.item.SmithingTemplateItem> CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE = ITEMS.registerItem(
             "concavian_armor_trim_smithing_template", net.minecraft.world.item.SmithingTemplateItem::createArmorTrimTemplate, p -> p.rarity(Rarity.RARE));
 

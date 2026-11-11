@@ -130,6 +130,9 @@ public final class ModBlocks {
     public static final DeferredBlock<AshVentBlock> ASH_VENT = BLOCKS.registerBlock("ash_vent",
             AshVentBlock::new, () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.MAGMA_BLOCK).mapColor(MapColor.COLOR_BLACK)
                     .lightLevel(state -> 6));
+    // 43b: Lamp Gel set in glass. As bright as a sea lantern, and it doesn't care whether it's under water.
+    public static final DeferredBlock<Block> JELLY_LAMP = BLOCKS.registerSimpleBlock("jelly_lamp",
+            () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.SEA_LANTERN).mapColor(MapColor.COLOR_LIGHT_GREEN).lightLevel(state -> 15));
     // 9c: the Hollow Earth's ores. Starsteel is diamond-tier (an iron pickaxe or better); phlogiston glows in the rock.
     public static final DeferredBlock<DropExperienceBlock> STARSTEEL_ORE = BLOCKS.registerBlock("starsteel_ore",
             p -> new DropExperienceBlock(UniformInt.of(2, 5), p),

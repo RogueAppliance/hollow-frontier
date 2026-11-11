@@ -83,3 +83,13 @@ entity/mothership 64x64
 entity/mothership_glowmask 64x64
 entity/gray_drone 64x32
 entity/gray_drone_glowmask 64x32
+# 43b: the Still Sea's creatures
+entity/great_sea_cow 256x128
+entity/basilosaurus 256x128
+entity/plesiosaur 128x64
+entity/lampjelly 64x32
+entity/lampjelly_glowmask 64x32
+entity/steam_submersible 256x160
+entity/steam_submersible_glowmask 256x160
+entity/harpoon 64x32
+entity/harpoon_line 16x16

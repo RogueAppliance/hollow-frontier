@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hollowfrontier:jelly_lamp"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "hollowfrontier:blocks/jelly_lamp"
+}

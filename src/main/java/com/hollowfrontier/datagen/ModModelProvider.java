@@ -159,6 +159,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.BRASS_BLOCK.get());
         // The Hollow Earth's crust and its unbreakable shell
         blockModels.createTrivialCube(ModBlocks.CRUST_ROCK.get());
+        blockModels.createTrivialCube(ModBlocks.JELLY_LAMP.get()); // 43b
         blockModels.createTrivialCube(ModBlocks.SHELL_BEDROCK.get());
         // Hollow Earth flora and ground (9b1): fronds as leaves, ash like sand, the vent a cracked top over basalt sides
         blockModels.createTrivialBlock(ModBlocks.FERN_FROND.get(), TexturedModel.LEAVES);
@@ -247,12 +248,24 @@ public class ModModelProvider extends ModelProvider {
         TextureMapping cold = new TextureMapping().put(TextureSlot.LANTERN, TextureMapping.getBlockTexture(lamp, "_unlit"));
         Identifier coldStanding = net.minecraft.client.data.models.model.ModelTemplates.LANTERN.createWithSuffix(lamp, "_unlit", cold, blockModels.modelOutput);
         Identifier coldHanging = net.minecraft.client.data.models.model.ModelTemplates.HANGING_LANTERN.createWithSuffix(lamp, "_unlit", cold, blockModels.modelOutput);
+        // 35a: dressed for December, lit and unlit: the same two models with a sprig and a red ribbon drawn on the texture
+        TextureMapping festiveLit = new TextureMapping().put(TextureSlot.LANTERN, TextureMapping.getBlockTexture(lamp, "_festive"));
+        TextureMapping festiveCold = new TextureMapping().put(TextureSlot.LANTERN, TextureMapping.getBlockTexture(lamp, "_festive_unlit"));
+        Identifier festiveStanding = ModelTemplates.LANTERN.createWithSuffix(lamp, "_festive", festiveLit, blockModels.modelOutput);
+        Identifier festiveHanging = ModelTemplates.HANGING_LANTERN.createWithSuffix(lamp, "_festive", festiveLit, blockModels.modelOutput);
+        Identifier festiveColdStanding = ModelTemplates.LANTERN.createWithSuffix(lamp, "_festive_unlit", festiveCold, blockModels.modelOutput);
+        Identifier festiveColdHanging = ModelTemplates.HANGING_LANTERN.createWithSuffix(lamp, "_festive_unlit", festiveCold, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(lamp).with(
-                net.minecraft.client.data.models.blockstates.PropertyDispatch.initial(BlockStateProperties.HANGING, BlockStateProperties.LIT)
-                        .select(false, true, BlockModelGenerators.plainVariant(Identifier.withDefaultNamespace("block/lantern")))
-                        .select(true, true, BlockModelGenerators.plainVariant(Identifier.withDefaultNamespace("block/lantern_hanging")))
-                        .select(false, false, BlockModelGenerators.plainVariant(coldStanding))
-                        .select(true, false, BlockModelGenerators.plainVariant(coldHanging))));
+                net.minecraft.client.data.models.blockstates.PropertyDispatch.initial(BlockStateProperties.HANGING, BlockStateProperties.LIT,
+                                com.hollowfrontier.content.frontier.furniture.TownLampBlock.FESTIVE)
+                        .select(false, true, false, BlockModelGenerators.plainVariant(Identifier.withDefaultNamespace("block/lantern")))
+                        .select(true, true, false, BlockModelGenerators.plainVariant(Identifier.withDefaultNamespace("block/lantern_hanging")))
+                        .select(false, false, false, BlockModelGenerators.plainVariant(coldStanding))
+                        .select(true, false, false, BlockModelGenerators.plainVariant(coldHanging))
+                        .select(false, true, true, BlockModelGenerators.plainVariant(festiveStanding))
+                        .select(true, true, true, BlockModelGenerators.plainVariant(festiveHanging))
+                        .select(false, false, true, BlockModelGenerators.plainVariant(festiveColdStanding))
+                        .select(true, false, true, BlockModelGenerators.plainVariant(festiveColdHanging))));
         itemModels.itemModelOutput.accept(lamp.asItem(), net.minecraft.client.data.models.model.ItemModelUtils.plainModel(
                 ModelTemplates.FLAT_ITEM.create(lamp.asItem(), TextureMapping.layer0(net.minecraft.world.item.Items.LANTERN), itemModels.modelOutput)));
         Block piano = ModBlocks.SALOON_PIANO.get();
@@ -315,6 +328,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.AIRSHIP_ENVELOPE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.AIRSHIP_ENGINE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.AIRSHIP.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.STEAM_SUBMERSIBLE.get(), ModelTemplates.FLAT_ITEM); // 43c
         heldModels(itemModels); // the resonator, the drill and the lens: flat icons, and held GeckoLib models
         // The polar compass points like a lodestone compass at its bearing (polar_compass_00..31), and spins without one.
         Item compass = ModItems.POLAR_COMPASS.get();
@@ -395,7 +409,7 @@ public class ModModelProvider extends ModelProvider {
                 ModItems.GRAY_WARDEN_SPAWN_EGG, ModItems.DISGUISED_GRAY_SPAWN_EGG, // 13a, 21c
                 ModItems.EMPTY_PHLOGISTON_CELL, ModItems.PHLOGISTON_CELL, ModItems.GRAVITY_DRIVE, // 13b
                 ModItems.PROTOTYPE_SAUCER, // 13c
-                ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD, ModItems.LETTER_HOME)) { // 15b, 20
+                ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD, ModItems.LETTER_HOME, ModItems.SEALED_HULL)) { // 15b, 20, 43d
             itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
         }
         // 28: the relics, the sherds and the trim template
@@ -403,6 +417,11 @@ public class ModModelProvider extends ModelProvider {
         ModItems.GADGETS.forEach(gadget -> itemModels.generateFlatItem(gadget.get(), ModelTemplates.FLAT_ITEM)); // 32c
         ModItems.SHERDS.forEach(sherd -> itemModels.generateFlatItem(sherd.get(), ModelTemplates.FLAT_ITEM));
         itemModels.generateFlatItem(ModItems.CONCAVIAN_ARMOR_TRIM_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);
+        // The Still Sea (43b): eggs and drops flat, the harpoons held like tools
+        for (var item : java.util.List.of(ModItems.GREAT_SEA_COW_SPAWN_EGG, ModItems.BASILOSAURUS_SPAWN_EGG, ModItems.PLESIOSAUR_SPAWN_EGG,
+                ModItems.LAMPJELLY_SPAWN_EGG, ModItems.BLUBBER, ModItems.TALLOW, ModItems.BASILOSAUR_TOOTH, ModItems.LAMP_GEL)) {
+            itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
+        }
         // The megafauna (10a): eggs, drops and gear
         for (var item : java.util.List.of(ModItems.WOOLLY_MAMMOTH_SPAWN_EGG, ModItems.TERROR_BIRD_SPAWN_EGG, ModItems.MEGATHERIUM_SPAWN_EGG, ModItems.GLYPTODON_SPAWN_EGG,
                 ModItems.MAMMOTH_TUSK, ModItems.RAW_MAMMOTH, ModItems.MAMMOTH_STEAK, ModItems.OLIPHANT, ModItems.TERROR_BIRD_TALON, ModItems.THICK_HIDE,
@@ -422,8 +441,10 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BRASS_STAR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.FRONTIER_GAZETTE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.SURVEY_LETTER.get(), ModelTemplates.FLAT_ITEM); // 32d
+        itemModels.generateFlatItem(ModItems.CHRISTMAS_PARCEL.get(), ModelTemplates.FLAT_ITEM); // 35b
+        itemModels.generateFlatItem(ModItems.FRUITCAKE.get(), ModelTemplates.FLAT_ITEM);
         for (var drink : java.util.List.of(ModItems.FRONTIER_BEER, ModItems.SARSAPARILLA, ModItems.COWBOY_COFFEE, ModItems.RYE_WHISKEY,
-                ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL)) {
+                ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL, ModItems.EGGNOG, ModItems.HOT_CIDER)) {
             itemModels.generateFlatItem(drink.get(), ModelTemplates.FLAT_ITEM);
         }
     }
@@ -444,6 +465,9 @@ public class ModModelProvider extends ModelProvider {
         held(itemModels, ModItems.POLAR_RESONATOR.get(), t -> t.rotation(0, -12, 0).translation(-2.0F, 2.5F, -2.5F).scale(0.6F), 3.2F);
         held(itemModels, ModItems.SUNSTONE_LENS.get(), t -> t.rotation(0, -12, 0).translation(-2.0F, 2.0F, -2.5F).scale(0.6F), 2.4F);
         held(itemModels, ModItems.STEAM_DRILL.get(), t -> t.rotation(0, 6, 0).translation(-1.6F, 2.2F, -3.5F).scale(0.45F), 1.9F);
+        // 43b: the harpoons, held like the drill (grip at the origin, head along -Z), a little bigger
+        held(itemModels, ModItems.HARPOON.get(), t -> t.rotation(0, 4, 0).translation(-1.2F, 2.6F, -2.0F).scale(0.6F), 1.9F);
+        held(itemModels, ModItems.TOOTHED_HARPOON.get(), t -> t.rotation(0, 4, 0).translation(-1.2F, 2.6F, -2.0F).scale(0.6F), 1.9F);
     }
 
     private static void held(ItemModelGenerators itemModels, Item item,

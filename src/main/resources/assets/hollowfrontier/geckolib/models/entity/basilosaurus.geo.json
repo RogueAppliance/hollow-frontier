@@ -1,0 +1,75 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.hollowfrontier.basilosaurus",
+				"texture_width": 256,
+				"texture_height": 128,
+				"visible_bounds_width": 12,
+				"visible_bounds_height": 4,
+				"visible_bounds_offset": [0, 0.5, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 8, 0],
+					"cubes": [{"origin": [-7, 1, -16], "size": [14, 14, 32], "uv": [100, 34]}]
+				},
+				{
+					"name": "chest",
+					"parent": "body",
+					"pivot": [0, 8, -16],
+					"cubes": [{"origin": [-8, 0, -48], "size": [16, 16, 32], "uv": [0, 34]}]
+				},
+				{
+					"name": "head",
+					"parent": "chest",
+					"pivot": [0, 9, -48],
+					"cubes": [{"origin": [-6, 5, -70], "size": [12, 10, 22], "uv": [0, 0]}]
+				},
+				{
+					"name": "jaw",
+					"parent": "head",
+					"pivot": [0, 5, -50],
+					"cubes": [{"origin": [-5, 2, -68], "size": [10, 3, 18], "uv": [72, 0]}]
+				},
+				{
+					"name": "flipper_left",
+					"parent": "chest",
+					"pivot": [8, 4, -38],
+					"cubes": [{"origin": [8, -2, -42], "size": [2, 6, 10], "uv": [196, 34]}]
+				},
+				{
+					"name": "flipper_right",
+					"parent": "chest",
+					"pivot": [-8, 4, -38],
+					"cubes": [{"origin": [-10, -2, -42], "size": [2, 6, 10], "uv": [196, 34], "mirror": true}]
+				},
+				{
+					"name": "hips",
+					"parent": "body",
+					"pivot": [0, 8, 16],
+					"cubes": [{"origin": [-5, 3, 16], "size": [10, 10, 32], "uv": [0, 84]}]
+				},
+				{
+					"name": "tail",
+					"parent": "hips",
+					"pivot": [0, 8, 48],
+					"cubes": [{"origin": [-3, 5, 48], "size": [6, 6, 28], "uv": [88, 84]}]
+				},
+				{
+					"name": "fluke",
+					"parent": "tail",
+					"pivot": [0, 8, 74],
+					"cubes": [{"origin": [-10, 7, 72], "size": [20, 2, 10], "uv": [160, 84]}]
+				}
+			]
+		}
+	]
+}

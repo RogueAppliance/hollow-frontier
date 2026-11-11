@@ -49,6 +49,11 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> PIANO_THE_STRENUOUS_LIFE = register("block.saloon_piano.the_strenuous_life");
     public static final List<DeferredHolder<SoundEvent, SoundEvent>> PIANO_REPERTOIRE =
             List.of(PIANO_THE_ENTERTAINER, PIANO_ELITE_SYNCOPATIONS, PIANO_PINEAPPLE_RAG, PIANO_THE_STRENUOUS_LIFE);
+    // 35c: December's carols, worked in every other tune. Our own arrangements of public-domain tunes, rendered the same way.
+    public static final DeferredHolder<SoundEvent, SoundEvent> PIANO_JINGLE_BELLS = register("block.saloon_piano.jingle_bells");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PIANO_GOD_REST_YE = register("block.saloon_piano.god_rest_ye_merry_gentlemen");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PIANO_O_COME = register("block.saloon_piano.o_come_all_ye_faithful");
+    public static final List<DeferredHolder<SoundEvent, SoundEvent>> PIANO_CAROLS = List.of(PIANO_JINGLE_BELLS, PIANO_GOD_REST_YE, PIANO_O_COME);
 
     // Steam handcar: the engine's beat and its whistle
     public static final DeferredHolder<SoundEvent, SoundEvent> HANDCAR_CHUFF = register("entity.steam_handcar.chuff");
@@ -69,6 +74,7 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> STEPPES_AMBIENT = register("ambient.crystal_steppes.additions");
     public static final DeferredHolder<SoundEvent, SoundEvent> BADLANDS_AMBIENT = register("ambient.ember_badlands.additions");
     public static final DeferredHolder<SoundEvent, SoundEvent> HIGHLANDS_AMBIENT = register("ambient.concavian_highlands.additions");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SEA_AMBIENT = register("ambient.still_sea.additions");
     public static final DeferredHolder<SoundEvent, SoundEvent> ASH_VENT_HISS = register("block.ash_vent.hiss");
     // The Hollow Earth's small creatures (9b2)
     public static final DeferredHolder<SoundEvent, SoundEvent> FERN_SKITTER_AMBIENT = register("entity.fern_skitter.ambient");
@@ -106,6 +112,20 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> GLYPTODON_DEATH = register("entity.glyptodon.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> GLYPTODON_HUNKER = register("entity.glyptodon.hunker");
     public static final DeferredHolder<SoundEvent, SoundEvent> GLYPTODON_BRUSH = register("entity.glyptodon.brush");
+    // The Still Sea's creatures (43b)
+    public static final DeferredHolder<SoundEvent, SoundEvent> SEA_COW_AMBIENT = register("entity.great_sea_cow.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SEA_COW_HURT = register("entity.great_sea_cow.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SEA_COW_DEATH = register("entity.great_sea_cow.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BASILOSAURUS_AMBIENT = register("entity.basilosaurus.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BASILOSAURUS_HURT = register("entity.basilosaurus.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BASILOSAURUS_DEATH = register("entity.basilosaurus.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BASILOSAURUS_BITE = register("entity.basilosaurus.bite");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PLESIOSAUR_AMBIENT = register("entity.plesiosaur.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PLESIOSAUR_HURT = register("entity.plesiosaur.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PLESIOSAUR_DEATH = register("entity.plesiosaur.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> LAMPJELLY_HURT = register("entity.lampjelly.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> LAMPJELLY_DEATH = register("entity.lampjelly.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> LAMPJELLY_STING = register("entity.lampjelly.sting");
     public static final DeferredHolder<SoundEvent, SoundEvent> OLIPHANT_BLOW = register("item.oliphant.blow");
     // The Gray experiments (10b)
     public static final DeferredHolder<SoundEvent, SoundEvent> SENTINEL_CHARGE = register("entity.gray_sentinel.charge");

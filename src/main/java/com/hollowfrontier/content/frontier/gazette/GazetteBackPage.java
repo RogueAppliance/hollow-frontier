@@ -94,6 +94,11 @@ public final class GazetteBackPage {
         add(k, act(Act.AFTER), "FOR SALE: lead-lined nightcap. The sky's quiet now, and the owner wants his hair back.");
         add(k, when(DUST_DEVIL), "LOST: one good hat, last seen heading east at a gallop. Reward.");
         add(k, when(LOST_HAT), "FOR SALE: hats, with chin straps. Ask the reader who has just lost one.");
+        // 35d: December
+        add(k, when(DECEMBER), "FOR SALE: fruitcake, unopened, some years old. Will trade for anything that is not fruitcake.");
+        add(k, when(DECEMBER), "WANTED: snow, any quantity, by Christmas. Will also accept flour. Ask at the schoolhouse.");
+        add(k, when(DECEMBER, SIGHTINGS), "FOUND: one sleigh bell, large, in a pasture. Still warm. Owner may call at this office.");
+        add(k, when(SEA_SEEN), "FOR SALE: rowing boat, used once, on a sea that is on no map. Ask no questions."); // 43d
     }
 
     private static void letters() {
@@ -110,6 +115,9 @@ public final class GazetteBackPage {
         add(k, when(CROP_CIRCLES), "Sir,\nI did not make the rings in my wheat, and I resent my neighbours' suggestion that I have taken up dancing.\n\n— A Farmer");
         add(k, only(Act.GRAYS), "Sir,\nOn Saturday last I was taken up into a light and shown many wonders. I should like to know who will pay for my fence.\n\n— A Citizen");
         add(k, act(Act.AFTER), "Sir,\nThe lights have stopped. I have nothing left to write to you about.\n\nP.S. The bandstand is still a disgrace.\n— A Resident");
+        add(k, when(DECEMBER, SIGHTINGS), "Sir,\nMy children say the lights over the mesa were a sleigh. Kindly do not print otherwise until January.\n\n— A Mother");
+        add(k, when(DECEMBER), "Sir,\nThe town tree has more candles on it than the church. I do not say this is wrong. I say it has been noticed.\n\n— A Deacon");
+        add(k, when(SEA_SEEN), "Sir,\nYour paper says there is a sea beneath us. I have dug wells for thirty years and never once struck a fish.\n\n— A Well-Digger"); // 43d
     }
 
     private static void corrections() {
@@ -126,6 +134,10 @@ public final class GazetteBackPage {
         add(k, Cond.ANY, "We reported a twister through the stockyard. It was a dust devil, and it took only the stockman's hat. He would like it back.");
         add(k, only(Act.GRAYS), "Gentlemen from out of town have asked us to say that last week's lights were a dust devil carrying a lantern. We have said it.");
         add(k, act(Act.AFTER), "We reported that the sky has been quiet for a month. A goose flew over on Thursday. We regret the alarm.");
+        add(k, when(DECEMBER, SIGHTINGS), "We reported a sleigh over the mesa on Tuesday. It had no horses, no runners and no driver. It was not a sleigh. We regret the excitement.");
+        add(k, when(DECEMBER, SIGHTINGS), "Gentlemen from out of town have asked us to correct our correction. It was a sleigh. They were very firm about it. Merry Christmas.");
+        add(k, when(CHRISTMAS), "The punch at the Christmas social was not \"spiked\". It was eggnog, which arrives that way. The Editor has apologised to the punch.");
+        add(k, when(SEA_SEEN), "We reported a sea under the earth with no tide. A reader asks what, then, it has. We have asked. Lamps, we are told."); // 43d
     }
 
     // ---------------------------------------------------------------- printing

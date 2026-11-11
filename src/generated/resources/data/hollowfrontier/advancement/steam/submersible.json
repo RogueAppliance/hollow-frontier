@@ -1,0 +1,36 @@
+{
+  "parent": "hollowfrontier:steam/airship",
+  "criteria": {
+    "submersible": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:steam_submersible"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.steam.submersible.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:steam_submersible"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.steam.submersible.title"
+    }
+  },
+  "requirements": [
+    [
+      "submersible"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

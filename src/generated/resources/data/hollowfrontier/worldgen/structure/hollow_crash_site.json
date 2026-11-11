@@ -1,6 +1,6 @@
 {
   "type": "hollowfrontier:hollow_site",
-  "biomes": "#hollowfrontier:is_hollow_earth",
+  "biomes": "#hollowfrontier:is_hollow_land",
   "max_slope": 6,
   "spawn_overrides": {},
   "start_pool": "hollowfrontier:crash_site",

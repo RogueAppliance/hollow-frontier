@@ -40,7 +40,7 @@ import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 /**
- * The Hollow Earth's four biomes, all our own (none borrows a vanilla builder, so none carries vanilla's sky colour).
+ * The Hollow Earth's biomes, all our own (none borrows a vanilla builder, so none carries vanilla's sky colour).
  * <ul>
  * <li><b>Primordial Jungle</b> (warm and wet): rolling green hills under tall jungle trees and ferns, rivers, a steamy green
  *     haze, giant tree ferns and cycads among the trees, bird calls and croaks (9b1).</li>
@@ -51,8 +51,11 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
  *     cinders, rumbling (9b1).</li>
  * <li><b>Concavian Highlands</b> (cold, or high ground): pale calcite and stone uplands with grey-green grass, pale moss,
  *     and snow on the peaks; pale standing stones and fallen pillars of Kindled work, the wind (9b1; 12a brings the ruins).</li>
+ * <li><b>The Still Sea</b> (43a; the lowest ground, whatever the weather): an inner sea with no wind and no weather, so it
+ *     lies flat as glass. Pale sand shores, kelp and seagrass in the shallows, the crust's spires standing in it as sea
+ *     stacks, and falls pouring into it from overhead.</li>
  * </ul>
- * The climate table ({@link #parameters}) cuts temperature, humidity and continentalness into those four regions with no
+ * The climate table ({@link #parameters}) cuts temperature, humidity and continentalness into those regions with no
  * gaps; {@link HollowTerrain} shapes the land from the same thresholds. Spawns are vanilla animals and each biome's own
  * small creature (9b2: fern skitters, glassback hares, ash salamanders, pale ravens); the biome tags {@code has_mammoths}
  * etc. (ModBiomeTagsProvider) are where phase 10a's megafauna will hook in.
@@ -64,10 +67,16 @@ public final class HollowBiomes {
     public static final ResourceKey<Biome> CRYSTAL_STEPPES = key("crystal_steppes");
     public static final ResourceKey<Biome> EMBER_BADLANDS = key("ember_badlands");
     public static final ResourceKey<Biome> CONCAVIAN_HIGHLANDS = key("concavian_highlands");
-    public static final List<ResourceKey<Biome>> ALL = List.of(PRIMORDIAL_JUNGLE, CRYSTAL_STEPPES, EMBER_BADLANDS, CONCAVIAN_HIGHLANDS);
+    /** The Still Sea (43a): the inner sea, where the land lies lowest. */
+    public static final ResourceKey<Biome> STILL_SEA = key("still_sea");
+    /** The four land biomes, as they were before the sea (43a). */
+    public static final List<ResourceKey<Biome>> LANDS = List.of(PRIMORDIAL_JUNGLE, CRYSTAL_STEPPES, EMBER_BADLANDS, CONCAVIAN_HIGHLANDS);
+    public static final List<ResourceKey<Biome>> ALL = List.of(PRIMORDIAL_JUNGLE, CRYSTAL_STEPPES, EMBER_BADLANDS, CONCAVIAN_HIGHLANDS, STILL_SEA);
 
     // Hooks for later phases: 10a adds spawn biome modifiers on these (as ModSpawns does for rattlesnakes), 10b its labs
     public static final TagKey<Biome> IS_HOLLOW_EARTH = tag("is_hollow_earth");
+    /** The Hollow Earth's dry land: where the sites that stand anywhere go (the Symmes camp, crash sites, sky shrines), never the sea. */
+    public static final TagKey<Biome> IS_HOLLOW_LAND = tag("is_hollow_land");
     public static final TagKey<Biome> HAS_MAMMOTHS = tag("has_mammoths");
     public static final TagKey<Biome> HAS_TERROR_BIRDS = tag("has_terror_birds");
     public static final TagKey<Biome> HAS_MEGATHERIUM = tag("has_megatherium");
@@ -85,6 +94,11 @@ public final class HollowBiomes {
     public static final float COLD = -0.45F;
     /** Temperature above this, if dry, is Badlands. */
     public static final float HOT = 0.12F;
+    /**
+     * Continentalness below this is the Still Sea (43a), whatever the weather. The land biomes keep everything above it
+     * exactly as they had it, and {@link HollowTerrain} only presses the land down below it.
+     */
+    public static final float SEA_CONTINENTS = -0.30F;
     /** Humidity above this is Jungle (if not cold or high). */
     public static final float WET = 0.02F;
 
@@ -94,7 +108,20 @@ public final class HollowBiomes {
 
     public static Climate.ParameterList<Holder<Biome>> parameters(HolderGetter<Biome> biomes) {
         Climate.Parameter any = Climate.Parameter.span(-1.0F, 1.0F);
-        Climate.Parameter low = Climate.Parameter.span(-1.0F, HIGHLAND_CONTINENTS);
+        List<Pair<Climate.ParameterPoint, Holder<Biome>>> list = lands(biomes, SEA_CONTINENTS);
+        list.add(entry(any, any, Climate.Parameter.span(-1.0F, SEA_CONTINENTS), biomes.getOrThrow(STILL_SEA)));
+        return new Climate.ParameterList<>(list);
+    }
+
+    /** The table as it was before the Still Sea (43a), land all the way down: the tests hold today's land against it. */
+    public static Climate.ParameterList<Holder<Biome>> parametersBeforeTheSea(HolderGetter<Biome> biomes) {
+        return new Climate.ParameterList<>(lands(biomes, -1.0F));
+    }
+
+    /** The four land biomes' entries, with the low ground starting at {@code lowFrom} in continentalness. */
+    private static List<Pair<Climate.ParameterPoint, Holder<Biome>>> lands(HolderGetter<Biome> biomes, float lowFrom) {
+        Climate.Parameter any = Climate.Parameter.span(-1.0F, 1.0F);
+        Climate.Parameter low = Climate.Parameter.span(lowFrom, HIGHLAND_CONTINENTS);
         Climate.Parameter high = Climate.Parameter.span(HIGHLAND_CONTINENTS, 1.0F);
         Climate.Parameter cold = Climate.Parameter.span(-1.0F, COLD);
         Climate.Parameter mild = Climate.Parameter.span(COLD, HOT);
@@ -108,7 +135,7 @@ public final class HollowBiomes {
         list.add(entry(warm, wet, low, biomes.getOrThrow(PRIMORDIAL_JUNGLE)));
         list.add(entry(hot, dry, low, biomes.getOrThrow(EMBER_BADLANDS)));
         list.add(entry(mild, dry, low, biomes.getOrThrow(CRYSTAL_STEPPES)));
-        return new Climate.ParameterList<>(list);
+        return list;
     }
 
     private static Pair<Climate.ParameterPoint, Holder<Biome>> entry(Climate.Parameter temperature, Climate.Parameter humidity,
@@ -126,6 +153,7 @@ public final class HollowBiomes {
         context.register(CRYSTAL_STEPPES, steppes(placed, carvers));
         context.register(EMBER_BADLANDS, badlands(placed, carvers));
         context.register(CONCAVIAN_HIGHLANDS, highlands(placed, carvers));
+        context.register(STILL_SEA, sea(placed, carvers));
     }
 
     private static Biome jungle(HolderGetter<PlacedFeature> placed, HolderGetter<WorldCarver> carvers) {
@@ -206,6 +234,28 @@ public final class HollowBiomes {
                 .modifyAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, ListModifier.append(), AmbientParticle.of(ParticleTypes.SNOWFLAKE, 0.003F))
                 .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.HIGHLANDS_AMBIENT, 0.004))
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_GROVE))
+                .mobSpawnSettings(mobs.build())
+                .generationSettings(gen.build())
+                .build();
+    }
+
+    // The Still Sea (43a): vanilla fish and squid for now (43b brings its own creatures). No farm animals on its beaches,
+    // no ambient particles (the air doesn't move), and a pale jade water that goes dark teal with depth.
+    private static Biome sea(HolderGetter<PlacedFeature> placed, HolderGetter<WorldCarver> carvers) {
+        MobSpawnSettings.Builder mobs = new MobSpawnSettings.Builder();
+        mobs.addSpawn(EntityTypes.COD, 12, 3, 6);
+        mobs.addSpawn(EntityTypes.SALMON, 8, 2, 5);
+        mobs.addSpawn(EntityTypes.TROPICAL_FISH, 10, 4, 8);
+        mobs.addSpawn(EntityTypes.SQUID, 4, 1, 3);
+        BiomeDefaultFeatures.commonSpawns(mobs);
+        BiomeGenerationSettings.Builder gen = common(placed, carvers);
+        HollowFeatures.sea(gen);
+        return base(0.8F, 0.5F, 0x4FB8A8, 0x9CBF7A, 0x8DB26C)
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xCFE0CC))
+                .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 420.0F)
+                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x12404A))
+                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.SEA_AMBIENT, 0.004))
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_LUSH_CAVES))
                 .mobSpawnSettings(mobs.build())
                 .generationSettings(gen.build())
                 .build();

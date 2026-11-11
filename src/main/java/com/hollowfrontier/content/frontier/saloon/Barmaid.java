@@ -162,6 +162,30 @@ public class Barmaid extends Townsfolk {
         offers.add(buy(gold, 1, ModItems.RYE_WHISKEY.get(), 6));
     }
 
+    // 35c: her offers are built once, so December's two drinks go on the list when trading opens in December and come off
+    // it when trading opens at any other time. Whatever she already has is left alone (its uses and prices keep).
+    @Override
+    public net.minecraft.world.InteractionResult mobInteract(Player player, net.minecraft.world.InteractionHand hand) {
+        if (level() instanceof ServerLevel server) {
+            seasonal(com.hollowfrontier.content.frontier.season.Season.isDecember(server));
+        }
+        return super.mobInteract(player, hand);
+    }
+
+    /** Puts December's drinks on her list, or takes them off (public so game tests can drive it). */
+    public void seasonal(boolean december) {
+        MerchantOffers offers = getOffers();
+        Item eggnog = ModItems.EGGNOG.get(), cider = ModItems.HOT_CIDER.get();
+        boolean pouring = offers.stream().anyMatch(o -> o.getResult().is(eggnog) || o.getResult().is(cider));
+        if (december && !pouring) {
+            Item copper = ModItems.COPPER_COIN.get();
+            offers.add(pour(copper, 2, eggnog));
+            offers.add(pour(copper, 2, cider));
+        } else if (!december && pouring) {
+            offers.removeIf(o -> o.getResult().is(eggnog) || o.getResult().is(cider));
+        }
+    }
+
     private MerchantOffer pour(ItemLike coin, int price, Item drink) {
         if (!getHostess().isSpecialty(drink)) {
             return buy(coin, price, drink, 1);

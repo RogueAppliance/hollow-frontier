@@ -136,6 +136,7 @@ public final class ModAdvancements {
         text("steam/laying_track", "Laying Track", "Buy rails from a railroad engineer");
         text("steam/long_haul", "Transcontinental (Nearly)", "Drive a steam handcar a thousand blocks without getting off");
         text("steam/airship", "Lighter Than Air", "Build an airship");
+        text("steam/submersible", "No Fire Below", "Build a Steam Submersible. It runs on steam it was given, not steam it makes");
         text("steam/above_the_clouds", "Above the Clouds", "Take an airship up past height 200");
         text("steam/true_north", "True North", "Take a bearing with a Polar Compass");
         text("steam/open_sesame", "Open Sesame", "Wake a Polar Gateway with a Polar Resonator and 2,000 mB of steam");
@@ -161,6 +162,16 @@ public final class ModAdvancements {
         text("hollow/shell_game", "Shell Game", "Get a scute off a glyptodon (a brush does it kindly)");
         text("hollow/shell_suit", "Armadillo Chic", "Get a whole suit of glyptodon shell armor");
         text("hollow/big_game","Big Game", "Bring down a mammoth, a terror bird, a megatherium and a glyptodon");
+        // 43: the Still Sea
+        text("hollow/still_sea", "No Tide Tables", "Reach the Still Sea, where nothing blows and nothing rains");
+        text("hollow/sea_cow", "Rendering", "Get blubber off a Great Sea Cow. It burns like coal once it's tallow");
+        text("hollow/lamp_gel", "Light Without Fire", "Get Lamp Gel from a Lampjelly. Mind the sting");
+        text("hollow/harpoon", "On the Line", "Make a Harpoon. What it hits, it holds");
+        text("hollow/plesiosaur_fetch", "Good Neck", "Give a Plesiosaur a fish and see what it brings up");
+        text("hollow/basilosaurus", "Deep Water", "Bring down a Basilosaurus");
+        text("hollow/symmes_landing", "Not Launching Her Again", "Find where the Symmes expedition drew up its boat");
+        text("hollow/drowned_quarter", "Under Glass", "Find a Drowned Quarter on the bed of the Still Sea");
+        text("hollow/sealed_hull", "Made for the Day the River Rose", "Take the Sealed Hull from a Drowned Quarter's vault");
         text("hollow/still_running", "Still Running", "Find a Gray field station that hasn't been abandoned");
         text("hollow/escaped_specimen", "Escaped Specimen", "Bring down a beast the Grays have tagged");
         text("hollow/on_the_signal", "On the Signal", "Pick up a Gray station's signal on a Signal Locator");
@@ -434,6 +445,10 @@ public final class ModAdvancements {
                     .addCriterion("airship", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.AIRSHIP.get()))
                     .rewards(AdvancementRewards.Builder.experience(50))
                     .save(output, id("steam/airship"));
+            display(airship, "steam/submersible", ModItems.STEAM_SUBMERSIBLE.get(), AdvancementType.GOAL, false) // 43c
+                    .addCriterion("submersible", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STEAM_SUBMERSIBLE.get()))
+                    .rewards(AdvancementRewards.Builder.experience(50))
+                    .save(output, id("steam/submersible"));
             display(airship, "steam/above_the_clouds", ModItems.AIRSHIP_ENVELOPE.get(), AdvancementType.CHALLENGE, false)
                     .addCriterion("altitude", ModCriteria.AIRSHIP_ALTITUDE.get().atLeast(200))
                     .rewards(AdvancementRewards.Builder.experience(50))
@@ -513,6 +528,32 @@ public final class ModAdvancements {
                 bigGame.addCriterion(beast.getId().getPath(), KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entities, beast.get())));
             }
             bigGame.save(output, id("hollow/big_game"));
+            // 43: the Still Sea, its creatures and the Harpoon (a side road: not part of World Within or Big Game)
+            AdvancementHolder sea = task(root, "hollow/still_sea", Items.KELP)
+                    .addCriterion("visited", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(HollowBiomes.STILL_SEA))))
+                    .save(output, id("hollow/still_sea"));
+            task(sea, "hollow/sea_cow", ModItems.BLUBBER.get())
+                    .addCriterion("blubber", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.BLUBBER.get()))
+                    .save(output, id("hollow/sea_cow"));
+            task(sea, "hollow/lamp_gel", ModItems.LAMP_GEL.get())
+                    .addCriterion("gel", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.LAMP_GEL.get()))
+                    .save(output, id("hollow/lamp_gel"));
+            task(sea, "hollow/plesiosaur_fetch", Items.COD)
+                    .addCriterion("fetched", ModCriteria.PLESIOSAUR_FETCHED.get().criterion())
+                    .save(output, id("hollow/plesiosaur_fetch"));
+            AdvancementHolder harpoon = task(sea, "hollow/harpoon", ModItems.HARPOON.get())
+                    .addCriterion("harpoon", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.HARPOON.get()))
+                    .save(output, id("hollow/harpoon"));
+            display(harpoon, "hollow/basilosaurus", ModItems.BASILOSAUR_TOOTH.get(), AdvancementType.GOAL, false)
+                    .addCriterion("basilosaurus", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entities, ModEntities.BASILOSAURUS.get())))
+                    .save(output, id("hollow/basilosaurus"));
+            // 43d: the sea's sites, and what the Quarter's vault holds
+            found(sea, "hollow/symmes_landing", Items.SPRUCE_BOAT, structures.getOrThrow(ModStructures.SYMMES_LANDING));
+            found(sea, "hollow/drowned_quarter", ModItems.JELLY_LAMP.get(), structures.getOrThrow(ModStructures.DROWNED_QUARTER));
+            display(sea, "hollow/sealed_hull", ModItems.SEALED_HULL.get(), AdvancementType.CHALLENGE, true)
+                    .addCriterion("hull", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SEALED_HULL.get()))
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("hollow/sealed_hull"));
             // The Gray experiments (10b)
             found(root, "hollow/still_running", Items.SEA_LANTERN, structures.getOrThrow(ModStructures.GRAY_STATION));
             AdvancementHolder specimen = task(bird, "hollow/escaped_specimen", ModItems.GRAY_TECH_FRAGMENT.get())

@@ -36,7 +36,7 @@
           "biome": "hollowfrontier:concavian_highlands",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -0.3,
               0.38
             ],
             "depth": 0.0,
@@ -63,7 +63,7 @@
           "biome": "hollowfrontier:primordial_jungle",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -0.3,
               0.38
             ],
             "depth": 0.0,
@@ -90,7 +90,7 @@
           "biome": "hollowfrontier:ember_badlands",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -0.3,
               0.38
             ],
             "depth": 0.0,
@@ -117,7 +117,7 @@
           "biome": "hollowfrontier:crystal_steppes",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -0.3,
               0.38
             ],
             "depth": 0.0,
@@ -133,6 +133,33 @@
             "temperature": [
               -0.45,
               0.12
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "hollowfrontier:still_sea",
+          "parameters": {
+            "continentalness": [
+              -1.0,
+              -0.3
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              1.0
             ],
             "weirdness": [
               -1.0,

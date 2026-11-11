@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "hollowfrontier:harpoon",
+    "hollowfrontier:basilosaur_tooth",
+    "hollowfrontier:basilosaur_tooth"
+  ],
+  "result": {
+    "id": "hollowfrontier:toothed_harpoon"
+  }
+}

@@ -297,10 +297,29 @@ public class Lawman extends PathfinderMob implements GeoEntity, GunWielder {
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        // 35d: over Christmas a sheriff lets one small fine go, once a year (one star only: at two the law still shoots)
+        if (getTarget() == null && player instanceof ServerPlayer wanted && waiveFine(wanted)) {
+            getLookControl().setLookAt(player);
+            return InteractionResult.SUCCESS;
+        }
         if (getTarget() == null && player instanceof ServerPlayer serverPlayer && Chatter.talk(this, serverPlayer) != null) {
             getLookControl().setLookAt(player);
         }
         return InteractionResult.SUCCESS;
+    }
+
+    /** The Christmas truce's other half: a sheriff clears a one-star player's name for nothing, once a calendar year. */
+    public boolean waiveFine(ServerPlayer player) {
+        int year = com.hollowfrontier.content.frontier.season.Season.year();
+        if (getRank() != Rank.SHERIFF || !com.hollowfrontier.content.frontier.season.Season.truce(level())
+                || com.hollowfrontier.content.frontier.law.Wanted.stars(player) != 1
+                || player.getData(com.hollowfrontier.registry.ModAttachments.FINE_WAIVED_YEAR.get()) == year) {
+            return false;
+        }
+        player.setData(com.hollowfrontier.registry.ModAttachments.FINE_WAIVED_YEAR.get(), year);
+        com.hollowfrontier.content.frontier.law.Wanted.clear(player);
+        player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("message.hollowfrontier.truce.waived"));
+        return true;
     }
 
     // Sights set on a player: he calls it out.

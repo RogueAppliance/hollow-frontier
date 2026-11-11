@@ -9,6 +9,8 @@ import com.hollowfrontier.worldgen.feature.AshVentFeature;
 import com.hollowfrontier.worldgen.feature.CrystalOutcropFeature;
 import com.hollowfrontier.worldgen.feature.CycadFeature;
 import com.hollowfrontier.worldgen.feature.GiantFernFeature;
+import com.hollowfrontier.worldgen.feature.SeaGrassFeature;
+import com.hollowfrontier.worldgen.feature.SeaKelpFeature;
 import com.hollowfrontier.worldgen.feature.StandingStoneFeature;
 
 import net.minecraft.core.Direction;
@@ -41,6 +43,7 @@ import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.OffsetPlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.NoiseBasedCountPlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraft.world.level.material.Fluids;
@@ -118,6 +121,15 @@ public final class HollowFeatures {
     public static final ResourceKey<PlacedFeature> PHLOGISTON_ORE = placed("ore_phlogiston");
     public static final ResourceKey<PlacedFeature> PHLOGISTON_ORE_CRYSTAL = placed("ore_phlogiston_crystal");
 
+    // 43a: the Still Sea's bed. Vanilla's kelp and seagrass find the bed by heightmap, which here is the crust, so these are ours.
+    public static final ResourceKey<Feature> SEA_KELP = feature("sea_kelp");
+    public static final ResourceKey<Feature> SEA_GRASS = feature("sea_grass");
+    public static final ResourceKey<PlacedFeature> SEA_KELP_FORESTS = placed("sea_kelp_forests");
+    public static final ResourceKey<PlacedFeature> SEA_GRASS_MEADOWS = placed("sea_grass_meadows");
+    /** Seabed placements start just under the surface and go down through the water ({@link SeabedScanPlacement}). */
+    public static final PlacementModifier UNDER_THE_SURFACE = HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(HollowEarth.SEA_LEVEL - 1)));
+    public static final PlacementModifier TO_SEABED = new SeabedScanPlacement(HollowEarth.SEA_LEVEL - HollowEarth.MIN_Y);
+
     private static ResourceKey<Feature> feature(String name) {
         return ResourceKey.create(Registries.FEATURE, HollowFrontier.id("hollow_earth/" + name));
     }
@@ -160,6 +172,13 @@ public final class HollowFeatures {
         falls(gen, WATERFALLS_RARE);
     }
 
+    // The Still Sea (43a): kelp forests and seagrass on the bed, the usual ores under it, and falls pouring in from the crust
+    static void sea(BiomeGenerationSettings.Builder gen) {
+        ores(gen, STARSTEEL_ORE, PHLOGISTON_ORE);
+        vegetation(gen, SEA_KELP_FORESTS, SEA_GRASS_MEADOWS);
+        falls(gen, WATERFALLS_COMMON);
+    }
+
     @SafeVarargs
     private static void ores(BiomeGenerationSettings.Builder gen, ResourceKey<PlacedFeature>... ores) {
         for (ResourceKey<PlacedFeature> ore : ores) {
@@ -191,6 +210,8 @@ public final class HollowFeatures {
         context.register(ASH_VENT, AshVentFeature.INSTANCE);
         context.register(STANDING_STONE, StandingStoneFeature.INSTANCE);
         context.register(GRAY_RELAY, com.hollowfrontier.worldgen.feature.GrayRelayFeature.INSTANCE);
+        context.register(SEA_KELP, SeaKelpFeature.INSTANCE);
+        context.register(SEA_GRASS, SeaGrassFeature.INSTANCE);
         RuleTest stone = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslate = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         context.register(ORE_STARSTEEL, new OreFeature(List.of(
@@ -236,6 +257,12 @@ public final class HollowFeatures {
         context.register(HIGHLAND_STANDING_STONES, onGround(features.getOrThrow(STANDING_STONE), RarityFilter.onAverageOnceEvery(5)));
         context.register(CEILING_GRAY_RELAYS, new PlacedFeature(features.getOrThrow(GRAY_RELAY), List.of(RarityFilter.onAverageOnceEvery(GRAY_RELAY_RARITY),
                 InSquarePlacement.spread(), MID_AIR, TO_CEILING, BiomeFilter.biome(), ClearOfSitesFilter.INSTANCE)));
+        // The Still Sea's bed (43a): kelp in forests (thick in places and absent in others, by noise, as vanilla's), seagrass
+        // all through the shallows. Each feature keeps to its own depth.
+        context.register(SEA_KELP_FORESTS, new PlacedFeature(features.getOrThrow(SEA_KELP), List.of(NoiseBasedCountPlacement.of(90, 80.0, 0.0),
+                InSquarePlacement.spread(), UNDER_THE_SURFACE, TO_SEABED, BiomeFilter.biome())));
+        context.register(SEA_GRASS_MEADOWS, new PlacedFeature(features.getOrThrow(SEA_GRASS), List.of(CountPlacement.of(40),
+                InSquarePlacement.spread(), UNDER_THE_SURFACE, TO_SEABED, BiomeFilter.biome())));
         // Starsteel deep everywhere (a little richer than diamond), and again in the red rock of the Badlands; phlogiston scarcer
         // everywhere, and common under the crystal country (Steppes and Highlands), where it comes up nearer the surface
         context.register(STARSTEEL_ORE, ore(features.getOrThrow(ORE_STARSTEEL), 8, HeightRangePlacement.triangle(VerticalAnchor.absolute(-56), VerticalAnchor.absolute(56))));

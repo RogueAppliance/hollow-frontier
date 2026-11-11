@@ -1,0 +1,37 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"misc.idle": {
+			"loop": true,
+			"animation_length": 6.0,
+			"bones": {
+				"body": {"position": [0, "math.sin(query.anim_time * 60) * 0.8", 0]},
+				"head": {"rotation": ["math.sin(query.anim_time * 60) * 3", 0, 0]},
+				"tail": {"rotation": ["math.sin(query.anim_time * 60) * 5", 0, 0]},
+				"fluke": {"rotation": ["math.sin(query.anim_time * 60 - 60) * 8", 0, 0]},
+				"flipper_left": {"rotation": [0, 0, "-12 + math.sin(query.anim_time * 60) * 6"]},
+				"flipper_right": {"rotation": [0, 0, "12 - math.sin(query.anim_time * 60) * 6"]}
+			}
+		},
+		"move.swim": {
+			"loop": true,
+			"animation_length": 3.0,
+			"bones": {
+				"body": {"rotation": ["math.sin(query.anim_time * 120) * 2", 0, 0]},
+				"head": {"rotation": ["math.sin(query.anim_time * 120 + 60) * 3", 0, 0]},
+				"tail": {"rotation": ["math.sin(query.anim_time * 120 - 60) * 14", 0, 0]},
+				"fluke": {"rotation": ["math.sin(query.anim_time * 120 - 130) * 22", 0, 0]},
+				"flipper_left": {"rotation": ["math.sin(query.anim_time * 120) * 10", 0, "-25 + math.sin(query.anim_time * 120) * 8"]},
+				"flipper_right": {"rotation": ["math.sin(query.anim_time * 120) * 10", 0, "25 - math.sin(query.anim_time * 120) * 8"]}
+			}
+		},
+		"misc.graze": {
+			"loop": true,
+			"animation_length": 1.0,
+			"bones": {
+				"head": {"rotation": ["22 + math.sin(query.anim_time * 720) * 5", 0, 0]},
+				"snout": {"rotation": ["math.sin(query.anim_time * 720) * 6", 0, 0]}
+			}
+		}
+	}
+}

@@ -28,6 +28,9 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
  * <li><b>Floating islands</b>: rare flat-topped chunks of crust drifting a little under the ceiling, with rocky cones
  *     beneath.</li>
  * </ul>
+ * Where continentalness is lowest the land is pressed down under sea level into the bed of the <b>Still Sea</b> (43a), which
+ * the generator's sea level then fills.
+ * <p>
  * Caves come from vanilla carvers (in the biomes), not from noise, which keeps the crust and islands solid.
  */
 public final class HollowTerrain {
@@ -48,6 +51,11 @@ public final class HollowTerrain {
     public static final ResourceKey<NormalNoise> ISLANDS = noise("islands");
     public static final ResourceKey<NormalNoise> ISLAND_FIELDS = noise("island_fields");
 
+    /** How far below the sea's threshold (in continentalness) the shore takes to come down to the beach. */
+    public static final float SEA_SHORE = 0.04F;
+    /** How far below the threshold the bed reaches its full depth. */
+    public static final float SEA_SHELF = 0.22F;
+
     // ---------------------------------------------------------------- named density functions
 
     public static final ResourceKey<DensityFunction> F_TEMPERATURE = function("temperature");
@@ -55,7 +63,9 @@ public final class HollowTerrain {
     public static final ResourceKey<DensityFunction> F_CONTINENTS = function("continents");
     public static final ResourceKey<DensityFunction> F_EROSION = function("erosion");
     public static final ResourceKey<DensityFunction> F_RIDGES = function("ridges");
-    /** The land's height in blocks at x/z. */
+    /** The land's height in blocks at x/z as it was before the sea (43a): what {@link #HEIGHT} is everywhere the sea isn't. */
+    public static final ResourceKey<DensityFunction> LAND_HEIGHT = function("land_height");
+    /** The land's height in blocks at x/z, the Still Sea's bed included. */
     public static final ResourceKey<DensityFunction> HEIGHT = function("height");
     /** The crust's underside in blocks at x/z (spires included). */
     public static final ResourceKey<DensityFunction> CEILING_BOTTOM = function("ceiling_bottom");
@@ -130,7 +140,17 @@ public final class HollowTerrain {
         land = DensityFunctions.lerp(river, land, DensityFunctions.min(land, DensityFunctions.constant(HollowEarth.SEA_LEVEL - 5.0F)));
         // Nothing climbs into the crust: above 150 the ground rises at 40% (the tallest peaks end around 180)
         land = DensityFunctions.min(land, land.sub(150.0F).mul(0.4F).add(150.0F));
-        DensityFunction height = register(context, HEIGHT, DensityFunctions.cache(land));
+        DensityFunction landHeight = register(context, LAND_HEIGHT, DensityFunctions.cache(land));
+
+        // ---- the Still Sea (43a): only where continentalness is under the sea's threshold, so the land biomes keep their
+        // shape exactly. A short shore brings whatever stands at the edge (hills, cold uplands) down to a beach just over
+        // the water; then a long shelf lowers the bed to a rolling floor 15 to 35 blocks under the surface.
+        DensityFunction shore = DensityFunctions.clampedMap(c, HollowBiomes.SEA_CONTINENTS - SEA_SHORE, HollowBiomes.SEA_CONTINENTS, 1.0F, 0.0F);
+        DensityFunction shelf = DensityFunctions.clampedMap(c, HollowBiomes.SEA_CONTINENTS - SEA_SHELF, HollowBiomes.SEA_CONTINENTS - 0.02F, 1.0F, 0.0F);
+        DensityFunction seabed = DensityFunctions.clampedMap(r, -1.0F, 1.0F, HollowEarth.SEA_LEVEL - 35.0F, HollowEarth.SEA_LEVEL - 15.0F);
+        DensityFunction coast = DensityFunctions.lerp(shore, landHeight, DensityFunctions.min(landHeight, DensityFunctions.constant(HollowEarth.SEA_LEVEL + 1.5F)));
+        DensityFunction withSea = DensityFunctions.lerp(shelf, coast, DensityFunctions.min(coast, seabed));
+        DensityFunction height = register(context, HEIGHT, DensityFunctions.cache(withSea));
 
         // ---- the crust's underside, in blocks
         DensityFunction sway = flat(shiftX, shiftZ, noises.getOrThrow(CEILING)).mul((float) HollowEarth.CEILING_SWAY);

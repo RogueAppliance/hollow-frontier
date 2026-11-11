@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blubber": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hollowfrontier:blubber"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "hollowfrontier:tallow_from_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_blubber"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hollowfrontier:tallow_from_campfire_cooking"
+    ]
+  }
+}

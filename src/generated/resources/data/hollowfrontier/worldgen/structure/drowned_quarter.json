@@ -1,0 +1,15 @@
+{
+  "type": "hollowfrontier:hollow_site",
+  "biomes": "hollowfrontier:still_sea",
+  "max_slope": 6,
+  "seabed": true,
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "start_pool": "hollowfrontier:drowned_quarter",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

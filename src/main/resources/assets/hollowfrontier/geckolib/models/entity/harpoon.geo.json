@@ -1,0 +1,40 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.hollowfrontier.harpoon",
+				"texture_width": 64,
+				"texture_height": 32,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2,
+				"visible_bounds_offset": [0, 0, 0]
+			},
+			"bones": [
+				{
+					"name": "harpoon",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-0.5, -0.5, -12], "size": [1, 1, 24], "uv": [0, 0]},
+						{"origin": [-1, -1, -17], "size": [2, 2, 5], "uv": [0, 25]},
+						{"origin": [-2.5, -0.5, -15], "size": [5, 1, 2], "uv": [16, 26]},
+						{"origin": [-0.5, -2.5, -15], "size": [1, 5, 2], "uv": [32, 25]},
+						{"origin": [-1, -1, 12], "size": [2, 2, 1], "uv": [40, 25]},
+						{"origin": [-1.5, -1.5, 9], "size": [3, 3, 2], "uv": [48, 25]}
+					]
+				},
+				{
+					"name": "teeth",
+					"parent": "harpoon",
+					"pivot": [0, 0, -15],
+					"cubes": [
+						{"origin": [1.5, -0.5, -13], "size": [1, 1, 2], "uv": [52, 0]},
+						{"origin": [-2.5, -0.5, -13], "size": [1, 1, 2], "uv": [52, 0]},
+						{"origin": [-0.5, 1.5, -13], "size": [1, 1, 2], "uv": [52, 0]},
+						{"origin": [-0.5, -2.5, -13], "size": [1, 1, 2], "uv": [52, 0]}
+					]
+				}
+			]
+		}
+	]
+}

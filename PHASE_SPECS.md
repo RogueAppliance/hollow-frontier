@@ -176,3 +176,21 @@ Phase 9 onward (rewritten 2026-10-28): each entry is one session's job. Start a 
     - **Advancement:** "Hold On to Your Hat" (lose a hat to a dust devil).
     - **Left for later:** wrong-way devils hiding a Gray probe (a mystery sign), a Glint Devil on the Crystal Steppes, and a full dust storm (a haboob: fog, folk indoors, outlaws raiding under its cover), which would be its own phase.
     - *Done when:* devils spawn only in their biomes and weather; they lift and fling items, small mobs and players without fall damage, blow hats off, spook unshod horses and drop their loot; Ash Devils set fires; the Gazette and Chatter lines show up when forced; runPhoto shows a devil in the desert, the badlands and the Ember Badlands; game tests cover the spawn rules, lifting, the hat, the horseshoes and the Ash Devil's fire.
+
+## Phase 35: a frontier December (specced 2026-11-05, built 2026-11-10)
+
+Content that comes on by the real date, and leaves by itself. To reach players in its first year it had to be uploaded by late November.
+
+**Ground rules**
+- **The date is the server's.** `content/frontier/season/Season` reads the server's local date: `isDecember(level)` for all of December, `isChristmas(level)` for Dec 24-26 (vanilla's Christmas chest window). A per-world config, `hollowfrontier-season-server.toml`, holds `mode` (`auto`, `always`, `never`; default `auto`) and `truce` (default true). Tests set the date through a clock seam in `Season`.
+- **No client date and no new payloads.** Everything reaches the client through paths that already exist: blockstates, entities, chatter, the Gazette, the piano.
+- **Nothing to clean up.** Every world change undoes itself in January. Items players already have stay and keep working.
+- **Old worlds get all of it.** No worldgen changes, so nothing depends on a chunk being new.
+- **No snow.** Weather and biomes stay as they are. Desert towns get a dry Christmas, and folk remark on it.
+- **Tone:** deadpan, from how the frontier reacts. The story stays serious. The figure with the sleigh is never named, and nothing quotes a later work.
+
+**Parts**
+- **35a The season and the lamps.** `Season` and its config. Town Lamps get a `FESTIVE` property, a sprig and red ribbon on the existing lit and unlit models, and flip it on the random tick that already handles `LIT`.
+- **35b The town tree and the parcel.** A GeckoLib entity, not a block, about seven blocks of spruce with tin stars and candles (a glow mask at night), spawned by `TownPresence.update` on clear ground nearest the town's rally point; a Christmas Parcel from the postmaster, one per player per calendar year, holding coins, cartridges, caps, coffee and a Fruitcake.
+- **35c The saloon.** Eggnog (Absorption, 1 Tipsy) and Hot Cider (Regeneration, thaws freezing, no Tipsy), on the barmaids' lists in December only; three public-domain carols for the Saloon Piano, a carol every other tune.
+- **35d Words and the truce.** `Fact.DECEMBER` and `Fact.CHRISTMAS`; about 30 chatter lines, a few exchanges and Gazette pieces (the sleigh, the Gray at the church social, the Kindled, the jail); no raid starts during Christmas with `truce` on, and a sheriff waives one one-star fine per player per Christmas.

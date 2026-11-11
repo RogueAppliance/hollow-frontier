@@ -4,6 +4,7 @@ import com.hollowfrontier.HollowFrontier;
 import com.hollowfrontier.content.frontier.bounty.BountyBoardEntity;
 import com.hollowfrontier.content.steam.SteamHandcar;
 import com.hollowfrontier.content.steam.airship.Airship;
+import com.hollowfrontier.content.steam.submersible.SteamSubmersible;
 import com.hollowfrontier.content.frontier.furniture.SeatEntity;
 import com.hollowfrontier.content.frontier.gear.DynamiteEntity;
 import com.hollowfrontier.content.frontier.gear.LassoEntity;
@@ -26,6 +27,12 @@ import com.hollowfrontier.content.hollow.creature.GlassbackHare;
 import com.hollowfrontier.content.hollow.creature.PaleRaven;
 import com.hollowfrontier.content.hollow.gray.GraySentinel;
 import com.hollowfrontier.content.hollow.megafauna.Glyptodon;
+import com.hollowfrontier.content.hollow.sea.Basilosaurus;
+import com.hollowfrontier.content.hollow.sea.GreatSeaCow;
+import com.hollowfrontier.content.hollow.sea.HarpoonEntity;
+import com.hollowfrontier.content.hollow.sea.Lampjelly;
+import com.hollowfrontier.content.hollow.sea.Plesiosaur;
+import com.hollowfrontier.content.hollow.sea.SeaLife;
 import com.hollowfrontier.content.hollow.megafauna.Megatherium;
 import com.hollowfrontier.content.hollow.megafauna.TerrorBird;
 import com.hollowfrontier.content.hollow.megafauna.WoollyMammoth;
@@ -127,6 +134,37 @@ public final class ModEntities {
                     .eyeHeight(0.8F)
                     .clientTrackingRange(10)
                     .build(key(id)));
+    // 43b: the Still Sea's creatures (placed by SeaLife's own spawner, by depth), and the thrown Harpoon
+    public static final DeferredHolder<EntityType<?>, EntityType<GreatSeaCow>> GREAT_SEA_COW = ENTITIES.register("great_sea_cow",
+            id -> EntityType.Builder.<GreatSeaCow>of(GreatSeaCow::new, MobCategory.CREATURE)
+                    .sized(2.2F, 1.5F)
+                    .eyeHeight(0.9F)
+                    .clientTrackingRange(10)
+                    .build(key(id)));
+    public static final DeferredHolder<EntityType<?>, EntityType<Basilosaurus>> BASILOSAURUS = ENTITIES.register("basilosaurus",
+            id -> EntityType.Builder.<Basilosaurus>of(Basilosaurus::new, MobCategory.WATER_CREATURE)
+                    .sized(2.6F, 1.8F)
+                    .eyeHeight(1.0F)
+                    .clientTrackingRange(12)
+                    .build(key(id)));
+    public static final DeferredHolder<EntityType<?>, EntityType<Plesiosaur>> PLESIOSAUR = ENTITIES.register("plesiosaur",
+            id -> EntityType.Builder.<Plesiosaur>of(Plesiosaur::new, MobCategory.WATER_CREATURE)
+                    .sized(2.0F, 1.3F)
+                    .eyeHeight(1.1F)
+                    .clientTrackingRange(10)
+                    .build(key(id)));
+    public static final DeferredHolder<EntityType<?>, EntityType<Lampjelly>> LAMPJELLY = ENTITIES.register("lampjelly",
+            id -> EntityType.Builder.<Lampjelly>of(Lampjelly::new, MobCategory.WATER_AMBIENT)
+                    .sized(0.6F, 0.7F)
+                    .clientTrackingRange(8)
+                    .build(key(id)));
+    public static final DeferredHolder<EntityType<?>, EntityType<HarpoonEntity>> HARPOON = ENTITIES.register("harpoon",
+            id -> EntityType.Builder.<HarpoonEntity>of(HarpoonEntity::new, MobCategory.MISC)
+                    .noLootTable()
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .updateInterval(2)
+                    .build(key(id)));
     // 9b3: the watcher over the abandoned Gray field lab (placed by the structure only)
     public static final DeferredHolder<EntityType<?>, EntityType<GrayProbe>> GRAY_PROBE = ENTITIES.register("gray_probe",
             id -> EntityType.Builder.<GrayProbe>of(GrayProbe::new, MobCategory.MISC)
@@ -154,6 +192,14 @@ public final class ModEntities {
             id -> EntityType.Builder.<CattleCarcass>of(CattleCarcass::new, MobCategory.MISC)
                     .sized(1.6F, 0.8F)
                     .clientTrackingRange(8)
+                    .build(key(id)));
+    // 35b: a town's December tree. Sized for the eye (so it isn't culled with its foot off screen); it has no collision
+    public static final DeferredHolder<EntityType<?>, EntityType<com.hollowfrontier.content.frontier.season.TownTree>> TOWN_TREE = ENTITIES.register("town_tree",
+            id -> EntityType.Builder.<com.hollowfrontier.content.frontier.season.TownTree>of(com.hollowfrontier.content.frontier.season.TownTree::new, MobCategory.MISC)
+                    .noLootTable()
+                    .sized(3.0F, 7.0F)
+                    .clientTrackingRange(10)
+                    .updateInterval(20)
                     .build(key(id)));
     // 11b: the men in black dusters (come by event only: after a mystery, or hunting a marked player)
     public static final DeferredHolder<EntityType<?>, EntityType<ManInBlack>> MAN_IN_BLACK = ENTITIES.register("man_in_black",
@@ -303,6 +349,14 @@ public final class ModEntities {
                     .passengerAttachments(0.1875F)
                     .clientTrackingRange(8)
                     .build(key(id)));
+    // 43c: the Steam Submersible. The hit box is the hull amidships and the crew under the dome.
+    public static final DeferredHolder<EntityType<?>, EntityType<SteamSubmersible>> STEAM_SUBMERSIBLE = ENTITIES.register("steam_submersible",
+            id -> EntityType.Builder.<SteamSubmersible>of(SteamSubmersible::new, MobCategory.MISC)
+                    .noLootTable()
+                    .sized(1.6F, 1.9F)
+                    .clientTrackingRange(10)
+                    .updateInterval(2)
+                    .build(key(id)));
     // Airship: the hit box is the gondola and the lower half of the envelope (the rest of the envelope is only drawn).
     public static final DeferredHolder<EntityType<?>, EntityType<Airship>> AIRSHIP = ENTITIES.register("airship",
             id -> EntityType.Builder.<Airship>of(Airship::new, MobCategory.MISC)
@@ -342,6 +396,10 @@ public final class ModEntities {
         event.put(TERROR_BIRD.get(), TerrorBird.createAttributes().build());
         event.put(MEGATHERIUM.get(), Megatherium.createAttributes().build());
         event.put(GLYPTODON.get(), Glyptodon.createAttributes().build());
+        event.put(GREAT_SEA_COW.get(), GreatSeaCow.createAttributes().build());
+        event.put(BASILOSAURUS.get(), Basilosaurus.createAttributes().build());
+        event.put(PLESIOSAUR.get(), Plesiosaur.createAttributes().build());
+        event.put(LAMPJELLY.get(), Lampjelly.createAttributes().build());
         event.put(GRAY_SENTINEL.get(), GraySentinel.createAttributes().build());
         event.put(MAN_IN_BLACK.get(), ManInBlack.createAttributes().build());
         event.put(KINDLED.get(), Kindled.createAttributes().build());
@@ -381,5 +439,14 @@ public final class ModEntities {
                 GrayWarden::checkSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(GLYPTODON.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Glyptodon::checkSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        // 43b: the sea's creatures, in water (SeaLife places them; this is for whatever else asks)
+        event.register(GREAT_SEA_COW.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SeaLife::inWater, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(BASILOSAURUS.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SeaLife::inWater, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(PLESIOSAUR.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SeaLife::inWater, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(LAMPJELLY.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SeaLife::inWater, RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 }

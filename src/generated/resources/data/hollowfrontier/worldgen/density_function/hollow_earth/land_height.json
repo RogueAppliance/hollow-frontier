@@ -1,0 +1,1858 @@
+{
+  "type": "minecraft:cache",
+  "input": {
+    "type": "minecraft:min",
+    "left": {
+      "type": "minecraft:lerp",
+      "alpha": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:add",
+            "left": {
+              "type": "minecraft:mul",
+              "left": {
+                "type": "minecraft:clamp",
+                "input": {
+                  "type": "minecraft:abs",
+                  "input": {
+                    "type": "minecraft:noise",
+                    "noise": "hollowfrontier:hollow_earth/rivers",
+                    "shift_x": "minecraft:shift_x",
+                    "shift_z": "minecraft:shift_z",
+                    "xz_scale": 0.25,
+                    "y_scale": 0.0
+                  }
+                },
+                "max": 0.07,
+                "min": 0.02
+              },
+              "right": -20.0
+            },
+            "right": 1.4
+          },
+          "right": {
+            "type": "minecraft:sub",
+            "left": 1.0,
+            "right": {
+              "type": "minecraft:cache",
+              "input": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:clamp",
+                        "input": "hollowfrontier:hollow_earth/temperature",
+                        "max": 0.19999999,
+                        "min": 0.099999994
+                      },
+                      "right": 10.000001
+                    },
+                    "right": -1.0
+                  },
+                  "right": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:clamp",
+                        "input": "hollowfrontier:hollow_earth/humidity",
+                        "max": 0.04,
+                        "min": -0.08
+                      },
+                      "right": -8.333334
+                    },
+                    "right": 0.3333333
+                  }
+                },
+                "right": {
+                  "type": "minecraft:sub",
+                  "left": 1.0,
+                  "right": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:clamp",
+                        "input": "hollowfrontier:hollow_earth/continents",
+                        "max": 0.73,
+                        "min": 0.28
+                      },
+                      "right": 2.222222
+                    },
+                    "right": -0.6222222
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "type": "minecraft:sub",
+          "left": 1.0,
+          "right": {
+            "type": "minecraft:mul",
+            "left": {
+              "type": "minecraft:add",
+              "left": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:clamp",
+                  "input": "hollowfrontier:hollow_earth/continents",
+                  "max": 0.73,
+                  "min": 0.28
+                },
+                "right": 2.222222
+              },
+              "right": -0.6222222
+            },
+            "right": 0.6
+          }
+        }
+      },
+      "first": {
+        "type": "minecraft:lerp",
+        "alpha": {
+          "type": "minecraft:cache",
+          "input": {
+            "type": "minecraft:mul",
+            "left": {
+              "type": "minecraft:mul",
+              "left": {
+                "type": "minecraft:add",
+                "left": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:clamp",
+                    "input": "hollowfrontier:hollow_earth/temperature",
+                    "max": 0.19999999,
+                    "min": 0.099999994
+                  },
+                  "right": 10.000001
+                },
+                "right": -1.0
+              },
+              "right": {
+                "type": "minecraft:add",
+                "left": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:clamp",
+                    "input": "hollowfrontier:hollow_earth/humidity",
+                    "max": 0.04,
+                    "min": -0.08
+                  },
+                  "right": -8.333334
+                },
+                "right": 0.3333333
+              }
+            },
+            "right": {
+              "type": "minecraft:sub",
+              "left": 1.0,
+              "right": {
+                "type": "minecraft:add",
+                "left": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:clamp",
+                    "input": "hollowfrontier:hollow_earth/continents",
+                    "max": 0.73,
+                    "min": 0.28
+                  },
+                  "right": 2.222222
+                },
+                "right": -0.6222222
+              }
+            }
+          }
+        },
+        "first": {
+          "type": "minecraft:add",
+          "left": {
+            "type": "minecraft:add",
+            "left": {
+              "type": "minecraft:add",
+              "left": 72.0,
+              "right": {
+                "type": "minecraft:mul",
+                "left": "hollowfrontier:hollow_earth/continents",
+                "right": 30.0
+              }
+            },
+            "right": {
+              "type": "minecraft:mul",
+              "left": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:clamp",
+                      "input": "hollowfrontier:hollow_earth/erosion",
+                      "max": 0.6,
+                      "min": -0.6
+                    },
+                    "right": -31.666666
+                  },
+                  "right": 25.0
+                },
+                "right": {
+                  "type": "minecraft:sub",
+                  "left": 1.0,
+                  "right": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/humidity",
+                              "max": 0.04,
+                              "min": -0.08
+                            },
+                            "right": -8.333334
+                          },
+                          "right": 0.3333333
+                        },
+                        "right": {
+                          "type": "minecraft:sub",
+                          "left": 1.0,
+                          "right": {
+                            "type": "minecraft:add",
+                            "left": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:clamp",
+                                "input": "hollowfrontier:hollow_earth/temperature",
+                                "max": 0.19999999,
+                                "min": 0.099999994
+                              },
+                              "right": 10.000001
+                            },
+                            "right": -1.0
+                          }
+                        }
+                      },
+                      "right": {
+                        "type": "minecraft:sub",
+                        "left": 1.0,
+                        "right": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/temperature",
+                              "max": -0.35,
+                              "min": -0.75
+                            },
+                            "right": -2.5
+                          },
+                          "right": -0.875
+                        }
+                      }
+                    },
+                    "right": 0.65
+                  }
+                }
+              },
+              "right": "hollowfrontier:hollow_earth/ridges"
+            }
+          },
+          "right": {
+            "type": "minecraft:mul",
+            "left": {
+              "type": "minecraft:max",
+              "left": {
+                "type": "minecraft:add",
+                "left": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:clamp",
+                    "input": "hollowfrontier:hollow_earth/continents",
+                    "max": 0.73,
+                    "min": 0.28
+                  },
+                  "right": 2.222222
+                },
+                "right": -0.6222222
+              },
+              "right": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:clamp",
+                      "input": "hollowfrontier:hollow_earth/temperature",
+                      "max": -0.35,
+                      "min": -0.75
+                    },
+                    "right": -2.5
+                  },
+                  "right": -0.875
+                },
+                "right": 0.6
+              }
+            },
+            "right": {
+              "type": "minecraft:add",
+              "left": 70.0,
+              "right": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:abs",
+                  "input": "hollowfrontier:hollow_earth/ridges"
+                },
+                "right": 42.0
+              }
+            }
+          }
+        },
+        "second": {
+          "type": "minecraft:add",
+          "left": {
+            "type": "minecraft:add",
+            "left": {
+              "type": "minecraft:mul",
+              "left": {
+                "type": "minecraft:floor",
+                "input": {
+                  "type": "minecraft:div",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:add",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": 72.0,
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": "hollowfrontier:hollow_earth/continents",
+                          "right": 30.0
+                        }
+                      },
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:add",
+                            "left": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:clamp",
+                                "input": "hollowfrontier:hollow_earth/erosion",
+                                "max": 0.6,
+                                "min": -0.6
+                              },
+                              "right": -31.666666
+                            },
+                            "right": 25.0
+                          },
+                          "right": {
+                            "type": "minecraft:sub",
+                            "left": 1.0,
+                            "right": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:add",
+                                    "left": {
+                                      "type": "minecraft:mul",
+                                      "left": {
+                                        "type": "minecraft:clamp",
+                                        "input": "hollowfrontier:hollow_earth/humidity",
+                                        "max": 0.04,
+                                        "min": -0.08
+                                      },
+                                      "right": -8.333334
+                                    },
+                                    "right": 0.3333333
+                                  },
+                                  "right": {
+                                    "type": "minecraft:sub",
+                                    "left": 1.0,
+                                    "right": {
+                                      "type": "minecraft:add",
+                                      "left": {
+                                        "type": "minecraft:mul",
+                                        "left": {
+                                          "type": "minecraft:clamp",
+                                          "input": "hollowfrontier:hollow_earth/temperature",
+                                          "max": 0.19999999,
+                                          "min": 0.099999994
+                                        },
+                                        "right": 10.000001
+                                      },
+                                      "right": -1.0
+                                    }
+                                  }
+                                },
+                                "right": {
+                                  "type": "minecraft:sub",
+                                  "left": 1.0,
+                                  "right": {
+                                    "type": "minecraft:add",
+                                    "left": {
+                                      "type": "minecraft:mul",
+                                      "left": {
+                                        "type": "minecraft:clamp",
+                                        "input": "hollowfrontier:hollow_earth/temperature",
+                                        "max": -0.35,
+                                        "min": -0.75
+                                      },
+                                      "right": -2.5
+                                    },
+                                    "right": -0.875
+                                  }
+                                }
+                              },
+                              "right": 0.65
+                            }
+                          }
+                        },
+                        "right": "hollowfrontier:hollow_earth/ridges"
+                      }
+                    },
+                    "right": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:max",
+                        "left": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/continents",
+                              "max": 0.73,
+                              "min": 0.28
+                            },
+                            "right": 2.222222
+                          },
+                          "right": -0.6222222
+                        },
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:add",
+                            "left": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:clamp",
+                                "input": "hollowfrontier:hollow_earth/temperature",
+                                "max": -0.35,
+                                "min": -0.75
+                              },
+                              "right": -2.5
+                            },
+                            "right": -0.875
+                          },
+                          "right": 0.6
+                        }
+                      },
+                      "right": {
+                        "type": "minecraft:add",
+                        "left": 70.0,
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:abs",
+                            "input": "hollowfrontier:hollow_earth/ridges"
+                          },
+                          "right": 42.0
+                        }
+                      }
+                    }
+                  },
+                  "right": 8.0
+                }
+              },
+              "right": 8.0
+            },
+            "right": 2.0
+          },
+          "right": {
+            "type": "minecraft:mul",
+            "left": {
+              "type": "minecraft:floor",
+              "input": {
+                "type": "minecraft:div",
+                "left": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:clamp",
+                      "input": "hollowfrontier:hollow_earth/ridges",
+                      "max": 0.4,
+                      "min": -0.1
+                    },
+                    "right": 88.0
+                  },
+                  "right": 8.8
+                },
+                "right": 8.0
+              }
+            },
+            "right": 8.0
+          }
+        }
+      },
+      "second": {
+        "type": "minecraft:min",
+        "left": {
+          "type": "minecraft:lerp",
+          "alpha": {
+            "type": "minecraft:cache",
+            "input": {
+              "type": "minecraft:mul",
+              "left": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:clamp",
+                      "input": "hollowfrontier:hollow_earth/temperature",
+                      "max": 0.19999999,
+                      "min": 0.099999994
+                    },
+                    "right": 10.000001
+                  },
+                  "right": -1.0
+                },
+                "right": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:clamp",
+                      "input": "hollowfrontier:hollow_earth/humidity",
+                      "max": 0.04,
+                      "min": -0.08
+                    },
+                    "right": -8.333334
+                  },
+                  "right": 0.3333333
+                }
+              },
+              "right": {
+                "type": "minecraft:sub",
+                "left": 1.0,
+                "right": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:clamp",
+                      "input": "hollowfrontier:hollow_earth/continents",
+                      "max": 0.73,
+                      "min": 0.28
+                    },
+                    "right": 2.222222
+                  },
+                  "right": -0.6222222
+                }
+              }
+            }
+          },
+          "first": {
+            "type": "minecraft:add",
+            "left": {
+              "type": "minecraft:add",
+              "left": {
+                "type": "minecraft:add",
+                "left": 72.0,
+                "right": {
+                  "type": "minecraft:mul",
+                  "left": "hollowfrontier:hollow_earth/continents",
+                  "right": 30.0
+                }
+              },
+              "right": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:clamp",
+                        "input": "hollowfrontier:hollow_earth/erosion",
+                        "max": 0.6,
+                        "min": -0.6
+                      },
+                      "right": -31.666666
+                    },
+                    "right": 25.0
+                  },
+                  "right": {
+                    "type": "minecraft:sub",
+                    "left": 1.0,
+                    "right": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:add",
+                            "left": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:clamp",
+                                "input": "hollowfrontier:hollow_earth/humidity",
+                                "max": 0.04,
+                                "min": -0.08
+                              },
+                              "right": -8.333334
+                            },
+                            "right": 0.3333333
+                          },
+                          "right": {
+                            "type": "minecraft:sub",
+                            "left": 1.0,
+                            "right": {
+                              "type": "minecraft:add",
+                              "left": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:clamp",
+                                  "input": "hollowfrontier:hollow_earth/temperature",
+                                  "max": 0.19999999,
+                                  "min": 0.099999994
+                                },
+                                "right": 10.000001
+                              },
+                              "right": -1.0
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "minecraft:sub",
+                          "left": 1.0,
+                          "right": {
+                            "type": "minecraft:add",
+                            "left": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:clamp",
+                                "input": "hollowfrontier:hollow_earth/temperature",
+                                "max": -0.35,
+                                "min": -0.75
+                              },
+                              "right": -2.5
+                            },
+                            "right": -0.875
+                          }
+                        }
+                      },
+                      "right": 0.65
+                    }
+                  }
+                },
+                "right": "hollowfrontier:hollow_earth/ridges"
+              }
+            },
+            "right": {
+              "type": "minecraft:mul",
+              "left": {
+                "type": "minecraft:max",
+                "left": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:clamp",
+                      "input": "hollowfrontier:hollow_earth/continents",
+                      "max": 0.73,
+                      "min": 0.28
+                    },
+                    "right": 2.222222
+                  },
+                  "right": -0.6222222
+                },
+                "right": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:clamp",
+                        "input": "hollowfrontier:hollow_earth/temperature",
+                        "max": -0.35,
+                        "min": -0.75
+                      },
+                      "right": -2.5
+                    },
+                    "right": -0.875
+                  },
+                  "right": 0.6
+                }
+              },
+              "right": {
+                "type": "minecraft:add",
+                "left": 70.0,
+                "right": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:abs",
+                    "input": "hollowfrontier:hollow_earth/ridges"
+                  },
+                  "right": 42.0
+                }
+              }
+            }
+          },
+          "second": {
+            "type": "minecraft:add",
+            "left": {
+              "type": "minecraft:add",
+              "left": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:floor",
+                  "input": {
+                    "type": "minecraft:div",
+                    "left": {
+                      "type": "minecraft:add",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:add",
+                          "left": 72.0,
+                          "right": {
+                            "type": "minecraft:mul",
+                            "left": "hollowfrontier:hollow_earth/continents",
+                            "right": 30.0
+                          }
+                        },
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:add",
+                              "left": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:clamp",
+                                  "input": "hollowfrontier:hollow_earth/erosion",
+                                  "max": 0.6,
+                                  "min": -0.6
+                                },
+                                "right": -31.666666
+                              },
+                              "right": 25.0
+                            },
+                            "right": {
+                              "type": "minecraft:sub",
+                              "left": 1.0,
+                              "right": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:mul",
+                                    "left": {
+                                      "type": "minecraft:add",
+                                      "left": {
+                                        "type": "minecraft:mul",
+                                        "left": {
+                                          "type": "minecraft:clamp",
+                                          "input": "hollowfrontier:hollow_earth/humidity",
+                                          "max": 0.04,
+                                          "min": -0.08
+                                        },
+                                        "right": -8.333334
+                                      },
+                                      "right": 0.3333333
+                                    },
+                                    "right": {
+                                      "type": "minecraft:sub",
+                                      "left": 1.0,
+                                      "right": {
+                                        "type": "minecraft:add",
+                                        "left": {
+                                          "type": "minecraft:mul",
+                                          "left": {
+                                            "type": "minecraft:clamp",
+                                            "input": "hollowfrontier:hollow_earth/temperature",
+                                            "max": 0.19999999,
+                                            "min": 0.099999994
+                                          },
+                                          "right": 10.000001
+                                        },
+                                        "right": -1.0
+                                      }
+                                    }
+                                  },
+                                  "right": {
+                                    "type": "minecraft:sub",
+                                    "left": 1.0,
+                                    "right": {
+                                      "type": "minecraft:add",
+                                      "left": {
+                                        "type": "minecraft:mul",
+                                        "left": {
+                                          "type": "minecraft:clamp",
+                                          "input": "hollowfrontier:hollow_earth/temperature",
+                                          "max": -0.35,
+                                          "min": -0.75
+                                        },
+                                        "right": -2.5
+                                      },
+                                      "right": -0.875
+                                    }
+                                  }
+                                },
+                                "right": 0.65
+                              }
+                            }
+                          },
+                          "right": "hollowfrontier:hollow_earth/ridges"
+                        }
+                      },
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:max",
+                          "left": {
+                            "type": "minecraft:add",
+                            "left": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:clamp",
+                                "input": "hollowfrontier:hollow_earth/continents",
+                                "max": 0.73,
+                                "min": 0.28
+                              },
+                              "right": 2.222222
+                            },
+                            "right": -0.6222222
+                          },
+                          "right": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:add",
+                              "left": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:clamp",
+                                  "input": "hollowfrontier:hollow_earth/temperature",
+                                  "max": -0.35,
+                                  "min": -0.75
+                                },
+                                "right": -2.5
+                              },
+                              "right": -0.875
+                            },
+                            "right": 0.6
+                          }
+                        },
+                        "right": {
+                          "type": "minecraft:add",
+                          "left": 70.0,
+                          "right": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:abs",
+                              "input": "hollowfrontier:hollow_earth/ridges"
+                            },
+                            "right": 42.0
+                          }
+                        }
+                      }
+                    },
+                    "right": 8.0
+                  }
+                },
+                "right": 8.0
+              },
+              "right": 2.0
+            },
+            "right": {
+              "type": "minecraft:mul",
+              "left": {
+                "type": "minecraft:floor",
+                "input": {
+                  "type": "minecraft:div",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:clamp",
+                        "input": "hollowfrontier:hollow_earth/ridges",
+                        "max": 0.4,
+                        "min": -0.1
+                      },
+                      "right": 88.0
+                    },
+                    "right": 8.8
+                  },
+                  "right": 8.0
+                }
+              },
+              "right": 8.0
+            }
+          }
+        },
+        "right": 58.0
+      }
+    },
+    "right": {
+      "type": "minecraft:add",
+      "left": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:sub",
+          "left": {
+            "type": "minecraft:lerp",
+            "alpha": {
+              "type": "minecraft:mul",
+              "left": {
+                "type": "minecraft:mul",
+                "left": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:clamp",
+                      "input": {
+                        "type": "minecraft:abs",
+                        "input": {
+                          "type": "minecraft:noise",
+                          "noise": "hollowfrontier:hollow_earth/rivers",
+                          "shift_x": "minecraft:shift_x",
+                          "shift_z": "minecraft:shift_z",
+                          "xz_scale": 0.25,
+                          "y_scale": 0.0
+                        }
+                      },
+                      "max": 0.07,
+                      "min": 0.02
+                    },
+                    "right": -20.0
+                  },
+                  "right": 1.4
+                },
+                "right": {
+                  "type": "minecraft:sub",
+                  "left": 1.0,
+                  "right": {
+                    "type": "minecraft:cache",
+                    "input": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/temperature",
+                              "max": 0.19999999,
+                              "min": 0.099999994
+                            },
+                            "right": 10.000001
+                          },
+                          "right": -1.0
+                        },
+                        "right": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/humidity",
+                              "max": 0.04,
+                              "min": -0.08
+                            },
+                            "right": -8.333334
+                          },
+                          "right": 0.3333333
+                        }
+                      },
+                      "right": {
+                        "type": "minecraft:sub",
+                        "left": 1.0,
+                        "right": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/continents",
+                              "max": 0.73,
+                              "min": 0.28
+                            },
+                            "right": 2.222222
+                          },
+                          "right": -0.6222222
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "type": "minecraft:sub",
+                "left": 1.0,
+                "right": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:clamp",
+                        "input": "hollowfrontier:hollow_earth/continents",
+                        "max": 0.73,
+                        "min": 0.28
+                      },
+                      "right": 2.222222
+                    },
+                    "right": -0.6222222
+                  },
+                  "right": 0.6
+                }
+              }
+            },
+            "first": {
+              "type": "minecraft:lerp",
+              "alpha": {
+                "type": "minecraft:cache",
+                "input": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:add",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:clamp",
+                          "input": "hollowfrontier:hollow_earth/temperature",
+                          "max": 0.19999999,
+                          "min": 0.099999994
+                        },
+                        "right": 10.000001
+                      },
+                      "right": -1.0
+                    },
+                    "right": {
+                      "type": "minecraft:add",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:clamp",
+                          "input": "hollowfrontier:hollow_earth/humidity",
+                          "max": 0.04,
+                          "min": -0.08
+                        },
+                        "right": -8.333334
+                      },
+                      "right": 0.3333333
+                    }
+                  },
+                  "right": {
+                    "type": "minecraft:sub",
+                    "left": 1.0,
+                    "right": {
+                      "type": "minecraft:add",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:clamp",
+                          "input": "hollowfrontier:hollow_earth/continents",
+                          "max": 0.73,
+                          "min": 0.28
+                        },
+                        "right": 2.222222
+                      },
+                      "right": -0.6222222
+                    }
+                  }
+                }
+              },
+              "first": {
+                "type": "minecraft:add",
+                "left": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": 72.0,
+                    "right": {
+                      "type": "minecraft:mul",
+                      "left": "hollowfrontier:hollow_earth/continents",
+                      "right": 30.0
+                    }
+                  },
+                  "right": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": "hollowfrontier:hollow_earth/erosion",
+                            "max": 0.6,
+                            "min": -0.6
+                          },
+                          "right": -31.666666
+                        },
+                        "right": 25.0
+                      },
+                      "right": {
+                        "type": "minecraft:sub",
+                        "left": 1.0,
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:clamp",
+                                    "input": "hollowfrontier:hollow_earth/humidity",
+                                    "max": 0.04,
+                                    "min": -0.08
+                                  },
+                                  "right": -8.333334
+                                },
+                                "right": 0.3333333
+                              },
+                              "right": {
+                                "type": "minecraft:sub",
+                                "left": 1.0,
+                                "right": {
+                                  "type": "minecraft:add",
+                                  "left": {
+                                    "type": "minecraft:mul",
+                                    "left": {
+                                      "type": "minecraft:clamp",
+                                      "input": "hollowfrontier:hollow_earth/temperature",
+                                      "max": 0.19999999,
+                                      "min": 0.099999994
+                                    },
+                                    "right": 10.000001
+                                  },
+                                  "right": -1.0
+                                }
+                              }
+                            },
+                            "right": {
+                              "type": "minecraft:sub",
+                              "left": 1.0,
+                              "right": {
+                                "type": "minecraft:add",
+                                "left": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:clamp",
+                                    "input": "hollowfrontier:hollow_earth/temperature",
+                                    "max": -0.35,
+                                    "min": -0.75
+                                  },
+                                  "right": -2.5
+                                },
+                                "right": -0.875
+                              }
+                            }
+                          },
+                          "right": 0.65
+                        }
+                      }
+                    },
+                    "right": "hollowfrontier:hollow_earth/ridges"
+                  }
+                },
+                "right": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:max",
+                    "left": {
+                      "type": "minecraft:add",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:clamp",
+                          "input": "hollowfrontier:hollow_earth/continents",
+                          "max": 0.73,
+                          "min": 0.28
+                        },
+                        "right": 2.222222
+                      },
+                      "right": -0.6222222
+                    },
+                    "right": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": "hollowfrontier:hollow_earth/temperature",
+                            "max": -0.35,
+                            "min": -0.75
+                          },
+                          "right": -2.5
+                        },
+                        "right": -0.875
+                      },
+                      "right": 0.6
+                    }
+                  },
+                  "right": {
+                    "type": "minecraft:add",
+                    "left": 70.0,
+                    "right": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:abs",
+                        "input": "hollowfrontier:hollow_earth/ridges"
+                      },
+                      "right": 42.0
+                    }
+                  }
+                }
+              },
+              "second": {
+                "type": "minecraft:add",
+                "left": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:floor",
+                      "input": {
+                        "type": "minecraft:div",
+                        "left": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:add",
+                            "left": {
+                              "type": "minecraft:add",
+                              "left": 72.0,
+                              "right": {
+                                "type": "minecraft:mul",
+                                "left": "hollowfrontier:hollow_earth/continents",
+                                "right": 30.0
+                              }
+                            },
+                            "right": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:add",
+                                  "left": {
+                                    "type": "minecraft:mul",
+                                    "left": {
+                                      "type": "minecraft:clamp",
+                                      "input": "hollowfrontier:hollow_earth/erosion",
+                                      "max": 0.6,
+                                      "min": -0.6
+                                    },
+                                    "right": -31.666666
+                                  },
+                                  "right": 25.0
+                                },
+                                "right": {
+                                  "type": "minecraft:sub",
+                                  "left": 1.0,
+                                  "right": {
+                                    "type": "minecraft:mul",
+                                    "left": {
+                                      "type": "minecraft:mul",
+                                      "left": {
+                                        "type": "minecraft:mul",
+                                        "left": {
+                                          "type": "minecraft:add",
+                                          "left": {
+                                            "type": "minecraft:mul",
+                                            "left": {
+                                              "type": "minecraft:clamp",
+                                              "input": "hollowfrontier:hollow_earth/humidity",
+                                              "max": 0.04,
+                                              "min": -0.08
+                                            },
+                                            "right": -8.333334
+                                          },
+                                          "right": 0.3333333
+                                        },
+                                        "right": {
+                                          "type": "minecraft:sub",
+                                          "left": 1.0,
+                                          "right": {
+                                            "type": "minecraft:add",
+                                            "left": {
+                                              "type": "minecraft:mul",
+                                              "left": {
+                                                "type": "minecraft:clamp",
+                                                "input": "hollowfrontier:hollow_earth/temperature",
+                                                "max": 0.19999999,
+                                                "min": 0.099999994
+                                              },
+                                              "right": 10.000001
+                                            },
+                                            "right": -1.0
+                                          }
+                                        }
+                                      },
+                                      "right": {
+                                        "type": "minecraft:sub",
+                                        "left": 1.0,
+                                        "right": {
+                                          "type": "minecraft:add",
+                                          "left": {
+                                            "type": "minecraft:mul",
+                                            "left": {
+                                              "type": "minecraft:clamp",
+                                              "input": "hollowfrontier:hollow_earth/temperature",
+                                              "max": -0.35,
+                                              "min": -0.75
+                                            },
+                                            "right": -2.5
+                                          },
+                                          "right": -0.875
+                                        }
+                                      }
+                                    },
+                                    "right": 0.65
+                                  }
+                                }
+                              },
+                              "right": "hollowfrontier:hollow_earth/ridges"
+                            }
+                          },
+                          "right": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:max",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:clamp",
+                                    "input": "hollowfrontier:hollow_earth/continents",
+                                    "max": 0.73,
+                                    "min": 0.28
+                                  },
+                                  "right": 2.222222
+                                },
+                                "right": -0.6222222
+                              },
+                              "right": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:add",
+                                  "left": {
+                                    "type": "minecraft:mul",
+                                    "left": {
+                                      "type": "minecraft:clamp",
+                                      "input": "hollowfrontier:hollow_earth/temperature",
+                                      "max": -0.35,
+                                      "min": -0.75
+                                    },
+                                    "right": -2.5
+                                  },
+                                  "right": -0.875
+                                },
+                                "right": 0.6
+                              }
+                            },
+                            "right": {
+                              "type": "minecraft:add",
+                              "left": 70.0,
+                              "right": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:abs",
+                                  "input": "hollowfrontier:hollow_earth/ridges"
+                                },
+                                "right": 42.0
+                              }
+                            }
+                          }
+                        },
+                        "right": 8.0
+                      }
+                    },
+                    "right": 8.0
+                  },
+                  "right": 2.0
+                },
+                "right": {
+                  "type": "minecraft:mul",
+                  "left": {
+                    "type": "minecraft:floor",
+                    "input": {
+                      "type": "minecraft:div",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": "hollowfrontier:hollow_earth/ridges",
+                            "max": 0.4,
+                            "min": -0.1
+                          },
+                          "right": 88.0
+                        },
+                        "right": 8.8
+                      },
+                      "right": 8.0
+                    }
+                  },
+                  "right": 8.0
+                }
+              }
+            },
+            "second": {
+              "type": "minecraft:min",
+              "left": {
+                "type": "minecraft:lerp",
+                "alpha": {
+                  "type": "minecraft:cache",
+                  "input": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": "hollowfrontier:hollow_earth/temperature",
+                            "max": 0.19999999,
+                            "min": 0.099999994
+                          },
+                          "right": 10.000001
+                        },
+                        "right": -1.0
+                      },
+                      "right": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": "hollowfrontier:hollow_earth/humidity",
+                            "max": 0.04,
+                            "min": -0.08
+                          },
+                          "right": -8.333334
+                        },
+                        "right": 0.3333333
+                      }
+                    },
+                    "right": {
+                      "type": "minecraft:sub",
+                      "left": 1.0,
+                      "right": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": "hollowfrontier:hollow_earth/continents",
+                            "max": 0.73,
+                            "min": 0.28
+                          },
+                          "right": 2.222222
+                        },
+                        "right": -0.6222222
+                      }
+                    }
+                  }
+                },
+                "first": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:add",
+                      "left": 72.0,
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": "hollowfrontier:hollow_earth/continents",
+                        "right": 30.0
+                      }
+                    },
+                    "right": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/erosion",
+                              "max": 0.6,
+                              "min": -0.6
+                            },
+                            "right": -31.666666
+                          },
+                          "right": 25.0
+                        },
+                        "right": {
+                          "type": "minecraft:sub",
+                          "left": 1.0,
+                          "right": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:add",
+                                  "left": {
+                                    "type": "minecraft:mul",
+                                    "left": {
+                                      "type": "minecraft:clamp",
+                                      "input": "hollowfrontier:hollow_earth/humidity",
+                                      "max": 0.04,
+                                      "min": -0.08
+                                    },
+                                    "right": -8.333334
+                                  },
+                                  "right": 0.3333333
+                                },
+                                "right": {
+                                  "type": "minecraft:sub",
+                                  "left": 1.0,
+                                  "right": {
+                                    "type": "minecraft:add",
+                                    "left": {
+                                      "type": "minecraft:mul",
+                                      "left": {
+                                        "type": "minecraft:clamp",
+                                        "input": "hollowfrontier:hollow_earth/temperature",
+                                        "max": 0.19999999,
+                                        "min": 0.099999994
+                                      },
+                                      "right": 10.000001
+                                    },
+                                    "right": -1.0
+                                  }
+                                }
+                              },
+                              "right": {
+                                "type": "minecraft:sub",
+                                "left": 1.0,
+                                "right": {
+                                  "type": "minecraft:add",
+                                  "left": {
+                                    "type": "minecraft:mul",
+                                    "left": {
+                                      "type": "minecraft:clamp",
+                                      "input": "hollowfrontier:hollow_earth/temperature",
+                                      "max": -0.35,
+                                      "min": -0.75
+                                    },
+                                    "right": -2.5
+                                  },
+                                  "right": -0.875
+                                }
+                              }
+                            },
+                            "right": 0.65
+                          }
+                        }
+                      },
+                      "right": "hollowfrontier:hollow_earth/ridges"
+                    }
+                  },
+                  "right": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:max",
+                      "left": {
+                        "type": "minecraft:add",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": "hollowfrontier:hollow_earth/continents",
+                            "max": 0.73,
+                            "min": 0.28
+                          },
+                          "right": 2.222222
+                        },
+                        "right": -0.6222222
+                      },
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/temperature",
+                              "max": -0.35,
+                              "min": -0.75
+                            },
+                            "right": -2.5
+                          },
+                          "right": -0.875
+                        },
+                        "right": 0.6
+                      }
+                    },
+                    "right": {
+                      "type": "minecraft:add",
+                      "left": 70.0,
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:abs",
+                          "input": "hollowfrontier:hollow_earth/ridges"
+                        },
+                        "right": 42.0
+                      }
+                    }
+                  }
+                },
+                "second": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:floor",
+                        "input": {
+                          "type": "minecraft:div",
+                          "left": {
+                            "type": "minecraft:add",
+                            "left": {
+                              "type": "minecraft:add",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": 72.0,
+                                "right": {
+                                  "type": "minecraft:mul",
+                                  "left": "hollowfrontier:hollow_earth/continents",
+                                  "right": 30.0
+                                }
+                              },
+                              "right": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:add",
+                                    "left": {
+                                      "type": "minecraft:mul",
+                                      "left": {
+                                        "type": "minecraft:clamp",
+                                        "input": "hollowfrontier:hollow_earth/erosion",
+                                        "max": 0.6,
+                                        "min": -0.6
+                                      },
+                                      "right": -31.666666
+                                    },
+                                    "right": 25.0
+                                  },
+                                  "right": {
+                                    "type": "minecraft:sub",
+                                    "left": 1.0,
+                                    "right": {
+                                      "type": "minecraft:mul",
+                                      "left": {
+                                        "type": "minecraft:mul",
+                                        "left": {
+                                          "type": "minecraft:mul",
+                                          "left": {
+                                            "type": "minecraft:add",
+                                            "left": {
+                                              "type": "minecraft:mul",
+                                              "left": {
+                                                "type": "minecraft:clamp",
+                                                "input": "hollowfrontier:hollow_earth/humidity",
+                                                "max": 0.04,
+                                                "min": -0.08
+                                              },
+                                              "right": -8.333334
+                                            },
+                                            "right": 0.3333333
+                                          },
+                                          "right": {
+                                            "type": "minecraft:sub",
+                                            "left": 1.0,
+                                            "right": {
+                                              "type": "minecraft:add",
+                                              "left": {
+                                                "type": "minecraft:mul",
+                                                "left": {
+                                                  "type": "minecraft:clamp",
+                                                  "input": "hollowfrontier:hollow_earth/temperature",
+                                                  "max": 0.19999999,
+                                                  "min": 0.099999994
+                                                },
+                                                "right": 10.000001
+                                              },
+                                              "right": -1.0
+                                            }
+                                          }
+                                        },
+                                        "right": {
+                                          "type": "minecraft:sub",
+                                          "left": 1.0,
+                                          "right": {
+                                            "type": "minecraft:add",
+                                            "left": {
+                                              "type": "minecraft:mul",
+                                              "left": {
+                                                "type": "minecraft:clamp",
+                                                "input": "hollowfrontier:hollow_earth/temperature",
+                                                "max": -0.35,
+                                                "min": -0.75
+                                              },
+                                              "right": -2.5
+                                            },
+                                            "right": -0.875
+                                          }
+                                        }
+                                      },
+                                      "right": 0.65
+                                    }
+                                  }
+                                },
+                                "right": "hollowfrontier:hollow_earth/ridges"
+                              }
+                            },
+                            "right": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:max",
+                                "left": {
+                                  "type": "minecraft:add",
+                                  "left": {
+                                    "type": "minecraft:mul",
+                                    "left": {
+                                      "type": "minecraft:clamp",
+                                      "input": "hollowfrontier:hollow_earth/continents",
+                                      "max": 0.73,
+                                      "min": 0.28
+                                    },
+                                    "right": 2.222222
+                                  },
+                                  "right": -0.6222222
+                                },
+                                "right": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:add",
+                                    "left": {
+                                      "type": "minecraft:mul",
+                                      "left": {
+                                        "type": "minecraft:clamp",
+                                        "input": "hollowfrontier:hollow_earth/temperature",
+                                        "max": -0.35,
+                                        "min": -0.75
+                                      },
+                                      "right": -2.5
+                                    },
+                                    "right": -0.875
+                                  },
+                                  "right": 0.6
+                                }
+                              },
+                              "right": {
+                                "type": "minecraft:add",
+                                "left": 70.0,
+                                "right": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:abs",
+                                    "input": "hollowfrontier:hollow_earth/ridges"
+                                  },
+                                  "right": 42.0
+                                }
+                              }
+                            }
+                          },
+                          "right": 8.0
+                        }
+                      },
+                      "right": 8.0
+                    },
+                    "right": 2.0
+                  },
+                  "right": {
+                    "type": "minecraft:mul",
+                    "left": {
+                      "type": "minecraft:floor",
+                      "input": {
+                        "type": "minecraft:div",
+                        "left": {
+                          "type": "minecraft:add",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": "hollowfrontier:hollow_earth/ridges",
+                              "max": 0.4,
+                              "min": -0.1
+                            },
+                            "right": 88.0
+                          },
+                          "right": 8.8
+                        },
+                        "right": 8.0
+                      }
+                    },
+                    "right": 8.0
+                  }
+                }
+              },
+              "right": 58.0
+            }
+          },
+          "right": 150.0
+        },
+        "right": 0.4
+      },
+      "right": 150.0
+    }
+  }
+}

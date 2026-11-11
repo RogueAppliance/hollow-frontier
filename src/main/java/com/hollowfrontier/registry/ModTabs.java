@@ -59,7 +59,9 @@ public final class ModTabs {
                 ModItems.MAN_IN_BLACK_SPAWN_EGG,
                 ModItems.FERN_SKITTER_SPAWN_EGG, ModItems.GLASSBACK_HARE_SPAWN_EGG, ModItems.ASH_SALAMANDER_SPAWN_EGG, ModItems.PALE_RAVEN_SPAWN_EGG,
                 ModItems.GRAY_PROBE_SPAWN_EGG, ModItems.WOOLLY_MAMMOTH_SPAWN_EGG, ModItems.TERROR_BIRD_SPAWN_EGG,
-                ModItems.MEGATHERIUM_SPAWN_EGG, ModItems.GLYPTODON_SPAWN_EGG, ModItems.GRAY_SENTINEL_SPAWN_EGG,
+                ModItems.MEGATHERIUM_SPAWN_EGG, ModItems.GLYPTODON_SPAWN_EGG,
+                ModItems.GREAT_SEA_COW_SPAWN_EGG, ModItems.BASILOSAURUS_SPAWN_EGG, ModItems.PLESIOSAUR_SPAWN_EGG, ModItems.LAMPJELLY_SPAWN_EGG,
+                ModItems.GRAY_SENTINEL_SPAWN_EGG,
                 ModItems.KINDLED_SPAWN_EGG, ModItems.CRYSTAL_GUARDIAN_SPAWN_EGG, ModItems.SUN_ARCHON_SPAWN_EGG,
                 ModItems.GRAY_WARDEN_SPAWN_EGG, ModItems.DISGUISED_GRAY_SPAWN_EGG);
     }
@@ -90,6 +92,8 @@ public final class ModTabs {
         add(out, ModItems.IRON_HORSESHOES, ModItems.BRASS_HORSESHOES, ModItems.SADDLEBAGS);
         // Money, the law and the news
         add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE, ModItems.SURVEY_LETTER);
+        // 35: a frontier December
+        add(out, ModItems.CHRISTMAS_PARCEL, ModItems.FRUITCAKE, ModItems.EGGNOG, ModItems.HOT_CIDER);
         // The frontier's mysteries (11a)
         add(out, ModItems.FLATTENED_WHEAT, ModItems.STRANGE_SKULL);
         // Drinks, soft to hard, then the doctor's
@@ -128,7 +132,7 @@ public final class ModTabs {
         out.accept(fullCanister());
         add(out, ModItems.STEAM_DRILL, ModItems.STEAM_HANDCAR);
         // The airship: its two parts, then the ship
-        add(out, ModItems.AIRSHIP_ENVELOPE, ModItems.AIRSHIP_ENGINE, ModItems.AIRSHIP);
+        add(out, ModItems.AIRSHIP_ENVELOPE, ModItems.AIRSHIP_ENGINE, ModItems.AIRSHIP, ModItems.STEAM_SUBMERSIBLE);
         // The polar expedition: find a gateway, open it (the frame is for builders in creative)
         add(out, ModItems.POLAR_COMPASS, ModItems.POLAR_RESONATOR);
         // Machines, in the order a steam line is built
@@ -154,6 +158,9 @@ public final class ModTabs {
         add(out, ModItems.MAMMOTH_TUSK, ModItems.OLIPHANT, ModItems.RAW_MAMMOTH, ModItems.MAMMOTH_STEAK, ModItems.TERROR_BIRD_TALON, ModItems.TALON_KNIFE,
                 ModItems.THICK_HIDE, ModItems.HIDE_BARDING, ModItems.GLYPTODON_SCUTE,
                 ModItems.GLYPTODON_HELMET, ModItems.GLYPTODON_CHESTPLATE, ModItems.GLYPTODON_LEGGINGS, ModItems.GLYPTODON_BOOTS);
+        // The Still Sea (43b): what its creatures give, what that makes, and the Harpoons
+        add(out, ModItems.BLUBBER, ModItems.TALLOW, ModItems.LAMP_GEL, ModItems.JELLY_LAMP, ModItems.BASILOSAUR_TOOTH,
+                ModItems.HARPOON, ModItems.TOOTHED_HARPOON);
         // The Gray experiments (10b)
         add(out, ModItems.GRAY_TECH_FRAGMENT, ModItems.SIGNAL_LOCATOR);
     }
@@ -176,7 +183,7 @@ public final class ModTabs {
         add(out, ModItems.ALIEN_ALLOY_PLATING, ModItems.DAMAGED_GRAVITY_DRIVE, ModItems.BEAM_EMITTER, ModItems.LENS_ARRAY, ModItems.NAVIGATION_CORE);
         // Phlogiston tech (13b)
         add(out, ModItems.EMPTY_PHLOGISTON_CELL, ModItems.PHLOGISTON_CELL, ModItems.RAY_PISTOL, ModItems.PHLOGISTON_RIFLE, ModItems.GRAVITY_DRIVE);
-        add(out, ModItems.PROTOTYPE_SAUCER, ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD); // 13c, 15b
+        add(out, ModItems.PROTOTYPE_SAUCER, ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD, ModItems.SEALED_HULL); // 13c, 15b, 43d
         add(out, ModItems.PHLOGISTON_BEACON); // 13d
         add(out, ModItems.IMPLANT_RIG, ModItems.LETTER_HOME); // 20
         add(out, ModItems.KINDLED_SEAL, ModItems.SEAL_SOCKET); // 26
@@ -233,7 +240,8 @@ public final class ModTabs {
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
             after(event, Items.COOKED_BEEF, ModItems.RAW_MAMMOTH, ModItems.MAMMOTH_STEAK);
             after(event, Items.HONEY_BOTTLE, ModItems.SARSAPARILLA, ModItems.COWBOY_COFFEE, ModItems.FRONTIER_BEER, ModItems.RYE_WHISKEY,
-                    ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL);
+                    ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL, ModItems.EGGNOG, ModItems.HOT_CIDER);
+            after(event, Items.PUMPKIN_PIE, ModItems.FRUITCAKE);
         } else if (tab == CreativeModeTabs.INGREDIENTS) {
             after(event, Items.RAW_GOLD, ModItems.RAW_STARSTEEL);
             after(event, Items.DIAMOND, ModItems.PHLOGISTON_SHARD);

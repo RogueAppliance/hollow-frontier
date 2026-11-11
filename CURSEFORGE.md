@@ -55,6 +55,7 @@ The store page for both Modrinth and CurseForge. Form fields, gallery and upload
 - **The Steam Drill and Steam Canisters** for mining on the go.
 - **The Steam Handcar** rides the rails, and refuels at depot standpipes.
 - **The Airship:** a coal-fired steam dirigible for two. Fly it north to find the Polar Gateways.
+- **The Steam Submersible:** a fireless brass boat for two, charged with steam at the waterline, for the Still Sea or any other.
 
 ![airship over the frontier](https://raw.githubusercontent.com/RogueAppliance/hollow-frontier/main/branding/gifs/airship.gif)
 
@@ -65,6 +66,10 @@ The store page for both Modrinth and CurseForge. Form fields, gallery and upload
 Wake a Polar Gateway's ring of stones with a Polar Resonator, then fall through Symmes' Hole into a world of its own. A golden crust arches 150 blocks overhead with stone spires and waterfalls hanging from it, and an inner sun that never sets.
 
 - **Four biomes:** the Primordial Jungle, the Crystal Steppes, the Ember Badlands and the Concavian Highlands, each with its own plants, sounds and creatures.
+- **The Still Sea:** an inner sea with no wind and no weather, so it lies flat as glass. Pale beaches, kelp forests on the shelf, and falls pouring in from the crust.
+- **Sea life:** Great Sea Cows grazing the kelp, a Plesiosaur that dives for you if you feed it a fish, glowing Lampjellies that sting, and the Basilosaurus, which hunts whatever swims over deep water. Take a Harpoon: it reels in what's small, and what's big tows you.
+- **The Steam Submersible:** a brass boat for two that runs on steam charged at the shore, with no fire aboard. Dive, hold your depth, and see by its lamp. A Basilosaurus will ram it.
+- **The Drowned Quarter:** a sunken Kindled river port on the seabed, with glass domes that still hold air, guardians still on watch, and a vault. What's in the vault lets your saucer follow you down.
 - **Megafauna:** woolly mammoths that charge as a herd, terror birds that outrun you, giant ground sloths and glyptodons.
 - **New metals:** glowing phlogiston crystal, and starsteel for tools, a paxel and armor.
 - **Sites to explore:** a lost Symmes expedition's dig, Kindled temples and observatories, an overgrown ziggurat, a tar pit full of bones, an abandoned phlogiston mine, a ruined starsteel foundry, shrines on the floating islands, and Gray relays hanging from the crust.
@@ -118,6 +123,22 @@ Bringing it down breaks the Grays' hold on the outlaws, but the story doesn't st
 
 ---
 
+## A Frontier December
+
+It comes on by the date and leaves by itself. The date is the server's, so everyone on a server sees the same thing, and existing worlds get all of it.
+
+- **Town lamps** dress themselves one by one, a sprig and a red ribbon on each, and undress in January.
+- **A tree in every town's square,** seven blocks of spruce with tin stars and candles lit after dark. It can't be hit or pushed and it harms nothing.
+- **A Christmas Parcel** from the postmaster, one a year for each player: coins, cartridges, coffee and a **Fruitcake**. It takes five seconds to eat. Nobody will buy one.
+- **Eggnog and Hot Cider** at the saloon, and **carols** on the piano, a carol every other tune.
+- **The sleigh:** if there have been lights in the sky, the children decide it was a sleigh. The Gazette corrects them. The men in black find they prefer the children's version.
+- **The Christmas truce:** from the 24th to the 26th no outlaw raid starts, and a sheriff lets one small fine go.
+- **No snow.** Desert towns get a dry Christmas, and folk remark on it.
+
+Turn it off, or keep it all year, in `hollowfrontier-season-server.toml`.
+
+---
+
 ## Where to Start
 
 A new world starts you in the nearest town's square. On a dedicated server with operators, set `spawn-protection=0`, or other players can't use the doors and chests around it. Talk to a town's **postmaster** first: the **Polar Survey's last letter** is waiting, and it keeps track of the road north (what to build, and roughly where the crater is). The **Hollow Frontier** and **Steam Age** advancement tabs lay out the rest of the frontier. Once you reach the Hollow Earth, craft a **Concavian Codex** (a book and a phlogiston shard) and it will guide you from there.
@@ -152,6 +173,7 @@ Hollow Frontier works on its own. If these mods are installed, it uses them:
 - `hollowfrontier-towns-server.toml` (per world): whether towns replace the townsfolk and lawmen they lose, and how long each new arrival takes.
   It also holds `spawnAtTown`, on by default, which starts new worlds in the nearest town. A world chooses its spawn once, so set this in the `config` folder before creating the world.
 - `hollowfrontier-saloon-server.toml` and `hollowfrontier-dust-devils-server.toml` (per world): saloon brawls and missing time; dust devils.
+- `hollowfrontier-season-server.toml` (per world): December. `mode` is `AUTO` (by the server's date), `ALWAYS` or `NEVER`; `truce` is the Christmas truce.
 - `hollowfrontier-startup.toml`: crafting-table brass. Turn it off if another mod makes brass.
 - Gamerule `hollowfrontier:saucer_beams_players`: whether a player's saucer can beam up other players.
 - Ops can set off raids, sightings, saucers and dust devils by hand with `/hollowfrontier raid|mystery|kindled|ufo|dustdevil ...`.

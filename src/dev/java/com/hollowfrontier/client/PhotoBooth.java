@@ -211,6 +211,13 @@ public final class PhotoBooth {
             }
             return;
         }
+        // A frontier December (35), only on its own with -PphotoScene=december
+        if (DECEMBER_ONLY) {
+            if (ticks >= 40) {
+                december(mc, server, ticks - 40);
+            }
+            return;
+        }
         // Dust devils (29), only on their own with -PphotoScene=dustdevils
         if (DUST_DEVILS_ONLY) {
             if (ticks >= 40) {
@@ -364,6 +371,41 @@ public final class PhotoBooth {
         if (SITES_ONLY) {
             if (ticks >= 40) {
                 sites(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The Still Sea's creatures (43b), only on their own with -PphotoScene=sealife
+        if (SEALIFE_ONLY) {
+            if (ticks >= 40) {
+                seaLife(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The Steam Submersible (43c), only on its own with -PphotoScene=submersible
+        if (SUBMERSIBLE_ONLY) {
+            if (ticks >= 40) {
+                submersible(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // Harpoons in flight (43b), only on their own with -PphotoScene=harpoon
+        if (HARPOON_ONLY) {
+            if (ticks >= 40) {
+                harpoon(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The Drowned Quarter and the Symmes Landing (43d), only on their own with -PphotoScene=quarter
+        if (QUARTER_ONLY) {
+            if (ticks >= 40) {
+                quarter(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // The Still Sea (43a), only on its own with -PphotoScene=sea
+        if (SEA_ONLY) {
+            if (ticks >= 40) {
+                sea(mc, server, ticks - 40);
             }
             return;
         }
@@ -1182,6 +1224,590 @@ public final class PhotoBooth {
         hollowWait = wait;
     }
 
+    // ---------------------------------------------------------------- phase 43a: the Still Sea
+
+    private static final boolean SEA_ONLY = "sea".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int seaStep;
+    private static int seaWait;
+    private static BlockPos seaDeep;
+    private static BlockPos seaShore;
+    private static BlockPos seaStack;
+    private static BlockPos seaSeam;
+
+    /**
+     * The Still Sea (hf_43a_*), only with -PphotoScene=sea: the nearest sea to the staging spot from high above, from
+     * just over the water and from under it; its shore from the land side; a sea stack (the crust's lowest spire within a
+     * kilometre, if one reaches the water); and, since the photo world's Hollow Earth was explored before the sea existed,
+     * a chunk saved as land that now lies in the sea, from above, for the seam where old chunks meet new.
+     */
+    private static void sea(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            seaStep = 0;
+            seaWait = 0;
+        }
+        if (seaWait > 0) {
+            seaWait--;
+            return;
+        }
+        int surface = HollowEarth.SEA_LEVEL;
+        switch (seaStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                server.execute(() -> findSea(server));
+                seaNext(20);
+            }
+            case 1 -> {
+                if (seaDeep == null) {
+                    HollowFrontier.LOGGER.info("[PhotoBooth] no Still Sea within reach, quitting");
+                    quit(mc, server);
+                    seaStep = 99;
+                    return;
+                }
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 16", seaDeep.getX(), HollowEarth.CEILING_LOWEST - 60, seaDeep.getZ() + 90));
+                seaNext(GENERATE_TICKS);
+            }
+            case 2 -> {
+                shot(mc, "hf_43a_1_sea_above.png");
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 -4", seaDeep.getX(), surface + 3, seaDeep.getZ()));
+                seaNext(80);
+            }
+            case 3 -> {
+                shot(mc, "hf_43a_2_sea_surface.png");
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 20", seaDeep.getX(), surface - 7, seaDeep.getZ()));
+                seaNext(60);
+            }
+            case 4 -> {
+                shot(mc, "hf_43a_3_sea_underwater.png");
+                // The shore, from 40 blocks inland and a little up, looking out to the deep water
+                Vec3 out = Vec3.atCenterOf(seaDeep).subtract(Vec3.atCenterOf(seaShore)).multiply(1, 0, 1).normalize();
+                Vec3 eye = new Vec3(seaShore.getX() - out.x * 40, surface + 16, seaShore.getZ() - out.z * 40);
+                hollowLooking(server, eye, new Vec3(seaShore.getX() + out.x * 60, surface, seaShore.getZ() + out.z * 60));
+                seaNext(GENERATE_TICKS);
+            }
+            case 5 -> {
+                shot(mc, "hf_43a_4_shore.png");
+                if (seaStack == null) {
+                    seaStep = 7;
+                    return;
+                }
+                Vec3 eye = new Vec3(seaStack.getX() + 70, surface + 22, seaStack.getZ() + 40);
+                hollowLooking(server, eye, new Vec3(seaStack.getX(), surface + 45, seaStack.getZ()));
+                seaNext(GENERATE_TICKS);
+            }
+            case 6 -> {
+                shot(mc, "hf_43a_5_sea_stack.png");
+                seaNext(0);
+            }
+            case 7 -> {
+                if (seaSeam == null) {
+                    seaStep = 10;
+                    return;
+                }
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 50", seaSeam.getX(), surface + 80, seaSeam.getZ() + 40));
+                seaNext(GENERATE_TICKS);
+            }
+            case 8 -> {
+                shot(mc, "hf_43a_6_old_world_seam_north.png");
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 0 50", seaSeam.getX(), surface + 80, seaSeam.getZ() - 40));
+                seaNext(GENERATE_TICKS);
+            }
+            case 9 -> {
+                shot(mc, "hf_43a_7_old_world_seam_south.png");
+                seaNext(0);
+            }
+            case 10 -> {
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                seaNext(20);
+            }
+            case 11 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] done, quitting");
+                quit(mc, server);
+                seaNext(0);
+            }
+            default -> {}
+        }
+    }
+
+    private static void seaNext(int wait) {
+        seaStep++;
+        seaWait = wait;
+    }
+
+    /** On the server thread: the sea's shore nearest the staging spot, its deepest water nearby, a stack, and an old chunk. */
+    private static void findSea(MinecraftServer server) {
+        ServerLevel level = server.getLevel(HollowEarth.LEVEL);
+        var sea = com.hollowfrontier.worldgen.HollowBiomes.STILL_SEA;
+        var found = level.findClosestBiome3d(b -> b.is(sea), new BlockPos(baseX, 80, baseZ), 6400, 32, 64);
+        if (found == null) {
+            return;
+        }
+        seaShore = found.getFirst();
+        var functions = level.registryAccess().lookupOrThrow(Registries.DENSITY_FUNCTION);
+        var continents = functions.getOrThrow(com.hollowfrontier.worldgen.HollowTerrain.F_CONTINENTS).value();
+        var ceiling = functions.getOrThrow(com.hollowfrontier.worldgen.HollowTerrain.CEILING_BOTTOM).value();
+        var random = level.getChunkSource().randomState();
+        float lowest = Float.MAX_VALUE;
+        float lowestCeiling = Float.MAX_VALUE;
+        seaDeep = seaShore;
+        seaStack = null;
+        for (int dx = -1000; dx <= 1000; dx += 8) {
+            for (int dz = -1000; dz <= 1000; dz += 8) {
+                int x = seaShore.getX() + dx;
+                int z = seaShore.getZ() + dz;
+                float c = random.sampleBlockValueUncached(continents, x, 0, z);
+                if (c < lowest && dx % 32 == 0 && dz % 32 == 0 && dx * dx + dz * dz <= 800 * 800) {
+                    lowest = c;
+                    seaDeep = new BlockPos(x, 80, z);
+                }
+                if (c < com.hollowfrontier.worldgen.HollowBiomes.SEA_CONTINENTS - com.hollowfrontier.worldgen.HollowTerrain.SEA_SHORE) {
+                    float bottom = random.sampleBlockValueUncached(ceiling, x, 0, z);
+                    if (bottom < lowestCeiling) {
+                        lowestCeiling = bottom;
+                        seaStack = new BlockPos(x, 80, z);
+                    }
+                }
+            }
+        }
+        if (lowestCeiling > HollowEarth.SEA_LEVEL + 4) {
+            HollowFrontier.LOGGER.info("[PhotoBooth] no sea stack within a kilometre (the lowest spire over the sea ends at y {})", lowestCeiling);
+            seaStack = null;
+        }
+        HollowFrontier.LOGGER.info("[PhotoBooth] Still Sea: shore {}, deep water {} (continents {}), stack {}", seaShore, seaDeep, lowest, seaStack);
+        // An old chunk in the new sea: saved full, with a land biome, where the generator now says sea well past the shore
+        seaSeam = null;
+        float seamLowest = com.hollowfrontier.worldgen.HollowBiomes.SEA_CONTINENTS - com.hollowfrontier.worldgen.HollowTerrain.SEA_SHORE;
+        int checked = 0;
+        int old = 0;
+        java.io.File[] regions = server.getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT)
+                .resolve("dimensions/hollowfrontier/hollow_earth/region").toFile().listFiles((dir, name) -> name.endsWith(".mca"));
+        for (java.io.File region : regions == null ? new java.io.File[0] : regions) {
+            String[] parts = region.getName().split("[.]");
+            int rx = Integer.parseInt(parts[1]);
+            int rz = Integer.parseInt(parts[2]);
+            for (int i = 0; i < 32 && checked < 400; i += 4) {
+                for (int j = 0; j < 32 && checked < 400; j += 4) {
+                    int cx = rx * 32 + i;
+                    int cz = rz * 32 + j;
+                    float c = random.sampleBlockValueUncached(continents, cx * 16 + 8, 0, cz * 16 + 8);
+                    if (c >= seamLowest) {
+                        continue;
+                    }
+                    checked++;
+                    var chunk = level.getChunkSource().getChunk(cx, cz, net.minecraft.world.level.chunk.status.ChunkStatus.EMPTY, true);
+                    if (chunk != null && chunk.getPersistedStatus().isOrAfter(net.minecraft.world.level.chunk.status.ChunkStatus.FULL)
+                            && !chunk.getNoiseBiome(2, 80 >> 2, 2).is(sea)) {
+                        old++;
+                        seamLowest = c;
+                        seaSeam = new BlockPos(cx * 16 + 8, 80, cz * 16 + 8);
+                    }
+                }
+            }
+        }
+        HollowFrontier.LOGGER.info("[PhotoBooth] old chunks in the new sea: {} of {} checked; the deepest at {} (continents {})", old, checked, seaSeam, seamLowest);
+    }
+
+    // ---------------------------------------------------------------- phase 43b: the Still Sea's creatures
+
+    private static final boolean SEALIFE_ONLY = "sealife".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int seaLifeStep;
+    private static int seaLifeWait;
+
+    /**
+     * The Still Sea's creatures (hf_43b_*), only with -PphotoScene=sealife: a Great Sea Cow, a Plesiosaur, a Basilosaurus
+     * and a shoal of Lampjellies set still in the deep water nearest the staging spot, side on, shot together from under
+     * the surface and then one by one. They're taken away again afterwards.
+     */
+    private static void seaLife(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            seaLifeStep = 0;
+            seaLifeWait = 0;
+        }
+        if (seaLifeWait > 0) {
+            seaLifeWait--;
+            return;
+        }
+        int y = HollowEarth.SEA_LEVEL - 7;
+        switch (seaLifeStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                server.execute(() -> findSea(server));
+                seaLifeNext(20);
+            }
+            case 1 -> {
+                if (seaDeep == null) {
+                    HollowFrontier.LOGGER.info("[PhotoBooth] no Still Sea within reach, quitting");
+                    quit(mc, server);
+                    seaLifeStep = 99;
+                    return;
+                }
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 180 0", seaDeep.getX(), y, seaDeep.getZ() + 16));
+                seaLifeNext(GENERATE_TICKS);
+            }
+            case 2 -> {
+                String still = "{NoAI:1b,PersistenceRequired:1b,Tags:[\"hf_photo\"],Rotation:[90f,0f]}";
+                String in = "execute in " + HollowEarth.LEVEL.identifier() + " run summon hollowfrontier:";
+                int x = seaDeep.getX(), z = seaDeep.getZ();
+                run(server, String.format(java.util.Locale.ROOT, in + "great_sea_cow %d %d %d %s", x - 9, y - 1, z + 4, still));
+                run(server, String.format(java.util.Locale.ROOT, in + "plesiosaur %d %d %d %s", x + 2, y, z + 6, still));
+                run(server, String.format(java.util.Locale.ROOT, in + "basilosaurus %d %d %d %s", x, y - 3, z - 6, still));
+                for (int i = 0; i < 4; i++) {
+                    run(server, String.format(java.util.Locale.ROOT, in + "lampjelly %d %d %d %s", x + 6 + i * 2, y + 1 - i % 2, z + 9 + i % 3, still));
+                }
+                seaLifeNext(40);
+            }
+            case 3 -> {
+                shot(mc, "hf_43b_1_sea_life.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() - 8.5, y + 0.5, seaDeep.getZ() + 10.5), new Vec3(seaDeep.getX() - 8.5, y, seaDeep.getZ() + 4.5));
+                seaLifeNext(30);
+            }
+            case 4 -> {
+                shot(mc, "hf_43b_2_great_sea_cow.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() + 1.0, y + 1.5, seaDeep.getZ() + 12.5), new Vec3(seaDeep.getX() + 1.0, y + 0.8, seaDeep.getZ() + 6.5));
+                seaLifeNext(30);
+            }
+            case 5 -> {
+                shot(mc, "hf_43b_3_plesiosaur.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() - 1.0, y - 1.5, seaDeep.getZ() + 5.5), new Vec3(seaDeep.getX() - 1.0, y - 2.5, seaDeep.getZ() - 5.5));
+                seaLifeNext(30);
+            }
+            case 6 -> {
+                shot(mc, "hf_43b_4_basilosaurus.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() + 9.5, y + 1.0, seaDeep.getZ() + 13.5), new Vec3(seaDeep.getX() + 9.5, y + 0.8, seaDeep.getZ() + 10.0));
+                seaLifeNext(30);
+            }
+            case 7 -> {
+                shot(mc, "hf_43b_5_lampjellies.png");
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[tag=hf_photo]");
+                seaLifeNext(10);
+            }
+            case 8 -> {
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[type=item,distance=..40]");
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                seaLifeNext(20);
+            }
+            case 9 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] done, quitting");
+                quit(mc, server);
+                seaLifeNext(0);
+            }
+            default -> {}
+        }
+    }
+
+    private static void seaLifeNext(int wait) {
+        seaLifeStep++;
+        seaLifeWait = wait;
+    }
+
+    // ---------------------------------------------------------------- phase 43c: the Steam Submersible
+
+    private static final boolean SUBMERSIBLE_ONLY = "submersible".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int subStep;
+    private static int subWait;
+
+    /**
+     * The Steam Submersible (hf_43c_*), only with -PphotoScene=submersible: one awash on the Still Sea, from over the
+     * water, and one eight blocks down, from beside it. They're taken away again afterwards.
+     */
+    private static void submersible(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            subStep = 0;
+            subWait = 0;
+        }
+        if (subWait > 0) {
+            subWait--;
+            return;
+        }
+        double awash = HollowEarth.SEA_LEVEL - 1.25, under = HollowEarth.SEA_LEVEL - 10.0;
+        switch (subStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                server.execute(() -> findSea(server));
+                subWait = 20;
+                subStep++;
+            }
+            case 1 -> {
+                if (seaDeep == null) {
+                    quit(mc, server);
+                    subStep = 99;
+                    return;
+                }
+                hollowLooking(server, new Vec3(seaDeep.getX() + 4.5, awash + 3.0, seaDeep.getZ() + 5.5), new Vec3(seaDeep.getX() + 0.5, awash + 0.8, seaDeep.getZ() + 0.5));
+                subWait = GENERATE_TICKS;
+                subStep++;
+            }
+            case 2 -> {
+                String in = "execute in " + HollowEarth.LEVEL.identifier() + " run summon hollowfrontier:steam_submersible ";
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {Tags:[\"hf_photo\"],Rotation:[60f,0f],steam:8000}", seaDeep.getX(), awash, seaDeep.getZ()));
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {Tags:[\"hf_photo\"],Rotation:[90f,0f],steam:8000}", seaDeep.getX(), under, seaDeep.getZ() - 12));
+                subWait = 40;
+                subStep++;
+            }
+            case 3 -> {
+                shot(mc, "hf_43c_1_submersible_awash.png");
+                hollowLooking(server, new Vec3(seaDeep.getX() + 3.5, under + 2.2, seaDeep.getZ() - 8.0), new Vec3(seaDeep.getX() + 0.5, under + 0.9, seaDeep.getZ() - 11.5));
+                subWait = 40;
+                subStep++;
+            }
+            case 4 -> {
+                shot(mc, "hf_43c_2_submersible_under.png");
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[tag=hf_photo]");
+                subWait = 10;
+                subStep++;
+            }
+            case 5 -> {
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[type=item,distance=..40]");
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                subWait = 20;
+                subStep++;
+            }
+            case 6 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] done, quitting");
+                quit(mc, server);
+                subStep++;
+            }
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- phase 43b: the Harpoon in flight
+
+    private static final boolean HARPOON_ONLY = "harpoon".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int harpoonStep;
+    private static int harpoonWait;
+
+    /**
+     * Harpoons in flight (hf_43b_6_harpoons.png), only with -PphotoScene=harpoon: three drifting slowly over the Still Sea,
+     * seen from the south looking north. Left to right: one flying east (its head should point right), one flying up and
+     * east (head up and right), and a toothed one flying west (head left). It's how the renderer's turn was set.
+     */
+    private static void harpoon(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            harpoonStep = 0;
+            harpoonWait = 0;
+        }
+        if (harpoonWait > 0) {
+            harpoonWait--;
+            return;
+        }
+        double y = HollowEarth.SEA_LEVEL + 4.0;
+        switch (harpoonStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                server.execute(() -> findSea(server));
+                harpoonWait = 20;
+                harpoonStep++;
+            }
+            case 1 -> {
+                if (seaDeep == null) {
+                    quit(mc, server);
+                    harpoonStep = 99;
+                    return;
+                }
+                hollowLooking(server, new Vec3(seaDeep.getX() + 0.5, y, seaDeep.getZ() + 4.5), new Vec3(seaDeep.getX() + 0.5, y, seaDeep.getZ() - 4.5));
+                harpoonWait = GENERATE_TICKS;
+                harpoonStep++;
+            }
+            case 2 -> {
+                int[] me = net.minecraft.core.UUIDUtil.uuidToIntArray(mc.player.getUUID()); // thrown by the camera, so each has a line back to it
+                String mine = String.format("Owner:[I;%d,%d,%d,%d],", me[0], me[1], me[2], me[3]);
+                String in = "execute in " + HollowEarth.LEVEL.identifier() + " run summon hollowfrontier:harpoon ";
+                int x = seaDeep.getX(), z = seaDeep.getZ();
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {" + mine + "Tags:[\"hf_photo\"],NoGravity:1b,Motion:[0.03d,0.0d,0.0d]}", x - 3, y, z));
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {" + mine + "Tags:[\"hf_photo\"],NoGravity:1b,Motion:[0.02d,0.02d,0.0d]}", x, y, z));
+                run(server, String.format(java.util.Locale.ROOT, in + "%d.5 %.2f %d.5 {" + mine + "Tags:[\"hf_photo\"],NoGravity:1b,Motion:[-0.03d,0.0d,0.0d],"
+                        + "item:{id:\"hollowfrontier:toothed_harpoon\",count:1}}", x + 3, y, z));
+                harpoonWait = 12;
+                harpoonStep++;
+            }
+            case 3 -> {
+                shot(mc, "hf_43b_6_harpoons.png");
+                run(server, "execute in " + HollowEarth.LEVEL.identifier() + " run kill @e[tag=hf_photo]");
+                harpoonWait = 10;
+                harpoonStep++;
+            }
+            case 4 -> {
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                harpoonWait = 20;
+                harpoonStep++;
+            }
+            case 5 -> {
+                quit(mc, server);
+                harpoonStep++;
+            }
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- phase 43d: the Drowned Quarter and the Symmes Landing
+
+    private static final boolean QUARTER_ONLY = "quarter".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static int quarterStep;
+    private static int quarterWait;
+    private static ChunkPos quarterChunk;
+    private static ChunkPos landingChunk;
+    private static net.minecraft.world.level.levelgen.structure.BoundingBox quarterBox;
+    private static net.minecraft.world.level.levelgen.structure.BoundingBox landingBox;
+
+    /**
+     * The sea's sites as the world generates them (hf_43d_*), only with -PphotoScene=quarter: the nearest Drowned Quarter to
+     * the sea by the staging spot, from over its north-east corner under water, from the quay looking down the street, and
+     * from inside the great dome; then the nearest Symmes Landing from the land side.
+     */
+    private static void quarter(Minecraft mc, MinecraftServer server, int t) {
+        if (t == 0) {
+            quarterStep = 0;
+            quarterWait = 0;
+        }
+        if (quarterWait > 0) {
+            quarterWait--;
+            return;
+        }
+        switch (quarterStep) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                run(server, "effect give @p minecraft:night_vision infinite 0 true");
+                server.execute(() -> {
+                    findSea(server);
+                    if (seaDeep == null) {
+                        return;
+                    }
+                    quarterChunk = locateSite(server, com.hollowfrontier.worldgen.structure.ModStructures.DROWNED_QUARTER, seaDeep);
+                    landingChunk = locateSite(server, com.hollowfrontier.worldgen.structure.ModStructures.SYMMES_LANDING, seaDeep);
+                    if (quarterChunk != null) {
+                        run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 0 60", quarterChunk.getMinBlockX(), HollowEarth.SEA_LEVEL - 4, quarterChunk.getMinBlockZ()));
+                    }
+                });
+                quarterWait = GENERATE_TICKS;
+                quarterStep++;
+            }
+            case 1 -> {
+                if (quarterChunk == null) {
+                    quarterStep = 5;
+                    return;
+                }
+                server.execute(() -> quarterBox = siteBox(server, com.hollowfrontier.worldgen.structure.ModStructures.DROWNED_QUARTER, quarterChunk));
+                quarterWait = 10;
+                quarterStep++;
+            }
+            case 2 -> {
+                if (quarterBox == null) {
+                    quarterStep = 5;
+                    return;
+                }
+                Vec3 middle = new Vec3(quarterBox.getCenter().getX(), quarterBox.minY() + 4, quarterBox.getCenter().getZ());
+                hollowLooking(server, new Vec3(quarterBox.maxX() + 6, quarterBox.minY() + 16, quarterBox.minZ() - 6), middle);
+                quarterWait = 120;
+                quarterStep++;
+            }
+            case 3 -> {
+                shot(mc, "hf_43d_1_drowned_quarter.png");
+                Vec3 middle = new Vec3(quarterBox.getCenter().getX(), quarterBox.minY() + 3, quarterBox.getCenter().getZ());
+                hollowLooking(server, new Vec3(quarterBox.minX() - 4, quarterBox.minY() + 7, quarterBox.maxZ() + 4), middle);
+                quarterWait = 60;
+                quarterStep++;
+            }
+            case 4 -> {
+                shot(mc, "hf_43d_2_drowned_quarter_other_side.png");
+                // Inside the largest pocket of air there is: the great dome, wherever the piece was turned to
+                server.execute(() -> {
+                    ServerLevel level = server.getLevel(HollowEarth.LEVEL);
+                    BlockPos best = null;
+                    int bestAir = 0;
+                    for (BlockPos pos : BlockPos.betweenClosed(quarterBox.minX() + 4, quarterBox.minY() + 5, quarterBox.minZ() + 4, quarterBox.maxX() - 4, quarterBox.minY() + 5, quarterBox.maxZ() - 4)) {
+                        int air = 0;
+                        for (BlockPos near : BlockPos.betweenClosed(pos.offset(-5, 0, -5), pos.offset(5, 0, 5))) {
+                            if (level.getBlockState(near).isAir()) {
+                                air++;
+                            }
+                        }
+                        if (air > bestAir) {
+                            bestAir = air;
+                            best = pos.immutable();
+                        }
+                    }
+                    HollowFrontier.LOGGER.info("[PhotoBooth] Drowned Quarter {}: the great dome's air at {} ({} of 121 blocks round it)", quarterBox, best, bestAir);
+                    if (best != null) {
+                        run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d.3 %d.5 30 -12", best.getX(), best.getY(), best.getZ()));
+                    }
+                });
+                quarterWait = 60;
+                quarterStep = 6;
+            }
+            case 5 -> {
+                HollowFrontier.LOGGER.warn("[PhotoBooth] no Drowned Quarter found or generated near {}", seaDeep);
+                quarterStep = 7;
+            }
+            case 6 -> {
+                shot(mc, "hf_43d_3_inside_the_great_dome.png");
+                quarterStep++;
+            }
+            case 7 -> {
+                if (landingChunk == null) {
+                    HollowFrontier.LOGGER.warn("[PhotoBooth] no Symmes Landing found near {}", seaDeep);
+                    quarterStep = 11;
+                    return;
+                }
+                run(server, String.format(java.util.Locale.ROOT, HOLLOW_TP + "%d.5 %d %d.5 0 60", landingChunk.getMinBlockX(), HollowEarth.SEA_LEVEL + 30, landingChunk.getMinBlockZ()));
+                quarterWait = GENERATE_TICKS;
+                quarterStep++;
+            }
+            case 8 -> {
+                server.execute(() -> landingBox = siteBox(server, com.hollowfrontier.worldgen.structure.ModStructures.SYMMES_LANDING, landingChunk));
+                quarterWait = 10;
+                quarterStep++;
+            }
+            case 9 -> {
+                if (landingBox == null) {
+                    quarterStep = 11;
+                    return;
+                }
+                Vec3 middle = new Vec3(landingBox.getCenter().getX(), landingBox.minY() + 1, landingBox.getCenter().getZ());
+                hollowLooking(server, middle.add(9, 7, 11), middle);
+                quarterWait = 80;
+                quarterStep++;
+            }
+            case 10 -> {
+                shot(mc, "hf_43d_4_symmes_landing.png");
+                quarterStep++;
+            }
+            case 11 -> {
+                run(server, "effect clear @p minecraft:night_vision");
+                run(server, String.format("execute in minecraft:overworld run tp @p %d.5 %d %d.5", baseX, Y, baseZ));
+                quarterWait = 20;
+                quarterStep++;
+            }
+            case 12 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] done, quitting");
+                quit(mc, server);
+                quarterStep++;
+            }
+            default -> {}
+        }
+    }
+
+    /** On the server thread: the chunk of the nearest {@code key} to {@code from} in the Hollow Earth, or null. */
+    private static ChunkPos locateSite(MinecraftServer server, net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.structure.Structure> key, BlockPos from) {
+        ServerLevel level = server.getLevel(HollowEarth.LEVEL);
+        var holder = level.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(key);
+        var found = level.getChunkSource().getGenerator().findNearestMapStructure(level, net.minecraft.core.HolderSet.direct(holder), from, 100, false);
+        HollowFrontier.LOGGER.info("[PhotoBooth] nearest {} to {}: {}", key.identifier().getPath(), from, found == null ? "none" : found.getFirst());
+        return found == null ? null : ChunkPos.containing(found.getFirst());
+    }
+
+    /** On the server thread: the bounds of the {@code key} that starts in {@code chunk}, once it has generated. */
+    private static net.minecraft.world.level.levelgen.structure.BoundingBox siteBox(MinecraftServer server,
+            net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.structure.Structure> key, ChunkPos chunk) {
+        ServerLevel level = server.getLevel(HollowEarth.LEVEL);
+        var structure = level.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(key).value();
+        StructureStart start = level.getChunk(chunk.x(), chunk.z()).getStartForStructure(structure);
+        if (start == null || !start.isValid()) {
+            HollowFrontier.LOGGER.warn("[PhotoBooth] the {} at {} didn't generate", key.identifier().getPath(), chunk);
+            return null;
+        }
+        return start.getPieces().getFirst().getBoundingBox();
+    }
+
     // ---------------------------------------------------------------- phase 9b: the Hollow Earth's life, close up
 
     private static final boolean LIFE_ONLY = "life".equals(System.getProperty("hollowfrontier.photo.scene"));
@@ -1524,7 +2150,7 @@ public final class PhotoBooth {
             }
             case 10 -> {
                 server.execute(() -> {
-                    var item = com.hollowfrontier.content.ufo.PrototypeSaucerItem.of(new com.hollowfrontier.content.ufo.SaucerFittings(true, true, true), 200);
+                    var item = com.hollowfrontier.content.ufo.PrototypeSaucerItem.of(new com.hollowfrontier.content.ufo.SaucerFittings(true, true, true, false, true, true), 200);
                     var saucer = com.hollowfrontier.content.ufo.PrototypeSaucerItem.place(server.overworld(), at, 180.0F, item);
                     if (saucer != null) {
                         server.overworld().addFreshEntity(saucer);
@@ -2013,6 +2639,102 @@ public final class PhotoBooth {
     }
 
     // ---------------------------------------------------------------- 29: dust devils
+
+    private static final boolean DECEMBER_ONLY = "december".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static volatile Vec3 decemberSquare, decemberStreet, decemberLamp, decemberTree, decemberOut = new Vec3(1, 0, 0);
+
+    /**
+     * A frontier December (hf_35*), only with -PphotoScene=december: a real town with the season held on. Its lamps are
+     * given their turn (the random tick that dresses and lights them) and its tree stood up, then: a dressed street at
+     * dusk, a dressed lamp close up, the tree in the square by day and by night.
+     */
+    private static void december(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                run(server, "time set 12900");
+                run(server, "weather clear");
+                server.execute(() -> com.hollowfrontier.content.frontier.season.Season.setMode(com.hollowfrontier.content.frontier.season.Season.Mode.ALWAYS));
+            }
+            case 5 -> findCheckTown(server, 0);
+            case 320 -> server.execute(() -> dressTown(server));
+            case 340 -> { if (decemberStreet != null) tpLooking(server, decemberStreet, decemberSquare.add(0, 2.5, 0)); }
+            case 420 -> shot(mc, "hf_35a_dressed_street_dusk.png");
+            case 422 -> { if (decemberLamp != null) tpLooking(server, decemberLamp.add(1.6, 0.4, 1.9), decemberLamp); }
+            case 470 -> shot(mc, "hf_35a_festive_lamp.png");
+            case 472 -> {
+                run(server, "time set 6000");
+                server.execute(() -> dressTown(server));
+            }
+            case 480 -> { if (decemberTree != null) tpLooking(server, decemberTree.add(decemberOut.scale(11.0)).add(0, 5.0, 0), decemberTree.add(0, 3.4, 0)); }
+            case 540 -> shot(mc, "hf_35b_town_tree_day.png");
+            case 542 -> {
+                run(server, "time set 18000");
+                server.execute(() -> dressTown(server));
+            }
+            case 550 -> { if (decemberTree != null) tpLooking(server, decemberTree.add(decemberOut.scale(9.0)).add(decemberOut.z * 5.0, 3.0, -decemberOut.x * 5.0), decemberTree.add(0, 3.4, 0)); }
+            case 640 -> shot(mc, "hf_35b_town_tree_night.png");
+            case 642 -> { if (decemberTree != null) tpLooking(server, decemberTree.add(decemberOut.scale(5.5)).add(0, 3.2, 0), decemberTree.add(0, 3.6, 0)); }
+            case 690 -> shot(mc, "hf_35b_town_tree_close.png");
+            // 44: the creative tab, which opens on an empty revolver and a loaded one: their ammo pips
+            case 692 -> run(server, "gamemode creative @p");
+            case 700 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
+            case 720 -> shot(mc, "hf_44_gun_pips.png");
+            case 722 -> mc.gui.setScreen(null);
+            case 725 -> {
+                server.execute(() -> com.hollowfrontier.content.frontier.season.Season.setMode(null));
+                HollowFrontier.LOGGER.info("[PhotoBooth] december done, quitting");
+                quit(mc, server);
+            }
+            default -> {}
+        }
+    }
+
+    // Gives every Town Lamp in the found town its random tick, stands the tree up (or lets it see the hour), and notes where to shoot from
+    private static void dressTown(MinecraftServer server) {
+        ServerLevel level = server.overworld();
+        TownStyle style = TownStyle.values()[0];
+        ChunkPos chunk = TOWN_CHUNKS.get(style);
+        if (chunk == null) {
+            HollowFrontier.LOGGER.warn("[PhotoBooth] december: no town found");
+            return;
+        }
+        var town = level.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(style.structure()).value();
+        StructureStart start = level.getChunk(chunk.x(), chunk.z()).getStartForStructure(town);
+        if (start == null || !start.isValid()) {
+            HollowFrontier.LOGGER.warn("[PhotoBooth] december: the town at {} didn't generate", chunk);
+            return;
+        }
+        TownSite site = TownSite.of(level, start, net.minecraft.util.RandomSource.create(35));
+        BoundingBox bounds = start.getBoundingBox();
+        int lamps = 0;
+        BlockPos nearest = null;
+        for (BlockPos pos : BlockPos.betweenClosed(bounds.minX(), bounds.minY(), bounds.minZ(), bounds.maxX(), bounds.maxY(), bounds.maxZ())) {
+            if (level.isLoaded(pos) && level.getBlockState(pos).is(com.hollowfrontier.registry.ModBlocks.TOWN_LAMP.get())) {
+                level.getBlockState(pos).randomTick(level, pos, level.getRandom());
+                lamps++;
+                // one that stands (a post lamp) rather than hangs, for the close-up
+                if (!level.getBlockState(pos).getValue(net.minecraft.world.level.block.LanternBlock.HANGING)
+                        && (nearest == null || pos.distSqr(site.rally()) < nearest.distSqr(site.rally()))) {
+                    nearest = pos.immutable();
+                }
+            }
+        }
+        var put = com.hollowfrontier.content.frontier.season.TownTree.ensure(level, site.rally());
+        var trees = level.getEntitiesOfClass(com.hollowfrontier.content.frontier.season.TownTree.class, AABB.of(bounds).inflate(8));
+        trees.forEach(tree -> tree.keep(level));
+        decemberSquare = Vec3.atBottomCenterOf(site.rally());
+        Vec3 edge = Vec3.atBottomCenterOf(site.edge());
+        Vec3 along = edge.subtract(decemberSquare).multiply(1, 0, 1).normalize();
+        decemberStreet = decemberSquare.add(along.scale(Math.min(22.0, edge.distanceTo(decemberSquare)))).add(0, 3.2, 0);
+        decemberLamp = nearest == null ? null : Vec3.atCenterOf(nearest);
+        decemberTree = trees.isEmpty() ? null : trees.getFirst().position();
+        if (decemberTree != null) { // shoot from the tree's far side, looking back across the square
+            Vec3 out = decemberTree.subtract(decemberSquare).multiply(1, 0, 1);
+            decemberOut = out.lengthSqr() < 0.01 ? new Vec3(1, 0, 0) : out.normalize();
+        }
+        HollowFrontier.LOGGER.info("[PhotoBooth] december: {} lamps ticked, tree {} (new {}), square {}", lamps, decemberTree, put.isPresent(), site.rally());
+    }
 
     private static final boolean DUST_DEVILS_ONLY = "dustdevils".equals(System.getProperty("hollowfrontier.photo.scene"));
 

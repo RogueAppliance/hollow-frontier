@@ -34,7 +34,7 @@ public class StructureNbtProvider implements DataProvider {
     @SuppressWarnings("deprecation") // Hashing.sha1 is what vanilla's DataProvider uses for the cache
     public CompletableFuture<?> run(CachedOutput cache) {
         return CompletableFuture.runAsync(() -> {
-            for (Blueprint blueprint : Stream.of(FrontierBlueprints.all(), HollowBlueprints.all(), ConcaviaBlueprints.all(), com.hollowfrontier.worldgen.structure.DungeonBlueprints.all(), com.hollowfrontier.worldgen.structure.WildBlueprints.all(), UfoBlueprints.all(), TestBlueprints.all()).flatMap(List::stream).toList()) {
+            for (Blueprint blueprint : Stream.of(FrontierBlueprints.all(), HollowBlueprints.all(), ConcaviaBlueprints.all(), com.hollowfrontier.worldgen.structure.DungeonBlueprints.all(), com.hollowfrontier.worldgen.structure.WildBlueprints.all(), com.hollowfrontier.worldgen.structure.SeaBlueprints.all(), UfoBlueprints.all(), TestBlueprints.all()).flatMap(List::stream).toList()) {
                 try {
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     NbtIo.writeCompressed(blueprint.toNbt(), bytes);

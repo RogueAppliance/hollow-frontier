@@ -1,0 +1,81 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.hollowfrontier.plesiosaur",
+				"texture_width": 128,
+				"texture_height": 64,
+				"visible_bounds_width": 8,
+				"visible_bounds_height": 5,
+				"visible_bounds_offset": [0, 1, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 8, 0],
+					"cubes": [{"origin": [-8, 3, -12], "size": [16, 10, 24], "uv": [0, 0]}]
+				},
+				{
+					"name": "neck1",
+					"parent": "body",
+					"pivot": [0, 10, -12],
+					"cubes": [{"origin": [-2, 8, -24], "size": [4, 4, 12], "uv": [84, 0]}]
+				},
+				{
+					"name": "neck2",
+					"parent": "neck1",
+					"pivot": [0, 10, -24],
+					"cubes": [{"origin": [-2, 8, -36], "size": [4, 4, 12], "uv": [84, 0]}]
+				},
+				{
+					"name": "neck3",
+					"parent": "neck2",
+					"pivot": [0, 10, -36],
+					"cubes": [{"origin": [-2, 8, -48], "size": [4, 4, 12], "uv": [84, 0]}]
+				},
+				{
+					"name": "head",
+					"parent": "neck3",
+					"pivot": [0, 10, -48],
+					"cubes": [{"origin": [-2.5, 8, -56], "size": [5, 4, 8], "uv": [84, 18]}]
+				},
+				{
+					"name": "tail",
+					"parent": "body",
+					"pivot": [0, 8, 12],
+					"cubes": [{"origin": [-3, 5, 12], "size": [6, 5, 14], "uv": [0, 36]}]
+				},
+				{
+					"name": "flipper_front_left",
+					"parent": "body",
+					"pivot": [8, 5, -7],
+					"cubes": [{"origin": [8, 4, -10], "size": [10, 2, 6], "uv": [44, 36]}]
+				},
+				{
+					"name": "flipper_front_right",
+					"parent": "body",
+					"pivot": [-8, 5, -7],
+					"cubes": [{"origin": [-18, 4, -10], "size": [10, 2, 6], "uv": [44, 36], "mirror": true}]
+				},
+				{
+					"name": "flipper_back_left",
+					"parent": "body",
+					"pivot": [8, 5, 8],
+					"cubes": [{"origin": [8, 4, 5], "size": [10, 2, 6], "uv": [44, 36]}]
+				},
+				{
+					"name": "flipper_back_right",
+					"parent": "body",
+					"pivot": [-8, 5, 8],
+					"cubes": [{"origin": [-18, 4, 5], "size": [10, 2, 6], "uv": [44, 36], "mirror": true}]
+				}
+			]
+		}
+	]
+}

@@ -24,13 +24,15 @@ import net.minecraft.resources.Identifier;
  * The Prototype Saucer (13c, {@code prototype_saucer}, full size, made by tools/models/SaucerModels.java): a stepped,
  * near-round alloy disc with a spinning band of rim lights, and a brass-ribbed glass dome the crew show through. It draws
  * translucent for the glass. The beam emitter, lens array and navigation core each show once fitted
- * ({@link SaucerFittings#mask}); the rim lights, drive, emitter, lens eye, nav ball and console glow. The cloak and the
- * cargo hold don't show; a cloaked saucer isn't drawn at all, but for its own crew.
+ * ({@link SaucerFittings#mask}), and since 43d so do the cargo hold (a strapped locker under the stern) and the Sealed
+ * Hull (two collars of Kindled plate either side of the rim, lamp gel in their seams); the rim lights, drive, emitter,
+ * lens eye, nav ball, console and the gel glow. The cloak doesn't show; a cloaked saucer isn't drawn at all, but for
+ * its own crew.
  */
 public class SaucerRenderer<R extends EntityRenderState & GeoRenderState> extends GlowingGeoRenderer<PrototypeSaucer, R> {
     static final DataTicket<Integer> FITTINGS = DataTicket.create("hollowfrontier_saucer_fittings", Integer.class);
-    static final String[] BONES = {"emitter", "lens", "nav"};
-    static final int[] BITS = {SaucerFittings.EMITTER, SaucerFittings.LENS, SaucerFittings.NAV};
+    static final String[] BONES = {"emitter", "lens", "nav", "hold", "hull_band"};
+    static final int[] BITS = {SaucerFittings.EMITTER, SaucerFittings.LENS, SaucerFittings.NAV, SaucerFittings.HOLD, SaucerFittings.HULL};
     // From inside in first person, the ribs, the glass's tint and the console filled the view (playtest): the crew's own
     // camera skips the dome, its cap and mast and the console, and sees out clear over the hull
     static final DataTicket<Boolean> CREW_VIEW = DataTicket.create("hollowfrontier_saucer_crew_view", Boolean.class);

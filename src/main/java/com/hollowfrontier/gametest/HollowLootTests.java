@@ -122,7 +122,8 @@ final class HollowLootTests {
      */
     static void digsAndPatterns(GameTestHelper h) {
         for (Object[] site : new Object[][] {{ConcaviaBlueprints.CRYSTAL_RUINS, ModChestLoot.DIG_CRYSTAL_RUINS}, {WildBlueprints.TAR_PIT, ModChestLoot.DIG_TAR_PIT},
-                {WildBlueprints.ZIGGURAT, ModChestLoot.DIG_ZIGGURAT}, {com.hollowfrontier.worldgen.structure.HollowBlueprints.SYMMES_CAMP, ModChestLoot.DIG_SYMMES}}) {
+                {WildBlueprints.ZIGGURAT, ModChestLoot.DIG_ZIGGURAT}, {com.hollowfrontier.worldgen.structure.HollowBlueprints.SYMMES_CAMP, ModChestLoot.DIG_SYMMES},
+                {com.hollowfrontier.worldgen.structure.SeaBlueprints.DROWNED_QUARTER, ModChestLoot.DIG_DROWNED_QUARTER}}) {
             StructureTemplate t = h.getLevel().getStructureTemplateManager().get(HollowFrontier.id((String) site[0])).orElseThrow();
             @SuppressWarnings("unchecked")
             ResourceKey<LootTable> table = (ResourceKey<LootTable>) site[1];
@@ -132,7 +133,7 @@ final class HollowLootTests {
             h.assertTrue(digs >= 2, site[0] + " has " + digs + " places to brush");
         }
         Set<Item> found = new HashSet<>();
-        for (ResourceKey<LootTable> dig : List.of(ModChestLoot.DIG_CRYSTAL_RUINS, ModChestLoot.DIG_SYMMES, ModChestLoot.DIG_TAR_PIT)) {
+        for (ResourceKey<LootTable> dig : List.of(ModChestLoot.DIG_CRYSTAL_RUINS, ModChestLoot.DIG_SYMMES, ModChestLoot.DIG_TAR_PIT, ModChestLoot.DIG_DROWNED_QUARTER)) {
             for (int i = 0; i < 80; i++) {
                 roll(h, dig, true).forEach(stack -> found.add(stack.getItem()));
             }

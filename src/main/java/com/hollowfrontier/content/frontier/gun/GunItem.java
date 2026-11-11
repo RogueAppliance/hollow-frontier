@@ -58,6 +58,8 @@ public class GunItem extends Item implements GeoItem {
     // Render-state data the client renderer fills in from the stack; read by the animation controller.
     public static final DataTicket<Double> RELOAD_TICKS = DataTicket.create("hollowfrontier_reload_ticks", Double.class);
     public static final DataTicket<Long> LAST_FIRED_TICK = DataTicket.create("hollowfrontier_last_fired", Long.class);
+    /** How much faster than the plain gun this one loads (Quick Load): the reload animation runs that much faster, to end with the chamber. */
+    public static final DataTicket<Double> RELOAD_SPEED = DataTicket.create("hollowfrontier_reload_speed", Double.class);
     public static final DataTicket<Double> SINCE_FIRED = DataTicket.create("hollowfrontier_since_fired", Double.class);
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
@@ -145,6 +147,12 @@ public class GunItem extends Item implements GeoItem {
             AbstractOutlaw.onPlayerReload(player);
         }
         return true;
+    }
+
+    /** How many times faster than the plain gun this one loads a chamber: 1 without Quick Load (or for a gun that doesn't load). */
+    public double reloadSpeed(ItemStack stack, Level level) {
+        int load = GunEnchantments.apply(stats, stack, level).loadTicks();
+        return stats.loadTicks() <= 0 || load <= 0 ? 1.0 : (double) stats.loadTicks() / load;
     }
 
     public void stopReload(ItemStack stack) {
@@ -318,8 +326,12 @@ public class GunItem extends Item implements GeoItem {
         long[] seenShot = {Long.MIN_VALUE};
         controllers.add(new AnimationController<GunItem>("gun", 3, test -> {
             if (test.getDataOrDefault(RELOAD_TICKS, -1.0) >= 0) {
+                // One turn of the reload loop is one chamber at the gun's own pace; Quick Load shortens the chamber, so it
+                // has to shorten the turn too, or the hands fall behind the loading and are cut off mid-stroke
+                test.setControllerSpeed((float) (double) test.getDataOrDefault(RELOAD_SPEED, 1.0));
                 return test.setAndContinue(RELOAD);
             }
+            test.setControllerSpeed(1.0F);
             long shot = test.getDataOrDefault(LAST_FIRED_TICK, Long.MIN_VALUE);
             if (shot != seenShot[0]) {
                 seenShot[0] = shot;

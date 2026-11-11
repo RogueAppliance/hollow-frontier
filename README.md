@@ -29,6 +29,10 @@ Shaders are up to you; Complementary Reimagined and Bliss are good fits. The sky
 
 A new world starts you in the nearest town's square, and on a dedicated server with operators you'll want `spawn-protection=0`, or other players can't use the doors and chests around it. Talk to a town's postmaster first: the Polar Survey's last letter is waiting, and it keeps track of the road north to a Polar Gateway (what to build, and roughly where the crater is). Once you reach the Hollow Earth, craft a Concavian Codex (a book and a phlogiston shard): it keeps track of how far you've come and says what's next. The advancement tabs (Hollow Frontier, Steam Age) lay out the rest.
 
+## December
+
+By the server's date, and gone again in January: town lamps dressed with a sprig and a ribbon, a tree in each town's square with candles lit after dark, a Christmas Parcel from the postmaster (one a year, with a Fruitcake in it), Eggnog and Hot Cider at the saloon, carols on the piano, and a good deal of talk about what the lights in the sky really were. From December 24th to 26th no outlaw raid starts, and a sheriff will let one small fine go. No snow is added. It's all switchable in `hollowfrontier-season-server.toml`.
+
 ## Settings
 
 - `hollowfrontier-server.toml` (per world): outlaw raids on towns, how often, how big, and what defenders earn.
@@ -37,6 +41,7 @@ A new world starts you in the nearest town's square, and on a dedicated server w
 - `hollowfrontier-mysteries-server.toml` (per world): airship sightings, cattle mutilations, crop circles, and the men in black's visits and hunts, each switchable.
 - `hollowfrontier-towns-server.toml` (per world): whether towns replace the townsfolk and lawmen they lose, and how long each new arrival takes.
   It also holds `spawnAtTown`, on by default, which starts new worlds in the nearest town. A world chooses its spawn once, so set this in the `config` folder before creating the world.
+- `hollowfrontier-season-server.toml` (per world): December. `mode` is `AUTO` (by the server's date), `ALWAYS` or `NEVER`; `truce` is the Christmas truce.
 - `hollowfrontier-startup.toml`: whether brass can be alloyed at a crafting table (turn it off if another mod makes brass).
 
 ## In a modpack

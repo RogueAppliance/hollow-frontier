@@ -92,6 +92,25 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ModItems.THICK_HIDE.get())
                 .unlockedBy("has_thick_hide", has(ModItems.THICK_HIDE.get()))
                 .save(output, HollowFrontier.id("leather_from_thick_hide").toString());
+        // The Still Sea (43b): blubber rendered to tallow (a fuel, and candles); Lamp Gel in glass; the Harpoon, and its teeth
+        simpleCookingRecipe("smelting", SmeltingRecipe::new, 200, ModItems.BLUBBER.get(), ModItems.TALLOW.get(), 0.1F);
+        simpleCookingRecipe("campfire_cooking", CampfireCookingRecipe::new, 600, ModItems.BLUBBER.get(), ModItems.TALLOW.get(), 0.1F);
+        shaped(RecipeCategory.DECORATIONS, Items.CANDLE, 2)
+                .define('S', Items.STRING).define('T', ModItems.TALLOW.get())
+                .pattern("S").pattern("T")
+                .unlockedBy("has_tallow", has(ModItems.TALLOW.get()))
+                .save(output, HollowFrontier.id("candle_from_tallow").toString());
+        shaped(RecipeCategory.DECORATIONS, ModItems.JELLY_LAMP.get())
+                .define('G', ModItems.LAMP_GEL.get()).define('X', Items.GLASS)
+                .pattern(" G ").pattern("GXG").pattern(" G ")
+                .unlockedBy("has_lamp_gel", has(ModItems.LAMP_GEL.get())).save(output);
+        shaped(RecipeCategory.COMBAT, ModItems.HARPOON.get())
+                .define('I', Items.IRON_INGOT).define('S', Items.STICK).define('L', Items.LEAD)
+                .pattern("  I").pattern(" S ").pattern("L  ")
+                .unlockedBy("has_lead", has(Items.LEAD)).save(output);
+        shapeless(RecipeCategory.COMBAT, ModItems.TOOTHED_HARPOON.get())
+                .requires(ModItems.HARPOON.get()).requires(ModItems.BASILOSAUR_TOOTH.get(), 2)
+                .unlockedBy("has_basilosaur_tooth", has(ModItems.BASILOSAUR_TOOTH.get())).save(output);
         // Glyptodon shell armor, scutes in the usual shapes
         TagKey<Item> scute = ModTags.Items.SCUTES_GLYPTODON;
         String has = "has_glyptodon_scute";
@@ -234,6 +253,13 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("GVG")
                 .unlockedBy("has_pressure_valve", has(ModItems.PRESSURE_VALVE.get()))
                 .save(output);
+        // 43c: the Steam Submersible. A brass hull with a glass dome, tallow in the seams, a jelly for its lamp, copper for
+        // the reservoir and a gear for the screw. Nothing in it burns.
+        shaped(RecipeCategory.TRANSPORTATION, ModItems.STEAM_SUBMERSIBLE.get())
+                .define('P', ModTags.Items.PLATES_BRASS).define('G', Items.GLASS).define('T', ModItems.TALLOW.get())
+                .define('L', ModItems.LAMP_GEL.get()).define('C', Tags.Items.STORAGE_BLOCKS_COPPER).define('R', ModTags.Items.GEARS_BRASS)
+                .pattern("PGP").pattern("TLT").pattern("CRC")
+                .unlockedBy("has_tallow", has(ModItems.TALLOW.get())).save(output);
         shaped(RecipeCategory.TRANSPORTATION, ModItems.AIRSHIP.get())
                 .define('L', Items.LEAD)
                 .define('E', ModItems.AIRSHIP_ENVELOPE.get())

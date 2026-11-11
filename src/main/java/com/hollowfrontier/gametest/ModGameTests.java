@@ -194,6 +194,33 @@ public final class ModGameTests {
         test("return_gateway_clears_trees", 20, HollowEarthTests::returnGatewayClearsTrees);
         test("crust_lets_light_through", 20, HollowEarthTests::crustLetsLightThrough);
         test("crossing_fall_cant_kill", 60, HollowEarthTests::crossingFallCantKill);
+        // 43a: the Still Sea
+        test("still_sea_takes_only_the_low_ground", 400, StillSeaTests::seaTakesOnlyTheLowGround);
+        test("still_sea_deep_water_has_a_bed", 400, StillSeaTests::deepWaterHasABed);
+        test("still_sea_biome_is_its_own", 20, StillSeaTests::seaBiomeIsItsOwn);
+        garden("still_sea_kelp_grows_on_the_shelf", 20, StillSeaTests::kelpGrowsOnTheShelf);
+        garden("still_sea_seagrass_grows_in_the_shallows", 20, StillSeaTests::seagrassGrowsInTheShallows);
+        // 43b: the sea's creatures and the Harpoon
+        field("sea_life_stocks_by_depth", 20, SeaLifeTests::seaLifeStocksByDepth);
+        field("sea_drops_and_recipes", 60, SeaLifeTests::seaDropsAndRecipes);
+        field("sea_cow_grazes", 20, SeaLifeTests::seaCowGrazes);
+        field("sea_cows_breed", 600, SeaLifeTests::seaCowsBreed);
+        field("basilosaurus_hunts", 20, SeaLifeTests::basilosaurusHunts);
+        field("plesiosaur_dives_and_fetches", 900, SeaLifeTests::plesiosaurDivesAndFetches);
+        field("lampjelly_stings", 20, SeaLifeTests::lampjellyStings);
+        field("harpoon_holds_reels_and_tows", 400, SeaLifeTests::harpoonHoldsReelsAndTows);
+        // 43c: the Steam Submersible
+        field("submersible_launches_and_charges", 100, SubmersibleTests::submersibleLaunchesAndCharges);
+        field("submersible_dives_holds_and_surfaces", 600, SubmersibleTests::submersibleDivesHoldsAndSurfaces);
+        field("submersible_keeps_its_crew", 60, SubmersibleTests::submersibleKeepsItsCrew);
+        field("submersible_owner_lock_and_fold", 20, SubmersibleTests::submersibleOwnerLockAndFold);
+        field("basilosaurus_rams_the_hull", 20, SubmersibleTests::basilosaurusRamsTheHull);
+        // 43d: the Drowned Quarter, the Symmes Landing and the Sealed Hull
+        test("sea_sites_go_where_they_should", 20, SeaSiteTests::seaSitesGoWhereTheyShould);
+        field("drowned_quarter_keeps_its_air", 100, SeaSiteTests::drownedQuarterKeepsItsAir);
+        field("symmes_landing_places", 20, SeaSiteTests::symmesLandingPlaces);
+        test("sea_tables_give_what_they_promise", 20, SeaSiteTests::seaTablesGiveWhatTheyPromise);
+        field("sealed_hull_lets_a_saucer_dive", 100, SeaSiteTests::sealedHullLetsASaucerDive);
         // 9b1: flora and ambience
         test("hollow_flora_in_biomes", 20, HollowFloraTests::floraInBiomes);
         garden("giant_fern_grows", 20, HollowFloraTests::giantFernGrows);
@@ -469,6 +496,15 @@ public final class ModGameTests {
         test("modpack_mystery_switches_default_on", 20, ModpackTests::mysterySwitchesDefaultOn);
         field("ash_devil_burns", 400, DustDevilTests::ashDevilBurns);
         field("dust_devils_the_frontier_talks", 20, DustDevilTests::theFrontierTalks);
+        // A frontier December (35)
+        test("season_follows_the_date", 20, SeasonTests::seasonFollowsTheDate);
+        test("lamps_dress_by_date", 20, SeasonTests::lampsDressByDate);
+        test("town_tree_stands_in_december", 20, SeasonTests::townTreeStandsInDecember);
+        test("parcel_once_per_year", 20, SeasonTests::parcelOncePerYear);
+        test("december_drinks_come_and_go", 20, SeasonTests::decemberDrinksComeAndGo);
+        test("piano_plays_carols", 20, SeasonTests::pianoPlaysCarols);
+        test("december_words_keep_to_the_season", 20, SeasonTests::decemberWordsKeepToTheSeason);
+        test("christmas_truce", 20, SeasonTests::christmasTruce);
         // The bank (16)
         test("bank_box_opens_for_a_gold_coin", 20, BankTests::boxOpensForAGoldCoin);
         test("bank_boxes_are_private", 20, BankTests::boxesArePrivate);

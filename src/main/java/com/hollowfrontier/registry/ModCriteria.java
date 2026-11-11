@@ -23,6 +23,8 @@ public final class ModCriteria {
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> GUN_LOADED = register("gun_loaded");
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> HORSE_SHOD = register("horse_shod");
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> LASSOED = register("lassoed");
+    /** A Plesiosaur brought something up for the player who fed it (43b). */
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> PLESIOSAUR_FETCHED = register("plesiosaur_fetched");
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> BOUNTY_CLAIMED = register("bounty_claimed");
     /** Value: the stars reached. */
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> WANTED_LEVEL = register("wanted_level");

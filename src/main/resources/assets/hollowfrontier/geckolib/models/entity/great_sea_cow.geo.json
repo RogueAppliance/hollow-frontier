@@ -1,0 +1,63 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.hollowfrontier.great_sea_cow",
+				"texture_width": 256,
+				"texture_height": 128,
+				"visible_bounds_width": 7,
+				"visible_bounds_height": 3,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 11, 0],
+					"cubes": [{"origin": [-11, 2, -20], "size": [22, 18, 40], "uv": [0, 0]}]
+				},
+				{
+					"name": "head",
+					"parent": "body",
+					"pivot": [0, 11, -20],
+					"cubes": [{"origin": [-7, 4, -34], "size": [14, 12, 14], "uv": [128, 0]}]
+				},
+				{
+					"name": "snout",
+					"parent": "head",
+					"pivot": [0, 7, -34],
+					"cubes": [{"origin": [-5, 3, -40], "size": [10, 8, 6], "uv": [188, 0]}]
+				},
+				{
+					"name": "tail",
+					"parent": "body",
+					"pivot": [0, 11, 20],
+					"cubes": [{"origin": [-7, 6, 20], "size": [14, 10, 16], "uv": [128, 30]}]
+				},
+				{
+					"name": "fluke",
+					"parent": "tail",
+					"pivot": [0, 11, 36],
+					"cubes": [{"origin": [-14, 9.5, 34], "size": [28, 3, 12], "uv": [128, 60]}]
+				},
+				{
+					"name": "flipper_left",
+					"parent": "body",
+					"pivot": [11, 6, -12],
+					"cubes": [{"origin": [11, -4, -16], "size": [3, 10, 8], "uv": [190, 30]}]
+				},
+				{
+					"name": "flipper_right",
+					"parent": "body",
+					"pivot": [-11, 6, -12],
+					"cubes": [{"origin": [-14, -4, -16], "size": [3, 10, 8], "uv": [190, 30], "mirror": true}]
+				}
+			]
+		}
+	]
+}
