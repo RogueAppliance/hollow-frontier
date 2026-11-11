@@ -85,6 +85,7 @@ public final class ModEntityRenderers {
         // carcass (its cuts glow faintly)
         event.registerEntityRenderer(ModEntities.AIRSHIP_SIGHTING.get(), ctx -> new GlowingGeoRenderer<>(ctx,
                 new DefaultedEntityGeoModel<AirshipSighting>(HollowFrontier.id("airship_sighting"))).withScale(4.0F).withRenderLayer(AutoGlowingGeoLayer::new));
+        event.registerEntityRenderer(ModEntities.TOWN_TREE.get(), TownTreeRenderer::new); // 35b
         event.registerEntityRenderer(ModEntities.CATTLE_CARCASS.get(), ctx -> new GlowingGeoRenderer<>(ctx,
                 new DefaultedEntityGeoModel<CattleCarcass>(HollowFrontier.id("cattle_carcass"))).withRenderLayer(AutoGlowingGeoLayer::new));
         // The live station's sentinel (10b): the probe's model in its own skin, its lights red

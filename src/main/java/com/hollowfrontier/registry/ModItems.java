@@ -183,6 +183,20 @@ public final class ModItems {
     public static final DeferredItem<DrinkItem> MOONSHINE = drink("moonshine", Drink.MOONSHINE, p -> p.rarity(Rarity.UNCOMMON));
     public static final DeferredItem<DrinkItem> SNAKE_OIL = drink("snake_oil", Drink.SNAKE_OIL, p -> p.rarity(Rarity.UNCOMMON));
 
+    // 35: a frontier December. The parcel a postmaster hands over, the Fruitcake always in it (five seconds to eat, fills you
+    // right up and slows you for half a minute), and the two drinks the barmaids pour that month
+    public static final DeferredItem<com.hollowfrontier.content.frontier.season.ChristmasParcelItem> CHRISTMAS_PARCEL = ITEMS.registerItem("christmas_parcel",
+            com.hollowfrontier.content.frontier.season.ChristmasParcelItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<com.hollowfrontier.content.frontier.season.FruitcakeItem> FRUITCAKE = ITEMS.registerItem("fruitcake",
+            com.hollowfrontier.content.frontier.season.FruitcakeItem::new,
+            p -> p.stacksTo(16).food(new FoodProperties.Builder().nutrition(20).saturationModifier(0.6F).alwaysEdible().build(),
+                    Consumables.defaultFood().consumeSeconds(5.0F)
+                            .onConsume(new net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect(
+                                    new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.SLOWNESS, 600, 0)))
+                            .build()));
+    public static final DeferredItem<DrinkItem> EGGNOG = drink("eggnog", Drink.EGGNOG, p -> p);
+    public static final DeferredItem<DrinkItem> HOT_CIDER = drink("hot_cider", Drink.HOT_CIDER, p -> p);
+
     // Steam
     public static final DeferredItem<BlockItem> BOILER = ITEMS.registerSimpleBlockItem(ModBlocks.BOILER);
     public static final DeferredItem<BlockItem> COPPER_PIPE = ITEMS.registerSimpleBlockItem(ModBlocks.COPPER_PIPE);

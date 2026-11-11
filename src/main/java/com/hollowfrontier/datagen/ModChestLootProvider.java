@@ -363,6 +363,16 @@ public class ModChestLootProvider implements LootTableSubProvider {
         ModItems.GADGETS.forEach(gadget -> gadgets.add(item(gadget.get(), 1, 1, 1)));
         LootPool.Builder another = pool(1, 1).add(EmptyLootItem.emptyItem().setWeight(15));
         ModItems.GADGETS.forEach(gadget -> another.add(item(gadget.get(), 1, 1, 1)));
+        // 35b: a Christmas Parcel: always a Fruitcake and some coin, and two of the things a frontier relative would send
+        accept(ModChestLoot.CHRISTMAS_PARCEL, LootTable.lootTable()
+                .withPool(pool(1, 1).add(item(ModItems.FRUITCAKE.get(), 1, 1, 1)))
+                .withPool(pool(1, 1).add(item(ModItems.COPPER_COIN.get(), 6, 12, 1)))
+                .withPool(pool(2, 2)
+                        .add(item(ModItems.REVOLVER_CARTRIDGE.get(), 8, 16, 10))
+                        .add(item(ModItems.RIFLE_CARTRIDGE.get(), 5, 10, 8))
+                        .add(item(ModItems.PERCUSSION_CAP.get(), 12, 24, 10))
+                        .add(item(ModItems.COWBOY_COFFEE.get(), 1, 2, 10))
+                        .add(item(ModItems.GOLD_COIN.get(), 1, 1, 3))));
         accept(ModChestLoot.CRASH_SITE, LootTable.lootTable()
                 .withPool(pool(1, 1).add(item(ModItems.ALIEN_ALLOY_PLATING.get(), 1, 2, 1)))
                 .withPool(pool(2, 3)

@@ -1,16 +1,28 @@
 {
   "variants": {
-    "hanging=false,lit=false": {
+    "festive=false,hanging=false,lit=false": {
       "model": "hollowfrontier:block/town_lamp_unlit"
     },
-    "hanging=false,lit=true": {
+    "festive=false,hanging=false,lit=true": {
       "model": "minecraft:block/lantern"
     },
-    "hanging=true,lit=false": {
+    "festive=false,hanging=true,lit=false": {
       "model": "hollowfrontier:block/town_lamp_unlit_hanging"
     },
-    "hanging=true,lit=true": {
+    "festive=false,hanging=true,lit=true": {
       "model": "minecraft:block/lantern_hanging"
+    },
+    "festive=true,hanging=false,lit=false": {
+      "model": "hollowfrontier:block/town_lamp_festive_unlit"
+    },
+    "festive=true,hanging=false,lit=true": {
+      "model": "hollowfrontier:block/town_lamp_festive"
+    },
+    "festive=true,hanging=true,lit=false": {
+      "model": "hollowfrontier:block/town_lamp_festive_unlit_hanging"
+    },
+    "festive=true,hanging=true,lit=true": {
+      "model": "hollowfrontier:block/town_lamp_festive_hanging"
     }
   }
 }

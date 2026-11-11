@@ -49,6 +49,11 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> PIANO_THE_STRENUOUS_LIFE = register("block.saloon_piano.the_strenuous_life");
     public static final List<DeferredHolder<SoundEvent, SoundEvent>> PIANO_REPERTOIRE =
             List.of(PIANO_THE_ENTERTAINER, PIANO_ELITE_SYNCOPATIONS, PIANO_PINEAPPLE_RAG, PIANO_THE_STRENUOUS_LIFE);
+    // 35c: December's carols, worked in every other tune. Our own arrangements of public-domain tunes, rendered the same way.
+    public static final DeferredHolder<SoundEvent, SoundEvent> PIANO_JINGLE_BELLS = register("block.saloon_piano.jingle_bells");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PIANO_GOD_REST_YE = register("block.saloon_piano.god_rest_ye_merry_gentlemen");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PIANO_O_COME = register("block.saloon_piano.o_come_all_ye_faithful");
+    public static final List<DeferredHolder<SoundEvent, SoundEvent>> PIANO_CAROLS = List.of(PIANO_JINGLE_BELLS, PIANO_GOD_REST_YE, PIANO_O_COME);
 
     // Steam handcar: the engine's beat and its whistle
     public static final DeferredHolder<SoundEvent, SoundEvent> HANDCAR_CHUFF = register("entity.steam_handcar.chuff");

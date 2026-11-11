@@ -19,6 +19,28 @@
 - **Existing worlds:** the sea appears in Hollow Earth chunks nobody has visited yet. Places already explored stay as they are. About two thirds of what becomes sea was shallow lake before, so the join is mostly under water; where old dry land meets new sea there may be a step. Nothing else moves: the four land biomes, their terrain and their sites are where they were.
 - **For pack makers:** the new biome is `hollowfrontier:still_sea`. It is in `hollowfrontier:is_hollow_earth` and in no vanilla ocean tag, so vanilla's ocean structures and mobs don't appear there. A new tag, `hollowfrontier:is_hollow_land`, holds the four land biomes.
 
+## 1.2.0 — A frontier December (unreleased)
+
+Everything here comes on by the date and leaves by itself. The date is the server's own, so every player on a server sees the same thing. Nothing needs cleaning up in January, and existing worlds get all of it.
+
+- **The lamps:** through December a town's lamps dress themselves one by one, a sprig and a red ribbon on each, and undress the same way in January. Town Lamps you've placed yourself do it too.
+- **The town tree:** a December town has a spruce in its square, about seven blocks tall, in a tub, hung with tin stars and candles that are lit after dark. It can't be hit, pushed or walked into, and it damages nothing: it's there when someone is in town, and gone once the month is over.
+- **The Christmas Parcel:** in December the first time you talk to a town's postmaster he hands you a parcel, one a year for each player. In a town with no post office the shopkeeper has it. Use it to open it: coins, and things a frontier relative would send (cartridges, caps, coffee), and a **Fruitcake**.
+- **The Fruitcake** takes five seconds to eat, fills you right up and slows you for half a minute. Nobody will buy one.
+- **Two December drinks** at the saloon: **Eggnog** (Absorption, and 1 Tipsy) and **Hot Cider** (Regeneration, thaws you if you're freezing, and doesn't make you Tipsy). The barmaids pour them in December only.
+- **Carols:** in December the saloon piano works a carol in every other tune: Jingle Bells, God Rest Ye Merry, Gentlemen, and O Come, All Ye Faithful. They stop for a brawl like every other tune.
+- **Talk:** about thirty new lines across the frontier's voices, a few overheard exchanges, and Gazette back-page pieces. If there have been lights in the sky, the children decide it was a sleigh, the Gazette corrects them, and the men in black adopt it. The Kindled, who live under a sun that never sets, have the shortest day explained to them.
+- **The truce:** from December 24th to 26th no outlaw raid starts. A raid or a posse already under way isn't called off. Over those three days a sheriff will let one fine go, once a year: talk to him with one star. At two stars the law still shoots.
+- **No snow:** weather and biomes stay as they are. Desert towns get a dry Christmas, and folk remark on it.
+- **Settings:** `hollowfrontier-season-server.toml`, per world. `mode` is `AUTO` (by the server's date), `ALWAYS` (December's things all year) or `NEVER`. Christmas itself always goes by the date, so `ALWAYS` doesn't stop raids for good. `truce` turns the truce and the waived fine off.
+
+Also in this version:
+
+- **Guns show what's in them:** a black powder gun's slot now has a row of small pips along the top, one for each chamber or barrel, brass when loaded and dark when not. Before, a loaded gun and an empty one were the same picture.
+- **Quick Load:** the reload animation now keeps pace with the faster loading. Before, the gun loaded sooner but the hands moved at the old speed and were cut off mid-stroke.
+- **Dusters have tails:** the outlaws', the men in black's and the U.S. Marshal's long coats now hang to the knee, open in front, and swing as they walk and ride.
+- **Fern Fronds redrawn:** the crowns of the Jungle's tree ferns read as fronds now, each with a midrib and leaflets. Before, they looked like scattered pixels.
+
 ## 1.1.4 — New worlds start in town, new faces, and safecrackers find the way in
 
 - **New worlds start in town:** a new world now puts you on open ground in the nearest town's square, and you come back there if you die with no bed. With no town within about 10,000 blocks you start where the game would have put you. Existing worlds keep their spawn. Set `spawnAtTown` in `hollowfrontier-towns-server.toml`, in the config folder, before creating the world. On a dedicated server with operators, set `spawn-protection=0`, or other players can't use the doors and chests round the square.

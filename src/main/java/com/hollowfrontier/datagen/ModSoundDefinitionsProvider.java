@@ -27,6 +27,11 @@ public class ModSoundDefinitionsProvider extends SoundDefinitionsProvider {
             add(tune, definition().subtitle("subtitles." + HollowFrontier.MODID + ".saloon_piano.play")
                     .with(recording("block/saloon_piano/" + name).attenuationDistance(24)));
         }
+        for (var tune : ModSounds.PIANO_CAROLS) { // 35c
+            String name = tune.getId().getPath().substring("block.saloon_piano.".length());
+            add(tune, definition().subtitle("subtitles." + HollowFrontier.MODID + ".saloon_piano.carol")
+                    .with(recording("block/saloon_piano/" + name).attenuationDistance(24)));
+        }
 
         remix(ModSounds.RATTLESNAKE_RATTLE, "rattlesnake.rattle", vanilla("entity.silverfish.ambient", 0.8F, 1.7F), vanilla("entity.silverfish.ambient", 0.8F, 1.85F));
         remix(ModSounds.RATTLESNAKE_HURT, "rattlesnake.hurt", vanilla("entity.silverfish.hurt", 1.0F, 1.3F));

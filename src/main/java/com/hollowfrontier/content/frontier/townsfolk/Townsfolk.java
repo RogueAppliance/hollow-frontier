@@ -221,6 +221,15 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
             serverPlayer.sendSystemMessage(Component.translatable("message.hollowfrontier.survey.postmaster"));
             return InteractionResult.SUCCESS_SERVER;
         }
+        // 35b: in December a postmaster (or, with no post office, the storekeeper) has this year's parcel for you
+        if (isAlive() && getType() == ModEntities.TOWNSFOLK.get() && level() instanceof ServerLevel serverLevel
+                && player instanceof ServerPlayer serverPlayer
+                && com.hollowfrontier.content.frontier.season.ChristmasParcelItem.due(serverLevel, serverPlayer)
+                && com.hollowfrontier.content.frontier.season.ChristmasParcelItem.handsOver(serverLevel, this)
+                && com.hollowfrontier.content.frontier.season.ChristmasParcelItem.handOver(serverLevel, serverPlayer)) {
+            serverPlayer.sendSystemMessage(Component.translatable("message.hollowfrontier.parcel." + getFolk().id()));
+            return InteractionResult.SUCCESS_SERVER;
+        }
         // Sneaking up to a banker: your safe deposit box in this town's bank, not his trades.
         if (isAlive() && player.isSecondaryUseActive() && getType() == ModEntities.TOWNSFOLK.get() && getFolk() == Folk.BANKER) {
             if (level() instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {

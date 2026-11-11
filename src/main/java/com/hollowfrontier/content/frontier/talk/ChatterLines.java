@@ -81,6 +81,7 @@ public final class ChatterLines {
         outlaws();
         others();
         gossip();
+        december();
     }
 
     // ---------------------------------------------------------------- town
@@ -528,6 +529,79 @@ public final class ChatterLines {
         say(TALK, when(SIGIL), "You carry our sign. Our guardians know you by it.");
         say(TALK, only(Act.GRAYS), "The grey ones grow bold above. We feel their ships pass through the crust.");
         say(TALK, act(Act.AFTER), "The leash is broken. For the first time in an age, the grey ones are afraid.");
+    }
+
+    // ---------------------------------------------------------------- a frontier December (35d)
+
+    /**
+     * What the frontier says in December ({@link Fact#DECEMBER}) and over Christmas itself ({@link Fact#CHRISTMAS}), voice
+     * by voice. Three threads run through it: the lights in the sky become a sleigh (the children and old-timers decide it,
+     * the Gazette corrects them, the men in black adopt it); the Gray at the church social; and the Kindled, who live under
+     * a sun that never sets and have the month explained to them. Nobody names the driver of the sleigh.
+     */
+    private static void december() {
+        voice("townsfolk");
+        say(GREET, when(DECEMBER), "Merry Christmas, stranger. Mind the tree. It's the only one for forty miles.");
+        say(GREET, when(DECEMBER).unless(RAIN), "No snow again this year. We hung the washing out to look festive.");
+        say(GREET, when(CHRISTMAS), "Merry Christmas! Even the gang's stayed home. Don't ask how I know.");
+        say(TALK, when(DECEMBER), "Tree came in on the railroad. Cost more than the church bell. Smells better.");
+        say(TALK, when(DECEMBER), "My boy asked for snow. I gave him a bucket of sand and told him to use his imagination.");
+        say(TALK, when(DECEMBER, SIGHTINGS), "Them lights last night? The children say it was a sleigh. I've decided they're right. I sleep better.");
+        say(TALK, when(CHRISTMAS, STRANGER), "The tall fella sang every carol at the social. Half a beat behind. Every one.");
+        say(TALK, when(CHRISTMAS, STRANGER), "New fella brought a gift to the social. It hums. Nobody's opened it.");
+
+        voice("shopkeeper");
+        say(TALK, when(DECEMBER), "Fruitcake? No. I don't buy them. Nobody buys them. They just arrive.");
+        voice("banker");
+        say(TALK, when(DECEMBER), "The bank shuts Christmas Day. The vault isn't festive. Leave it be.");
+        voice("wrangler");
+        say(TALK, when(DECEMBER), "Horses don't know it's Christmas. I told 'em. Made no difference.");
+        voice("prospector");
+        say(TALK, when(DECEMBER, SIGHTINGS), "Lights over the ridge, fast, no sound. That's a sleigh. Saw one in '49. Didn't stop then neither.");
+        voice("doctor");
+        say(TALK, when(DECEMBER), "Eggnog is not medicine. I'm asked every year.");
+        voice("teacher");
+        say(TALK, when(DECEMBER, SIGHTINGS), "The children drew what they saw in the sky. Eleven sleighs and one very round plate. I've kept the plate.");
+        voice("preacher");
+        say(TALK, when(DECEMBER), "Carol service is Sunday. Come and sing. We need somebody who knows the second verse.");
+        voice("postmaster");
+        say(TALK, when(DECEMBER), "Parcels up to the rafters. Half of 'em are fruitcake. You can tell by the lifting.");
+        voice("editor");
+        say(TALK, when(DECEMBER, SIGHTINGS), "The Gazette's position is that it was not a sleigh. Sales are down.");
+
+        voice("barmaid");
+        say(GREET, when(DECEMBER), "Come in, darlin'. Mind the mistletoe. Nobody's stood under it on purpose yet.");
+        say(TALK, when(DECEMBER), "Eggnog or hot cider, sugar? December only. Come January I pour it out.");
+        say(TALK, when(CHRISTMAS, STRANGER), "The quiet fella ordered an eggnog. Held it an hour. Then he asked me what a nog was.");
+
+        voice("lawman");
+        say(TALK, when(DECEMBER).unless(WANTED), "Quiet month. Even outlaws have mothers.");
+        voice("sheriff");
+        say(TALK, when(CHRISTMAS).unless(WANTED), "No raids over Christmas. Nobody agreed to it. It just happens.");
+        voice("jailbird");
+        say(JEER, when(DECEMBER), "They brought me a plate. Turkey, they said. I've met that turkey. It was a crow.");
+        say(JEER, when(CHRISTMAS), "Christmas dinner on a tin plate. Gravy was warm, mind. Don't tell the sheriff I said so.");
+
+        // The sleigh, as a cover story: worse each time
+        voice("man_in_black");
+        say(TALK, when(DECEMBER, SIGHTINGS), "It was a sleigh.");
+        say(TALK, when(DECEMBER, SIGHTINGS), "It was a sleigh. We have looked into it.");
+        say(TALK, when(DECEMBER, SIGHTINGS), "It was a sleigh. We have looked into it. You may stop asking.");
+        say(TALK, when(DECEMBER, SIGHTINGS), "The sleigh has been accounted for. So have the reindeer. There were the usual number of reindeer.");
+
+        voice("disguised_gray");
+        say(GREET, when(DECEMBER), "Merry December, fellow human. I have brought a gift. It is a rock. It is wrapped.");
+        say(TALK, when(CHRISTMAS), "I have sung the carol. All of it. I began when you had finished, to be polite.");
+
+        voice("kindled");
+        say(TALK, when(DECEMBER), "A shortest day. We have no word for it. Our sun does not leave. I am sorry that yours does.");
+        say(TALK, when(DECEMBER), "Your sun goes a little further each day, and so you light candles and sing. That is sad. It is also brave.");
+
+        gossip(when(DECEMBER), "Tree's up in the square.", "Came by rail. Dropped half its needles at the depot.", "Depot looks lovely.");
+        gossip(when(DECEMBER).unless(RAIN), "Think it'll snow for Christmas?", "It hasn't snowed here since the town was founded.", "So it's due.");
+        gossip(when(DECEMBER, SIGHTINGS), "The little ones say the lights were a sleigh.", "And what do you say?", "I say it's cheaper than the truth.");
+        gossip(when(CHRISTMAS), "No sign of the gang all week.", "Christmas. Even they keep it.", "That's what worries me.");
+        gossip(when(CHRISTMAS, STRANGER), "That stranger sang at the social.", "Sang well?", "Sang late. Half a beat. Like an echo with a hat on.");
     }
 
     // ---------------------------------------------------------------- overheard

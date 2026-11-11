@@ -248,12 +248,24 @@ public class ModModelProvider extends ModelProvider {
         TextureMapping cold = new TextureMapping().put(TextureSlot.LANTERN, TextureMapping.getBlockTexture(lamp, "_unlit"));
         Identifier coldStanding = net.minecraft.client.data.models.model.ModelTemplates.LANTERN.createWithSuffix(lamp, "_unlit", cold, blockModels.modelOutput);
         Identifier coldHanging = net.minecraft.client.data.models.model.ModelTemplates.HANGING_LANTERN.createWithSuffix(lamp, "_unlit", cold, blockModels.modelOutput);
+        // 35a: dressed for December, lit and unlit: the same two models with a sprig and a red ribbon drawn on the texture
+        TextureMapping festiveLit = new TextureMapping().put(TextureSlot.LANTERN, TextureMapping.getBlockTexture(lamp, "_festive"));
+        TextureMapping festiveCold = new TextureMapping().put(TextureSlot.LANTERN, TextureMapping.getBlockTexture(lamp, "_festive_unlit"));
+        Identifier festiveStanding = ModelTemplates.LANTERN.createWithSuffix(lamp, "_festive", festiveLit, blockModels.modelOutput);
+        Identifier festiveHanging = ModelTemplates.HANGING_LANTERN.createWithSuffix(lamp, "_festive", festiveLit, blockModels.modelOutput);
+        Identifier festiveColdStanding = ModelTemplates.LANTERN.createWithSuffix(lamp, "_festive_unlit", festiveCold, blockModels.modelOutput);
+        Identifier festiveColdHanging = ModelTemplates.HANGING_LANTERN.createWithSuffix(lamp, "_festive_unlit", festiveCold, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(lamp).with(
-                net.minecraft.client.data.models.blockstates.PropertyDispatch.initial(BlockStateProperties.HANGING, BlockStateProperties.LIT)
-                        .select(false, true, BlockModelGenerators.plainVariant(Identifier.withDefaultNamespace("block/lantern")))
-                        .select(true, true, BlockModelGenerators.plainVariant(Identifier.withDefaultNamespace("block/lantern_hanging")))
-                        .select(false, false, BlockModelGenerators.plainVariant(coldStanding))
-                        .select(true, false, BlockModelGenerators.plainVariant(coldHanging))));
+                net.minecraft.client.data.models.blockstates.PropertyDispatch.initial(BlockStateProperties.HANGING, BlockStateProperties.LIT,
+                                com.hollowfrontier.content.frontier.furniture.TownLampBlock.FESTIVE)
+                        .select(false, true, false, BlockModelGenerators.plainVariant(Identifier.withDefaultNamespace("block/lantern")))
+                        .select(true, true, false, BlockModelGenerators.plainVariant(Identifier.withDefaultNamespace("block/lantern_hanging")))
+                        .select(false, false, false, BlockModelGenerators.plainVariant(coldStanding))
+                        .select(true, false, false, BlockModelGenerators.plainVariant(coldHanging))
+                        .select(false, true, true, BlockModelGenerators.plainVariant(festiveStanding))
+                        .select(true, true, true, BlockModelGenerators.plainVariant(festiveHanging))
+                        .select(false, false, true, BlockModelGenerators.plainVariant(festiveColdStanding))
+                        .select(true, false, true, BlockModelGenerators.plainVariant(festiveColdHanging))));
         itemModels.itemModelOutput.accept(lamp.asItem(), net.minecraft.client.data.models.model.ItemModelUtils.plainModel(
                 ModelTemplates.FLAT_ITEM.create(lamp.asItem(), TextureMapping.layer0(net.minecraft.world.item.Items.LANTERN), itemModels.modelOutput)));
         Block piano = ModBlocks.SALOON_PIANO.get();
@@ -429,8 +441,10 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BRASS_STAR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.FRONTIER_GAZETTE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.SURVEY_LETTER.get(), ModelTemplates.FLAT_ITEM); // 32d
+        itemModels.generateFlatItem(ModItems.CHRISTMAS_PARCEL.get(), ModelTemplates.FLAT_ITEM); // 35b
+        itemModels.generateFlatItem(ModItems.FRUITCAKE.get(), ModelTemplates.FLAT_ITEM);
         for (var drink : java.util.List.of(ModItems.FRONTIER_BEER, ModItems.SARSAPARILLA, ModItems.COWBOY_COFFEE, ModItems.RYE_WHISKEY,
-                ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL)) {
+                ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL, ModItems.EGGNOG, ModItems.HOT_CIDER)) {
             itemModels.generateFlatItem(drink.get(), ModelTemplates.FLAT_ITEM);
         }
     }

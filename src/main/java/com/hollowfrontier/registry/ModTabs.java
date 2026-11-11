@@ -92,6 +92,8 @@ public final class ModTabs {
         add(out, ModItems.IRON_HORSESHOES, ModItems.BRASS_HORSESHOES, ModItems.SADDLEBAGS);
         // Money, the law and the news
         add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE, ModItems.SURVEY_LETTER);
+        // 35: a frontier December
+        add(out, ModItems.CHRISTMAS_PARCEL, ModItems.FRUITCAKE, ModItems.EGGNOG, ModItems.HOT_CIDER);
         // The frontier's mysteries (11a)
         add(out, ModItems.FLATTENED_WHEAT, ModItems.STRANGE_SKULL);
         // Drinks, soft to hard, then the doctor's
@@ -238,7 +240,8 @@ public final class ModTabs {
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
             after(event, Items.COOKED_BEEF, ModItems.RAW_MAMMOTH, ModItems.MAMMOTH_STEAK);
             after(event, Items.HONEY_BOTTLE, ModItems.SARSAPARILLA, ModItems.COWBOY_COFFEE, ModItems.FRONTIER_BEER, ModItems.RYE_WHISKEY,
-                    ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL);
+                    ModItems.MEZCAL, ModItems.MOONSHINE, ModItems.SNAKE_OIL, ModItems.EGGNOG, ModItems.HOT_CIDER);
+            after(event, Items.PUMPKIN_PIE, ModItems.FRUITCAKE);
         } else if (tab == CreativeModeTabs.INGREDIENTS) {
             after(event, Items.RAW_GOLD, ModItems.RAW_STARSTEEL);
             after(event, Items.DIAMOND, ModItems.PHLOGISTON_SHARD);

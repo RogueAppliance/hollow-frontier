@@ -28,6 +28,9 @@ public class DrinkItem extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if (!level.isClientSide()) {
             drink.drink(entity);
+            if (drink == Drink.HOT_CIDER) {
+                entity.setTicksFrozen(0); // 35c: it thaws you out
+            }
             if (drink == Drink.MOONSHINE && entity instanceof net.minecraft.server.level.ServerPlayer player) {
                 Moonshine.drunk(player); // 21b: it may show them something
             }
@@ -43,6 +46,9 @@ public class DrinkItem extends Item {
                 name = Component.translatable("potion.withAmplifier", name, Component.translatable("potion.potency." + dose.amplifier()));
             }
             builder.accept(Component.translatable("potion.withDuration", name, duration(dose.seconds())).withStyle(ChatFormatting.BLUE));
+        }
+        if (drink == Drink.HOT_CIDER) {
+            builder.accept(Component.translatable("tooltip.hollowfrontier.drink.thaws").withStyle(ChatFormatting.BLUE));
         }
         if (drink.gamble()) {
             builder.accept(Component.translatable("tooltip.hollowfrontier.drink.gamble").withStyle(ChatFormatting.DARK_PURPLE));

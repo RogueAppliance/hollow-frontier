@@ -73,6 +73,8 @@ neoForge {
             // Sign in with a real Microsoft account (own name and skin): the first launch prints a login code, then it's cached
             devLogin = true
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            // -PseasonDate=2026-12-25 holds the date for the run, to play December (35) in any month
+            if (project.hasProperty('seasonDate')) systemProperty 'hollowfrontier.season.date', project.property('seasonDate').toString()
         }
 
         // Dev visual check: opens run/saves/hf_photo, stages the mod's mobs, saves run/screenshots/hf_*.png, quits.
@@ -119,6 +121,8 @@ neoForge {
         gameTestServer {
             type = "gameTestServer"
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            // The suite reads the same whatever the month: December's content (35) is tested by setting the date in each test
+            systemProperty 'hollowfrontier.season.date', '2026-07-01'
         }
 
         data {

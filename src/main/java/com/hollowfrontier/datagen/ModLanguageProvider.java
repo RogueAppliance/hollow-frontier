@@ -118,6 +118,20 @@ public class ModLanguageProvider extends LanguageProvider {
         add("tooltip.hollowfrontier.drink.tipsy", "+%s Tipsy (spoils your aim)");
         add("tooltip.hollowfrontier.drink.sober", "Sobers you up by %s level");
         add("tooltip.hollowfrontier.drink.sober_all", "Sobers you right up");
+        // 35: a frontier December
+        addItem(ModItems.CHRISTMAS_PARCEL, "Christmas Parcel");
+        addItem(ModItems.FRUITCAKE, "Fruitcake");
+        addItem(ModItems.EGGNOG, "Eggnog");
+        addItem(ModItems.HOT_CIDER, "Hot Cider");
+        addEntityType(ModEntities.TOWN_TREE, "Town Tree");
+        add("tooltip.hollowfrontier.christmas_parcel", "Brown paper and string. Use it to open it.");
+        add("tooltip.hollowfrontier.fruitcake", "Nobody will buy one.");
+        add("tooltip.hollowfrontier.drink.thaws", "Thaws you out");
+        add("message.hollowfrontier.parcel.postmaster", "The postmaster: \"Parcel for you. Came in on the December stage. It rattles, and it's heavy.\"");
+        add("message.hollowfrontier.parcel.shopkeeper", "The shopkeeper: \"No post office here, so the stage leaves these with me. This one's yours. It's heavy.\"");
+        add("message.hollowfrontier.parcel.opened", "Somebody back East remembered you.");
+        add("message.hollowfrontier.truce.waived", "The sheriff: \"It's Christmas. I never saw you. Don't make me see you tomorrow.\"");
+        add("subtitles.hollowfrontier.saloon_piano.carol", "Piano plays a carol");
         add("tooltip.hollowfrontier.drink.gamble", "Cures what ails you. Probably.");
         add("message.hollowfrontier.blackout", "You black out...");
         // 21b: Doc's promises (one per outcome, in Drink.GAMBLE's order, none of them true), and the rest of a saloon night
@@ -308,6 +322,10 @@ public class ModLanguageProvider extends LanguageProvider {
         add("track.hollowfrontier.elite_syncopations", "Scott Joplin - Elite Syncopations (1902)");
         add("track.hollowfrontier.pineapple_rag", "Scott Joplin - Pineapple Rag (1908)");
         add("track.hollowfrontier.the_strenuous_life", "Scott Joplin - The Strenuous Life (1902)");
+        // 35c: the carols, as the rags are named (TownSoundscape's "Now Playing")
+        add("track.hollowfrontier.jingle_bells", "James Lord Pierpont - Jingle Bells (1857)");
+        add("track.hollowfrontier.god_rest_ye_merry_gentlemen", "Traditional - God Rest Ye Merry, Gentlemen");
+        add("track.hollowfrontier.o_come_all_ye_faithful", "John Francis Wade - O Come, All Ye Faithful (1743)");
         add("subtitles.hollowfrontier.saloon_piano.play", "Piano plays");
         add("subtitles.hollowfrontier.rattlesnake.rattle", "Rattlesnake rattles");
         add("subtitles.hollowfrontier.rattlesnake.hurt", "Rattlesnake hisses");

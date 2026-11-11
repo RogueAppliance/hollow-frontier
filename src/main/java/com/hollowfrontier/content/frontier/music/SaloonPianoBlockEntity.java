@@ -53,6 +53,8 @@ public class SaloonPianoBlockEntity extends BlockEntity {
     private int sinceStart;
     private int pause;
     private int tune = -1;
+    private int carol = -1;
+    private boolean lastWasCarol;
 
     public SaloonPianoBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SALOON_PIANO.get(), pos, state);
@@ -88,19 +90,25 @@ public class SaloonPianoBlockEntity extends BlockEntity {
         if (piano.pause-- > 0) {
             return;
         }
-        output.start(pos, piano.nextTune().value());
+        output.start(pos, piano.nextTune(state.getValue(SaloonPianoBlock.CAROLS)).value());
         piano.sounding = true;
         piano.sinceStart = 0;
     }
 
     /** Once a second, on the server: hushed while there's trouble within {@link #TROUBLE_RANGE} (21b). */
     public static void serverTick(Level level, BlockPos pos, BlockState state, SaloonPianoBlockEntity piano) {
-        if ((level.getGameTime() + pos.asLong()) % 20 != 0) {
-            return;
+        if ((level.getGameTime() + pos.asLong()) % 20 == 0) {
+            watch(level, pos, state);
         }
+    }
+
+    /** The server's look round (public so game tests can drive it): trouble hushes the piano, December gives it carols. */
+    public static void watch(Level level, BlockPos pos, BlockState state) {
         boolean trouble = trouble(level, pos);
-        if (state.getValue(SaloonPianoBlock.HUSHED) != trouble) {
-            level.setBlock(pos, state.setValue(SaloonPianoBlock.HUSHED, trouble), Block.UPDATE_CLIENTS);
+        // 35c: the date is the server's, so the season reaches each client's pianist by the block
+        boolean carols = com.hollowfrontier.content.frontier.season.Season.isDecember(level);
+        if (state.getValue(SaloonPianoBlock.HUSHED) != trouble || state.getValue(SaloonPianoBlock.CAROLS) != carols) {
+            level.setBlock(pos, state.setValue(SaloonPianoBlock.HUSHED, trouble).setValue(SaloonPianoBlock.CAROLS, carols), Block.UPDATE_CLIENTS);
         }
     }
 
@@ -113,6 +121,18 @@ public class SaloonPianoBlockEntity extends BlockEntity {
         }
         return !level.getEntitiesOfClass(Mob.class, new AABB(pos).inflate(TROUBLE_RANGE),
                 m -> (m instanceof AbstractOutlaw || m instanceof Lawman) && m.isAlive() && m.getTarget() != null && m.getTarget().isAlive()).isEmpty();
+    }
+
+    /** The tune to play next, in December (35c): a carol every other tune, the carols in turn like the rags. */
+    public Holder<SoundEvent> nextTune(boolean carols) {
+        if (!carols || lastWasCarol) {
+            lastWasCarol = false;
+            return nextTune();
+        }
+        List<DeferredHolder<SoundEvent, SoundEvent>> tunes = ModSounds.PIANO_CAROLS;
+        carol = carol < 0 ? Math.floorMod(worldPosition.hashCode(), tunes.size()) : (carol + 1) % tunes.size();
+        lastWasCarol = true;
+        return tunes.get(carol);
     }
 
     /** The tune to play next: each piano starts somewhere in the repertoire, then plays it in order. */

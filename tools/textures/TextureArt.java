@@ -58,6 +58,8 @@ public class TextureArt {
         System.out.println("TextureArt: " + relics + " Hollow relic, sherd, trim and seal textures");
         int sea = Sea.writeAll(root); // 43b: the Still Sea's creatures, their drops, the Jelly Lamp and the Harpoons
         System.out.println("TextureArt: " + sea + " Still Sea textures");
+        int december = December.writeAll(root); // 35: the town tree, the parcel and what's in it, the two December drinks
+        System.out.println("TextureArt: " + december + " December textures");
         int reworked = Reworked.writeAll(root); // last: it overwrites hand-drawn versions with ones reworked from vanilla
         System.out.println("TextureArt: wrote " + (3 + folk.length + ranks.length) + " skins, " + barmaids + " barmaid skins, " + creatures + " Hollow Earth creature textures, " + megafauna + " megafauna textures, " + mystery + " frontier mystery textures, " + cats + " cat textures, 1 effect icon, " + guns + " gun textures, " + items + " items, " + blocks + " block tiles, " + armor + " armor layers, " + expedition + " airship and polar gateway textures, " + hollow + " Hollow Earth textures, " + starsteel + " starsteel and phlogiston textures, " + concavia + " Concavia textures, " + ufo + " Gray textures, " + reworked + " reworked from vanilla to " + root);
     }
@@ -155,11 +157,16 @@ public class TextureArt {
     static final int SKIN_W = 64, SKIN_H = 96;
 
     /**
-     * What hangs below the belt: a dress or a robe (none: -1, the box left clear). Duster and frock-coat tails were tried
-     * on the coat wearers and held off on request; the painting below still handles them.
+     * What hangs below the belt: a dress, a robe or a duster's tails (none: -1, the box left clear). The dusters are the
+     * long coats: the outlaws', the men in black's and the U.S. Marshal's (the user's call, 2026-11-10, after tails on every
+     * coat wearer were tried and held off). The frock coats (doctor, preacher, banker) stay short; the painting below would
+     * handle them.
      */
     static int tails(Character c) {
         if (c == Character.TEACHER || c == Character.KINDLED) {
+            return c.coat;
+        }
+        if (c == Character.OUTLAW || c == Character.GUNSLINGER || c == Character.BOSS || c == Character.MAN_IN_BLACK || c == Character.MARSHAL) {
             return c.coat;
         }
         return -1;
@@ -5365,8 +5372,49 @@ public class TextureArt {
                     }
                 }
                 n += Tiles.put(root, "town_lamp_unlit", cold);
+                // 35a: dressed for December: a red ribbon round the cap with a bow, and a sprig of green with a berry on the
+                // lamp's shoulder. Lit keeps vanilla's flame frames (and its frame time); unlit is the cold lamp dressed.
+                BufferedImage festive = new BufferedImage(strip.getWidth(), strip.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                festive.getGraphics().drawImage(strip, 0, 0, null);
+                for (int frame = 0; frame < strip.getHeight() / strip.getWidth(); frame++) {
+                    dressLamp(festive, frame * strip.getWidth());
+                }
+                n += Tiles.put(root, "town_lamp_festive", festive);
+                java.nio.file.Files.writeString(new File(root, "block/town_lamp_festive.png.mcmeta").toPath(), "{\"animation\": {\"frametime\": 8}}\n");
+                BufferedImage festiveCold = new BufferedImage(cold.getWidth(), cold.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                festiveCold.getGraphics().drawImage(cold, 0, 0, null);
+                dressLamp(festiveCold, 0);
+                n += Tiles.put(root, "town_lamp_festive_unlit", festiveCold);
             }
             return n;
+        }
+
+        // The December dressing on one frame of the lantern's texture (its top at y0): the cap's sides are (1..4, 0..1), the
+        // body's sides (0..5, 2..8) and the body's top (0..5, 9..14) with the cap standing in its middle.
+        static void dressLamp(BufferedImage img, int y0) {
+            int ribbon = 0xFFB3202A, ribbonLight = 0xFFE0434A, leaf = 0xFF2F6B2C, leafLight = 0xFF4F9440, berry = 0xFFD8262E;
+            for (int x = 1; x <= 4; x++) {
+                img.setRGB(x, y0 + 1, x == 2 || x == 3 ? ribbonLight : ribbon); // the ribbon round the cap
+            }
+            img.setRGB(2, y0, ribbon); // the bow's loops, above the knot
+            img.setRGB(3, y0, ribbon);
+            // The sprig, lying along the top of each side
+            int[] sprig = {leaf, leafLight, berry, leaf, leafLight, leaf};
+            for (int x = 0; x < 6; x++) {
+                img.setRGB(x, y0 + 2, sprig[x]);
+            }
+            img.setRGB(1, y0 + 3, leaf);
+            img.setRGB(4, y0 + 3, leaf);
+            // And round the cap, seen from above
+            for (int i = 0; i < 6; i++) {
+                int c = i % 3 == 2 ? leafLight : leaf;
+                img.setRGB(i, y0 + 9, c);
+                img.setRGB(i, y0 + 14, c);
+                img.setRGB(0, y0 + 9 + i, c);
+                img.setRGB(5, y0 + 9 + i, c);
+            }
+            img.setRGB(5, y0 + 9, berry);
+            img.setRGB(0, y0 + 14, berry);
         }
 
         /** The patched game jar the build makes (holds vanilla's assets), or null before the first build. */
@@ -5737,6 +5785,160 @@ public class TextureArt {
      * The Still Sea's creatures (43b): box-UV skins matching their hand-written GeckoLib models (the boxes below repeat each
      * cube's uv and size), the Lampjelly's glow mask, their spawn eggs and drops, the Jelly Lamp and the Harpoons.
      */
+    /**
+     * A frontier December (35): the town tree's 96x64 texture and its glow mask (the layout is tools/models/TreeModels.java's,
+     * and the rectangles must match), the Christmas Parcel, the Fruitcake, Eggnog and Hot Cider. The festive Town Lamp is in
+     * Reworked, with the lamp it's drawn on.
+     */
+    static final class December {
+        static final int NEEDLE = 0x2C5A36, NEEDLE_DARK = 0x1C3E26, NEEDLE_LIGHT = 0x3F7A48, NEEDLE_TIP = 0x5A9A5C;
+        static final int BARK = 0x4A3220, BARK_DARK = 0x33221A, TUB = 0x7A5A36, TUB_DARK = 0x56402A, HOOP = 0x8A8E94, SOIL = 0x3A2A1E;
+        static final int WAX = 0xEDE4C8, WAX_SHADE = 0xC8BE9E, FLAME = 0xFFD860, FLAME_CORE = 0xFFF6C0, TIN = 0xC4CCD2, TIN_DARK = 0x8A949C, TIN_LIGHT = 0xF0F4F6;
+        static final int GOLD = 0xE8B830, GOLD_DARK = 0xA87A18, GOLD_LIGHT = 0xFFE890;
+
+        static int writeAll(File root) throws Exception {
+            BufferedImage[] tree = tree();
+            write(new File(root, "entity/town_tree.png"), tree[0]);
+            write(new File(root, "entity/town_tree_glowmask.png"), tree[1]);
+            int n = 2;
+            // Brown paper and string, a red wax seal where the string crosses
+            n += Items.put(root, "christmas_parcel", sprite(0xB08A56, pal('s', 0xE8DCC0, 'S', 0xB8AC90, 'r', 0xB3202A, 'R', 0xE0434A, 'k', 0x5A4326),
+                    "",
+                    "",
+                    "   kkkkkkkkkk",
+                    "  k5556s55554k",
+                    "  k5666s66654k",
+                    "  k5666s66554k",
+                    "  k566rRr6554k",
+                    "  ksssrRrsssSk",
+                    "  k555rrr5544k",
+                    "  k5555s55444k",
+                    "  k5555s54443k",
+                    "  k4554S44433k",
+                    "  k4444S44333k",
+                    "   kkkkkkkkkk"));
+            // A dark loaf, one slice cut: candied fruit in red, green and yellow, an almond on top
+            n += Items.put(root, "fruitcake", sprite(0x6A4226, pal('k', 0x2E1C10, 'r', 0xC8303A, 'g', 0x4F9440, 'y', 0xE8C040, 'a', 0xE8DCC0, 'c', 0x8A5A32),
+                    "",
+                    "",
+                    "",
+                    "",
+                    "     kkkkkkkk",
+                    "    k6a66a665k",
+                    "   k66666666554k",
+                    "   k5r55g55y544k",
+                    "   k55y55r55g44k",
+                    "   k4g55y45r443k",
+                    "   k44r44g44y33k",
+                    "   k333333333332k",
+                    "    kkkkkkkkkkkk"));
+            // Eggnog in a glass mug, nutmeg on the froth; hot cider in a tin cup, steaming, a cinnamon stick in it
+            n += Items.put(root, "eggnog", sprite(0xEAD9A0, pal('g', 0x9AB4B4, 'G', 0xD8ECEC, 'f', 0xFFF8E0, 'n', 0x8A5A32),
+                    "",
+                    "",
+                    "",
+                    "    fffnfff",
+                    "   ffnffffnf",
+                    "   gfffffffG",
+                    "   g6666665G gg",
+                    "   g6666655G   g",
+                    "   g6666555G   g",
+                    "   g5665554G   g",
+                    "   g5555544G gg",
+                    "   g5555444G",
+                    "   g4444433G",
+                    "    ggggggg"));
+            n += Items.put(root, "hot_cider", sprite(0xB8651E, pal('t', 0x9AA0A6, 'T', 0xD0D4D8, 'd', 0x6A6E74, 's', 0xD8DCE0, 'c', 0x7A4A22, 'C', 0xA86A32),
+                    "     s    s",
+                    "      s  s",
+                    "     s    s",
+                    "      s  s  C",
+                    "           Cc",
+                    "   TTTTTTTCcT",
+                    "   t66666Cc5t",
+                    "   tT5555555tdd",
+                    "   tTttttttdt  d",
+                    "   tTtttttddt  d",
+                    "   tTttttdddt  d",
+                    "   tTtttddddt dd",
+                    "   tttttdddddd",
+                    "    dddddddd"));
+            return n;
+        }
+
+        /** The tree's texture and its glow mask (the flames alone). */
+        static BufferedImage[] tree() {
+            BufferedImage img = new BufferedImage(96, 64, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage glow = new BufferedImage(96, 64, BufferedImage.TYPE_INT_ARGB);
+            Random r = new Random(3512);
+            // The boughs from the side (0,0 44x14): needles hanging in short strokes, darker under each bough's shadow at
+            // the top, lighter tips, and a ragged fringe along the bottom two rows that the tier below shows through
+            for (int x = 0; x < 44; x++) {
+                int hang = r.nextInt(3); // how far this column's fringe is cut back: 0, 1 or 2 rows
+                for (int y = 0; y < 14; y++) {
+                    if (y >= 14 - hang) continue;
+                    int c = y < 2 ? NEEDLE_DARK : NEEDLE;
+                    int roll = r.nextInt(10);
+                    if (roll == 0) c = NEEDLE_DARK;
+                    else if (roll <= 2) c = NEEDLE_LIGHT;
+                    if (y == 13 - hang || (y == 12 - hang && r.nextBoolean())) c = NEEDLE_TIP; // the tips catch the light
+                    img.setRGB(x, y, 0xFF000000 | c);
+                }
+            }
+            // The boughs from above (0,16 44x44): needles lying outward from the trunk, lighter toward the edge
+            for (int x = 0; x < 44; x++) {
+                for (int y = 0; y < 44; y++) {
+                    int c = NEEDLE;
+                    int roll = r.nextInt(8);
+                    if (roll == 0) c = NEEDLE_DARK;
+                    else if (roll <= 2) c = NEEDLE_LIGHT;
+                    if ((x + y) % 5 == 0 && r.nextBoolean()) c = NEEDLE_TIP;
+                    img.setRGB(x, 16 + y, 0xFF000000 | c);
+                }
+            }
+            // Bark (48,0 4x12)
+            for (int x = 0; x < 4; x++) {
+                for (int y = 0; y < 12; y++) {
+                    img.setRGB(48 + x, y, 0xFF000000 | (x == 0 || (x + y * 3) % 5 == 0 ? BARK_DARK : BARK));
+                }
+            }
+            // The tub's staves and its two iron hoops (56,0 12x8), and its top (56,8 12x12): soil inside a wooden rim
+            for (int x = 0; x < 12; x++) {
+                for (int y = 0; y < 8; y++) {
+                    int c = x % 3 == 0 ? TUB_DARK : TUB;
+                    if (y == 1 || y == 6) c = HOOP;
+                    img.setRGB(56 + x, y, 0xFF000000 | c);
+                }
+                for (int y = 0; y < 12; y++) {
+                    boolean rim = x == 0 || x == 11 || y == 0 || y == 11;
+                    img.setRGB(56 + x, 8 + y, 0xFF000000 | (rim ? TUB : (x + y) % 4 == 0 ? shade(SOIL, 1.25) : SOIL));
+                }
+            }
+            // A candle (72,0 1x3) and its flame (76,0 1x2), which is all the glow mask holds
+            img.setRGB(72, 0, 0xFF000000 | WAX);
+            img.setRGB(72, 1, 0xFF000000 | WAX);
+            img.setRGB(72, 2, 0xFF000000 | WAX_SHADE);
+            img.setRGB(76, 0, 0xFF000000 | FLAME_CORE);
+            img.setRGB(76, 1, 0xFF000000 | FLAME);
+            glow.setRGB(76, 0, 0xFF000000 | FLAME_CORE);
+            glow.setRGB(76, 1, 0xFF000000 | FLAME);
+            // A tin star cut from a can lid (80,0 3x3): a plus of tin, its corners clear
+            int[][] tin = {{1, 0, TIN_LIGHT}, {0, 1, TIN}, {1, 1, TIN_LIGHT}, {2, 1, TIN_DARK}, {1, 2, TIN_DARK}};
+            for (int[] p : tin) img.setRGB(80 + p[0], p[1], 0xFF000000 | p[2]);
+            // The star on top (84,0 8x8): five points, brass gilt
+            draw(img, 84, 0, GOLD, pal('g', GOLD, 'd', GOLD_DARK, 'l', GOLD_LIGHT),
+                    "   ll",
+                    "   lg",
+                    "llllggdd",
+                    " lgggggd",
+                    "  lgggd",
+                    "  lggdd",
+                    " lgd dgd",
+                    " ld   dd");
+            return new BufferedImage[] {img, glow};
+        }
+    }
+
     static final class Sea {
         static final int COW = 0x6E6A64, COW_DARK = 0x4E4A46, COW_BELLY = 0x9A948A, COW_SCAR = 0x8A847A;
         static final int WHALE = 0x3E4A52, WHALE_DARK = 0x262E34, WHALE_BELLY = 0xC8C4B4, TOOTH = 0xEDE6D0, GUM = 0x8A3A3A;
@@ -6427,28 +6629,34 @@ public class TextureArt {
         }
 
         /**
-         * Fern frond (9b1, a leaves texture: the gaps are see-through): fronds crossing the block, each a dark curved midrib
-         * with paired leaflets that shorten toward its tip, lit on one side and shaded on the other; a darker frond lies
-         * underneath to fill the gaps a little. Drawn wrapping, so the tile repeats.
+         * Fern frond (9b1, a leaves texture: the gaps are see-through). Redrawn for 1.3: the first one laid four thin
+         * fronds across each other at angles and read as scattered pixels. This one is two fronds hanging side by side down
+         * the block, each a dark midrib with leaflets two pixels thick sweeping up and out from it in pairs, like a
+         * feather: lit on the left, shaded on the right, pale at the tips. Between the leaflets it's dark near the rib (the
+         * frond behind) and clear further out, with a clear line between the two fronds, so a crown of them still lets the
+         * light through. Everything repeats every 4 rows and 8 columns, so the tile joins itself on every side.
          */
         static BufferedImage frond(long seed) {
             BufferedImage img = Tiles.blank();
             Random r = new Random(seed);
-            double[][] fronds = {{9, -1, -0.35, 1, 0.6}, {7, 6, 1, 0.5, 0.6}, {-2, 2, 1, 0.45, 1}, {4, 9, 1, -0.4, 1}};
-            for (double[] fr : fronds) {
-                double len = Math.hypot(fr[2], fr[3]), ux = fr[2] / len, uy = fr[3] / len, shade = fr[4];
-                for (int s = 0; s < 15; s++) {
-                    double bend = s * s * 0.012;
-                    double mx = fr[0] + ux * s - uy * bend, my = fr[1] + uy * s + ux * bend;
-                    Tiles.px(img, Math.floorMod((int) Math.round(mx), 16), Math.floorMod((int) Math.round(my), 16), shade(FROND_RIB, shade));
-                    if (s % 2 != 0) continue;
-                    int reach = (int) Math.round(4 - s * 0.2);
-                    for (int side = -1; side <= 1; side += 2) {
-                        for (int k = 1; k <= reach; k++) {
-                            double lx = mx - uy * side * k + ux * k * 0.4, ly = my + ux * side * k + uy * k * 0.4;
-                            int c = k == reach ? FROND_TIP : side < 0 ? FROND : shade(FROND, 0.8);
-                            Tiles.px(img, Math.floorMod((int) Math.round(lx), 16), Math.floorMod((int) Math.round(ly), 16), Tiles.jitter(shade(c, shade), r, 2));
-                        }
+            for (int x = 0; x < 16; x++) {
+                int frond = x / 8, dx = x % 8 - 3; // -3..4 from this frond's midrib; 4 is the gap between fronds
+                for (int y = 0; y < 16; y++) {
+                    int out = Math.abs(dx);
+                    if (out == 4) {
+                        continue; // the clear line between two fronds
+                    }
+                    if (out == 0) {
+                        Tiles.px(img, x, y, Tiles.jitter(FROND_RIB, r, 2));
+                        continue;
+                    }
+                    // Leaflets climb as they go out, a row for each pixel; the second frond hangs two rows lower
+                    int row = Math.floorMod(y + out + frond * 2, 4);
+                    if (row < 2) {
+                        int c = out == 3 && row == 0 ? FROND_TIP : dx < 0 ? (row == 0 ? shade(FROND, 1.12) : FROND) : (row == 0 ? FROND : shade(FROND, 0.8));
+                        Tiles.px(img, x, y, Tiles.jitter(c, r, 3));
+                    } else if (out == 1) {
+                        Tiles.px(img, x, y, Tiles.jitter(shade(FROND_RIB, 0.85), r, 2)); // the frond behind, close in by the rib
                     }
                 }
             }

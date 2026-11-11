@@ -98,6 +98,9 @@ public final class ModChestLoot {
     // Buried under the strange grave on the rare Boot Hill (9c)
     public static final ResourceKey<LootTable> STRANGE_GRAVE = key("strange_grave");
 
+    /** 35b: what a Christmas Parcel holds. */
+    public static final ResourceKey<LootTable> CHRISTMAS_PARCEL = key("christmas_parcel");
+
     private static ResourceKey<LootTable> key(String name) {
         return ResourceKey.create(Registries.LOOT_TABLE, HollowFrontier.id("chests/" + name));
     }

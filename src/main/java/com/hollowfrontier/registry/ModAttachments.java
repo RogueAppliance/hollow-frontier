@@ -72,6 +72,12 @@ public final class ModAttachments {
     public static final Supplier<AttachmentType<Boolean>> SURVEY_PAID = ATTACHMENTS.register("survey_paid",
             () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL.fieldOf("paid"), paid -> paid).copyOnDeath().build());
 
+    // 35: the year a postmaster last handed the player a Christmas Parcel, and the year a sheriff last let a fine go. Kept through death
+    public static final Supplier<AttachmentType<Integer>> PARCEL_YEAR = ATTACHMENTS.register("parcel_year",
+            () -> AttachmentType.builder(() -> 0).serialize(Codec.INT.fieldOf("year"), year -> year != 0).copyOnDeath().build());
+    public static final Supplier<AttachmentType<Integer>> FINE_WAIVED_YEAR = ATTACHMENTS.register("fine_waived_year",
+            () -> AttachmentType.builder(() -> 0).serialize(Codec.INT.fieldOf("year"), year -> year != 0).copyOnDeath().build());
+
     // Present only while the horse wears saddlebags (check hasData before getData, which would create it).
     public static final Supplier<AttachmentType<ItemContainerContents>> SADDLEBAGS = ATTACHMENTS.register("saddlebags",
             () -> AttachmentType.builder(() -> ItemContainerContents.EMPTY).serialize(ItemContainerContents.CODEC.fieldOf("items")).build());

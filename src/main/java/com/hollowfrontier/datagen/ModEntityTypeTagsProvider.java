@@ -23,11 +23,11 @@ public class ModEntityTypeTagsProvider extends TagsProvider<EntityType<?>> {
         tag(Tags.EntityTypes.BOSSES).add(ModEntities.OUTLAW_BOSS.key(), ModEntities.SUN_ARCHON.key(), ModEntities.MOTHERSHIP.key());
         // Bosses and the guardians of their sites stay put: a boss in a jar or across the map breaks its fight
         tag(Tags.EntityTypes.TELEPORTING_NOT_SUPPORTED).addTag(Tags.EntityTypes.BOSSES)
-                .add(ModEntities.CRYSTAL_GUARDIAN.key(), ModEntities.GRAY_WARDEN.key());
+                .add(ModEntities.CRYSTAL_GUARDIAN.key(), ModEntities.GRAY_WARDEN.key(), ModEntities.TOWN_TREE.key());
         // ...and so do the folk a town or a story keeps track of (their town, their errand, their disguise)
         tag(Tags.EntityTypes.CAPTURING_NOT_SUPPORTED).addTag(Tags.EntityTypes.BOSSES)
                 .add(ModEntities.CRYSTAL_GUARDIAN.key(), ModEntities.GRAY_WARDEN.key(), ModEntities.TOWNSFOLK.key(),
                         ModEntities.BARMAID.key(), ModEntities.LAWMAN.key(), ModEntities.KINDLED.key(),
-                        ModEntities.MAN_IN_BLACK.key(), ModEntities.DISGUISED_GRAY.key());
+                        ModEntities.MAN_IN_BLACK.key(), ModEntities.DISGUISED_GRAY.key(), ModEntities.TOWN_TREE.key());
     }
 }

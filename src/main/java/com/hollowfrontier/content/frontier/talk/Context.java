@@ -76,6 +76,12 @@ public record Context(Set<Fact> facts, Act act, String poster, boolean beenDown)
         if (!level.getEntitiesOfClass(DisguisedGray.class, new AABB(where).inflate(STRANGER_RANGE), g -> g.isAlive() && !g.isExposed()).isEmpty()) {
             facts.add(Fact.STRANGER);
         }
+        if (com.hollowfrontier.content.frontier.season.Season.isDecember(level)) {
+            facts.add(Fact.DECEMBER);
+        }
+        if (com.hollowfrontier.content.frontier.season.Season.isChristmas(level)) {
+            facts.add(Fact.CHRISTMAS);
+        }
         if (DustDevils.cameThrough(level, where)) {
             facts.add(Fact.DUST_DEVIL);
         }

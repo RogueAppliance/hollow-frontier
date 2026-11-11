@@ -32,6 +32,9 @@ public final class TownPresence {
         if (player.getData(ModAttachments.IN_TOWN.get()) != inTown) {
             player.setData(ModAttachments.IN_TOWN.get(), inTown); // only on change: every set is a sync packet
         }
+        if (inTown) {
+            com.hollowfrontier.content.frontier.season.TownTree.ensure(player.level(), player); // 35b: a December town has its tree
+        }
     }
 
     public static boolean isInTown(ServerLevel level, ServerPlayer player) {

@@ -206,6 +206,12 @@ final class GunEnchantmentTests {
         GunItem.setReloadStart(gun, now - 6);
         item.tickReload(player, gun);
         h.assertValueEqual(GunItem.getAmmo(gun), 1, "chambers loaded after 6 ticks");
+        // The reload animation keeps pace: a 15-tick turn of the loop has to fit the 6-tick chamber
+        h.assertTrue(Math.abs(item.reloadSpeed(gun, h.getLevel()) - 15.0 / 6.0) < 1e-6, "the reload animation should run 2.5 times as fast: "
+                + item.reloadSpeed(gun, h.getLevel()));
+        h.assertTrue(item.reloadSpeed(new ItemStack(ModItems.REVOLVER.get()), h.getLevel()) == 1.0, "a plain gun's animation runs at its own pace");
+        h.assertTrue(((GunItem) ModItems.RAY_PISTOL.get()).reloadSpeed(new ItemStack(ModItems.RAY_PISTOL.get()), h.getLevel()) == 1.0,
+                "a gun that doesn't load has no pace to change");
         h.succeed();
     }
 

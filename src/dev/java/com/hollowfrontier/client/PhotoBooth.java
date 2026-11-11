@@ -211,6 +211,13 @@ public final class PhotoBooth {
             }
             return;
         }
+        // A frontier December (35), only on its own with -PphotoScene=december
+        if (DECEMBER_ONLY) {
+            if (ticks >= 40) {
+                december(mc, server, ticks - 40);
+            }
+            return;
+        }
         // Dust devils (29), only on their own with -PphotoScene=dustdevils
         if (DUST_DEVILS_ONLY) {
             if (ticks >= 40) {
@@ -2632,6 +2639,102 @@ public final class PhotoBooth {
     }
 
     // ---------------------------------------------------------------- 29: dust devils
+
+    private static final boolean DECEMBER_ONLY = "december".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static volatile Vec3 decemberSquare, decemberStreet, decemberLamp, decemberTree, decemberOut = new Vec3(1, 0, 0);
+
+    /**
+     * A frontier December (hf_35*), only with -PphotoScene=december: a real town with the season held on. Its lamps are
+     * given their turn (the random tick that dresses and lights them) and its tree stood up, then: a dressed street at
+     * dusk, a dressed lamp close up, the tree in the square by day and by night.
+     */
+    private static void december(Minecraft mc, MinecraftServer server, int t) {
+        switch (t) {
+            case 0 -> {
+                run(server, "gamemode spectator @p");
+                run(server, "time set 12900");
+                run(server, "weather clear");
+                server.execute(() -> com.hollowfrontier.content.frontier.season.Season.setMode(com.hollowfrontier.content.frontier.season.Season.Mode.ALWAYS));
+            }
+            case 5 -> findCheckTown(server, 0);
+            case 320 -> server.execute(() -> dressTown(server));
+            case 340 -> { if (decemberStreet != null) tpLooking(server, decemberStreet, decemberSquare.add(0, 2.5, 0)); }
+            case 420 -> shot(mc, "hf_35a_dressed_street_dusk.png");
+            case 422 -> { if (decemberLamp != null) tpLooking(server, decemberLamp.add(1.6, 0.4, 1.9), decemberLamp); }
+            case 470 -> shot(mc, "hf_35a_festive_lamp.png");
+            case 472 -> {
+                run(server, "time set 6000");
+                server.execute(() -> dressTown(server));
+            }
+            case 480 -> { if (decemberTree != null) tpLooking(server, decemberTree.add(decemberOut.scale(11.0)).add(0, 5.0, 0), decemberTree.add(0, 3.4, 0)); }
+            case 540 -> shot(mc, "hf_35b_town_tree_day.png");
+            case 542 -> {
+                run(server, "time set 18000");
+                server.execute(() -> dressTown(server));
+            }
+            case 550 -> { if (decemberTree != null) tpLooking(server, decemberTree.add(decemberOut.scale(9.0)).add(decemberOut.z * 5.0, 3.0, -decemberOut.x * 5.0), decemberTree.add(0, 3.4, 0)); }
+            case 640 -> shot(mc, "hf_35b_town_tree_night.png");
+            case 642 -> { if (decemberTree != null) tpLooking(server, decemberTree.add(decemberOut.scale(5.5)).add(0, 3.2, 0), decemberTree.add(0, 3.6, 0)); }
+            case 690 -> shot(mc, "hf_35b_town_tree_close.png");
+            // 44: the creative tab, which opens on an empty revolver and a loaded one: their ammo pips
+            case 692 -> run(server, "gamemode creative @p");
+            case 700 -> creativeTab(mc, ModTabs.HOLLOW_FRONTIER.get());
+            case 720 -> shot(mc, "hf_44_gun_pips.png");
+            case 722 -> mc.gui.setScreen(null);
+            case 725 -> {
+                server.execute(() -> com.hollowfrontier.content.frontier.season.Season.setMode(null));
+                HollowFrontier.LOGGER.info("[PhotoBooth] december done, quitting");
+                quit(mc, server);
+            }
+            default -> {}
+        }
+    }
+
+    // Gives every Town Lamp in the found town its random tick, stands the tree up (or lets it see the hour), and notes where to shoot from
+    private static void dressTown(MinecraftServer server) {
+        ServerLevel level = server.overworld();
+        TownStyle style = TownStyle.values()[0];
+        ChunkPos chunk = TOWN_CHUNKS.get(style);
+        if (chunk == null) {
+            HollowFrontier.LOGGER.warn("[PhotoBooth] december: no town found");
+            return;
+        }
+        var town = level.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(style.structure()).value();
+        StructureStart start = level.getChunk(chunk.x(), chunk.z()).getStartForStructure(town);
+        if (start == null || !start.isValid()) {
+            HollowFrontier.LOGGER.warn("[PhotoBooth] december: the town at {} didn't generate", chunk);
+            return;
+        }
+        TownSite site = TownSite.of(level, start, net.minecraft.util.RandomSource.create(35));
+        BoundingBox bounds = start.getBoundingBox();
+        int lamps = 0;
+        BlockPos nearest = null;
+        for (BlockPos pos : BlockPos.betweenClosed(bounds.minX(), bounds.minY(), bounds.minZ(), bounds.maxX(), bounds.maxY(), bounds.maxZ())) {
+            if (level.isLoaded(pos) && level.getBlockState(pos).is(com.hollowfrontier.registry.ModBlocks.TOWN_LAMP.get())) {
+                level.getBlockState(pos).randomTick(level, pos, level.getRandom());
+                lamps++;
+                // one that stands (a post lamp) rather than hangs, for the close-up
+                if (!level.getBlockState(pos).getValue(net.minecraft.world.level.block.LanternBlock.HANGING)
+                        && (nearest == null || pos.distSqr(site.rally()) < nearest.distSqr(site.rally()))) {
+                    nearest = pos.immutable();
+                }
+            }
+        }
+        var put = com.hollowfrontier.content.frontier.season.TownTree.ensure(level, site.rally());
+        var trees = level.getEntitiesOfClass(com.hollowfrontier.content.frontier.season.TownTree.class, AABB.of(bounds).inflate(8));
+        trees.forEach(tree -> tree.keep(level));
+        decemberSquare = Vec3.atBottomCenterOf(site.rally());
+        Vec3 edge = Vec3.atBottomCenterOf(site.edge());
+        Vec3 along = edge.subtract(decemberSquare).multiply(1, 0, 1).normalize();
+        decemberStreet = decemberSquare.add(along.scale(Math.min(22.0, edge.distanceTo(decemberSquare)))).add(0, 3.2, 0);
+        decemberLamp = nearest == null ? null : Vec3.atCenterOf(nearest);
+        decemberTree = trees.isEmpty() ? null : trees.getFirst().position();
+        if (decemberTree != null) { // shoot from the tree's far side, looking back across the square
+            Vec3 out = decemberTree.subtract(decemberSquare).multiply(1, 0, 1);
+            decemberOut = out.lengthSqr() < 0.01 ? new Vec3(1, 0, 0) : out.normalize();
+        }
+        HollowFrontier.LOGGER.info("[PhotoBooth] december: {} lamps ticked, tree {} (new {}), square {}", lamps, decemberTree, put.isPresent(), site.rally());
+    }
 
     private static final boolean DUST_DEVILS_ONLY = "dustdevils".equals(System.getProperty("hollowfrontier.photo.scene"));
 

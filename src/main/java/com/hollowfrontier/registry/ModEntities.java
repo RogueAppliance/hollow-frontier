@@ -193,6 +193,14 @@ public final class ModEntities {
                     .sized(1.6F, 0.8F)
                     .clientTrackingRange(8)
                     .build(key(id)));
+    // 35b: a town's December tree. Sized for the eye (so it isn't culled with its foot off screen); it has no collision
+    public static final DeferredHolder<EntityType<?>, EntityType<com.hollowfrontier.content.frontier.season.TownTree>> TOWN_TREE = ENTITIES.register("town_tree",
+            id -> EntityType.Builder.<com.hollowfrontier.content.frontier.season.TownTree>of(com.hollowfrontier.content.frontier.season.TownTree::new, MobCategory.MISC)
+                    .noLootTable()
+                    .sized(3.0F, 7.0F)
+                    .clientTrackingRange(10)
+                    .updateInterval(20)
+                    .build(key(id)));
     // 11b: the men in black dusters (come by event only: after a mystery, or hunting a marked player)
     public static final DeferredHolder<EntityType<?>, EntityType<ManInBlack>> MAN_IN_BLACK = ENTITIES.register("man_in_black",
             id -> EntityType.Builder.<ManInBlack>of(ManInBlack::new, MobCategory.MISC)

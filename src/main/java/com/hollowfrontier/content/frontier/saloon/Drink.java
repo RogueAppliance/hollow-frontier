@@ -36,6 +36,9 @@ public record Drink(List<Dose> effects, int tipsy, boolean gamble) {
     public static final Drink RYE_WHISKEY = new Drink(List.of(dose(MobEffects.STRENGTH, 60, 0), dose(MobEffects.RESISTANCE, 60, 0)), 1, false);
     public static final Drink MEZCAL = new Drink(List.of(dose(MobEffects.NIGHT_VISION, 120, 0), dose(MobEffects.JUMP_BOOST, 60, 0)), 2, false);
     public static final Drink MOONSHINE = new Drink(List.of(dose(MobEffects.FIRE_RESISTANCE, 90, 0), dose(MobEffects.STRENGTH, 30, 1)), 3, false);
+    // 35c: December's two. Hot Cider also thaws the drinker out (DrinkItem)
+    public static final Drink EGGNOG = new Drink(List.of(dose(MobEffects.ABSORPTION, 120, 0)), 1, false);
+    public static final Drink HOT_CIDER = new Drink(List.of(dose(MobEffects.REGENERATION, 15, 0)), 0, false);
     public static final Drink SNAKE_OIL = new Drink(List.of(), 0, true);
 
     // Doc's miracle tonic: five ways it helps, three ways it doesn't.

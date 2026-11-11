@@ -40,6 +40,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> {
         double now = level.getGameTime() + partialTick;
         Long reloadStart = stack.get(ModDataComponents.RELOAD_START.get());
         state.addGeckolibData(GunItem.RELOAD_TICKS, reloadStart == null ? -1.0 : Math.max(0.0, now - reloadStart));
+        state.addGeckolibData(GunItem.RELOAD_SPEED, reloadStart == null ? 1.0 : gun.reloadSpeed(stack, level));
         Long fired = stack.get(ModDataComponents.LAST_FIRED.get());
         state.addGeckolibData(GunItem.LAST_FIRED_TICK, fired == null ? Long.MIN_VALUE : fired);
         state.addGeckolibData(GunItem.SINCE_FIRED, fired == null ? 1000.0 : now - fired);

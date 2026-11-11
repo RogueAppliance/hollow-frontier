@@ -375,6 +375,36 @@
     ],
     "subtitle": "subtitles.hollowfrontier.saloon_piano.play"
   },
+  "block.saloon_piano.god_rest_ye_merry_gentlemen": {
+    "sounds": [
+      {
+        "attenuation_distance": 24,
+        "name": "hollowfrontier:block/saloon_piano/god_rest_ye_merry_gentlemen",
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.saloon_piano.carol"
+  },
+  "block.saloon_piano.jingle_bells": {
+    "sounds": [
+      {
+        "attenuation_distance": 24,
+        "name": "hollowfrontier:block/saloon_piano/jingle_bells",
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.saloon_piano.carol"
+  },
+  "block.saloon_piano.o_come_all_ye_faithful": {
+    "sounds": [
+      {
+        "attenuation_distance": 24,
+        "name": "hollowfrontier:block/saloon_piano/o_come_all_ye_faithful",
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.saloon_piano.carol"
+  },
   "block.saloon_piano.pineapple_rag": {
     "sounds": [
       {

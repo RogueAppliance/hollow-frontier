@@ -496,6 +496,15 @@ public final class ModGameTests {
         test("modpack_mystery_switches_default_on", 20, ModpackTests::mysterySwitchesDefaultOn);
         field("ash_devil_burns", 400, DustDevilTests::ashDevilBurns);
         field("dust_devils_the_frontier_talks", 20, DustDevilTests::theFrontierTalks);
+        // A frontier December (35)
+        test("season_follows_the_date", 20, SeasonTests::seasonFollowsTheDate);
+        test("lamps_dress_by_date", 20, SeasonTests::lampsDressByDate);
+        test("town_tree_stands_in_december", 20, SeasonTests::townTreeStandsInDecember);
+        test("parcel_once_per_year", 20, SeasonTests::parcelOncePerYear);
+        test("december_drinks_come_and_go", 20, SeasonTests::decemberDrinksComeAndGo);
+        test("piano_plays_carols", 20, SeasonTests::pianoPlaysCarols);
+        test("december_words_keep_to_the_season", 20, SeasonTests::decemberWordsKeepToTheSeason);
+        test("christmas_truce", 20, SeasonTests::christmasTruce);
         // The bank (16)
         test("bank_box_opens_for_a_gold_coin", 20, BankTests::boxOpensForAGoldCoin);
         test("bank_boxes_are_private", 20, BankTests::boxesArePrivate);

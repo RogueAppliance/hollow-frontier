@@ -36,16 +36,18 @@ public class SaloonPianoBlock extends BaseEntityBlock {
     public static final BooleanProperty PLAYING = BooleanProperty.create("playing");
     /** Trouble near (21b): a brawl or a gunfight. The pianist stops mid-tune, and starts again once it's over. */
     public static final BooleanProperty HUSHED = BooleanProperty.create("hushed");
+    /** December (35c): the server sets it, and the pianist works a carol in every other tune. */
+    public static final BooleanProperty CAROLS = BooleanProperty.create("carols");
     private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 15, 15);
 
     public SaloonPianoBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PLAYING, true).setValue(HUSHED, false));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PLAYING, true).setValue(HUSHED, false).setValue(CAROLS, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, PLAYING, HUSHED);
+        builder.add(FACING, PLAYING, HUSHED, CAROLS);
     }
 
     // The keyboard faces whoever placed it.
