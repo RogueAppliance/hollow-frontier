@@ -81,6 +81,17 @@ public final class ModDataComponents {
                     .persistent(Codec.LONG)
                     .networkSynchronized(ByteBufCodecs.VAR_LONG));
 
+    // 47: the town a Deputy's Badge, a deed or a warrant is for
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<com.hollowfrontier.content.frontier.stake.TownRef>> TOWN =
+            DATA_COMPONENTS.registerComponentType("town", builder -> builder
+                    .persistent(com.hollowfrontier.content.frontier.stake.TownRef.CODEC)
+                    .networkSynchronized(com.hollowfrontier.content.frontier.stake.TownRef.STREAM_CODEC));
+    // 47b: the game time a branding iron stays hot until
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> HOT_UNTIL =
+            DATA_COMPONENTS.registerComponentType("hot_until", builder -> builder
+                    .persistent(Codec.LONG)
+                    .networkSynchronized(ByteBufCodecs.VAR_LONG));
+
     // 32d: where the Survey Letter's gateway is (the nearest to the post office it was collected from)
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<net.minecraft.core.GlobalPos>> SURVEY_GATEWAY =
             DATA_COMPONENTS.registerComponentType("survey_gateway", builder -> builder

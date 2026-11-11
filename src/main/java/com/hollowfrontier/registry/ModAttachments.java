@@ -78,6 +78,28 @@ public final class ModAttachments {
     public static final Supplier<AttachmentType<Integer>> FINE_WAIVED_YEAR = ATTACHMENTS.register("fine_waived_year",
             () -> AttachmentType.builder(() -> 0).serialize(Codec.INT.fieldOf("year"), year -> year != 0).copyOnDeath().build());
 
+    // 47a: what each town thinks of the player, and whose star they wear. Kept through death (the law's heat isn't)
+    public static final Supplier<AttachmentType<com.hollowfrontier.content.frontier.stake.Standing>> STANDING = ATTACHMENTS.register("standing",
+            () -> AttachmentType.builder(() -> com.hollowfrontier.content.frontier.stake.Standing.NONE).serialize(com.hollowfrontier.content.frontier.stake.Standing.CODEC.fieldOf("standing")).copyOnDeath().build());
+    // 47a: the sheriff's job in hand (present only while there is one: check hasData), and the game day the last one ended
+    public static final Supplier<AttachmentType<com.hollowfrontier.content.frontier.stake.SheriffJob>> SHERIFF_JOB = ATTACHMENTS.register("sheriff_job",
+            () -> AttachmentType.builder(() -> com.hollowfrontier.content.frontier.stake.SheriffJob.NONE).serialize(com.hollowfrontier.content.frontier.stake.SheriffJob.CODEC.fieldOf("job")).copyOnDeath().build());
+    public static final Supplier<AttachmentType<Long>> LAST_JOB_DAY = ATTACHMENTS.register("last_job_day",
+            () -> AttachmentType.builder(() -> -1L).serialize(Codec.LONG.fieldOf("day"), day -> day >= 0).copyOnDeath().build());
+    // 47a: on a drifter, the deputy sent to bring him in (present only on one: check hasData)
+    public static final Supplier<AttachmentType<java.util.UUID>> QUARRY = ATTACHMENTS.register("quarry",
+            () -> AttachmentType.builder(() -> new java.util.UUID(0, 0)).serialize(net.minecraft.core.UUIDUtil.CODEC.fieldOf("deputy")).build());
+    // 47b, 47c: a cow's brand and its herd mark (each present only on a cow that has one), and a herd cow's fright (not saved)
+    public static final Supplier<AttachmentType<com.hollowfrontier.content.frontier.stake.Herds.Brand>> BRAND = ATTACHMENTS.register("brand",
+            () -> AttachmentType.builder(() -> com.hollowfrontier.content.frontier.stake.Herds.Brand.NONE).serialize(com.hollowfrontier.content.frontier.stake.Herds.Brand.CODEC.fieldOf("brand")).build());
+    public static final Supplier<AttachmentType<com.hollowfrontier.content.frontier.stake.Herds.Herd>> HERD = ATTACHMENTS.register("herd",
+            () -> AttachmentType.builder(() -> com.hollowfrontier.content.frontier.stake.Herds.Herd.NONE).serialize(com.hollowfrontier.content.frontier.stake.Herds.Herd.CODEC.fieldOf("herd")).build());
+    public static final Supplier<AttachmentType<com.hollowfrontier.content.frontier.stake.Herds.Stampede>> STAMPEDE = ATTACHMENTS.register("stampede",
+            () -> AttachmentType.builder(() -> com.hollowfrontier.content.frontier.stake.Herds.Stampede.NONE).build());
+    // 47c: the drive a player has out (present only while there is one). Kept through death: the herd is still out there
+    public static final Supplier<AttachmentType<com.hollowfrontier.content.frontier.stake.Drives.Drive>> DRIVE = ATTACHMENTS.register("drive",
+            () -> AttachmentType.builder(() -> com.hollowfrontier.content.frontier.stake.Drives.Drive.NONE).serialize(com.hollowfrontier.content.frontier.stake.Drives.Drive.CODEC.fieldOf("drive")).copyOnDeath().build());
+
     // Present only while the horse wears saddlebags (check hasData before getData, which would create it).
     public static final Supplier<AttachmentType<ItemContainerContents>> SADDLEBAGS = ATTACHMENTS.register("saddlebags",
             () -> AttachmentType.builder(() -> ItemContainerContents.EMPTY).serialize(ItemContainerContents.CODEC.fieldOf("items")).build());

@@ -1792,15 +1792,15 @@
     "sounds": [
       {
         "type": "event",
-        "name": "item.trident.riptide_1",
-        "pitch": 1.7,
-        "volume": 0.25
+        "name": "entity.player.attack.sweep",
+        "pitch": 0.7,
+        "volume": 0.4
       },
       {
         "type": "event",
-        "name": "entity.fishing_bobber.throw",
-        "pitch": 0.8,
-        "volume": 0.6
+        "name": "entity.player.attack.sweep",
+        "pitch": 0.85,
+        "volume": 0.4
       }
     ],
     "subtitle": "subtitles.hollowfrontier.lasso.whirl"

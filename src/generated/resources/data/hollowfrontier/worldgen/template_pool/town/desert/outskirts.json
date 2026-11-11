@@ -58,6 +58,17 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
+        "location": "hollowfrontier:town/desert/old_place",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 96
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
         "location": "hollowfrontier:town/desert/ranch",
         "processors": {
           "processors": []

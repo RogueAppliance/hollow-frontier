@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.5.0 — A stake in town (unreleased)
+
+A town can now know you. Existing worlds get all of it; only the Old Place standing ready on a town's outskirts needs a town that's new.
+
+- **Standing:** every town keeps its own opinion of you: Stranger, Regular, Neighbour, Pillar of the Town. Bring a bounty to its board, help see off a raid on it, walk one of its people home, or work for its sheriff, and it rises. Shoot up the street and it falls. It's kept when you die, and one town's opinion is nothing to the next.
+- **What being known gets you:** a Neighbour pays a coin less for anything dear, and a Pillar a coin less again. A Regular has one small fine a year let go by the sheriff.
+- **The Deputy's Badge:** a town's sheriff swears in a Neighbour (in a town with no sheriff, ask any of its lawmen). With the star on you, bounties brought to that town's board pay a gold coin over, and its lawmen come when something goes for you there. Earn two wanted stars anywhere and the sheriff takes it back until your name is clear. One town's star at a time.
+- **The sheriff's jobs,** one a day for his deputy. After dark, walk the rounds and report. By day, bring in a drifter alive (shoot him down to half, throw a lasso on him, walk him back), or carry a warrant to the next town's sheriff.
+- **The Old Place:** a homestead standing empty at the edge of town, for sale. A two-storey house with a veranda and a balcony over it, a parlour with a hearth and a piano, a kitchen with the table still laid, two bedrooms upstairs; a red barn with a hay loft, a horse, a donkey and tack; a corral of cattle, a kitchen garden, a well and its windmill. Four chests of what was left behind. A Neighbour buys the Deed from the banker or the postmaster and uses it on the stake by the gate. Where a town has no Old Place standing (in a world made before this update, say), use the deed on level ground near town and the town raises one. The land round it is yours to build on.
+- **The Mailbox** at your gate gets the Gazette every morning. You can craft more of them.
+- **The Branding Iron:** heat it at any fire and put your brand on your cattle. The stake at your gate counts them. Rustlers have heard: they cut the fence and lead a cow off on a rope, so be quick, or keep your stock behind walls.
+- **Cattle drives:** sneak and use a wrangler. He'll have a herd held outside town for you, bound for the next town or a buyer down the trail, paid per head that gets there. Stay close to the herd and it walks on; fall behind and it stops; lead one on a rope and the rest follow. A gunshot stampedes them, so think before you answer the riders on your back trail. He also buys your own branded stock, and pays more the farther it's come.
+- **Seven advancements,** from Known Around Town to Pillar of the Town.
+- **Settings:** `hollowfrontier-stake-server.toml` switches standing, deeds and drives, and sets the deed's price and the distances.
+- **On servers:** a claim isn't land protection. Only its stake and its mailbox are the owner's alone. Use your usual claim mod for the rest.
+
 ## 1.4.0 — The Hollow, heard, and the frontier, felt (unreleased)
 
 Two updates in one, and neither adds an item, a mob or a block: the Hollow Earth gets a sound of its own, and the things you do most get some weight. Existing worlds get all of it.

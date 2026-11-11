@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/known_around_town",
+  "criteria": {
+    "drive": {
+      "trigger": "hollowfrontier:drive_done"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.head_em_up.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "minecraft:lead"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.head_em_up.title"
+    }
+  },
+  "requirements": [
+    [
+      "drive"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

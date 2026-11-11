@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/the_old_place",
+  "criteria": {
+    "branded": {
+      "trigger": "hollowfrontier:branded"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.riding_for_the_brand.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:branding_iron"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.riding_for_the_brand.title"
+    }
+  },
+  "requirements": [
+    [
+      "branded"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

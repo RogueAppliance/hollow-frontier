@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/dead_or_alive",
+  "criteria": {
+    "known": {
+      "trigger": "hollowfrontier:standing_rank"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.known_around_town.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:frontier_gazette"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.known_around_town.title"
+    }
+  },
+  "requirements": [
+    [
+      "known"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

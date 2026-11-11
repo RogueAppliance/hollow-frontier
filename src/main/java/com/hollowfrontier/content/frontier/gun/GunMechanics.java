@@ -56,6 +56,7 @@ public final class GunMechanics {
         Vec3 start = shooter.getEyePosition();
         Vec3 look = shooter.getViewVector(1.0F);
         RandomSource random = shooter.getRandom();
+        com.hollowfrontier.content.frontier.stake.Herds.spook(level, start, com.hollowfrontier.content.frontier.stake.Herds.SPOOK_RANGE); // 47c: a shot stampedes a herd
         Map<Entity, Float> damageByTarget = new HashMap<>();
         Map<Entity, Vec3> headshots = new HashMap<>();
         java.util.List<Vec3> paths = new java.util.ArrayList<>(); // where each pellet stopped (46a: what flew past whom)

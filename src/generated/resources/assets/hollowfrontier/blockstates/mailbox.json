@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "hollowfrontier:block/mailbox",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "hollowfrontier:block/mailbox",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hollowfrontier:block/mailbox"
+    },
+    "facing=south": {
+      "model": "hollowfrontier:block/mailbox",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "hollowfrontier:block/mailbox",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "hollowfrontier:block/mailbox",
+      "y": 270
+    }
+  }
+}

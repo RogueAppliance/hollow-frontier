@@ -441,6 +441,22 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     private void furniture() {
+        // 47b: a mailbox (a tin box round a chest's worth of room) and the branding iron
+        shaped(RecipeCategory.DECORATIONS, ModItems.MAILBOX.get())
+                .define('I', Items.IRON_INGOT)
+                .define('C', Items.CHEST)
+                .pattern("III")
+                .pattern("ICI")
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .save(output);
+        shaped(RecipeCategory.TOOLS, ModItems.BRANDING_IRON.get())
+                .define('I', Items.IRON_INGOT)
+                .define('S', Items.STICK)
+                .pattern("II")
+                .pattern(" S")
+                .pattern(" S")
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .save(output);
         shaped(RecipeCategory.DECORATIONS, ModItems.BAR_COUNTER.get(), 3)
                 .define('S', Items.DARK_OAK_SLAB)
                 .define('W', ItemTags.PLANKS)

@@ -169,6 +169,7 @@ public class TownRaids extends SavedData {
         TownRaid raid = TownRaid.create(level, site, timings, gangSize, mounted);
         active.put(site.key(), raid);
         raid.announceWarning(level);
+        com.hollowfrontier.content.frontier.stake.StakeEvents.raidStarted(level, site.key()); // 47b: anyone with a place here hears the bell
         setDirty();
         return Optional.of(raid);
     }

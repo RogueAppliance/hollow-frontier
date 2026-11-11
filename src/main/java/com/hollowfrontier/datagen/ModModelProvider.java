@@ -72,6 +72,25 @@ public class ModModelProvider extends ModelProvider {
             .element(e -> e.from(1, 0, 13).to(3, 13, 15).textureAll(TextureSlot.ALL))
             .element(e -> e.from(13, 0, 13).to(15, 13, 15).textureAll(TextureSlot.ALL))
             .build();
+    // 47b: the Claim Stake (a post with a board nailed across it) and the mailbox (a tin box on a stub of post, its door
+    // north, a flag on its east side)
+    private static final ModelTemplate CLAIM_STAKE = ExtendedModelTemplateBuilder.builder()
+            .parent(Identifier.withDefaultNamespace("block/block"))
+            .requiredTextureSlot(TextureSlot.ALL)
+            .requiredTextureSlot(TextureSlot.PARTICLE)
+            .element(e -> e.from(6, 0, 6).to(10, 16, 10).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(2, 9, 5).to(14, 14, 6).textureAll(TextureSlot.ALL))
+            .build();
+    private static final ModelTemplate MAILBOX = ExtendedModelTemplateBuilder.builder()
+            .parent(Identifier.withDefaultNamespace("block/block"))
+            .requiredTextureSlot(TextureSlot.ALL)
+            .requiredTextureSlot(TextureSlot.PARTICLE)
+            .element(e -> e.from(4, 3, 2).to(12, 11, 14).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(5, 11, 2).to(11, 12, 14).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(7, 0, 7).to(9, 3, 9).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(12, 6, 10).to(12.5F, 13, 11).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(12, 11, 8).to(12.5F, 13, 10).textureAll(TextureSlot.ALL))
+            .build();
     // Saloon piano (facing north): case with a panelled front, keybed with the keys on top, two legs, lid.
     private static final TextureSlot KEYS = TextureSlot.create("keys");
     private static final ModelTemplate PIANO = ExtendedModelTemplateBuilder.builder()
@@ -242,6 +261,21 @@ public class ModModelProvider extends ModelProvider {
             blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(table,
                     BlockModelGenerators.plainVariant(TABLE.create(table, planks, blockModels.modelOutput))));
         }
+        // 47b: the Claim Stake in spruce, and the mailbox turned the way it's set down
+        Block stake = ModBlocks.CLAIM_STAKE.get();
+        TextureMapping stakeWood = new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(net.minecraft.world.level.block.Blocks.SPRUCE_PLANKS))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(net.minecraft.world.level.block.Blocks.SPRUCE_PLANKS));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(stake,
+                BlockModelGenerators.plainVariant(CLAIM_STAKE.create(stake, stakeWood, blockModels.modelOutput))));
+        Block mailbox = ModBlocks.MAILBOX.get();
+        Identifier mailboxModel = MAILBOX.create(mailbox, TextureMapping.cube(mailbox).copySlot(TextureSlot.ALL, TextureSlot.PARTICLE), blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(mailbox, BlockModelGenerators.plainVariant(mailboxModel))
+                .with(BlockModelGenerators.ROTATION_FACING));
+        blockModels.registerSimpleItemModel(mailbox, mailboxModel);
+        itemModels.generateFlatItem(ModItems.DEPUTY_BADGE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.WARRANT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.DEED.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.BRANDING_IRON.get(), ModelTemplates.FLAT_ITEM);
         // The town lamp: vanilla's lantern when lit, a cold lantern (town_lamp_unlit, reworked from vanilla's) when not; the
         // item is vanilla's lantern sprite
         Block lamp = ModBlocks.TOWN_LAMP.get();

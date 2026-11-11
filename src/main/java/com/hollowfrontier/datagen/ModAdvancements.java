@@ -99,6 +99,14 @@ public final class ModAdvancements {
         text("frontier/dead_or_alive", "Dead or Alive", "Turn in an outlaw's badge at a Bounty Board");
         text("frontier/or_alive", "...Or Alive", "Bring an outlaw from a Gray pen to the town that posted him, alive");
         text("frontier/hold_the_line", "Hold the Line", "Help a town see off an outlaw raid");
+        // 47: a stake in town
+        text("frontier/known_around_town", "Known Around Town", "Do enough for a town that it knows your name");
+        text("frontier/the_star", "The Star", "Be sworn in as a town's deputy. The sheriff asks a Neighbour");
+        text("frontier/an_honest_days_work", "An Honest Day's Work", "Do a job for the sheriff");
+        text("frontier/the_old_place", "The Old Place", "Take up a deed to a homestead of your own");
+        text("frontier/riding_for_the_brand", "Riding for the Brand", "Put your brand on a cow with a hot iron");
+        text("frontier/head_em_up", "Head 'Em Up", "Bring a herd in at the end of a drive");
+        text("frontier/pillar_of_the_town", "Pillar of the Town", "Stand as high in a town as anyone can");
         text("frontier/not_so_fast", "Not So Fast, Partner", "Shoot the Safecracker before he rides out with the town's money");
         text("frontier/well_heeled", "Well Heeled", "Fit horseshoes to a tamed horse");
         text("frontier/lights_in_the_sky", "Lights in the Sky", "See one of the airships that cross the frontier by night");
@@ -323,6 +331,33 @@ public final class ModAdvancements {
                     .addCriterion("recovered", ModCriteria.LOOT_RECOVERED.get().criterion())
                     .rewards(AdvancementRewards.Builder.experience(100).addLootTable(output.lookup(Registries.LOOT_TABLE).getOrThrow(REWARD_RECOVERED)))
                     .save(output, id("frontier/not_so_fast"));
+
+            // 47: a stake in town
+            AdvancementHolder known = task(bounty, "frontier/known_around_town", ModItems.FRONTIER_GAZETTE.get())
+                    .addCriterion("known", ModCriteria.STANDING_RANK.get().criterion())
+                    .save(output, id("frontier/known_around_town"));
+            AdvancementHolder star = display(known, "frontier/the_star", ModItems.DEPUTY_BADGE.get(), AdvancementType.GOAL, false)
+                    .addCriterion("sworn", ModCriteria.DEPUTISED.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(50))
+                    .save(output, id("frontier/the_star"));
+            task(star, "frontier/an_honest_days_work", ModItems.COPPER_COIN.get())
+                    .addCriterion("job", ModCriteria.JOB_DONE.get().criterion())
+                    .save(output, id("frontier/an_honest_days_work"));
+            AdvancementHolder place = display(known, "frontier/the_old_place", ModItems.DEED.get(), AdvancementType.GOAL, false)
+                    .addCriterion("homesteader", ModCriteria.HOMESTEADER.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("frontier/the_old_place"));
+            task(place, "frontier/riding_for_the_brand", ModItems.BRANDING_IRON.get())
+                    .addCriterion("branded", ModCriteria.BRANDED.get().criterion())
+                    .save(output, id("frontier/riding_for_the_brand"));
+            display(known, "frontier/head_em_up", Items.LEAD, AdvancementType.GOAL, false)
+                    .addCriterion("drive", ModCriteria.DRIVE_DONE.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(50))
+                    .save(output, id("frontier/head_em_up"));
+            display(known, "frontier/pillar_of_the_town", ModItems.GOLD_COIN.get(), AdvancementType.CHALLENGE, false)
+                    .addCriterion("pillar", ModCriteria.STANDING_RANK.get().atLeast(3))
+                    .rewards(AdvancementRewards.Builder.experience(200))
+                    .save(output, id("frontier/pillar_of_the_town"));
 
             // Horses
             AdvancementHolder shod = task(root, "frontier/well_heeled", ModItems.IRON_HORSESHOES.get())

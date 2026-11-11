@@ -97,6 +97,9 @@ public record Wanted(int heat, long lastChange, long nextPosse) {
                     ? Component.translatable("message.hollowfrontier.wanted.clear").withStyle(ChatFormatting.GREEN)
                     : Component.translatable("message.hollowfrontier.wanted." + stars).withStyle(ChatFormatting.RED);
             player.sendOverlayMessage(message);
+            if (stars >= 2 && oldStars < 2) {
+                com.hollowfrontier.content.frontier.stake.Deputies.disgrace(player); // 47a: the star comes off
+            }
             if (stars > oldStars) {
                 player.level().playSound(null, player.blockPosition(), ModSounds.WANTED_RAISED.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 ModCriteria.fire(player, ModCriteria.WANTED_LEVEL, stars);

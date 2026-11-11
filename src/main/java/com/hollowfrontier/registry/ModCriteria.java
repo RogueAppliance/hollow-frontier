@@ -45,6 +45,13 @@ public final class ModCriteria {
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> LOOT_RECOVERED = register("loot_recovered");
     /** A 3-star outlaw paid a cut of a robbery. */
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> RAID_CUT = register("raid_cut");
+    // A stake in town (47). Value of the first: the rank reached (1 Regular, 2 Neighbour, 3 Pillar); of the last: head delivered
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> STANDING_RANK = register("standing_rank");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DEPUTISED = register("deputised");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> JOB_DONE = register("job_done");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> HOMESTEADER = register("homesteader");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> BRANDED = register("branded");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DRIVE_DONE = register("drive_done");
     // Steam
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> CANISTER_FILLED = register("canister_filled");
     /** Value: blocks driven under steam on one ride. */

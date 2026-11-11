@@ -60,6 +60,8 @@ public class TextureArt {
         System.out.println("TextureArt: " + sea + " Still Sea textures");
         int december = December.writeAll(root); // 35: the town tree, the parcel and what's in it, the two December drinks
         System.out.println("TextureArt: " + december + " December textures");
+        int stake = Stake.writeAll(root); // 47: the Deputy's Badge, the warrant, the deed, the branding iron and the mailbox
+        System.out.println("TextureArt: " + stake + " stake-in-town textures");
         int reworked = Reworked.writeAll(root); // last: it overwrites hand-drawn versions with ones reworked from vanilla
         System.out.println("TextureArt: wrote " + (3 + folk.length + ranks.length) + " skins, " + barmaids + " barmaid skins, " + creatures + " Hollow Earth creature textures, " + megafauna + " megafauna textures, " + mystery + " frontier mystery textures, " + cats + " cat textures, 1 effect icon, " + guns + " gun textures, " + items + " items, " + blocks + " block tiles, " + armor + " armor layers, " + expedition + " airship and polar gateway textures, " + hollow + " Hollow Earth textures, " + starsteel + " starsteel and phlogiston textures, " + concavia + " Concavia textures, " + ufo + " Gray textures, " + reworked + " reworked from vanilla to " + root);
     }
@@ -5790,6 +5792,98 @@ public class TextureArt {
      * and the rectangles must match), the Christmas Parcel, the Fruitcake, Eggnog and Hot Cider. The festive Town Lamp is in
      * Reworked, with the lamp it's drawn on.
      */
+    /** 47, a stake in town: four items and the mailbox's tin. */
+    static final class Stake {
+        static int writeAll(File root) throws Exception {
+            int n = 0;
+            // A brass star, five points, a steel stud in the middle
+            n += Items.put(root, "deputy_badge", sprite(0xC9A03A, pal('k', 0x3A2A10, 's', 0xD8DCE0),
+                    "",
+                    "       kk",
+                    "      k66k",
+                    "      k65k",
+                    "     k6655k",
+                    "kkkkkk6555kkkkkk",
+                    "k66666555555444k",
+                    " k665555555444k",
+                    "  k6555ss5544k",
+                    "   k555ss544k",
+                    "   k55555444k",
+                    "  k5554kk4443k",
+                    "  k554k  k433k",
+                    " k54kk    kk33k",
+                    " kkk        kkk"));
+            // A sheet of foolscap, written close, a red wax seal in the corner
+            n += Items.put(root, "warrant", sprite(0xD8CCA8, pal('k', 0x4A4030, 'd', 0x5A4A3A, 'r', 0xA3202A, 'R', 0xD8434A),
+                    "",
+                    "   kkkkkkkkkk",
+                    "  k6666666665k",
+                    "  k6ddd6dddd5k",
+                    "  k6666666665k",
+                    "  k6dddddd665k",
+                    "  k6666666655k",
+                    "  k6ddd6ddd55k",
+                    "  k6666666555k",
+                    "  k6dddd66rr5k",
+                    "  k666666rRr4k",
+                    "  k555555rrr4k",
+                    "  k5555554444k",
+                    "   kkkkkkkkkk"));
+            // A wide sheet of vellum with a green ribbon across the foot and a gold seal on it
+            n += Items.put(root, "deed", sprite(0xE4D8B4, pal('k', 0x4A4030, 'd', 0x5A4A3A, 'g', 0xC89A20, 'G', 0xFFE070, 'v', 0x3F7A48),
+                    "",
+                    "",
+                    " kkkkkkkkkkkkkk",
+                    " k666666666665k",
+                    " k6ddd6dddd665k",
+                    " k666666666655k",
+                    " k6dd6ddd6dd55k",
+                    " k666666666555k",
+                    " k6dddddd65555k",
+                    " k66666666gg54k",
+                    " kvvvvvvvgGGgvk",
+                    " k55555555gg44k",
+                    " k555555544444k",
+                    " kkkkkkkkkkkkkk"));
+            // An iron rod with a ring for a head and a wooden grip
+            n += Items.put(root, "branding_iron", sprite(0x8A8E94, pal('k', 0x26282C, 'w', 0x6A4A2A, 'W', 0x8E6A3C),
+                    "           kkk",
+                    "          k565k",
+                    "         k5k k5k",
+                    "          k545k",
+                    "          k4kk",
+                    "         k4k",
+                    "        k4k",
+                    "       k4k",
+                    "      k3k",
+                    "     k3k",
+                    "    kwk",
+                    "   kwWk",
+                    "  kwWk",
+                    " kwWk",
+                    " kkk"));
+            // The mailbox: tin sheet, riveted at the corners, a slot, and a red patch the flag's faces take
+            write(new File(root, "block/mailbox.png"), sprite(0x98A2AA, pal('k', 0x4A5058, 'd', 0x2E3238, 'r', 0xB3202A),
+                    "kkkkkkkkkkkkkkkk",
+                    "k56666666666654k",
+                    "k65555555555543k",
+                    "k65555555555543k",
+                    "k655dddddddd543k",
+                    "k65555555555543k",
+                    "k65555555555543k",
+                    "k65555555555543k",
+                    "k655555rrrr5543k",
+                    "k655555rrrr5543k",
+                    "k65555555555543k",
+                    "k65555555555543k",
+                    "k65555555555543k",
+                    "k54444444444433k",
+                    "k43333333333332k",
+                    "kkkkkkkkkkkkkkkk"));
+            return n + 1;
+        }
+    }
+
     static final class December {
         static final int NEEDLE = 0x2C5A36, NEEDLE_DARK = 0x1C3E26, NEEDLE_LIGHT = 0x3F7A48, NEEDLE_TIP = 0x5A9A5C;
         static final int BARK = 0x4A3220, BARK_DARK = 0x33221A, TUB = 0x7A5A36, TUB_DARK = 0x56402A, HOOP = 0x8A8E94, SOIL = 0x3A2A1E;

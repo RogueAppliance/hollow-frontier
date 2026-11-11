@@ -134,6 +134,13 @@ public final class PhotoBooth {
         if (mc.gui.screen() instanceof net.minecraft.client.gui.screens.PauseScreen) {
             mc.gui.setScreen(null);
         }
+        // Phase 47 played through in real towns, only on its own with -PphotoScene=stake (StakePlaytest)
+        if (StakePlaytest.ENABLED) {
+            if (ticks >= 40) {
+                StakePlaytest.tick(mc, server);
+            }
+            return;
+        }
         // The Polar Resonator held, only on its own with -PphotoScene=resonator
         if (RESONATOR_ONLY) {
             if (ticks >= 40) {
@@ -3239,7 +3246,7 @@ public final class PhotoBooth {
     private static final boolean TOWNBUILD_ONLY = "townbuild".equals(System.getProperty("hollowfrontier.photo.scene"));
     /** A building to shoot: its template, width and depth, and the heights (template y, highest first) to cut it down to. */
     private record Plot(String template, int w, int d, int... cuts) {}
-    private static final List<Plot> PLOTS = List.of(
+    private static final List<Plot> ALL_PLOTS = List.of(
             new Plot("town/general_store", 12, 12, 5), new Plot("town/sheriff_office", 9, 12, 5), new Plot("town/bank", 12, 12, 6),
             new Plot("town/hotel", 11, 12, 10, 5), new Plot("town/hotel_grand", 13, 13, 9, 5), new Plot("town/saloon", 13, 13, 6),
             new Plot("town/saloon_grand", 15, 14, 10, 5), new Plot("town/gunsmith", 12, 12, 5), new Plot("town/doctor", 12, 12, 5),
@@ -3249,8 +3256,16 @@ public final class PhotoBooth {
             new Plot("town/mining/homestead", 12, 12), new Plot("town/desert/general_store", 12, 12), new Plot("town/desert/courthouse", 17, 16),
             new Plot("town/bathhouse", 12, 12, 5), new Plot("town/gazette_office", 12, 12, 6), new Plot("town/ranch", 21, 21, 5),
             new Plot("town/street_short", 9, 44), new Plot("town/rail_boxcar", 7, 28), new Plot("town/rail_tank", 7, 28),
-            new Plot("town/square_tee_bandstand", 39, 39));
-    private static final int PLOT_TICKS = 100;
+            new Plot("town/square_tee_bandstand", 39, 39),
+            // 47b: the Old Place, in each style (the frontier one cut to its upper floor, then its ground floor)
+            new Plot("town/old_place", 35, 31, 9, 5), new Plot("town/desert/old_place", 35, 31), new Plot("town/mining/old_place", 35, 31));
+    /** -PphotoFilter=old_place shoots only the plots whose template holds one of those words, and skips the tour of real towns. */
+    private static final List<String> PLOT_FILTER = java.util.Arrays.stream(System.getProperty("hollowfrontier.photo.filter", "").split(","))
+            .filter(word -> !word.isBlank()).toList();
+    private static final List<Plot> PLOTS = PLOT_FILTER.isEmpty() ? ALL_PLOTS
+            : ALL_PLOTS.stream().filter(plot -> PLOT_FILTER.stream().anyMatch(plot.template()::contains)).toList();
+    private static boolean plotsDone;
+    private static final int PLOT_TICKS = 130;
 
     /**
      * `hf_w*`: each town building placed alone on a grass stage in the sky (cleared between them), shot from the street
@@ -3287,9 +3302,13 @@ public final class PhotoBooth {
                 tpLooking(server, new Vec3(x - far * 0.35, Y + far * 0.4, z - far), new Vec3(cx, Y + 2, cz));
             } else if (k == 30) {
                 shot(mc, tag + "_out.png");
+            } else if (k == 31) {                 // and from the street, standing at the gate's shoulder
+                tpLooking(server, new Vec3(x + p.w() * 0.2, Y + 4, z - Math.max(6, p.d() * 0.45)), new Vec3(cx, Y + 4, cz));
+            } else if (k == 56) {
+                shot(mc, tag + "_street.png");
             } else {
                 for (int c = 0; c < p.cuts().length; c++) {
-                    int at = 32 + c * 30;
+                    int at = 58 + c * 30;
                     if (k == at) {
                         int cutY = oy + p.cuts()[c];
                         run(server, String.format("kill @e[type=minecraft:item,distance=..80]"));
@@ -3306,7 +3325,13 @@ public final class PhotoBooth {
             }
             return;
         }
-        if (s >= plots * PLOT_TICKS) {
+        if (s >= plots * PLOT_TICKS && !PLOT_FILTER.isEmpty()) {
+            if (!plotsDone) {
+                plotsDone = true;
+                HollowFrontier.LOGGER.info("[PhotoBooth] townbuild plots done, quitting");
+                quit(mc, server);
+            }
+        } else if (s >= plots * PLOT_TICKS) {
             townTour(mc, server);
         }
     }
@@ -4828,7 +4853,7 @@ public final class PhotoBooth {
      * Ends the run. Every forceload the scenes added is released first: the photo world is reused, and forced chunks are
      * kept with it and all loaded at the next start, which (before this) had piled up into minutes of "preparing spawn area".
      */
-    private static void quit(Minecraft mc, MinecraftServer server) {
+    static void quit(Minecraft mc, MinecraftServer server) {
         releaseForceloads(server);
         server.execute(() -> mc.execute(mc::stop)); // after the release (queued before it), so it lands before the save
     }
@@ -4966,7 +4991,7 @@ public final class PhotoBooth {
         });
     }
 
-    private static void shot(Minecraft mc, String name) {
+    static void shot(Minecraft mc, String name) {
         Screenshot.grab(mc.gameDirectory, name, mc.gameRenderer.mainRenderTarget(), 1,
                 message -> HollowFrontier.LOGGER.info("[PhotoBooth] {}", message.getString()));
     }

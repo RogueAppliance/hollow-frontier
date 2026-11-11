@@ -70,6 +70,16 @@ public final class ModGameTests {
         test("infinity_loads_for_free", 20, GunEnchantmentTests::infinityLoadsForFree);
         test("blacksmith_sells_a_gun_book", 20, GunEnchantmentTests::blacksmithSellsAGunBook);
         test("lasso_leashes_cow", 80, FrontierTests::lassoLeashesCow);
+        // A stake in town (47)
+        test("standing_by_deed", 20, StakeTests::standingByDeed);
+        test("badge_offered_and_taken_back", 20, StakeTests::badgeOfferedAndTakenBack);
+        test("rounds_walked_and_paid", 20, StakeTests::roundsWalkedAndPaid);
+        test("drifter_brought_in_alive", 20, StakeTests::drifterBroughtInAlive);
+        test("dead_drifter_pays_nothing", 20, StakeTests::deadDrifterPaysNothing);
+        test("warrant_served", 20, StakeTests::warrantServed);
+        test("old_place_stands_and_is_taken", 40, StakeTests::oldPlaceStandsAndIsTaken);
+        test("herd_driven_and_paid", 20, StakeTests::herdDrivenAndPaid);
+        test("old_place_data", 20, StakeTests::oldPlaceData);
         test("lasso_winds_up_then_throws", 20, FrontierTests::lassoWindsUpThenThrows);
         test("cowboy_set_bonus_speeds_horse", 20, FrontierTests::cowboySetBonusSpeedsHorse);
         test("horse_gear_fit_and_strip", 20, FrontierTests::horseGearFitAndStrip);

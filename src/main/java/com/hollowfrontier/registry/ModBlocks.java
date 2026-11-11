@@ -80,6 +80,13 @@ public final class ModBlocks {
             com.hollowfrontier.content.frontier.furniture.TownLampBlock::new,
             () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.LANTERN).lightLevel(com.hollowfrontier.content.frontier.furniture.TownLampBlock::light));
 
+    // 47b: the stake by an Old Place's gate (no item: it comes with the place) and the mailbox
+    public static final DeferredBlock<com.hollowfrontier.content.frontier.stake.ClaimStakeBlock> CLAIM_STAKE = BLOCKS.registerBlock("claim_stake",
+            com.hollowfrontier.content.frontier.stake.ClaimStakeBlock::new, () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.SPRUCE_FENCE).strength(2.0F, 1200.0F).noLootTable()
+                    .pushReaction(PushReaction.IMMOVEABLE));
+    public static final DeferredBlock<com.hollowfrontier.content.frontier.stake.MailboxBlock> MAILBOX = BLOCKS.registerBlock("mailbox",
+            com.hollowfrontier.content.frontier.stake.MailboxBlock::new, () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.IRON_BARS).strength(2.0F).noOcclusion());
+
     private static DeferredBlock<ChairBlock> chair(String name, Block wood) {
         return BLOCKS.registerBlock(name, ChairBlock::new, () -> BlockBehaviour.Properties.ofLegacyCopy(wood).noOcclusion());
     }

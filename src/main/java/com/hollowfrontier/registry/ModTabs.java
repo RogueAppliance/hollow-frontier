@@ -92,6 +92,8 @@ public final class ModTabs {
         add(out, ModItems.IRON_HORSESHOES, ModItems.BRASS_HORSESHOES, ModItems.SADDLEBAGS);
         // Money, the law and the news
         add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE, ModItems.SURVEY_LETTER);
+        // 47: a stake in town
+        add(out, ModItems.DEPUTY_BADGE, ModItems.WARRANT, ModItems.DEED, ModItems.BRANDING_IRON);
         // 35: a frontier December
         add(out, ModItems.CHRISTMAS_PARCEL, ModItems.FRUITCAKE, ModItems.EGGNOG, ModItems.HOT_CIDER);
         // The frontier's mysteries (11a)
@@ -113,7 +115,7 @@ public final class ModTabs {
         add(out, ModItems.SALOON_DOORS, ModItems.BAR_COUNTER, ModItems.BAR_STOOL, ModItems.SALOON_PIANO, ModItems.CARD_TABLE);
         // Chairs and tables (24c)
         add(out, ModItems.OAK_CHAIR, ModItems.SPRUCE_CHAIR, ModItems.DARK_OAK_CHAIR, ModItems.OAK_TABLE, ModItems.SPRUCE_TABLE, ModItems.DARK_OAK_TABLE,
-                ModItems.TOWN_LAMP);
+                ModItems.TOWN_LAMP, ModItems.MAILBOX);
         // The law office
         add(out, ModItems.HANGING_BOUNTY_BOARD, ModItems.BOUNTY_BOARD);
         // Metal blocks and the ore they come from

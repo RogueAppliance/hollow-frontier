@@ -31,6 +31,14 @@ public class ModLanguageProvider extends LanguageProvider {
                 add(exchange.key(i), exchange.texts().get(i));
             }
         });
+        // 47: a stake in town, each line from where it's said
+        com.hollowfrontier.content.frontier.stake.StakeText.all().forEach(this::add);
+        addItem(ModItems.DEPUTY_BADGE, "Deputy's Badge");
+        addItem(ModItems.WARRANT, "Warrant");
+        addItem(ModItems.DEED, "Deed");
+        addItem(ModItems.BRANDING_IRON, "Branding Iron");
+        addBlock(ModBlocks.MAILBOX, "Mailbox");
+        addBlock(ModBlocks.CLAIM_STAKE, "Claim Stake");
         // 21a: the Gazette's back page, the Gray field notes and Boot Hill's epitaphs, each from its own table
         for (GazetteBackPage.Kind kind : GazetteBackPage.Kind.values()) {
             add(kind.titleKey(), kind.title);

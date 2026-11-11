@@ -1,0 +1,32 @@
+{
+  "parent": "hollowfrontier:frontier/known_around_town",
+  "criteria": {
+    "pillar": {
+      "conditions": {
+        "min": 3
+      },
+      "trigger": "hollowfrontier:standing_rank"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.pillar_of_the_town.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:gold_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.pillar_of_the_town.title"
+    }
+  },
+  "requirements": [
+    [
+      "pillar"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  },
+  "sends_telemetry_event": true
+}

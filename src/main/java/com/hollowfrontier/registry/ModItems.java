@@ -134,6 +134,16 @@ public final class ModItems {
             p -> new BountyItem(true, p), p -> p.stacksTo(1));
     public static final DeferredItem<BountyItem> OUTLAW_BADGE = ITEMS.registerItem("outlaw_badge",
             p -> new BountyItem(false, p), p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    // 47: a stake in town. The star, the warrant and the deed each carry their town; the stake itself has no item
+    public static final DeferredItem<com.hollowfrontier.content.frontier.stake.StakeItems.Badge> DEPUTY_BADGE = ITEMS.registerItem("deputy_badge",
+            com.hollowfrontier.content.frontier.stake.StakeItems.Badge::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<com.hollowfrontier.content.frontier.stake.StakeItems.Warrant> WARRANT = ITEMS.registerItem("warrant",
+            com.hollowfrontier.content.frontier.stake.StakeItems.Warrant::new, p -> p.stacksTo(1));
+    public static final DeferredItem<com.hollowfrontier.content.frontier.stake.StakeItems.Deed> DEED = ITEMS.registerItem("deed",
+            com.hollowfrontier.content.frontier.stake.StakeItems.Deed::new, p -> p.stacksTo(1).rarity(Rarity.RARE));
+    public static final DeferredItem<com.hollowfrontier.content.frontier.stake.StakeItems.BrandingIron> BRANDING_IRON = ITEMS.registerItem("branding_iron",
+            com.hollowfrontier.content.frontier.stake.StakeItems.BrandingIron::new, p -> p.durability(64));
+    public static final DeferredItem<BlockItem> MAILBOX = ITEMS.registerSimpleBlockItem(ModBlocks.MAILBOX);
     public static final DeferredItem<SpawnEggItem> OUTLAW_SPAWN_EGG = ITEMS.registerItem("outlaw_spawn_egg",
             SpawnEggItem::new, p -> p.spawnEgg(ModEntities.OUTLAW.get()));
     public static final DeferredItem<SpawnEggItem> OUTLAW_GUNSLINGER_SPAWN_EGG = ITEMS.registerItem("outlaw_gunslinger_spawn_egg",
