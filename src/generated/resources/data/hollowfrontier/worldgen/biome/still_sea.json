@@ -5,6 +5,7 @@
         "sound": "hollowfrontier:ambient.still_sea.additions",
         "tick_chance": 0.004
       },
+      "loop": "hollowfrontier:ambient.still_sea.loop",
       "mood": {
         "block_search_extent": 8,
         "offset": 2.0,
@@ -16,7 +17,7 @@
       "default": {
         "max_delay": 24000,
         "min_delay": 12000,
-        "sound": "minecraft:music.overworld.lush_caves"
+        "sound": "hollowfrontier:music.hollow.still_sea"
       }
     },
     "minecraft:gameplay/natural_mob_spawns": {

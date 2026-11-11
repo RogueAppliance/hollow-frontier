@@ -19,6 +19,8 @@ import com.hollowfrontier.registry.ModSounds;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -130,6 +132,12 @@ public class PhlogistonGunItem extends GunItem {
         shot.aim(from, stop, colour);
         level.addFreshEntity(shot);
         level.sendParticles(spark, stop.x, stop.y, stop.z, 6, 0.1, 0.1, 0.1, 0);
+        if (struck.isEmpty() && end.distanceToSqr(eye) < stats.range() * stats.range() - 0.01) {
+            // 46a: stopped by a block: a scorch that glows for a moment, and a hiss
+            level.sendParticles(ParticleTypes.SMALL_FLAME, stop.x, stop.y, stop.z, 4, 0.06, 0.06, 0.06, 0.002);
+            level.sendParticles(ParticleTypes.SMOKE, stop.x, stop.y, stop.z, 2, 0.05, 0.05, 0.05, 0.01);
+            level.playSound(null, stop.x, stop.y, stop.z, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.2F, 1.8F);
+        }
         for (LivingEntity target : struck) {
             // Where the beam went in, for a headshot
             Vec3 hit = target.getBoundingBox().inflate(0.3).clip(eye, end).orElse(target.getBoundingBox().getCenter());

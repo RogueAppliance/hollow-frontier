@@ -48,7 +48,7 @@ public final class ModEntityRenderers {
 
     @SubscribeEvent
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.LASSO.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.LASSO.get(), LassoRenderer::new);
         event.registerEntityRenderer(ModEntities.DYNAMITE.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.SEAT.get(), NoopRenderer::new);
         // 29: a dust devil draws itself in particles

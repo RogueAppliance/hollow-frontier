@@ -175,6 +175,7 @@ Hollow Frontier works on its own. If these mods are installed, it uses them:
 - `hollowfrontier-saloon-server.toml` and `hollowfrontier-dust-devils-server.toml` (per world): saloon brawls and missing time; dust devils.
 - `hollowfrontier-season-server.toml` (per world): December. `mode` is `AUTO` (by the server's date), `ALWAYS` or `NEVER`; `truce` is the Christmas truce.
 - `hollowfrontier-startup.toml`: crafting-table brass. Turn it off if another mod makes brass.
+- `hollowfrontier-client.toml` (yours alone, not the server's): `hollowScore` turns the Hollow Earth's own music and boss themes off and puts vanilla's back. `cameraKick` and `cameraShake` run from 0 to 1: how hard a gun kicks your view, and how much it shakes for heavy footfalls and blasts. Set both to 0 if a moving view makes you unwell.
 - Gamerule `hollowfrontier:saucer_beams_players`: whether a player's saucer can beam up other players.
 - Ops can set off raids, sightings, saucers and dust devils by hand with `/hollowfrontier raid|mystery|kindled|ufo|dustdevil ...`.
 

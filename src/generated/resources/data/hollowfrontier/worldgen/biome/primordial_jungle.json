@@ -5,6 +5,7 @@
         "sound": "hollowfrontier:ambient.primordial_jungle.additions",
         "tick_chance": 0.006
       },
+      "loop": "hollowfrontier:ambient.primordial_jungle.loop",
       "mood": {
         "block_search_extent": 8,
         "offset": 2.0,
@@ -16,7 +17,7 @@
       "default": {
         "max_delay": 24000,
         "min_delay": 12000,
-        "sound": "minecraft:music.overworld.jungle"
+        "sound": "hollowfrontier:music.hollow.primordial_jungle"
       }
     },
     "minecraft:gameplay/natural_mob_spawns": {

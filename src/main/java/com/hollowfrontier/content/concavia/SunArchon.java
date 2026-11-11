@@ -118,6 +118,7 @@ public class SunArchon extends Monster implements GeoEntity {
         super(type, level);
         xpReward = 500;
         bossEvent.setVisible(false);
+        bossEvent.setPlayBossMusic(true); // 45c: how the client knows to play his theme (client/BossMusic)
         setPersistenceRequired();
     }
 

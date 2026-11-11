@@ -28,7 +28,7 @@ public final class ModAttachments {
 
     // Horse gear. Horseshoe tier: 0 = none, otherwise HorseshoeItem.tier().
     public static final Supplier<AttachmentType<Integer>> HORSESHOE_TIER = ATTACHMENTS.register("horseshoe_tier",
-            () -> AttachmentType.builder(() -> 0).serialize(Codec.INT.fieldOf("tier")).build());
+            () -> AttachmentType.builder(() -> 0).serialize(Codec.INT.fieldOf("tier")).sync(ByteBufCodecs.VAR_INT).build()); // synced since 46b: shod hooves ring
 
     // A player's standing with the law. Reset on death; the heat is synced to its player for the HUD.
     public static final Supplier<AttachmentType<Wanted>> WANTED = ATTACHMENTS.register("wanted",

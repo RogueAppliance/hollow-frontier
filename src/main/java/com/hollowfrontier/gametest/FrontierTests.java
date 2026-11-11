@@ -197,6 +197,25 @@ final class FrontierTests {
         });
     }
 
+    /**
+     * 46b: using a lasso winds it up and throws nothing; letting go throws one, with the cooldown, however short the
+     * wind-up was (a click is a press and a release).
+     */
+    static void lassoWindsUpThenThrows(GameTestHelper h) {
+        ServerPlayer player = TestPlayers.survival(h, new BlockPos(2, 1, 2));
+        ItemStack stack = new ItemStack(ModItems.LASSO.get(), 3);
+        player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+        var box = new net.minecraft.world.phys.AABB(h.absolutePos(new BlockPos(2, 1, 2))).inflate(8);
+        int before = h.getLevel().getEntitiesOfClass(LassoEntity.class, box).size();
+        ModItems.LASSO.get().use(h.getLevel(), player, InteractionHand.MAIN_HAND);
+        h.assertTrue(player.isUsingItem(), "using a lasso should wind it up");
+        h.assertTrue(h.getLevel().getEntitiesOfClass(LassoEntity.class, box).size() == before && stack.getCount() == 3, "winding up shouldn't throw");
+        player.releaseUsingItem();
+        h.assertTrue(h.getLevel().getEntitiesOfClass(LassoEntity.class, box).size() == before + 1, "letting go should throw one lasso");
+        h.assertTrue(stack.getCount() == 2 && player.getCooldowns().isOnCooldown(stack), "a throw should cost a lasso and start the cooldown");
+        h.succeed();
+    }
+
     static void cowboySetBonusSpeedsHorse(GameTestHelper h) {
         ServerPlayer player = TestPlayers.survival(h, new BlockPos(4, 1, 4));
         Horse horse = h.spawnWithNoFreeWill(EntityTypes.HORSE, new BlockPos(4, 1, 4));

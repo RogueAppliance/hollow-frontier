@@ -318,6 +318,14 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.SALOON_PIANO, "Saloon Piano");
         add("message.hollowfrontier.piano.playing", "The piano strikes up a rag.");
         add("message.hollowfrontier.piano.stopped", "The piano lid closes.");
+        // 45a: the Hollow's score, as the "now playing" toast names it
+        add("hollowfrontier.music.hollow.primordial_jungle", "Hollow Frontier - Green Noon");
+        add("hollowfrontier.music.hollow.crystal_steppes", "Hollow Frontier - Glass Wind");
+        add("hollowfrontier.music.hollow.ember_badlands", "Hollow Frontier - Cinder Country");
+        add("hollowfrontier.music.hollow.concavian_highlands", "Hollow Frontier - The High Stones");
+        add("hollowfrontier.music.hollow.still_sea", "Hollow Frontier - Still Water");
+        add("hollowfrontier.configuration.score", "The Hollow Earth's score");
+        add("hollowfrontier.configuration.hollowScore", "Play the Hollow's own score");
         add("track.hollowfrontier.the_entertainer", "Scott Joplin - The Entertainer (1902)");
         add("track.hollowfrontier.elite_syncopations", "Scott Joplin - Elite Syncopations (1902)");
         add("track.hollowfrontier.pineapple_rag", "Scott Joplin - Pineapple Rag (1908)");
@@ -331,6 +339,20 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.hollowfrontier.rattlesnake.hurt", "Rattlesnake hisses");
         add("subtitles.hollowfrontier.rattlesnake.death", "Rattlesnake dies");
         add("subtitles.hollowfrontier.dynamite.fuse", "Dynamite fuse fizzes");
+        // 46: how things feel
+        add("subtitles.hollowfrontier.dynamite.blast", "Dynamite goes off");
+        add("subtitles.hollowfrontier.gun.ricochet", "Bullet ricochets");
+        add("subtitles.hollowfrontier.gun.whiz", "Bullet whizzes past");
+        add("subtitles.hollowfrontier.gun.thud", "Bullet strikes home");
+        add("subtitles.hollowfrontier.horse.horseshoe_ring", "Horseshoes ring");
+        add("subtitles.hollowfrontier.lasso.whirl", "Lasso whirls");
+        add("subtitles.hollowfrontier.lasso.line_creak", "Line creaks");
+        add("subtitles.hollowfrontier.airship.creak", "Airship creaks");
+        add("subtitles.hollowfrontier.steam_handcar.clack", "Handcar clacks");
+        add("subtitles.hollowfrontier.megafauna.footfall", "Heavy footfall");
+        add("hollowfrontier.configuration.camera", "Camera movement");
+        add("hollowfrontier.configuration.cameraKick", "Gun kick");
+        add("hollowfrontier.configuration.cameraShake", "Shake and sway");
         add("subtitles.hollowfrontier.coin.clink", "Coins clink");
         add("subtitles.hollowfrontier.drink.pour", "Drink poured");
         add("subtitles.hollowfrontier.wanted.raised", "Alarm bell rings");
@@ -665,6 +687,8 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.hollowfrontier.ember_badlands.additions", "The ground rumbles");
         add("subtitles.hollowfrontier.concavian_highlands.additions", "Wind over the uplands");
         add("subtitles.hollowfrontier.still_sea.additions", "Still water stirs");
+        add("subtitles.hollowfrontier.hollow_earth.crust_rumble", "The crust rumbles overhead"); // 45b
+        add("subtitles.hollowfrontier.steam_submersible.creak", "Hull creaks");
         add("subtitles.hollowfrontier.ash_vent.hiss", "Ash vent hisses");
         addEntityType(ModEntities.FERN_SKITTER, "Fern Skitter");
         addEntityType(ModEntities.GLASSBACK_HARE, "Glassback Hare");

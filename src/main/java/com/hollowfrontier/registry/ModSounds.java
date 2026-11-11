@@ -70,6 +70,55 @@ public final class ModSounds {
     // Falling out of the crust into the Hollow Earth: a slow swell of strings and voices (tools/music/Swell.java)
     public static final DeferredHolder<SoundEvent, SoundEvent> HOLLOW_REVEAL = register("ambient.hollow_earth.reveal");
     // Each Hollow Earth biome's ambient additions (HollowBiomes), and the ash vents' hiss
+    // 45a: the Hollow's own score, one piece a biome (tools/music/HollowScore.java), played as each biome's background music
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_JUNGLE = register("music.hollow.primordial_jungle");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_STEPPES = register("music.hollow.crystal_steppes");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_BADLANDS = register("music.hollow.ember_badlands");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_HIGHLANDS = register("music.hollow.concavian_highlands");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_SEA = register("music.hollow.still_sea");
+    public static final List<DeferredHolder<SoundEvent, SoundEvent>> HOLLOW_SCORE =
+            List.of(MUSIC_JUNGLE, MUSIC_STEPPES, MUSIC_BADLANDS, MUSIC_HIGHLANDS, MUSIC_SEA);
+
+    // 46: what things feel like. All re-pitched vanilla (frontier sounds, not sci-fi), so no files.
+    public static final DeferredHolder<SoundEvent, SoundEvent> GUN_RICOCHET = register("item.gun.ricochet");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GUN_WHIZ = register("item.gun.whiz");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GUN_THUD = register("item.gun.thud");
+    public static final DeferredHolder<SoundEvent, SoundEvent> HORSESHOE_RING = register("entity.horse.horseshoe_ring");
+    public static final DeferredHolder<SoundEvent, SoundEvent> LASSO_WHIRL = register("item.lasso.whirl");
+    public static final DeferredHolder<SoundEvent, SoundEvent> LINE_CREAK = register("item.lasso.line_creak");
+    public static final DeferredHolder<SoundEvent, SoundEvent> AIRSHIP_WIND = register("entity.airship.wind");
+    public static final DeferredHolder<SoundEvent, SoundEvent> AIRSHIP_CREAK = register("entity.airship.creak");
+    public static final DeferredHolder<SoundEvent, SoundEvent> HANDCAR_CLACK = register("entity.steam_handcar.clack");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BEAST_FOOTFALL = register("entity.megafauna.footfall");
+    public static final DeferredHolder<SoundEvent, SoundEvent> DYNAMITE_BLAST = register("item.dynamite.blast");
+
+    // 45c: the two boss themes (loops, played by client/BossMusic while the boss's bar shows) and the five stings
+    // (content/hollow/Moments plays each once, on an advancement). All from tools/music/HollowScore.java.
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_SUN_ARCHON = register("music.boss.sun_archon");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_MOTHERSHIP = register("music.boss.mothership");
+    public static final List<DeferredHolder<SoundEvent, SoundEvent>> BOSS_THEMES = List.of(MUSIC_SUN_ARCHON, MUSIC_MOTHERSHIP);
+    public static final DeferredHolder<SoundEvent, SoundEvent> STING_WELL_MET = register("event.sting.well_met");
+    public static final DeferredHolder<SoundEvent, SoundEvent> STING_SUN_TEMPLE = register("event.sting.sun_temple");
+    public static final DeferredHolder<SoundEvent, SoundEvent> STING_STILL_RUNNING = register("event.sting.still_running");
+    public static final DeferredHolder<SoundEvent, SoundEvent> STING_DROWNED_QUARTER = register("event.sting.drowned_quarter");
+    public static final DeferredHolder<SoundEvent, SoundEvent> STING_CUT_LOOSE = register("event.sting.cut_loose");
+    public static final List<DeferredHolder<SoundEvent, SoundEvent>> STINGS =
+            List.of(STING_WELL_MET, STING_SUN_TEMPLE, STING_STILL_RUNNING, STING_DROWNED_QUARTER, STING_CUT_LOOSE);
+
+    // 45b: each biome's bed, a seamless loop under its one-shots (tools/music/HollowBeds.java); the sea from under it; the
+    // crust overhead; the submersible's works and its hull
+    public static final DeferredHolder<SoundEvent, SoundEvent> JUNGLE_LOOP = register("ambient.primordial_jungle.loop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> STEPPES_LOOP = register("ambient.crystal_steppes.loop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BADLANDS_LOOP = register("ambient.ember_badlands.loop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> HIGHLANDS_LOOP = register("ambient.concavian_highlands.loop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SEA_LOOP = register("ambient.still_sea.loop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SEA_DEEP = register("ambient.still_sea.deep");
+    public static final List<DeferredHolder<SoundEvent, SoundEvent>> HOLLOW_BEDS =
+            List.of(JUNGLE_LOOP, STEPPES_LOOP, BADLANDS_LOOP, HIGHLANDS_LOOP, SEA_LOOP, SEA_DEEP);
+    public static final DeferredHolder<SoundEvent, SoundEvent> CRUST_RUMBLE = register("ambient.hollow_earth.crust_rumble");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SUBMERSIBLE_THRUM = register("entity.steam_submersible.thrum");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SUBMERSIBLE_CREAK = register("entity.steam_submersible.creak");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> JUNGLE_AMBIENT = register("ambient.primordial_jungle.additions");
     public static final DeferredHolder<SoundEvent, SoundEvent> STEPPES_AMBIENT = register("ambient.crystal_steppes.additions");
     public static final DeferredHolder<SoundEvent, SoundEvent> BADLANDS_AMBIENT = register("ambient.ember_badlands.additions");

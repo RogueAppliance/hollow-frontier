@@ -138,6 +138,7 @@ public class Mothership extends Monster implements GeoEntity {
     public Mothership(EntityType<? extends Mothership> type, Level level) {
         super(type, level);
         xpReward = 1000;
+        bossEvent.setPlayBossMusic(true); // 45c: how the client knows to play its theme (client/BossMusic)
         noPhysics = true;
         setNoGravity(true);
         setPersistenceRequired();

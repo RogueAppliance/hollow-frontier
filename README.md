@@ -43,6 +43,7 @@ By the server's date, and gone again in January: town lamps dressed with a sprig
   It also holds `spawnAtTown`, on by default, which starts new worlds in the nearest town. A world chooses its spawn once, so set this in the `config` folder before creating the world.
 - `hollowfrontier-season-server.toml` (per world): December. `mode` is `AUTO` (by the server's date), `ALWAYS` or `NEVER`; `truce` is the Christmas truce.
 - `hollowfrontier-startup.toml`: whether brass can be alloyed at a crafting table (turn it off if another mod makes brass).
+- `hollowfrontier-client.toml` (the player's own): `hollowScore` (the Hollow Earth's own music and boss themes, or vanilla's), and `cameraKick` and `cameraShake`, 0 to 1 (how hard a gun kicks the view, and how much it shakes for footfalls and blasts; 0 turns that movement off).
 
 ## In a modpack
 

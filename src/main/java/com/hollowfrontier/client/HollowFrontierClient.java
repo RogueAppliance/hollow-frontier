@@ -8,12 +8,14 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 // Client-only entry point: renderers, screens, sky effects and key mappings get registered from here.
 @Mod(value = HollowFrontier.MODID, dist = Dist.CLIENT)
 public class HollowFrontierClient {
     public HollowFrontierClient(IEventBus modEventBus, ModContainer container) {
+        container.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         modEventBus.addListener(FMLClientSetupEvent.class, event -> {
             if (Compat.isLoaded(Compat.IRIS)) {
                 event.enqueueWork(IrisCompat::assignPipelines);

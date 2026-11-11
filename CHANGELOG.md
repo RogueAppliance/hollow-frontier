@@ -1,5 +1,39 @@
 # Changelog
 
+## 1.4.0 — The Hollow, heard, and the frontier, felt (unreleased)
+
+Two updates in one, and neither adds an item, a mob or a block: the Hollow Earth gets a sound of its own, and the things you do most get some weight. Existing worlds get all of it.
+
+### The Hollow, heard
+
+- **A score for the Hollow Earth:** five original pieces, one for each biome, in place of the vanilla biome music that played there before. They grow from the swell you hear as you first fall out of the crust: the Primordial Jungle's is warm and close, the Crystal Steppes' glassy with bells, the Ember Badlands' low and dry, the Concavian Highlands' thin and high with one wordless voice, the Still Sea's slow and deep. They play on the Music slider with the game's usual gaps, and a saloon piano or a record in earshot still holds them.
+- **A bed under every biome:** each Hollow biome now has a quiet sound that is always there under its birds and chimes: insects and dripping water in the Primordial Jungle, a wide wind and the crystals' faint hum on the Crystal Steppes, a low rumble and a hiss of heat in the Ember Badlands, thin wind round old stone in the Concavian Highlands, and next to nothing on the Still Sea, where nothing blows. They cross-fade as you walk from one biome to the next, and sit on the Ambient slider.
+- **Things heard from far off:** now and then a creature that lives where you are calls from a long way away, in a direction you can turn to: a mammoth across the steppes, a terror bird in the badlands, something singing over deep water. Rarely, the crust rumbles overhead.
+- **Gray sites are quiet.** With Gray machines near, nothing calls and nothing rumbles.
+- **Under the Still Sea** the surface goes away and a deep, dark sound comes up, louder and lower the further down you go.
+- **Aboard the Steam Submersible** you hear its works, fuller under way, and the hull creaks: now and then just under the surface, often at depth.
+- **Boss themes:** the Sun Archon and the Mothership each have a theme of their own. It starts when the boss's bar comes up and fades out over a few seconds when the fight ends, however it ends. The Archon's is the Hollow's own music turned hard and bright, a choir over a pulse; the Mothership's is in a key as far from the Hollow's as a key can be, cold bells over a machine's beat.
+- **Five moments:** a few seconds of music the first time you meet one of the Kindled, enter the Sun Temple, find a Gray station still running, reach the Drowned Quarter, and break the leash. Each plays once for each player in a world, and only that player hears it.
+- **A switch:** `hollowScore` in the new `hollowfrontier-client.toml` (on by default). Turn it off and the Hollow plays vanilla's biome music as it did before, with no boss themes, for players and packs with music of their own. The beds, the far-off calls and the five moments aren't music and stay; they're on the Ambient slider.
+- **For pack makers:** the pieces are the sound events `hollowfrontier:music.hollow.<biome>`, so a resource pack can replace any of them.
+
+### The frontier, felt
+
+Nothing here changes what anything does. Guns hit as hard and as true as they did, and horses, airships and beasts move as they did.
+
+- **Guns kick.** Firing throws your view up and a little to one side, and it settles back in a quarter of a second to exactly where it was, so your aim doesn't move. The Blunderbuss kicks most, the rifle next, the revolver least, and the phlogiston guns hardly at all.
+- **A ball knows what it hit.** Chips of the block it struck and that block's own sound, in place of the same puff of smoke everywhere. Stone, metal and glass throw a spark, and now and then the ball whines off. Water splashes. A ray leaves a scorch that glows for a moment.
+- **Hits and misses are heard.** A hit on a creature lands with a thud for the shooter. A ball that passes within two blocks of you, fired by anyone else, cracks past your ear, so being shot at sounds like it.
+- **Gunfights leave a haze.** Three or more black powder shots from one spot inside a few seconds leave thin white smoke hanging for several seconds.
+- **Horses raise dust.** Every horse, donkey and mule at a gallop kicks up the ground it's on: a cloud on sand, gravel and dry dirt, a little on grass, a puff on snow, none on stone or boards. Rain lays it. A shod horse rings on stone.
+- **Horseshoes show.** A shod horse, donkey or mule wears them: a band of the shoe's metal round each hoof, iron grey, brass or starsteel crimson, and the shoe itself under the foot.
+- **The lasso whirls.** Hold use and the loop whirls over your head on a line from your raised hand, swishing as it comes round; let go to throw. A plain click still throws at once, and the throw is the same however long you wind it. In the air it's a loop of rope spinning on a line back to your hand, where it used to be the item's flat picture. A lead or lasso with something pulling on the end of it creaks.
+- **The airship:** wind over the deck that rises with speed and with height, a creak from the envelope when you turn or climb hard, wisps of cloud past the deck at cloud height, and a deck that leans a little into a turn.
+- **The handcar** clacks over rail joints, quicker with speed, and throws sparks when it brakes.
+- **Big things are felt.** A Woolly Mammoth, Megatherium or Glyptodon walking near you lands each foot with a thud, dust and a small shake of the view, harder at a charge. Dynamite, a vault blown in a raid and the Mothership's death ray shake the view by how close you are. A Basilosaurus ramming your submersible jolts it. The Mothership coming in is a tremor before it's a sight.
+- **Two sliders:** `cameraKick` and `cameraShake` in `hollowfrontier-client.toml`, each from 0 to 1. At 0 that movement is gone entirely. If a moving view makes you unwell, set both to 0; nothing else changes.
+- **For pack makers:** every new sound is a sound event of the mod's built from vanilla sounds, so a resource pack can replace any of them, and no new particle types are added.
+
 ## 1.3.0 — The Still Sea and a frontier December (2026-11-10)
 
 Two updates in one: an inner sea for the Hollow Earth, and a frontier Christmas that comes and goes by the date.
