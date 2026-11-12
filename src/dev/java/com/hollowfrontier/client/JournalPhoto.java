@@ -35,12 +35,21 @@ final class JournalPhoto {
         }
     }
 
+    /**
+     * The client's tick drives this, but a player's pack, advancements and attachments are the server's: what touches
+     * them runs on the server's own thread, and this waits for it. (Done from here they worked by luck.)
+     */
+    private static void onServer(MinecraftServer server, Runnable work) {
+        server.submit(work).join();
+    }
+
     static void tick(Minecraft mc, MinecraftServer server) {
         ServerPlayer player = server.getPlayerList().getPlayers().getFirst();
         int at = tick++;
         switch (at) {
             case 0 -> {
                 mc.options.guiScale().set(2);
+                onServer(server, () -> {
                 player.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);
                 player.getInventory().clearContent();
                 player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.PROSPECTORS_JOURNAL.get()));
@@ -76,12 +85,13 @@ final class JournalPhoto {
                 com.hollowfrontier.content.frontier.bank.TownBanks.get(level).open(town, player.getUUID(), 0).setItem(0, new ItemStack(ModItems.GOLD_COIN.get(), 3));
                 com.hollowfrontier.content.frontier.raid.TownRaids.get(level).record(town, level.getGameTime()).lastRaid = Math.max(0, level.getGameTime() - 48000);
                 townName = com.hollowfrontier.content.frontier.town.Towns.name(level, town);
+                });
             }
-            case 60 -> {
+            case 60 -> onServer(server, () -> {
                 // the way a player opens it: the item used
                 player.gameMode.useItem(player, player.level(), player.getMainHandItem(), InteractionHand.MAIN_HAND);
                 HollowFrontier.LOGGER.info("[Journal] sent: {}", Journal.pages(player));
-            }
+            });
             case 80 -> {
                 HollowFrontier.LOGGER.info("[Journal] {}", mc.gui.screen() instanceof JournalScreen ? "PASS the item opens the screen" : "FAIL no screen: " + mc.gui.screen());
                 PhotoBooth.shot(mc, "hf_journal_1_scale2_latest.png");
@@ -99,8 +109,10 @@ final class JournalPhoto {
             case 110 -> pick(mc, "steam");
             case 120 -> PhotoBooth.shot(mc, "hf_journal_3_scale2_steam.png");
             case 130 -> {
-                Journal.pin(player, "steam");
-                Journal.open(player);
+                onServer(server, () -> {
+                    Journal.pin(player, "steam");
+                    Journal.open(player);
+                });
                 pick(mc, "grays");
             }
             case 150 -> PhotoBooth.shot(mc, "hf_journal_4_scale2_pinned.png");
@@ -121,9 +133,11 @@ final class JournalPhoto {
                 mc.options.guiScale().set(2);
             }
             case 230 -> {   // with the book shut, the next thing on some thread is done: the note
-                String step = Journal.threads(player).stream().map(Journal.Thread::next).filter(next -> !next.isEmpty()).findFirst().orElseThrow();
-                HollowFrontier.LOGGER.info("[Journal] reaching {}", step);
-                award(player, step);
+                onServer(server, () -> {
+                    String step = Journal.threads(player).stream().map(Journal.Thread::next).filter(next -> !next.isEmpty()).findFirst().orElseThrow();
+                    HollowFrontier.LOGGER.info("[Journal] reaching {}", step);
+                    award(player, step);
+                });
             }
             case 245 -> PhotoBooth.shot(mc, "hf_journal_7_noted.png");
             case 300 -> {

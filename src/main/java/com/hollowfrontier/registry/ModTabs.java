@@ -188,6 +188,7 @@ public final class ModTabs {
         add(out, ModItems.PROTOTYPE_SAUCER, ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD, ModItems.SEALED_HULL); // 13c, 15b, 43d
         add(out, ModItems.PHLOGISTON_BEACON); // 13d
         add(out, ModItems.IMPLANT_RIG, ModItems.LETTER_HOME); // 20
+        add(out, ModItems.SHOCK_ROD, ModItems.GRAY_FIELD, ModItems.SHIP_CONSOLE, ModItems.CORE_SOCKET); // 50
         add(out, ModItems.KINDLED_SEAL, ModItems.SEAL_SOCKET); // 26
         ModItems.RELICS.forEach(relic -> add(out, relic)); // 28
         ModItems.GADGETS.forEach(gadget -> add(out, gadget)); // 32c

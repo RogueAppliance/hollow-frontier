@@ -125,6 +125,10 @@ public record Context(Set<Fact> facts, Act act, String poster, boolean beenDown)
                     && com.hollowfrontier.content.concavia.ConcavianCodexItem.reached(seaman, "hollow/still_sea")) {
                 facts.add(Fact.SEA_SEEN);
             }
+            com.hollowfrontier.content.ufo.taken.TakenData taken = com.hollowfrontier.content.ufo.taken.TakenData.of(player);
+            if (taken.times() > 0 && !taken.aboard()) {
+                facts.add(Fact.TAKEN);
+            }
             if (player.getData(ModAttachments.SURVEY_LETTER.get())) {
                 facts.add(Fact.SURVEY_LETTER);
             }

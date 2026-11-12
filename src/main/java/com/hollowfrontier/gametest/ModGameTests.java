@@ -574,6 +574,21 @@ public final class ModGameTests {
         TESTS.add(new Entry(ResourceKey.create(Registries.TEST_FUNCTION, HollowFrontier.id(name)), maxTicks, structure));
     }
 
+    // Taken (50). Registered last on purpose: tests stand in the order they're listed, and a new one in the middle moves
+    // every later test to another spot, where two of them (herd_driven_and_paid, posse_rides_out) turned out to depend on
+    // nothing having been left overhead by whoever stood there before.
+    static {
+        test("taken_kept_by_the_rule", 40, TakenTests::keptByTheRule);
+        test("taken_kit_whole_after_each_way_out", 60, TakenTests::kitWholeAfterEachWayOut);
+        test("taken_two_on_one_ship", 40, TakenTests::twoOnOneShip);
+        test("taken_what_the_crew_make_out", 40, TakenTests::whatTheCrewMakeOut);
+        test("taken_alarm_and_the_fall", 80, TakenTests::alarmAndTheFall);
+        test("taken_the_hull_holds", 40, TakenTests::theHullHolds);
+        test("taken_cells_bring_it_down", 160, TakenTests::cellsBringItDown);
+        test("taken_nobody_left_behind", 200, TakenTests::nobodyLeftBehind);
+        test("taken_crash_site_raised", 40, TakenTests::crashSiteRaised);
+    }
+
     @SubscribeEvent
     static void registerTests(RegisterGameTestsEvent event) {
         Holder<TestEnvironmentDefinition<?>> environment = event.registerEnvironment(HollowFrontier.id("default"));

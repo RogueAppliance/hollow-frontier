@@ -52,6 +52,12 @@ public final class ModCriteria {
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> HOMESTEADER = register("homesteader");
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> BRANDED = register("branded");
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DRIVE_DONE = register("drive_done");
+    // Taken (50): woke aboard; got off in a pod; with everyone the ship held; having brought it down; without being seen
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_ABOARD = register("taken_aboard");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_OUT = register("taken_out");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_NOBODY_LEFT = register("taken_nobody_left");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_BROUGHT_DOWN = register("taken_brought_down");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_UNSEEN = register("taken_unseen");
     // Steam
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> CANISTER_FILLED = register("canister_filled");
     /** Value: blocks driven under steam on one ride. */

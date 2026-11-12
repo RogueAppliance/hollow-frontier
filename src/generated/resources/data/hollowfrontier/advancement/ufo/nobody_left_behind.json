@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/checked_out_early",
+  "criteria": {
+    "everyone": {
+      "trigger": "hollowfrontier:taken_nobody_left"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.nobody_left_behind.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:letter_home"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.nobody_left_behind.title"
+    }
+  },
+  "requirements": [
+    [
+      "everyone"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  },
+  "sends_telemetry_event": true
+}

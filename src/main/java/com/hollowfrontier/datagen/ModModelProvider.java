@@ -202,6 +202,27 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.GRAY_CACHE.get()); // 15a
         blockModels.createTrivialBlock(ModBlocks.WAYSTONE.get(), TexturedModel.COLUMN); // 15c
         blockModels.createTrivialBlock(ModBlocks.IMPLANT_RIG.get(), TexturedModel.COLUMN); // 20
+        // 50: aboard the ship. The field (its texture is see-through), the console (lit, or dark once it's done its one
+        // thing) and the core's socket (a cell in it, or not)
+        blockModels.createTrivialCube(ModBlocks.GRAY_FIELD.get());
+        Block console = ModBlocks.SHIP_CONSOLE.get();
+        TextureMapping consoleTextures = TextureMapping.cubeBottomTop(console);
+        Identifier consoleLit = ModelTemplates.CUBE_BOTTOM_TOP.create(console, consoleTextures, blockModels.modelOutput);
+        Identifier consoleSpent = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(console, "_spent", consoleTextures
+                .copyAndUpdate(TextureSlot.TOP, TextureMapping.getBlockTexture(console, "_top_spent"))
+                .copyAndUpdate(TextureSlot.SIDE, TextureMapping.getBlockTexture(console, "_side_spent")), blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(console).with(BlockModelGenerators.createBooleanModelDispatch(
+                com.hollowfrontier.content.ufo.taken.ShipConsoleBlock.SPENT, BlockModelGenerators.plainVariant(consoleSpent), BlockModelGenerators.plainVariant(consoleLit))));
+        blockModels.registerSimpleItemModel(console, consoleLit);
+        Block coreSocket = ModBlocks.CORE_SOCKET.get();
+        TextureMapping coreTextures = TextureMapping.cubeBottomTop(coreSocket);
+        Identifier coreFull = ModelTemplates.CUBE_BOTTOM_TOP.create(coreSocket, coreTextures, blockModels.modelOutput);
+        Identifier coreEmpty = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(coreSocket, "_empty", coreTextures
+                .copyAndUpdate(TextureSlot.TOP, TextureMapping.getBlockTexture(coreSocket, "_top_empty"))
+                .copyAndUpdate(TextureSlot.SIDE, TextureMapping.getBlockTexture(coreSocket, "_side_empty")), blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(coreSocket).with(BlockModelGenerators.createBooleanModelDispatch(
+                com.hollowfrontier.content.ufo.taken.CoreSocketBlock.CELL, BlockModelGenerators.plainVariant(coreFull), BlockModelGenerators.plainVariant(coreEmpty))));
+        blockModels.registerSimpleItemModel(coreSocket, coreFull);
         // 26: the vault's seal, and its sockets (a lit top where the mural marks one)
         blockModels.createTrivialCube(ModBlocks.KINDLED_SEAL.get());
         Block socket = ModBlocks.SEAL_SOCKET.get();
@@ -213,6 +234,7 @@ public class ModModelProvider extends ModelProvider {
                 com.hollowfrontier.content.concavia.SealSocketBlock.MARKED, BlockModelGenerators.plainVariant(socketMarked), BlockModelGenerators.plainVariant(socketPlain))));
 
         itemModels.generateFlatItem(ModItems.BRASS_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.SHOCK_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM); // 50
         itemModels.generateFlatItem(ModItems.BRASS_NUGGET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BRASS_PLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BRASS_GEAR.get(), ModelTemplates.FLAT_ITEM);

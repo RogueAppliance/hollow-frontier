@@ -392,6 +392,12 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> WAYSTONE = ITEMS.registerSimpleBlockItem(ModBlocks.WAYSTONE, p -> p.rarity(Rarity.EPIC));
     // 20: the captives: the rig (creative-only, like the waystone) and the letters freed captives hand over
     public static final DeferredItem<BlockItem> IMPLANT_RIG = ITEMS.registerSimpleBlockItem(ModBlocks.IMPLANT_RIG, p -> p.rarity(Rarity.UNCOMMON));
+    // 50: taken aboard. The Shock Rod off the surgeons' tray, and the ship's own fittings (creative-only, for builders)
+    public static final DeferredItem<com.hollowfrontier.content.ufo.taken.ShockRodItem> SHOCK_ROD = ITEMS.registerItem("shock_rod",
+            com.hollowfrontier.content.ufo.taken.ShockRodItem::new, p -> p.stacksTo(1).rarity(Rarity.RARE));
+    public static final DeferredItem<BlockItem> GRAY_FIELD = ITEMS.registerSimpleBlockItem(ModBlocks.GRAY_FIELD, p -> p.rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<BlockItem> SHIP_CONSOLE = ITEMS.registerSimpleBlockItem(ModBlocks.SHIP_CONSOLE, p -> p.rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<BlockItem> CORE_SOCKET = ITEMS.registerSimpleBlockItem(ModBlocks.CORE_SOCKET, p -> p.rarity(Rarity.UNCOMMON));
     // 26: the Kindled vault's puzzle
     public static final DeferredItem<BlockItem> KINDLED_SEAL = ITEMS.registerSimpleBlockItem(ModBlocks.KINDLED_SEAL, p -> p.rarity(Rarity.UNCOMMON));
     public static final DeferredItem<BlockItem> SEAL_SOCKET = ITEMS.registerSimpleBlockItem(ModBlocks.SEAL_SOCKET, p -> p.rarity(Rarity.UNCOMMON));

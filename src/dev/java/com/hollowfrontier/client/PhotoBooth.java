@@ -141,6 +141,13 @@ public final class PhotoBooth {
             }
             return;
         }
+        // Phase 50 played through aboard a Gray ship, only on its own with -PphotoScene=taken (TakenPlaytest)
+        if (TakenPlaytest.ENABLED) {
+            if (ticks >= 40) {
+                TakenPlaytest.tick(mc, server);
+            }
+            return;
+        }
         // The Prospector's Journal on screen, only on its own with -PphotoScene=journal (JournalPhoto)
         if (JournalPhoto.ENABLED) {
             if (ticks >= 40) {

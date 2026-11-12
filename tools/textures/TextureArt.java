@@ -61,6 +61,8 @@ public class TextureArt {
         int december = December.writeAll(root); // 35: the town tree, the parcel and what's in it, the two December drinks
         System.out.println("TextureArt: " + december + " December textures");
         int stake = Stake.writeAll(root); // 47: the Deputy's Badge, the warrant, the deed, the branding iron and the mailbox
+        int taken = Taken.writeAll(root); // 50: the Gray field, the ship's console, the core's socket and the Shock Rod
+        System.out.println("TextureArt: " + taken + " Gray ship textures");
         System.out.println("TextureArt: " + stake + " stake-in-town textures");
         int reworked = Reworked.writeAll(root); // last: it overwrites hand-drawn versions with ones reworked from vanilla
         System.out.println("TextureArt: wrote " + (3 + folk.length + ranks.length) + " skins, " + barmaids + " barmaid skins, " + creatures + " Hollow Earth creature textures, " + megafauna + " megafauna textures, " + mystery + " frontier mystery textures, " + cats + " cat textures, 1 effect icon, " + guns + " gun textures, " + items + " items, " + blocks + " block tiles, " + armor + " armor layers, " + expedition + " airship and polar gateway textures, " + hollow + " Hollow Earth textures, " + starsteel + " starsteel and phlogiston textures, " + concavia + " Concavia textures, " + ufo + " Gray textures, " + reworked + " reworked from vanilla to " + root);
@@ -7535,6 +7537,179 @@ public class TextureArt {
                 img.setRGB(x, 26, mid);
                 img.setRGB(x, 27, sh);
             }
+            return img;
+        }
+    }
+    // ---------------------------------------------------------------- 50: aboard the Grays' ship
+
+    /**
+     * The ship's own fittings, in the Grays' teal on their pale alloy: the field (see-through: its alpha is what makes the
+     * game draw it so), the console lit and spent, the core's socket with a cell in it and without (the cell is the
+     * Concavians' and burns ember), and the Shock Rod.
+     */
+    static final class Taken {
+        static final int TEAL = 0x58E8D0, TEAL_DEEP = 0x1E8E86, ALLOY = 0xC6CCD0, ALLOY_SHADE = 0x9CA4AA, ALLOY_DARK = 0x6E767C, DARK = 0x20262A,
+                EMBER = 0xFF8A2A, EMBER_HOT = 0xFFE0A0;
+
+        static int writeAll(File root) throws Exception {
+            write(new File(root, "block/gray_field.png"), field());
+            write(new File(root, "block/ship_console_side.png"), consoleSide(true));
+            write(new File(root, "block/ship_console_side_spent.png"), consoleSide(false));
+            write(new File(root, "block/ship_console_top.png"), consoleTop(true));
+            write(new File(root, "block/ship_console_top_spent.png"), consoleTop(false));
+            write(new File(root, "block/ship_console_bottom.png"), plate(new Random(5003)));
+            write(new File(root, "block/core_socket_side.png"), socketSide(true));
+            write(new File(root, "block/core_socket_side_empty.png"), socketSide(false));
+            write(new File(root, "block/core_socket_top.png"), socketTop(true));
+            write(new File(root, "block/core_socket_top_empty.png"), socketTop(false));
+            write(new File(root, "block/core_socket_bottom.png"), plate(new Random(5007)));
+            write(new File(root, "item/shock_rod.png"), rod());
+            return 12;
+        }
+
+        static int argb(int alpha, int rgb) {
+            return alpha << 24 | rgb;
+        }
+
+        static int mix(int a, int b, double t) {
+            int r = (int) ((a >> 16 & 255) * (1 - t) + (b >> 16 & 255) * t), g = (int) ((a >> 8 & 255) * (1 - t) + (b >> 8 & 255) * t),
+                    bl = (int) ((a & 255) * (1 - t) + (b & 255) * t);
+            return r << 16 | g << 8 | bl;
+        }
+
+        /** A pane of light: faint through the middle, brighter in thin lines across it and at its edge. */
+        static BufferedImage field() {
+            BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+            Random r = new Random(5001);
+            for (int y = 0; y < 16; y++) {
+                for (int x = 0; x < 16; x++) {
+                    boolean edge = x == 0 || y == 0 || x == 15 || y == 15;
+                    boolean line = y % 4 == 1;
+                    int alpha = line ? 110 : edge ? 70 : 44 + r.nextInt(14);
+                    img.setRGB(x, y, argb(alpha, line ? mix(TEAL, 0xFFFFFF, 0.35) : edge ? TEAL : mix(TEAL_DEEP, TEAL, 0.5)));
+                }
+            }
+            for (int k = 0; k < 7; k++) { // motes caught in it
+                img.setRGB(1 + r.nextInt(14), 1 + r.nextInt(14), argb(190, 0xE8FFF8));
+            }
+            return img;
+        }
+
+        /** Brushed alloy plate with a seam round it. */
+        static BufferedImage plate(Random r) {
+            BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+            for (int y = 0; y < 16; y++) {
+                for (int x = 0; x < 16; x++) {
+                    boolean seam = x == 0 || y == 0 || x == 15 || y == 15;
+                    int c = seam ? ALLOY_DARK : mix(ALLOY, ALLOY_SHADE, r.nextDouble() * 0.5 + (y % 2) * 0.15);
+                    img.setRGB(x, y, argb(255, c));
+                }
+            }
+            return img;
+        }
+
+        static BufferedImage consoleSide(boolean lit) {
+            BufferedImage img = plate(new Random(5002));
+            int glow = lit ? TEAL : DARK, deep = lit ? TEAL_DEEP : 0x12171A;
+            for (int x = 2; x <= 13; x++) { // a band of light under the top, and a slot of it lower down
+                img.setRGB(x, 2, argb(255, glow));
+                img.setRGB(x, 3, argb(255, deep));
+            }
+            for (int y = 7; y <= 12; y++) {
+                for (int x = 6; x <= 9; x++) {
+                    img.setRGB(x, y, argb(255, y == 7 || x == 6 ? deep : glow));
+                }
+            }
+            return img;
+        }
+
+        /** The glass: three rows of marks nobody on the frontier can read, and one large one to press. */
+        static BufferedImage consoleTop(boolean lit) {
+            BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+            Random r = new Random(5004);
+            int glass = lit ? 0x0E2A2E : 0x0C1012, mark = lit ? TEAL : 0x2A3236, hot = lit ? 0xE8FFF8 : 0x39434A;
+            for (int y = 0; y < 16; y++) {
+                for (int x = 0; x < 16; x++) {
+                    boolean rim = x == 0 || y == 0 || x == 15 || y == 15;
+                    img.setRGB(x, y, argb(255, rim ? ALLOY_DARK : x == 1 || y == 1 || x == 14 || y == 14 ? ALLOY : glass));
+                }
+            }
+            for (int row = 0; row < 3; row++) {
+                for (int x = 3; x <= 8; x++) {
+                    if (r.nextInt(3) != 0) {
+                        img.setRGB(x, 3 + row * 2, argb(255, mark));
+                    }
+                }
+            }
+            int[][] ring = {{10, 9}, {11, 8}, {12, 9}, {13, 10}, {12, 11}, {11, 12}, {10, 11}, {9, 10}};
+            for (int[] at : ring) {
+                img.setRGB(at[0], at[1], argb(255, mark));
+            }
+            img.setRGB(11, 10, argb(255, hot));
+            img.setRGB(3, 11, argb(255, mark));
+            img.setRGB(4, 12, argb(255, mark));
+            img.setRGB(5, 11, argb(255, mark));
+            return img;
+        }
+
+        static BufferedImage socketSide(boolean cell) {
+            BufferedImage img = plate(new Random(5005));
+            // A window on the cell: ember through glass while it's seated, a dark hollow after
+            for (int y = 4; y <= 12; y++) {
+                for (int x = 5; x <= 10; x++) {
+                    boolean frame = y == 4 || y == 12 || x == 5 || x == 10;
+                    int c = frame ? DARK : cell ? mix(EMBER, EMBER_HOT, x == 7 || x == 8 ? 0.7 : 0.15) : 0x14181A;
+                    img.setRGB(x, y, argb(255, c));
+                }
+            }
+            for (int x = 2; x <= 13; x += 11) { // a conduit down each edge, in the Grays' own colour
+                for (int y = 2; y <= 13; y++) {
+                    img.setRGB(x, y, argb(255, cell ? TEAL_DEEP : ALLOY_DARK));
+                }
+            }
+            return img;
+        }
+
+        static BufferedImage socketTop(boolean cell) {
+            BufferedImage img = plate(new Random(5006));
+            for (int y = 3; y <= 12; y++) {
+                for (int x = 3; x <= 12; x++) {
+                    double d = Math.hypot(x - 7.5, y - 7.5);
+                    if (d <= 4.6) {
+                        int c = d > 3.6 ? DARK : cell ? mix(EMBER_HOT, EMBER, d / 3.6) : mix(0x0C0E10, 0x23292D, d / 3.6);
+                        img.setRGB(x, y, argb(255, c));
+                    }
+                }
+            }
+            if (cell) { // the brass cap of the cell, across the middle
+                for (int x = 5; x <= 10; x++) {
+                    img.setRGB(x, 7, argb(255, 0xC9A03A));
+                    img.setRGB(x, 8, argb(255, 0x8E6E22));
+                }
+            }
+            return img;
+        }
+
+        /** A short alloy rod, a grip of dark binding at one end and two prongs with a spark between them at the other. */
+        static BufferedImage rod() {
+            BufferedImage img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+            for (int i = 0; i < 11; i++) { // the shaft, bottom left to top right
+                int x = 2 + i, y = 13 - i;
+                img.setRGB(x, y, argb(255, i < 4 ? DARK : ALLOY));
+                img.setRGB(x + 1, y, argb(255, i < 4 ? 0x39434A : ALLOY_SHADE));
+                img.setRGB(x, y + 1, argb(255, i < 4 ? 0x12171A : ALLOY_DARK));
+            }
+            img.setRGB(1, 14, argb(255, ALLOY_DARK));
+            img.setRGB(2, 14, argb(255, ALLOY_DARK));
+            // The prongs and what jumps between them
+            img.setRGB(13, 1, argb(255, ALLOY));
+            img.setRGB(14, 2, argb(255, ALLOY));
+            img.setRGB(12, 1, argb(255, ALLOY_SHADE));
+            img.setRGB(14, 3, argb(255, ALLOY_SHADE));
+            img.setRGB(14, 1, argb(255, 0xE8FFF8));
+            img.setRGB(15, 0, argb(255, TEAL));
+            img.setRGB(13, 0, argb(200, TEAL));
+            img.setRGB(15, 2, argb(200, TEAL));
             return img;
         }
     }

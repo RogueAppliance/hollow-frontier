@@ -1,0 +1,27 @@
+{
+  "parent": "hollowfrontier:ufo/root",
+  "criteria": {
+    "aboard": {
+      "trigger": "hollowfrontier:taken_aboard"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.taken.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:gray_field"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.taken.title"
+    }
+  },
+  "requirements": [
+    [
+      "aboard"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

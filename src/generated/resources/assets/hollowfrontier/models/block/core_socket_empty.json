@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "hollowfrontier:block/core_socket_bottom",
+    "side": "hollowfrontier:block/core_socket_side_empty",
+    "top": "hollowfrontier:block/core_socket_top_empty"
+  }
+}

@@ -99,6 +99,7 @@ public final class GazetteBackPage {
         add(k, when(DECEMBER), "WANTED: snow, any quantity, by Christmas. Will also accept flour. Ask at the schoolhouse.");
         add(k, when(DECEMBER, SIGHTINGS), "FOUND: one sleigh bell, large, in a pasture. Still warm. Owner may call at this office.");
         add(k, when(SEA_SEEN), "FOR SALE: rowing boat, used once, on a sea that is on no map. Ask no questions."); // 43d
+        add(k, when(TAKEN), "FOUND: one prospector, asleep in a field, some miles from home. Has been collected."); // 50
     }
 
     private static void letters() {
@@ -117,6 +118,7 @@ public final class GazetteBackPage {
         add(k, act(Act.AFTER), "Sir,\nThe lights have stopped. I have nothing left to write to you about.\n\nP.S. The bandstand is still a disgrace.\n— A Resident");
         add(k, when(DECEMBER, SIGHTINGS), "Sir,\nMy children say the lights over the mesa were a sleigh. Kindly do not print otherwise until January.\n\n— A Mother");
         add(k, when(DECEMBER), "Sir,\nThe town tree has more candles on it than the church. I do not say this is wrong. I say it has been noticed.\n\n— A Deacon");
+        add(k, when(TAKEN), "Sir,\nYour paper says a resident was found asleep in a field. I have slept in that field. Nothing in it would take four days.\n\n— A Drover"); // 50
         add(k, when(SEA_SEEN), "Sir,\nYour paper says there is a sea beneath us. I have dug wells for thirty years and never once struck a fish.\n\n— A Well-Digger"); // 43d
     }
 
@@ -137,6 +139,7 @@ public final class GazetteBackPage {
         add(k, when(DECEMBER, SIGHTINGS), "We reported a sleigh over the mesa on Tuesday. It had no horses, no runners and no driver. It was not a sleigh. We regret the excitement.");
         add(k, when(DECEMBER, SIGHTINGS), "Gentlemen from out of town have asked us to correct our correction. It was a sleigh. They were very firm about it. Merry Christmas.");
         add(k, when(CHRISTMAS), "The punch at the Christmas social was not \"spiked\". It was eggnog, which arrives that way. The Editor has apologised to the punch.");
+        add(k, when(TAKEN), "We reported that a resident was \"carried off by a light\". The resident was found asleep in a field. Gentlemen from out of town have been kind enough to explain the difference."); // 50
         add(k, when(SEA_SEEN), "We reported a sea under the earth with no tide. A reader asks what, then, it has. We have asked. Lamps, we are told."); // 43d
     }
 

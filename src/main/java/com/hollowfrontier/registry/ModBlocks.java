@@ -209,6 +209,21 @@ public final class ModBlocks {
     public static final DeferredBlock<ImplantRigBlock> IMPLANT_RIG = BLOCKS.registerBlock("implant_rig", ImplantRigBlock::new,
             () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F)
                     .requiresCorrectToolForDrops().lightLevel(state -> 9));
+    // 50: aboard the Grays' ship. The field can't be broken (the ship lets it go); the console and the core's sockets are
+    // worked by hand. All three have items for builders in creative only.
+    public static final DeferredBlock<com.hollowfrontier.content.ufo.taken.GrayFieldBlock> GRAY_FIELD = BLOCKS.registerBlock("gray_field",
+            com.hollowfrontier.content.ufo.taken.GrayFieldBlock::new, () -> BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN)
+                    .strength(-1.0F, 3600000.0F).noLootTable().noOcclusion().sound(SoundType.GLASS).lightLevel(state -> 9)
+                    .isValidSpawn(Blocks::never).isRedstoneConductor((s, l, p) -> false).isSuffocating((s, l, p) -> false)
+                    .isViewBlocking((s, l, p, box) -> false).pushReaction(PushReaction.IMMOVEABLE));
+    public static final DeferredBlock<com.hollowfrontier.content.ufo.taken.ShipConsoleBlock> SHIP_CONSOLE = BLOCKS.registerBlock("ship_console",
+            com.hollowfrontier.content.ufo.taken.ShipConsoleBlock::new, () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.IRON_BLOCK)
+                    .mapColor(MapColor.COLOR_LIGHT_GRAY).strength(-1.0F, 3600000.0F).noLootTable().pushReaction(PushReaction.IMMOVEABLE)
+                    .lightLevel(state -> state.getValue(com.hollowfrontier.content.ufo.taken.ShipConsoleBlock.SPENT) ? 0 : 8));
+    public static final DeferredBlock<com.hollowfrontier.content.ufo.taken.CoreSocketBlock> CORE_SOCKET = BLOCKS.registerBlock("core_socket",
+            com.hollowfrontier.content.ufo.taken.CoreSocketBlock::new, () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.IRON_BLOCK)
+                    .mapColor(MapColor.COLOR_LIGHT_GRAY).strength(-1.0F, 3600000.0F).noLootTable().pushReaction(PushReaction.IMMOVEABLE)
+                    .lightLevel(state -> state.getValue(com.hollowfrontier.content.ufo.taken.CoreSocketBlock.CELL) ? 12 : 0));
     // 26: the Kindled vault's seal (opens when its sockets are right) and the sockets, marked or not
     public static final DeferredBlock<Block> KINDLED_SEAL = BLOCKS.registerSimpleBlock("kindled_seal",
             () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.REINFORCED_DEEPSLATE).mapColor(MapColor.COLOR_CYAN).strength(-1.0F, 3600000.0F)

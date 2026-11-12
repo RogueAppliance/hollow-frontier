@@ -1,0 +1,12 @@
+{
+  "type": "hollowfrontier:aboard",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "hollowfrontier:aboard",
+      "features": false,
+      "lakes": false,
+      "layers": []
+    }
+  }
+}

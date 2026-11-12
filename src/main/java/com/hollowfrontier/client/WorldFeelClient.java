@@ -287,7 +287,10 @@ public final class WorldFeelClient {
         Identifier id = sound.getIdentifier();
         WorldFeel.Blast blast = id.equals(ModSounds.DYNAMITE_BLAST.getId()) ? WorldFeel.DYNAMITE
                 : id.equals(ModSounds.VAULT_BLOWN.getId()) ? WorldFeel.VAULT
-                : id.equals(ModSounds.DEATH_RAY_FIRE.getId()) ? WorldFeel.DEATH_RAY : null;
+                : id.equals(ModSounds.DEATH_RAY_FIRE.getId()) ? WorldFeel.DEATH_RAY
+                : id.equals(ModSounds.ABOARD_GROAN.getId()) ? WorldFeel.HULL_GROAN
+                : id.equals(ModSounds.POD_CRASH.getId()) ? WorldFeel.POD_CRASH
+                : id.equals(ModSounds.POD_LAUNCH.getId()) ? WorldFeel.HULL_GROAN : null;
         if (blast != null) {
             CameraFeel.shake(WorldFeel.blast(blast, Math.sqrt(player.distanceToSqr(sound.getX(), sound.getY(), sound.getZ()))));
         }

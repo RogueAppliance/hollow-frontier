@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.6.0 — Taken (unreleased)
+
+The Grays' beam used to cost you an hour and a walk home. Now, once they have reason to keep you, you wake up aboard. Existing worlds get all of it.
+
+- **Taken:** the first time a saucer's beam draws you up after the men in black have started minding you, you aren't set down. You wake in a pen on the Grays' ship with nothing on you. After that, about one abduction in four keeps you again. Sneaking or stepping out of the beam still gets you off, and nobody is kept once the leash is broken.
+- **Nothing is ever lost.** Everything you were carrying is held for you and is waiting in the ship's hold. However you leave the ship, you have all of it when you're back on the ground.
+- **The ship:** pens, a hold, a surgery, a pod bay and an engine room off a ring corridor, in a place of its own. Other people from the frontier are held there, and one is already on the table.
+- **You wake fed and whole,** and a bar across the top shows the one coming for you: it fills as it nears your pen, then runs down while its back is turned. That's when to go.
+- **The crew** see you at twelve blocks walking and four sneaking, and not at all in the vents (the grilles come off in your hands; nothing else aboard breaks). Keep low and any of them within twenty blocks shows through the walls. There are crates to stand behind round the ring and by the pens' door. Stay in a Gray's sights for seven seconds and the alarm goes up: the doors shut, and open only while one of the crew walks through.
+- **The people you free pitch in:** they follow you, each hands over bread they'd kept back, and when a Gray comes after anybody they go for it with their hands.
+- **The Shock Rod,** off the surgeons' tray: a blow from it stuns a Gray for three seconds, and anything carrying their implant too (outlaws, men in dusters, tagged beasts). It takes a charge a blow from the Phlogiston Cells you carry, and it's yours to keep. Used on the rig, it stops the procedure for good.
+- **In the hold** there's something they've been at with their implants. Let it out and it goes for the crew, not for you.
+- **The ways out:** an escape pod sets you down a few hundred blocks from where you were taken, with anyone you freed who reached it. Or pull the three cells out of the engine first: you get ninety seconds, the lights go out from the middle, the deck rolls, the crew run for it, and a crash site is waiting a short walk from where your pod lands.
+- **No law aboard:** nothing you do on the ship earns a wanted star.
+- **Dying aboard isn't dying.** You wake on the ground as from missing time, with all your things. Leaving the game aboard does the same when you come back.
+- **Afterwards** the town has heard, and has its own account of where you were. So do the men in dusters, and the Gazette.
+- **The journal** notes it: a line under strange doings, and two more paragraphs on the Grays.
+- **Five advancements:** Taken, Checked Out Early, Nobody Left Behind, What Goes Up and Never There.
+- **Sound:** the ship has a hum, an alarm and a piece of music of its own, all made for it.
+- **Settings:** in `hollowfrontier-ufo-server.toml`, `taken` turns it off (every abduction is missing time again), `suspicion` sets how much the men in black must mind you first (30), and `again` the chance of being kept after the first time (0.25). `abductPlayers` off still turns off all of it.
+- **For ops:** `/hollowfrontier ufo taken` keeps you now; `/hollowfrontier ufo taken leave` sets you down.
+- **On servers:** two players caught in one beam wake on one ship. Curios slots are left alone.
+
 ## 1.5.0 — A stake in town (unreleased)
 
 A town can now know you. Existing worlds get all of it; only the Old Place standing ready on a town's outskirts needs a town that's new.

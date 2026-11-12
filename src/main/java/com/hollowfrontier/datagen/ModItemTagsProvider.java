@@ -111,6 +111,7 @@ public class ModItemTagsProvider extends BlockTagCopyingItemTagProvider {
         tag(ModTags.Items.GLYPTODON_SHELL_ARMOR).add(ModItems.GLYPTODON_HELMET.key(), ModItems.GLYPTODON_CHESTPLATE.key(),
                 ModItems.GLYPTODON_LEGGINGS.key(), ModItems.GLYPTODON_BOOTS.key());
         // The Grays' things the men in black buy back (11b)
+        tag(ModTags.Items.STRANGE_GOODS).add(ModItems.SHOCK_ROD.key()); // 50
         tag(ModTags.Items.STRANGE_GOODS).add(ModItems.GRAY_TECH_FRAGMENT.key(), ModItems.STRANGE_SKULL.key(), ModItems.SIGNAL_LOCATOR.key(),
                 ModItems.FLATTENED_WHEAT.key());
         tag(ItemTags.SWORDS).add(ModItems.TALON_KNIFE.key());

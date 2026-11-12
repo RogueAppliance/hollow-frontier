@@ -104,6 +104,13 @@ public final class ModAttachments {
     public static final Supplier<AttachmentType<com.hollowfrontier.content.journal.JournalData>> JOURNAL = ATTACHMENTS.register("journal",
             () -> AttachmentType.builder(() -> com.hollowfrontier.content.journal.JournalData.NONE).serialize(com.hollowfrontier.content.journal.JournalData.CODEC.fieldOf("journal")).copyOnDeath().build());
 
+    // 50: what being taken has done to a player (how often, whether they're aboard, where from, and the kit held for them).
+    // Kept through death and through leaving the game; and the ship's state, synced so the client knows what to play
+    public static final Supplier<AttachmentType<com.hollowfrontier.content.ufo.taken.TakenData>> TAKEN = ATTACHMENTS.register("taken",
+            () -> AttachmentType.builder(() -> com.hollowfrontier.content.ufo.taken.TakenData.NONE).serialize(com.hollowfrontier.content.ufo.taken.TakenData.CODEC.fieldOf("taken")).copyOnDeath().build());
+    public static final Supplier<AttachmentType<Integer>> ABOARD = ATTACHMENTS.register("aboard",
+            () -> AttachmentType.builder(() -> 0).sync(ByteBufCodecs.VAR_INT).build());
+
     // Present only while the horse wears saddlebags (check hasData before getData, which would create it).
     public static final Supplier<AttachmentType<ItemContainerContents>> SADDLEBAGS = ATTACHMENTS.register("saddlebags",
             () -> AttachmentType.builder(() -> ItemContainerContents.EMPTY).serialize(ItemContainerContents.CODEC.fieldOf("items")).build());

@@ -96,6 +96,15 @@ public class ModSoundDefinitionsProvider extends SoundDefinitionsProvider {
         for (var bed : ModSounds.HOLLOW_BEDS) {
             add(bed, definition().with(recording(bed.getId().getPath().replace('.', '/')).volume(0.56F)));
         }
+        // Aboard the Grays' ship (50), all synthesized (tools/music/ShipSounds.java): the hum is a bed like the Hollow's, the
+        // ship's piece is music, and the rest are short and loaded whole
+        add(ModSounds.ABOARD_LOOP, definition().with(recording("ambient/aboard/loop").volume(0.5F)));
+        add(ModSounds.MUSIC_ABOARD, definition().with(recording("music/aboard").volume(0.8F)));
+        add(ModSounds.GRAY_FIELD_DROP, definition().subtitle("subtitles." + HollowFrontier.MODID + ".gray_field.drop").with(shot("block/gray_field/drop")));
+        add(ModSounds.ABOARD_ALARM, definition().subtitle("subtitles." + HollowFrontier.MODID + ".aboard.alarm").with(shot("event/aboard/alarm")));
+        add(ModSounds.ABOARD_GROAN, definition().subtitle("subtitles." + HollowFrontier.MODID + ".aboard.groan").with(shot("event/aboard/groan")));
+        add(ModSounds.POD_LAUNCH, definition().subtitle("subtitles." + HollowFrontier.MODID + ".aboard.pod_launch").with(shot("event/aboard/pod_launch")));
+        add(ModSounds.POD_CRASH, definition().subtitle("subtitles." + HollowFrontier.MODID + ".aboard.pod_crash").with(shot("event/aboard/pod_crash")));
         // The submersible's works are a two-second loop, loaded whole; its hull is old iron and copper complaining
         add(ModSounds.SUBMERSIBLE_THRUM, definition().with(shot("entity/steam_submersible/thrum").volume(0.8F)));
         remix(ModSounds.SUBMERSIBLE_CREAK, "steam_submersible.creak", vanilla("block.iron_door.open", 0.56F, 0.5F),

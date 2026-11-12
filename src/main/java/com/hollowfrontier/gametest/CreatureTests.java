@@ -162,6 +162,19 @@ final class CreatureTests {
     static void salamanderBasksOnVent(GameTestHelper h) {
         BlockPos vent = new BlockPos(12, 0, 8);
         h.setBlock(vent, ModBlocks.ASH_VENT.get());
+        // Penned within reach of the vent: a salamander looks HEAT_RANGE (10) blocks for somewhere hot, and one that had
+        // strolled eleven off, or off the garden altogether, never found it. That failed about one run in six.
+        int west = vent.getX() - AshSalamander.HEAT_RANGE + 1;
+        for (int i = 0; i <= 15; i++) {
+            for (int y = 1; y <= 2; y++) {
+                if (i >= west - 1) {
+                    h.setBlock(new BlockPos(i, y, 0), Blocks.GLASS);
+                    h.setBlock(new BlockPos(i, y, 15), Blocks.GLASS);
+                }
+                h.setBlock(new BlockPos(west - 1, y, i), Blocks.GLASS);
+                h.setBlock(new BlockPos(15, y, i), Blocks.GLASS);
+            }
+        }
         AshSalamander salamander = h.spawn(ModEntities.ASH_SALAMANDER.get(), new BlockPos(5, 1, 8));
         h.succeedWhen(() -> h.assertTrue(salamander.isBasking() && salamander.blockPosition().below().equals(h.absolutePos(vent)),
                 "it isn't basking on the vent (at " + h.relativePos(salamander.blockPosition()) + ", basking " + salamander.isBasking() + ")"));

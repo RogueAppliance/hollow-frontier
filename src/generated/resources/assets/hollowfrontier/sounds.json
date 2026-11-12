@@ -1,4 +1,13 @@
 {
+  "ambient.aboard.loop": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:ambient/aboard/loop",
+        "stream": true,
+        "volume": 0.5
+      }
+    ]
+  },
   "ambient.concavian_highlands.additions": {
     "sounds": [
       {
@@ -348,6 +357,12 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.ash_vent.hiss"
+  },
+  "block.gray_field.drop": {
+    "sounds": [
+      "hollowfrontier:block/gray_field/drop"
+    ],
+    "subtitle": "subtitles.hollowfrontier.gray_field.drop"
   },
   "block.polar_gateway.charge": {
     "sounds": [
@@ -1514,6 +1529,30 @@
     ],
     "subtitle": "subtitles.hollowfrontier.woolly_mammoth.trumpet"
   },
+  "event.aboard.alarm": {
+    "sounds": [
+      "hollowfrontier:event/aboard/alarm"
+    ],
+    "subtitle": "subtitles.hollowfrontier.aboard.alarm"
+  },
+  "event.aboard.groan": {
+    "sounds": [
+      "hollowfrontier:event/aboard/groan"
+    ],
+    "subtitle": "subtitles.hollowfrontier.aboard.groan"
+  },
+  "event.aboard.pod_crash": {
+    "sounds": [
+      "hollowfrontier:event/aboard/pod_crash"
+    ],
+    "subtitle": "subtitles.hollowfrontier.aboard.pod_crash"
+  },
+  "event.aboard.pod_launch": {
+    "sounds": [
+      "hollowfrontier:event/aboard/pod_launch"
+    ],
+    "subtitle": "subtitles.hollowfrontier.aboard.pod_launch"
+  },
   "event.raid.alarm": {
     "sounds": [
       {
@@ -1852,6 +1891,15 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.signal_locator.ping"
+  },
+  "music.aboard": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:music/aboard",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
   },
   "music.boss.mothership": {
     "sounds": [

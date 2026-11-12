@@ -154,6 +154,17 @@ public final class WorldFeel {
     public static final Blast DYNAMITE = new Blast(0.8F, 24.0);
     public static final Blast VAULT = new Blast(0.9F, 32.0);
     public static final Blast DEATH_RAY = new Blast(1.0F, 48.0);
+    // 50: aboard a Gray ship. Its hull giving way, and a pod meeting the ground with you in it
+    public static final Blast HULL_GROAN = new Blast(0.45F, 16.0);
+    public static final Blast POD_CRASH = new Blast(1.0F, 40.0);
+    /** A falling ship's deck: how far it leans the view, how slowly it rolls, and the tremor held under it. */
+    public static final float FALL_LEAN = 2.2F, FALL_ROLL = 0.045F, FALL_TREMOR = 0.12F;
+
+    /** The lean of a falling ship's deck at {@code tick}, growing as the time left ({@code 0..1} of it gone) runs out. */
+    public static float fallLean(int tick, float gone) {
+        return Mth.sin(tick * FALL_ROLL) * FALL_LEAN * (0.4F + 0.6F * Mth.clamp(gone, 0.0F, 1.0F));
+    }
+
     /** A Basilosaurus ramming the submersible you're in. */
     public static final float RAM = 0.7F;
     /** The Mothership coming in: a tremor held at this level under it, felt out to this range. */

@@ -49,6 +49,8 @@ public enum Fact {
     LOST_HAT,
     /** The listener has been to the Still Sea (hollow/still_sea, 43): the frontier has heard, and doesn't believe a word of it. */
     SEA_SEEN,
+    /** The listener has been kept by the Grays and come back (50): they've told it in town, and the town has its own account. */
+    TAKEN,
     /** It's December by the server's calendar (35, {@link com.hollowfrontier.content.frontier.season.Season}). */
     DECEMBER,
     /** It's December 24th to 26th: the truce is on, and the church social has been. */

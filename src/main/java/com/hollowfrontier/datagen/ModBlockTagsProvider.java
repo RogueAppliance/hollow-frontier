@@ -77,6 +77,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(ModBlocks.PHLOGISTON_BEACON.key()); // 13d
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.IMPLANT_RIG.key()); // 20
         tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.IMPLANT_RIG.key());
+        // 50: what comes away in the hands of someone taken: the grilles over the vents, and the rig
+        tag(ModTags.Blocks.TAKEN_BREAKABLE).add(ModBlocks.IMPLANT_RIG.key())
+                .add(net.minecraft.world.level.block.Blocks.COPPER_GRATE.waxed().oxidized().builtInRegistryHolder().key());
         tag(BlockItemTags.STAIRS.block()).add(ModBlocks.CRYSTAL_BRICK_STAIRS.key());
         tag(BlockItemTags.SLABS.block()).add(ModBlocks.CRYSTAL_BRICK_SLAB.key());
         tag(BlockItemTags.WALLS.block()).add(ModBlocks.CRYSTAL_BRICK_WALL.key());

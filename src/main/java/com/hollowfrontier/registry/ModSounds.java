@@ -192,6 +192,15 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> DEATH_RAY_FIRE = register("entity.mothership.death_ray_fire");
     // The frontier's mysteries (11a)
     public static final DeferredHolder<SoundEvent, SoundEvent> SIGHTING_HUM = register("entity.airship_sighting.hum");
+    // 50: aboard the Grays' ship. All synthesized (tools/music/ShipSounds.java): the hum that never stops, the ship's piece
+    // of the score, a field coming down, the alarm, the hull giving, and a pod going and arriving
+    public static final DeferredHolder<SoundEvent, SoundEvent> ABOARD_LOOP = register("ambient.aboard.loop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_ABOARD = register("music.aboard");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRAY_FIELD_DROP = register("block.gray_field.drop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ABOARD_ALARM = register("event.aboard.alarm");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ABOARD_GROAN = register("event.aboard.groan");
+    public static final DeferredHolder<SoundEvent, SoundEvent> POD_LAUNCH = register("event.aboard.pod_launch");
+    public static final DeferredHolder<SoundEvent, SoundEvent> POD_CRASH = register("event.aboard.pod_crash");
     // 29: a dust devil's wind
     public static final DeferredHolder<SoundEvent, SoundEvent> DUST_DEVIL_WIND = register("entity.dust_devil.wind");
 

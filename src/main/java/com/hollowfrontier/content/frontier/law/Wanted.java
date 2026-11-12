@@ -77,6 +77,11 @@ public record Wanted(int heat, long lastChange, long nextPosse) {
         if (player.isCreative() || player.isSpectator()) {
             return;
         }
+        // 50: there is no law aboard a Gray ship. A stray blow in a fight up there (the held are the frontier's own people)
+        // can't put a price on anybody's head
+        if (amount > 0 && com.hollowfrontier.content.ufo.taken.Taken.shipOf(player) != null) {
+            return;
+        }
         Wanted old = of(player);
         int heat = Mth.clamp(old.heat + amount, 0, MAX_HEAT);
         long now = player.level().getGameTime();

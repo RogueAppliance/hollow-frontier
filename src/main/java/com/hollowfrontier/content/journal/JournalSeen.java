@@ -101,6 +101,7 @@ public final class JournalSeen {
         PEOPLE.put("grays", List.of(new Fact("met", player -> player.getData(ModAttachments.JOURNAL.get()).people().contains("grays.met")
                         || ConcavianCodexItem.reached(player, "ufo/root")),
                 reached("caught", "frontier/caught_in_the_act"), kept("grays", "notes"), reached("pens", "hollow/jailbreak"),
+                reached("aboard", "ufo/taken"), reached("down", "ufo/what_goes_up"), // 50
                 reached("truth", "concavia/the_truth"), reached("fallen", "ufo/the_mothership_falls"), reached("loose", "ufo/cut_loose")));
     }
 
@@ -240,6 +241,13 @@ public final class JournalSeen {
                 strange(level, player, "visit", visit.time(), visit.pos().getX(), visit.pos().getZ());
             }
         });
+    }
+
+    /** Off one of the Grays' ships by pod (50): it goes in the book as a strange doing of the player's own, where they came down. */
+    public static void takenAndBack(ServerPlayer player, boolean broughtDown) {
+        if (player.level() instanceof ServerLevel level) {
+            strange(level, player, broughtDown ? "brought_down" : "taken", level.getGameTime(), player.getBlockX(), player.getBlockZ());
+        }
     }
 
     private static void strange(ServerLevel level, ServerPlayer player, String kind, long time, int x, int z) {

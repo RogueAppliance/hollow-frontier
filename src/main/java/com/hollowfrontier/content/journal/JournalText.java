@@ -107,6 +107,8 @@ public final class JournalText {
         fact("grays", "caught", "Caught one of their probes at work, on a steer or in a wheat field. So that's who.");
         fact("grays", "notes", "Found a book of their field notes. They've been studying us. We're \"specimens\".");
         fact("grays", "pens", "They keep people in pens down in the Hollow. I let one out.");
+        fact("grays", "aboard", "They kept me this time. I woke in a pen on a ship of theirs with nothing on me. There's a table with a machine over it, and people from our towns waiting their turn at it.");
+        fact("grays", "down", "Pulled the cells out of their engine and left in one of their boats. The ship came down after me.");
         fact("grays", "truth", "The Kindled say the ships were never the Grays': they were Concavia's. And that a frontier at war with itself never looks up, which is all the Grays want of it.");
         fact("grays", "fallen", "The Mothership is down.");
         fact("grays", "loose", "The leash is broken and the implants have gone dark. They still land, some nights.");
@@ -116,6 +118,8 @@ public final class JournalText {
         strange("crop_circle", "A circle pressed into a wheat field.");
         strange("landing", "Something landed.");
         strange("visit", "Men in black dusters came asking.");
+        strange("taken", "Taken aboard, and got off. Came down here.");
+        strange("brought_down", "Taken aboard, and brought the ship down. Came down here.");
 
         creature("rattlesnake", "Rattles when you come near and strikes if you come nearer. The bite poisons. It backs away from cats.",
                 "Snakeskin, for boots. In those a snake only bites if provoked, and the bite doesn't poison.", null);

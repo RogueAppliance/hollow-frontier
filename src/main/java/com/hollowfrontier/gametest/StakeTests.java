@@ -296,6 +296,13 @@ final class StakeTests {
         h.assertTrue(Drives.salePrice(0) == Drives.SALE_BASE && Drives.salePrice(160) == Drives.SALE_BASE + 2, "branded stock doesn't sell by distance");
         BlockPos at = h.absolutePos(new BlockPos(5, 1, 5));
         BlockPos dest = com.hollowfrontier.content.frontier.town.Towns.middle(TOWN).offset(600, 0, 0); // pay goes by how far the town it left is
+        // The test's cage: the framework roofs a test in barrier while it sets it up, and now and then the roof is still on
+        // at the first tick. A herd is turned out on open ground, so a roof six blocks up reads as a building: take it off.
+        for (BlockPos over : BlockPos.betweenClosed(at.offset(-9, 2, -9), at.offset(9, 12, 9))) {
+            if (level.getBlockState(over).is(net.minecraft.world.level.block.Blocks.BARRIER)) {
+                level.setBlock(over, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 2);
+            }
+        }
         Drives.Drive drive = Drives.start(level, player, at, TOWN, Optional.empty(), dest, 4);
         h.assertTrue(drive != null && drive.head() >= 1 && Drives.of(player) != null, "no herd turned out");
         List<Animal> herd = Drives.herd(level, player, drive);

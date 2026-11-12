@@ -203,6 +203,11 @@ public final class ModAdvancements {
         text("ufo/root", "Close Encounters", "See a Gray saucer in the night sky");
         text("ufo/missing_time", "Missing Time", "Be taken up by a saucer's beam");
         text("ufo/not_today", "Not Today", "Slip out of a saucer's beam by keeping low");
+        text("ufo/taken", "Taken", "Wake up somewhere that isn't a field");
+        text("ufo/checked_out_early", "Checked Out Early", "Leave a Gray ship in one of its own pods");
+        text("ufo/nobody_left_behind", "Nobody Left Behind", "Leave a Gray ship with everyone it was holding");
+        text("ufo/what_goes_up", "What Goes Up", "Pull the cells from a Gray ship's engine, and be off it before it lands");
+        text("ufo/never_there", "Never There", "Leave a Gray ship without one of them ever seeing you");
         text("ufo/crash_and_burn", "Crash and Burn", "Find a downed Gray saucer");
         text("ufo/salvage_rights", "Salvage Rights", "Pry something out of a saucer's wreckage");
         text("ufo/some_assembly_required", "Some Assembly Required", "Hold every kind of saucer salvage at once: plating, gravity drive, beam emitter, lens array and navigation core");
@@ -685,6 +690,26 @@ public final class ModAdvancements {
             task(root, "ufo/not_today", Items.LEATHER_BOOTS)
                     .addCriterion("escaped", ModCriteria.BEAM_ESCAPED.get().criterion())
                     .save(output, id("ufo/not_today"));
+            // 50: kept, and what's made of it
+            AdvancementHolder taken = display(root, "ufo/taken", ModItems.GRAY_FIELD.get(), AdvancementType.GOAL, true)
+                    .addCriterion("aboard", ModCriteria.TAKEN_ABOARD.get().criterion())
+                    .save(output, id("ufo/taken"));
+            AdvancementHolder out = display(taken, "ufo/checked_out_early", ModItems.SHIP_CONSOLE.get(), AdvancementType.GOAL, false)
+                    .addCriterion("out", ModCriteria.TAKEN_OUT.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("ufo/checked_out_early"));
+            display(out, "ufo/nobody_left_behind", ModItems.LETTER_HOME.get(), AdvancementType.CHALLENGE, false)
+                    .addCriterion("everyone", ModCriteria.TAKEN_NOBODY_LEFT.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(150))
+                    .save(output, id("ufo/nobody_left_behind"));
+            display(out, "ufo/what_goes_up", ModItems.CORE_SOCKET.get(), AdvancementType.CHALLENGE, false)
+                    .addCriterion("down", ModCriteria.TAKEN_BROUGHT_DOWN.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(150))
+                    .save(output, id("ufo/what_goes_up"));
+            display(out, "ufo/never_there", Items.LEATHER_BOOTS, AdvancementType.CHALLENGE, true)
+                    .addCriterion("unseen", ModCriteria.TAKEN_UNSEEN.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(150))
+                    .save(output, id("ufo/never_there"));
             AdvancementHolder crash = display(root, "ufo/crash_and_burn", ModItems.SAUCER_HULL.get(), AdvancementType.GOAL, false)
                     .addCriterion("surface", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inStructure(structures.getOrThrow(ModStructures.CRASH_SITE))))
                     .addCriterion("hollow", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inStructure(structures.getOrThrow(ModStructures.HOLLOW_CRASH_SITE))))
