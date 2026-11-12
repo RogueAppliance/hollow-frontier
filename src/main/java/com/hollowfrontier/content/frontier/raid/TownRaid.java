@@ -628,7 +628,9 @@ public class TownRaid {
         } else {
             payDefenders(level);
         }
-        data.record(site.key(), level.getGameTime()).nextRaid = level.getGameTime() + RaidConfig.cooldown();
+        TownRecord decided = data.record(site.key(), level.getGameTime());
+        decided.nextRaid = level.getGameTime() + RaidConfig.cooldown();
+        decided.lastRaid = level.getGameTime();
         data.setDirty();
     }
 

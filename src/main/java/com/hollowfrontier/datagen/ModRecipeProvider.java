@@ -449,6 +449,9 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("ICI")
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
                 .save(output);
+        shapeless(RecipeCategory.TOOLS, ModItems.PROSPECTORS_JOURNAL.get())   // 48a
+                .requires(Items.BOOK).requires(Tags.Items.LEATHERS).requires(Tags.Items.FEATHERS)
+                .unlockedBy("has_book", has(Items.BOOK)).save(output);
         shaped(RecipeCategory.TOOLS, ModItems.BRANDING_IRON.get())
                 .define('I', Items.IRON_INGOT)
                 .define('S', Items.STICK)

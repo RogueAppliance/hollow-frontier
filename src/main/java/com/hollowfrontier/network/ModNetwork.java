@@ -19,8 +19,12 @@ public final class ModNetwork {
                 .playToServer(ReloadGunPayload.TYPE, ReloadGunPayload.STREAM_CODEC, ReloadGunPayload::handle)
                 .playToServer(SaucerControlPayload.TYPE, SaucerControlPayload.STREAM_CODEC, SaucerControlPayload::handle)
                 .playToServer(SaucerHoldPayload.TYPE, SaucerHoldPayload.STREAM_CODEC, SaucerHoldPayload::handle)
+                .playToServer(JournalRequestPayload.TYPE, JournalRequestPayload.STREAM_CODEC, JournalRequestPayload::handle)
                 // The client's handler is registered client-side (GatewayOverlay), so no client class loads on a server.
                 .playToClient(GatewayCrossingPayload.TYPE, GatewayCrossingPayload.STREAM_CODEC)
-                .playToClient(PhantomSightingPayload.TYPE, PhantomSightingPayload.STREAM_CODEC);
+                .playToClient(PhantomSightingPayload.TYPE, PhantomSightingPayload.STREAM_CODEC)
+                // 48a: the journal's pages, and a note of something just written in (JournalClient)
+                .playToClient(JournalPagesPayload.TYPE, JournalPagesPayload.STREAM_CODEC)
+                .playToClient(JournalNotePayload.TYPE, JournalNotePayload.STREAM_CODEC);
     }
 }

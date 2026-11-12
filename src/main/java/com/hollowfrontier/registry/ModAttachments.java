@@ -100,6 +100,10 @@ public final class ModAttachments {
     public static final Supplier<AttachmentType<com.hollowfrontier.content.frontier.stake.Drives.Drive>> DRIVE = ATTACHMENTS.register("drive",
             () -> AttachmentType.builder(() -> com.hollowfrontier.content.frontier.stake.Drives.Drive.NONE).serialize(com.hollowfrontier.content.frontier.stake.Drives.Drive.CODEC.fieldOf("drive")).copyOnDeath().build());
 
+    // 48a: the journal's pinned thread, and whether one was handed out for starting in town. Kept through death
+    public static final Supplier<AttachmentType<com.hollowfrontier.content.journal.JournalData>> JOURNAL = ATTACHMENTS.register("journal",
+            () -> AttachmentType.builder(() -> com.hollowfrontier.content.journal.JournalData.NONE).serialize(com.hollowfrontier.content.journal.JournalData.CODEC.fieldOf("journal")).copyOnDeath().build());
+
     // Present only while the horse wears saddlebags (check hasData before getData, which would create it).
     public static final Supplier<AttachmentType<ItemContainerContents>> SADDLEBAGS = ATTACHMENTS.register("saddlebags",
             () -> AttachmentType.builder(() -> ItemContainerContents.EMPTY).serialize(ItemContainerContents.CODEC.fieldOf("items")).build());

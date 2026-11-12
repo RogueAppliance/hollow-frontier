@@ -70,6 +70,17 @@ public final class ModGameTests {
         test("infinity_loads_for_free", 20, GunEnchantmentTests::infinityLoadsForFree);
         test("blacksmith_sells_a_gun_book", 20, GunEnchantmentTests::blacksmithSellsAGunBook);
         test("lasso_leashes_cow", 80, FrontierTests::lassoLeashesCow);
+        // The Prospector's Journal (48)
+        test("journal_road_matches_the_codex", 20, JournalTests::roadMatchesTheCodex);
+        test("journal_threads_open_when_met", 20, JournalTests::threadsOpenWhenMet);
+        test("journal_survey_list_and_heading", 20, JournalTests::surveyListAndHeading);
+        test("journal_pin_and_hand_out", 20, JournalTests::pinAndHandOut);
+        test("journal_kept_on_death", 20, JournalTests::keptOnDeath);
+        test("journal_creature_on_first_sight", 20, JournalTests::creatureOnFirstSight);
+        test("journal_strange_doings_in_range", 20, JournalTests::strangeDoingsInRange);
+        test("journal_people_by_fact", 20, JournalTests::peopleByFact);
+        test("journal_text_covers_what_is_seen", 20, JournalTests::textCoversWhatIsSeen);
+        test("journal_town_pages", 20, JournalTests::townPages);
         // A stake in town (47)
         test("standing_by_deed", 20, StakeTests::standingByDeed);
         test("badge_offered_and_taken_back", 20, StakeTests::badgeOfferedAndTakenBack);

@@ -91,7 +91,7 @@ public final class ModTabs {
         // Horse gear
         add(out, ModItems.IRON_HORSESHOES, ModItems.BRASS_HORSESHOES, ModItems.SADDLEBAGS);
         // Money, the law and the news
-        add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE, ModItems.SURVEY_LETTER);
+        add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE, ModItems.SURVEY_LETTER, ModItems.PROSPECTORS_JOURNAL);
         // 47: a stake in town
         add(out, ModItems.DEPUTY_BADGE, ModItems.WARRANT, ModItems.DEED, ModItems.BRANDING_IRON);
         // 35: a frontier December

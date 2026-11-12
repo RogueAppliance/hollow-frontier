@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:book",
+    "#c:leathers",
+    "#c:feathers"
+  ],
+  "result": {
+    "id": "hollowfrontier:prospectors_journal"
+  }
+}

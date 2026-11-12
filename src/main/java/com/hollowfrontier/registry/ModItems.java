@@ -343,6 +343,9 @@ public final class ModItems {
     // 32d: the Polar Survey's last letter, from a town's postmaster
     public static final DeferredItem<com.hollowfrontier.content.frontier.survey.SurveyLetterItem> SURVEY_LETTER = ITEMS.registerItem("survey_letter",
             com.hollowfrontier.content.frontier.survey.SurveyLetterItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    // 48a: the player's own notebook, on a screen of its own
+    public static final DeferredItem<com.hollowfrontier.content.journal.JournalItem> PROSPECTORS_JOURNAL = ITEMS.registerItem("prospectors_journal",
+            com.hollowfrontier.content.journal.JournalItem::new, p -> p.stacksTo(1));
     public static final DeferredItem<SpawnEggItem> SUN_ARCHON_SPAWN_EGG = ITEMS.registerItem("sun_archon_spawn_egg",
             SpawnEggItem::new, p -> p.spawnEgg(ModEntities.SUN_ARCHON.get()));
 

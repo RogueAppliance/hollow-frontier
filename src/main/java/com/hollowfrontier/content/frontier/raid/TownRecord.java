@@ -18,12 +18,20 @@ public final class TownRecord {
             Codec.LONG.fieldOf("next_raid").forGetter(r -> r.nextRaid),
             Codec.LONG.fieldOf("robbed_until").forGetter(r -> r.robbedUntil),
             BountyData.CODEC.optionalFieldOf("poster").forGetter(r -> r.poster),
-            BoundingBox.CODEC.optionalFieldOf("bounds").forGetter(r -> r.bounds)).apply(i, TownRecord::new));
+            BoundingBox.CODEC.optionalFieldOf("bounds").forGetter(r -> r.bounds),
+            Codec.LONG.optionalFieldOf("last_raid", -1L).forGetter(r -> r.lastRaid)).apply(i, TownRecord::new));
 
     public long nextRaid;
     public long robbedUntil;
     public Optional<BountyData> poster;
     public Optional<BoundingBox> bounds;
+    /** When the last raid here was decided (48c, for the journal's town page); -1 if none has been since this was kept. */
+    public long lastRaid = -1;
+
+    public TownRecord(long nextRaid, long robbedUntil, Optional<BountyData> poster, Optional<BoundingBox> bounds, long lastRaid) {
+        this(nextRaid, robbedUntil, poster, bounds);
+        this.lastRaid = lastRaid;
+    }
 
     public TownRecord(long nextRaid, long robbedUntil, Optional<BountyData> poster, Optional<BoundingBox> bounds) {
         this.bounds = bounds;

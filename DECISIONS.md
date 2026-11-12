@@ -700,3 +700,39 @@ Calls made in place of asking, and the reasons behind them. PLAN.md keeps the st
   - *Raising a place by deed refused 48 spots round one town before one took,* nearly all "too rough": every sampled point had to be within three blocks of level, and a tree counted as a hill. Now half the lot must be within two blocks of level, a quarter may be more than four off, none more than eight, an eighth may be wet, and trees are ignored. The next four towns took the fifth, second, first and second spot tried.
 - **Three of the script's own first failures were the script's** (standing given to a spectator, a herd brought to the trail's end after its drover, a path asked of a walker not yet on the ground). Fixed in the script, not the game.
 - **Left as found:** a postmaster's first business with a newcomer is still the Survey's letter, so the deed is his second click; a drifter's pay reads as two messages (2 gold for the man, 6 copper for the job); the rounds' reminder repeats every five seconds on the bar.
+
+### Phase 48a the book and the road (2026-11-11)
+- **The road's pages are read off advancements each time the book opens,** not kept. So `JournalData` holds only the pinned thread and whether a journal was handed out, an old world's journal is full at once with no backfill step, and there is nothing to drift from the Codex. 48b will add what's been seen to the same attachment.
+- **When a thread gets its page.** Any milestone of its own opens it. Otherwise the frontier is always there, steam opens with the Survey's letter, the Hollow on arriving, and "After" once the leash is broken. Concavia, the Grays and the Still Sea wait until the player has met them, so their names aren't in the book before the story gets there.
+- **Done steps wear the advancement's title; only the next step is in the journal's voice.** One new line a milestone (43), each said the journal's way and held to the Codex's list by a test. Writing a second line for each step once done would have doubled that for little.
+- **The Survey's list sits on steam's page** while the gateway is shut, in the letter's own words (its lang keys), with the first thing not yet got and how. The heading comes from a letter the player carries, as the spec said ("where the letter gives one"): the journal doesn't go looking for the crater itself.
+- **Three payloads, not the spec's two.** The request (which also carries a pin, so pinning needs none of its own), the pages, and a third: a one-word note when a milestone is reached with the journal carried. The "noted" line is a client option, so the client has to be the one to show it; an action bar message from the server couldn't be switched off there.
+- **No GUI sprites.** The spec said sprites and text; the screen is fills and the font, like the waystone and the card table. Same result for shader packs and nothing to draw or list. A drawn page would look better; that's an art pass if wanted.
+- **J opens it,** only while a journal is carried, and J again shuts it. Without one it says so on the bar.
+- **"In the hands of anyone starting in town"** became: at a player's first login, if they're standing in a town, a journal goes in their pack. It's remembered either way, so it happens once. A player already on an old world who happens to log in inside a town gets one too; I let that stand.
+- **The note's pencil scratch is vanilla's cartography table sound,** pitched up. Not a sound of our own.
+- **Kept on death is tested by a real respawn** of a test player, the first test here to do that.
+
+### Phase 48b what you've seen (2026-11-11)
+- **It's written down whether or not the book is carried.** The journal is what the player knows; a player who crafts one on day ten shouldn't find it blank. Only the "noted" line and the editor's payment need the book on them.
+- **The book got parts.** Seven threads, thirteen creatures and four people don't fit one contents page, so the left page has a row of parts (Road, Beasts, Signs, Folk), each shown once it holds anything. Short names because the row has 124 pixels.
+- **First sight is six blocks, in plain view,** checked once a second. A kill from any distance also opens the page.
+- **"Tamed, bred or harvested" became: killed, tamed, bred, or (the plesiosaur) fed a fish.** A kill stands for harvesting: it's when the drops are seen. The glyptodon's brushing and the sea cow's kelp aren't hooked; their second lines come with a kill or a calf.
+- **"Their tagged kin" is a line on the creature's own page,** not a page each: a tagged mammoth is still a mammoth. The glassback hare's ear tag counts.
+- **Strange doings are read from `MysteryLog` on a poll** (every five seconds, anything from the last ten within 128 blocks), so the log's writers weren't touched. A player far from a mutilation doesn't get it; one who logs in later doesn't either. The place is the nearest town within 160 blocks, or else the coordinates.
+- **The editor pays 5 gold, once, at ten.** A first guess, like 47's prices. He does it before his usual trade, as the postmaster hands the letter over first.
+- **People's paragraphs lean on advancements** (a bounty turned in, a warning from a man in a duster, the Kindled's story, the Mothership down), which is what lets old worlds fill in. Two things are kept in the journal itself: having met them, and carrying a copy of the Grays' Field Notes. The spec said "a Field Notes book read"; a written book opens on the client alone, so carrying one is what counts.
+- **What the paragraphs say after the Kindled's story is the Kindled's story,** taken from their own lines (the seed behind the ear, the ships that were Concavia's, the king who became the Archon), and attributed to them: "The Kindled say". Nothing of it appears before `concavia/the_truth`.
+- **A Gray wearing a man's face doesn't open the Grays' page.** The player hasn't knowingly met one.
+- **The note payload now carries a translation key,** so one payload serves milestones, creatures, people and strange doings.
+- **A paragraph that would run over the foot of a leaf starts the next leaf,** after the first pictures showed one cut after four words.
+
+### Phase 48c towns (2026-11-11)
+- **The journal keeps the town and the day; the page is read from the town.** Standing, the star, the job, the claim, the bank box, the poster and the raid all have records of their own already, so the page can't disagree with them.
+- **"The day it was last raided" needed one new number.** Nothing kept it. `TownRecord` has an optional `last_raid`, set when a raid is decided. It's the one piece of world data phase 48 adds, against its own ground rule; the alternative was a line the page couldn't have. Raids from before it aren't dated.
+- **"The bounty on its board" is the raid leader's poster** (the one a town holds after a gang gets away), with its reward. A board's everyday postings belong to the board block, not the town, and change as they're taken.
+- **The branded head count is `Herds.count`,** which counts loaded cattle. Read from across the map it says 0; the line says "last I counted". I let that stand over keeping a second count that could go stale.
+- **A drive shows on the page of the town it left from:** the head near the player and the distance and heading to where it's bound. In another dimension it says only that the herd is out.
+- **A fifth part made the row of parts wrap** to a second line when all five are there; the lists under it move down, and their rows went from ten pixels to nine so thirteen creatures still fit.
+- **Walking in is `IN_TOWN` plus the town at the player's feet,** checked every two seconds. As with 48b it's noted whether or not the book is carried.
+

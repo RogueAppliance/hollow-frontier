@@ -221,6 +221,11 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
             serverPlayer.sendSystemMessage(Component.translatable("message.hollowfrontier.survey.postmaster"));
             return InteractionResult.SUCCESS_SERVER;
         }
+        // 48b: the Gazette's editor pays, once, for a journal with ten strange doings in it
+        if (isAlive() && getType() == ModEntities.TOWNSFOLK.get() && getFolk() == Folk.EDITOR && player instanceof ServerPlayer serverPlayer
+                && com.hollowfrontier.content.journal.JournalSeen.sellTally(serverPlayer)) {
+            return InteractionResult.SUCCESS_SERVER;
+        }
         // 35b: in December a postmaster (or, with no post office, the storekeeper) has this year's parcel for you
         if (isAlive() && getType() == ModEntities.TOWNSFOLK.get() && level() instanceof ServerLevel serverLevel
                 && player instanceof ServerPlayer serverPlayer

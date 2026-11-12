@@ -137,6 +137,9 @@ public class Plesiosaur extends SeaBeast {
             level.sendParticles(ParticleTypes.HAPPY_VILLAGER, getX(), getEyeY(), getZ(), 5, 0.4, 0.3, 0.4, 0.0);
             gameEvent(GameEvent.EAT);
             startDive(player);
+            if (player instanceof net.minecraft.server.level.ServerPlayer feeder) {
+                com.hollowfrontier.content.journal.JournalSeen.learn(feeder, this);   // 48b
+            }
         }
         return InteractionResult.SUCCESS;
     }

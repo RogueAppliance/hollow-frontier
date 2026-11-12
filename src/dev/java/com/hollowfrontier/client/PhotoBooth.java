@@ -141,6 +141,13 @@ public final class PhotoBooth {
             }
             return;
         }
+        // The Prospector's Journal on screen, only on its own with -PphotoScene=journal (JournalPhoto)
+        if (JournalPhoto.ENABLED) {
+            if (ticks >= 40) {
+                JournalPhoto.tick(mc, server);
+            }
+            return;
+        }
         // The Polar Resonator held, only on its own with -PphotoScene=resonator
         if (RESONATOR_ONLY) {
             if (ticks >= 40) {

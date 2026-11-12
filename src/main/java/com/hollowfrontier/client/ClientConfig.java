@@ -14,6 +14,7 @@ public final class ClientConfig {
     private static final ModConfigSpec.BooleanValue HOLLOW_SCORE;
     private static final ModConfigSpec.DoubleValue CAMERA_KICK;
     private static final ModConfigSpec.DoubleValue CAMERA_SHAKE;
+    private static final ModConfigSpec.BooleanValue JOURNAL_NOTES;
 
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
@@ -27,10 +28,15 @@ public final class ClientConfig {
         CAMERA_SHAKE = b.comment("How much the view shakes for heavy footfalls, blasts and the Mothership, and leans on an airship's deck, from 0 (not at all) to 1")
                 .defineInRange("cameraShake", 1.0, 0.0, 1.0);
         b.pop();
+        b.comment("The Prospector's Journal (48)").push("journal");
+        JOURNAL_NOTES = b.comment("Whether a line over the hotbar and a pencil scratch say so when something is written into the journal you carry")
+                .define("journalNotes", true);
+        b.pop();
         SPEC = b.build();
     }
 
     public static double cameraKick() { return SPEC.isLoaded() ? CAMERA_KICK.getAsDouble() : CAMERA_KICK.getDefault(); }
     public static double cameraShake() { return SPEC.isLoaded() ? CAMERA_SHAKE.getAsDouble() : CAMERA_SHAKE.getDefault(); }
+    public static boolean journalNotes() { return SPEC.isLoaded() ? JOURNAL_NOTES.getAsBoolean() : JOURNAL_NOTES.getDefault(); }
     public static boolean hollowScore() { return SPEC.isLoaded() ? HOLLOW_SCORE.getAsBoolean() : HOLLOW_SCORE.getDefault(); }
 }

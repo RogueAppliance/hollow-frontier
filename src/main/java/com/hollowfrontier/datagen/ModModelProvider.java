@@ -276,6 +276,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.WARRANT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.DEED.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BRANDING_IRON.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.PROSPECTORS_JOURNAL.get(), ModelTemplates.FLAT_ITEM); // 48a
         // The town lamp: vanilla's lantern when lit, a cold lantern (town_lamp_unlit, reworked from vanilla's) when not; the
         // item is vanilla's lantern sprite
         Block lamp = ModBlocks.TOWN_LAMP.get();

@@ -5862,6 +5862,23 @@ public class TextureArt {
                     "  kwWk",
                     " kwWk",
                     " kkk"));
+            // The Prospector's Journal (48a): a leather notebook with a paper label, a strap and a brass clasp, pages showing
+            n += Items.put(root, "prospectors_journal", sprite(0x7A4A28, pal('k', 0x24160C, 'p', 0xE6DAB8, 'P', 0xC2B48E, 'g', 0xB8862C, 'G', 0xE6C060, 's', 0x3A2414),
+                    "",
+                    "  kkkkkkkkkkk",
+                    " k56666666665k",
+                    " k65555555554kk",
+                    " k65555555554pk",
+                    " k65kkkkkk554Pk",
+                    " k65kppPpk554pk",
+                    " k65kkkkkk554Pk",
+                    " k65555555554pk",
+                    " kssssssssggsPk",
+                    " ksssssssgGGgpk",
+                    " kssssssssggsPk",
+                    " k65555555554pk",
+                    " k54444444443Pk",
+                    " kkkkkkkkkkkkkk"));
             // The mailbox: tin sheet, riveted at the corners, a slot, and a red patch the flag's faces take
             write(new File(root, "block/mailbox.png"), sprite(0x98A2AA, pal('k', 0x4A5058, 'd', 0x2E3238, 'r', 0xB3202A),
                     "kkkkkkkkkkkkkkkk",

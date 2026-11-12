@@ -33,10 +33,12 @@ public class ModLanguageProvider extends LanguageProvider {
         });
         // 47: a stake in town, each line from where it's said
         com.hollowfrontier.content.frontier.stake.StakeText.all().forEach(this::add);
+        com.hollowfrontier.content.journal.JournalText.all().forEach(this::add);
         addItem(ModItems.DEPUTY_BADGE, "Deputy's Badge");
         addItem(ModItems.WARRANT, "Warrant");
         addItem(ModItems.DEED, "Deed");
         addItem(ModItems.BRANDING_IRON, "Branding Iron");
+        addItem(ModItems.PROSPECTORS_JOURNAL, "Prospector's Journal");
         addBlock(ModBlocks.MAILBOX, "Mailbox");
         addBlock(ModBlocks.CLAIM_STAKE, "Claim Stake");
         // 21a: the Gazette's back page, the Gray field notes and Boot Hill's epitaphs, each from its own table
@@ -361,6 +363,8 @@ public class ModLanguageProvider extends LanguageProvider {
         add("hollowfrontier.configuration.camera", "Camera movement");
         add("hollowfrontier.configuration.cameraKick", "Gun kick");
         add("hollowfrontier.configuration.cameraShake", "Shake and sway");
+        add("hollowfrontier.configuration.journal", "The Prospector's Journal");
+        add("hollowfrontier.configuration.journalNotes", "Say when something's noted");
         add("subtitles.hollowfrontier.coin.clink", "Coins clink");
         add("subtitles.hollowfrontier.drink.pour", "Drink poured");
         add("subtitles.hollowfrontier.wanted.raised", "Alarm bell rings");
@@ -1164,6 +1168,7 @@ public class ModLanguageProvider extends LanguageProvider {
 
         add("key.category.hollowfrontier.main", "Hollow Frontier");
         add("key.hollowfrontier.reload", "Reload Gun");
+        add("key.hollowfrontier.journal", "Open the Prospector's Journal");
 
         add("death.attack.hollowfrontier.bullet", "%1$s was shot by %2$s");
         add("death.attack.hollowfrontier.bullet.item", "%1$s was shot by %2$s using %3$s");
