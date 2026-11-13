@@ -1,0 +1,30 @@
+{
+  "parent": "hollowfrontier:ufo/checked_out_early",
+  "criteria": {
+    "unseen": {
+      "trigger": "hollowfrontier:taken_unseen"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.never_there.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "id": "minecraft:leather_boots"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.never_there.title"
+    }
+  },
+  "requirements": [
+    [
+      "unseen"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  },
+  "sends_telemetry_event": true
+}

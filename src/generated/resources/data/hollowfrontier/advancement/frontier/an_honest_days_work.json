@@ -1,0 +1,26 @@
+{
+  "parent": "hollowfrontier:frontier/the_star",
+  "criteria": {
+    "job": {
+      "trigger": "hollowfrontier:job_done"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.an_honest_days_work.description"
+    },
+    "icon": {
+      "id": "hollowfrontier:copper_coin"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.an_honest_days_work.title"
+    }
+  },
+  "requirements": [
+    [
+      "job"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

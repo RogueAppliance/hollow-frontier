@@ -91,7 +91,9 @@ public final class ModTabs {
         // Horse gear
         add(out, ModItems.IRON_HORSESHOES, ModItems.BRASS_HORSESHOES, ModItems.SADDLEBAGS);
         // Money, the law and the news
-        add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE, ModItems.SURVEY_LETTER);
+        add(out, ModItems.COPPER_COIN, ModItems.GOLD_COIN, ModItems.WANTED_POSTER, ModItems.OUTLAW_BADGE, ModItems.FRONTIER_GAZETTE, ModItems.SURVEY_LETTER, ModItems.PROSPECTORS_JOURNAL);
+        // 47: a stake in town
+        add(out, ModItems.DEPUTY_BADGE, ModItems.WARRANT, ModItems.DEED, ModItems.BRANDING_IRON);
         // 35: a frontier December
         add(out, ModItems.CHRISTMAS_PARCEL, ModItems.FRUITCAKE, ModItems.EGGNOG, ModItems.HOT_CIDER);
         // The frontier's mysteries (11a)
@@ -113,7 +115,7 @@ public final class ModTabs {
         add(out, ModItems.SALOON_DOORS, ModItems.BAR_COUNTER, ModItems.BAR_STOOL, ModItems.SALOON_PIANO, ModItems.CARD_TABLE);
         // Chairs and tables (24c)
         add(out, ModItems.OAK_CHAIR, ModItems.SPRUCE_CHAIR, ModItems.DARK_OAK_CHAIR, ModItems.OAK_TABLE, ModItems.SPRUCE_TABLE, ModItems.DARK_OAK_TABLE,
-                ModItems.TOWN_LAMP);
+                ModItems.TOWN_LAMP, ModItems.MAILBOX);
         // The law office
         add(out, ModItems.HANGING_BOUNTY_BOARD, ModItems.BOUNTY_BOARD);
         // Metal blocks and the ore they come from
@@ -186,6 +188,7 @@ public final class ModTabs {
         add(out, ModItems.PROTOTYPE_SAUCER, ModItems.CLOAKING_DEVICE, ModItems.CARGO_HOLD, ModItems.SEALED_HULL); // 13c, 15b, 43d
         add(out, ModItems.PHLOGISTON_BEACON); // 13d
         add(out, ModItems.IMPLANT_RIG, ModItems.LETTER_HOME); // 20
+        add(out, ModItems.SHOCK_ROD, ModItems.GRAY_FIELD, ModItems.SHIP_CONSOLE, ModItems.CORE_SOCKET); // 50
         add(out, ModItems.KINDLED_SEAL, ModItems.SEAL_SOCKET); // 26
         ModItems.RELICS.forEach(relic -> add(out, relic)); // 28
         ModItems.GADGETS.forEach(gadget -> add(out, gadget)); // 32c

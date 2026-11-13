@@ -63,9 +63,19 @@ public final class ModDataGen {
                 .add(Registries.DENSITY_FUNCTION, HollowTerrain::bootstrapFunctions)
                 .add(Registries.MATERIAL_RULE, HollowMaterialRules::bootstrap)
                 .add(Registries.NOISE_SETTINGS, HollowEarth::bootstrapNoiseSettings)
-                .add(Registries.DIMENSION_TYPE, HollowEarth::bootstrapDimensionTypes)
-                .add(Registries.BIOME, HollowBiomes::bootstrap)
-                .add(Registries.LEVEL_STEM, HollowEarth::bootstrapStems);
+                // ...and the Grays' ship (50): a world with nothing in it but what Taken sets there
+                .add(Registries.DIMENSION_TYPE, context -> {
+                    HollowEarth.bootstrapDimensionTypes(context);
+                    com.hollowfrontier.worldgen.Aboard.bootstrapDimensionTypes(context);
+                })
+                .add(Registries.BIOME, context -> {
+                    HollowBiomes.bootstrap(context);
+                    context.register(com.hollowfrontier.worldgen.Aboard.BIOME, com.hollowfrontier.worldgen.Aboard.biome());
+                })
+                .add(Registries.LEVEL_STEM, context -> {
+                    HollowEarth.bootstrapStems(context);
+                    com.hollowfrontier.worldgen.Aboard.bootstrapStems(context);
+                });
     }
 
     @SubscribeEvent

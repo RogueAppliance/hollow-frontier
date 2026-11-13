@@ -172,7 +172,7 @@ final class DataTests {
         var randomState = level.getChunkSource().randomState();
         var structures = level.registryAccess().lookupOrThrow(Registries.STRUCTURE);
         java.util.regex.Pattern template = java.util.regex.Pattern.compile("hollowfrontier:town/[a-z_/0-9]+");
-        int pieces = 0, towns = 0;
+        int pieces = 0, towns = 0, oldPlaces = 0;
         for (TownStyle style : TownStyle.values()) {
             var structure = structures.getOrThrow(style.structure()).value();
             int stood = 0;
@@ -202,10 +202,12 @@ final class DataTests {
                 h.assertTrue(bounds.getXSpan() <= 2 * 116 + 1 && bounds.getZSpan() <= 2 * 116 + 1, where + " spans " + bounds);
                 pieces += placed.size();
                 towns++;
+                oldPlaces += names.stream().anyMatch(n -> n.contains("/old_place")) ? 1 : 0; // 47b
             }
             h.assertTrue(stood >= 12, "only " + stood + " " + style + " towns found level ground in 80 tries");
         }
-        HollowFrontier.LOGGER.info("[DataTests] {} towns laid out, {} pieces on average", towns, pieces / towns);
+        HollowFrontier.LOGGER.info("[DataTests] {} towns laid out, {} pieces on average, {} with an Old Place standing", towns, pieces / towns, oldPlaces);
+        h.assertTrue(oldPlaces * 4 >= towns, "only " + oldPlaces + " of " + towns + " towns have an Old Place standing (47b)");
         h.succeed();
     }
 

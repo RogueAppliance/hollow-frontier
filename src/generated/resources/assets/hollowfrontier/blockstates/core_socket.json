@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "cell=false": {
+      "model": "hollowfrontier:block/core_socket_empty"
+    },
+    "cell=true": {
+      "model": "hollowfrontier:block/core_socket"
+    }
+  }
+}

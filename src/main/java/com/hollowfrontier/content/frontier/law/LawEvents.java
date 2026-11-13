@@ -30,6 +30,7 @@ public final class LawEvents {
         int heat = crimeHeat(event.getEntity(), false);
         if (heat > 0 && TownRaids.raidAt(player.level(), event.getEntity().blockPosition()) == null) {
             Wanted.addHeat(player, heat);
+            thoughtLessOf(player, event.getEntity(), heat, false);
         }
     }
 
@@ -42,9 +43,20 @@ public final class LawEvents {
         int heat = crimeHeat(victim, true);
         if (heat > 0) {
             Wanted.addHeat(player, heat);
+            thoughtLessOf(player, victim, heat, victim instanceof Townsfolk || victim instanceof Lawman);
         } else if (victim instanceof AbstractOutlaw outlaw && !outlaw.isJailed()) {
             Wanted.addHeat(player, -1); // a good deed
         }
+    }
+
+    // 47a: a crime inside a town costs the player their standing there (half of it for killing one of the town's own)
+    private static void thoughtLessOf(ServerPlayer player, LivingEntity victim, int heat, boolean killedOneOfTheirs) {
+        com.hollowfrontier.content.frontier.town.Towns.keyAt(player.level(), victim.blockPosition()).ifPresent(town -> {
+            if (killedOneOfTheirs) {
+                com.hollowfrontier.content.frontier.stake.Standing.halve(player, town);
+            }
+            com.hollowfrontier.content.frontier.stake.Standing.add(player, town, -heat * com.hollowfrontier.content.frontier.stake.Standing.PER_HEAT);
+        });
     }
 
     /** Heat for hurting or killing this entity; 0 if it's no crime. */

@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/checked_out_early",
+  "criteria": {
+    "down": {
+      "trigger": "hollowfrontier:taken_brought_down"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.what_goes_up.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:core_socket"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.what_goes_up.title"
+    }
+  },
+  "requirements": [
+    [
+      "down"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  },
+  "sends_telemetry_event": true
+}

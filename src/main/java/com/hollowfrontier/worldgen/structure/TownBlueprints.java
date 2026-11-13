@@ -112,10 +112,10 @@ public final class TownBlueprints {
                         "homestead", desert ? 1 : 2)),
                 java.util.Map.entry(TownLayout.LANDMARKS, java.util.Map.of("courthouse", 3, "church", 2)),
                 java.util.Map.entry(TownLayout.STREET_ENDS, java.util.Map.of("chapel", 2, "water_tower", 1, "depot", 2, "lane", 4, "town_limits", 1,
-                        "schoolhouse", 2)),
+                        "schoolhouse", 2, OldPlaceBlueprint.NAME, 2)),
                 java.util.Map.entry(TownLayout.LANE_LOTS, java.util.Map.of("house", desert ? 1 : 3, "adobe", desert ? 3 : 1, "garden", 2, "homestead", 1)),
                 java.util.Map.entry(TownLayout.OUTSKIRTS, java.util.Map.of("windpump", 6, "corral", 6, "boot_hill", 2, "boot_hill_b", 2,
-                        "boot_hill_c", 1, "boot_hill_strange", 1, "wheat_field", desert ? 3 : 6, "ranch", 4)),
+                        "boot_hill_c", 1, "boot_hill_strange", 1, "wheat_field", desert ? 3 : 6, "ranch", 4, OldPlaceBlueprint.NAME, 8)),
                 java.util.Map.entry(TownLayout.FARMS, java.util.Map.of("farm_track", 1)),
                 java.util.Map.entry(TownLayout.FIELDS, java.util.Map.of("wheat_field", 1))));
         if (style == TownStyle.FRONTIER) { // one railroad pool serves every style (the depot names it)

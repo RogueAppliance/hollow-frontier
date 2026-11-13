@@ -29,7 +29,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 ModBlocks.BAR_STOOL.key(), ModBlocks.SALOON_DOORS.key(), ModBlocks.SALOON_PIANO.key(), ModBlocks.CARD_TABLE.key());
         tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.OAK_CHAIR.key(), ModBlocks.SPRUCE_CHAIR.key(), ModBlocks.DARK_OAK_CHAIR.key(),
                 ModBlocks.OAK_TABLE.key(), ModBlocks.SPRUCE_TABLE.key(), ModBlocks.DARK_OAK_TABLE.key());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.TOWN_LAMP.key());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.TOWN_LAMP.key(), ModBlocks.MAILBOX.key());
+        tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.CLAIM_STAKE.key());
         tag(BlockTags.WOODEN_DOORS).add(ModBlocks.SALOON_DOORS.key());
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.BOILER.key(), ModBlocks.COPPER_PIPE.key(), ModBlocks.STEAM_TANK.key(),
                 ModBlocks.PRESSURE_GAUGE.key(), ModBlocks.CRUSHER.key());
@@ -76,6 +77,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(ModBlocks.PHLOGISTON_BEACON.key()); // 13d
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.IMPLANT_RIG.key()); // 20
         tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.IMPLANT_RIG.key());
+        // 50: what comes away in the hands of someone taken: the grilles over the vents, and the rig
+        tag(ModTags.Blocks.TAKEN_BREAKABLE).add(ModBlocks.IMPLANT_RIG.key())
+                .add(net.minecraft.world.level.block.Blocks.COPPER_GRATE.waxed().oxidized().builtInRegistryHolder().key());
         tag(BlockItemTags.STAIRS.block()).add(ModBlocks.CRYSTAL_BRICK_STAIRS.key());
         tag(BlockItemTags.SLABS.block()).add(ModBlocks.CRYSTAL_BRICK_SLAB.key());
         tag(BlockItemTags.WALLS.block()).add(ModBlocks.CRYSTAL_BRICK_WALL.key());

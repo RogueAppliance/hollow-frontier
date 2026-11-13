@@ -134,6 +134,16 @@ public final class ModItems {
             p -> new BountyItem(true, p), p -> p.stacksTo(1));
     public static final DeferredItem<BountyItem> OUTLAW_BADGE = ITEMS.registerItem("outlaw_badge",
             p -> new BountyItem(false, p), p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    // 47: a stake in town. The star, the warrant and the deed each carry their town; the stake itself has no item
+    public static final DeferredItem<com.hollowfrontier.content.frontier.stake.StakeItems.Badge> DEPUTY_BADGE = ITEMS.registerItem("deputy_badge",
+            com.hollowfrontier.content.frontier.stake.StakeItems.Badge::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<com.hollowfrontier.content.frontier.stake.StakeItems.Warrant> WARRANT = ITEMS.registerItem("warrant",
+            com.hollowfrontier.content.frontier.stake.StakeItems.Warrant::new, p -> p.stacksTo(1));
+    public static final DeferredItem<com.hollowfrontier.content.frontier.stake.StakeItems.Deed> DEED = ITEMS.registerItem("deed",
+            com.hollowfrontier.content.frontier.stake.StakeItems.Deed::new, p -> p.stacksTo(1).rarity(Rarity.RARE));
+    public static final DeferredItem<com.hollowfrontier.content.frontier.stake.StakeItems.BrandingIron> BRANDING_IRON = ITEMS.registerItem("branding_iron",
+            com.hollowfrontier.content.frontier.stake.StakeItems.BrandingIron::new, p -> p.durability(64));
+    public static final DeferredItem<BlockItem> MAILBOX = ITEMS.registerSimpleBlockItem(ModBlocks.MAILBOX);
     public static final DeferredItem<SpawnEggItem> OUTLAW_SPAWN_EGG = ITEMS.registerItem("outlaw_spawn_egg",
             SpawnEggItem::new, p -> p.spawnEgg(ModEntities.OUTLAW.get()));
     public static final DeferredItem<SpawnEggItem> OUTLAW_GUNSLINGER_SPAWN_EGG = ITEMS.registerItem("outlaw_gunslinger_spawn_egg",
@@ -333,6 +343,9 @@ public final class ModItems {
     // 32d: the Polar Survey's last letter, from a town's postmaster
     public static final DeferredItem<com.hollowfrontier.content.frontier.survey.SurveyLetterItem> SURVEY_LETTER = ITEMS.registerItem("survey_letter",
             com.hollowfrontier.content.frontier.survey.SurveyLetterItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    // 48a: the player's own notebook, on a screen of its own
+    public static final DeferredItem<com.hollowfrontier.content.journal.JournalItem> PROSPECTORS_JOURNAL = ITEMS.registerItem("prospectors_journal",
+            com.hollowfrontier.content.journal.JournalItem::new, p -> p.stacksTo(1));
     public static final DeferredItem<SpawnEggItem> SUN_ARCHON_SPAWN_EGG = ITEMS.registerItem("sun_archon_spawn_egg",
             SpawnEggItem::new, p -> p.spawnEgg(ModEntities.SUN_ARCHON.get()));
 
@@ -379,6 +392,12 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> WAYSTONE = ITEMS.registerSimpleBlockItem(ModBlocks.WAYSTONE, p -> p.rarity(Rarity.EPIC));
     // 20: the captives: the rig (creative-only, like the waystone) and the letters freed captives hand over
     public static final DeferredItem<BlockItem> IMPLANT_RIG = ITEMS.registerSimpleBlockItem(ModBlocks.IMPLANT_RIG, p -> p.rarity(Rarity.UNCOMMON));
+    // 50: taken aboard. The Shock Rod off the surgeons' tray, and the ship's own fittings (creative-only, for builders)
+    public static final DeferredItem<com.hollowfrontier.content.ufo.taken.ShockRodItem> SHOCK_ROD = ITEMS.registerItem("shock_rod",
+            com.hollowfrontier.content.ufo.taken.ShockRodItem::new, p -> p.stacksTo(1).rarity(Rarity.RARE));
+    public static final DeferredItem<BlockItem> GRAY_FIELD = ITEMS.registerSimpleBlockItem(ModBlocks.GRAY_FIELD, p -> p.rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<BlockItem> SHIP_CONSOLE = ITEMS.registerSimpleBlockItem(ModBlocks.SHIP_CONSOLE, p -> p.rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<BlockItem> CORE_SOCKET = ITEMS.registerSimpleBlockItem(ModBlocks.CORE_SOCKET, p -> p.rarity(Rarity.UNCOMMON));
     // 26: the Kindled vault's puzzle
     public static final DeferredItem<BlockItem> KINDLED_SEAL = ITEMS.registerSimpleBlockItem(ModBlocks.KINDLED_SEAL, p -> p.rarity(Rarity.UNCOMMON));
     public static final DeferredItem<BlockItem> SEAL_SOCKET = ITEMS.registerSimpleBlockItem(ModBlocks.SEAL_SOCKET, p -> p.rarity(Rarity.UNCOMMON));

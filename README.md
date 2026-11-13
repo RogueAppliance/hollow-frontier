@@ -36,13 +36,15 @@ By the server's date, and gone again in January: town lamps dressed with a sprig
 ## Settings
 
 - `hollowfrontier-server.toml` (per world): outlaw raids on towns, how often, how big, and what defenders earn.
-- `hollowfrontier-ufo-server.toml` (per world): saucer flyovers, and whether their beams take players.
+- `hollowfrontier-ufo-server.toml` (per world): saucer flyovers, whether their beams take players, and whether the Grays ever keep one aboard (`taken`).
 - `hollowfrontier-saloon-server.toml` and `hollowfrontier-dust-devils-server.toml` (per world): saloon brawls and missing time; dust devils.
 - `hollowfrontier-mysteries-server.toml` (per world): airship sightings, cattle mutilations, crop circles, and the men in black's visits and hunts, each switchable.
 - `hollowfrontier-towns-server.toml` (per world): whether towns replace the townsfolk and lawmen they lose, and how long each new arrival takes.
   It also holds `spawnAtTown`, on by default, which starts new worlds in the nearest town. A world chooses its spawn once, so set this in the `config` folder before creating the world.
+- `hollowfrontier-stake-server.toml` (per world): town standing, deeds to the Old Place and cattle drives, each switchable, with the deed's price and the distances (how far a deed can raise a place, a herd be driven, a warrant be carried).
 - `hollowfrontier-season-server.toml` (per world): December. `mode` is `AUTO` (by the server's date), `ALWAYS` or `NEVER`; `truce` is the Christmas truce.
 - `hollowfrontier-startup.toml`: whether brass can be alloyed at a crafting table (turn it off if another mod makes brass).
+- `hollowfrontier-client.toml` (the player's own): `hollowScore` (the Hollow Earth's own music and boss themes, or vanilla's), and `cameraKick` and `cameraShake`, 0 to 1 (how hard a gun kicks the view, and how much it shakes for footfalls and blasts; 0 turns that movement off).
 
 ## In a modpack
 

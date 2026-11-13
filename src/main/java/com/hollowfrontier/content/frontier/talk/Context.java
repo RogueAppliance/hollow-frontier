@@ -125,6 +125,16 @@ public record Context(Set<Fact> facts, Act act, String poster, boolean beenDown)
                     && com.hollowfrontier.content.concavia.ConcavianCodexItem.reached(seaman, "hollow/still_sea")) {
                 facts.add(Fact.SEA_SEEN);
             }
+            com.hollowfrontier.content.ufo.taken.TakenData taken = com.hollowfrontier.content.ufo.taken.TakenData.of(player);
+            if (taken.times() > 0 && !taken.aboard()) {
+                facts.add(Fact.TAKEN);
+            }
+            int duel = com.hollowfrontier.content.frontier.duel.DuelData.of(player).last(); // 51
+            if (duel == com.hollowfrontier.content.frontier.duel.DuelData.WON) {
+                facts.add(Fact.DUEL_WON);
+            } else if (duel == com.hollowfrontier.content.frontier.duel.DuelData.LOST) {
+                facts.add(Fact.DUEL_LOST);
+            }
             if (player.getData(ModAttachments.SURVEY_LETTER.get())) {
                 facts.add(Fact.SURVEY_LETTER);
             }

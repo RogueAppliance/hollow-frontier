@@ -30,6 +30,11 @@ public final class ModChestLoot {
     public static final ResourceKey<LootTable> BATHHOUSE = key("bathhouse");
     public static final ResourceKey<LootTable> GAZETTE_OFFICE = key("gazette_office");
     public static final ResourceKey<LootTable> RANCH = key("ranch");
+    // 47b: the Old Place's pantry, the trunk at the foot of the bed, the writing desk and the barn
+    public static final ResourceKey<LootTable> OLD_PLACE_PANTRY = key("old_place_pantry");
+    public static final ResourceKey<LootTable> OLD_PLACE_TRUNK = key("old_place_trunk");
+    public static final ResourceKey<LootTable> OLD_PLACE_DESK = key("old_place_desk");
+    public static final ResourceKey<LootTable> OLD_PLACE_BARN = key("old_place_barn");
     public static final ResourceKey<LootTable> OUTLAW_CAMP = key("outlaw_camp");
     public static final ResourceKey<LootTable> POLAR_GATEWAY = key("polar_gateway");
     // The Hollow Earth's lore sites (9b3)

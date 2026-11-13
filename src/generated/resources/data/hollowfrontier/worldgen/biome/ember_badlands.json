@@ -5,6 +5,7 @@
         "sound": "hollowfrontier:ambient.ember_badlands.additions",
         "tick_chance": 0.008
       },
+      "loop": "hollowfrontier:ambient.ember_badlands.loop",
       "mood": {
         "block_search_extent": 8,
         "offset": 2.0,
@@ -16,7 +17,7 @@
       "default": {
         "max_delay": 24000,
         "min_delay": 12000,
-        "sound": "minecraft:music.overworld.badlands"
+        "sound": "hollowfrontier:music.hollow.ember_badlands"
       }
     },
     "minecraft:gameplay/natural_mob_spawns": {

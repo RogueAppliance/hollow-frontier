@@ -97,8 +97,20 @@ public final class ModAdvancements {
         text("frontier/rattler", "Don't Tread on Me", "Kill a rattlesnake. It did warn you");
         text("frontier/snakeskin_boots", "Snakeskin Swagger", "Make Snakeskin Boots. Rattlers give the wearer a wide berth");
         text("frontier/dead_or_alive", "Dead or Alive", "Turn in an outlaw's badge at a Bounty Board");
+        // 51: high noon
+        text("frontier/high_noon", "High Noon", "Meet an Outlaw Boss in the street when you are called out, and be the one who walks away");
+        text("frontier/nobody_faster", "Nobody Faster", "Win a duel against a boss with a bounty of seven gold or more");
+        text("frontier/one_was_enough", "One Was Enough", "Win a duel with your first shot, to the head");
         text("frontier/or_alive", "...Or Alive", "Bring an outlaw from a Gray pen to the town that posted him, alive");
         text("frontier/hold_the_line", "Hold the Line", "Help a town see off an outlaw raid");
+        // 47: a stake in town
+        text("frontier/known_around_town", "Known Around Town", "Do enough for a town that it knows your name");
+        text("frontier/the_star", "The Star", "Be sworn in as a town's deputy. The sheriff asks a Neighbour");
+        text("frontier/an_honest_days_work", "An Honest Day's Work", "Do a job for the sheriff");
+        text("frontier/the_old_place", "The Old Place", "Take up a deed to a homestead of your own");
+        text("frontier/riding_for_the_brand", "Riding for the Brand", "Put your brand on a cow with a hot iron");
+        text("frontier/head_em_up", "Head 'Em Up", "Bring a herd in at the end of a drive");
+        text("frontier/pillar_of_the_town", "Pillar of the Town", "Stand as high in a town as anyone can");
         text("frontier/not_so_fast", "Not So Fast, Partner", "Shoot the Safecracker before he rides out with the town's money");
         text("frontier/well_heeled", "Well Heeled", "Fit horseshoes to a tamed horse");
         text("frontier/lights_in_the_sky", "Lights in the Sky", "See one of the airships that cross the frontier by night");
@@ -195,6 +207,11 @@ public final class ModAdvancements {
         text("ufo/root", "Close Encounters", "See a Gray saucer in the night sky");
         text("ufo/missing_time", "Missing Time", "Be taken up by a saucer's beam");
         text("ufo/not_today", "Not Today", "Slip out of a saucer's beam by keeping low");
+        text("ufo/taken", "Taken", "Wake up somewhere that isn't a field");
+        text("ufo/checked_out_early", "Checked Out Early", "Leave a Gray ship in one of its own pods");
+        text("ufo/nobody_left_behind", "Nobody Left Behind", "Leave a Gray ship with everyone it was holding");
+        text("ufo/what_goes_up", "What Goes Up", "Pull the cells from a Gray ship's engine, and be off it before it lands");
+        text("ufo/never_there", "Never There", "Leave a Gray ship without one of them ever seeing you");
         text("ufo/crash_and_burn", "Crash and Burn", "Find a downed Gray saucer");
         text("ufo/salvage_rights", "Salvage Rights", "Pry something out of a saucer's wreckage");
         text("ufo/some_assembly_required", "Some Assembly Required", "Hold every kind of saucer salvage at once: plating, gravity drive, beam emitter, lens array and navigation core");
@@ -310,6 +327,19 @@ public final class ModAdvancements {
                     .addCriterion("claimed", ModCriteria.BOUNTY_CLAIMED.get().criterion())
                     .rewards(AdvancementRewards.Builder.experience(30))
                     .save(output, id("frontier/dead_or_alive"));
+            // 51: called out to the street, and won
+            AdvancementHolder duel = display(bounty, "frontier/high_noon", ModItems.REVOLVER.get(), AdvancementType.GOAL, false)
+                    .addCriterion("won", ModCriteria.DUEL_WON.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(50))
+                    .save(output, id("frontier/high_noon"));
+            display(duel, "frontier/nobody_faster", ModItems.OUTLAW_BADGE.get(), AdvancementType.CHALLENGE, false)
+                    .addCriterion("dearest", ModCriteria.DUEL_WON_DEAREST.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("frontier/nobody_faster"));
+            display(duel, "frontier/one_was_enough", ModItems.REVOLVER_CARTRIDGE.get(), AdvancementType.CHALLENGE, true)
+                    .addCriterion("head", ModCriteria.DUEL_HEADSHOT.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("frontier/one_was_enough"));
             // 20: the man himself, walked in from a Gray pen
             display(bounty, "frontier/or_alive", Items.LEAD, AdvancementType.GOAL, false)
                     .addCriterion("alive", ModCriteria.BROUGHT_IN_ALIVE.get().criterion())
@@ -323,6 +353,33 @@ public final class ModAdvancements {
                     .addCriterion("recovered", ModCriteria.LOOT_RECOVERED.get().criterion())
                     .rewards(AdvancementRewards.Builder.experience(100).addLootTable(output.lookup(Registries.LOOT_TABLE).getOrThrow(REWARD_RECOVERED)))
                     .save(output, id("frontier/not_so_fast"));
+
+            // 47: a stake in town
+            AdvancementHolder known = task(bounty, "frontier/known_around_town", ModItems.FRONTIER_GAZETTE.get())
+                    .addCriterion("known", ModCriteria.STANDING_RANK.get().criterion())
+                    .save(output, id("frontier/known_around_town"));
+            AdvancementHolder star = display(known, "frontier/the_star", ModItems.DEPUTY_BADGE.get(), AdvancementType.GOAL, false)
+                    .addCriterion("sworn", ModCriteria.DEPUTISED.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(50))
+                    .save(output, id("frontier/the_star"));
+            task(star, "frontier/an_honest_days_work", ModItems.COPPER_COIN.get())
+                    .addCriterion("job", ModCriteria.JOB_DONE.get().criterion())
+                    .save(output, id("frontier/an_honest_days_work"));
+            AdvancementHolder place = display(known, "frontier/the_old_place", ModItems.DEED.get(), AdvancementType.GOAL, false)
+                    .addCriterion("homesteader", ModCriteria.HOMESTEADER.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("frontier/the_old_place"));
+            task(place, "frontier/riding_for_the_brand", ModItems.BRANDING_IRON.get())
+                    .addCriterion("branded", ModCriteria.BRANDED.get().criterion())
+                    .save(output, id("frontier/riding_for_the_brand"));
+            display(known, "frontier/head_em_up", Items.LEAD, AdvancementType.GOAL, false)
+                    .addCriterion("drive", ModCriteria.DRIVE_DONE.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(50))
+                    .save(output, id("frontier/head_em_up"));
+            display(known, "frontier/pillar_of_the_town", ModItems.GOLD_COIN.get(), AdvancementType.CHALLENGE, false)
+                    .addCriterion("pillar", ModCriteria.STANDING_RANK.get().atLeast(3))
+                    .rewards(AdvancementRewards.Builder.experience(200))
+                    .save(output, id("frontier/pillar_of_the_town"));
 
             // Horses
             AdvancementHolder shod = task(root, "frontier/well_heeled", ModItems.IRON_HORSESHOES.get())
@@ -650,6 +707,26 @@ public final class ModAdvancements {
             task(root, "ufo/not_today", Items.LEATHER_BOOTS)
                     .addCriterion("escaped", ModCriteria.BEAM_ESCAPED.get().criterion())
                     .save(output, id("ufo/not_today"));
+            // 50: kept, and what's made of it
+            AdvancementHolder taken = display(root, "ufo/taken", ModItems.GRAY_FIELD.get(), AdvancementType.GOAL, true)
+                    .addCriterion("aboard", ModCriteria.TAKEN_ABOARD.get().criterion())
+                    .save(output, id("ufo/taken"));
+            AdvancementHolder out = display(taken, "ufo/checked_out_early", ModItems.SHIP_CONSOLE.get(), AdvancementType.GOAL, false)
+                    .addCriterion("out", ModCriteria.TAKEN_OUT.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("ufo/checked_out_early"));
+            display(out, "ufo/nobody_left_behind", ModItems.LETTER_HOME.get(), AdvancementType.CHALLENGE, false)
+                    .addCriterion("everyone", ModCriteria.TAKEN_NOBODY_LEFT.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(150))
+                    .save(output, id("ufo/nobody_left_behind"));
+            display(out, "ufo/what_goes_up", ModItems.CORE_SOCKET.get(), AdvancementType.CHALLENGE, false)
+                    .addCriterion("down", ModCriteria.TAKEN_BROUGHT_DOWN.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(150))
+                    .save(output, id("ufo/what_goes_up"));
+            display(out, "ufo/never_there", Items.LEATHER_BOOTS, AdvancementType.CHALLENGE, true)
+                    .addCriterion("unseen", ModCriteria.TAKEN_UNSEEN.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(150))
+                    .save(output, id("ufo/never_there"));
             AdvancementHolder crash = display(root, "ufo/crash_and_burn", ModItems.SAUCER_HULL.get(), AdvancementType.GOAL, false)
                     .addCriterion("surface", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inStructure(structures.getOrThrow(ModStructures.CRASH_SITE))))
                     .addCriterion("hollow", PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inStructure(structures.getOrThrow(ModStructures.HOLLOW_CRASH_SITE))))

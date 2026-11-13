@@ -37,6 +37,7 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
                 ModBlocks.SPRUCE_TABLE, ModBlocks.DARK_OAK_TABLE, ModBlocks.TOWN_LAMP)) {
             dropSelf(furniture.get());
         }
+        dropSelf(ModBlocks.MAILBOX.get()); // 47b (what's in it spills as a barrel's does; the Claim Stake drops nothing)
         add(ModBlocks.SALOON_DOORS.get(), this::createDoorTable);
         dropSelf(ModBlocks.BOILER.get());
         dropSelf(ModBlocks.COPPER_PIPE.get());

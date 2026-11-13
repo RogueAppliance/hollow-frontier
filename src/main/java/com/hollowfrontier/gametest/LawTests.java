@@ -83,6 +83,13 @@ final class LawTests {
 
     static void posseRidesOut(GameTestHelper h) {
         ServerPlayer player = TestPlayers.survival(h, new BlockPos(5, 1, 5));
+        // A posse rides in from 24 to 32 blocks off, on loaded ground. Where this test stands at the edge of the tests'
+        // grid, half of that ring isn't loaded and eight tries sometimes find one spot, not two: load it first.
+        for (int cx = -2; cx <= 2; cx++) {
+            for (int cz = -2; cz <= 2; cz++) {
+                h.getLevel().getChunk((player.getBlockX() >> 4) + cx, (player.getBlockZ() >> 4) + cz);
+            }
+        }
         Wanted.addHeat(player, Wanted.MAX_HEAT);
         Wanted.sendPosse(h.getLevel(), player);
         List<Lawman> posse = h.getLevel().getEntitiesOfClass(Lawman.class, new AABB(player.blockPosition()).inflate(40, 128, 40), Lawman::isPosse);

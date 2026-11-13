@@ -52,6 +52,12 @@ public final class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.hollowfrontier.content.hollow.gray.ImplantRigBlockEntity>> IMPLANT_RIG =
             BLOCK_ENTITIES.register("implant_rig", () -> new BlockEntityType<>(com.hollowfrontier.content.hollow.gray.ImplantRigBlockEntity::new, ModBlocks.IMPLANT_RIG.get()));
 
+    // 47b: the mailbox keeps a barrel's block entity
+    @SubscribeEvent
+    static void addBlocks(net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent event) {
+        event.modify(net.minecraft.world.level.block.entity.BlockEntityTypes.BARREL, ModBlocks.MAILBOX.get());
+    }
+
     // Steam moves through the standard fluid capability, so other mods' pipes and tanks interoperate.
     @SubscribeEvent
     static void registerCapabilities(RegisterCapabilitiesEvent event) {

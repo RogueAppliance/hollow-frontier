@@ -17,6 +17,9 @@ public final class UfoConfig {
     private static final ModConfigSpec.DoubleValue CHANCE;
     private static final ModConfigSpec.DoubleValue ABDUCTION_CHANCE;
     private static final ModConfigSpec.BooleanValue ABDUCT_PLAYERS;
+    private static final ModConfigSpec.BooleanValue TAKEN;
+    private static final ModConfigSpec.IntValue TAKEN_SUSPICION;
+    private static final ModConfigSpec.DoubleValue TAKEN_AGAIN;
     private static final ModConfigSpec.BooleanValue LANDINGS;
     private static final ModConfigSpec.IntValue LANDING_INTERVAL;
     private static final ModConfigSpec.DoubleValue LANDING_CHANCE;
@@ -29,6 +32,11 @@ public final class UfoConfig {
         CHANCE = b.comment("Chance per roll").defineInRange("chance", 0.05, 0.0, 1.0);
         ABDUCTION_CHANCE = b.comment("Chance a saucer that comes over stops to beam something up").defineInRange("abductionChance", 0.4, 0.0, 1.0);
         ABDUCT_PLAYERS = b.comment("Whether a saucer's beam takes players who aren't sneaking (animals either way)").define("abductPlayers", true);
+        b.pop();
+        b.comment("Taken: a player the beam draws up may be kept, and wake aboard the ship with nothing on them (their things are always given back)").push("taken");
+        TAKEN = b.comment("Whether the Grays ever keep a player (off: every abduction is missing time, as before; abductPlayers off turns this off too)").define("enabled", true);
+        TAKEN_SUSPICION = b.comment("How much the men in black must mind a player before the Grays keep them the first time (they warn at 25, hunt at 60)").defineInRange("suspicion", 30, 0, 100);
+        TAKEN_AGAIN = b.comment("Chance that a later abduction of the same player keeps them again").defineInRange("again", 0.25, 0.0, 1.0);
         b.pop();
         b.comment("Gray Landings, once the leash is broken: a saucer set down near a player for the night, in the Overworld or the Hollow Earth").push("landings");
         LANDINGS = b.comment("Whether saucers land on their own (the /hollowfrontier ufo landing command works either way)").define("enabled", true);
@@ -43,6 +51,9 @@ public final class UfoConfig {
     public static double chance() { return SPEC.isLoaded() ? CHANCE.getAsDouble() : CHANCE.getDefault(); }
     public static double abductionChance() { return SPEC.isLoaded() ? ABDUCTION_CHANCE.getAsDouble() : ABDUCTION_CHANCE.getDefault(); }
     public static boolean abductPlayers() { return SPEC.isLoaded() ? ABDUCT_PLAYERS.getAsBoolean() : ABDUCT_PLAYERS.getDefault(); }
+    public static boolean taken() { return SPEC.isLoaded() ? TAKEN.getAsBoolean() : TAKEN.getDefault(); }
+    public static int takenSuspicion() { return SPEC.isLoaded() ? TAKEN_SUSPICION.getAsInt() : TAKEN_SUSPICION.getDefault(); }
+    public static double takenAgain() { return SPEC.isLoaded() ? TAKEN_AGAIN.getAsDouble() : TAKEN_AGAIN.getDefault(); }
     public static boolean landings() { return SPEC.isLoaded() ? LANDINGS.getAsBoolean() : LANDINGS.getDefault(); }
     public static int landingInterval() { return SPEC.isLoaded() ? LANDING_INTERVAL.getAsInt() : LANDING_INTERVAL.getDefault(); }
     public static double landingChance() { return SPEC.isLoaded() ? LANDING_CHANCE.getAsDouble() : LANDING_CHANCE.getDefault(); }

@@ -70,6 +70,28 @@ public final class ModGameTests {
         test("infinity_loads_for_free", 20, GunEnchantmentTests::infinityLoadsForFree);
         test("blacksmith_sells_a_gun_book", 20, GunEnchantmentTests::blacksmithSellsAGunBook);
         test("lasso_leashes_cow", 80, FrontierTests::lassoLeashesCow);
+        // The Prospector's Journal (48)
+        test("journal_road_matches_the_codex", 20, JournalTests::roadMatchesTheCodex);
+        test("journal_threads_open_when_met", 20, JournalTests::threadsOpenWhenMet);
+        test("journal_survey_list_and_heading", 20, JournalTests::surveyListAndHeading);
+        test("journal_pin_and_hand_out", 20, JournalTests::pinAndHandOut);
+        test("journal_kept_on_death", 20, JournalTests::keptOnDeath);
+        test("journal_creature_on_first_sight", 20, JournalTests::creatureOnFirstSight);
+        test("journal_strange_doings_in_range", 20, JournalTests::strangeDoingsInRange);
+        test("journal_people_by_fact", 20, JournalTests::peopleByFact);
+        test("journal_text_covers_what_is_seen", 20, JournalTests::textCoversWhatIsSeen);
+        test("journal_town_pages", 20, JournalTests::townPages);
+        // A stake in town (47)
+        test("standing_by_deed", 20, StakeTests::standingByDeed);
+        test("badge_offered_and_taken_back", 20, StakeTests::badgeOfferedAndTakenBack);
+        test("rounds_walked_and_paid", 20, StakeTests::roundsWalkedAndPaid);
+        test("drifter_brought_in_alive", 20, StakeTests::drifterBroughtInAlive);
+        test("dead_drifter_pays_nothing", 20, StakeTests::deadDrifterPaysNothing);
+        test("warrant_served", 20, StakeTests::warrantServed);
+        test("old_place_stands_and_is_taken", 40, StakeTests::oldPlaceStandsAndIsTaken);
+        test("herd_driven_and_paid", 20, StakeTests::herdDrivenAndPaid);
+        test("old_place_data", 20, StakeTests::oldPlaceData);
+        test("lasso_winds_up_then_throws", 20, FrontierTests::lassoWindsUpThenThrows);
         test("cowboy_set_bonus_speeds_horse", 20, FrontierTests::cowboySetBonusSpeedsHorse);
         test("horse_gear_fit_and_strip", 20, FrontierTests::horseGearFitAndStrip);
         test("outlaw_spawns_armed", 20, FrontierTests::outlawSpawnsArmed);
@@ -155,6 +177,22 @@ public final class ModGameTests {
         test("sound_events_registered", 20, MusicTests::soundEventsRegistered);
         test("piano_controls", 20, MusicTests::pianoControls);
         test("piano_repertoire_resolves", 20, MusicTests::pianoRepertoireResolves);
+        test("every_sound_event_is_defined", 20, MusicTests::everySoundEventIsDefined);
+        test("hollow_biomes_play_the_hollow_score", 20, MusicTests::hollowBiomesPlayTheHollowScore);
+        test("hollow_biomes_have_beds", 20, MusicTests::hollowBiomesHaveBeds);
+        test("far_calls_come_from_what_lives_there", 20, MusicTests::farCallsComeFromWhatLivesThere);
+        test("depth_darkens_the_sea_and_works_the_hull", 20, MusicTests::depthDarkensTheSeaAndWorksTheHull);
+        test("stings_ride_on_real_advancements", 20, MusicTests::stingsRideOnRealAdvancements);
+        test("boss_bars_ask_for_their_themes", 20, MusicTests::bossBarsAskForTheirThemes);
+        // 46: how things feel
+        test("kick_goes_by_the_load", 20, FeelTests::kickGoesByTheLoad);
+        test("feel_leaves_the_guns_alone", 20, FeelTests::feelLeavesTheGunsAlone);
+        test("a_ball_knows_what_it_hit", 20, FeelTests::aBallKnowsWhatItHit);
+        test("a_near_miss_is_near", 20, FeelTests::aNearMissIsNear);
+        test("a_gunfight_leaves_a_haze", 20, FeelTests::aGunfightLeavesAHaze);
+        test("dust_goes_by_the_ground", 20, FeelTests::dustGoesByTheGround);
+        test("wind_goes_by_speed_and_height", 20, FeelTests::windGoesBySpeedAndHeight);
+        test("a_shake_falls_with_distance", 20, FeelTests::aShakeFallsWithDistance);
         // The steam bridge: handcar, depot standpipe, railroad engineer
         test("handcar_burns_steam_and_moves", 40, RailTests::handcarBurnsSteamAndMoves);
         test("handcar_fills_at_standpipe", 200, RailTests::handcarFillsAtStandpipe);
@@ -534,6 +572,29 @@ public final class ModGameTests {
     private static void test(String name, int maxTicks, Consumer<GameTestHelper> function, String structure) {
         FUNCTIONS.register(name, () -> function);
         TESTS.add(new Entry(ResourceKey.create(Registries.TEST_FUNCTION, HollowFrontier.id(name)), maxTicks, structure));
+    }
+
+    // Taken (50). Registered last on purpose: tests stand in the order they're listed, and a new one in the middle moves
+    // every later test to another spot, where two of them (herd_driven_and_paid, posse_rides_out) turned out to depend on
+    // nothing having been left overhead by whoever stood there before.
+    static {
+        test("taken_kept_by_the_rule", 40, TakenTests::keptByTheRule);
+        test("taken_kit_whole_after_each_way_out", 60, TakenTests::kitWholeAfterEachWayOut);
+        test("taken_two_on_one_ship", 40, TakenTests::twoOnOneShip);
+        test("taken_what_the_crew_make_out", 40, TakenTests::whatTheCrewMakeOut);
+        test("taken_alarm_and_the_fall", 80, TakenTests::alarmAndTheFall);
+        test("taken_the_hull_holds", 40, TakenTests::theHullHolds);
+        test("taken_cells_bring_it_down", 160, TakenTests::cellsBringItDown);
+        test("taken_nobody_left_behind", 200, TakenTests::nobodyLeftBehind);
+        test("taken_crash_site_raised", 40, TakenTests::crashSiteRaised);
+        // High noon (51). After Taken, for the same reason
+        test("duel_called_out_by_the_rule", 20, DuelTests::calledOutByTheRule);
+        test("duel_asked_and_answered", 20, DuelTests::askedAndAnswered);
+        test("duel_gun_free_and_lent_gun_back", 40, DuelTests::gunFreeAndLentGunBack);
+        test("duel_flinch_costs_time", 20, DuelTests::flinchCostsTime);
+        test("duel_won_in_the_street", 40, DuelTests::wonInTheStreet);
+        test("duel_lost_and_left_standing", 20, DuelTests::lostAndLeftStanding);
+        test("duel_lethal_by_switch", 100, DuelTests::lethalBySwitch);
     }
 
     @SubscribeEvent

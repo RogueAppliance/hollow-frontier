@@ -61,7 +61,7 @@ public final class TownLandmarks {
 
     static List<Blueprint> all() {
         return List.of(courthouse(), church(), grandHotel(), grandSaloon(), depot(), windpump(), corral(), bootHill(), bootHillB(), bootHillC(), bootHillStrange(),
-                TownLots.inLot(garden()), townLimits(), wheatField(), ranch());
+                TownLots.inLot(garden()), townLimits(), wheatField(), ranch(), OldPlaceBlueprint.oldPlace());
     }
 
     // ---------------------------------------------------------------- on the square

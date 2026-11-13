@@ -30,6 +30,8 @@ public final class ModTags {
     public static final class Blocks {
         /** What the starsteel paxel mines: anything a pickaxe, an axe or a shovel does. */
         public static final TagKey<Block> MINEABLE_WITH_PAXEL = TagKey.create(Registries.BLOCK, com.hollowfrontier.HollowFrontier.id("mineable/paxel"));
+        /** The only things aboard a Gray ship that someone taken can break (50): the vents' grilles and the rig. */
+        public static final TagKey<Block> TAKEN_BREAKABLE = TagKey.create(Registries.BLOCK, com.hollowfrontier.HollowFrontier.id("taken_breakable"));
     }
 
     public static final class Items {

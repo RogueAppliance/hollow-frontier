@@ -221,6 +221,11 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
             serverPlayer.sendSystemMessage(Component.translatable("message.hollowfrontier.survey.postmaster"));
             return InteractionResult.SUCCESS_SERVER;
         }
+        // 48b: the Gazette's editor pays, once, for a journal with ten strange doings in it
+        if (isAlive() && getType() == ModEntities.TOWNSFOLK.get() && getFolk() == Folk.EDITOR && player instanceof ServerPlayer serverPlayer
+                && com.hollowfrontier.content.journal.JournalSeen.sellTally(serverPlayer)) {
+            return InteractionResult.SUCCESS_SERVER;
+        }
         // 35b: in December a postmaster (or, with no post office, the storekeeper) has this year's parcel for you
         if (isAlive() && getType() == ModEntities.TOWNSFOLK.get() && level() instanceof ServerLevel serverLevel
                 && player instanceof ServerPlayer serverPlayer
@@ -240,6 +245,8 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
         if (isAlive() && !isTrading() && !isBaby()) {
             if (level() instanceof ServerLevel serverLevel && !getOffers().isEmpty()) {
                 hardTimes(serverLevel);
+                com.hollowfrontier.content.frontier.stake.StakeEvents.offerDeed(serverLevel, this, player); // 47b: the deed, for a neighbour without a place
+                knownHere(serverLevel, player);
                 if (player instanceof ServerPlayer serverPlayer) {
                     Chatter.talk(this, serverPlayer);
                 }
@@ -256,6 +263,17 @@ public class Townsfolk extends AbstractVillager implements GeoEntity {
         boolean robbed = TownRaids.isRobbed(level, blockPosition());
         for (MerchantOffer offer : getOffers()) {
             offer.setSpecialPriceDiff(robbed ? 1 : 0);
+        }
+    }
+
+    // 47a: a neighbour gets a coin off anything dear, a pillar of the town a coin more off what's dearer still
+    private void knownHere(ServerLevel level, Player player) {
+        var rank = com.hollowfrontier.content.frontier.town.Towns.keyAt(level, blockPosition())
+                .map(town -> com.hollowfrontier.content.frontier.stake.Standing.rank(player, town)).orElse(com.hollowfrontier.content.frontier.stake.Standing.Rank.STRANGER);
+        for (MerchantOffer offer : getOffers()) {
+            int off = (rank.atLeast(com.hollowfrontier.content.frontier.stake.Standing.Rank.NEIGHBOUR) && offer.getBaseCostA().getCount() >= 3 ? 1 : 0)
+                    + (rank.atLeast(com.hollowfrontier.content.frontier.stake.Standing.Rank.PILLAR) && offer.getBaseCostA().getCount() >= 6 ? 1 : 0);
+            offer.setSpecialPriceDiff(offer.getSpecialPriceDiff() - off);
         }
     }
 

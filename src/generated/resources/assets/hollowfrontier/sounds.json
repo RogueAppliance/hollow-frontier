@@ -1,4 +1,13 @@
 {
+  "ambient.aboard.loop": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:ambient/aboard/loop",
+        "stream": true,
+        "volume": 0.5
+      }
+    ]
+  },
   "ambient.concavian_highlands.additions": {
     "sounds": [
       {
@@ -21,6 +30,15 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.concavian_highlands.additions"
+  },
+  "ambient.concavian_highlands.loop": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:ambient/concavian_highlands/loop",
+        "stream": true,
+        "volume": 0.56
+      }
+    ]
   },
   "ambient.crystal_steppes.additions": {
     "sounds": [
@@ -45,6 +63,15 @@
     ],
     "subtitle": "subtitles.hollowfrontier.crystal_steppes.additions"
   },
+  "ambient.crystal_steppes.loop": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:ambient/crystal_steppes/loop",
+        "stream": true,
+        "volume": 0.56
+      }
+    ]
+  },
   "ambient.ember_badlands.additions": {
     "sounds": [
       {
@@ -67,6 +94,32 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.ember_badlands.additions"
+  },
+  "ambient.ember_badlands.loop": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:ambient/ember_badlands/loop",
+        "stream": true,
+        "volume": 0.56
+      }
+    ]
+  },
+  "ambient.hollow_earth.crust_rumble": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.generic.explode",
+        "pitch": 0.5,
+        "volume": 0.28
+      },
+      {
+        "type": "event",
+        "name": "block.deepslate.break",
+        "pitch": 0.5,
+        "volume": 0.64
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.hollow_earth.crust_rumble"
   },
   "ambient.hollow_earth.reveal": {
     "sounds": [
@@ -105,6 +158,15 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.primordial_jungle.additions"
+  },
+  "ambient.primordial_jungle.loop": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:ambient/primordial_jungle/loop",
+        "stream": true,
+        "volume": 0.56
+      }
+    ]
   },
   "ambient.saloon.glasses": {
     "sounds": [
@@ -145,6 +207,24 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.still_sea.additions"
+  },
+  "ambient.still_sea.deep": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:ambient/still_sea/deep",
+        "stream": true,
+        "volume": 0.56
+      }
+    ]
+  },
+  "ambient.still_sea.loop": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:ambient/still_sea/loop",
+        "stream": true,
+        "volume": 0.56
+      }
+    ]
   },
   "ambient.town.bell": {
     "sounds": [
@@ -277,6 +357,12 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.ash_vent.hiss"
+  },
+  "block.gray_field.drop": {
+    "sounds": [
+      "hollowfrontier:block/gray_field/drop"
+    ],
+    "subtitle": "subtitles.hollowfrontier.gray_field.drop"
   },
   "block.polar_gateway.charge": {
     "sounds": [
@@ -435,6 +521,29 @@
     ],
     "subtitle": "subtitles.hollowfrontier.saloon_piano.play"
   },
+  "entity.airship.creak": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.wooden_door.open",
+        "pitch": 0.5,
+        "volume": 0.7
+      },
+      {
+        "type": "event",
+        "name": "block.wooden_trapdoor.close",
+        "pitch": 0.5,
+        "volume": 0.6
+      },
+      {
+        "type": "event",
+        "name": "entity.boat.paddle_land",
+        "pitch": 0.5,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.airship.creak"
+  },
   "entity.airship.engine": {
     "sounds": [
       {
@@ -484,6 +593,14 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.airship.vent"
+  },
+  "entity.airship.wind": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.elytra.flying"
+      }
+    ]
   },
   "entity.airship_sighting.hum": {
     "sounds": [
@@ -959,6 +1076,23 @@
     ],
     "subtitle": "subtitles.hollowfrontier.great_sea_cow.hurt"
   },
+  "entity.horse.horseshoe_ring": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.anvil.step",
+        "pitch": 1.8,
+        "volume": 0.5
+      },
+      {
+        "type": "event",
+        "name": "block.netherite_block.step",
+        "pitch": 1.6,
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.horse.horseshoe_ring"
+  },
   "entity.lampjelly.death": {
     "sounds": [
       {
@@ -991,6 +1125,27 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.lampjelly.sting"
+  },
+  "entity.megafauna.footfall": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.ravager.step",
+        "pitch": 0.6
+      },
+      {
+        "type": "event",
+        "name": "entity.iron_golem.step",
+        "pitch": 0.5,
+        "volume": 0.8
+      },
+      {
+        "type": "event",
+        "name": "entity.warden.step",
+        "pitch": 0.7
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.megafauna.footfall"
   },
   "entity.megatherium.ambient": {
     "sounds": [
@@ -1203,6 +1358,23 @@
     ],
     "subtitle": "subtitles.hollowfrontier.steam_handcar.chuff"
   },
+  "entity.steam_handcar.clack": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.iron_trapdoor.close",
+        "pitch": 1.6,
+        "volume": 0.3
+      },
+      {
+        "type": "event",
+        "name": "block.metal.step",
+        "pitch": 0.8,
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.steam_handcar.clack"
+  },
   "entity.steam_handcar.whistle": {
     "sounds": [
       {
@@ -1213,6 +1385,37 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.steam_handcar.whistle"
+  },
+  "entity.steam_submersible.creak": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.iron_door.open",
+        "pitch": 0.5,
+        "volume": 0.56
+      },
+      {
+        "type": "event",
+        "name": "block.copper_door.open",
+        "pitch": 0.5,
+        "volume": 0.56
+      },
+      {
+        "type": "event",
+        "name": "block.iron_trapdoor.close",
+        "pitch": 0.5,
+        "volume": 0.48
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.steam_submersible.creak"
+  },
+  "entity.steam_submersible.thrum": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:entity/steam_submersible/thrum",
+        "volume": 0.8
+      }
+    ]
   },
   "entity.terror_bird.ambient": {
     "sounds": [
@@ -1326,6 +1529,30 @@
     ],
     "subtitle": "subtitles.hollowfrontier.woolly_mammoth.trumpet"
   },
+  "event.aboard.alarm": {
+    "sounds": [
+      "hollowfrontier:event/aboard/alarm"
+    ],
+    "subtitle": "subtitles.hollowfrontier.aboard.alarm"
+  },
+  "event.aboard.groan": {
+    "sounds": [
+      "hollowfrontier:event/aboard/groan"
+    ],
+    "subtitle": "subtitles.hollowfrontier.aboard.groan"
+  },
+  "event.aboard.pod_crash": {
+    "sounds": [
+      "hollowfrontier:event/aboard/pod_crash"
+    ],
+    "subtitle": "subtitles.hollowfrontier.aboard.pod_crash"
+  },
+  "event.aboard.pod_launch": {
+    "sounds": [
+      "hollowfrontier:event/aboard/pod_launch"
+    ],
+    "subtitle": "subtitles.hollowfrontier.aboard.pod_launch"
+  },
   "event.raid.alarm": {
     "sounds": [
       {
@@ -1437,6 +1664,51 @@
     ],
     "subtitle": "subtitles.hollowfrontier.raid.won"
   },
+  "event.sting.cut_loose": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:event/sting/cut_loose",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "event.sting.drowned_quarter": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:event/sting/drowned_quarter",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "event.sting.still_running": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:event/sting/still_running",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "event.sting.sun_temple": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:event/sting/sun_temple",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "event.sting.well_met": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:event/sting/well_met",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
   "event.wanted.raised": {
     "sounds": [
       {
@@ -1465,6 +1737,23 @@
     ],
     "subtitle": "subtitles.hollowfrontier.coin.clink"
   },
+  "item.dynamite.blast": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.lightning_bolt.thunder",
+        "pitch": 1.5,
+        "volume": 0.25
+      },
+      {
+        "type": "event",
+        "name": "entity.generic.explode",
+        "pitch": 0.6,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.dynamite.blast"
+  },
   "item.dynamite.fuse": {
     "sounds": [
       {
@@ -1475,6 +1764,85 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.dynamite.fuse"
+  },
+  "item.gun.ricochet": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.trident.return",
+        "pitch": 1.9,
+        "volume": 0.4
+      },
+      {
+        "type": "event",
+        "name": "block.anvil.land",
+        "pitch": 2.0,
+        "volume": 0.12
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.gun.ricochet"
+  },
+  "item.gun.thud": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.player.attack.knockback",
+        "pitch": 0.6,
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.gun.thud"
+  },
+  "item.gun.whiz": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.arrow.shoot",
+        "pitch": 1.9,
+        "volume": 0.8
+      },
+      {
+        "type": "event",
+        "name": "item.trident.throw",
+        "pitch": 2.0,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.gun.whiz"
+  },
+  "item.lasso.line_creak": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.crossbow.loading_middle",
+        "pitch": 0.6,
+        "volume": 0.5
+      },
+      {
+        "type": "event",
+        "name": "block.wooden_trapdoor.close",
+        "pitch": 0.5,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.lasso.line_creak"
+  },
+  "item.lasso.whirl": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.player.attack.sweep",
+        "pitch": 0.7,
+        "volume": 0.4
+      },
+      {
+        "type": "event",
+        "name": "entity.player.attack.sweep",
+        "pitch": 0.85,
+        "volume": 0.4
+      }
+    ],
+    "subtitle": "subtitles.hollowfrontier.lasso.whirl"
   },
   "item.oliphant.blow": {
     "sounds": [
@@ -1523,5 +1891,77 @@
       }
     ],
     "subtitle": "subtitles.hollowfrontier.signal_locator.ping"
+  },
+  "music.aboard": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:music/aboard",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "music.boss.mothership": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:music/boss/mothership",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "music.boss.sun_archon": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:music/boss/sun_archon",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "music.hollow.concavian_highlands": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:music/hollow/concavian_highlands",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "music.hollow.crystal_steppes": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:music/hollow/crystal_steppes",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "music.hollow.ember_badlands": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:music/hollow/ember_badlands",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "music.hollow.primordial_jungle": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:music/hollow/primordial_jungle",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "music.hollow.still_sea": {
+    "sounds": [
+      {
+        "name": "hollowfrontier:music/hollow/still_sea",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
   }
 }

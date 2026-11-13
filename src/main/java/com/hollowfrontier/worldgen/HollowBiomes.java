@@ -172,8 +172,8 @@ public final class HollowBiomes {
                 .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 360.0F)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x1E5A46))
                 .modifyAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, ListModifier.append(), AmbientParticle.of(ParticleTypes.SPORE_BLOSSOM_AIR, 0.006F))
-                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.JUNGLE_AMBIENT, 0.006))
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_JUNGLE))
+                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.JUNGLE_LOOP, ModSounds.JUNGLE_AMBIENT, 0.006))
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(ModSounds.MUSIC_JUNGLE))
                 .mobSpawnSettings(mobs.build())
                 .generationSettings(gen.build())
                 .build();
@@ -192,8 +192,8 @@ public final class HollowBiomes {
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xDCD49A))
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x2D6E7E))
                 .modifyAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, ListModifier.append(), AmbientParticle.of(ParticleTypes.GLOW, 0.003F))
-                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.STEPPES_AMBIENT, 0.005))
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_MEADOW))
+                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.STEPPES_LOOP, ModSounds.STEPPES_AMBIENT, 0.005))
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(ModSounds.MUSIC_STEPPES))
                 .mobSpawnSettings(mobs.build())
                 .generationSettings(gen.build())
                 .build();
@@ -212,8 +212,8 @@ public final class HollowBiomes {
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x5A3E2A))
                 .modifyAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, ListModifier.append(), List.of(
                         new AmbientParticle(ParticleTypes.WHITE_ASH, 0.02F), new AmbientParticle(ParticleTypes.CRIMSON_SPORE, 0.006F)))
-                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.BADLANDS_AMBIENT, 0.008))
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_BADLANDS))
+                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.BADLANDS_LOOP, ModSounds.BADLANDS_AMBIENT, 0.008))
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(ModSounds.MUSIC_BADLANDS))
                 .mobSpawnSettings(mobs.build())
                 .generationSettings(gen.build())
                 .build();
@@ -232,8 +232,8 @@ public final class HollowBiomes {
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xD0DCD4))
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x3A7A8E))
                 .modifyAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, ListModifier.append(), AmbientParticle.of(ParticleTypes.SNOWFLAKE, 0.003F))
-                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.HIGHLANDS_AMBIENT, 0.004))
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_GROVE))
+                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.HIGHLANDS_LOOP, ModSounds.HIGHLANDS_AMBIENT, 0.004))
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(ModSounds.MUSIC_HIGHLANDS))
                 .mobSpawnSettings(mobs.build())
                 .generationSettings(gen.build())
                 .build();
@@ -254,19 +254,20 @@ public final class HollowBiomes {
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xCFE0CC))
                 .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 420.0F)
                 .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x12404A))
-                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.SEA_AMBIENT, 0.004))
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_LUSH_CAVES))
+                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, ambient(ModSounds.SEA_LOOP, ModSounds.SEA_AMBIENT, 0.004))
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(ModSounds.MUSIC_SEA))
                 .mobSpawnSettings(mobs.build())
                 .generationSettings(gen.build())
                 .build();
     }
 
     /**
-     * A biome's sounds: its own one-shots now and then ({@code chance} a tick, 9b1), over the cave mood the dimension has
-     * (setting the attribute replaces the dimension's, so the mood is set again here).
+     * A biome's sounds: its bed, a loop that is always there (45b; the game cross-fades it at a border), its own one-shots
+     * now and then ({@code chance} a tick, 9b1), and the cave mood the dimension has (setting the attribute replaces the
+     * dimension's, so the mood is set again here).
      */
-    private static AmbientSounds ambient(Holder<SoundEvent> additions, double chance) {
-        return new AmbientSounds(Optional.empty(), Optional.of(AmbientMoodSettings.LEGACY_CAVE_SETTINGS),
+    private static AmbientSounds ambient(Holder<SoundEvent> loop, Holder<SoundEvent> additions, double chance) {
+        return new AmbientSounds(Optional.of(loop), Optional.of(AmbientMoodSettings.LEGACY_CAVE_SETTINGS),
                 List.of(new AmbientAdditionsSettings(additions, chance)));
     }
 

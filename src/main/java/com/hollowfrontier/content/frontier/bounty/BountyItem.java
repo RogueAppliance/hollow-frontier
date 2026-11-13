@@ -34,6 +34,9 @@ public class BountyItem extends Item {
                 builder.accept(Component.translatable("tooltip.hollowfrontier.bounty.captive").withStyle(ChatFormatting.DARK_AQUA));
             } else if (bounty.spawned()) {
                 builder.accept(Component.translatable("tooltip.hollowfrontier.bounty.spotted").withStyle(ChatFormatting.RED));
+            } else if (com.hollowfrontier.content.frontier.duel.Duels.callsOut(bounty)) {
+                // 51: this one would sooner settle it in the street
+                builder.accept(Component.translatable(com.hollowfrontier.content.frontier.duel.DuelText.POSTER_LINE).withStyle(ChatFormatting.GOLD));
             }
         }
         builder.accept(Component.translatable("tooltip.hollowfrontier.bounty.reward", bounty.reward()).withStyle(ChatFormatting.YELLOW));

@@ -77,6 +77,11 @@ public record Wanted(int heat, long lastChange, long nextPosse) {
         if (player.isCreative() || player.isSpectator()) {
             return;
         }
+        // 50: there is no law aboard a Gray ship. A stray blow in a fight up there (the held are the frontier's own people)
+        // can't put a price on anybody's head
+        if (amount > 0 && com.hollowfrontier.content.ufo.taken.Taken.shipOf(player) != null) {
+            return;
+        }
         Wanted old = of(player);
         int heat = Mth.clamp(old.heat + amount, 0, MAX_HEAT);
         long now = player.level().getGameTime();
@@ -97,6 +102,9 @@ public record Wanted(int heat, long lastChange, long nextPosse) {
                     ? Component.translatable("message.hollowfrontier.wanted.clear").withStyle(ChatFormatting.GREEN)
                     : Component.translatable("message.hollowfrontier.wanted." + stars).withStyle(ChatFormatting.RED);
             player.sendOverlayMessage(message);
+            if (stars >= 2 && oldStars < 2) {
+                com.hollowfrontier.content.frontier.stake.Deputies.disgrace(player); // 47a: the star comes off
+            }
             if (stars > oldStars) {
                 player.level().playSound(null, player.blockPosition(), ModSounds.WANTED_RAISED.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 ModCriteria.fire(player, ModCriteria.WANTED_LEVEL, stars);

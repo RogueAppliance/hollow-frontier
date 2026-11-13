@@ -1,6 +1,7 @@
 package com.hollowfrontier.content.frontier.gun;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -56,8 +57,10 @@ public final class GunMechanics {
         Vec3 start = shooter.getEyePosition();
         Vec3 look = shooter.getViewVector(1.0F);
         RandomSource random = shooter.getRandom();
+        com.hollowfrontier.content.frontier.stake.Herds.spook(level, start, com.hollowfrontier.content.frontier.stake.Herds.SPOOK_RANGE); // 47c: a shot stampedes a herd
         Map<Entity, Float> damageByTarget = new HashMap<>();
         Map<Entity, Vec3> headshots = new HashMap<>();
+        java.util.List<Vec3> paths = new java.util.ArrayList<>(); // where each pellet stopped (46a: what flew past whom)
         // Liquor spoils your aim: each Tipsy level widens the cone, even for a rifle.
         float spreadDegrees = stats.spreadDegrees() + TipsyEffect.extraSpread(shooter);
 
@@ -84,14 +87,30 @@ public final class GunMechanics {
                 }
                 damageByTarget.merge(entityHit.getEntity(), stats.damage() * headshot, Float::sum);
             } else if (blockHit.getType() != HitResult.Type.MISS) {
-                level.sendParticles(ParticleTypes.SMOKE, end.x, end.y, end.z, 3, 0.05, 0.05, 0.05, 0.01);
+                GunFeel.strike(level, blockHit, i, random); // 46a: chips of what it hit, and that block's own sound
             }
+            GunFeel.splash(level, shooter, start, end, i);
+            paths.add(end);
             tracer(level, start.add(dir.scale(0.8)), end);
         }
 
+        // 51: in the street the first hit is the duel, whatever it would have done to him
+        com.hollowfrontier.content.frontier.duel.Duels.shot(shooter);
+        for (Entity target : List.copyOf(damageByTarget.keySet())) {
+            com.hollowfrontier.content.frontier.duel.Duels.hit(level, shooter, target, headshots.containsKey(target));
+        }
         DamageSource source = new DamageSource(ModDamageTypes.holder(level, ModDamageTypes.BULLET), shooter, shooter);
         damageByTarget.forEach((target, damage) -> target.hurtServer(level, source, damage));
         headshots.forEach((target, at) -> headshotFeedback(level, shooter, at));
+        // 46a: a thud for a hit that wasn't a headshot, a crack for anyone a ball went past, and powder for the haze
+        if (shooter instanceof ServerPlayer player && !damageByTarget.isEmpty() && headshots.isEmpty()) {
+            GunFeel.thud(player);
+        }
+        java.util.Set<ServerPlayer> told = new java.util.HashSet<>();
+        for (Vec3 end : paths) {
+            GunFeel.whiz(level, shooter, start, end, damageByTarget.keySet(), told);
+        }
+        GunFeel.powder(level, start.add(look.scale(0.9)));
 
         // Black powder: a flash and a white cloud drifting out of the muzzle, sent to each player on their own. Everyone else
         // sees it just ahead of the shooter's face, where the muzzle is from outside. The shooter gets a thinner one where

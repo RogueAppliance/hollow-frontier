@@ -1,5 +1,101 @@
 # Changelog
 
+## 1.4.0 — High noon, Taken, a stake in town, and the Hollow heard (2026-11-12)
+
+Four things at once: a duel in the street at noon, waking aboard the Grays' ship, a town that knows you (with a journal to keep it all in), and a Hollow you can hear. Existing worlds get all of it.
+
+### High noon
+
+An Outlaw Boss used to be a fight at the gang's camp and nothing else. Now and then one sends word instead: the street, at noon. Existing worlds get all of it.
+
+- **Called out:** about one Wanted Poster in three says its boss would sooner settle it in the street. Be within 200 blocks of that town near noon and you're asked, over the hotbar: Y to go out, N to stay put. No costs nothing; the boss asks once more the next day, then it's the camp as usual.
+- **The count:** yes puts you on a mark in the street with the boss twelve paces off. You can't walk, your eyes are held down from the horizon and your trigger is locked. The bell tolls three times, then there's a wait nobody can time, then the word.
+- **The draw:** the gun is yours again and it shoots as it always does. The first hit decides it, whatever the boss's health. Pull the trigger before the word and nothing fires, and your gun stays locked half a second longer for each pull.
+- **Your own gun, for nothing:** your revolver or ray pistol is fetched to your hand and fires through the duel without using caps, rounds or charge; afterwards it's back in its slot with what was loaded before. With no handgun on you, the law lends a plain revolver and has it back however it ends.
+- **As fast as the price:** a boss with a 3 gold bounty fires 0.9 seconds after the word, one with 7 or more in 0.45. The boss hits five times in six. If both miss, both keep shooting.
+- **Win,** and the boss is dead in the street, the badge pays half as much again, and the town thinks better of you.
+- **Lose,** and you're left at one heart with a tenth of your coin gone (never more than the bounty), the town thinks a little less of you, and the boss is back at camp worth half as much again. With `lethalDuels` on, the shot kills.
+- **A duel is between two:** nobody else can hurt either of you until it's over, you can't hurt anybody else, and the town gets out of the line of fire and watches.
+- **Afterwards** the town talks about it and the Gazette prints it, either way. The journal notes it under outlaws and on the town's page.
+- **Three advancements:** High Noon, Nobody Faster and One Was Enough.
+- **Settings:** in `hollowfrontier-duel-server.toml`, `duels` turns it off, `callOutChance` sets how many posters call out (0.33), `duelReach` how near town you must be (200), and `lethalDuels` whether losing kills (off).
+- **Keys:** two new ones, Y and N, used only while you're being asked. Both can be rebound.
+- Never asked on Peaceful, where there are no outlaws to ask.
+
+### Taken
+
+The Grays' beam used to cost you an hour and a walk home. Now, once they have reason to keep you, you wake up aboard. Existing worlds get all of it.
+
+- **Taken:** the first time a saucer's beam draws you up after the men in black have started minding you, you aren't set down. You wake in a pen on the Grays' ship with nothing on you. After that, about one abduction in four keeps you again. Sneaking or stepping out of the beam still gets you off, and nobody is kept once the leash is broken.
+- **Nothing is ever lost.** Everything you were carrying is held for you and is waiting in the ship's hold. However you leave the ship, you have all of it when you're back on the ground.
+- **The ship:** pens, a hold, a surgery, a pod bay and an engine room off a ring corridor, in a place of its own. Other people from the frontier are held there, and one is already on the table.
+- **You wake fed and whole,** and a bar across the top shows the one coming for you: it fills as it nears your pen, then runs down while its back is turned. That's when to go.
+- **The crew** see you at twelve blocks walking and four sneaking, and not at all in the vents (the grilles come off in your hands; nothing else aboard breaks). Keep low and any of them within twenty blocks shows through the walls. There are crates to stand behind round the ring and by the pens' door. Stay in a Gray's sights for seven seconds and the alarm goes up: the doors shut, and open only while one of the crew walks through.
+- **The people you free pitch in:** they follow you, each hands over bread they'd kept back, and when a Gray comes after anybody they go for it with their hands.
+- **The Shock Rod,** off the surgeons' tray: a blow from it stuns a Gray for three seconds, and anything carrying their implant too (outlaws, men in dusters, tagged beasts). It takes a charge a blow from the Phlogiston Cells you carry, and it's yours to keep. Used on the rig, it stops the procedure for good.
+- **In the hold** there's something they've been at with their implants. Let it out and it goes for the crew, not for you.
+- **The ways out:** an escape pod sets you down a few hundred blocks from where you were taken, with anyone you freed who reached it. Or pull the three cells out of the engine first: you get ninety seconds, the lights go out from the middle, the deck rolls, the crew run for it, and a crash site is waiting a short walk from where your pod lands.
+- **No law aboard:** nothing you do on the ship earns a wanted star.
+- **Dying aboard isn't dying.** You wake on the ground as from missing time, with all your things. Leaving the game aboard does the same when you come back.
+- **Afterwards** the town has heard, and has its own account of where you were. So do the men in dusters, and the Gazette.
+- **The journal** notes it: a line under strange doings, and two more paragraphs on the Grays.
+- **Five advancements:** Taken, Checked Out Early, Nobody Left Behind, What Goes Up and Never There.
+- **Sound:** the ship has a hum, an alarm and a piece of music of its own, all made for it.
+- **Settings:** in `hollowfrontier-ufo-server.toml`, `taken` turns it off (every abduction is missing time again), `suspicion` sets how much the men in black must mind you first (30), and `again` the chance of being kept after the first time (0.25). `abductPlayers` off still turns off all of it.
+- **For ops:** `/hollowfrontier ufo taken` keeps you now; `/hollowfrontier ufo taken leave` sets you down.
+- **On servers:** two players caught in one beam wake on one ship. Curios slots are left alone.
+
+### A stake in town
+
+A town can now know you. Existing worlds get all of it; only the Old Place standing ready on a town's outskirts needs a town that's new.
+
+- **Standing:** every town keeps its own opinion of you: Stranger, Regular, Neighbour, Pillar of the Town. Bring a bounty to its board, help see off a raid on it, walk one of its people home, or work for its sheriff, and it rises. Shoot up the street and it falls. It's kept when you die, and one town's opinion is nothing to the next.
+- **What being known gets you:** a Neighbour pays a coin less for anything dear, and a Pillar a coin less again. A Regular has one small fine a year let go by the sheriff.
+- **The Deputy's Badge:** a town's sheriff swears in a Neighbour (in a town with no sheriff, ask any of its lawmen). With the star on you, bounties brought to that town's board pay a gold coin over, and its lawmen come when something goes for you there. Earn two wanted stars anywhere and the sheriff takes it back until your name is clear. One town's star at a time.
+- **The sheriff's jobs,** one a day for his deputy. After dark, walk the rounds and report. By day, bring in a drifter alive (shoot him down to half, throw a lasso on him, walk him back), or carry a warrant to the next town's sheriff.
+- **The Old Place:** a homestead standing empty at the edge of town, for sale. A two-storey house with a veranda and a balcony over it, a parlour with a hearth and a piano, a kitchen with the table still laid, two bedrooms upstairs; a red barn with a hay loft, a horse, a donkey and tack; a corral of cattle, a kitchen garden, a well and its windmill. Four chests of what was left behind. A Neighbour buys the Deed from the banker or the postmaster and uses it on the stake by the gate. Where a town has no Old Place standing (in a world made before this update, say), use the deed on level ground near town and the town raises one. The land round it is yours to build on.
+- **The Mailbox** at your gate gets the Gazette every morning. You can craft more of them.
+- **The Branding Iron:** heat it at any fire and put your brand on your cattle. The stake at your gate counts them. Rustlers have heard: they cut the fence and lead a cow off on a rope, so be quick, or keep your stock behind walls.
+- **Cattle drives:** sneak and use a wrangler. He'll have a herd held outside town for you, bound for the next town or a buyer down the trail, paid per head that gets there. Stay close to the herd and it walks on; fall behind and it stops; lead one on a rope and the rest follow. A gunshot stampedes them, so think before you answer the riders on your back trail. He also buys your own branded stock, and pays more the farther it's come.
+- **Seven advancements,** from Known Around Town to Pillar of the Town.
+- **The Prospector's Journal:** your own notebook (a book, leather and a feather; anyone starting out in a town has one). Use it, or press J while you carry it. It keeps the road as you've walked it: a page for each part you've met, what you've done, and the one next thing to do, with the Polar Survey's list and the way to the crater while the gateway is shut. Pin a page to the front. It also keeps what you've seen: a page for each of the mod's creatures once you've met it (more once you've hunted, tamed or bred one), the strange doings you were near with the day and the place (the Gazette's editor pays for a list of ten), what you've learned of the outlaws, the men in dusters, the Kindled and the Grays, and a page for every town you've walked into: when you first came, your standing, your star and the sheriff's job in hand, your place and stock, a herd you have out, what's in the bank, who's wanted on the board and when it was last raided. It says nothing about what you haven't seen. A line over the hotbar says when something's noted (`journalNotes` in the client settings turns that off).
+- **Settings:** `hollowfrontier-stake-server.toml` switches standing, deeds and drives, and sets the deed's price and the distances.
+- **On servers:** a claim isn't land protection. Only its stake and its mailbox are the owner's alone. Use your usual claim mod for the rest.
+
+### The Hollow, heard, and the frontier, felt
+
+Two updates in one, and neither adds an item, a mob or a block: the Hollow Earth gets a sound of its own, and the things you do most get some weight. Existing worlds get all of it.
+
+### The Hollow, heard
+
+- **A score for the Hollow Earth:** five original pieces, one for each biome, in place of the vanilla biome music that played there before. They grow from the swell you hear as you first fall out of the crust: the Primordial Jungle's is warm and close, the Crystal Steppes' glassy with bells, the Ember Badlands' low and dry, the Concavian Highlands' thin and high with one wordless voice, the Still Sea's slow and deep. They play on the Music slider with the game's usual gaps, and a saloon piano or a record in earshot still holds them.
+- **A bed under every biome:** each Hollow biome now has a quiet sound that is always there under its birds and chimes: insects and dripping water in the Primordial Jungle, a wide wind and the crystals' faint hum on the Crystal Steppes, a low rumble and a hiss of heat in the Ember Badlands, thin wind round old stone in the Concavian Highlands, and next to nothing on the Still Sea, where nothing blows. They cross-fade as you walk from one biome to the next, and sit on the Ambient slider.
+- **Things heard from far off:** now and then a creature that lives where you are calls from a long way away, in a direction you can turn to: a mammoth across the steppes, a terror bird in the badlands, something singing over deep water. Rarely, the crust rumbles overhead.
+- **Gray sites are quiet.** With Gray machines near, nothing calls and nothing rumbles.
+- **Under the Still Sea** the surface goes away and a deep, dark sound comes up, louder and lower the further down you go.
+- **Aboard the Steam Submersible** you hear its works, fuller under way, and the hull creaks: now and then just under the surface, often at depth.
+- **Boss themes:** the Sun Archon and the Mothership each have a theme of their own. It starts when the boss's bar comes up and fades out over a few seconds when the fight ends, however it ends. The Archon's is the Hollow's own music turned hard and bright, a choir over a pulse; the Mothership's is in a key as far from the Hollow's as a key can be, cold bells over a machine's beat.
+- **Five moments:** a few seconds of music the first time you meet one of the Kindled, enter the Sun Temple, find a Gray station still running, reach the Drowned Quarter, and break the leash. Each plays once for each player in a world, and only that player hears it.
+- **A switch:** `hollowScore` in the new `hollowfrontier-client.toml` (on by default). Turn it off and the Hollow plays vanilla's biome music as it did before, with no boss themes, for players and packs with music of their own. The beds, the far-off calls and the five moments aren't music and stay; they're on the Ambient slider.
+- **For pack makers:** the pieces are the sound events `hollowfrontier:music.hollow.<biome>`, so a resource pack can replace any of them.
+
+### The frontier, felt
+
+Nothing here changes what anything does. Guns hit as hard and as true as they did, and horses, airships and beasts move as they did.
+
+- **Guns kick.** Firing throws your view up and a little to one side, and it settles back in a quarter of a second to exactly where it was, so your aim doesn't move. The Blunderbuss kicks most, the rifle next, the revolver least, and the phlogiston guns hardly at all.
+- **A ball knows what it hit.** Chips of the block it struck and that block's own sound, in place of the same puff of smoke everywhere. Stone, metal and glass throw a spark, and now and then the ball whines off. Water splashes. A ray leaves a scorch that glows for a moment.
+- **Hits and misses are heard.** A hit on a creature lands with a thud for the shooter. A ball that passes within two blocks of you, fired by anyone else, cracks past your ear, so being shot at sounds like it.
+- **Gunfights leave a haze.** Three or more black powder shots from one spot inside a few seconds leave thin white smoke hanging for several seconds.
+- **Horses raise dust.** Every horse, donkey and mule at a gallop kicks up the ground it's on: a cloud on sand, gravel and dry dirt, a little on grass, a puff on snow, none on stone or boards. Rain lays it. A shod horse rings on stone.
+- **Horseshoes show.** A shod horse, donkey or mule wears them: a band of the shoe's metal round each hoof, iron grey, brass or starsteel crimson, and the shoe itself under the foot.
+- **The lasso whirls.** Hold use and the loop whirls over your head on a line from your raised hand, swishing as it comes round; let go to throw. A plain click still throws at once, and the throw is the same however long you wind it. In the air it's a loop of rope spinning on a line back to your hand, where it used to be the item's flat picture. A lead or lasso with something pulling on the end of it creaks.
+- **The airship:** wind over the deck that rises with speed and with height, a creak from the envelope when you turn or climb hard, wisps of cloud past the deck at cloud height, and a deck that leans a little into a turn.
+- **The handcar** clacks over rail joints, quicker with speed, and throws sparks when it brakes.
+- **Big things are felt.** A Woolly Mammoth, Megatherium or Glyptodon walking near you lands each foot with a thud, dust and a small shake of the view, harder at a charge. Dynamite, a vault blown in a raid and the Mothership's death ray shake the view by how close you are. A Basilosaurus ramming your submersible jolts it. The Mothership coming in is a tremor before it's a sight.
+- **Two sliders:** `cameraKick` and `cameraShake` in `hollowfrontier-client.toml`, each from 0 to 1. At 0 that movement is gone entirely. If a moving view makes you unwell, set both to 0; nothing else changes.
+- **For pack makers:** every new sound is a sound event of the mod's built from vanilla sounds, so a resource pack can replace any of them, and no new particle types are added.
+
 ## 1.3.0 — The Still Sea and a frontier December (2026-11-10)
 
 Two updates in one: an inner sea for the Hollow Earth, and a frontier Christmas that comes and goes by the date.

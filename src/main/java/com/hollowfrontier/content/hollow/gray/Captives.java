@@ -294,6 +294,7 @@ public final class Captives {
         }
         level.playSound(null, pos, SoundEvents.VILLAGER_CELEBRATE, SoundSource.NEUTRAL, 1.0F, 1.0F);
         ModCriteria.fire(player, ModCriteria.LETTER_DELIVERED);
+        com.hollowfrontier.content.frontier.stake.Standing.add(player, town.get(), com.hollowfrontier.content.frontier.stake.Standing.LETTER); // 47a: one of theirs is coming home
         return true;
     }
 
@@ -321,9 +322,15 @@ public final class Captives {
             player.sendSystemMessage(Component.translatable("message.hollowfrontier.captive.turned_in", bounty.target(), bounty.reward()).withStyle(ChatFormatting.GOLD));
             level.playSound(null, pos, SoundEvents.PLAYER_LEVELUP, SoundSource.NEUTRAL, 0.8F, 1.2F);
             level.sendParticles(ParticleTypes.POOF, prisoner.getX(), prisoner.getY(0.5), prisoner.getZ(), 8, 0.3, 0.5, 0.3, 0.02);
+            // 47a: the town thinks the better of whoever brought him; a deputy's drifter is the sheriff's job done
+            boolean drifter = com.hollowfrontier.content.frontier.stake.SheriffJobs.quarryOf(prisoner).isPresent();
+            com.hollowfrontier.content.frontier.stake.Standing.atBoard(player, key, com.hollowfrontier.content.frontier.stake.Standing.CAPTIVE);
+            com.hollowfrontier.content.frontier.stake.SheriffJobs.broughtIn(player, prisoner);
             prisoner.discard();
             ModCriteria.fire(player, ModCriteria.BOUNTY_CLAIMED);
-            ModCriteria.fire(player, ModCriteria.BROUGHT_IN_ALIVE);
+            if (!drifter) {
+                ModCriteria.fire(player, ModCriteria.BROUGHT_IN_ALIVE);
+            }
         }
         return prisoners.size();
     }

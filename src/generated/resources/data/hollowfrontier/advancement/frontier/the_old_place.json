@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/known_around_town",
+  "criteria": {
+    "homesteader": {
+      "trigger": "hollowfrontier:homesteader"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.the_old_place.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:deed"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.the_old_place.title"
+    }
+  },
+  "requirements": [
+    [
+      "homesteader"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -1,6 +1,7 @@
 package com.hollowfrontier.datagen;
 
 import com.hollowfrontier.HollowFrontier;
+import com.hollowfrontier.content.frontier.duel.DuelText;
 import com.hollowfrontier.content.frontier.gazette.GazetteBackPage;
 import com.hollowfrontier.content.frontier.talk.ChatterLines;
 import com.hollowfrontier.content.ufo.FieldNotes;
@@ -31,6 +32,16 @@ public class ModLanguageProvider extends LanguageProvider {
                 add(exchange.key(i), exchange.texts().get(i));
             }
         });
+        // 47: a stake in town, each line from where it's said
+        com.hollowfrontier.content.frontier.stake.StakeText.all().forEach(this::add);
+        com.hollowfrontier.content.journal.JournalText.all().forEach(this::add);
+        addItem(ModItems.DEPUTY_BADGE, "Deputy's Badge");
+        addItem(ModItems.WARRANT, "Warrant");
+        addItem(ModItems.DEED, "Deed");
+        addItem(ModItems.BRANDING_IRON, "Branding Iron");
+        addItem(ModItems.PROSPECTORS_JOURNAL, "Prospector's Journal");
+        addBlock(ModBlocks.MAILBOX, "Mailbox");
+        addBlock(ModBlocks.CLAIM_STAKE, "Claim Stake");
         // 21a: the Gazette's back page, the Gray field notes and Boot Hill's epitaphs, each from its own table
         for (GazetteBackPage.Kind kind : GazetteBackPage.Kind.values()) {
             add(kind.titleKey(), kind.title);
@@ -318,6 +329,14 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.SALOON_PIANO, "Saloon Piano");
         add("message.hollowfrontier.piano.playing", "The piano strikes up a rag.");
         add("message.hollowfrontier.piano.stopped", "The piano lid closes.");
+        // 45a: the Hollow's score, as the "now playing" toast names it
+        add("hollowfrontier.music.hollow.primordial_jungle", "Hollow Frontier - Green Noon");
+        add("hollowfrontier.music.hollow.crystal_steppes", "Hollow Frontier - Glass Wind");
+        add("hollowfrontier.music.hollow.ember_badlands", "Hollow Frontier - Cinder Country");
+        add("hollowfrontier.music.hollow.concavian_highlands", "Hollow Frontier - The High Stones");
+        add("hollowfrontier.music.hollow.still_sea", "Hollow Frontier - Still Water");
+        add("hollowfrontier.configuration.score", "The Hollow Earth's score");
+        add("hollowfrontier.configuration.hollowScore", "Play the Hollow's own score");
         add("track.hollowfrontier.the_entertainer", "Scott Joplin - The Entertainer (1902)");
         add("track.hollowfrontier.elite_syncopations", "Scott Joplin - Elite Syncopations (1902)");
         add("track.hollowfrontier.pineapple_rag", "Scott Joplin - Pineapple Rag (1908)");
@@ -331,6 +350,22 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.hollowfrontier.rattlesnake.hurt", "Rattlesnake hisses");
         add("subtitles.hollowfrontier.rattlesnake.death", "Rattlesnake dies");
         add("subtitles.hollowfrontier.dynamite.fuse", "Dynamite fuse fizzes");
+        // 46: how things feel
+        add("subtitles.hollowfrontier.dynamite.blast", "Dynamite goes off");
+        add("subtitles.hollowfrontier.gun.ricochet", "Bullet ricochets");
+        add("subtitles.hollowfrontier.gun.whiz", "Bullet whizzes past");
+        add("subtitles.hollowfrontier.gun.thud", "Bullet strikes home");
+        add("subtitles.hollowfrontier.horse.horseshoe_ring", "Horseshoes ring");
+        add("subtitles.hollowfrontier.lasso.whirl", "Lasso whirls");
+        add("subtitles.hollowfrontier.lasso.line_creak", "Line creaks");
+        add("subtitles.hollowfrontier.airship.creak", "Airship creaks");
+        add("subtitles.hollowfrontier.steam_handcar.clack", "Handcar clacks");
+        add("subtitles.hollowfrontier.megafauna.footfall", "Heavy footfall");
+        add("hollowfrontier.configuration.camera", "Camera movement");
+        add("hollowfrontier.configuration.cameraKick", "Gun kick");
+        add("hollowfrontier.configuration.cameraShake", "Shake and sway");
+        add("hollowfrontier.configuration.journal", "The Prospector's Journal");
+        add("hollowfrontier.configuration.journalNotes", "Say when something's noted");
         add("subtitles.hollowfrontier.coin.clink", "Coins clink");
         add("subtitles.hollowfrontier.drink.pour", "Drink poured");
         add("subtitles.hollowfrontier.wanted.raised", "Alarm bell rings");
@@ -665,6 +700,8 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.hollowfrontier.ember_badlands.additions", "The ground rumbles");
         add("subtitles.hollowfrontier.concavian_highlands.additions", "Wind over the uplands");
         add("subtitles.hollowfrontier.still_sea.additions", "Still water stirs");
+        add("subtitles.hollowfrontier.hollow_earth.crust_rumble", "The crust rumbles overhead"); // 45b
+        add("subtitles.hollowfrontier.steam_submersible.creak", "Hull creaks");
         add("subtitles.hollowfrontier.ash_vent.hiss", "Ash vent hisses");
         addEntityType(ModEntities.FERN_SKITTER, "Fern Skitter");
         addEntityType(ModEntities.GLASSBACK_HARE, "Glassback Hare");
@@ -1039,6 +1076,58 @@ public class ModLanguageProvider extends LanguageProvider {
         add("gazette.hollowfrontier.aftermath.general.3.body", "The gentlemen in black dusters who asked so many questions last season have not been seen since. Their hotel bill remains unpaid.");
         add("gazette.hollowfrontier.aftermath.general.4.title", "FEWER GANGS, SAYS SHERIFF");
         add("gazette.hollowfrontier.aftermath.general.4.body", "The county reports fewer gangs on the roads than in any year since the railroad came. Those still riding are said to be doing it the old-fashioned way, out of plain greed.");
+        // Taken (50): aboard the Grays' ship. The player's own notes, the held, and the ways off
+        addBlock(ModBlocks.GRAY_FIELD, "Gray Field");
+        addBlock(ModBlocks.SHIP_CONSOLE, "Ship's Console");
+        addBlock(ModBlocks.CORE_SOCKET, "Core Socket");
+        addItem(ModItems.SHOCK_ROD, "Shock Rod");
+        add("tooltip.hollowfrontier.shock_rod", "Stuns a Gray, and anything that carries their implant");
+        add("tooltip.hollowfrontier.shock_rod.charge", "A charge a blow, from the cells you carry");
+        add("message.hollowfrontier.taken.wake", "A cold floor. A hum I can feel in my teeth. This isn't a field.");
+        add("message.hollowfrontier.taken.empty_hands", "Nothing on me. No gun, no knife, not a coin. They've been through my pockets.");
+        add("message.hollowfrontier.taken.say.new", "New one's awake. Keep your voice down.");
+        add("message.hollowfrontier.taken.say.wait", "One of them comes for the new ones. When the light goes off your door it'll be busy at the wall. Don't be there when it turns round. Keep low and you'll see it coming.");
+        add("message.hollowfrontier.taken.say.go", "Now. Go on. The grating across the way comes off in your hands, and they don't look in there.");
+        add("message.hollowfrontier.taken.say.pens_open", "Well, I'll be. Give me a hand up and I'm behind you.");
+        add("message.hollowfrontier.taken.pen_open", "The light across the front of the pen has gone out.");
+        add("message.hollowfrontier.taken.pens", "Every pen's light is down. They'll want a hand up before they can walk.");
+        add("message.hollowfrontier.taken.kit", "My own things, stacked like freight. It's all here.");
+        add("message.hollowfrontier.taken.kit_none", "Nothing of yours left in it.");
+        add("message.hollowfrontier.taken.kit_back", "My things are back on me. All of them.");
+        add("message.hollowfrontier.taken.tray", "A rod off their tray, and a cell that fits it. I've seen what it does to a man. Let's see what it does to them.");
+        add("message.hollowfrontier.taken.rig_shorted", "The rod, the machine, and a smell like a struck match. It won't do that again.");
+        add("message.hollowfrontier.taken.hold", "Whatever they did to that bird, it remembers who did it.");
+        add("message.hollowfrontier.taken.vent", "They don't look in here. They wouldn't fit.");
+        add("message.hollowfrontier.taken.seen", "It's seen me.");
+        add("message.hollowfrontier.taken.alarm", "That noise is for me. The doors are shutting.");
+        add("message.hollowfrontier.taken.alarm_over", "Quiet again. They've stopped looking.");
+        add("message.hollowfrontier.taken.console_dead", "Dark. It's done what it does.");
+        add("message.hollowfrontier.taken.socket_empty", "The socket's empty.");
+        add("message.hollowfrontier.taken.cant_break", "It doesn't so much as scratch.");
+        add("message.hollowfrontier.taken.cell_1", "The hum drops a note.");
+        add("message.hollowfrontier.taken.cell_2", "The floor leans. One left.");
+        add("message.hollowfrontier.taken.falling", "That's all three. There's nothing holding this thing up. Time to be somewhere else.");
+        add("message.hollowfrontier.taken.fall_late", "Not long now.");
+        add("bossbar.hollowfrontier.ship_falling", "The ship is going down");
+        add("bossbar.hollowfrontier.taken_coming", "Something is coming for you");
+        add("bossbar.hollowfrontier.taken_turned", "Its back is turned");
+        add("message.hollowfrontier.taken.listen", "Keeping low and still, I can tell where they are. Through the walls, even.");
+        add("message.hollowfrontier.taken.say.bread", "Kept this back from what they feed us. You'll want it more than I do.");
+        add("message.hollowfrontier.taken.pod", "The hatch shuts. Something under the floor lets go.");
+        add("message.hollowfrontier.taken.landed.pod", "Ground. Real ground, with a sky over it. I walked out of that.");
+        add("message.hollowfrontier.taken.landed.fell", "I come to on the ground with the wind knocked out of me. I remember a long way down, and then I don't.");
+        add("message.hollowfrontier.taken.landed.died", "I come to on the ground, far from where I was. Whatever they were doing, they finished. There's an itch behind my ear.");
+        add("message.hollowfrontier.taken.landed.crashed", "I come to in the dirt beside something burning. I don't know how I'm alive.");
+        add("message.hollowfrontier.taken.landed.left", "I come to on the ground, far from where I was, with no idea how.");
+        add("message.hollowfrontier.taken.crash_site", "Something a good deal bigger came down after me: about %s paces %s.");
+        add("message.hollowfrontier.taken.left_behind", "There were others still in there.");
+        add("commands.hollowfrontier.ufo.taken.no_ship", "There's nowhere to put a ship in this world.");
+        add("commands.hollowfrontier.ufo.taken.not_aboard", "You aren't aboard a ship.");
+        add("subtitles.hollowfrontier.gray_field.drop", "Field drops");
+        add("subtitles.hollowfrontier.aboard.alarm", "Ship's alarm sounds");
+        add("subtitles.hollowfrontier.aboard.groan", "Hull groans");
+        add("subtitles.hollowfrontier.aboard.pod_launch", "Pod launches");
+        add("subtitles.hollowfrontier.aboard.pod_crash", "Pod comes down");
         // The captives (20): the pens, the procedure, letters home and men brought in alive
         addBlock(ModBlocks.IMPLANT_RIG, "Implant Rig");
         addBlock(ModBlocks.KINDLED_SEAL, "Kindled Seal");
@@ -1132,6 +1221,36 @@ public class ModLanguageProvider extends LanguageProvider {
 
         add("key.category.hollowfrontier.main", "Hollow Frontier");
         add("key.hollowfrontier.reload", "Reload Gun");
+        add("key.hollowfrontier.journal", "Open the Prospector's Journal");
+        // High noon (51): called out to the street by a poster's boss
+        add(DuelText.KEY_YES, "Called out: go and meet them in the street");
+        add(DuelText.KEY_NO, "Called out: let them wait");
+        add(DuelText.POSTER_LINE, "Sends word: the street, at noon");
+        add(DuelText.WORD_SENT, "Word comes with the poster. %s would sooner settle it in the street. If I'm near town at noon, I'll be asked.");
+        add(DuelText.ASK, "%s is waiting in the street.");
+        add(DuelText.ASK_KEYS, "[%s] Go out    [%s] Stay put    %ss");
+        add(DuelText.MARK, "Stand your mark. Hand off the gun.");
+        add(DuelText.TOLLS[0], "One.");
+        add(DuelText.TOLLS[1], "Two.");
+        add(DuelText.TOLLS[2], "Three.");
+        add(DuelText.DRAW, "DRAW");
+        add(DuelText.WON, "%s is down.");
+        add(DuelText.LOST, "%s was quicker.");
+        add(DuelText.DECLINED, "%s can stand in the street. I know where the camp is. I expect I'll be asked again tomorrow.");
+        add(DuelText.DECLINED_LAST, "%s won't ask again. It's the camp, then.");
+        add(DuelText.TOO_LATE, "Too late. %s has gone from the street.");
+        add(DuelText.LENT, "No handgun on me. The law puts a plain revolver in my hand and wants it back after.");
+        add(DuelText.LENT_BACK, "The law has its revolver back.");
+        add(DuelText.FLINCH, "Too soon. That'll cost me.");
+        add(DuelText.GREETING, "You came. Most don't.");
+        add(DuelText.WON_LINE, "Mine landed first. %s is down in the street, and that badge pays half as much again.");
+        add(DuelText.WON_HEAD, "One shot, and it was enough. %s is down in the street, and that badge pays half as much again.");
+        add(DuelText.LOST_LINE, "%s was quicker. I'm on my back in the street with about one breath left in me.");
+        add(DuelText.LOST_PURSE, "My purse is lighter by %s gold and %s copper.");
+        add(DuelText.LOST_SAYS, "Keep the boots. I'll take the purse.");
+        add(DuelText.STOOD_DOWN, "Nobody hit anybody. %s spits, turns and walks out of town.");
+        add(DuelText.CALLED_OFF, "It's off. %s has gone from the street.");
+        add(DuelText.SAYS, "<%s> %s");
 
         add("death.attack.hollowfrontier.bullet", "%1$s was shot by %2$s");
         add("death.attack.hollowfrontier.bullet.item", "%1$s was shot by %2$s using %3$s");

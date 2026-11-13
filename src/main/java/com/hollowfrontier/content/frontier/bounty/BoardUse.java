@@ -88,6 +88,7 @@ public final class BoardUse {
             player.sendSystemMessage(Component.translatable("message.hollowfrontier.bounty.raider", posting.bounty().target()));
         }
         give(player, poster);
+        com.hollowfrontier.content.frontier.duel.Duels.posterTaken(player, posting.bounty()); // 51
         level.playSound(null, at.x, at.y, at.z, SoundEvents.BOOK_PAGE_TURN, SoundSource.BLOCKS, 1.0F, 1.0F);
     }
 
@@ -120,6 +121,15 @@ public final class BoardUse {
         give(player, new ItemStack(ModItems.GOLD_COIN.get(), bounty.reward()));
         player.sendSystemMessage(Component.translatable("message.hollowfrontier.bounty.paid", bounty.reward(), bounty.target()));
         ModCriteria.fire(player, ModCriteria.BOUNTY_CLAIMED);
+        // 47a: the town whose board it is thinks the better of them, and pays its own deputy a coin over
+        if (player instanceof ServerPlayer hunter) {
+            String key = board != null ? board.key(level) : BountyBoards.keyFor(level, BlockPos.containing(at));
+            com.hollowfrontier.content.frontier.stake.Standing.atBoard(hunter, key, com.hollowfrontier.content.frontier.stake.Standing.BOUNTY);
+            com.hollowfrontier.content.frontier.stake.Standing.town(key).filter(town -> com.hollowfrontier.content.frontier.stake.Deputies.deputy(hunter, town)).ifPresent(town -> {
+                give(hunter, new ItemStack(ModItems.GOLD_COIN.get()));
+                hunter.sendSystemMessage(Component.translatable(com.hollowfrontier.content.frontier.stake.StakeText.BOUNTY_BONUS));
+            });
+        }
         level.playSound(null, at.x, at.y, at.z, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 0.8F, 1.2F);
         BountyBoards.get(level).markDead(bounty.id());
         if (board != null) {

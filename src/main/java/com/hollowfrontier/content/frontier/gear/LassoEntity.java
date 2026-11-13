@@ -55,6 +55,11 @@ public class LassoEntity extends ThrowableItemProjectile {
             return;
         }
 
+        // 47a: a deputy's drifter, roped: he gives up or he doesn't, and either way the lasso drops
+        if (com.hollowfrontier.content.frontier.stake.SheriffJobs.rope(level, owner, target)) {
+            dropLasso(level);
+            return;
+        }
         Vec3 toOwner = owner.position().subtract(target.position());
         double distance = toOwner.length();
         // Big animals barely budge.

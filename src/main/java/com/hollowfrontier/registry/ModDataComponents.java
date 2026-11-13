@@ -47,6 +47,12 @@ public final class ModDataComponents {
                     .persistent(Codec.intRange(0, Integer.MAX_VALUE))
                     .networkSynchronized(ByteBufCodecs.VAR_INT));
 
+    // 51: on the revolver a town lends for a duel, so it can be taken back wherever it has got to.
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> LENT =
+            DATA_COMPONENTS.registerComponentType("lent", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(ByteBufCodecs.BOOL));
+
     // Bounty on a Wanted Poster / Outlaw Badge.
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BountyData>> BOUNTY =
             DATA_COMPONENTS.registerComponentType("bounty", builder -> builder
@@ -78,6 +84,17 @@ public final class ModDataComponents {
     // 32: game time a Polar Resonator last woke a ring. Drives its ring animation (the fork shivers, the needle swings).
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> RESONATED =
             DATA_COMPONENTS.registerComponentType("resonated", builder -> builder
+                    .persistent(Codec.LONG)
+                    .networkSynchronized(ByteBufCodecs.VAR_LONG));
+
+    // 47: the town a Deputy's Badge, a deed or a warrant is for
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<com.hollowfrontier.content.frontier.stake.TownRef>> TOWN =
+            DATA_COMPONENTS.registerComponentType("town", builder -> builder
+                    .persistent(com.hollowfrontier.content.frontier.stake.TownRef.CODEC)
+                    .networkSynchronized(com.hollowfrontier.content.frontier.stake.TownRef.STREAM_CODEC));
+    // 47b: the game time a branding iron stays hot until
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> HOT_UNTIL =
+            DATA_COMPONENTS.registerComponentType("hot_until", builder -> builder
                     .persistent(Codec.LONG)
                     .networkSynchronized(ByteBufCodecs.VAR_LONG));
 

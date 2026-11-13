@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "spent=false": {
+      "model": "hollowfrontier:block/ship_console"
+    },
+    "spent=true": {
+      "model": "hollowfrontier:block/ship_console_spent"
+    }
+  }
+}

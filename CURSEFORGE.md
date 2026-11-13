@@ -31,6 +31,8 @@ The store page for both Modrinth and CurseForge. Form fields, gallery and upload
 
 **Bounties and the law.** Take a poster off the Bounty Board, track the outlaw to his camp and bring back his badge. The posters show a sketch of each outlaw's face, the reward and which way the hideout lies, and they're stamped TAKEN with your name and DEAD when you're done. If you shoot the wrong people, you earn wanted stars and a poster of your own (the artist has never seen you). At two stars the law shoots on sight, and at three a posse rides out after you.
 
+**A stake in town.** Every town keeps its own opinion of you. Do right by one and you become a Regular, then a Neighbour, then a Pillar of the Town. The sheriff swears a Neighbour in as his deputy and has work for them: the night rounds, a drifter to bring in alive on the end of a lasso, a warrant to carry to the next town. A Neighbour can also buy the Old Place, the furnished homestead standing empty at the edge of town, with its barn, its corral and its garden, and build on from there. Brand your cattle, and take a wrangler's herd up the trail for pay.
+
 **Outlaw raids.** Now and then, at night, a gang rides on the town you're in. They go for the bank vault, and with it the coins in your safe deposit box. Bring down the bagman before he gets away and every coin goes back.
 
 **The saloon and the bank.** Play blackjack at the Card Table against the barmaid, but watch out for Josie's table. Keep your savings in a safe deposit box, where coins earn a little interest while you're away. Pick up The Frontier Gazette for rumours, sightings, coordinates, and the classifieds on the back page.
@@ -96,6 +98,7 @@ The **Concavian Codex** keeps track of how far you've come and tells you what's 
 Something has been troubling the frontier: lights in the night sky, cattle found with surgical marks, crop circles in the town's wheat, and men in black dusters who show up after every sighting with a story about Venus.
 
 - **Saucer flyovers and abductions** at night. Sneak if you don't want to be taken.
+- **Taken:** once the men in black have started minding you, the Grays keep you. You wake in a pen aboard their ship with nothing on you, among other people from the frontier. Slip past the crew or through the vents, get your things back from the hold, take a Shock Rod off the surgeons' tray, free who you can, and leave in an escape pod. Or pull the cells out of the engine first, and get off in ninety seconds while it comes down. Nothing you carried is ever lost.
 - **Gray field stations** in the Hollow Earth, where tagged and augmented megafauna come from.
 - **Gray pens,** where men taken from the frontier wait in cells. Stop the procedure, free the captives, and carry their letters home.
 - **Crash sites** with salvage to pry loose (alien alloy, a gravity drive, a beam emitter, a lens array and a navigation core) and a sealed cargo pod in the cockpit, holding the odd Gray gadget the prospector will buy: a doohickey that hums at ore, a rock that keeps you warm, a watch that runs backward, a marble that would rather be up, and a box that doesn't open.
@@ -173,8 +176,10 @@ Hollow Frontier works on its own. If these mods are installed, it uses them:
 - `hollowfrontier-towns-server.toml` (per world): whether towns replace the townsfolk and lawmen they lose, and how long each new arrival takes.
   It also holds `spawnAtTown`, on by default, which starts new worlds in the nearest town. A world chooses its spawn once, so set this in the `config` folder before creating the world.
 - `hollowfrontier-saloon-server.toml` and `hollowfrontier-dust-devils-server.toml` (per world): saloon brawls and missing time; dust devils.
+- `hollowfrontier-stake-server.toml` (per world): standing, deeds and cattle drives, each switchable; the deed's price; how far from town a place can be raised and how far a drive may go.
 - `hollowfrontier-season-server.toml` (per world): December. `mode` is `AUTO` (by the server's date), `ALWAYS` or `NEVER`; `truce` is the Christmas truce.
 - `hollowfrontier-startup.toml`: crafting-table brass. Turn it off if another mod makes brass.
+- `hollowfrontier-client.toml` (yours alone, not the server's): `hollowScore` turns the Hollow Earth's own music and boss themes off and puts vanilla's back. `cameraKick` and `cameraShake` run from 0 to 1: how hard a gun kicks your view, and how much it shakes for heavy footfalls and blasts. Set both to 0 if a moving view makes you unwell.
 - Gamerule `hollowfrontier:saucer_beams_players`: whether a player's saucer can beam up other players.
 - Ops can set off raids, sightings, saucers and dust devils by hand with `/hollowfrontier raid|mystery|kindled|ufo|dustdevil ...`.
 

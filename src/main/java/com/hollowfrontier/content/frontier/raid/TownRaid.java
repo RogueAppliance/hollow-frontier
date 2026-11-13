@@ -628,7 +628,9 @@ public class TownRaid {
         } else {
             payDefenders(level);
         }
-        data.record(site.key(), level.getGameTime()).nextRaid = level.getGameTime() + RaidConfig.cooldown();
+        TownRecord decided = data.record(site.key(), level.getGameTime());
+        decided.nextRaid = level.getGameTime() + RaidConfig.cooldown();
+        decided.lastRaid = level.getGameTime();
         data.setDirty();
     }
 
@@ -654,6 +656,7 @@ public class TownRaid {
                     + (c.safecracker() ? RaidConfig.paySafecracker() : 0) + saved * RaidConfig.payLawmanSaved();
             payCoins(player, copper);
             ModCriteria.fire(player, ModCriteria.RAID_DEFENDED, c.kills());
+            com.hollowfrontier.content.frontier.stake.Standing.add(player, site.key(), com.hollowfrontier.content.frontier.stake.Standing.RAID_DEFENDED + c.kills() * com.hollowfrontier.content.frontier.stake.Standing.RAID_KILL); // 47a
             player.sendSystemMessage(Component.translatable("message.hollowfrontier.npc.say", payer,
                     Component.translatable("message.hollowfrontier.raid.reward", copper / 9, copper % 9)));
             if (Wanted.of(player).heat() > 0 && RaidConfig.heatReduction() > 0) {

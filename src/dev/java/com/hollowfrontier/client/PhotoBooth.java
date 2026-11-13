@@ -134,6 +134,34 @@ public final class PhotoBooth {
         if (mc.gui.screen() instanceof net.minecraft.client.gui.screens.PauseScreen) {
             mc.gui.setScreen(null);
         }
+        // Phase 47 played through in real towns, only on its own with -PphotoScene=stake (StakePlaytest)
+        if (StakePlaytest.ENABLED) {
+            if (ticks >= 40) {
+                StakePlaytest.tick(mc, server);
+            }
+            return;
+        }
+        // Phase 51 played through in a real town's street, only on its own with -PphotoScene=duel (DuelPlaytest)
+        if (DuelPlaytest.ENABLED) {
+            if (ticks >= 40) {
+                DuelPlaytest.tick(mc, server);
+            }
+            return;
+        }
+        // Phase 50 played through aboard a Gray ship, only on its own with -PphotoScene=taken (TakenPlaytest)
+        if (TakenPlaytest.ENABLED) {
+            if (ticks >= 40) {
+                TakenPlaytest.tick(mc, server);
+            }
+            return;
+        }
+        // The Prospector's Journal on screen, only on its own with -PphotoScene=journal (JournalPhoto)
+        if (JournalPhoto.ENABLED) {
+            if (ticks >= 40) {
+                JournalPhoto.tick(mc, server);
+            }
+            return;
+        }
         // The Polar Resonator held, only on its own with -PphotoScene=resonator
         if (RESONATOR_ONLY) {
             if (ticks >= 40) {
@@ -322,6 +350,20 @@ public final class PhotoBooth {
         if (GLINT_ONLY) {
             if (ticks >= 40) {
                 glint(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // 46b: horseshoes as worn and the lasso's whirl, only on its own with -PphotoScene=shod
+        if (SHOD_ONLY) {
+            if (ticks >= 40) {
+                shod(mc, server, ticks - 40);
+            }
+            return;
+        }
+        // 46: how things feel, only on its own with -PphotoScene=feel
+        if (FEEL_ONLY) {
+            if (ticks >= 40) {
+                feel(mc, server, ticks - 40);
             }
             return;
         }
@@ -3225,7 +3267,7 @@ public final class PhotoBooth {
     private static final boolean TOWNBUILD_ONLY = "townbuild".equals(System.getProperty("hollowfrontier.photo.scene"));
     /** A building to shoot: its template, width and depth, and the heights (template y, highest first) to cut it down to. */
     private record Plot(String template, int w, int d, int... cuts) {}
-    private static final List<Plot> PLOTS = List.of(
+    private static final List<Plot> ALL_PLOTS = List.of(
             new Plot("town/general_store", 12, 12, 5), new Plot("town/sheriff_office", 9, 12, 5), new Plot("town/bank", 12, 12, 6),
             new Plot("town/hotel", 11, 12, 10, 5), new Plot("town/hotel_grand", 13, 13, 9, 5), new Plot("town/saloon", 13, 13, 6),
             new Plot("town/saloon_grand", 15, 14, 10, 5), new Plot("town/gunsmith", 12, 12, 5), new Plot("town/doctor", 12, 12, 5),
@@ -3235,8 +3277,16 @@ public final class PhotoBooth {
             new Plot("town/mining/homestead", 12, 12), new Plot("town/desert/general_store", 12, 12), new Plot("town/desert/courthouse", 17, 16),
             new Plot("town/bathhouse", 12, 12, 5), new Plot("town/gazette_office", 12, 12, 6), new Plot("town/ranch", 21, 21, 5),
             new Plot("town/street_short", 9, 44), new Plot("town/rail_boxcar", 7, 28), new Plot("town/rail_tank", 7, 28),
-            new Plot("town/square_tee_bandstand", 39, 39));
-    private static final int PLOT_TICKS = 100;
+            new Plot("town/square_tee_bandstand", 39, 39),
+            // 47b: the Old Place, in each style (the frontier one cut to its upper floor, then its ground floor)
+            new Plot("town/old_place", 35, 31, 9, 5), new Plot("town/desert/old_place", 35, 31), new Plot("town/mining/old_place", 35, 31));
+    /** -PphotoFilter=old_place shoots only the plots whose template holds one of those words, and skips the tour of real towns. */
+    private static final List<String> PLOT_FILTER = java.util.Arrays.stream(System.getProperty("hollowfrontier.photo.filter", "").split(","))
+            .filter(word -> !word.isBlank()).toList();
+    private static final List<Plot> PLOTS = PLOT_FILTER.isEmpty() ? ALL_PLOTS
+            : ALL_PLOTS.stream().filter(plot -> PLOT_FILTER.stream().anyMatch(plot.template()::contains)).toList();
+    private static boolean plotsDone;
+    private static final int PLOT_TICKS = 130;
 
     /**
      * `hf_w*`: each town building placed alone on a grass stage in the sky (cleared between them), shot from the street
@@ -3273,9 +3323,13 @@ public final class PhotoBooth {
                 tpLooking(server, new Vec3(x - far * 0.35, Y + far * 0.4, z - far), new Vec3(cx, Y + 2, cz));
             } else if (k == 30) {
                 shot(mc, tag + "_out.png");
+            } else if (k == 31) {                 // and from the street, standing at the gate's shoulder
+                tpLooking(server, new Vec3(x + p.w() * 0.2, Y + 4, z - Math.max(6, p.d() * 0.45)), new Vec3(cx, Y + 4, cz));
+            } else if (k == 56) {
+                shot(mc, tag + "_street.png");
             } else {
                 for (int c = 0; c < p.cuts().length; c++) {
-                    int at = 32 + c * 30;
+                    int at = 58 + c * 30;
                     if (k == at) {
                         int cutY = oy + p.cuts()[c];
                         run(server, String.format("kill @e[type=minecraft:item,distance=..80]"));
@@ -3292,7 +3346,13 @@ public final class PhotoBooth {
             }
             return;
         }
-        if (s >= plots * PLOT_TICKS) {
+        if (s >= plots * PLOT_TICKS && !PLOT_FILTER.isEmpty()) {
+            if (!plotsDone) {
+                plotsDone = true;
+                HollowFrontier.LOGGER.info("[PhotoBooth] townbuild plots done, quitting");
+                quit(mc, server);
+            }
+        } else if (s >= plots * PLOT_TICKS) {
             townTour(mc, server);
         }
     }
@@ -3737,6 +3797,202 @@ public final class PhotoBooth {
                     run(server, String.format("item replace entity @p hotbar.%d with minecraft:air", i));
                 }
                 HollowFrontier.LOGGER.info("[PhotoBooth] glint done, quitting");
+                quit(mc, server);
+            }
+            default -> {}
+        }
+    }
+
+    // ---------------------------------------------------------------- 46: how things feel
+
+    private static final boolean FEEL_ONLY = "feel".equals(System.getProperty("hollowfrontier.photo.scene"));
+    private static final List<String> FEEL_SURFACES = List.of("stone", "oak_planks", "sand", "iron_block");
+    private static float feelKick, feelShake;
+
+    /**
+     * `hf_46*`: a ball on stone, boards, sand and iron and into water; the haze after four shots; a mammoth walking by; a
+     * horse at a gallop on sand; a stick of dynamite. What can't be photographed is measured and logged: the most the view
+     * was kicked by a real shot, and the most it shook for the mammoth and for the dynamite.
+     */
+    private static void feel(Minecraft mc, MinecraftServer server, int t) {
+        int x = baseX, z = baseZ;
+        feelKick = Math.max(feelKick, CameraFeel.kicked());
+        feelShake = Math.max(feelShake, CameraFeel.shaking());
+        if (t >= 60 && t < 220 && (t - 60) % 40 == 0) { // each surface in turn: aim, fire ten ticks on, shoot two after
+            int k = (t - 60) / 40;
+            tpLooking(server, new Vec3(x + 0.5, Y, z - 1.5), new Vec3(x - 4 + k * 3 + 1.0, Y + 1.5, z + 6.0));
+            return;
+        }
+        if (t >= 70 && t < 230 && (t - 70) % 40 == 0) {
+            int k = (t - 70) / 40;
+            if (k == 0) { // the first is a real pull of the trigger, so the client sees its own shot and kicks
+                server.execute(() -> {
+                    var player = server.getPlayerList().getPlayers().getFirst();
+                    player.gameMode.useItem(player, player.level(), player.getMainHandItem(), net.minecraft.world.InteractionHand.MAIN_HAND);
+                });
+            } else {
+                server.execute(() -> GunMechanics.fire(server.overworld(), server.getPlayerList().getPlayers().getFirst(), GunTypes.REVOLVER));
+            }
+            return;
+        }
+        if (t >= 73 && t < 233 && (t - 73) % 40 == 0) {
+            shot(mc, "hf_46a_impact_" + FEEL_SURFACES.get((t - 73) / 40) + ".png");
+            return;
+        }
+        switch (t) {
+            case 0 -> {
+                run(server, "gamemode creative @p");
+                run(server, "time set 6000");
+                run(server, "weather clear");
+                feelKick = 0;
+                feelShake = 0;
+            }
+            case 20 -> {
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:grass_block", x - 12, Y - 1, z - 8, x + 16, Y - 1, z + 30));
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:air", x - 12, Y, z - 8, x + 16, Y + 8, z + 30));
+                run(server, String.format("execute positioned %d %d %d run kill @e[type=!player,distance=..60]", x, Y, z + 10));
+                for (int k = 0; k < FEEL_SURFACES.size(); k++) { // four walls, two wide and three high
+                    run(server, String.format("fill %d %d %d %d %d %d minecraft:%s", x - 4 + k * 3, Y, z + 6, x - 3 + k * 3, Y + 2, z + 6, FEEL_SURFACES.get(k)));
+                }
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:stone", x + 9, Y - 2, z + 2, x + 13, Y - 1, z + 6));
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:water", x + 10, Y - 1, z + 3, x + 12, Y - 1, z + 5));
+                run(server, "item replace entity @p hotbar.0 with hollowfrontier:revolver[hollowfrontier:loaded_ammo=6]");
+                mc.player.getInventory().setSelectedSlot(0);
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+            }
+            case 82 -> HollowFrontier.LOGGER.info("[PhotoBooth] feel: a real revolver shot kicked the view {} degrees at most (GunFeel says {})",
+                    feelKick, com.hollowfrontier.content.frontier.gun.GunFeel.kick(GunTypes.REVOLVER));
+            // Into water
+            case 230 -> tpLooking(server, new Vec3(x + 6.5, Y, z + 0.5), new Vec3(x + 11.5, Y - 1.0, z + 4.5));
+            case 240 -> server.execute(() -> GunMechanics.fire(server.overworld(), server.getPlayerList().getPlayers().getFirst(), GunTypes.REVOLVER));
+            case 243 -> shot(mc, "hf_46a_impact_water.png");
+            // The haze: four shots out over the grass, then wait
+            case 250 -> tpLooking(server, new Vec3(x - 8.5, Y, z - 2.5), new Vec3(x - 8.5, Y + 1.0, z + 20.5));
+            case 260, 266, 272, 278 -> server.execute(() -> GunMechanics.fire(server.overworld(), server.getPlayerList().getPlayers().getFirst(), GunTypes.REVOLVER));
+            case 300 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] feel: hazes hanging after four shots: {}", com.hollowfrontier.content.frontier.gun.GunFeel.hazes(server.overworld()));
+                mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+            }
+            case 325 -> shot(mc, "hf_46a_haze.png");
+            // A mammoth walking past, six blocks off
+            case 330 -> {
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+                feelShake = 0;
+                run(server, String.format("summon hollowfrontier:woolly_mammoth %d %d %d {NoAI:1b,PersistenceRequired:1b,Tags:[\"walker\"]}", x - 6, Y, z + 14));
+                tpLooking(server, new Vec3(x + 0.5, Y, z + 8.5), new Vec3(x + 0.5, Y + 1.5, z + 14.5));
+            }
+            case 410 -> shot(mc, "hf_46c_mammoth.png");
+            case 451 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] feel: a mammoth walking past shook the view to {} at most", feelShake);
+                run(server, "kill @e[tag=walker]");
+                run(server, "kill @e[type=item]");
+                feelShake = 0;
+            }
+            // A horse at a gallop along a strip of sand
+            case 455 -> {
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:stone", x - 12, Y - 2, z + 18, x + 16, Y - 2, z + 20)); // or the sand falls
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:sand", x - 12, Y - 1, z + 18, x + 16, Y - 1, z + 20));
+                run(server, "kill @e[type=item]");
+                run(server, String.format("summon minecraft:horse %d %d %d {NoAI:1b,Tame:1b,PersistenceRequired:1b,Tags:[\"runner\"]}", x - 11, Y, z + 19));
+                tpLooking(server, new Vec3(x + 2.5, Y + 1.0, z + 13.5), new Vec3(x + 2.5, Y + 0.5, z + 19.5));
+            }
+            case 485 -> shot(mc, "hf_46b_gallop_sand.png");
+            case 512 -> run(server, "kill @e[tag=runner]");
+            // Dynamite, eight blocks off
+            case 520 -> {
+                feelShake = 0;
+                tpLooking(server, new Vec3(x + 0.5, Y, z - 4.5), new Vec3(x + 0.5, Y, z + 3.5));
+                run(server, String.format("summon hollowfrontier:dynamite %d %d %d", x, Y, z + 3));
+            }
+            case 660 -> {
+                HollowFrontier.LOGGER.info("[PhotoBooth] feel: dynamite eight blocks off shook the view to {} at most (WorldFeel says {})", feelShake,
+                        com.hollowfrontier.content.WorldFeel.blast(com.hollowfrontier.content.WorldFeel.DYNAMITE, 8.0));
+                run(server, "item replace entity @p hotbar.0 with minecraft:air");
+                run(server, String.format("execute positioned %d %d %d run kill @e[type=!player,distance=..60]", x, Y, z + 10));
+                HollowFrontier.LOGGER.info("[PhotoBooth] feel done, quitting");
+                quit(mc, server);
+            }
+            default -> {
+                if (t > 335 && t <= 450) { // the mammoth's walk: two blocks a second
+                    run(server, "execute as @e[tag=walker] at @s run tp @s ~0.1 ~ ~");
+                } else if (t > 460 && t <= 510) { // the gallop: nine blocks a second
+                    run(server, "execute as @e[tag=runner] at @s run tp @s ~0.45 ~ ~");
+                }
+            }
+        }
+    }
+
+    private static final boolean SHOD_ONLY = "shod".equals(System.getProperty("hollowfrontier.photo.scene"));
+
+    /**
+     * `hf_46b_shod*`, `hf_46b_lasso*`: three horses shod in iron, brass and starsteel beside one unshod, from the side and
+     * from low down; then the lasso wound up overhead (from behind and from the front) and in the air, from the thrower's
+     * eyes and from the side.
+     */
+    private static void shod(Minecraft mc, MinecraftServer server, int t) {
+        int x = baseX, z = baseZ;
+        switch (t) {
+            case 0 -> {
+                run(server, "gamemode creative @p");
+                run(server, "time set 6000");
+                run(server, "weather clear");
+            }
+            case 20 -> {
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:smooth_stone", x - 12, Y - 1, z - 8, x + 16, Y - 1, z + 30));
+                run(server, String.format("fill %d %d %d %d %d %d minecraft:air", x - 12, Y, z - 8, x + 16, Y + 8, z + 30));
+                run(server, String.format("execute positioned %d %d %d run kill @e[type=!player,distance=..60]", x, Y, z + 10));
+                for (int i = 0; i < 4; i++) { // unshod, iron, brass, starsteel, left to right, standing side-on
+                    run(server, String.format("summon minecraft:horse %d %d %d {NoAI:1b,Tame:1b,Variant:%d,PersistenceRequired:1b,Rotation:[90f,0f],Tags:[\"shoe%d\"]}",
+                            x - 5 + i * 3, Y, z + 6, i == 3 ? 4 : i, i));
+                }
+            }
+            case 40 -> server.execute(() -> {
+                for (var entity : server.overworld().getAllEntities()) {
+                    for (int tier = 1; tier <= 3; tier++) {
+                        if (entity.entityTags().contains("shoe" + tier)) {
+                            entity.setData(com.hollowfrontier.registry.ModAttachments.HORSESHOE_TIER.get(), tier);
+                        }
+                    }
+                }
+            });
+            case 50 -> {
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+                tpLooking(server, new Vec3(x + 0.0, Y, z + 0.5), new Vec3(x + 0.0, Y + 0.8, z + 6.5));
+            }
+            case 70 -> shot(mc, "hf_46b_shod_row.png");
+            case 80 -> tpLooking(server, new Vec3(x + 1.5, Y - 1.2, z + 4.3), new Vec3(x + 1.5, Y + 0.3, z + 6.5)); // low, at the brass horse's feet
+            case 100 -> shot(mc, "hf_46b_shod_feet.png");
+            // The lasso wound up: from behind, then from in front
+            case 110 -> {
+                run(server, String.format("execute positioned %d %d %d run kill @e[type=!player,distance=..60]", x, Y, z + 10));
+                run(server, "item replace entity @p hotbar.0 with hollowfrontier:lasso 8");
+                mc.player.getInventory().setSelectedSlot(0);
+                tpLooking(server, new Vec3(x + 0.5, Y, z + 0.5), new Vec3(x + 0.5, Y + 1.6, z + 12.5));
+            }
+            case 130 -> {
+                mc.options.keyUse.setDown(true); // the real key, held: let go and the client throws at once
+                mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+            }
+            case 150 -> shot(mc, "hf_46b_lasso_windup_back.png");
+            case 153 -> shot(mc, "hf_46b_lasso_windup_back_2.png");
+            case 160 -> mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+            case 175 -> shot(mc, "hf_46b_lasso_windup_front.png");
+            case 180 -> mc.options.setCameraType(CameraType.FIRST_PERSON);
+            case 190 -> shot(mc, "hf_46b_lasso_windup_first_person.png");
+            // And thrown: let go, and look
+            case 200 -> mc.options.keyUse.setDown(false);
+            case 203 -> shot(mc, "hf_46b_lasso_thrown_first_person.png");
+            case 230 -> {
+                mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+                mc.options.keyUse.setDown(true); // the real key, held: let go and the client throws at once
+            }
+            case 245 -> mc.options.keyUse.setDown(false);
+            case 248 -> shot(mc, "hf_46b_lasso_thrown_back.png");
+            case 270 -> {
+                mc.options.setCameraType(CameraType.FIRST_PERSON);
+                run(server, "item replace entity @p hotbar.0 with minecraft:air");
+                run(server, String.format("execute positioned %d %d %d run kill @e[type=!player,distance=..60]", x, Y, z + 10));
+                HollowFrontier.LOGGER.info("[PhotoBooth] shod done, quitting");
                 quit(mc, server);
             }
             default -> {}
@@ -4618,7 +4874,7 @@ public final class PhotoBooth {
      * Ends the run. Every forceload the scenes added is released first: the photo world is reused, and forced chunks are
      * kept with it and all loaded at the next start, which (before this) had piled up into minutes of "preparing spawn area".
      */
-    private static void quit(Minecraft mc, MinecraftServer server) {
+    static void quit(Minecraft mc, MinecraftServer server) {
         releaseForceloads(server);
         server.execute(() -> mc.execute(mc::stop)); // after the release (queued before it), so it lands before the save
     }
@@ -4756,7 +5012,7 @@ public final class PhotoBooth {
         });
     }
 
-    private static void shot(Minecraft mc, String name) {
+    static void shot(Minecraft mc, String name) {
         Screenshot.grab(mc.gameDirectory, name, mc.gameRenderer.mainRenderTarget(), 1,
                 message -> HollowFrontier.LOGGER.info("[PhotoBooth] {}", message.getString()));
     }

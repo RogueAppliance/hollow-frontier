@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/known_around_town",
+  "criteria": {
+    "sworn": {
+      "trigger": "hollowfrontier:deputised"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.the_star.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:deputy_badge"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.the_star.title"
+    }
+  },
+  "requirements": [
+    [
+      "sworn"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

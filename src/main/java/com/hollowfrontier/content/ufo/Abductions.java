@@ -110,7 +110,10 @@ public final class Abductions {
     public static void take(ServerLevel level, GraySaucer saucer, LivingEntity taken) {
         level.playSound(null, saucer.getX(), saucer.getY(), saucer.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.HOSTILE, 4.0F, 0.5F);
         if (taken instanceof ServerPlayer player) {
-            missingTime(level, player);
+            // 50: one the Grays have reason to keep wakes aboard; anyone else loses an hour, as before
+            if (!com.hollowfrontier.content.ufo.taken.Taken.keeps(level, player) || com.hollowfrontier.content.ufo.taken.Taken.take(level, player) == null) {
+                missingTime(level, player);
+            }
         } else {
             taken.discard();
         }
@@ -155,6 +158,10 @@ public final class Abductions {
                             ctx.getSource().sendSuccess(() -> Component.translatable("commands.hollowfrontier.ufo.abduction"), true);
                             return 1;
                         }))
+                        // 50: the runner is kept, whatever the rules say; "leave" sets them down again
+                        .then(Commands.literal("taken")
+                                .executes(ctx -> com.hollowfrontier.content.ufo.taken.Taken.commandTake(ctx.getSource().getPlayerOrException()))
+                                .then(Commands.literal("leave").executes(ctx -> com.hollowfrontier.content.ufo.taken.Taken.commandLeave(ctx.getSource().getPlayerOrException()))))
                         // 15a: a Gray Landing nearby (closer than one would come on its own, and whether or not the leash holds)
                         .then(Commands.literal("landing").executes(ctx -> {
                             ServerLevel level = ctx.getSource().getLevel();

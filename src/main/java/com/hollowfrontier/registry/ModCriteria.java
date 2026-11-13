@@ -45,6 +45,23 @@ public final class ModCriteria {
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> LOOT_RECOVERED = register("loot_recovered");
     /** A 3-star outlaw paid a cut of a robbery. */
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> RAID_CUT = register("raid_cut");
+    // A stake in town (47). Value of the first: the rank reached (1 Regular, 2 Neighbour, 3 Pillar); of the last: head delivered
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> STANDING_RANK = register("standing_rank");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DEPUTISED = register("deputised");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> JOB_DONE = register("job_done");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> HOMESTEADER = register("homesteader");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> BRANDED = register("branded");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DRIVE_DONE = register("drive_done");
+    // High noon (51): a duel won in the street; one against the fastest there is; one with the first shot, to the head
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DUEL_WON = register("duel_won");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DUEL_WON_DEAREST = register("duel_won_dearest");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DUEL_HEADSHOT = register("duel_headshot");
+    // Taken (50): woke aboard; got off in a pod; with everyone the ship held; having brought it down; without being seen
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_ABOARD = register("taken_aboard");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_OUT = register("taken_out");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_NOBODY_LEFT = register("taken_nobody_left");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_BROUGHT_DOWN = register("taken_brought_down");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_UNSEEN = register("taken_unseen");
     // Steam
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> CANISTER_FILLED = register("canister_filled");
     /** Value: blocks driven under steam on one ride. */

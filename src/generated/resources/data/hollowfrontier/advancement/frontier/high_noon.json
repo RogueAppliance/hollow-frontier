@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/dead_or_alive",
+  "criteria": {
+    "won": {
+      "trigger": "hollowfrontier:duel_won"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.high_noon.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:revolver"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.high_noon.title"
+    }
+  },
+  "requirements": [
+    [
+      "won"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

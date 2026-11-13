@@ -30,6 +30,8 @@ public class HollowFrontier {
         modContainer.registerConfig(ModConfig.Type.SYNCED, com.hollowfrontier.content.frontier.mystery.MysteryConfig.SPEC, MODID + "-mysteries-server.toml");
         modContainer.registerConfig(ModConfig.Type.SYNCED, com.hollowfrontier.content.frontier.town.TownConfig.SPEC, MODID + "-towns-server.toml");
         modContainer.registerConfig(ModConfig.Type.SYNCED, com.hollowfrontier.content.frontier.season.SeasonConfig.SPEC, MODID + "-season-server.toml");
+        modContainer.registerConfig(ModConfig.Type.SYNCED, com.hollowfrontier.content.frontier.stake.StakeConfig.SPEC, MODID + "-stake-server.toml");
+        modContainer.registerConfig(ModConfig.Type.SYNCED, com.hollowfrontier.content.frontier.duel.DuelConfig.SPEC, MODID + "-duel-server.toml");
     }
 
     public static Identifier id(String path) {

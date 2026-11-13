@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:ufo/taken",
+  "criteria": {
+    "out": {
+      "trigger": "hollowfrontier:taken_out"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.ufo.checked_out_early.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "hollowfrontier:ship_console"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.ufo.checked_out_early.title"
+    }
+  },
+  "requirements": [
+    [
+      "out"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

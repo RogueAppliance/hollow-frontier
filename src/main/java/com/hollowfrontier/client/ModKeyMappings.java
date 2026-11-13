@@ -39,6 +39,16 @@ public final class ModKeyMappings {
     public static final KeyMapping SAUCER_HOLD = new KeyMapping("key.hollowfrontier.saucer_hold",
             KeyConflictContext.IN_GAME, InputConstants.Type.KEYBOARD, InputConstants.KEY_H, CATEGORY);
 
+    // 48a: opens the Prospector's Journal, while one is carried (JournalClient)
+    public static final KeyMapping JOURNAL = new KeyMapping("key.hollowfrontier.journal",
+            KeyConflictContext.IN_GAME, InputConstants.Type.KEYBOARD, InputConstants.KEY_J, CATEGORY);
+
+    // 51: the answer to a boss's call to the street, while he's asking (DuelClient)
+    public static final KeyMapping DUEL_YES = new KeyMapping("key.hollowfrontier.duel_yes",
+            KeyConflictContext.IN_GAME, InputConstants.Type.KEYBOARD, InputConstants.KEY_Y, CATEGORY);
+    public static final KeyMapping DUEL_NO = new KeyMapping("key.hollowfrontier.duel_no",
+            KeyConflictContext.IN_GAME, InputConstants.Type.KEYBOARD, InputConstants.KEY_N, CATEGORY);
+
     // What the server was last told of the saucer keys, so the payload goes only when they change
     private static boolean sentLaser, sentBeam;
 
@@ -49,6 +59,9 @@ public final class ModKeyMappings {
         event.register(SAUCER_LASER);
         event.register(SAUCER_BEAM);
         event.register(SAUCER_HOLD);
+        event.register(JOURNAL);
+        event.register(DUEL_YES);
+        event.register(DUEL_NO);
     }
 
     @SubscribeEvent

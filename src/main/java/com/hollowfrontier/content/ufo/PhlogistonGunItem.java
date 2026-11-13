@@ -19,6 +19,8 @@ import com.hollowfrontier.registry.ModSounds;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -78,6 +80,9 @@ public class PhlogistonGunItem extends GunItem {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        if (com.hollowfrontier.content.frontier.duel.Duels.holstered(player)) { // 51: not before the draw
+            return InteractionResult.FAIL;
+        }
         if (level instanceof ServerLevel serverLevel) {
             if (!shoot(serverLevel, player, stack, hand)) {
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), net.minecraft.sounds.SoundEvents.DISPENSER_FAIL,
@@ -92,12 +97,15 @@ public class PhlogistonGunItem extends GunItem {
 
     /** Fires if the shooter's cells hold the charge: draws it, burns what the beam meets, wears the gun. Whether it fired. */
     public boolean shoot(ServerLevel level, Player shooter, ItemStack stack, InteractionHand hand) {
-        if (!PhlogistonCellItem.draw(shooter, cost)) {
+        boolean free = com.hollowfrontier.content.frontier.duel.Duels.freeFire(shooter); // 51: a duel's shots cost nothing
+        if (!free && !PhlogistonCellItem.draw(shooter, cost)) {
             return false;
         }
         beam(level, shooter, stack);
         markFired(stack, level.getGameTime());
-        stack.hurtAndBreak(1, shooter, hand);
+        if (!free) {
+            stack.hurtAndBreak(1, shooter, hand);
+        }
         return true;
     }
 
@@ -130,10 +138,18 @@ public class PhlogistonGunItem extends GunItem {
         shot.aim(from, stop, colour);
         level.addFreshEntity(shot);
         level.sendParticles(spark, stop.x, stop.y, stop.z, 6, 0.1, 0.1, 0.1, 0);
+        if (struck.isEmpty() && end.distanceToSqr(eye) < stats.range() * stats.range() - 0.01) {
+            // 46a: stopped by a block: a scorch that glows for a moment, and a hiss
+            level.sendParticles(ParticleTypes.SMALL_FLAME, stop.x, stop.y, stop.z, 4, 0.06, 0.06, 0.06, 0.002);
+            level.sendParticles(ParticleTypes.SMOKE, stop.x, stop.y, stop.z, 2, 0.05, 0.05, 0.05, 0.01);
+            level.playSound(null, stop.x, stop.y, stop.z, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.2F, 1.8F);
+        }
+        com.hollowfrontier.content.frontier.duel.Duels.shot(shooter);
         for (LivingEntity target : struck) {
             // Where the beam went in, for a headshot
             Vec3 hit = target.getBoundingBox().inflate(0.3).clip(eye, end).orElse(target.getBoundingBox().getCenter());
             float headshot = GunMechanics.headshot(shooter, target, hit, stats);
+            com.hollowfrontier.content.frontier.duel.Duels.hit(level, shooter, target, headshot > 1.0F); // 51: in the street, that's the duel
             if (target.hurtServer(level, ModDamageTypes.phlogistonBeam(shooter), stats.damage() * headshot)) {
                 target.igniteForSeconds(burnSeconds);
             }

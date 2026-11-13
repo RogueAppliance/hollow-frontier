@@ -72,6 +72,25 @@ public class ModModelProvider extends ModelProvider {
             .element(e -> e.from(1, 0, 13).to(3, 13, 15).textureAll(TextureSlot.ALL))
             .element(e -> e.from(13, 0, 13).to(15, 13, 15).textureAll(TextureSlot.ALL))
             .build();
+    // 47b: the Claim Stake (a post with a board nailed across it) and the mailbox (a tin box on a stub of post, its door
+    // north, a flag on its east side)
+    private static final ModelTemplate CLAIM_STAKE = ExtendedModelTemplateBuilder.builder()
+            .parent(Identifier.withDefaultNamespace("block/block"))
+            .requiredTextureSlot(TextureSlot.ALL)
+            .requiredTextureSlot(TextureSlot.PARTICLE)
+            .element(e -> e.from(6, 0, 6).to(10, 16, 10).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(2, 9, 5).to(14, 14, 6).textureAll(TextureSlot.ALL))
+            .build();
+    private static final ModelTemplate MAILBOX = ExtendedModelTemplateBuilder.builder()
+            .parent(Identifier.withDefaultNamespace("block/block"))
+            .requiredTextureSlot(TextureSlot.ALL)
+            .requiredTextureSlot(TextureSlot.PARTICLE)
+            .element(e -> e.from(4, 3, 2).to(12, 11, 14).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(5, 11, 2).to(11, 12, 14).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(7, 0, 7).to(9, 3, 9).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(12, 6, 10).to(12.5F, 13, 11).textureAll(TextureSlot.ALL))
+            .element(e -> e.from(12, 11, 8).to(12.5F, 13, 10).textureAll(TextureSlot.ALL))
+            .build();
     // Saloon piano (facing north): case with a panelled front, keybed with the keys on top, two legs, lid.
     private static final TextureSlot KEYS = TextureSlot.create("keys");
     private static final ModelTemplate PIANO = ExtendedModelTemplateBuilder.builder()
@@ -183,6 +202,27 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.GRAY_CACHE.get()); // 15a
         blockModels.createTrivialBlock(ModBlocks.WAYSTONE.get(), TexturedModel.COLUMN); // 15c
         blockModels.createTrivialBlock(ModBlocks.IMPLANT_RIG.get(), TexturedModel.COLUMN); // 20
+        // 50: aboard the ship. The field (its texture is see-through), the console (lit, or dark once it's done its one
+        // thing) and the core's socket (a cell in it, or not)
+        blockModels.createTrivialCube(ModBlocks.GRAY_FIELD.get());
+        Block console = ModBlocks.SHIP_CONSOLE.get();
+        TextureMapping consoleTextures = TextureMapping.cubeBottomTop(console);
+        Identifier consoleLit = ModelTemplates.CUBE_BOTTOM_TOP.create(console, consoleTextures, blockModels.modelOutput);
+        Identifier consoleSpent = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(console, "_spent", consoleTextures
+                .copyAndUpdate(TextureSlot.TOP, TextureMapping.getBlockTexture(console, "_top_spent"))
+                .copyAndUpdate(TextureSlot.SIDE, TextureMapping.getBlockTexture(console, "_side_spent")), blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(console).with(BlockModelGenerators.createBooleanModelDispatch(
+                com.hollowfrontier.content.ufo.taken.ShipConsoleBlock.SPENT, BlockModelGenerators.plainVariant(consoleSpent), BlockModelGenerators.plainVariant(consoleLit))));
+        blockModels.registerSimpleItemModel(console, consoleLit);
+        Block coreSocket = ModBlocks.CORE_SOCKET.get();
+        TextureMapping coreTextures = TextureMapping.cubeBottomTop(coreSocket);
+        Identifier coreFull = ModelTemplates.CUBE_BOTTOM_TOP.create(coreSocket, coreTextures, blockModels.modelOutput);
+        Identifier coreEmpty = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(coreSocket, "_empty", coreTextures
+                .copyAndUpdate(TextureSlot.TOP, TextureMapping.getBlockTexture(coreSocket, "_top_empty"))
+                .copyAndUpdate(TextureSlot.SIDE, TextureMapping.getBlockTexture(coreSocket, "_side_empty")), blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(coreSocket).with(BlockModelGenerators.createBooleanModelDispatch(
+                com.hollowfrontier.content.ufo.taken.CoreSocketBlock.CELL, BlockModelGenerators.plainVariant(coreFull), BlockModelGenerators.plainVariant(coreEmpty))));
+        blockModels.registerSimpleItemModel(coreSocket, coreFull);
         // 26: the vault's seal, and its sockets (a lit top where the mural marks one)
         blockModels.createTrivialCube(ModBlocks.KINDLED_SEAL.get());
         Block socket = ModBlocks.SEAL_SOCKET.get();
@@ -194,6 +234,7 @@ public class ModModelProvider extends ModelProvider {
                 com.hollowfrontier.content.concavia.SealSocketBlock.MARKED, BlockModelGenerators.plainVariant(socketMarked), BlockModelGenerators.plainVariant(socketPlain))));
 
         itemModels.generateFlatItem(ModItems.BRASS_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.SHOCK_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM); // 50
         itemModels.generateFlatItem(ModItems.BRASS_NUGGET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BRASS_PLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BRASS_GEAR.get(), ModelTemplates.FLAT_ITEM);
@@ -242,6 +283,22 @@ public class ModModelProvider extends ModelProvider {
             blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(table,
                     BlockModelGenerators.plainVariant(TABLE.create(table, planks, blockModels.modelOutput))));
         }
+        // 47b: the Claim Stake in spruce, and the mailbox turned the way it's set down
+        Block stake = ModBlocks.CLAIM_STAKE.get();
+        TextureMapping stakeWood = new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(net.minecraft.world.level.block.Blocks.SPRUCE_PLANKS))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(net.minecraft.world.level.block.Blocks.SPRUCE_PLANKS));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(stake,
+                BlockModelGenerators.plainVariant(CLAIM_STAKE.create(stake, stakeWood, blockModels.modelOutput))));
+        Block mailbox = ModBlocks.MAILBOX.get();
+        Identifier mailboxModel = MAILBOX.create(mailbox, TextureMapping.cube(mailbox).copySlot(TextureSlot.ALL, TextureSlot.PARTICLE), blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(mailbox, BlockModelGenerators.plainVariant(mailboxModel))
+                .with(BlockModelGenerators.ROTATION_FACING));
+        blockModels.registerSimpleItemModel(mailbox, mailboxModel);
+        itemModels.generateFlatItem(ModItems.DEPUTY_BADGE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.WARRANT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.DEED.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.BRANDING_IRON.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.PROSPECTORS_JOURNAL.get(), ModelTemplates.FLAT_ITEM); // 48a
         // The town lamp: vanilla's lantern when lit, a cold lantern (town_lamp_unlit, reworked from vanilla's) when not; the
         // item is vanilla's lantern sprite
         Block lamp = ModBlocks.TOWN_LAMP.get();
