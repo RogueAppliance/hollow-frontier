@@ -827,3 +827,4 @@ Calls made in place of asking, and the reasons behind them. PLAN.md keeps the st
 - **The talk:** seven lines and two exchanges in town, five Gazette pieces, by two new facts (the latest duel won, or lost). The journal: two paragraphs under outlaws, and a line on a town's page.
 - **For 1.7.0** in CHANGELOG.md; the jar's version isn't bumped.
 - **After the user's first play (2026-11-12):** three duels, the speed "about right": nothing retuned. Outlaw names include women's (Belle, Ruby, Calamity, Pearl, Etta, Mags), so the prompt is "Go out / Stay put" and no duel line calls the boss "him".
+- **Numbered 1.4.0, at the user's word (2026-11-12):** phases 45 to 51 go out as one version, 1.4.0. CHANGELOG.md has one 1.4.0 section with a part for each; "for 1.5.0", "for 1.6.0" and "for 1.7.0" elsewhere in PLAN.md and here all mean this release.

@@ -1,16 +1,20 @@
 # Changelog
 
-## 1.7.0 — High noon (unreleased)
+## 1.4.0 — High noon, Taken, a stake in town, and the Hollow heard (unreleased)
 
-An Outlaw Boss used to be a fight at his camp and nothing else. Now and then one sends word instead: the street, at noon. Existing worlds get all of it.
+Four things at once: a duel in the street at noon, waking aboard the Grays' ship, a town that knows you (with a journal to keep it all in), and a Hollow you can hear. Existing worlds get all of it.
 
-- **Called out:** about one Wanted Poster in three says its boss would sooner settle it in the street. Be within 200 blocks of that town near noon and you're asked, over the hotbar: Y to meet him, N to let him wait. No costs nothing; he asks once more the next day, then it's the camp as usual.
-- **The count:** yes puts you on a mark in the street with him twelve paces off. You can't walk, your eyes are held down from the horizon and your trigger is locked. The bell tolls three times, then there's a wait nobody can time, then the word.
-- **The draw:** the gun is yours again and it shoots as it always does. The first hit decides it, whatever his health. Pull the trigger before the word and nothing fires, and your gun stays locked half a second longer for each pull.
+### High noon
+
+An Outlaw Boss used to be a fight at the gang's camp and nothing else. Now and then one sends word instead: the street, at noon. Existing worlds get all of it.
+
+- **Called out:** about one Wanted Poster in three says its boss would sooner settle it in the street. Be within 200 blocks of that town near noon and you're asked, over the hotbar: Y to go out, N to stay put. No costs nothing; the boss asks once more the next day, then it's the camp as usual.
+- **The count:** yes puts you on a mark in the street with the boss twelve paces off. You can't walk, your eyes are held down from the horizon and your trigger is locked. The bell tolls three times, then there's a wait nobody can time, then the word.
+- **The draw:** the gun is yours again and it shoots as it always does. The first hit decides it, whatever the boss's health. Pull the trigger before the word and nothing fires, and your gun stays locked half a second longer for each pull.
 - **Your own gun, for nothing:** your revolver or ray pistol is fetched to your hand and fires through the duel without using caps, rounds or charge; afterwards it's back in its slot with what was loaded before. With no handgun on you, the law lends a plain revolver and has it back however it ends.
-- **He's as fast as his price:** a boss with 3 gold on his head fires 0.9 seconds after the word, one with 7 or more in 0.45. He hits five times in six. If both miss, both keep shooting.
-- **Win,** and he's dead in the street, his badge pays half as much again, and the town thinks better of you.
-- **Lose,** and you're left at one heart with a tenth of your coin gone (never more than his bounty), the town thinks a little less of you, and he's back at his camp worth half as much again. With `lethalDuels` on, his shot kills.
+- **As fast as the price:** a boss with a 3 gold bounty fires 0.9 seconds after the word, one with 7 or more in 0.45. The boss hits five times in six. If both miss, both keep shooting.
+- **Win,** and the boss is dead in the street, the badge pays half as much again, and the town thinks better of you.
+- **Lose,** and you're left at one heart with a tenth of your coin gone (never more than the bounty), the town thinks a little less of you, and the boss is back at camp worth half as much again. With `lethalDuels` on, the shot kills.
 - **A duel is between two:** nobody else can hurt either of you until it's over, you can't hurt anybody else, and the town gets out of the line of fire and watches.
 - **Afterwards** the town talks about it and the Gazette prints it, either way. The journal notes it under outlaws and on the town's page.
 - **Three advancements:** High Noon, Nobody Faster and One Was Enough.
@@ -18,7 +22,7 @@ An Outlaw Boss used to be a fight at his camp and nothing else. Now and then one
 - **Keys:** two new ones, Y and N, used only while you're being asked. Both can be rebound.
 - Never asked on Peaceful, where there are no outlaws to ask.
 
-## 1.6.0 — Taken (unreleased)
+### Taken
 
 The Grays' beam used to cost you an hour and a walk home. Now, once they have reason to keep you, you wake up aboard. Existing worlds get all of it.
 
@@ -41,7 +45,7 @@ The Grays' beam used to cost you an hour and a walk home. Now, once they have re
 - **For ops:** `/hollowfrontier ufo taken` keeps you now; `/hollowfrontier ufo taken leave` sets you down.
 - **On servers:** two players caught in one beam wake on one ship. Curios slots are left alone.
 
-## 1.5.0 — A stake in town (unreleased)
+### A stake in town
 
 A town can now know you. Existing worlds get all of it; only the Old Place standing ready on a town's outskirts needs a town that's new.
 
@@ -58,7 +62,7 @@ A town can now know you. Existing worlds get all of it; only the Old Place stand
 - **Settings:** `hollowfrontier-stake-server.toml` switches standing, deeds and drives, and sets the deed's price and the distances.
 - **On servers:** a claim isn't land protection. Only its stake and its mailbox are the owner's alone. Use your usual claim mod for the rest.
 
-## 1.4.0 — The Hollow, heard, and the frontier, felt (unreleased)
+### The Hollow, heard, and the frontier, felt
 
 Two updates in one, and neither adds an item, a mob or a block: the Hollow Earth gets a sound of its own, and the things you do most get some weight. Existing worlds get all of it.
 
