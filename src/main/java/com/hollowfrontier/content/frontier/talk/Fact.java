@@ -51,6 +51,9 @@ public enum Fact {
     SEA_SEEN,
     /** The listener has been kept by the Grays and come back (50): they've told it in town, and the town has its own account. */
     TAKEN,
+    /** The listener's latest duel in the street (51) was won; or was lost, and they walked away from it. */
+    DUEL_WON,
+    DUEL_LOST,
     /** It's December by the server's calendar (35, {@link com.hollowfrontier.content.frontier.season.Season}). */
     DECEMBER,
     /** It's December 24th to 26th: the truce is on, and the church social has been. */

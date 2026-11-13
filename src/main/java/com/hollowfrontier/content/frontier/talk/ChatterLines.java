@@ -162,6 +162,14 @@ public final class ChatterLines {
         say(TALK, when(TAKEN), "If they kept your hat, I'd let it go.");
         say(TALK, when(TAKEN), "You don't blink as much as you used to. Has anybody told you?");
         say(TALK, when(TAKEN), "Whatever you saw up there, don't tell the children. They'll want to go.");
+        // 51: high noon. The whole town was at its windows
+        say(TALK, when(DUEL_WON), "I watched it from the hotel window. So did everybody. The hotel charged.");
+        say(TALK, when(DUEL_WON), "Twelve paces and one shot. The undertaker had the box measured before the smoke cleared.");
+        say(TALK, when(DUEL_WON), "The bell rang three times and then once more, by itself. The preacher says that last one was the wind.");
+        say(TALK, when(DUEL_WON), "My boy's been standing in the street all morning with a stick in his belt. I blame you, and I thank you.");
+        say(TALK, when(DUEL_LOST), "You stood up. Then you lay down. Nobody's saying otherwise.");
+        say(TALK, when(DUEL_LOST), "You were left your boots. From that sort, it's a compliment.");
+        say(TALK, when(DUEL_LOST), "The doctor says you'll mend. He says it about everyone, mind.");
         // 43d: the Still Sea, which nobody up here believes in
         say(TALK, when(SEA_SEEN), "A sea under the ground. And I suppose the fish carry lanterns.");
         say(TALK, when(SEA_SEEN), "A sea with no waves on it? That's not a sea. That's a pond with ideas.");
@@ -649,6 +657,8 @@ public final class ChatterLines {
         gossip(when(SEA_SEEN), "That one says there's a sea under the ground.", "Under whose ground?", "Everybody's, the way they tell it."); // 43d
         gossip(when(TAKEN), "That one says they were carried off into the sky.", "Carried off by what?", "Doctors, to hear it told."); // 50
         gossip(when(TAKEN), "Gone four days, that one.", "Gone where?", "Up.");
+        gossip(when(DUEL_WON), "That's the one from the street at noon.", "Quick?", "The other one thought so too."); // 51
+        gossip(when(DUEL_LOST), "That's the one who got shot at noon.", "Shot, and walking?", "It was only the purse that was wanted.");
         gossip(when(SEA_SEEN), "They say you can ride a brass kettle to the bottom of it.", "And back up?", "They didn't say.");
     }
 }

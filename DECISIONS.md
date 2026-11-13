@@ -802,3 +802,28 @@ Calls made in place of asking, and the reasons behind them. PLAN.md keeps the st
 - **`salamander_basks_on_vent` is steadied.** It failed about one run in six, with or without phase 50. A salamander looks `HEAT_RANGE` (10) blocks for somewhere hot, and the test's garden let it stroll eleven off, or off the edge. The test now pens it within reach of the vent. Walling the whole garden wasn't enough (it failed once in six more runs, from a corner eleven blocks away); penned to the range, eight runs passed.
 - **I was wrong about `StakePlaytest`:** I told the user it drove server code from the client's thread, as `TakenPlaytest` had. It doesn't; it has always handed its steps to the server. `JournalPhoto` did have the fault, in a mild form (it gives items and advancements, and moves nobody between worlds), and is the one fixed: its server work now runs on the server's thread. Run once after; it passes.
 - **Nothing else was refactored.** `PhotoBooth.java` (5,012 lines), `TextureArt.java` (7,716) and the registries' inline class names were named and left.
+
+### Phase 51 planned: High noon (2026-11-12)
+- **The user's four calls:** the poster's boss is the only challenger; holstered through the count, then real aim; the player's own handgun, loaded free; and losing is shot down by default with a `lethalDuels` switch for real death.
+- **The user's outline:** challenged, accepted on the HUD, set on the spot, a countdown, and no way to be caught without a loaded gun. All kept.
+- **Mine, not asked:** one poster in three; asked near noon within 200 blocks, twice at most; two new keys (Y and N) for the answer; a flinch delays the gun and isn't a forfeit; the first hit decides, whatever his health; his reaction runs 0.9 to 0.45 seconds by bounty and he hits five in six; the purse is a tenth of carried coin; the win pays half again; nobody else can touch a duel; no clock is moved (a server's day belongs to everyone); a lent revolver when there's no handgun. All first guesses until played.
+
+### Phase 51 High noon, as built (2026-11-12, the user's word: "Build it")
+- **Who calls out is fixed by the bounty itself** (a hash of its id against `callOutChance`), so the poster can say so in its tooltip and nothing new is saved on it. Changing the chance changes which posters call.
+- **The ask needs the poster's board.** The town is the one whose board the poster hangs on (`BountyBoards.keyHolding`); a poster the board has already taken down (seven days) no longer calls. The window is 5400 to 6100 by the clock, and the duel starts when the answer comes: no clock is moved and nobody waits for the stroke of noon.
+- **The street is found, not built.** `Duels.ground` tries each street piece off the square for two marks twelve apart that are level, dry and in plain sight of each other, then the square itself both ways. A town with no such run never has a duel.
+- **The gun isn't drawn lowered.** There's no first-person holster. Until the word the client holds the eyes 18 degrees down from the horizon (every frame, so nothing jumps) and the trigger is locked on both sides; at the word both are let go. `CameraFeel` is untouched: the spec's slow push on the count wasn't built.
+- **A flinch:** a held trigger is one pull (repeats under six ticks apart don't count again), and four is the most that's charged.
+- **His shot is settled by the dice, then shown.** He fires a spread-less revolver where he's pointing; five in six he points at the player and it's a hit whatever is in the way, one in six he points wide. So a block set down between the two saves nobody.
+- **A mob's bullet goes by the difficulty,** so the lethal shot is his by name with nobody behind it; it kills on Easy as on Hard. A totem still saves its bearer: that's the bearer's totem doing its work.
+- **Winning pays through the badge.** It carries half as much again and pays at any board, and the 4 standing is given in the street, not at the board. Losing takes 3.
+- **His speed runs from 3 gold to 7,** not to 9 as first written: boards post 3 to 6 and a raid leader 4 to 7, so 9 was out of reach. Nobody Faster asks for 7 or more.
+- **Nothing can kill a duellist but the duel,** `/kill` included, and neither can hurt anyone else. The gang stays at the camp because the camp is never raised: the poster reads "spotted" while he's in the street.
+- **Called off** (the player leaves the game, changes world, is moved more than six blocks, or the server stops; or nobody is hit in thirty seconds): he goes, the poster is as it was, and the ask still counts as one of his two.
+- **The lent revolver** carries a `lent` component; anything with it is taken out of any player's pack once a second outside a duel, so one thrown down and picked up later doesn't last. Before a lethal shot it's taken back first, so it doesn't fall with the rest.
+- **A boss saved mid-duel** (a crash) loads as an ordinary boss standing in town, shotgun and all.
+- **He doesn't ride out.** Three seconds after it's decided he's gone in a puff of dust. The undertaker doesn't come out; townsfolk and the law clear the line and look on, and up to four cheer a win.
+- **Never on Peaceful.**
+- **The talk:** seven lines and two exchanges in town, five Gazette pieces, by two new facts (the latest duel won, or lost). The journal: two paragraphs under outlaws, and a line on a town's page.
+- **For 1.7.0** in CHANGELOG.md; the jar's version isn't bumped.
+- **After the user's first play (2026-11-12):** three duels, the speed "about right": nothing retuned. Outlaw names include women's (Belle, Ruby, Calamity, Pearl, Etta, Mags), so the prompt is "Go out / Stay put" and no duel line calls the boss "him".

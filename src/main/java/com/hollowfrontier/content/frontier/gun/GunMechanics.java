@@ -1,6 +1,7 @@
 package com.hollowfrontier.content.frontier.gun;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -93,6 +94,11 @@ public final class GunMechanics {
             tracer(level, start.add(dir.scale(0.8)), end);
         }
 
+        // 51: in the street the first hit is the duel, whatever it would have done to him
+        com.hollowfrontier.content.frontier.duel.Duels.shot(shooter);
+        for (Entity target : List.copyOf(damageByTarget.keySet())) {
+            com.hollowfrontier.content.frontier.duel.Duels.hit(level, shooter, target, headshots.containsKey(target));
+        }
         DamageSource source = new DamageSource(ModDamageTypes.holder(level, ModDamageTypes.BULLET), shooter, shooter);
         damageByTarget.forEach((target, damage) -> target.hurtServer(level, source, damage));
         headshots.forEach((target, at) -> headshotFeedback(level, shooter, at));

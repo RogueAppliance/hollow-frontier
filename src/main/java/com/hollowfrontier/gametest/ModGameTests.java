@@ -587,6 +587,14 @@ public final class ModGameTests {
         test("taken_cells_bring_it_down", 160, TakenTests::cellsBringItDown);
         test("taken_nobody_left_behind", 200, TakenTests::nobodyLeftBehind);
         test("taken_crash_site_raised", 40, TakenTests::crashSiteRaised);
+        // High noon (51). After Taken, for the same reason
+        test("duel_called_out_by_the_rule", 20, DuelTests::calledOutByTheRule);
+        test("duel_asked_and_answered", 20, DuelTests::askedAndAnswered);
+        test("duel_gun_free_and_lent_gun_back", 40, DuelTests::gunFreeAndLentGunBack);
+        test("duel_flinch_costs_time", 20, DuelTests::flinchCostsTime);
+        test("duel_won_in_the_street", 40, DuelTests::wonInTheStreet);
+        test("duel_lost_and_left_standing", 20, DuelTests::lostAndLeftStanding);
+        test("duel_lethal_by_switch", 100, DuelTests::lethalBySwitch);
     }
 
     @SubscribeEvent

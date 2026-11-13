@@ -380,7 +380,8 @@ public class JournalScreen extends Screen {
             put(out, entry.driveWay().isEmpty() ? Component.translatable(JournalText.TOWN_DRIVE_AWAY) : Component.translatable(JournalText.TOWN_DRIVE,
                     entry.driveHead(), entry.driveBlocks(), Component.translatable("message.hollowfrontier.direction." + entry.driveWay())), INK);
         }
-        if (entry.bank() >= 0 || !entry.poster().isEmpty() || entry.raidDay() > 0) {
+        boolean duelled = entry.duelsWon() + entry.duelsLost() > 0;
+        if (entry.bank() >= 0 || !entry.poster().isEmpty() || entry.raidDay() > 0 || duelled) {
             out.add(null);
         }
         if (entry.bank() >= 0) {
@@ -395,6 +396,9 @@ public class JournalScreen extends Screen {
         }
         if (entry.raidDay() > 0) {
             put(out, Component.translatable(JournalText.TOWN_RAID, entry.raidDay()), INK);
+        }
+        if (duelled) {
+            put(out, Component.translatable(JournalText.TOWN_DUELS, entry.duelsWon(), entry.duelsLost()), INK);
         }
     }
 

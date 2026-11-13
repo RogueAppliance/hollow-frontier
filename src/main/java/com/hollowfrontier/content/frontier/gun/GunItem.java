@@ -102,6 +102,11 @@ public class GunItem extends Item implements GeoItem {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        // 51: in the street, before the draw, the trigger is locked; after it, the duel's shots cost nothing
+        if (com.hollowfrontier.content.frontier.duel.Duels.holstered(player)) {
+            return InteractionResult.FAIL;
+        }
+        boolean free = com.hollowfrontier.content.frontier.duel.Duels.freeFire(player);
         int ammo = getAmmo(stack);
         if (ammo <= 0 || (player.isShiftKeyDown() && ammo < stats.magazine())) {
             if (isReloading(stack)) {
@@ -111,10 +116,10 @@ public class GunItem extends Item implements GeoItem {
         }
         if (level instanceof ServerLevel serverLevel) {
             setReloadStart(stack, null);
-            if (!player.getAbilities().instabuild) {
+            if (!player.getAbilities().instabuild && !free) {
                 setAmmo(stack, ammo - 1);
             }
-            if (misfires(player, stack)) {
+            if (!free && misfires(player, stack)) {
                 Vec3 muzzle = player.getEyePosition().add(player.getViewVector(1.0F).scale(0.8));
                 serverLevel.sendParticles(ParticleTypes.SMOKE, muzzle.x, muzzle.y - 0.1, muzzle.z, 3, 0.03, 0.03, 0.03, 0.005);
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.5F, 1.6F);
@@ -123,7 +128,9 @@ public class GunItem extends Item implements GeoItem {
                 GunMechanics.fire(serverLevel, player, GunEnchantments.apply(stats, stack, level));
                 markFired(stack, level.getGameTime());
             }
-            stack.hurtAndBreak(1, player, hand);
+            if (!free) {
+                stack.hurtAndBreak(1, player, hand);
+            }
         }
         player.getCooldowns().addCooldown(stack, stats.fireCooldown());
         return InteractionResult.CONSUME;

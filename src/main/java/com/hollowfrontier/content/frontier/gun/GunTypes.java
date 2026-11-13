@@ -45,6 +45,9 @@ public final class GunTypes {
             BLAST, 1.4F, 1.0F);
     public static final GunStats OUTLAW_RIFLE = new GunStats(1, ModItems.RIFLE_CARTRIDGE, 7.0F, 1, 2.0F, 40.0, 45, 50,
             BLAST, 0.8F, 1.0F);
-    public static final GunStats BOSS_SHOTGUN = new GunStats(2, ModItems.BUCKSHOT_CARTRIDGE, 1.5F, 6, 8.0F, 16.0, 30, 35,
+    // 51: what a boss draws in the street. It goes where he points it: whether it lands is the duel's to say (Duels)
+    public static final GunStats DUEL_REVOLVER = new GunStats(6, ModItems.REVOLVER_CARTRIDGE, 3.0F, 1, 0.0F, 40.0, 24, 15,
+            BLAST, 1.4F, 1.0F);
+    public static final GunStats BOSS_SHOTGUN =new GunStats(2, ModItems.BUCKSHOT_CARTRIDGE, 1.5F, 6, 8.0F, 16.0, 30, 35,
             LARGE_BLAST, 1.0F, 1.0F);
 }

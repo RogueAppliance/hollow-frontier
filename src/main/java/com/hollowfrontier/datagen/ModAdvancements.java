@@ -97,6 +97,10 @@ public final class ModAdvancements {
         text("frontier/rattler", "Don't Tread on Me", "Kill a rattlesnake. It did warn you");
         text("frontier/snakeskin_boots", "Snakeskin Swagger", "Make Snakeskin Boots. Rattlers give the wearer a wide berth");
         text("frontier/dead_or_alive", "Dead or Alive", "Turn in an outlaw's badge at a Bounty Board");
+        // 51: high noon
+        text("frontier/high_noon", "High Noon", "Meet an Outlaw Boss in the street when you are called out, and be the one who walks away");
+        text("frontier/nobody_faster", "Nobody Faster", "Win a duel against a boss with a bounty of seven gold or more");
+        text("frontier/one_was_enough", "One Was Enough", "Win a duel with your first shot, to the head");
         text("frontier/or_alive", "...Or Alive", "Bring an outlaw from a Gray pen to the town that posted him, alive");
         text("frontier/hold_the_line", "Hold the Line", "Help a town see off an outlaw raid");
         // 47: a stake in town
@@ -323,6 +327,19 @@ public final class ModAdvancements {
                     .addCriterion("claimed", ModCriteria.BOUNTY_CLAIMED.get().criterion())
                     .rewards(AdvancementRewards.Builder.experience(30))
                     .save(output, id("frontier/dead_or_alive"));
+            // 51: called out to the street, and won
+            AdvancementHolder duel = display(bounty, "frontier/high_noon", ModItems.REVOLVER.get(), AdvancementType.GOAL, false)
+                    .addCriterion("won", ModCriteria.DUEL_WON.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(50))
+                    .save(output, id("frontier/high_noon"));
+            display(duel, "frontier/nobody_faster", ModItems.OUTLAW_BADGE.get(), AdvancementType.CHALLENGE, false)
+                    .addCriterion("dearest", ModCriteria.DUEL_WON_DEAREST.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("frontier/nobody_faster"));
+            display(duel, "frontier/one_was_enough", ModItems.REVOLVER_CARTRIDGE.get(), AdvancementType.CHALLENGE, true)
+                    .addCriterion("head", ModCriteria.DUEL_HEADSHOT.get().criterion())
+                    .rewards(AdvancementRewards.Builder.experience(100))
+                    .save(output, id("frontier/one_was_enough"));
             // 20: the man himself, walked in from a Gray pen
             display(bounty, "frontier/or_alive", Items.LEAD, AdvancementType.GOAL, false)
                     .addCriterion("alive", ModCriteria.BROUGHT_IN_ALIVE.get().criterion())

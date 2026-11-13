@@ -54,6 +54,7 @@ public final class JournalText {
     public static final String TOWN_BANK_EMPTY = t("town.bank_empty", "A box at the bank, with nothing in it.");
     public static final String TOWN_POSTER = t("town.poster", "On the board: %s. %s gold.");
     public static final String TOWN_RAID = t("town.raid", "Last raided on day %s.");
+    public static final String TOWN_DUELS = t("town.duels", "Stood in the street here at noon: won %s, lost %s.");
     public static final String TOWN_DRIVE = t("town.drive", "A herd of theirs is out with me: %s head near, about %s blocks %s to go.");
     public static final String TOWN_DRIVE_AWAY = t("town.drive_away", "A herd of theirs is out with me, and I'm nowhere near it.");
 
@@ -89,6 +90,8 @@ public final class JournalText {
         fact("outlaws", "bounty", "Turned a badge in. The board paid and asked nothing.");
         fact("outlaws", "freed", "Found one a place in a town after I got him out. He took it.");
         fact("outlaws", "truth", "The Kindled say they aren't born cruel. The grey ones take drifters off the plains, set a seed of metal behind the ear, and send them back angry.");
+        fact("outlaws", "duel", "One of the bosses sent word to meet in the street at noon. I went. I was quicker.");
+        fact("outlaws", "shot_down", "One of the bosses sent word to meet in the street at noon. I went. I was slower, and came away short a purse, with the rest of me left over.");
         fact("outlaws", "loose", "The leash is broken. The ones still riding do it by their own choice now.");
         person("dusters", "The Men in Dusters");
         fact("dusters", "met", "Men in black dusters. They turn up where something strange has happened, a while after, and lean on whoever saw it.");

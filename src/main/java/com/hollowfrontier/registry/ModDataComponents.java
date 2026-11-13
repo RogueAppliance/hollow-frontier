@@ -47,6 +47,12 @@ public final class ModDataComponents {
                     .persistent(Codec.intRange(0, Integer.MAX_VALUE))
                     .networkSynchronized(ByteBufCodecs.VAR_INT));
 
+    // 51: on the revolver a town lends for a duel, so it can be taken back wherever it has got to.
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> LENT =
+            DATA_COMPONENTS.registerComponentType("lent", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(ByteBufCodecs.BOOL));
+
     // Bounty on a Wanted Poster / Outlaw Badge.
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BountyData>> BOUNTY =
             DATA_COMPONENTS.registerComponentType("bounty", builder -> builder

@@ -1,0 +1,29 @@
+{
+  "parent": "hollowfrontier:frontier/high_noon",
+  "criteria": {
+    "dearest": {
+      "trigger": "hollowfrontier:duel_won_dearest"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.nobody_faster.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "hollowfrontier:outlaw_badge"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.nobody_faster.title"
+    }
+  },
+  "requirements": [
+    [
+      "dearest"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

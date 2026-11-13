@@ -1,6 +1,7 @@
 package com.hollowfrontier.datagen;
 
 import com.hollowfrontier.HollowFrontier;
+import com.hollowfrontier.content.frontier.duel.DuelText;
 import com.hollowfrontier.content.frontier.gazette.GazetteBackPage;
 import com.hollowfrontier.content.frontier.talk.ChatterLines;
 import com.hollowfrontier.content.ufo.FieldNotes;
@@ -1221,6 +1222,35 @@ public class ModLanguageProvider extends LanguageProvider {
         add("key.category.hollowfrontier.main", "Hollow Frontier");
         add("key.hollowfrontier.reload", "Reload Gun");
         add("key.hollowfrontier.journal", "Open the Prospector's Journal");
+        // High noon (51): called out to the street by a poster's boss
+        add(DuelText.KEY_YES, "Called out: go and meet them in the street");
+        add(DuelText.KEY_NO, "Called out: let them wait");
+        add(DuelText.POSTER_LINE, "Sends word: the street, at noon");
+        add(DuelText.WORD_SENT, "Word comes with the poster. %s would sooner settle it in the street. If I'm near town at noon, I'll be asked.");
+        add(DuelText.ASK, "%s is waiting in the street.");
+        add(DuelText.ASK_KEYS, "[%s] Go out    [%s] Stay put    %ss");
+        add(DuelText.MARK, "Stand your mark. Hand off the gun.");
+        add(DuelText.TOLLS[0], "One.");
+        add(DuelText.TOLLS[1], "Two.");
+        add(DuelText.TOLLS[2], "Three.");
+        add(DuelText.DRAW, "DRAW");
+        add(DuelText.WON, "%s is down.");
+        add(DuelText.LOST, "%s was quicker.");
+        add(DuelText.DECLINED, "%s can stand in the street. I know where the camp is. I expect I'll be asked again tomorrow.");
+        add(DuelText.DECLINED_LAST, "%s won't ask again. It's the camp, then.");
+        add(DuelText.TOO_LATE, "Too late. %s has gone from the street.");
+        add(DuelText.LENT, "No handgun on me. The law puts a plain revolver in my hand and wants it back after.");
+        add(DuelText.LENT_BACK, "The law has its revolver back.");
+        add(DuelText.FLINCH, "Too soon. That'll cost me.");
+        add(DuelText.GREETING, "You came. Most don't.");
+        add(DuelText.WON_LINE, "Mine landed first. %s is down in the street, and that badge pays half as much again.");
+        add(DuelText.WON_HEAD, "One shot, and it was enough. %s is down in the street, and that badge pays half as much again.");
+        add(DuelText.LOST_LINE, "%s was quicker. I'm on my back in the street with about one breath left in me.");
+        add(DuelText.LOST_PURSE, "My purse is lighter by %s gold and %s copper.");
+        add(DuelText.LOST_SAYS, "Keep the boots. I'll take the purse.");
+        add(DuelText.STOOD_DOWN, "Nobody hit anybody. %s spits, turns and walks out of town.");
+        add(DuelText.CALLED_OFF, "It's off. %s has gone from the street.");
+        add(DuelText.SAYS, "<%s> %s");
 
         add("death.attack.hollowfrontier.bullet", "%1$s was shot by %2$s");
         add("death.attack.hollowfrontier.bullet.item", "%1$s was shot by %2$s using %3$s");

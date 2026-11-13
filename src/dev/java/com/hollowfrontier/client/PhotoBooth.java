@@ -141,6 +141,13 @@ public final class PhotoBooth {
             }
             return;
         }
+        // Phase 51 played through in a real town's street, only on its own with -PphotoScene=duel (DuelPlaytest)
+        if (DuelPlaytest.ENABLED) {
+            if (ticks >= 40) {
+                DuelPlaytest.tick(mc, server);
+            }
+            return;
+        }
         // Phase 50 played through aboard a Gray ship, only on its own with -PphotoScene=taken (TakenPlaytest)
         if (TakenPlaytest.ENABLED) {
             if (ticks >= 40) {

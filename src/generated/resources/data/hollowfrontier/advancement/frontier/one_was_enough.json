@@ -1,0 +1,30 @@
+{
+  "parent": "hollowfrontier:frontier/high_noon",
+  "criteria": {
+    "head": {
+      "trigger": "hollowfrontier:duel_headshot"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.hollowfrontier.frontier.one_was_enough.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "id": "hollowfrontier:revolver_cartridge"
+    },
+    "title": {
+      "translate": "advancements.hollowfrontier.frontier.one_was_enough.title"
+    }
+  },
+  "requirements": [
+    [
+      "head"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

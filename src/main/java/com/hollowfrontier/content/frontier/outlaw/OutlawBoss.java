@@ -16,6 +16,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
@@ -31,6 +32,7 @@ public class OutlawBoss extends AbstractOutlaw {
     private final ServerBossEvent bossEvent = new ServerBossEvent(UUID.randomUUID(), Component.empty(),
             BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.PROGRESS);
     private BountyData bounty;
+    private boolean duelling;
 
     public OutlawBoss(EntityType<? extends OutlawBoss> type, Level level) {
         super(type, level);
@@ -56,9 +58,25 @@ public class OutlawBoss extends AbstractOutlaw {
         setCustomNameVisible(true);
     }
 
+    public boolean isDuelling() {
+        return duelling;
+    }
+
+    /**
+     * High noon (51): in the street he stands still with a revolver, and the duel moves him ({@code Duels}). Set false
+     * (or loaded from a save that caught him mid-duel), he's any boss again, shotgun and all.
+     */
+    public void setDuelling(boolean inTheStreet) {
+        duelling = inTheStreet;
+        setNoAi(inTheStreet);
+        setItemSlot(EquipmentSlot.MAINHAND, inTheStreet ? new ItemStack(ModItems.REVOLVER.get()) : createGun());
+        setDropChance(EquipmentSlot.MAINHAND, 0.0F);
+        setGunPose(GunPose.LOWERED);
+    }
+
     @Override
     public GunStats gunStats() {
-        return GunTypes.BOSS_SHOTGUN;
+        return duelling ? GunTypes.DUEL_REVOLVER : GunTypes.BOSS_SHOTGUN;
     }
 
     @Override
@@ -105,12 +123,18 @@ public class OutlawBoss extends AbstractOutlaw {
     protected void addAdditionalSaveData(ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.storeNullable("bounty", BountyData.CODEC, bounty);
+        if (duelling) {
+            output.putBoolean("duelling", true);
+        }
     }
 
     @Override
     protected void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
         input.read("bounty", BountyData.CODEC).ifPresent(this::setBounty);
+        if (input.getBooleanOr("duelling", false)) {
+            setDuelling(false); // the duel he was in went with the server
+        }
     }
 
     public boolean hasBounty(UUID id) {

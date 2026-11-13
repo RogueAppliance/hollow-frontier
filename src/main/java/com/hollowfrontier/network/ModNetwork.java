@@ -20,6 +20,9 @@ public final class ModNetwork {
                 .playToServer(SaucerControlPayload.TYPE, SaucerControlPayload.STREAM_CODEC, SaucerControlPayload::handle)
                 .playToServer(SaucerHoldPayload.TYPE, SaucerHoldPayload.STREAM_CODEC, SaucerHoldPayload::handle)
                 .playToServer(JournalRequestPayload.TYPE, JournalRequestPayload.STREAM_CODEC, JournalRequestPayload::handle)
+                // 51: the answer to a call to the street, and where a duel stands (DuelClient)
+                .playToServer(DuelAnswerPayload.TYPE, DuelAnswerPayload.STREAM_CODEC, DuelAnswerPayload::handle)
+                .playToClient(DuelHudPayload.TYPE, DuelHudPayload.STREAM_CODEC)
                 // The client's handler is registered client-side (GatewayOverlay), so no client class loads on a server.
                 .playToClient(GatewayCrossingPayload.TYPE, GatewayCrossingPayload.STREAM_CODEC)
                 .playToClient(PhantomSightingPayload.TYPE, PhantomSightingPayload.STREAM_CODEC)

@@ -92,7 +92,10 @@ public final class JournalSeen {
 
     static {
         PEOPLE.put("outlaws", List.of(kept("outlaws", "met"), reached("bounty", "frontier/dead_or_alive"), reached("freed", "ufo/second_chance"),
-                reached("truth", "concavia/the_truth"), reached("loose", "ufo/cut_loose")));
+                reached("truth", "concavia/the_truth"), reached("loose", "ufo/cut_loose"),
+                // 51: met one in the street at noon, and how it went
+                new Fact("duel", player -> com.hollowfrontier.content.frontier.duel.DuelData.of(player).wins() > 0),
+                new Fact("shot_down", player -> com.hollowfrontier.content.frontier.duel.DuelData.of(player).losses() > 0)));
         PEOPLE.put("dusters", List.of(kept("dusters", "met"), reached("warned", "frontier/word_to_the_wise"), reached("sold", "frontier/nothing_to_see"),
                 reached("marked", "frontier/marked_man"), reached("truth", "concavia/the_truth"), reached("loose", "ufo/cut_loose")));
         PEOPLE.put("kindled", List.of(new Fact("met", player -> player.getData(ModAttachments.JOURNAL.get()).people().contains("kindled.met")

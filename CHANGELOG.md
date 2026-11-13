@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.7.0 — High noon (unreleased)
+
+An Outlaw Boss used to be a fight at his camp and nothing else. Now and then one sends word instead: the street, at noon. Existing worlds get all of it.
+
+- **Called out:** about one Wanted Poster in three says its boss would sooner settle it in the street. Be within 200 blocks of that town near noon and you're asked, over the hotbar: Y to meet him, N to let him wait. No costs nothing; he asks once more the next day, then it's the camp as usual.
+- **The count:** yes puts you on a mark in the street with him twelve paces off. You can't walk, your eyes are held down from the horizon and your trigger is locked. The bell tolls three times, then there's a wait nobody can time, then the word.
+- **The draw:** the gun is yours again and it shoots as it always does. The first hit decides it, whatever his health. Pull the trigger before the word and nothing fires, and your gun stays locked half a second longer for each pull.
+- **Your own gun, for nothing:** your revolver or ray pistol is fetched to your hand and fires through the duel without using caps, rounds or charge; afterwards it's back in its slot with what was loaded before. With no handgun on you, the law lends a plain revolver and has it back however it ends.
+- **He's as fast as his price:** a boss with 3 gold on his head fires 0.9 seconds after the word, one with 7 or more in 0.45. He hits five times in six. If both miss, both keep shooting.
+- **Win,** and he's dead in the street, his badge pays half as much again, and the town thinks better of you.
+- **Lose,** and you're left at one heart with a tenth of your coin gone (never more than his bounty), the town thinks a little less of you, and he's back at his camp worth half as much again. With `lethalDuels` on, his shot kills.
+- **A duel is between two:** nobody else can hurt either of you until it's over, you can't hurt anybody else, and the town gets out of the line of fire and watches.
+- **Afterwards** the town talks about it and the Gazette prints it, either way. The journal notes it under outlaws and on the town's page.
+- **Three advancements:** High Noon, Nobody Faster and One Was Enough.
+- **Settings:** in `hollowfrontier-duel-server.toml`, `duels` turns it off, `callOutChance` sets how many posters call out (0.33), `duelReach` how near town you must be (200), and `lethalDuels` whether losing kills (off).
+- **Keys:** two new ones, Y and N, used only while you're being asked. Both can be rebound.
+- Never asked on Peaceful, where there are no outlaws to ask.
+
 ## 1.6.0 — Taken (unreleased)
 
 The Grays' beam used to cost you an hour and a walk home. Now, once they have reason to keep you, you wake up aboard. Existing worlds get all of it.

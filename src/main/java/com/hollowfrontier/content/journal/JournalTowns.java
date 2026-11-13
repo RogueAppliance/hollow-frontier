@@ -54,7 +54,7 @@ public final class JournalTowns {
      * player of a herd out from here, -1 with no drive; and how far and which way it's bound.
      */
     public record Town(String name, long firstDay, int points, String rank, int star, String job, int head, int bank, String poster, int reward,
-            long raidDay, int driveHead, int driveBlocks, String driveWay) {
+            long raidDay, int driveHead, int driveBlocks, String driveWay, int duelsWon, int duelsLost) {
         public static final StreamCodec<ByteBuf, Town> STREAM_CODEC = StreamCodec.of((buf, town) -> {
             ByteBufCodecs.STRING_UTF8.encode(buf, town.name);
             ByteBufCodecs.VAR_LONG.encode(buf, town.firstDay);
@@ -70,11 +70,14 @@ public final class JournalTowns {
             ByteBufCodecs.VAR_INT.encode(buf, town.driveHead);
             ByteBufCodecs.VAR_INT.encode(buf, town.driveBlocks);
             ByteBufCodecs.STRING_UTF8.encode(buf, town.driveWay);
+            ByteBufCodecs.VAR_INT.encode(buf, town.duelsWon); // 51: duels fought in its street
+            ByteBufCodecs.VAR_INT.encode(buf, town.duelsLost);
         }, buf -> new Town(ByteBufCodecs.STRING_UTF8.decode(buf), ByteBufCodecs.VAR_LONG.decode(buf), ByteBufCodecs.VAR_INT.decode(buf),
                 ByteBufCodecs.STRING_UTF8.decode(buf), ByteBufCodecs.VAR_INT.decode(buf), ByteBufCodecs.STRING_UTF8.decode(buf),
                 ByteBufCodecs.VAR_INT.decode(buf), ByteBufCodecs.VAR_INT.decode(buf), ByteBufCodecs.STRING_UTF8.decode(buf),
                 ByteBufCodecs.VAR_INT.decode(buf), ByteBufCodecs.VAR_LONG.decode(buf), ByteBufCodecs.VAR_INT.decode(buf),
-                ByteBufCodecs.VAR_INT.decode(buf), ByteBufCodecs.STRING_UTF8.decode(buf)));
+                ByteBufCodecs.VAR_INT.decode(buf), ByteBufCodecs.STRING_UTF8.decode(buf), ByteBufCodecs.VAR_INT.decode(buf),
+                ByteBufCodecs.VAR_INT.decode(buf)));
     }
 
     public static long day(long gameTime) {
@@ -102,6 +105,7 @@ public final class JournalTowns {
         SheriffJob job = player.hasData(ModAttachments.SHERIFF_JOB.get()) ? player.getData(ModAttachments.SHERIFF_JOB.get()) : null;
         Drives.Drive drive = Drives.of(player);
         TownRaids raids = TownRaids.get(level);
+        com.hollowfrontier.content.frontier.duel.DuelData duels = com.hollowfrontier.content.frontier.duel.DuelData.of(player);
         List<Map.Entry<Long, Long>> known = new ArrayList<>(data.towns().entrySet());
         known.sort(Map.Entry.<Long, Long>comparingByValue().thenComparing(Map.Entry.comparingByKey(Comparator.naturalOrder())));
         List<Town> pages = new ArrayList<>();
@@ -122,7 +126,8 @@ public final class JournalTowns {
                     record.filter(r -> r.lastRaid >= 0).map(r -> day(r.lastRaid)).orElse(0L),
                     driving ? (here ? Drives.herd(level, player, drive).size() : 0) : -1,
                     here ? (int) Math.round(Math.hypot(drive.dest().getX() - player.getX(), drive.dest().getZ() - player.getZ())) : 0,
-                    here ? PolarCompassItem.direction(player.blockPosition(), drive.dest()) : ""));
+                    here ? PolarCompassItem.direction(player.blockPosition(), drive.dest()) : "",
+                    duels.won(key), duels.lost(key)));
         }
         return pages;
     }

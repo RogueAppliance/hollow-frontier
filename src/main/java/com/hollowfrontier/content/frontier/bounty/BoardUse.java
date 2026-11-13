@@ -88,6 +88,7 @@ public final class BoardUse {
             player.sendSystemMessage(Component.translatable("message.hollowfrontier.bounty.raider", posting.bounty().target()));
         }
         give(player, poster);
+        com.hollowfrontier.content.frontier.duel.Duels.posterTaken(player, posting.bounty()); // 51
         level.playSound(null, at.x, at.y, at.z, SoundEvents.BOOK_PAGE_TURN, SoundSource.BLOCKS, 1.0F, 1.0F);
     }
 

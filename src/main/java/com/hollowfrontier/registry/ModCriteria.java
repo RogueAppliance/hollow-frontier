@@ -52,6 +52,10 @@ public final class ModCriteria {
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> HOMESTEADER = register("homesteader");
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> BRANDED = register("branded");
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DRIVE_DONE = register("drive_done");
+    // High noon (51): a duel won in the street; one against the fastest there is; one with the first shot, to the head
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DUEL_WON = register("duel_won");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DUEL_WON_DEAREST = register("duel_won_dearest");
+    public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> DUEL_HEADSHOT = register("duel_headshot");
     // Taken (50): woke aboard; got off in a pod; with everyone the ship held; having brought it down; without being seen
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_ABOARD = register("taken_aboard");
     public static final DeferredHolder<CriterionTrigger<?>, ModTrigger> TAKEN_OUT = register("taken_out");

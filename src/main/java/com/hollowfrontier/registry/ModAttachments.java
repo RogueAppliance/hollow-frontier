@@ -111,6 +111,10 @@ public final class ModAttachments {
     public static final Supplier<AttachmentType<Integer>> ABOARD = ATTACHMENTS.register("aboard",
             () -> AttachmentType.builder(() -> 0).sync(ByteBufCodecs.VAR_INT).build());
 
+    // 51: who has called the player out to the street, and the duels they've fought. Kept through death
+    public static final Supplier<AttachmentType<com.hollowfrontier.content.frontier.duel.DuelData>> DUELS = ATTACHMENTS.register("duels",
+            () -> AttachmentType.builder(() -> com.hollowfrontier.content.frontier.duel.DuelData.NONE).serialize(com.hollowfrontier.content.frontier.duel.DuelData.CODEC.fieldOf("duels")).copyOnDeath().build());
+
     // Present only while the horse wears saddlebags (check hasData before getData, which would create it).
     public static final Supplier<AttachmentType<ItemContainerContents>> SADDLEBAGS = ATTACHMENTS.register("saddlebags",
             () -> AttachmentType.builder(() -> ItemContainerContents.EMPTY).serialize(ItemContainerContents.CODEC.fieldOf("items")).build());
