@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.4.0 — High noon, Taken, a stake in town, and the Hollow heard (unreleased)
+## 1.4.0 — High noon, Taken, a stake in town, and the Hollow heard (2026-11-12)
 
 Four things at once: a duel in the street at noon, waking aboard the Grays' ship, a town that knows you (with a journal to keep it all in), and a Hollow you can hear. Existing worlds get all of it.
 
